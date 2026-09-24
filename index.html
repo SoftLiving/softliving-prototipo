@@ -2412,6 +2412,19 @@ const COVER_GRADIENTS = [
   "linear-gradient(135deg,#1f7a5c,#12294d)",
 ];
 
+// Regra de negócio: conteúdo publicado pelo cliente é sempre gratuito.
+// Só o acervo SoftLiving pode ser premium (destravado com créditos).
+// Card sem autor cadastrado = conteúdo do próprio cliente.
+function normalizeCard(c, org){
+  const author = c.a || org.name;
+  if(author === 'SoftLiving') return {...c, a:author};
+  return {...c, a:author, badge:'gratis', credits:undefined, cta:'Ler agora'};
+}
+
+function authorHTML(c){
+  return `<p class="cc-author">${c.a === 'SoftLiving' ? 'Acervo SoftLiving' : 'Por ' + c.a}</p>`;
+}
+
 function badgeHTML(c){
   return `<span class="cc-badge ${c.badge}">${c.badge==='gratis'?ICON.unlock+' Grátis':c.badge==='destravado'?ICON.unlock+' Destravado':ICON.lock+' '+c.credits+' créditos'}</span>`;
 }
@@ -2429,6 +2442,7 @@ function renderMosaic(cards){
         <div class="cc-cat-row"><p class="cc-cat-label">${c.cat}</p>${badgeHTML(c)}</div>
         <p class="cc-card-title">${c.t}</p>
         <p class="cc-excerpt">${c.e}</p>
+        ${authorHTML(c)}
         <button class="cc-cta ${c.badge}">${c.cta}</button>
       </div>
     </div>`;
@@ -2440,6 +2454,7 @@ function renderMosaic(cards){
         <div class="cc-cat-row"><p class="cc-cat-label">${feature.cat}</p>${badgeHTML(feature)}</div>
         <p class="cc-card-title cc-feature-title">${feature.t}</p>
         <p class="cc-excerpt">${feature.e}</p>
+        ${authorHTML(feature)}
         <button class="cc-cta ${feature.badge}">${feature.cta}</button>
       </div>
     </div>
@@ -2464,6 +2479,7 @@ function renderMosaic(cards){
         <div class="cc-cat-row"><p class="cc-cat-label">${wide.cat}</p>${badgeHTML(wide)}</div>
         <p class="cc-card-title">${wide.t}</p>
         <p class="cc-excerpt">${wide.e}</p>
+        ${authorHTML(wide)}
       </div>
       <button class="cc-cta ${wide.badge} cc-wide-cta">${wide.cta}</button>
     </div>
@@ -2897,7 +2913,7 @@ function renderServicos(org){
 
 function renderConteudos(org){
   if(org.conteudosCuradoria){
-    const cc = org.conteudosCuradoria;
+    const cc = {...org.conteudosCuradoria, cards: org.conteudosCuradoria.cards.map(c => normalizeCard(c, org))};
     const gratisCount = cc.cards.filter(c => c.badge === 'gratis').length;
     const premiumCount = cc.cards.filter(c => c.badge !== 'gratis').length;
     return `

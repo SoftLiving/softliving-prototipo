@@ -9,6 +9,7 @@ Abra `index.html` direto no navegador. Não precisa de servidor nem instalação
 - **Switcher de 3 comunidades fixas**, cada uma com um dropdown para trocar por qualquer uma das 12 comunidades fictícias cadastradas (favoritagem por troca)
 - **12 comunidades fictícias**: Claro (empresa), American Flat (condomínio), Clube Caiçaras (clube), Hotel Vista Mar, Restaurante Sabor & Arte, Faculdade Horizonte, Academia PowerFit, Escola de Música Allegro, Bella Viagens, Clínica SorrisoTotal, Zen Wellness Spa, Pet Shop Amigo Fiel, e Rede Dor (com toggle Paciente/Colaborador — dois públicos diferentes dentro do mesmo cliente)
 - **Abas**: Início, Conteúdos (curadoria em mosaico com destaques, listas e cards), Serviços (só no American Flat — agendamentos, classificados, cardápios, indicação de profissionais), Grupos internos, Membros (diretório de perfis), Publicar, Dashboard, Escuta
+- **Regra de gratuidade dos conteúdos**: conteúdo publicado pelo cliente (ex.: "RH Claro", "Síndica") é sempre gratuito para os usuários; só o acervo SoftLiving pode ser premium (destravado com créditos). Card sem autor cadastrado conta como conteúdo do cliente — ver `normalizeCard()`
 - Todo o conteúdo é fictício e todo o estado (agendamentos, classificados, favoritos) vive em memória — recarregar a página reseta tudo
 
 ## Estrutura do arquivo
