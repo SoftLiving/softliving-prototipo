@@ -64,9 +64,11 @@
   .top-banner .close svg.ic{ width:15px; height:15px; }
 
   header{ display:flex; align-items:center; justify-content:space-between; padding:16px 32px; border-bottom:1px solid var(--border); }
-  .brand{ font-family:'Cardo',Georgia,serif; font-size:26px; }
-  .brand .soft{ color:var(--navy); font-weight:700; font-style:italic; }
-  .brand .living{ color:var(--green); font-weight:600; font-style:normal; }
+  .brand{ font-family:'Times New Roman',Times,serif; font-size:28px; font-weight:700; line-height:1; text-decoration:none; letter-spacing:-.01em; white-space:nowrap; }
+  a.brand:hover{ opacity:.85; }
+  .brand .soft, .sig .soft{ color:#013565; font-weight:700; font-style:italic; }
+  .brand .living, .sig .living{ color:#1F5519; font-weight:700; font-style:normal; }
+  .sig{ font-family:'Times New Roman',Times,serif; white-space:nowrap; }
   .header-right{ display:flex; align-items:center; gap:16px; }
   .credits-pill{ display:flex; align-items:center; gap:6px; background:#fdf3e0; border:1px solid #f0dca8; color:#8a6b16; padding:6px 16px; border-radius:999px; font-size:14px; font-weight:600; }
   .icon-btn{ background:none; border:none; font-size:18px; color:var(--muted); cursor:pointer; }
@@ -540,7 +542,7 @@
   @media (max-width:900px){
     .menu-toggle{ display:flex; align-items:center; justify-content:center; }
     header{ padding:14px 16px; }
-    .brand{ font-size:21px; }
+    .brand{ font-size:23px; }
     .credits-label{ display:none; }
     .credits-pill{ padding:8px; }
     .header-right{ gap:10px; }
@@ -582,6 +584,133 @@
     .cc-card.cc-wide{ flex-direction:column !important; align-items:stretch !important; }
     button.cc-wide-cta.cc-wide-cta{ width:100% !important; margin-top:10px; }
   }
+
+  /* ===== Menu horizontal institucional ===== */
+  .top-nav{ display:flex; align-items:center; gap:4px; margin:0 auto 0 40px; }
+  .top-nav button{ background:none; border:none; font:inherit; font-size:15px; font-weight:600; color:#333c47; padding:9px 16px; border-radius:999px; cursor:pointer; white-space:nowrap; }
+  .top-nav button:hover{ background:var(--bg); color:var(--navy); }
+  .top-nav button.active{ background:var(--navy); color:#fff; }
+  @media (max-width:1180px){ .top-nav{ margin-left:20px; } .top-nav button{ padding:8px 11px; font-size:14.5px; } }
+  @media (max-width:1040px){
+    header{ flex-wrap:wrap; row-gap:10px; }
+    .top-nav{ order:3; flex-basis:100%; margin:0; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+    .top-nav::-webkit-scrollbar{ display:none; }
+    .top-nav button{ flex-shrink:0; border:1px solid var(--border); background:#fff; }
+    .top-nav button.active{ border-color:var(--navy); }
+  }
+
+  /* ===== Páginas institucionais (conteúdo do menu horizontal) ===== */
+  .site-page{ max-width:1180px; font-size:17px; line-height:1.6; }
+  .site-page a{ color:inherit; }
+  .site-page .sp-small-note a{ color:var(--navy); }
+  .site-page section{ border-radius:24px; margin-bottom:20px; overflow:hidden; }
+  .site-page section.sp-block{ background:#fff; border:1px solid var(--border); }
+  .site-page section.sp-block.sp-alt{ background:rgba(255,255,255,.6); }
+  .site-page .sp-hero{ padding:56px 0 48px !important; }
+  .site-page .sp-hero, .site-page .sp-closing{ border:1px solid var(--border); }
+  .site-page .sp-container{ padding:0 40px; }
+  @media (max-width:900px){ .site-page .sp-container{ padding:0 20px; } .site-page section{ border-radius:18px; } }
+  .site-page .sp-btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:0 22px; border-radius:999px; font-size:15.5px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; white-space:nowrap; }
+  .site-page .sp-btn-primary{ background:var(--navy); color:#fff; }
+  .site-page .sp-btn-primary:hover{ background:#0c1d38; }
+  .site-page .sp-btn-ghost{ background:#fff; color:var(--navy); border-color:var(--border); }
+  .site-page .sp-btn-ghost:hover{ background:var(--bg); }
+  .site-page .sp-btn-green{ background:var(--green); color:#fff; }
+  .site-page .sp-btn-green:hover{ background:#176247; }
+  .site-page .sp-btn-lg{ min-height:54px; padding:0 28px; font-size:17px; }
+  .site-page .sp-container{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  .site-page .sp-hero{ background:radial-gradient(900px 500px at 8% -10%, rgba(31,122,92,.09), transparent 60%), radial-gradient(900px 600px at 100% 0%, rgba(18,41,77,.07), transparent 55%), var(--bg); padding:72px 0 64px; }
+  .site-page .sp-hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:48px; align-items:center; }
+  .site-page .sp-eyebrow{ display:inline-block; font-size:13px; font-weight:700; letter-spacing:.04em; color:var(--green); background:var(--mint); padding:6px 14px; border-radius:999px; margin-bottom:18px; }
+  .site-page h1{ font-family:'Cardo',Georgia,serif; font-weight:700; color:var(--navy); font-size:clamp(34px,4.6vw,54px); line-height:1.12; margin:0 0 18px; }
+  .site-page h2{ font-family:'Cardo',Georgia,serif; font-weight:700; color:var(--navy); font-size:clamp(28px,3.2vw,38px); line-height:1.2; margin:0 0 12px; }
+  .site-page h3{ font-size:19px; color:var(--navy); margin:0 0 6px; line-height:1.35; }
+  .site-page .sp-lead{ font-size:clamp(18px,1.6vw,20px); color:#3b4450; max-width:620px; margin:0 0 28px; }
+  .site-page .sp-cta-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .site-page .sp-small-note{ font-size:15px; color:var(--muted); margin-top:16px; }
+  .site-page .sp-small-note a{ color:var(--navy); font-weight:600; }
+  .site-page .sp-hero-art{ aspect-ratio:4/3.4; border-radius:28px; background:linear-gradient(145deg,#fff,#eef3ef); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:14px; text-align:center; padding:24px; box-shadow:0 20px 50px rgba(18,41,77,.08); }
+  .site-page .sp-hero-art svg{ width:84px; height:84px; color:var(--green); opacity:.8; display:block; margin:0 auto 10px; }
+  .site-page section.sp-block{ padding:72px 0; }
+  .site-page section.sp-block.sp-alt{ background:var(--bg); }
+  .site-page .sp-section-head{ max-width:680px; margin-bottom:36px; }
+  .site-page .sp-section-head p{ color:#4a5360; margin:0; font-size:18px; }
+  .site-page .sp-grid{ display:grid; gap:20px; }
+  .site-page .sp-g2{ grid-template-columns:repeat(2,1fr); }
+  .site-page .sp-g3{ grid-template-columns:repeat(3,1fr); }
+  .site-page .sp-g4{ grid-template-columns:repeat(4,1fr); }
+  .site-page .sp-card{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:26px; }
+  .site-page .sp-card p{ margin:0; color:#4a5360; font-size:16px; }
+  .site-page .sp-card .sp-ic{ width:46px; height:46px; border-radius:14px; background:var(--mint); color:var(--green); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .site-page .sp-card .sp-ic svg{ width:22px; height:22px; }
+  .site-page .sp-step-num{ font-family:'Cardo',Georgia,serif; font-size:40px; font-weight:700; color:var(--green); line-height:1; margin-bottom:10px; }
+  .site-page .sp-step-meta{ display:inline-block; font-size:12.5px; font-weight:700; color:var(--navy); background:#eef1f6; border-radius:999px; padding:3px 10px; margin-bottom:10px; }
+  .site-page .sp-media-card{ display:flex; gap:18px; align-items:center; background:#fff; border:1px solid var(--border); border-radius:20px; padding:22px 26px; text-decoration:none; }
+  .site-page .sp-media-card .sp-src{ font-weight:700; color:var(--navy); font-size:15px; min-width:70px; }
+  .site-page .sp-media-card .sp-t{ flex:1; font-size:17px; }
+  .site-page .sp-media-card .sp-d{ color:var(--muted); font-size:14px; white-space:nowrap; }
+  .site-page .sp-media-card:hover{ border-color:#cfd6de; }
+  .site-page .sp-closing{ text-align:center; padding:84px 0; background:var(--navy); color:#fff; }
+  .site-page .sp-closing h2{ color:#fff; }
+  .site-page .sp-closing p{ color:rgba(255,255,255,.82); font-size:18px; margin:0 0 26px; }
+  .site-page .sp-closing .sp-btn-primary{ background:#fff; color:var(--navy); }
+  .site-page .sp-wallet{ width:100%; border-collapse:separate; border-spacing:0; background:#fff; border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+  .site-page .sp-wallet td{ padding:18px 22px; border-bottom:1px solid var(--border); font-size:16.5px; vertical-align:top; }
+  .site-page .sp-wallet tr:last-child td{ border-bottom:none; }
+  .site-page .sp-wallet td:first-child{ font-weight:700; color:var(--navy); width:44%; }
+  .site-page .sp-note{ font-size:15px; color:var(--muted); margin-top:14px; }
+  .site-page .sp-rules{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .site-page .sp-rules li{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:16px 20px; font-size:16px; color:#4a5360; }
+  .site-page .sp-rules strong{ color:var(--navy); }
+  .site-page .sp-inline-band{ display:flex; gap:24px; align-items:center; justify-content:space-between; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:22px; padding:28px 32px; }
+  .site-page .sp-inline-band h3{ font-size:21px; }
+  .site-page .sp-inline-band p{ margin:0; color:#4a5360; max-width:640px; font-size:16.5px; }
+  .site-page .sp-plan{ background:#fff; border:1px solid var(--border); border-radius:24px; padding:30px; display:flex; flex-direction:column; }
+  .site-page .sp-plan.sp-featured{ border:2px solid var(--navy); box-shadow:0 18px 40px rgba(18,41,77,.10); }
+  .site-page .sp-plan .sp-tag{ align-self:flex-start; font-size:12.5px; font-weight:700; padding:4px 12px; border-radius:999px; margin-bottom:14px; background:var(--mint); color:var(--green); }
+  .site-page .sp-plan.sp-featured .sp-tag{ background:var(--navy); color:#fff; }
+  .site-page .sp-plan.sp-soon{ background:var(--bg); }
+  .site-page .sp-plan.sp-soon .sp-tag{ background:#fff; color:var(--muted); border:1px solid var(--border); }
+  .site-page .sp-plan h2{ font-size:28px; }
+  .site-page .sp-plan .sp-price{ font-size:17px; color:#3b4450; margin:0 0 12px; }
+  .site-page .sp-plan .sp-price b{ font-size:26px; color:var(--navy); font-family:'Cardo',Georgia,serif; }
+  .site-page .sp-plan p{ color:#4a5360; margin:0 0 16px; font-size:16px; }
+  .site-page .sp-plan ul{ list-style:none; padding:0; margin:0 0 24px; display:grid; gap:10px; }
+  .site-page .sp-plan li{ display:flex; gap:10px; font-size:16px; }
+  .site-page .sp-plan li svg{ flex-shrink:0; width:20px; height:20px; color:var(--green); margin-top:3px; }
+  .site-page .sp-plan .sp-btn{ margin-top:auto; }
+  .site-page .sp-plan .sp-sub{ font-size:14px; font-weight:700; color:var(--navy); margin:0 0 10px; }
+  .site-page .sp-faq{ display:grid; gap:12px; max-width:820px; }
+  .site-page .sp-faq details{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:0 22px; }
+  .site-page .sp-faq summary{ cursor:pointer; list-style:none; padding:18px 0; font-weight:600; font-size:17px; color:var(--navy); display:flex; justify-content:space-between; gap:12px; }
+  .site-page .sp-faq summary::-webkit-details-marker{ display:none; }
+  .site-page .sp-faq summary::after{ content:"+"; font-size:22px; line-height:1; color:var(--green); }
+  .site-page .sp-faq details[open] summary::after{ content:"−"; }
+  .site-page .sp-faq details p{ margin:0 0 18px; color:#4a5360; font-size:16px; }
+  .site-page .sp-cota{ background:#fff; border:1px solid var(--border); border-radius:22px; padding:28px; }
+  .site-page .sp-cota .sp-kind{ font-size:13px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px; }
+  .site-page .sp-cota h3{ font-family:'Cardo',Georgia,serif; font-size:26px; margin-bottom:12px; }
+  .site-page .sp-cota ul{ margin:0 0 14px; padding-left:18px; color:#4a5360; font-size:16px; }
+  .site-page .sp-cota .sp-term{ font-size:14px; color:var(--muted); font-weight:600; }
+  .site-page .sp-seal{ display:flex; gap:24px; align-items:center; background:linear-gradient(135deg,#fdf6e3,#fff); border:1px solid var(--amber-border); border-radius:24px; padding:30px 34px; }
+  .site-page .sp-seal .sp-badge{ width:88px; height:88px; flex-shrink:0; border-radius:50%; background:linear-gradient(135deg,#e8b94a,var(--amber)); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(201,138,46,.35); }
+  .site-page .sp-seal .sp-badge svg{ width:40px; height:40px; }
+  .site-page .sp-seal p{ margin:0; color:#4a5360; font-size:17px; }
+  .sp-toast{ position:fixed; left:50%; bottom:24px; transform:translate(-50%,20px); background:var(--text); color:#fff; padding:12px 20px; border-radius:12px; font-size:15px; opacity:0; pointer-events:none; transition:.2s; z-index:80; max-width:calc(100% - 32px); text-align:center; }
+  .sp-toast.sp-show{ opacity:1; transform:translate(-50%,0); }
+  @media (max-width:900px){
+  .site-page .sp-hero{ padding:48px 0 44px; }
+  .site-page .sp-hero-grid, .site-page .sp-g2, .site-page .sp-g3, .site-page .sp-g4, .site-page .sp-footer-grid{ grid-template-columns:1fr; }
+  .site-page .sp-hero-art{ display:none; }
+  .site-page section.sp-block{ padding:52px 0; }
+  .site-page .sp-container{ padding:0 16px; }
+  .site-page .sp-media-card{ flex-direction:column; align-items:flex-start; gap:6px; }
+  .site-page .sp-seal{ flex-direction:column; text-align:center; }
+  }
+  @media (min-width:901px) and (max-width:1060px){
+  .site-page .sp-g4{ grid-template-columns:repeat(2,1fr); }
+  .site-page .sp-g3{ grid-template-columns:repeat(2,1fr); }
+  }
 </style>
 </head>
 <body>
@@ -596,7 +725,7 @@
 <div class="proto-modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
   <div class="proto-modal" role="dialog" aria-modal="true" aria-labelledby="protoModalTitle">
     <span class="proto-seal" style="margin-left:0;">PROPOSTA · EM APROVAÇÃO</span>
-    <h2 class="serif" id="protoModalTitle">Bem-vindo à demonstração SoftLiving</h2>
+    <h2 class="serif" id="protoModalTitle">Bem-vindo à demonstração <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></h2>
     <p>Esta é uma <b>simulação</b> de como a sua comunidade poderia funcionar dentro da plataforma SoftLiving.</p>
     <ul>
       <li>Todos os conteúdos, números, agendas e perfis são <b>fictícios</b>, criados só para esta apresentação.</li>
@@ -618,8 +747,15 @@
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
       <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
-    <div class="brand"><span class="soft">Soft</span><span class="living">Living</span></div>
+    <a class="brand" href="index.html" aria-label="SoftLiving, voltar ao início"><span class="soft">Soft</span><span class="living">Living</span></a>
   </div>
+  <nav class="top-nav" id="topNav" aria-label="Menu institucional">
+    <button type="button" data-site="conhecer">Conhecer</button>
+    <button type="button" data-site="como-funciona">Como Funciona</button>
+    <button type="button" data-site="beneficios">Benefícios</button>
+    <button type="button" data-site="seguranca">Segurança</button>
+    <button type="button" data-site="patrocinadores">Patrocinadores</button>
+  </nav>
   <div class="header-right">
     <div class="credits-pill"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> <span class="credits-label">41 créditos</span></div>
     <button class="icon-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
@@ -707,12 +843,382 @@
       <div id="content"></div>
     </div>
 
+
+    <!-- Página institucional: conhecer -->
+    <div class="wrap site-page" data-site="conhecer" hidden>
+  <section class="sp-hero">
+    <div class="sp-container sp-hero-grid">
+      <div>
+        <span class="sp-eyebrow">Aberto a todos, com atenção especial ao público 50+</span>
+        <h1>Um lugar simples para se conectar, aprender e se cuidar.</h1>
+        <p class="sp-lead">Um refúgio digital sem ruído, com curadoria de cultura, lazer e bem-estar. Para estar inteiro em algum lugar, em vez de estar em todo lugar.</p>
+        <div class="sp-cta-row">
+          <a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Participar grátis</a>
+          <a class="sp-btn sp-btn-ghost sp-btn-lg" href="#como-funciona">Como funciona</a>
+        </div>
+        <p class="sp-small-note">Já tem conta? <a href="https://softliving.com.br/entrar">Entrar aqui</a></p>
+      </div>
+      <div class="sp-hero-art" aria-hidden="true"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="8" r="3.2"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M3.5 19c.6-3.3 2.9-5.3 5.5-5.3s4.9 2 5.5 5.3M14 15.2c.8-.6 1.6-.9 2.5-.9 2.1 0 3.8 1.6 4.2 4.7"/></svg>Imagem: pessoas conversando com tranquilidade</div></div>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head">
+        <h2>Por que o SoftLiving é diferente</h2>
+        <p>Enquanto as redes disputam a sua atenção, o SoftLiving devolve o seu tempo.</p>
+      </div>
+      <div class="sp-grid sp-g4">
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m4 20 16-16"/></svg></div><h3>Sem anúncios na navegação</h3><p>Aqui não há banners nem rolagem infinita. Nada disputa a sua atenção.</p></div>
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></div><h3>Curadoria em tudo</h3><p>Cada conteúdo, grupo e parceiro passa pela seleção da nossa equipe. Menos volume, mais relevância.</p></div>
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.5-2.8 2.5-4.5 5-4.5s4.5 1.7 5 4.5M11 19c.5-2.8 2.5-4.5 5-4.5s4.5 1.7 5 4.5"/></svg></div><h3>Do digital para o encontro real</h3><p>Grupos e eventos presenciais que transformam interesses em amizades.</p></div>
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/></svg></div><h3>A alegria de ficar de fora</h3><p>Você não precisa saber de tudo. Escolha o que importa e aproveite com calma.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-section-head">
+        <h2>Como funciona</h2>
+        <p>Três passos simples para fazer parte do SoftLiving.</p>
+      </div>
+      <div class="sp-grid sp-g3">
+        <div class="sp-card"><div class="sp-step-num">1</div><h3>Entre</h3><p>Crie sua conta em cerca de 1 minuto, com nome, e-mail e senha, e ganhe R$ 20 em bônus.</p></div>
+        <div class="sp-card"><div class="sp-step-num">2</div><h3>Escolha seus interesses</h3><p>Cultura, leitura, gastronomia, turismo, casa e decoração, tecnologia, finanças pessoais, bem-estar. Diga o que gosta e veja conteúdo feito para você.</p></div>
+        <div class="sp-card"><div class="sp-step-num">3</div><h3>Participe dos Grupos</h3><p>Converse e aprenda em grupos como Clube do Livro, Yoga e Meditação, Tecnologia Sem Medo, Culinária Saudável e Investimentos para 50+.</p></div>
+      </div>
+      <div class="sp-cta-row" style="margin-top:28px"><a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Começar agora, é grátis</a></div>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head">
+        <h2>Segurança e ajuda</h2>
+        <p>Um ambiente cuidado, do primeiro acesso em diante.</p>
+      </div>
+      <div class="sp-grid sp-g3">
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Ambiente moderado</h3><p>Tudo o que é publicado passa por curadoria humana. Parceiros e profissionais são verificados antes de entrar.</p></div>
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg></div><h3>Suporte humano por WhatsApp</h3><p>Fale com pessoas de verdade, de segunda a sexta, das 8h às 18h.</p></div>
+        <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><h3>Privacidade respeitada</h3><p>Seus dados servem só para melhorar a sua experiência. Nada é vendido ou compartilhado.</p></div>
+      </div>
+      <div class="sp-cta-row" style="margin-top:28px"><a class="sp-btn sp-btn-ghost sp-btn-lg" href="#seguranca">Saiba mais sobre segurança</a></div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Na Mídia</h2></div>
+      <a class="sp-media-card" href="https://exame.com/bussola/plataforma-digital-vai-priorizar-conteudo-especial-para-publicos-50-e-80/" target="_blank" rel="noopener">
+        <span class="sp-src">Exame</span>
+        <span class="sp-t">Plataforma digital vai priorizar conteúdo especial para públicos 50+ e 80+</span>
+        <span class="sp-d">6 de maio de 2026</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sp-closing">
+    <div class="sp-container">
+      <h2>Reserve um momento para o que realmente importa</h2>
+      <p>Crie sua conta gratuita e comece no seu ritmo.</p>
+      <a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Participar grátis</a>
+    </div>
+  </section>
+    </div>
+
+    <!-- Página institucional: como-funciona -->
+    <div class="wrap site-page" data-site="como-funciona" hidden>
+  <section class="sp-hero">
+    <div class="sp-container sp-hero-grid">
+      <div>
+        <h1>Simples. Acolhedor. Para você.</h1>
+        <p class="sp-lead">Cada passo do SoftLiving foi desenhado para ser claro e tranquilo, pensando também em quem usa uma plataforma digital pela primeira vez.</p>
+      </div>
+      <div class="sp-hero-art" aria-hidden="true"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M10 18h4"/></svg>Imagem: pessoa usando tablet com tranquilidade</div></div>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Seis passos, no seu ritmo</h2></div>
+      <div class="sp-grid sp-g3">
+        <div class="sp-card"><div class="sp-step-num">1</div><span class="sp-step-meta">cerca de 1 min</span><h3>Faça seu cadastro</h3><p>Nome, e-mail e senha, e você já ganha R$ 20 em bônus. Perfil e interesses você completa depois, quando quiser.</p></div>
+        <div class="sp-card"><div class="sp-step-num">2</div><span class="sp-step-meta">Opcional</span><h3>Faça sua primeira recarga</h3><p>Com um Pix de R$ 50 você recebe 50 créditos e mais 50 de bônus. Os créditos liberam conteúdos completos e clubes de assinatura.</p></div>
+        <div class="sp-card"><div class="sp-step-num">3</div><span class="sp-step-meta">Sempre disponível</span><h3>Explore os Grupos</h3><p>Entre em grupos por interesse, conheça pessoas com gostos parecidos e participe de conversas e atividades.</p></div>
+        <div class="sp-card"><div class="sp-step-num">4</div><span class="sp-step-meta">Sempre disponível</span><h3>Acesse conteúdos</h3><p>Artigos, vídeos, colunistas e guias sobre cultura, leitura, gastronomia, turismo, casa, tecnologia, finanças pessoais e bem-estar. Parte gratuita, parte com créditos.</p></div>
+        <div class="sp-card"><div class="sp-step-num">5</div><span class="sp-step-meta">Quando quiser</span><h3>Vá aos encontros presenciais</h3><p>Eventos organizados pela nossa curadoria, para levar a conversa da tela para a vida real. Ingresso pago à parte.</p></div>
+        <div class="sp-card"><div class="sp-step-num">6</div><span class="sp-step-meta">Sempre disponível</span><h3>Aproveite os parceiros</h3><p>Produtos e serviços de parceiros selecionados, com condições especiais para a comunidade.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-section-head">
+        <h2>Sua carteira de créditos</h2>
+        <p>Funciona como um cartão pré-pago: você recarrega, usa quando quiser e recarrega de novo quando precisar.</p>
+      </div>
+      <table class="sp-wallet">
+        <tr><td>R$ 1 = 1 crédito</td><td>Recarga por Pix ou cartão</td></tr>
+        <tr><td>Primeira recarga com 100% de bônus</td><td>R$ 50 viram 50 créditos mais 50 de bônus</td></tr>
+        <tr><td>Onde usar</td><td>Conteúdos pagos e clubes de assinatura</td></tr>
+        <tr><td>Sem prazo de validade</td><td>Use no seu tempo</td></tr>
+        <tr><td>Sem obrigação</td><td>Recarregue só se quiser</td></tr>
+      </table>
+      <p class="sp-note">Créditos e bônus são de uso interno e não podem ser sacados. O bônus fica numa carteira separada. Eventos presenciais são pagos por ingresso, fora da carteira.</p>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head">
+        <h2>Indique e ganhe bônus</h2>
+        <p>Convide alguém para o SoftLiving e receba 5 créditos de bônus quando a indicação for aprovada.</p>
+      </div>
+      <ul class="sp-rules">
+        <li><strong>Bônus, não dinheiro:</strong> o benefício é de uso na plataforma. Não é sacável, não é transferível e não é renda ou comissão.</li>
+        <li><strong>Conforme a campanha:</strong> cada indicação é analisada, e a liberação segue as regras da campanha vigente.</li>
+        <li><strong>Sem ganhos em cadeia:</strong> só quem indicou diretamente pode receber, quando elegível. Não há múltiplos níveis nem comissão recorrente.</li>
+        <li><strong>Antifraude:</strong> autoindicação, cadastro duplicado ou abuso cancelam a indicação.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sp-closing">
+    <div class="sp-container">
+      <h2>Pronto para começar?</h2>
+      <p>Leva menos de 5 minutos, no seu ritmo.</p>
+      <a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Começar meu cadastro</a>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container sp-grid" style="gap:16px">
+      <div class="sp-inline-band">
+        <div><h3>Sua marca quer fazer parte?</h3><p>O SoftLiving oferece cotas de patrocínio para marcas de qualquer segmento que queiram estar presentes num ambiente sem ruído.</p></div>
+        <a class="sp-btn sp-btn-primary" href="#patrocinadores">Seja patrocinador</a>
+      </div>
+      <div class="sp-inline-band">
+        <div><h3>Tem um negócio local?</h3><p>Restaurantes, lojas, cafés, academias e serviços podem entrar gratuitamente no SoftLiving com um perfil de estabelecimento: apresentação, endereços e condições especiais para a comunidade. A entrada passa pela nossa curadoria.</p></div>
+        <a class="sp-btn sp-btn-green" href="https://softliving.com.br/cadastro/boas-vindas">Cadastrar meu estabelecimento</a>
+      </div>
+    </div>
+  </section>
+    </div>
+
+    <!-- Página institucional: beneficios -->
+    <div class="wrap site-page" data-site="beneficios" hidden>
+  <section class="sp-hero">
+    <div class="sp-container sp-hero-grid">
+      <div>
+        <h1>O que você ganha ao participar</h1>
+        <p class="sp-lead">Do primeiro acesso gratuito aos conteúdos completos, o SoftLiving foi feito para somar à sua vida, sem ruído.</p>
+      </div>
+      <div class="sp-hero-art" aria-hidden="true"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c.5-2.8 2.5-4.5 5-4.5s4.5 1.7 5 4.5M11 19c.5-2.8 2.5-4.5 5-4.5s4.5 1.7 5 4.5"/></svg>Imagem: grupo de amigos conversando</div></div>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container sp-grid sp-g3">
+      <div class="sp-plan">
+        <span class="sp-tag">Sempre grátis</span>
+        <h2>Conta gratuita</h2>
+        <p>Cadastre-se, explore a comunidade, faça amigos e acesse conteúdos sem pagar nada. No cadastro, você já ganha R$ 20 em bônus.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Grupos gratuitos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Conteúdos gratuitos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Seu perfil</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Ambiente com curadoria e sem anúncios</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Suporte humano por WhatsApp</li>
+        </ul>
+        <a class="sp-btn sp-btn-ghost sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Cadastrar grátis</a>
+      </div>
+
+      <div class="sp-plan sp-featured">
+        <span class="sp-tag">Recomendado</span>
+        <h2>Com créditos</h2>
+        <p class="sp-price"><b>R$ 50</b> na primeira recarga = 50 créditos + 50 de bônus</p>
+        <p>Use os créditos para acessar conteúdos completos e clubes de assinatura. Créditos e bônus são de uso interno e não são sacáveis.</p>
+        <p class="sp-sub">Tudo da conta gratuita, mais:</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Clubes de assinatura</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Conteúdos completos e exclusivos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Desconto em produtos de parceiros</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Eventos e encontros exclusivos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m5 12 4.5 4.5L19 7"/></svg>Suporte prioritário</li>
+        </ul>
+        <a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Fazer primeira recarga</a>
+      </div>
+
+      <div class="sp-plan sp-soon">
+        <span class="sp-tag">Em breve</span>
+        <h2>Assinatura VIP</h2>
+        <p>Uma camada premium com ainda mais benefícios. Em breve, os detalhes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-inline-band">
+        <div><h3>Ainda com dúvidas?</h3><p>Converse com nossa equipe pelo WhatsApp. Pessoas reais, de segunda a sexta, das 8h às 18h.</p></div>
+        <a class="sp-btn sp-btn-green" href="#" data-whatsapp>Falar pelo WhatsApp</a>
+      </div>
+      <p class="sp-small-note">Sua marca quer fazer parte? <a href="#patrocinadores">Seja patrocinador</a></p>
+    </div>
+  </section>
+    </div>
+
+    <!-- Página institucional: seguranca -->
+    <div class="wrap site-page" data-site="seguranca" hidden>
+  <section class="sp-hero">
+    <div class="sp-container">
+      <h1>Aqui você navega com tranquilidade</h1>
+      <p class="sp-lead">Segurança não é uma funcionalidade do SoftLiving: é um valor. Cada decisão que tomamos coloca a sua proteção em primeiro lugar.</p>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container sp-grid sp-g4">
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m4 20 16-16"/></svg></div><h3>Sem anúncios na navegação</h3><p>Aqui não há banners, pop-ups nem disputa pela sua atenção. É uma escolha nossa, para que o ambiente continue leve.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Ambiente moderado</h3><p>Tudo o que é publicado passa por curadoria humana. Conteúdos e parceiros são verificados antes de aparecer para a comunidade.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></div><h3>Dados protegidos</h3><p>Seus dados pessoais nunca são vendidos. Seguimos a LGPD, a Lei Geral de Proteção de Dados. Você controla o que compartilha.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><h3>Privacidade respeitada</h3><p>Você decide o que aparece no seu perfil. Nenhuma informação sensível é exibida sem a sua autorização.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 20c.7-3.5 3.5-5.5 7-5.5M15 17l2 2 4-4"/></svg></div><h3>Perfis verificados</h3><p>Parceiros e profissionais passam por verificação. Perfis suspeitos são identificados e removidos rapidamente.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div><h3>Reporte fácil</h3><p>Viu algo estranho? Com um botão você reporta qualquer post ou perfil. Nossa equipe responde em até 24 horas.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/></svg></div><h3>Suporte humano</h3><p>Atendimento por WhatsApp, feito por pessoas treinadas para ajudar. Sem robô quando você mais precisa.</p></div>
+      <div class="sp-card"><div class="sp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.3 2.3 4.7-5"/></svg></div><h3>Simples de usar</h3><p>Interface limpa, pensada para quem usa uma plataforma digital pela primeira vez.</p></div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Perguntas frequentes sobre segurança</h2></div>
+      <div class="sp-faq">
+        <details><summary>Quem pode participar?</summary><p>Qualquer pessoa a partir de 18 anos. Menores de idade só com autorização e acompanhamento dos pais ou responsáveis.</p></details>
+        <details><summary>Minhas fotos e dados ficam seguros?</summary><p>Sim. Seus dados são armazenados de forma criptografada e nunca são compartilhados com terceiros sem a sua autorização explícita.</p></details>
+        <details><summary>Posso me cadastrar sem foto?</summary><p>Com certeza. A foto de perfil é opcional. Você pode usar um avatar ou deixar sem imagem.</p></details>
+        <details><summary>O que faço se vir um post ou perfil suspeito?</summary><p>Use o botão "Reportar", disponível em qualquer post ou perfil. Nossa equipe analisa em até 24 horas e toma as medidas necessárias.</p></details>
+        <details><summary>Meus créditos estão seguros?</summary><p>Sim. Os créditos ficam na sua carteira, sem prazo de validade. São de uso interno e não podem ser sacados nem transferidos.</p></details>
+        <details><summary>Posso sair da plataforma quando quiser?</summary><p>Sim, a qualquer momento. Você pode desativar a conta ou excluir seus dados de forma permanente. Como os créditos não são sacáveis, vale usá-los antes de sair.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-closing">
+    <div class="sp-container">
+      <h2>Ainda com dúvidas?</h2>
+      <p>Nossa equipe está no WhatsApp para ajudar com qualquer questão de segurança ou privacidade.</p>
+      <div class="sp-cta-row" style="justify-content:center">
+        <a class="sp-btn sp-btn-primary sp-btn-lg" href="#" data-whatsapp>Falar no WhatsApp</a>
+        <a class="sp-btn sp-btn-ghost sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Participar com segurança</a>
+      </div>
+    </div>
+  </section>
+    </div>
+
+    <!-- Página institucional: patrocinadores -->
+    <div class="wrap site-page" data-site="patrocinadores" hidden>
+  <section class="sp-hero">
+    <div class="sp-container">
+      <h1>Sua marca num ambiente sem ruído</h1>
+      <p class="sp-lead">O SoftLiving é uma plataforma de conteúdo e comunidade, aberta a todos os públicos e com atenção especial ao público 50+. Aqui não há banners nem disputa de atenção. Por isso, a presença de uma marca é percebida como recomendação, não como interrupção.</p>
+      <a class="sp-btn sp-btn-primary sp-btn-lg" href="mailto:contato@softliving.com.br?subject=Patroc%C3%ADnio%20SoftLiving">Conversar sobre patrocínio</a>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Por que patrocinar</h2></div>
+      <div class="sp-grid sp-g4">
+        <div class="sp-card"><h3>Visibilidade com qualidade</h3><p>Sem poluição visual, sem rolagem infinita, com curadoria em tudo que entra. Sua marca aparece num espaço onde a atenção existe de verdade.</p></div>
+        <div class="sp-card"><h3>Curadoria que protege a sua marca</h3><p>Nem toda marca entra. O mesmo critério que seleciona os parceiros é o que valoriza a sua exposição.</p></div>
+        <div class="sp-card"><h3>Um público com renda e decisão de compra</h3><p>O público 50+ concentra renda disponível e poder de decisão de compra na família, e quase não existe mídia pensada de propósito para ele.</p></div>
+        <div class="sp-card"><h3>Para qualquer segmento</h3><p>Decoração, turismo, editoras, restaurantes, fintechs, seguradoras. Cada marca encontra aqui o seu público e o seu contexto.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Onde sua marca aparece</h2></div>
+      <div class="sp-grid sp-g3">
+        <div class="sp-card"><h3>Espaços seletivos e curados</h3><p>O logo da marca em posições definidas.</p></div>
+        <div class="sp-card"><h3>Conteúdo de marca</h3><p>Artigos e conteúdos produzidos no contexto editorial da plataforma.</p></div>
+        <div class="sp-card"><h3>Newsletter e WhatsApp</h3><p>Divulgação dos produtos e serviços da marca para a comunidade.</p></div>
+      </div>
+      <p class="sp-note">Não vendemos banner nem impressão. É essa regra que garante que a atenção do leitor não seja dividida com dez anunciantes.</p>
+    </div>
+  </section>
+
+  <section class="sp-block">
+    <div class="sp-container">
+      <div class="sp-section-head"><h2>Três formas de participar</h2></div>
+      <div class="sp-grid sp-g3">
+        <div class="sp-cota">
+          <div class="sp-kind">Presença visual</div>
+          <h3>Cota Fundadora</h3>
+          <ul>
+            <li>Naming e co-branding em produto ou seção</li>
+            <li>Espaço personalizado para os clientes e para os colaboradores da marca</li>
+            <li>Marca na newsletter e no WhatsApp</li>
+          </ul>
+          <span class="sp-term">Contrato de 12 meses</span>
+        </div>
+        <div class="sp-cota">
+          <div class="sp-kind">Presença em conteúdo</div>
+          <h3>Cota Presença</h3>
+          <ul>
+            <li>Presença consolidada no conteúdo editorial</li>
+            <li>Espaço personalizado para a marca falar com os clientes dela</li>
+            <li>Marca na newsletter e no WhatsApp</li>
+          </ul>
+          <span class="sp-term">Contrato de 12 meses</span>
+        </div>
+        <div class="sp-cota">
+          <div class="sp-kind">Presença em eventos</div>
+          <h3>Cota Pontual</h3>
+          <ul>
+            <li>Entrada vinculada aos encontros presenciais</li>
+            <li>Marca na newsletter e no WhatsApp</li>
+          </ul>
+          <span class="sp-term">Prazo a combinar</span>
+        </div>
+      </div>
+      <p class="sp-note">Cada proposta é personalizada, com uma cota e um valor pensados para a sua marca.</p>
+    </div>
+  </section>
+
+  <section class="sp-block sp-alt">
+    <div class="sp-container">
+      <div class="sp-seal">
+        <div class="sp-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg></div>
+        <div>
+          <h2>Selo Patrocinador Co-Fundador</h2>
+          <p>Quem entra nesta fase recebe o Selo Patrocinador Co-Fundador, um reconhecimento vitalício que permanece com a marca mesmo depois do contrato. O selo é concedido apenas nesta fase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-closing">
+    <div class="sp-container">
+      <h2>Vamos conversar?</h2>
+      <p>Conte um pouco sobre a sua marca e montamos uma proposta sob medida.</p>
+      <a class="sp-btn sp-btn-primary sp-btn-lg" href="mailto:contato@softliving.com.br?subject=Patroc%C3%ADnio%20SoftLiving">Conversar sobre patrocínio</a>
+    </div>
+  </section>
+    </div>
+
     <!-- Páginas do menu lateral ainda não desenhadas: ficam em branco por enquanto -->
     <div class="wrap blank-page" id="blankPage" hidden>
       <h1 class="org-title serif" id="blankPageTitle"></h1>
     </div>
   </main>
 </div>
+
+<div class="sp-toast" id="spToast" role="status" aria-live="polite"></div>
 
 <footer class="proto-footer">
   Protótipo conceitual SoftLiving, para apresentação e aprovação. Conteúdos, dados, números e pessoas são fictícios.
@@ -3226,6 +3732,7 @@ function showPage(page){
   const isCommunities = page === 'comunidades';
   document.getElementById('communitiesView').hidden = !isCommunities;
   document.getElementById('blankPage').hidden = isCommunities;
+  hideSitePages();
   if(!isCommunities) document.getElementById('blankPageTitle').textContent = PAGE_TITLES[page];
   sidebar.querySelectorAll('.side-nav a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
   window.scrollTo(0, 0);
@@ -3245,6 +3752,40 @@ document.addEventListener('click', e => {
   if(!e.target.closest('.org-dropdown')) closeOrgDropdown();
 });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOrgDropdown(); });
+
+
+// Menu horizontal institucional: cada botão abre uma página com o conteúdo do site
+const topNav = document.getElementById('topNav');
+function hideSitePages(){
+  document.querySelectorAll('.site-page').forEach(p => p.hidden = true);
+  topNav.querySelectorAll('button').forEach(b => { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+}
+function showSite(key){
+  document.getElementById('communitiesView').hidden = true;
+  document.getElementById('blankPage').hidden = true;
+  document.querySelectorAll('.site-page').forEach(p => p.hidden = p.dataset.site !== key);
+  topNav.querySelectorAll('button').forEach(b => {
+    const on = b.dataset.site === key;
+    b.classList.toggle('active', on);
+    if(on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+  });
+  sidebar.querySelectorAll('.side-nav a').forEach(a => a.classList.remove('active'));
+  window.scrollTo(0, 0);
+}
+topNav.querySelectorAll('button').forEach(b => b.addEventListener('click', () => showSite(b.dataset.site)));
+// Links internos das páginas (ex.: "Como funciona", "Seja patrocinador") trocam de página
+document.querySelectorAll('.site-page a[href^="#"]').forEach(a => {
+  const key = a.getAttribute('href').slice(1);
+  if(topNav.querySelector('[data-site="'+key+'"]')) a.addEventListener('click', e => { e.preventDefault(); showSite(key); });
+});
+// WhatsApp: número oficial ainda não definido
+const spToast = document.getElementById('spToast'); let spToastT;
+document.querySelectorAll('.site-page [data-whatsapp]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  spToast.textContent = 'Protótipo: o número oficial do WhatsApp ainda não foi definido.';
+  spToast.classList.add('show');
+  clearTimeout(spToastT); spToastT = setTimeout(() => spToast.classList.remove('show'), 3200);
+}));
 
 // Aviso de protótipo: abre na primeira visita da sessão
 const protoModal = document.getElementById('protoModal');
