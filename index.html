@@ -151,6 +151,15 @@
     background:#fff; border:1px solid var(--border); border-radius:14px;
     box-shadow:0 16px 32px rgba(18,41,77,.2); padding:8px; max-height:280px; overflow-y:auto;
   }
+  /* Barra de rolagem discreta, no mesmo estilo das listas de eventos */
+  .org-dropdown::-webkit-scrollbar, aside::-webkit-scrollbar{ width:6px; }
+  .org-dropdown::-webkit-scrollbar-track, aside::-webkit-scrollbar-track{ background:transparent; margin:10px 0; }
+  .org-dropdown::-webkit-scrollbar-thumb, aside::-webkit-scrollbar-thumb{ background:#d5dae0; border-radius:999px; }
+  .org-dropdown::-webkit-scrollbar-thumb:hover, aside::-webkit-scrollbar-thumb:hover{ background:var(--muted); }
+  .org-dropdown::-webkit-scrollbar-button, aside::-webkit-scrollbar-button{ display:none; }
+  @supports not selector(::-webkit-scrollbar){
+    .org-dropdown, aside{ scrollbar-width:thin; scrollbar-color:#d5dae0 transparent; }
+  }
   .org-dropdown-label{ font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; padding:4px 8px 6px; margin:0; }
   .org-dropdown-item{
     display:flex; align-items:center; gap:10px; width:100%; text-align:left;
