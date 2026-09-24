@@ -22,7 +22,10 @@
     --text:#1f2530;
     --bg:#f4f2ee;
   }
+  /* O layout é só claro: impede que o modo escuro do navegador mude botões e campos */
+  :root{ color-scheme:light; }
   *{box-sizing:border-box;}
+  button{ color:inherit; }
   body{
     margin:0; font-family:'Inter',Arial,sans-serif; color:var(--text); background:#fff;
   }
