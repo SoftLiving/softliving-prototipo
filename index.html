@@ -720,8 +720,111 @@ const DATA = {
     name: "Claro",
     orgIcon: "briefcase",
     orgType: "Empresa",
-    subtitle: "Ambiente corporativo — bem-estar, saúde ocupacional e conteúdo profissionalizante (NR-1)",
+    subtitle: "Claro — experiência do cliente e do colaborador em um só ambiente.",
     sponsor: "Claro",
+    // Dois públicos: o painel "Colaborador" herda os campos gerais desta comunidade (abaixo);
+    // o painel "Cliente" sobrescreve tudo com dados próprios.
+    audiences: {
+      cliente: {
+        audienceLabel: "Cliente",
+        subtitle: "Seus planos, sua fatura e conteúdos para aproveitar melhor seus serviços.",
+        memberLabel: "Clientes",
+        personalized: true,
+        greetingName: "Rafael",
+        summary: [
+          {lbl:"Fatura de outubro", num:"R$ 189,90"},
+          {lbl:"Vencimento", num:"10/10"},
+          {lbl:"Internet móvel usada", num:"18 de 30 GB"},
+          {lbl:"Internet fibra", num:"500 Mega"},
+          {lbl:"Chamados abertos", num:1},
+          {lbl:"Pontos acumulados", num:"2.340"},
+        ],
+        roadmap: null,
+        notice: { title:"Manutenção programada na sua região", body:"Na madrugada de 02/10, entre 01h e 05h, a internet fibra pode ficar instável na sua região. Não é preciso fazer nada." },
+        events: [
+          {day:"30", month:"SET", t:"Live: segurança digital para toda a família", time:"19:00 – 20:00", place:"Online"},
+          {day:"04", month:"OUT", t:"Oficina: aproveitando melhor seu Wi-Fi em casa", time:"10:00 – 11:00", place:"Online"},
+          {day:"09", month:"OUT", t:"Lançamento dos novos planos de internet móvel", time:"19:00", place:"Online"},
+          {day:"15", month:"OUT", t:"Tira-dúvidas: como ler sua fatura", time:"18:30 – 19:00", place:"Online"},
+          {day:"22", month:"OUT", t:"Workshop: celular sem golpes", time:"19:00 – 20:00", place:"Loja Centro"},
+          {day:"29", month:"OUT", t:"Maratona de séries com a comunidade", time:"20:00", place:"Online"},
+        ],
+        recommended: [
+          {t:"Como ler sua fatura em 3 minutos", m:"Claro · 3 min", r:"você concluiu 70%"},
+          {t:"Golpes pelo celular: como se proteger", m:"SoftLiving · 6 min", r:"você concluiu 35%"},
+        ],
+        quicklinks: [{icon:"document",label:"2ª via da fatura"},{icon:"chart",label:"Meu consumo"},{icon:"phone",label:"Falar com o suporte"},{icon:"gift",label:"Meus benefícios"}],
+        extra: { title:"Seus benefícios de cliente", tag:"Atualizado", items:[
+          {t:"Bônus de internet no aniversário", m:"+5 GB no mês do seu aniversário"},
+          {t:"Troca de pontos por aparelhos", m:"Use seus pontos com desconto em celulares"},
+          {t:"Descontos em streaming", m:"Condições especiais para clientes"},
+          {t:"Visita técnica sem custo", m:"Para problemas na instalação da fibra"},
+          {t:"Créditos SoftLiving", m:"Ganhe créditos ao pagar a fatura em dia"},
+        ]},
+        poll: { title:"Pesquisa de satisfação — internet fibra", publico:"Clientes de internet fibra", elegiveis:1800, respostas:740, participacao:"41%", status:"em andamento" },
+        conteudosCuradoria: {
+          subtitle: "Guias, dicas e novidades para você aproveitar melhor seus planos e usar a tecnologia com segurança.",
+          categories: ["Todas as categorias","Minha fatura","Internet e Wi-Fi","Celular","TV e streaming","Segurança digital","Benefícios","Tecnologia no dia a dia"],
+          featured: [
+            { tag:"EM DESTAQUE", t:"Como ler sua fatura em 3 minutos", icon:"document" },
+            { tag:"EM DESTAQUE", t:"Wi-Fi lento? 7 ajustes que resolvem na hora", icon:"bolt" },
+            { tag:"EM DESTAQUE", t:"Golpes pelo celular: como se proteger", icon:"shield" },
+            { tag:"EM DESTAQUE", t:"Seus pontos valem mais: veja como trocar", icon:"gift" },
+          ],
+          cards: [
+            {badge:"gratis", cat:"Minha fatura", t:"Como ler sua fatura em 3 minutos", e:"Entenda cada item cobrado e onde conferir seu consumo do mês.", a:"Claro", icon:"document", cta:"Ler agora"},
+            {badge:"gratis", cat:"Internet e Wi-Fi", t:"Wi-Fi lento? 7 ajustes que resolvem na hora", e:"Posição do roteador, canais e outras dicas simples para melhorar o sinal.", a:"Claro", icon:"bolt", cta:"Ler agora"},
+            {badge:"gratis", cat:"Segurança digital", t:"Golpes pelo celular: como se proteger", e:"Os golpes mais comuns por mensagem e ligação, e como reconhecê-los.", a:"SoftLiving", icon:"shield", cta:"Ler agora"},
+            {badge:"gratis", cat:"Benefícios", t:"Seus pontos valem mais: veja como trocar", e:"Onde consultar seu saldo e as melhores formas de usar os pontos.", a:"Claro", icon:"gift", cta:"Ler agora"},
+            {badge:"gratis", cat:"Celular", t:"Como economizar internet móvel no dia a dia", e:"Configurações que evitam gastar seus dados sem perceber.", a:"Claro", icon:"phone", cta:"Ler agora"},
+            {badge:"premium", credits:2, cat:"Tecnologia no dia a dia", t:"Casa conectada: primeiros passos", e:"Lâmpadas, tomadas e assistentes de voz para começar sem complicação.", a:"SoftLiving", icon:"robot", cta:"Destravar · 2 créditos"},
+            {badge:"gratis", cat:"TV e streaming", t:"Como organizar seus aplicativos de streaming", e:"Dicas para encontrar o que assistir e não pagar por serviços repetidos.", a:"Claro", icon:"star", cta:"Ler agora"},
+            {badge:"gratis", cat:"Internet e Wi-Fi", t:"Teste de velocidade: como fazer do jeito certo", e:"O passo a passo para medir sua internet e quando acionar o suporte.", a:"Claro", icon:"chart", cta:"Ler agora"},
+            {badge:"premium", credits:3, cat:"Segurança digital", t:"Proteção de dados para toda a família", e:"Senhas, controle parental e privacidade nas redes sociais.", a:"SoftLiving", icon:"lock", cta:"Destravar · 3 créditos"},
+            {badge:"gratis", cat:"Minha fatura", t:"Débito automático e fatura digital: vale a pena?", e:"Praticidade, prazos e como ativar pelo aplicativo.", a:"Claro", icon:"money", cta:"Ler agora"},
+            {badge:"destravado", cat:"Tecnologia no dia a dia", t:"Celular para os pais: configurando com facilidade", e:"Como deixar o aparelho mais simples para quem não tem intimidade com tecnologia.", a:"SoftLiving", icon:"users", cta:"Ler agora"},
+            {badge:"gratis", cat:"Celular", t:"Portabilidade: como trazer seu número", e:"O que é preciso e quanto tempo leva para trocar de operadora sem perder o número.", a:"Claro", icon:"phone", cta:"Ler agora"},
+          ],
+        },
+        celulasLabel: "Comunidades de clientes",
+        celulasIntro: "Grupos abertos para clientes trocarem dicas e experiências — moderados pela equipe Claro.",
+        celulas: [
+          {icon:"star", t:"Clube dos gamers", d:"Dicas de conexão, jogos online e eventos para quem joga."},
+          {icon:"users", t:"Pais conectados", d:"Segurança digital, controle parental e tecnologia para a família."},
+          {icon:"briefcase", t:"Empreendedores", d:"Internet e telefonia para quem tem um pequeno negócio."},
+          {icon:"users", t:"Tecnologia 60+", d:"Apoio para quem quer aprender a usar celular e aplicativos com calma."},
+        ],
+        connections: [
+          {n:"Juliana Mota", r:"Especialista em Wi-Fi", c:"navy"},
+          {n:"Carlos Pereira", r:"Consultor de planos", c:"green"},
+          {n:"Aline Santos", r:"Suporte técnico", c:"amber"},
+          {n:"Fábio Tenório", r:"Moderador · Clube dos gamers", c:"teal"},
+        ],
+        membrosDirectory: {
+          subtitle: "Fale com especialistas e consultores e tire suas dúvidas sobre seus serviços.",
+          filters: [{label:"Assunto",value:"Todos"},{label:"Serviço",value:"Todos"},{label:"Atendimento",value:"Online"},{label:"Status",value:"Disponíveis"}],
+          count: 24,
+          members: [
+            {name:"Juliana Mota", role:"Especialista em Wi-Fi", c:"navy", status:"Disponível", loc:"Atendimento online", stat1:"Resolve em média em 15 min", stat2:"4,9 de avaliação", tags:["Internet fibra","Wi-Fi"], more:1, cta:"Falar agora"},
+            {name:"Carlos Pereira", role:"Consultor de planos", c:"green", status:"Disponível", loc:"Atendimento online", stat1:"Ajuda a escolher o plano ideal", stat2:"4,8 de avaliação", tags:["Planos","Celular"], more:2, cta:"Falar agora"},
+            {name:"Aline Santos", role:"Suporte técnico", c:"amber", status:"Disponível", loc:"Atendimento online", stat1:"Especialista em TV e streaming", stat2:"4,9 de avaliação", tags:["TV","Streaming"], more:1, cta:"Falar agora"},
+            {name:"Roberto Lins", role:"Atendimento de fatura", c:"teal", status:"Disponível", loc:"Atendimento online", stat1:"Tira dúvidas sobre cobranças", stat2:"4,7 de avaliação", tags:["Fatura","Pagamentos"], more:1, cta:"Falar agora"},
+            {name:"Fábio Tenório", role:"Moderador · Clube dos gamers", c:"terracotta", status:"Ativo", loc:"Comunidade de clientes", stat1:"Organiza os torneios online", stat2:"1.200 membros no grupo", tags:["Games","Conexão"], more:1, cta:"Conectar"},
+            {name:"Denise Araújo", role:"Moderadora · Tecnologia 60+", c:"navy", status:"Ativa", loc:"Comunidade de clientes", stat1:"Conduz as oficinas online", stat2:"800 membros no grupo", tags:["Celular","Aplicativos"], more:1, cta:"Conectar"},
+          ],
+        },
+        publicarPublico: "Todos os clientes desta comunidade",
+        dashStats: [ {n:1800,l:"Elegíveis"}, {n:1320,l:"Cadastrados"}, {n:740,l:"Ativos (7 dias)"}, {n:95,l:"Inativos"} ],
+        dashCards: [
+          {t:'Conteúdo "Como ler sua fatura em 3 minutos"', m:"620 iniciaram · 540 concluíram · 87% entre quem iniciou"},
+          {t:"Atendimentos pela comunidade", m:"310 dúvidas resolvidas no mês · Wi-Fi é o assunto mais procurado"},
+        ],
+      },
+      colaborador: {
+        audienceLabel: "Colaborador",
+        subtitle: "Ambiente corporativo — bem-estar, saúde ocupacional e conteúdo profissionalizante (NR-1)",
+      },
+    },
     memberLabel: "Colaboradores",
     personalized: true,
     connections: [
@@ -2160,7 +2263,12 @@ let pinnedSlots = ['empresa', 'condominio', 'clube'];
 let openDropdownSlot = null;
 // Comunidades que aparecem no topo da lista "Trocar por"
 const DROPDOWN_FIRST = ['redador'];
-let currentAudience = 'paciente';
+// Comunidades com mais de um público (ex.: Paciente/Colaborador) abrem no primeiro da lista
+function defaultAudience(orgKey){
+  const a = DATA[orgKey].audiences;
+  return a ? Object.keys(a)[0] : null;
+}
+let currentAudience = defaultAudience(currentOrg);
 
 function ic(path){ return `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`; }
 
@@ -2243,7 +2351,7 @@ function renderOrgSwitcher(){
       </div>`;
   }).join('');
 
-  el.querySelectorAll('.org-card').forEach(btn => btn.addEventListener('click', () => { currentOrg = btn.dataset.org; openDropdownSlot = null; servicosView = { mode:'root', amenityKey:null }; currentAudience = 'paciente'; renderAll(); }));
+  el.querySelectorAll('.org-card').forEach(btn => btn.addEventListener('click', () => { currentOrg = btn.dataset.org; openDropdownSlot = null; servicosView = { mode:'root', amenityKey:null }; currentAudience = defaultAudience(currentOrg); renderAll(); }));
   el.querySelectorAll('.org-card-chevron').forEach(btn => btn.addEventListener('click', (e) => {
     e.stopPropagation();
     const i = +btn.dataset.slot;
@@ -2258,7 +2366,7 @@ function renderOrgSwitcher(){
     currentOrg = newOrg;
     openDropdownSlot = null;
     servicosView = { mode:'root', amenityKey:null };
-    currentAudience = 'paciente';
+    currentAudience = defaultAudience(currentOrg);
     renderAll();
   }));
 }
