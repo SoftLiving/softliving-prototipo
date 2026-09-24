@@ -3072,6 +3072,17 @@ menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') 
 sidebarOverlay.addEventListener('click', closeSidebar);
 sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
 
+// Fecha o dropdown "Trocar por" ao clicar fora dele ou apertar Esc
+function closeOrgDropdown(){
+  if(openDropdownSlot === null) return;
+  openDropdownSlot = null;
+  renderOrgSwitcher();
+}
+document.addEventListener('click', e => {
+  if(!e.target.closest('.org-dropdown')) closeOrgDropdown();
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOrgDropdown(); });
+
 // Aviso de protótipo: abre na primeira visita da sessão
 const protoModal = document.getElementById('protoModal');
 function openProtoModal(){ protoModal.classList.add('show'); }
