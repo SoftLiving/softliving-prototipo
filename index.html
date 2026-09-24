@@ -642,7 +642,7 @@
     <div class="side-group">
       <p class="side-label">CONTEÚDO</p>
       <nav class="side-nav">
-        <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5"/><path d="M4 5.5v16"/></svg> Conteúdos</a>
+        <a href="#" data-page="conteudos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5"/><path d="M4 5.5v16"/></svg> Conteúdos</a>
         <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Colunas</a>
         <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg> Atividades <span class="chev">⌄</span></a>
       </nav>
@@ -650,8 +650,8 @@
     <div class="side-group">
       <p class="side-label">COMUNIDADE &amp; BENEFÍCIOS</p>
       <nav class="side-nav">
-        <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M23 20c0-2.8-2-5-5-5.5"/></svg> Grupos</a>
-        <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg> Conexões</a>
+        <a href="#" data-page="grupos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M23 20c0-2.8-2-5-5-5.5"/></svg> Grupos</a>
+        <a href="#" data-page="conexoes"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg> Conexões</a>
         <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg> Membros</a>
         <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg> Parceiros</a>
         <a href="#"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg> Oportunidades</a>
@@ -670,7 +670,7 @@
     <div class="side-group">
       <p class="side-label">MINHAS COMUNIDADES</p>
       <nav class="side-nav">
-        <a href="#" class="active"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="M9 21v-4h6v4M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M16 15h.01"/></svg> Minhas Comunidades</a>
+        <a href="#" data-page="comunidades" class="active"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="M9 21v-4h6v4M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M16 15h.01"/></svg> Minhas Comunidades</a>
       </nav>
     </div>
 
@@ -682,7 +682,7 @@
   </aside>
 
   <main>
-    <div class="wrap">
+    <div class="wrap" id="communitiesView">
       <div class="org-switcher-wrap">
         <div class="org-switcher" id="orgSwitcher"></div>
       </div>
@@ -705,6 +705,11 @@
       </div>
 
       <div id="content"></div>
+    </div>
+
+    <!-- Páginas do menu lateral ainda não desenhadas: ficam em branco por enquanto -->
+    <div class="wrap blank-page" id="blankPage" hidden>
+      <h1 class="org-title serif" id="blankPageTitle"></h1>
     </div>
   </main>
 </div>
@@ -3213,6 +3218,22 @@ function openSidebar(){ sidebar.classList.add('open'); sidebarOverlay.classList.
 menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
 sidebarOverlay.addEventListener('click', closeSidebar);
 sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+
+// Menu lateral: Conteúdos, Grupos e Conexões abrem uma página em branco;
+// Minhas Comunidades volta para a tela das comunidades
+const PAGE_TITLES = { conteudos:'Conteúdos', grupos:'Grupos', conexoes:'Conexões' };
+function showPage(page){
+  const isCommunities = page === 'comunidades';
+  document.getElementById('communitiesView').hidden = !isCommunities;
+  document.getElementById('blankPage').hidden = isCommunities;
+  if(!isCommunities) document.getElementById('blankPageTitle').textContent = PAGE_TITLES[page];
+  sidebar.querySelectorAll('.side-nav a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
+  window.scrollTo(0, 0);
+}
+sidebar.querySelectorAll('a[data-page]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  showPage(a.dataset.page);
+}));
 
 // Fecha o dropdown "Trocar por" ao clicar fora dele ou apertar Esc
 function closeOrgDropdown(){
