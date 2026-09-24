@@ -2155,6 +2155,8 @@ let currentOrg = 'empresa';
 let currentTab = 'inicio';
 let pinnedSlots = ['empresa', 'condominio', 'clube'];
 let openDropdownSlot = null;
+// Comunidades que aparecem no topo da lista "Trocar por"
+const DROPDOWN_FIRST = ['redador'];
 let currentAudience = 'paciente';
 
 function ic(path){ return `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`; }
@@ -2218,7 +2220,8 @@ function renderOrgSwitcher(){
   el.innerHTML = pinnedSlots.map((key, i) => {
     const org = DATA[key];
     const active = key === currentOrg ? 'active-navy' : '';
-    const otherOrgs = Object.keys(DATA).filter(k => !pinnedSlots.includes(k));
+    const otherOrgs = Object.keys(DATA).filter(k => !pinnedSlots.includes(k))
+      .sort((a, b) => (DROPDOWN_FIRST.includes(b) ? 1 : 0) - (DROPDOWN_FIRST.includes(a) ? 1 : 0));
     return `
       <div class="org-card-wrap ${active}">
         <button class="org-card" data-org="${key}">
