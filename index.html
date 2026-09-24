@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SoftLiving — Minhas Comunidades (Protótipo)</title>
+<title>SoftLiving — Minhas Comunidades (Protótipo · em aprovação)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -27,6 +27,26 @@
     margin:0; font-family:'Inter',Arial,sans-serif; color:var(--text); background:#fff;
   }
   .serif{ font-family:'Cardo',Georgia,serif; }
+
+  /* Aviso de protótipo — não removível */
+  .proto-strip{
+    position:sticky; top:0; z-index:60; background:var(--amber-bg); color:var(--amber-text);
+    border-bottom:1px solid var(--amber-border); font-size:12.5px; line-height:1.4;
+    padding:7px 16px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center;
+  }
+  .proto-strip strong{ letter-spacing:.06em; font-size:11px; background:var(--amber); color:#fff; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  .proto-strip button{ background:none; border:none; color:var(--amber-text); font:inherit; font-weight:600; text-decoration:underline; cursor:pointer; padding:0; }
+  .proto-seal{ display:inline-flex; align-items:center; gap:6px; margin-left:10px; vertical-align:middle; font-size:10.5px; font-weight:700; letter-spacing:.06em; color:var(--amber-text); background:var(--amber-bg); border:1px dashed var(--amber); padding:3px 10px; border-radius:999px; }
+  .proto-modal-bg{ position:fixed; inset:0; z-index:100; background:rgba(18,20,24,.55); display:none; align-items:center; justify-content:center; padding:16px; }
+  .proto-modal-bg.show{ display:flex; }
+  .proto-modal{ background:#fff; border-radius:18px; max-width:480px; width:100%; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+  .proto-modal h2{ margin:10px 0 10px; font-size:24px; color:var(--navy); }
+  .proto-modal p{ font-size:14px; color:#4a5360; line-height:1.55; margin:0 0 12px; }
+  .proto-modal ul{ font-size:14px; color:#4a5360; line-height:1.55; margin:0 0 18px; padding-left:18px; }
+  .proto-modal button{ width:100%; background:var(--navy); color:#fff; border:none; border-radius:999px; padding:12px; font-size:14px; font-weight:600; cursor:pointer; }
+  .proto-short{ display:none; }
+  @media (max-width:1100px){ .proto-long{ display:none; } .proto-short{ display:inline; } .proto-strip{ gap:8px; font-size:12px; } }
+  .proto-footer{ border-top:1px solid var(--border); padding:18px 24px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5; }
 
   .top-banner{
     background:var(--navy); color:#fff; font-size:14px; padding:12px 24px;
@@ -551,6 +571,27 @@
 </head>
 <body>
 
+<div class="proto-strip" role="note">
+  <strong>PROTÓTIPO · EM APROVAÇÃO</strong>
+  <span class="proto-long">Demonstração conceitual: conteúdos, números e pessoas são fictícios. Marcas exibidas apenas para ilustrar a proposta, sem vínculo ou endosso.</span>
+  <span class="proto-short">Dados fictícios · sem vínculo com as marcas</span>
+  <button type="button" onclick="openProtoModal()">Saiba mais</button>
+</div>
+
+<div class="proto-modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
+  <div class="proto-modal" role="dialog" aria-modal="true" aria-labelledby="protoModalTitle">
+    <span class="proto-seal" style="margin-left:0;">PROPOSTA · EM APROVAÇÃO</span>
+    <h2 class="serif" id="protoModalTitle">Bem-vindo à demonstração SoftLiving</h2>
+    <p>Esta é uma <b>simulação</b> de como a sua comunidade poderia funcionar dentro da plataforma SoftLiving.</p>
+    <ul>
+      <li>Todos os conteúdos, números, agendas e perfis são <b>fictícios</b>, criados só para esta apresentação.</li>
+      <li>As marcas aparecem apenas para ilustrar a proposta. Não há parceria, vínculo ou endosso até aprovação formal.</li>
+      <li>Nada do que você fizer aqui é salvo. Recarregar a página reinicia a demonstração.</li>
+    </ul>
+    <button type="button" onclick="closeProtoModal()">Entendi, ver a demonstração</button>
+  </div>
+</div>
+
 <div class="top-banner">
   <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg> Você tem créditos. Para assinar clubes premium, ative com Pix de R$ 50.</span>
   <a href="#">Ativar agora</a>
@@ -631,7 +672,7 @@
         <div class="org-switcher" id="orgSwitcher"></div>
       </div>
 
-      <p class="eyebrow">SUAS COMUNIDADES</p>
+      <p class="eyebrow">SUAS COMUNIDADES <span class="proto-seal">PROPOSTA · EM APROVAÇÃO</span></p>
       <h1 class="org-title serif" id="orgTitle"></h1>
       <p class="org-subtitle" id="orgSubtitle"></p>
       <div id="audienceToggleWrap"></div>
@@ -652,6 +693,11 @@
     </div>
   </main>
 </div>
+
+<footer class="proto-footer">
+  Protótipo conceitual SoftLiving, para apresentação e aprovação. Conteúdos, dados, números e pessoas são fictícios.
+  Nomes e marcas de terceiros são usados apenas para ilustrar a proposta e não indicam parceria, vínculo ou endosso.
+</footer>
 
 <script>
 const DATA = {
@@ -3025,6 +3071,18 @@ function openSidebar(){ sidebar.classList.add('open'); sidebarOverlay.classList.
 menuToggle.addEventListener('click', () => { sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
 sidebarOverlay.addEventListener('click', closeSidebar);
 sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', closeSidebar));
+
+// Aviso de protótipo: abre na primeira visita da sessão
+const protoModal = document.getElementById('protoModal');
+function openProtoModal(){ protoModal.classList.add('show'); }
+function closeProtoModal(){
+  protoModal.classList.remove('show');
+  try { sessionStorage.setItem('protoAviso', '1'); } catch(e){}
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProtoModal(); });
+let protoVisto = false;
+try { protoVisto = sessionStorage.getItem('protoAviso') === '1'; } catch(e){}
+if (!protoVisto) openProtoModal();
 </script>
 
 </body>
