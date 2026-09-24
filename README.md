@@ -1,0 +1,3 @@
+﻿# softliving-prototipo
+
+Protótipo SoftLiving.
