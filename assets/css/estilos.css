@@ -622,8 +622,8 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .site-page .sp-cta-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
 .site-page .sp-small-note{ font-size:15px; color:var(--muted); margin-top:16px; }
 .site-page .sp-small-note a{ color:var(--navy); font-weight:600; }
-.site-page .sp-hero-art{ aspect-ratio:4/3.4; border-radius:28px; background:linear-gradient(145deg,#fff,#eef3ef); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:14px; text-align:center; padding:24px; box-shadow:0 20px 50px rgba(18,41,77,.08); }
-.site-page .sp-hero-art svg{ width:84px; height:84px; color:var(--green); opacity:.8; display:block; margin:0 auto 10px; }
+
+
 .site-page section.sp-block{ padding:72px 0; }
 .site-page section.sp-block.sp-alt{ background:var(--bg); }
 .site-page .sp-section-head{ max-width:680px; margin-bottom:36px; }
@@ -694,7 +694,7 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 @media (max-width:900px){
 .site-page .sp-hero{ padding:48px 0 44px; }
 .site-page .sp-hero-grid, .site-page .sp-g2, .site-page .sp-g3, .site-page .sp-g4, .site-page .sp-footer-grid{ grid-template-columns:1fr; }
-.site-page .sp-hero-art{ display:none; }
+
 .site-page section.sp-block{ padding:52px 0; }
 .site-page .sp-container{ padding:0 16px; }
 .site-page .sp-media-card{ flex-direction:column; align-items:flex-start; gap:6px; }
@@ -1046,3 +1046,14 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 
 /* Minhas Comunidades: coluna da direita com a pesquisa da comunidade; em telas menores, desce para baixo do conteúdo */
 @media (max-width:1280px){ .cm-grid{ grid-template-columns:minmax(0,1fr); } }
+
+/* Páginas institucionais (Conhecer, Como Funciona): janela de vídeo 16:9 no topo, com botão de play.
+   Para publicar o vídeo, coloque um <iframe> dentro de .sp-video no lugar do botão (ele ocupa a janela toda). */
+.site-page .sp-hero-video{ grid-template-columns:1fr 1fr; }
+.site-page .sp-video{ position:relative; aspect-ratio:16/9; border-radius:22px; overflow:hidden; background:linear-gradient(135deg,var(--navy),#1f4a6e 55%,var(--green)); box-shadow:0 20px 50px rgba(18,41,77,.15); display:flex; align-items:center; justify-content:center; }
+.site-page .sp-video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.site-page .sp-play{ width:84px; height:84px; border-radius:50%; border:none; background:rgba(255,255,255,.95); color:var(--navy); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,.25); transition:transform .15s ease; }
+.site-page .sp-play:hover{ transform:scale(1.06); }
+.site-page .sp-play svg{ width:34px; height:34px; margin-left:4px; }
+.site-page .sp-video-note{ position:absolute; bottom:14px; left:0; right:0; text-align:center; font-size:13px; color:rgba(255,255,255,.8); }
+@media (max-width:900px){ .site-page .sp-hero-video{ grid-template-columns:1fr; } .site-page .sp-play{ width:66px; height:66px; } }
