@@ -1030,7 +1030,7 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .es-nota-legenda{ display:flex; justify-content:space-between; font-size:10.5px; color:#a9b2bb; margin-top:4px; }
 .es-texto, .es-porque{ width:100%; font-size:13.5px; }
 .es-porque{ margin-top:8px; }
-.es-hint{ display:block; font-size:11px; color:#a9b2bb; margin-top:5px; }
+.es-hint{ display:block; font-size:11px; color:var(--text); margin-top:5px; }
 .es-actions{ display:flex; align-items:center; gap:10px; margin-top:14px; }
 .es-send{ flex:1; background:var(--amber); color:#fff; border:none; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:700; cursor:pointer; font-family:inherit; }
 .es-send:hover:not(:disabled){ background:#b47a24; }
