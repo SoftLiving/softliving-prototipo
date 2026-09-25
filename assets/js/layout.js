@@ -115,8 +115,20 @@ const LAYOUT_RODAPE = `
 <div class="sp-toast" id="spToast" role="status" aria-live="polite"></div>
 
 <footer class="proto-footer">
-  Protótipo conceitual SoftLiving, para apresentação e aprovação. Conteúdos, dados, números e pessoas são fictícios.
-  Nomes e marcas de terceiros são usados apenas para ilustrar a proposta e não indicam parceria, vínculo ou endosso.
+  <div class="footer-partners">
+    <div class="footer-partner">
+      <span>Assessoria de imprensa</span>
+      <img src="${LAYOUT_ROOT}assets/img/logo-fsb.png" alt="FSB" class="logo-fsb">
+    </div>
+    <div class="footer-partner">
+      <span>Consultoria estratégica</span>
+      <img src="${LAYOUT_ROOT}assets/img/logo-rb2-digital.png" alt="RB2 Digital — Consultoria Estratégica" class="logo-rb2">
+    </div>
+  </div>
+  <p class="footer-note">
+    Protótipo conceitual SoftLiving, para apresentação e aprovação. Conteúdos, dados, números e pessoas são fictícios.
+    Nomes e marcas de terceiros são usados apenas para ilustrar a proposta e não indicam parceria, vínculo ou endosso.
+  </p>
 </footer>`;
 
 (function montarLayout(){
