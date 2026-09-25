@@ -103,12 +103,16 @@
       const [i, c = 0, k = 0] = arg.split('-').map(Number), x = CONTEUDOS[i];
       if(!x) return TELAS.conteudos();
       const total = conteudosDoTema(c).length;
+      // Texto completo (conteudos-textos.js): parágrafos, e "## " vira intertítulo
+      const texto = (typeof TEXTOS_COMPLETOS !== 'undefined' && TEXTOS_COMPLETOS[x.t]) || [x.e];
+      const minutos = Math.max(1, Math.round(texto.join(' ').split(/\s+/).length / 180));
       return `${voltar(`tema/${c}-${k}`, `Voltar para ${TEMAS[c].nome}`)}
         <article class="sm-card sm-reading">
-          <p class="sm-meta">${x.cat} · Por ${x.a}</p>
+          <p class="sm-meta">${x.cat} · Por ${x.a} · ${plural(minutos, 'minuto', 'minutos')} de leitura</p>
           <h1 class="sm-title">${x.t}</h1>
-          <p class="sm-text">${x.e}</p>
-          <p class="sm-text">Este é um protótipo: aqui entra o texto completo do artigo, em letra grande e com espaço entre os parágrafos, para ler com calma.</p>
+          <p class="sm-lead">${x.e}</p>
+          <p class="sm-demo">Texto de demonstração, criado para o protótipo.</p>
+          ${texto.map(p => p.startsWith('## ') ? `<h2 class="sm-subtitle">${p.slice(3)}</h2>` : `<p class="sm-text">${p}</p>`).join('')}
           ${total > 1 ? `<div class="sm-actions"><a class="sm-btn sm-primary" href="#tema/${c}-${k + 1}">Ler o próximo ${ic('chevron')}</a></div>` : ''}
         </article>`;
     },

@@ -1136,3 +1136,5 @@ a.sm-row:hover{ border-color:var(--navy); }
 .modo-simples-btn:hover{ background:#d3ebdf; }
 .modo-simples-btn svg{ width:16px; height:16px; }
 @media (max-width:900px){ .modo-simples-btn span{ display:none; } .modo-simples-btn{ padding:0 10px; } }
+.sm-subtitle{ font-size:1.25em; font-weight:700; color:var(--navy); margin:1.3em 0 .4em; } /* Modo simples: intertítulos do artigo */
+.sm-demo{ display:inline-block; font-size:.8em; color:var(--amber-text); background:var(--amber-bg); border:1px solid var(--amber-border); border-radius:8px; padding:.2em .7em; margin:0 0 1em; }

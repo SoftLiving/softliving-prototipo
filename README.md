@@ -38,6 +38,7 @@ assets/js/escuta-dados.js   Perguntas da pesquisa de escuta (tipo: texto, escolh
 assets/js/escuta.js         Box "Sua opinião vale créditos" (montarEscuta): rodadas de 3 a 5 perguntas, +1 crédito cada; bônus somado em sessionStorage "bonusCreditos"
 assets/js/comunidades-escuta.js  Pesquisas de cada comunidade (20 perguntas por cliente; Claro e Rede Dor por público), no box da coluna direita das abas. Sem créditos (inclusive colaboradores, por enquanto)
 assets/js/conteudos-dados.js  Lista CONTEUDOS (usada por conteudos.html e simples.html)
+assets/js/conteudos-textos.js  Textos completos (fictícios) dos conteúdos, para a leitura no Modo simples
 assets/js/simples.js        Telas do Modo simples (endereços #conteudos, #grupo/1, #conversa/0...)
 assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
 assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
