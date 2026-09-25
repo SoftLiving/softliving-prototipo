@@ -58,6 +58,7 @@ const LAYOUT_TOPO = `
     <button type="button" data-site="patrocinadores">Patrocinadores</button>
   </nav>
   <div class="header-right">
+    <a class="modo-simples-btn" id="modoSimplesBtn" href="#" title="Ver o portal com menos opções e letra maior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg><span>Modo simples</span></a>
     <div class="credits-pill"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> <span class="credits-label saldo-creditos">41 créditos</span></div>
     <button class="icon-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
     <div class="avatar">RB</div>
@@ -145,6 +146,10 @@ const LAYOUT_RODAPE = `
   layout.insertAdjacentHTML('afterend', LAYOUT_RODAPE);
 
   document.querySelector('header a.brand').href = LAYOUT_ROOT + 'index.html';
+  // Modo simples: leva para a versão com poucas opções e letra maior; a escolha fica guardada para o index.html
+  const modoSimples = document.getElementById('modoSimplesBtn');
+  modoSimples.href = LAYOUT_ROOT + 'simples.html';
+  modoSimples.addEventListener('click', () => { try { localStorage.setItem('modoPreferido', 'simples'); } catch(e){} });
   layout.querySelectorAll('#sidebar a[data-page]').forEach(a => {
     a.href = LAYOUT_ROOT + PAGE_URLS[a.dataset.page];
     a.classList.toggle('active', a.dataset.page === LAYOUT_PAGE);

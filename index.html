@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>SoftLiving (Protótipo · em aprovação)</title>
-<meta http-equiv="refresh" content="0; url=inicio.html">
 </head>
 <body>
-<script>location.replace('inicio.html');</script>
-<p><a href="inicio.html">Abrir o protótipo</a></p>
+<script>
+  // Abre o modo que a pessoa escolheu por último (Modo simples ou completo); padrão: completo
+  let destino = 'inicio.html';
+  try { if(localStorage.getItem('modoPreferido') === 'simples') destino = 'simples.html'; } catch(e){}
+  location.replace(destino);
+</script>
+<p><a href="inicio.html">Abrir o protótipo</a> · <a href="simples.html">Abrir o Modo simples</a></p>
 </body>
 </html>

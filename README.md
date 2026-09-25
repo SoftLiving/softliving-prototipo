@@ -24,6 +24,8 @@ grupos.html                 Grupos: 3 colunas de grupos (Participar/Sair) + boxe
 grupo.html?g=<n>            Página interna de um grupo (mesma estrutura para todos): cabeçalho, Tópicos/rodadas, Mural,
                             Painel da moderação e Quem participa
 conexoes.html               Em branco por enquanto
+simples.html                Modo simples (para quem tem pouca familiaridade com tecnologia): 6 opções grandes, uma tarefa por tela,
+                            letra ajustável (A−/A+). Botão "Modo simples" no topo do modo completo; index.html lembra o modo escolhido
 institucional/              Menu do topo: conhecer, como-funciona, beneficios, seguranca, patrocinadores
 comunidades/                Minhas Comunidades, um arquivo por aba:
                             inicio, conteudos, servicos, grupos-internos, membros, publicar, dashboard, escuta
@@ -35,6 +37,8 @@ assets/js/comunidades.js    Troca de comunidade/público e conteúdo de cada aba
 assets/js/escuta-dados.js   Perguntas da pesquisa de escuta (tipo: texto, escolha, varias, nota)
 assets/js/escuta.js         Box "Sua opinião vale créditos" (montarEscuta): rodadas de 3 a 5 perguntas, +1 crédito cada; bônus somado em sessionStorage "bonusCreditos"
 assets/js/comunidades-escuta.js  Pesquisas de cada comunidade (20 perguntas por cliente; Claro e Rede Dor por público), no box da coluna direita das abas. Sem créditos (inclusive colaboradores, por enquanto)
+assets/js/conteudos-dados.js  Lista CONTEUDOS (usada por conteudos.html e simples.html)
+assets/js/simples.js        Telas do Modo simples (endereços #conteudos, #grupo/1, #conversa/0...)
 assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
 assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```
