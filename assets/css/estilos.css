@@ -529,7 +529,7 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .menu-toggle{ display:none; background:none; border:none; cursor:pointer; padding:4px; margin-right:4px; flex-shrink:0; }
 .menu-toggle svg.ic{ width:22px; height:22px; color:var(--text); }
 .header-left{ display:flex; align-items:center; }
-.sidebar-overlay{ display:none; position:fixed; inset:0; background:rgba(18,20,24,.45); z-index:40; }
+.sidebar-overlay{ display:none; position:fixed; inset:0; background:rgba(18,20,24,.45); z-index:65; } /* acima da faixa de protótipo (z-index 60) */
 .sidebar-overlay.show{ display:block; }
 
 @media (max-width:900px){
@@ -541,7 +541,7 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
   .header-right{ gap:10px; }
 
   aside#sidebar{
-    position:fixed; top:0; left:0; bottom:0; width:78vw; max-width:300px; z-index:50;
+    position:fixed; top:0; left:0; bottom:0; width:78vw; max-width:300px; z-index:70; /* menu do celular cobre a faixa de protótipo */
     transform:translateX(-100%); transition:transform .25s ease; overflow-y:auto;
     padding-top:20px; box-shadow:0 0 40px rgba(0,0,0,.2); background:#fff;
   }
