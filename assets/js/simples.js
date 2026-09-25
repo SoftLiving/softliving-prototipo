@@ -30,6 +30,13 @@
   const hora = new Date().getHours();
   const saudacao = hora < 12 ? 'Bom dia' : hora < 18 ? 'Boa tarde' : 'Boa noite';
 
+  // Assuntos (sub-segmentos) de Ler conteúdos: "Todos" + as categorias dos conteúdos, cada uma com um ícone
+  const ICONE_TEMA = { 'Saúde mental e qualidade de vida':'brain', 'Saúde e bem-estar físico':'activity', 'Turismo e viagem':'map',
+    'Estilo de vida e consumo':'building', 'Tecnologia e serviços digitais':'robot', 'SoftLiving':'star' };
+  const TEMAS = [{ nome:'Todos os assuntos', icon:'book' }, ...[...new Set(CONTEUDOS.map(x => x.cat))].map(nome => ({ nome, icon: ICONE_TEMA[nome] || 'book' }))];
+  const conteudosDoTema = c => CONTEUDOS.map((item, i) => ({ item, i })).filter(({ item }) => c === 0 || item.cat === (TEMAS[c] || {}).nome);
+  const plural = (n, s, p) => `${n} ${n === 1 ? s : p}`;
+
   // ---------- dados de exemplo das telas que ainda não existem no modo completo ----------
   const PESSOAS = [
     { n:'Luciana Russi', sobre:'Gosta de leitura e caminhadas' },
@@ -62,32 +69,47 @@
         <div class="sm-grid">${opcoes.map(([h, i, t]) => `<a class="sm-big" href="#${h}">${ic(i)}<span>${t}</span></a>`).join('')}</div>`;
     },
 
-    conteudos(pos = 0){
-      const i = ((+pos % CONTEUDOS.length) + CONTEUDOS.length) % CONTEUDOS.length, c = CONTEUDOS[i];
-      const pago = c.badge === 'premium';
+    // Ler conteúdos: primeiro a pessoa escolhe o assunto; depois vê os conteúdos dele, um por vez
+    conteudos(){
       return `${voltar('inicio', 'Voltar ao início')}${titulo('Ler conteúdos')}
-        <article class="sm-card">
-          <p class="sm-meta">Conteúdo ${i + 1} de ${CONTEUDOS.length} · ${pago ? `usa ${c.credits} crédito${c.credits > 1 ? 's' : ''}` : 'grátis'}</p>
-          <h2 class="sm-card-title">${c.t}</h2>
-          <p class="sm-text">${c.e}</p>
-          <p class="sm-meta">Por ${c.a}</p>
-          <div class="sm-actions">
-            <a class="sm-btn sm-primary" href="#ler/${i}">${pago ? `Ler com ${c.credits} crédito${c.credits > 1 ? 's' : ''}` : 'Ler agora'}</a>
-            <a class="sm-btn" href="#conteudos/${i + 1}">Próximo ${ic('chevron')}</a>
-          </div>
-        </article>
-        ${i > 0 ? `<a class="sm-link" href="#conteudos/${i - 1}">Ver o conteúdo anterior</a>` : ''}`;
+        <p class="sm-lead">Sobre qual assunto você quer ler?</p>
+        <div class="sm-list">${TEMAS.map((t, c) => `
+          <a class="sm-row" href="#tema/${c}-0">${ic(t.icon)}<span><b>${t.nome}</b><small>${plural(conteudosDoTema(c).length, 'conteúdo', 'conteúdos')}</small></span>${ic('chevron')}</a>`).join('')}
+        </div>`;
     },
 
-    ler(i){
-      const c = CONTEUDOS[+i]; if(!c) return TELAS.conteudos();
-      return `${voltar('conteudos/' + i, 'Voltar para os conteúdos')}
+    // tema/<assunto>-<posição>
+    tema(arg = '0-0'){
+      const [c, pos] = arg.split('-').map(Number), lista = conteudosDoTema(c);
+      if(!lista.length) return TELAS.conteudos();
+      const k = ((pos % lista.length) + lista.length) % lista.length, { item:x, i } = lista[k];
+      const pago = x.badge === 'premium';
+      return `${voltar('conteudos', 'Voltar para os assuntos')}${titulo(TEMAS[c].nome)}
+        <article class="sm-card">
+          <p class="sm-meta">Conteúdo ${k + 1} de ${lista.length} · ${pago ? `usa ${plural(x.credits, 'crédito', 'créditos')}` : 'grátis'}</p>
+          <h2 class="sm-card-title">${x.t}</h2>
+          <p class="sm-text">${x.e}</p>
+          <p class="sm-meta">Por ${x.a}</p>
+          <div class="sm-actions">
+            <a class="sm-btn sm-primary" href="#ler/${i}-${c}-${k}">${pago ? `Ler com ${plural(x.credits, 'crédito', 'créditos')}` : 'Ler agora'}</a>
+            ${lista.length > 1 ? `<a class="sm-btn" href="#tema/${c}-${k + 1}">Próximo ${ic('chevron')}</a>` : ''}
+          </div>
+        </article>
+        ${k > 0 ? `<a class="sm-link" href="#tema/${c}-${k - 1}">Ver o conteúdo anterior</a>` : ''}`;
+    },
+
+    // ler/<conteúdo>-<assunto>-<posição no assunto>
+    ler(arg = ''){
+      const [i, c = 0, k = 0] = arg.split('-').map(Number), x = CONTEUDOS[i];
+      if(!x) return TELAS.conteudos();
+      const total = conteudosDoTema(c).length;
+      return `${voltar(`tema/${c}-${k}`, `Voltar para ${TEMAS[c].nome}`)}
         <article class="sm-card sm-reading">
-          <p class="sm-meta">${c.cat} · Por ${c.a}</p>
-          <h1 class="sm-title">${c.t}</h1>
-          <p class="sm-text">${c.e}</p>
+          <p class="sm-meta">${x.cat} · Por ${x.a}</p>
+          <h1 class="sm-title">${x.t}</h1>
+          <p class="sm-text">${x.e}</p>
           <p class="sm-text">Este é um protótipo: aqui entra o texto completo do artigo, em letra grande e com espaço entre os parágrafos, para ler com calma.</p>
-          <div class="sm-actions"><a class="sm-btn sm-primary" href="#conteudos/${+i + 1}">Ler o próximo ${ic('chevron')}</a></div>
+          ${total > 1 ? `<div class="sm-actions"><a class="sm-btn sm-primary" href="#tema/${c}-${k + 1}">Ler o próximo ${ic('chevron')}</a></div>` : ''}
         </article>`;
     },
 
