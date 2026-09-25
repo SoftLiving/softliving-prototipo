@@ -980,9 +980,9 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 /* Rodapé: parceiros (assessoria de imprensa e consultoria estratégica) + aviso de protótipo */
 .footer-partners{ display:flex; justify-content:center; align-items:center; gap:48px; flex-wrap:wrap; padding:6px 0 16px; margin-bottom:14px; border-bottom:1px solid var(--border); }
 .footer-partner{ display:flex; align-items:center; gap:12px; }
-.footer-partner span{ font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#a9b2bb; }
+.footer-partner span{ font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#a9b2bb; }
 .footer-partner img{ display:block; width:auto; }
-.logo-fsb{ height:44px; }
-.logo-rb2{ height:62px; } /* a imagem tem margem branca própria */
+.logo-fsb{ height:66px; }
+.logo-rb2{ height:92px; } /* a imagem tem margem branca própria */
 .footer-note{ margin:0; }
 @media (max-width:560px){ .footer-partners{ gap:18px; } .footer-partner{ flex-direction:column; gap:6px; } }
