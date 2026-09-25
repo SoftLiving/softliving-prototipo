@@ -129,7 +129,7 @@ function renderModeracao(){
     : '<p class="gd-locked">Nenhuma rodada aberta.</p>';
 }
 
-function renderTudo(){ renderHero(); renderMembros(); renderRodadas(); renderMural(); renderModeracao(); }
+function renderTudo(){ renderHero(); renderMembros(); renderRodadas(); renderMural(); renderModeracao(); if(ehDesapego) renderAnuncios(); }
 
 // ---------- interações ----------
 document.getElementById('gdHero').addEventListener('click', e => {
@@ -138,11 +138,11 @@ document.getElementById('gdHero').addEventListener('click', e => {
   else return;
   renderTudo();
 });
+const GD_PAINEIS = { anuncios:'gdAnuncios', topicos:'gdTopicos', mural:'gdMural' };
 document.getElementById('gdTabs').addEventListener('click', e => {
   const b = e.target.closest('[data-tab]'); if(!b) return;
   document.querySelectorAll('#gdTabs .ct-tab').forEach(x => x.classList.toggle('active', x === b));
-  document.getElementById('gdTopicos').hidden = b.dataset.tab !== 'topicos';
-  document.getElementById('gdMural').hidden = b.dataset.tab !== 'mural';
+  Object.entries(GD_PAINEIS).forEach(([aba, id]) => document.getElementById(id).hidden = aba !== b.dataset.tab);
 });
 document.getElementById('gdRoundList').addEventListener('click', e => {
   const b = e.target.closest('[data-rodada]'); if(b){ rodadaAtual = +b.dataset.rodada; renderRodadas(); }
@@ -174,6 +174,97 @@ document.getElementById('gdArchiveList').addEventListener('click', e => {
   renderRodadas(); renderModeracao();
 });
 document.getElementById('gdMembers').addEventListener('click', e => { if(e.target.closest('a[href="#"]')) e.preventDefault(); });
+
+// ===== Grupos de desapego (grupo.tipo === 'desapego') =====
+// Em vez de Tópicos, a aba Anúncios: filtros (venda, doação, troca), "Tenho interesse", "Anunciar um item"
+// e dicas de segurança. Anúncios de exemplo em desapego-dados.js; os novos ficam só em memória.
+const ehDesapego = grupo && grupo.tipo === 'desapego';
+const anuncios = ehDesapego ? (DESAPEGO[grupo.t] || []).map(a => ({ ...a, capa: sorteiaDegrade() })) : [];
+let filtroAnuncio = 'todos';
+const TIPO_ANUNCIO = { venda:'Venda', doacao:'Doação', troca:'Troca' };
+const precoAnuncio = a => a.tipo === 'venda' ? a.preco : TIPO_ANUNCIO[a.tipo];
+
+function renderAnuncios(){
+  const lista = anuncios.map((a, i) => ({ ...a, i })).filter(a => filtroAnuncio === 'todos' || a.tipo === filtroAnuncio);
+  const cont = t => anuncios.filter(a => t === 'todos' || a.tipo === t).length;
+  const pode = grupo.participando;
+  document.getElementById('gdAnuncios').innerHTML = `
+    <div class="in-card-head"><h2>${ICON.store} Anúncios do grupo</h2>${pode ? `<button type="button" class="gr-join" data-anunciar>${ICON.plus} Anunciar um item</button>` : ''}</div>
+    <div class="dz-body">
+      <div class="dz-safety">${ICON.shield}<div><b>Negocie com segurança</b><span>Combine a entrega em local público e movimentado, veja o item antes de pagar e nunca pague adiantado para quem você não conhece.</span></div></div>
+      <form class="dz-form" id="dzForm" hidden>
+        <div class="dz-form-grid">
+          <label>O que você quer anunciar?<input type="text" name="t" placeholder="Ex.: Mesa de centro" required></label>
+          <label>Tipo<select name="tipo"><option value="venda">Venda</option><option value="doacao">Doação</option><option value="troca">Troca</option></select></label>
+          <label class="dz-preco">Preço<input type="text" name="preco" placeholder="Ex.: R$150"></label>
+          <label>Categoria<select name="cat">${DESAPEGO_CATEGORIAS.map(c => `<option>${c}</option>`).join('')}</select></label>
+          <label>Estado<select name="estado">${DESAPEGO_ESTADOS.map(c => `<option>${c}</option>`).join('')}</select></label>
+          <label>Bairro<input type="text" name="bairro" placeholder="Ex.: Tijuca" required></label>
+        </div>
+        <label>Descrição<textarea name="d" rows="2" placeholder="Conte o estado do item e como combinar a entrega"></textarea></label>
+        <div class="dz-form-actions"><button type="submit" class="gr-join">Publicar anúncio</button><button type="button" class="gr-leave" data-cancelar>Cancelar</button></div>
+      </form>
+      <div class="ct-tabs dz-filtros">${['todos','venda','doacao','troca'].map(t => `<button type="button" class="ct-tab ${t === filtroAnuncio ? 'active' : ''}" data-filtro="${t}">${t === 'todos' ? 'Tudo' : TIPO_ANUNCIO[t]} (${cont(t)})</button>`).join('')}</div>
+      ${pode ? '' : '<p class="gd-locked">Participe do grupo para anunciar e falar com quem anunciou.</p>'}
+      <div class="dz-grid">${lista.map(a => `
+        <article class="ct-card dz-card ${a.meu ? 'dz-meu' : ''} ${a.concluido ? 'dz-concluido' : ''}">
+          <div class="ct-cover"><div class="ct-ph" style="background:${a.capa};">${ICON[DESAPEGO_ICONES[a.cat]] || ICON.store}</div>
+            <span class="dz-tag dz-${a.tipo}">${a.concluido ? (a.tipo === 'venda' ? 'Vendido' : a.tipo === 'doacao' ? 'Doado' : 'Trocado') : precoAnuncio(a)}</span></div>
+          <div class="ct-body">
+            <span class="ct-cat">${a.cat}</span>
+            <h3 class="ct-title">${a.t}</h3>
+            <p class="ct-excerpt">${a.d}</p>
+            <p class="dz-info">${a.estado} · ${ICON.pin} ${a.bairro}</p>
+            <p class="ct-author">${ICON.user} ${a.meu ? 'Seu anúncio' : a.quem}</p>
+            ${a.meu ? `<div class="gr-foot">${a.concluido ? '' : `<button type="button" class="gr-join" data-concluir="${a.i}">Marcar como ${a.tipo === 'venda' ? 'vendido' : a.tipo === 'doacao' ? 'doado' : 'trocado'}</button>`}<button type="button" class="gr-leave" data-remover="${a.i}">Remover</button></div>`
+              : a.interesse ? `<p class="dz-enviado">${ICON.chat} Mensagem enviada. ${a.quem.split(' ')[0]} vai responder em Conversas.</p>`
+              : a.escrevendo ? `<div class="dz-msg"><textarea rows="2" data-texto="${a.i}">Olá! Tenho interesse em "${a.t}". Ainda está disponível?</textarea><button type="button" class="gr-join" data-enviar="${a.i}">Enviar</button></div>`
+              : pode && !a.concluido ? `<button type="button" class="ct-cta gratis" data-interesse="${a.i}">${ICON.chat} Tenho interesse</button>` : ''}
+          </div>
+        </article>`).join('') || '<p class="ct-empty">Nenhum anúncio neste filtro.</p>'}
+      </div>
+    </div>`;
+}
+
+if(ehDesapego){
+  const abaAnuncios = document.querySelector('#gdTabs [data-tab="anuncios"]'), abaTopicos = document.querySelector('#gdTabs [data-tab="topicos"]');
+  abaAnuncios.hidden = false; abaTopicos.hidden = true;
+  abaAnuncios.classList.add('active'); abaTopicos.classList.remove('active');
+  document.getElementById('gdTopicos').hidden = true;
+  document.getElementById('gdAnuncios').hidden = false;
+  // na moderação de desapego não há rodadas: fica só o aviso no mural
+  document.getElementById('gdNewTopic').hidden = true;
+  document.getElementById('gdArchiveBlock').hidden = true;
+  avisos.splice(0, avisos.length,
+    { a:EU, data:'23/09/2026', txt:'Regras do grupo: um anúncio por item, sempre com preço ou a indicação de doação ou troca. Nada de revenda comercial.' },
+    { a:EU, data:'20/09/2026', txt:'Depois de vender, doar ou trocar, marque o anúncio como concluído para ninguém perder tempo.' });
+
+  document.getElementById('gdAnuncios').addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    const d = b.dataset, form = document.getElementById('dzForm');
+    if(d.filtro){ filtroAnuncio = d.filtro; }
+    else if(d.anunciar !== undefined){ form.hidden = false; form.t.focus(); return; }
+    else if(d.cancelar !== undefined){ form.hidden = true; form.reset(); return; }
+    else if(d.interesse){ anuncios[+d.interesse].escrevendo = true; }
+    else if(d.enviar){ const t = document.querySelector(`[data-texto="${d.enviar}"]`); if(!t.value.trim()) return; anuncios[+d.enviar].interesse = true; }
+    else if(d.concluir){ anuncios[+d.concluir].concluido = true; }
+    else if(d.remover){ anuncios.splice(+d.remover, 1); }
+    else return;
+    renderAnuncios();
+  });
+  document.getElementById('gdAnuncios').addEventListener('change', e => {
+    if(e.target.name === 'tipo') e.target.form.querySelector('.dz-preco').hidden = e.target.value !== 'venda';
+  });
+  document.getElementById('gdAnuncios').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    if(f.tipo.value === 'venda' && !f.preco.value.trim()){ f.preco.focus(); return; }
+    anuncios.unshift({ t:f.t.value.trim(), tipo:f.tipo.value, preco:'R$' + f.preco.value.trim().replace(/^R\$\s*/, ''), cat:f.cat.value, estado:f.estado.value,
+      bairro:f.bairro.value.trim(), quem:EU, d:f.d.value.trim() || 'Sem descrição.', meu:true, capa:sorteiaDegrade() });
+    filtroAnuncio = 'todos';
+    renderAnuncios();
+  });
+}
 
 if(grupo){
   grupo.capa = sorteiaDegrade();

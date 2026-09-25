@@ -40,6 +40,7 @@ assets/js/comunidades-escuta.js  Pesquisas de cada comunidade (20 perguntas por 
 assets/js/conteudos-dados.js  Lista CONTEUDOS (usada por conteudos.html e simples.html)
 assets/js/conteudos-textos.js  Textos completos (fictícios) dos conteúdos, para a leitura no Modo simples
 assets/js/simples.js        Telas do Modo simples (endereços #conteudos, #grupo/1, #conversa/0...)
+assets/js/desapego-dados.js  Anúncios dos grupos de desapego (venda, doação, troca), por nome do grupo
 assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
 assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```

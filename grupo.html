@@ -21,6 +21,7 @@
 
       <!-- Tópicos | Mural -->
       <div class="ct-tabs gd-tabs" id="gdTabs">
+        <button type="button" class="ct-tab" data-tab="anuncios" hidden>Anúncios</button>
         <button type="button" class="ct-tab active" data-tab="topicos">Tópicos</button>
         <button type="button" class="ct-tab" data-tab="mural">Mural</button>
       </div>
@@ -33,6 +34,9 @@
         </div>
         <p class="gd-mod-note" id="gdModNote"></p>
       </section>
+
+      <!-- Só nos grupos de desapego: anúncios de venda, doação e troca -->
+      <section class="in-card gd-panel" id="gdAnuncios" hidden></section>
 
       <section class="in-card gd-panel" id="gdMural" hidden>
         <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6"/></svg>Mural</h2></div>
@@ -53,7 +57,7 @@
           <textarea name="aviso" rows="2" placeholder="Ex.: Encontro quinta, 19h — não perca!" required></textarea>
           <button type="submit" class="gr-join">Publicar aviso</button>
         </form>
-        <div>
+        <div id="gdArchiveBlock">
           <label>Arquivar rodada</label>
           <div id="gdArchiveList"></div>
         </div>
@@ -91,6 +95,7 @@
 <script src="assets/js/comum.js"></script>
 <script src="assets/js/layout.js"></script>
 <script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/desapego-dados.js"></script>
 <script src="assets/js/grupo.js"></script>
 </body>
 </html>
