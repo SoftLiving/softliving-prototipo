@@ -32,6 +32,8 @@ assets/js/comum.js          Ícones (ICON) e degradês de capa (sorteiaDegrade)
 assets/js/layout.js         Faixa de protótipo, aviso, topo, menu lateral e rodapé — montados em todas as páginas
 assets/js/comunidades-dados.js  Objeto DATA com as 12 comunidades
 assets/js/comunidades.js    Troca de comunidade/público e conteúdo de cada aba (funções render*)
+assets/js/escuta-dados.js   Perguntas da pesquisa de escuta (tipo: texto, escolha, varias, nota)
+assets/js/escuta.js         Box "Sua opinião vale créditos" (Início, Conteúdos, Grupos): rodadas de 3 a 5 perguntas, +1 crédito cada
 assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
 assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```

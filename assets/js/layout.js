@@ -58,7 +58,7 @@ const LAYOUT_TOPO = `
     <button type="button" data-site="patrocinadores">Patrocinadores</button>
   </nav>
   <div class="header-right">
-    <div class="credits-pill"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> <span class="credits-label">41 créditos</span></div>
+    <div class="credits-pill"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> <span class="credits-label saldo-creditos">41 créditos</span></div>
     <button class="icon-btn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
     <div class="avatar">RB</div>
   </div>
@@ -205,6 +205,18 @@ new MutationObserver(() => {
   ajusteLogosPendente = true;
   requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); });
 }).observe(document.querySelector('main'), { childList:true, subtree:true });
+
+// Saldo de créditos mostrado no topo (e na carteira da Início): saldo fictício + bônus ganhos no protótipo
+// (ex.: respostas da pesquisa de escuta). O bônus fica na sessão do navegador.
+const SALDO_BASE = 41;
+function lerBonusCreditos(){
+  try { return (JSON.parse(sessionStorage.getItem('escutaEstado') || 'null') || {}).bonus || 0; } catch(e){ return 0; }
+}
+function atualizarSaldo(){
+  const saldo = SALDO_BASE + lerBonusCreditos();
+  document.querySelectorAll('.saldo-creditos').forEach(el => el.textContent = `${saldo} créditos`);
+}
+atualizarSaldo();
 
 // Aviso de protótipo: abre na primeira visita da sessão
 const protoModal = document.getElementById('protoModal');
