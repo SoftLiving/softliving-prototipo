@@ -10,7 +10,7 @@
 </head>
 <body data-page="comunidades" data-tab="servicos" data-root="../">
 
-<div class="wrap" id="communitiesView">
+<div class="wrap in-page" id="communitiesView">
   <div class="org-switcher-wrap">
     <div class="org-switcher" id="orgSwitcher"></div>
   </div>
@@ -32,12 +32,18 @@
     <a class="tab-item" data-tab="escuta" href="escuta.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13a9 9 0 0 1 18 0"/><rect x="3" y="13" width="4" height="7" rx="1"/><rect x="17" y="13" width="4" height="7" rx="1"/></svg> Escuta</a>
   </div>
 
-  <div id="content"></div>
+  <!-- Conteúdo da aba à esquerda; coluna da direita com a pesquisa da comunidade -->
+  <div class="in-grid cm-grid">
+    <div class="in-main" id="content"></div>
+    <aside class="in-side" id="cmSide"></aside>
+  </div>
 </div>
 
 <script src="../assets/js/comum.js"></script>
 <script src="../assets/js/layout.js"></script>
 <script src="../assets/js/comunidades-dados.js"></script>
+<script src="../assets/js/escuta.js"></script>
+<script src="../assets/js/comunidades-escuta.js"></script>
 <script src="../assets/js/comunidades.js"></script>
 </body>
 </html>

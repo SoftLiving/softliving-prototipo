@@ -1,8 +1,7 @@
 // Pesquisa de escuta interna: perguntas sorteadas aos poucos (3 a 5 por rodada) no box "Sua opinião vale créditos".
 // Cada pergunta respondida vale 1 crédito de bônus.
-// tipo: 'texto' (resposta aberta, mínimo de ESCUTA_MIN_TEXTO caracteres) | 'escolha' (uma opção) |
-//       'varias' (uma ou mais opções) | 'nota' (escala de 0 a 10)
-const ESCUTA_MIN_TEXTO = 10;
+// tipo: 'texto' (resposta aberta) | 'escolha' (uma opção) |
+//       'varias' (uma ou mais opções) | 'nota' (escala de 0 a 10). Mínimo de caracteres do texto: ESCUTA_MIN_TEXTO, em escuta.js
 const ESCUTA_PERGUNTAS = [
   // Sua vida digital
   { id:2,  tema:'Sua vida digital', tipo:'varias', t:'Você acessou pelo celular, tablet ou computador?', op:['Celular','Tablet','Computador'] },

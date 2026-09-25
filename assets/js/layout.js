@@ -207,10 +207,10 @@ new MutationObserver(() => {
 }).observe(document.querySelector('main'), { childList:true, subtree:true });
 
 // Saldo de créditos mostrado no topo (e na carteira da Início): saldo fictício + bônus ganhos no protótipo
-// (ex.: respostas da pesquisa de escuta). O bônus fica na sessão do navegador.
+// (respostas das pesquisas de escuta, somadas em 'bonusCreditos'). O bônus fica na sessão do navegador.
 const SALDO_BASE = 41;
 function lerBonusCreditos(){
-  try { return (JSON.parse(sessionStorage.getItem('escutaEstado') || 'null') || {}).bonus || 0; } catch(e){ return 0; }
+  try { return +sessionStorage.getItem('bonusCreditos') || 0; } catch(e){ return 0; }
 }
 function atualizarSaldo(){
   const saldo = SALDO_BASE + lerBonusCreditos();

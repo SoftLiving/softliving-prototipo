@@ -883,6 +883,24 @@ function renderAll(){
   renderHeaderInfo();
   renderTabBar();
   renderContent();
+  renderEscutaComunidade();
+}
+
+// Pesquisa de escuta da comunidade (comunidades-escuta.js), na coluna da direita.
+// Só é remontada quando muda a comunidade ou o público, para não perder a resposta em edição.
+let escutaAtual = null;
+function renderEscutaComunidade(){
+  if(typeof ESCUTA_COMUNIDADES === 'undefined' || typeof montarEscuta === 'undefined') return;
+  const chave = `escuta:${currentOrg}:${currentAudience || ''}`;
+  if(chave === escutaAtual) return;
+  escutaAtual = chave;
+  const org = DATA[currentOrg], conjunto = ESCUTA_COMUNIDADES[currentOrg];
+  const perguntas = Array.isArray(conjunto) ? conjunto : conjunto && conjunto[currentAudience];
+  const lado = document.getElementById('cmSide');
+  if(!perguntas){ lado.innerHTML = ''; return; }
+  const publico = org.audiences ? ` · ${org.audiences[currentAudience].audienceLabel}` : '';
+  montarEscuta({ lado, perguntas, chave,
+    descricao: `Pesquisa ${org.name}${publico}. Responda e ganhe <b>+1 crédito de bônus</b> por pergunta.` });
 }
 
 // Fecha o dropdown "Trocar por" ao clicar fora dele ou apertar Esc

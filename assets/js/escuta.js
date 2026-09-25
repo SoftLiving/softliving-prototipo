@@ -1,20 +1,34 @@
 // Box "Sua opinião vale créditos": pesquisa de escuta em rodadas de 3 a 5 perguntas sorteadas, uma por vez.
-// Cada resposta vale +1 crédito de bônus (somado ao saldo do topo). Pergunta respondida não volta;
-// pergunta pulada pode aparecer em outra rodada. O estado fica na sessão do navegador e vale nas páginas
-// Início, Conteúdos e Grupos (quem começa numa continua na outra).
-// Perguntas em escuta-dados.js.
-(function(){
-  const lado = document.querySelector('.in-side');
-  if(!lado) return;
+// Cada resposta vale +1 crédito de bônus, somado ao saldo do topo (bônus de todas as pesquisas juntas).
+// Pergunta respondida não volta; pergunta pulada pode aparecer em outra rodada.
+// O estado de cada pesquisa fica na sessão do navegador, com uma chave própria.
+//
+// montarEscuta({ lado, perguntas, chave, descricao })
+//   lado: coluna da direita (.in-side) onde o box entra, no topo
+//   perguntas: lista no formato de escuta-dados.js
+//   chave: nome do estado na sessão (uma pesquisa = uma chave)
+//   descricao: texto opcional abaixo do título
+//
+// Início, Conteúdos e Grupos usam a pesquisa geral (escuta-dados.js), montada automaticamente no fim deste arquivo.
+// Minhas Comunidades usa uma pesquisa por comunidade (comunidades-escuta.js), montada por comunidades.js.
+
+const ESCUTA_MIN_TEXTO = 10;   // mínimo de caracteres para a resposta de texto valer o crédito
+
+function lerBonusTotal(){ try { return +sessionStorage.getItem('bonusCreditos') || 0; } catch(e){ return 0; } }
+function somarBonus(n){ try { sessionStorage.setItem('bonusCreditos', lerBonusTotal() + n); } catch(e){} }
+
+function montarEscuta({ lado, perguntas, chave, descricao = 'Responda e ganhe <b>+1 crédito de bônus</b> por pergunta.' }){
+  if(!lado || !perguntas || !perguntas.length) return;
+  lado.querySelectorAll('.es-box').forEach(b => b.remove());
   const box = document.createElement('section');
   box.className = 'in-card es-box';
   lado.prepend(box);
 
   let estado = { respondidas:{}, bonus:0, rodada:[], pos:0, ganhosRodada:0 };
-  try { estado = Object.assign(estado, JSON.parse(sessionStorage.getItem('escutaEstado') || 'null') || {}); } catch(e){}
-  const salvar = () => { try { sessionStorage.setItem('escutaEstado', JSON.stringify(estado)); } catch(e){} };
-  const pendentes = () => ESCUTA_PERGUNTAS.filter(p => !(p.id in estado.respondidas));
-  const pergunta = id => ESCUTA_PERGUNTAS.find(p => p.id === id);
+  try { estado = Object.assign(estado, JSON.parse(sessionStorage.getItem(chave) || 'null') || {}); } catch(e){}
+  const salvar = () => { try { sessionStorage.setItem(chave, JSON.stringify(estado)); } catch(e){} };
+  const pendentes = () => perguntas.filter(p => !(p.id in estado.respondidas));
+  const pergunta = id => perguntas.find(p => p.id === id);
 
   function novaRodada(){
     const pool = pendentes().sort(() => Math.random() - .5);
@@ -30,7 +44,7 @@
   let valor = null;   // resposta em edição
   const cabecalho = `
     <div class="in-card-head"><h2>Sua opinião vale créditos</h2></div>
-    <p class="es-sub">Responda e ganhe <b>+1 crédito de bônus</b> por pergunta.</p>`;
+    <p class="es-sub">${descricao}</p>`;
 
   function render(){
     if(estado.pos >= estado.rodada.length) return renderFim();
@@ -65,7 +79,7 @@
       const porque = box.querySelector('.es-porque');
       estado.respondidas[p.id] = porque && porque.value.trim() ? { resposta:valor, porque:porque.value.trim() } : valor;
       estado.bonus++; estado.ganhosRodada++; estado.pos++;
-      salvar(); atualizarSaldo(); render(); avisoCredito();
+      salvar(); somarBonus(1); atualizarSaldo(); render(); avisoCredito();
     });
     box.querySelector('.es-skip').addEventListener('click', () => { estado.pos++; salvar(); render(); });
   }
@@ -75,7 +89,7 @@
     box.innerHTML = `${cabecalho}
       <div class="es-fim">
         <p class="es-fim-t">${estado.ganhosRodada ? `Obrigado! Você ganhou <b>${estado.ganhosRodada} crédito${estado.ganhosRodada > 1 ? 's' : ''} de bônus</b> nesta rodada.` : 'Tudo bem! Quando quiser, responda outras perguntas.'}</p>
-        <p class="es-fim-s">Total ganho com a pesquisa: ${estado.bonus} crédito${estado.bonus === 1 ? '' : 's'}.</p>
+        <p class="es-fim-s">Total ganho com esta pesquisa: ${estado.bonus} crédito${estado.bonus === 1 ? '' : 's'}.</p>
         ${restam ? `<button type="button" class="es-send es-mais">Responder mais perguntas</button><small class="es-hint">Ainda há ${restam} pergunta${restam > 1 ? 's' : ''} para responder.</small>`
                  : '<p class="es-fim-s"><b>Você respondeu todas as perguntas. Muito obrigado!</b></p>'}
       </div>`;
@@ -93,4 +107,9 @@
   }
 
   render();
-})();
+}
+
+// Pesquisa geral: Início, Conteúdos e Grupos (quem começa numa continua na outra)
+if(typeof ESCUTA_PERGUNTAS !== 'undefined'){
+  montarEscuta({ lado: document.querySelector('.in-side'), perguntas: ESCUTA_PERGUNTAS, chave: 'escutaEstado' });
+}
