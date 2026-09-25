@@ -20,7 +20,8 @@ Cada tela é um `.html` próprio. `index.html` só abre a `inicio.html`.
 index.html                  → redireciona para inicio.html
 inicio.html                 Tela Início (menu lateral)
 conteudos.html              Conteúdos e Curadoria: 3 colunas de cards + boxes à direita
-grupos.html, conexoes.html  Em branco por enquanto
+grupos.html                 Grupos: 3 colunas de grupos (Participar/Sair) + boxes à direita
+conexoes.html               Em branco por enquanto
 institucional/              Menu do topo: conhecer, como-funciona, beneficios, seguranca, patrocinadores
 comunidades/                Minhas Comunidades, um arquivo por aba:
                             inicio, conteudos, servicos, grupos-internos, membros, publicar, dashboard, escuta
@@ -29,11 +30,11 @@ assets/js/comum.js          Ícones (ICON) e degradês de capa (sorteiaDegrade)
 assets/js/layout.js         Faixa de protótipo, aviso, topo, menu lateral e rodapé — montados em todas as páginas
 assets/js/comunidades-dados.js  Objeto DATA com as 12 comunidades
 assets/js/comunidades.js    Troca de comunidade/público e conteúdo de cada aba (funções render*)
-assets/js/inicio.js, conteudos.js  Scripts de cada tela
+assets/js/inicio.js, conteudos.js, grupos.js  Scripts de cada tela
 ```
 
 - **Mudar o topo ou o menu lateral**: edite só `assets/js/layout.js` — vale para todas as páginas.
-- **Nova página**: copie `grupos.html`, troque o conteúdo e o `data-page` do `<body>`, e registre o endereço em `PAGE_URLS` (`layout.js`) se ela entrar no menu lateral. Páginas em subpastas usam `data-root="../"`.
+- **Nova página**: copie `conexoes.html`, troque o conteúdo e o `data-page` do `<body>`, e registre o endereço em `PAGE_URLS` (`layout.js`) se ela entrar no menu lateral. Páginas em subpastas usam `data-root="../"`.
 - Funciona abrindo os arquivos direto no navegador (dois cliques), sem servidor.
 
 ## Levando para o produto real (Claude Code / Next.js)

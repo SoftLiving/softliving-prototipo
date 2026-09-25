@@ -52,6 +52,10 @@ const ICON = {
   chevron: ic('<path d="M6 9l6 6 6-6"/>'),
   star: ic('<path d="M12 3l2.9 6.3 6.9.6-5.2 4.6 1.6 6.8L12 16.8 5.8 20.3l1.6-6.8L2.2 8.9l6.9-.6L12 3z"/>'),
   paw: ic('<circle cx="7" cy="7" r="1.8"/><circle cx="12" cy="5" r="1.8"/><circle cx="17" cy="7" r="1.8"/><path d="M8 14c0-2.5 1.8-4 4-4s4 1.5 4 4-2 4.5-4 4.5-4-2-4-4.5z"/>'),
+  film: ic('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/>'),
+  heart: ic('<path d="M12 21s-7-4.35-9.5-8.5C.7 8.8 3 4.5 7 4.5c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.3 4.3 4.5 8.5C19 16.65 12 21 12 21z"/>'),
+  pin: ic('<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>'),
+  logout: ic('<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/>'),
 };
 
 const COVER_GRADIENTS = [
