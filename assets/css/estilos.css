@@ -1007,3 +1007,4 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .site-page .sp-pillars{ margin-top:20px; } /* Conhecer: pilares da carteira de créditos, abaixo dos dois caminhos */
 .site-page .sp-supporters{ margin-top:20px; } /* Conhecer: faixa de patrocinadores apoiadores abaixo dos pilares */
 .site-page .sp-fomo .sp-mo-tag.sp-mo-tag-red{ background:#fdecec; color:#b3261e; } /* Conhecer: etiqueta 'Outros portais' */
+.site-page .sp-jomo .sp-mo-tag .sig .soft, .site-page .sp-jomo .sp-mo-tag .sig .living{ color:#fff; } /* logo em texto sobre a etiqueta verde: versão branca */
