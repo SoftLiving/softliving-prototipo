@@ -177,6 +177,35 @@ document.querySelectorAll('main [data-site-link]').forEach(el => el.addEventList
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('main a[href="#"]:not([data-goto]):not([data-site-link]), #sidebar a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
+// Regra do logo em texto (.sig): se o fundo atrás dele confunde as cores da marca (azul #013565 e verde #1F5519),
+// o logo passa a ser branco (classe .sig-light). Vale para todas as páginas, inclusive conteúdo gerado depois.
+function corDeFundo(el){
+  for(; el; el = el.parentElement){
+    const m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+    if(m && (m[3] === undefined || +m[3] > 0.5)) return m.slice(0, 3).map(Number);
+  }
+  return [255, 255, 255];
+}
+function luminancia(rgb){
+  const [r, g, b] = rgb.map(v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
+  return .2126 * r + .7152 * g + .0722 * b;
+}
+const LOGO_CORES = [[1, 53, 101], [31, 85, 25]];
+function ajustarLogosEmTexto(){
+  document.querySelectorAll('.sig').forEach(sig => {
+    const lf = luminancia(corDeFundo(sig.parentElement));
+    const contraste = Math.min(...LOGO_CORES.map(c => { const lc = luminancia(c); return (Math.max(lf, lc) + .05) / (Math.min(lf, lc) + .05); }));
+    sig.classList.toggle('sig-light', contraste < 3);
+  });
+}
+ajustarLogosEmTexto();
+let ajusteLogosPendente = false;
+new MutationObserver(() => {
+  if(ajusteLogosPendente) return;
+  ajusteLogosPendente = true;
+  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); });
+}).observe(document.querySelector('main'), { childList:true, subtree:true });
+
 // Aviso de protótipo: abre na primeira visita da sessão
 const protoModal = document.getElementById('protoModal');
 function openProtoModal(){ protoModal.classList.add('show'); }
