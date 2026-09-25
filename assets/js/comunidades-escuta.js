@@ -1,6 +1,7 @@
 // Pesquisas de escuta de Minhas Comunidades: 20 perguntas fictícias por cliente, sobre o assunto de cada um.
 // Claro e Rede Dor têm uma pesquisa para cada público (cliente/paciente e colaborador).
-// Aparecem no box "Sua opinião vale créditos", na coluna da direita das abas de comunidades (+1 crédito por resposta).
+// Aparecem no box de pesquisa, na coluna da direita das abas de comunidades. Não valem créditos do portal:
+// as de colaboradores valem créditos internos da empresa (saldo próprio); as demais são só pesquisa.
 // Atalhos: E = uma escolha, V = várias escolhas, T = texto livre, N = nota de 0 a 10.
 (function(){
   const E = (t, op) => ({ tipo:'escolha', t, op }), V = (t, op) => ({ tipo:'varias', t, op }),
