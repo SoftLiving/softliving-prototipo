@@ -1005,3 +1005,4 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .site-page .sp-mo-close{ text-align:center; font-size:clamp(17px,1.6vw,20px); color:#3b4450; margin:28px auto 0; max-width:640px; }
 .site-page .sp-mo-close strong{ color:var(--navy); }
 .site-page .sp-pillars{ margin-top:20px; } /* Conhecer: pilares da carteira de créditos, abaixo dos dois caminhos */
+.site-page .sp-pillar-note{ margin-top:10px; padding-top:10px; border-top:1px solid var(--border); font-size:14.5px; color:#6b7580; } /* Conhecer: nota sobre patrocinadores apoiadores */
