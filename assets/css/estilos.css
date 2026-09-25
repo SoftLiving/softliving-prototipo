@@ -1004,3 +1004,4 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .site-page .sp-jomo li::before{ background:var(--green); }
 .site-page .sp-mo-close{ text-align:center; font-size:clamp(17px,1.6vw,20px); color:#3b4450; margin:28px auto 0; max-width:640px; }
 .site-page .sp-mo-close strong{ color:var(--navy); }
+.site-page .sp-pillars{ margin-top:20px; } /* Conhecer: pilares da carteira de créditos, abaixo dos dois caminhos */
