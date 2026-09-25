@@ -38,7 +38,7 @@ const LAYOUT_TOPO = `
 </div>
 
 <div class="top-banner">
-  <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg> Você tem créditos. Para assinar clubes premium, ative com Pix de R$ 50.</span>
+  <span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg> Você tem créditos. Para assinar clubes premium, ative com Pix de R$50.</span>
   <a href="#">Ativar agora</a>
   <button class="close" onclick="this.parentElement.style.display='none'"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
 </div>
@@ -106,7 +106,7 @@ const LAYOUT_SIDEBAR = `
 
     <div class="activate-card">
       <p class="title">Ative sua conta</p>
-      <p class="desc">Pix de R$ 50 → 50 créditos + 50 bônus.</p>
+      <p class="desc">Pix de R$50 → 50 créditos + 50 bônus.</p>
       <button>Ir para carteira</button>
     </div>
   </aside>`;

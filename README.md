@@ -37,6 +37,7 @@ assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```
 
 - **Logo em texto**: a palavra SoftLiving no conteúdo usa `<span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>` (Times New Roman negrito; Soft itálico azul #013565, Living verde #1F5519). Sobre fundos que confundem essas cores o logo fica branco automaticamente (`ajustarLogosEmTexto()` em `layout.js`).
+- **Valores em reais**: sempre sem espaço entre o símbolo e o número: `R$50`, `R$189,90` (nunca `R$ 50`).
 - **Mudar o topo ou o menu lateral**: edite só `assets/js/layout.js` — vale para todas as páginas.
 - **Nova página**: copie `conexoes.html`, troque o conteúdo e o `data-page` do `<body>`, e registre o endereço em `PAGE_URLS` (`layout.js`) se ela entrar no menu lateral. Páginas em subpastas usam `data-root="../"`.
 - Funciona abrindo os arquivos direto no navegador (dois cliques), sem servidor.

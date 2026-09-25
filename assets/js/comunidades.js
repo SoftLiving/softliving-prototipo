@@ -547,7 +547,7 @@ function renderServicoDetail(org, s, key){
               <select name="cat">${catOrder.map(c=>`<option>${c}</option>`).join('')}</select>
             </div>
             <div class="field"><label>Título</label><input type="text" name="title" placeholder="Ex.: Bicicleta infantil" required></div>
-            <div class="field"><label>Preço</label><input type="text" name="price" placeholder="Ex.: R$ 150" required></div>
+            <div class="field"><label>Preço</label><input type="text" name="price" placeholder="Ex.: R$150" required></div>
             <div class="field"><label>Telefone</label><input type="text" name="phone" placeholder="Ex.: (21) 99999-0000" required></div>
             <div class="field"><label>Foto</label><input type="file" name="photo" accept="image/*"></div>
             <div class="field"><label>Descrição</label><textarea name="desc" rows="2" placeholder="Conte um pouco sobre o item"></textarea></div>
