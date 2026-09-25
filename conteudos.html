@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conteúdos · SoftLiving (Protótipo · em aprovação)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="conteudos" data-root="">
+
+<!-- Tela Conteúdos (menu lateral): 3 colunas de conteúdos + coluna de boxes à direita -->
+<div class="wrap in-page" id="conteudosPage">
+  <div class="in-top">
+    <div>
+      <h1 class="in-hello">Conteúdos e Curadoria</h1>
+      <p class="in-sub">Artigos, guias e dicas sobre saúde, longevidade, tecnologia e muito mais.</p>
+    </div>
+  </div>
+
+  <a href="#" class="in-partner"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6"/></svg></span><span>Espaço para parceiros <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span><small>Fale conosco sobre anunciar aqui →</small></span></a>
+
+  <div class="cc-search ct-search">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <input type="text" id="ctSearch" placeholder="Buscar por título, autor ou tema...">
+  </div>
+
+  <div class="in-pills" id="ctCats"></div>
+
+  <a href="#" class="ct-highlight" id="ctHighlight"></a>
+
+  <div class="ct-tabs" id="ctTabs"></div>
+
+  <div class="in-grid">
+    <div class="in-main">
+      <div class="ct-grid" id="ctGrid"></div>
+      <p class="ct-empty" id="ctEmpty" hidden>Nenhum conteúdo encontrado com esses filtros.</p>
+      <div class="cc-loadmore"><button type="button">⌄ Carregar todos os conteúdos</button></div>
+    </div>
+
+    <aside class="in-side">
+      <section class="in-card">
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg>Meus grupos</h2><a href="#" class="in-more" data-goto="grupos">Ver todos ›</a></div>
+        <a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Yoga & Meditação</strong><small>Saúde</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Clube do Livro</strong><small>Cultura</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Tecnologia Sem Medo</strong><small>Tecnologia</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Culinária Saudável</strong><small>Gastronomia</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Copa do Mundo</strong><small>Social</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a>
+        <a href="#" class="in-link-center" data-goto="grupos">Explorar mais grupos →</a>
+      </section>
+      <section class="in-card in-today">
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>Hoje na <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></h2></div>
+        <div class="in-stat"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><p><strong>50 membros</strong><small>no diretório da comunidade</small></p></div>
+        <div class="in-stat"><span class="g"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span><p><strong>8 colunistas</strong><small>publicando novas colunas</small></p></div>
+        <div class="in-stat"><span class="a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span><p><strong>58+ conteúdos</strong><small>disponíveis para você</small></p></div>
+        <button type="button" class="in-btn-soft" data-goto="conteudos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h6a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H2zM22 5h-6a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h7z"/></svg>Explorar conteúdos</button>
+      </section>
+      <section class="in-card">
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg>Conheça a comunidade</h2><a href="#" class="in-more">Ver todos →</a></div>
+        <a href="#" class="in-member"><span class="in-av" style="background:#2f5d3a">LR</span>Luciana Russi</a><a href="#" class="in-member"><span class="in-av" style="background:#d4a24c">MH</span>Maria Helena Sobral</a><a href="#" class="in-member"><span class="in-av" style="background:#d4a24c">CB</span>CLAUDIO BRITO</a>
+        <button type="button" class="in-btn-line" data-goto="conexoes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg>Explorar comunidade</button>
+      </section>
+      <div class="in-club">
+        <em>Clube de Saúde <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></em>
+        <strong>Parceria em aberto</strong>
+        <a href="#" data-site-link="patrocinadores">Conheça as cotas de patrocínio</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/js/comum.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos.js"></script>
+</body>
+</html>

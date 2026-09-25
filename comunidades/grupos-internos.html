@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Comunidades · Grupos internos · SoftLiving (Protótipo · em aprovação)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/estilos.css">
+</head>
+<body data-page="comunidades" data-tab="celulas" data-root="../">
+
+<div class="wrap" id="communitiesView">
+  <div class="org-switcher-wrap">
+    <div class="org-switcher" id="orgSwitcher"></div>
+  </div>
+
+  <p class="eyebrow">SUAS COMUNIDADES <span class="proto-seal">PROPOSTA · EM APROVAÇÃO</span></p>
+  <h1 class="org-title serif" id="orgTitle"></h1>
+  <p class="org-subtitle" id="orgSubtitle"></p>
+  <div id="audienceToggleWrap"></div>
+
+
+  <div class="tab-bar" id="tabBar">
+    <a class="tab-item" data-tab="inicio" href="inicio.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg> Início</a>
+    <a class="tab-item" data-tab="conteudos" href="conteudos.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5"/><path d="M4 5.5v16"/></svg> Conteúdos</a>
+    <a class="tab-item" data-tab="servicos" href="servicos.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg> Serviços</a>
+    <a class="tab-item" data-tab="celulas" href="grupos-internos.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.5 3-6 7-6s7 2.5 7 6"/><circle cx="17" cy="9" r="2.5"/><path d="M23 20c0-2.8-2-5-5-5.5"/></svg> Grupos internos</a>
+    <a class="tab-item" data-tab="usuarios" href="membros.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg> Membros</a>
+    <a class="tab-item" data-tab="publicar" href="publicar.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg> Publicar</a>
+    <a class="tab-item" data-tab="dashboard" href="dashboard.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V12M11 20V6M18 20v-8"/></svg> Dashboard</a>
+    <a class="tab-item" data-tab="escuta" href="escuta.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13a9 9 0 0 1 18 0"/><rect x="3" y="13" width="4" height="7" rx="1"/><rect x="17" y="13" width="4" height="7" rx="1"/></svg> Escuta</a>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script src="../assets/js/comum.js"></script>
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/comunidades-dados.js"></script>
+<script src="../assets/js/comunidades.js"></script>
+</body>
+</html>
