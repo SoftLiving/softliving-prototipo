@@ -5,10 +5,10 @@
 const ESCUTA_MIN_TEXTO = 10;
 const ESCUTA_PERGUNTAS = [
   // Sua vida digital
-  { id:2,  tema:'Sua vida digital', tipo:'escolha', t:'Você acessou pelo celular, tablet ou computador?', op:['Celular','Tablet','Computador'] },
+  { id:2,  tema:'Sua vida digital', tipo:'varias', t:'Você acessou pelo celular, tablet ou computador?', op:['Celular','Tablet','Computador'] },
   { id:3,  tema:'Sua vida digital', tipo:'escolha', t:'Com que frequência você usa redes sociais e apps de conteúdo?', op:['Várias vezes ao dia','Uma vez por dia','Algumas vezes por semana','Raramente'] },
   { id:4,  tema:'Sua vida digital', tipo:'texto',   t:'Você já participa de alguma comunidade online? Qual?' },
-  { id:5,  tema:'Sua vida digital', tipo:'escolha', t:'O que mais pesa hoje na sua vida digital?', op:['Excesso de notificações','Falta de conteúdo relevante','Falta de gente de verdade para conversar'] },
+  { id:5,  tema:'Sua vida digital', tipo:'varias', t:'O que mais pesa hoje na sua vida digital?', op:['Excesso de notificações','Falta de conteúdo relevante','Falta de gente de verdade para conversar'] },
   // Primeira impressão e confiança
   { id:6,  tema:'Primeira impressão e confiança', tipo:'texto',   t:'Em 10 segundos na página inicial, o que você acha que o SoftLiving é?' },
   { id:7,  tema:'Primeira impressão e confiança', tipo:'texto',   t:'O que você procura no SoftLiving? E o que encontrou aqui?' },
@@ -25,7 +25,7 @@ const ESCUTA_PERGUNTAS = [
   { id:16, tema:'Conteúdo', tipo:'varias',  t:'Se pudesse reunir tudo em um só lugar, que conteúdos gostaria de encontrar?', op:['Cultura','Saúde','Finanças','Viagens','Tecnologia','Gastronomia','Outro tema'] },
   { id:17, tema:'Conteúdo', tipo:'texto',   t:'Qual conteúdo te chamou mais atenção? E qual não faz sentido estar aqui?' },
   { id:18, tema:'Conteúdo', tipo:'escolha', t:'Os textos parecem feitos para você ou são genéricos?', op:['Feitos para mim','Um pouco dos dois','Genéricos'] },
-  { id:19, tema:'Conteúdo', tipo:'escolha', t:'Você prefere ler, ouvir ou assistir?', op:['Ler','Ouvir','Assistir'] },
+  { id:19, tema:'Conteúdo', tipo:'varias', t:'Você prefere ler, ouvir ou assistir?', op:['Ler','Ouvir','Assistir'] },
   { id:20, tema:'Conteúdo', tipo:'escolha', t:'Você prefere consumir conteúdo sozinho ou em grupos, com conversa, debate e troca de experiências?', op:['Sozinho','Em grupo','Os dois'] },
   // Comunidade
   { id:21, tema:'Comunidade', tipo:'texto',   t:'Que assunto faria você entrar em um grupo e participar ativamente? Pode ser um tema que ainda não existe no SoftLiving.' },
