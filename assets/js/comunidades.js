@@ -898,15 +898,10 @@ function renderEscutaComunidade(){
   const perguntas = Array.isArray(conjunto) ? conjunto : conjunto && conjunto[currentAudience];
   const lado = document.getElementById('cmSide');
   if(!perguntas){ lado.innerHTML = ''; return; }
-  // Pesquisas de comunidades não dão créditos do portal. A dos colaboradores vale créditos internos da empresa,
-  // com saldo próprio (para ações internas); as demais são só pesquisa.
+  // Pesquisas de comunidades são só pesquisa, sem créditos (inclusive as de colaboradores, por enquanto).
   const publico = org.audiences ? ` · ${org.audiences[currentAudience].audienceLabel}` : '';
-  const colaborador = currentAudience === 'colaborador';
-  montarEscuta({ lado, perguntas, chave,
-    recompensa: colaborador ? { tipo:'interna', empresa:org.name, chave:`creditosInternos:${currentOrg}` } : { tipo:'nenhuma' },
-    descricao: colaborador
-      ? `Pesquisa interna ${org.name}. Cada resposta vale <b>+1 crédito interno</b> da empresa.`
-      : `Pesquisa ${org.name}${publico}. Sua opinião ajuda a melhorar esta comunidade.` });
+  montarEscuta({ lado, perguntas, chave, recompensa: { tipo:'nenhuma' },
+    descricao: `Pesquisa ${org.name}${publico}. Sua opinião ajuda a melhorar esta comunidade.` });
 }
 
 // Fecha o dropdown "Trocar por" ao clicar fora dele ou apertar Esc

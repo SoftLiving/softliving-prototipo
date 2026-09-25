@@ -34,7 +34,7 @@ assets/js/comunidades-dados.js  Objeto DATA com as 12 comunidades
 assets/js/comunidades.js    Troca de comunidade/público e conteúdo de cada aba (funções render*)
 assets/js/escuta-dados.js   Perguntas da pesquisa de escuta (tipo: texto, escolha, varias, nota)
 assets/js/escuta.js         Box "Sua opinião vale créditos" (montarEscuta): rodadas de 3 a 5 perguntas, +1 crédito cada; bônus somado em sessionStorage "bonusCreditos"
-assets/js/comunidades-escuta.js  Pesquisas de cada comunidade (20 perguntas por cliente; Claro e Rede Dor por público), no box da coluna direita das abas. Sem créditos do portal; as de colaboradores valem créditos internos da empresa (sessionStorage "creditosInternos:<org>")
+assets/js/comunidades-escuta.js  Pesquisas de cada comunidade (20 perguntas por cliente; Claro e Rede Dor por público), no box da coluna direita das abas. Sem créditos (inclusive colaboradores, por enquanto)
 assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
 assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```
