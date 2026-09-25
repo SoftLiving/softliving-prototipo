@@ -717,8 +717,6 @@ function renderConteudos(org){
     <h2 class="cc-title serif">Conteúdos e Curadoria</h2>
     <p class="cc-subtitle">${cc.subtitle}</p>
 
-    <div class="cc-sponsor">Espaço para parceiros ${org.name} · Fale conosco sobre anunciar aqui →</div>
-
     <div class="cc-search">
       ${ICON.search}
       <input type="text" placeholder="Buscar por título, autor ou tema...">
