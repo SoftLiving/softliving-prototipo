@@ -122,7 +122,7 @@ const LAYOUT_RODAPE = `
     </div>
     <div class="footer-partner">
       <span>Consultoria estratégica</span>
-      <img src="${LAYOUT_ROOT}assets/img/logo-rb2-digital.png" alt="RB2 Digital — Consultoria Estratégica" class="logo-rb2">
+      <img src="${LAYOUT_ROOT}assets/img/logo-rb2-digital.png" alt="RB2 Consultoria Estratégica" class="logo-rb2">
     </div>
   </div>
   <p class="footer-note">
