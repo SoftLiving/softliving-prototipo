@@ -21,6 +21,8 @@ index.html                  → redireciona para inicio.html
 inicio.html                 Tela Início (menu lateral)
 conteudos.html              Conteúdos e Curadoria: 3 colunas de cards + boxes à direita
 grupos.html                 Grupos: 3 colunas de grupos (Participar/Sair) + boxes à direita
+grupo.html?g=<n>            Página interna de um grupo (mesma estrutura para todos): cabeçalho, Tópicos/rodadas, Mural,
+                            Painel da moderação e Quem participa
 conexoes.html               Em branco por enquanto
 institucional/              Menu do topo: conhecer, como-funciona, beneficios, seguranca, patrocinadores
 comunidades/                Minhas Comunidades, um arquivo por aba:
@@ -30,7 +32,8 @@ assets/js/comum.js          Ícones (ICON) e degradês de capa (sorteiaDegrade)
 assets/js/layout.js         Faixa de protótipo, aviso, topo, menu lateral e rodapé — montados em todas as páginas
 assets/js/comunidades-dados.js  Objeto DATA com as 12 comunidades
 assets/js/comunidades.js    Troca de comunidade/público e conteúdo de cada aba (funções render*)
-assets/js/inicio.js, conteudos.js, grupos.js  Scripts de cada tela
+assets/js/grupos-dados.js   Lista GRUPOS (usada por grupos.html e grupo.html) e Participar/Sair da sessão
+assets/js/inicio.js, conteudos.js, grupos.js, grupo.js  Scripts de cada tela
 ```
 
 - **Mudar o topo ou o menu lateral**: edite só `assets/js/layout.js` — vale para todas as páginas.

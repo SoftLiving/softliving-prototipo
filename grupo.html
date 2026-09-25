@@ -3,37 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grupos · SoftLiving (Protótipo · em aprovação)</title>
+<title>Grupo · SoftLiving (Protótipo · em aprovação)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/estilos.css">
 </head>
 <body data-page="grupos" data-root="">
 
-<!-- Tela Grupos (menu lateral): 3 colunas de grupos + coluna de boxes à direita -->
-<div class="wrap in-page" id="gruposPage">
-  <div class="in-top">
-    <div>
-      <h1 class="in-hello">Grupos</h1>
-      <p class="in-sub">Encontre pessoas com os mesmos interesses e participe das conversas e encontros.</p>
-    </div>
-  </div>
-
-  <a href="#" class="in-partner"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6"/></svg></span><span>Espaço para parceiros <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span><small>Fale conosco sobre anunciar aqui →</small></span></a>
-
-  <div class="gr-head">
-    <h2>Grupos disponíveis</h2>
-    <span id="grCount"></span>
-  </div>
-  <div class="ct-tabs" id="grTabs"></div>
+<!-- Página interna de um grupo: todos os cards de grupos.html abrem esta mesma estrutura (grupo.html?g=<número>) -->
+<div class="wrap in-page" id="grupoPage">
+  <a href="grupos.html" class="gd-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Grupos</a>
 
   <div class="in-grid">
     <div class="in-main">
-      <div class="ct-grid" id="grGrid"></div>
-      <p class="ct-empty" id="grEmpty" hidden>Você ainda não participa de nenhum grupo.</p>
+      <!-- Cabeçalho do grupo -->
+      <section class="in-card gd-hero" id="gdHero"></section>
+
+      <!-- Tópicos | Mural -->
+      <div class="ct-tabs gd-tabs" id="gdTabs">
+        <button type="button" class="ct-tab active" data-tab="topicos">Tópicos</button>
+        <button type="button" class="ct-tab" data-tab="mural">Mural</button>
+      </div>
+
+      <section class="in-card gd-panel" id="gdTopicos">
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg>Rodadas</h2></div>
+        <div class="gd-rounds">
+          <div class="gd-round-list" id="gdRoundList"></div>
+          <div class="gd-round-detail" id="gdRoundDetail"></div>
+        </div>
+        <p class="gd-mod-note" id="gdModNote"></p>
+      </section>
+
+      <section class="in-card gd-panel" id="gdMural" hidden>
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6"/></svg>Mural</h2></div>
+        <div id="gdMuralList"></div>
+      </section>
+
+      <!-- Só aparece para quem modera o grupo -->
+      <section class="in-card gd-mod" id="gdMod">
+        <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Painel da moderação</h2></div>
+        <form id="gdNewTopic">
+          <label>Novo tópico (rodada)</label>
+          <input type="text" name="titulo" placeholder="Ex.: Encontro de outubro" required>
+          <textarea name="guia" rows="2" placeholder="Pergunta-guia ou instruções (opcional)"></textarea>
+          <button type="submit" class="gr-join">Abrir tópico</button>
+        </form>
+        <form id="gdNewNotice">
+          <label>Aviso no mural</label>
+          <textarea name="aviso" rows="2" placeholder="Ex.: Encontro quinta, 19h — não perca!" required></textarea>
+          <button type="submit" class="gr-join">Publicar aviso</button>
+        </form>
+        <div>
+          <label>Arquivar rodada</label>
+          <div id="gdArchiveList"></div>
+        </div>
+      </section>
     </div>
 
-    <aside class="in-side">
+  <aside class="in-side">
+      <section class="in-card" id="gdMembers"></section>
       <section class="in-card">
         <div class="in-card-head"><h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg>Meus grupos</h2><a href="#" class="in-more" data-goto="grupos">Ver todos ›</a></div>
         <a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Yoga & Meditação</strong><small>Saúde</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Clube do Livro</strong><small>Cultura</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Tecnologia Sem Medo</strong><small>Tecnologia</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Culinária Saudável</strong><small>Gastronomia</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a><a href="#" class="in-group"><span class="in-gic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg></span><span><strong>Copa do Mundo</strong><small>Social</small></span><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></i></a>
@@ -63,6 +91,6 @@
 <script src="assets/js/comum.js"></script>
 <script src="assets/js/layout.js"></script>
 <script src="assets/js/grupos-dados.js"></script>
-<script src="assets/js/grupos.js"></script>
+<script src="assets/js/grupo.js"></script>
 </body>
 </html>
