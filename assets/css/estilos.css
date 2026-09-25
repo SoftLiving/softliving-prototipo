@@ -978,10 +978,10 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .in-minis .in-mini{ background:#fff; }
 
 /* Rodapé: parceiros (assessoria de imprensa e consultoria estratégica) + aviso de protótipo */
-.footer-partners{ display:flex; justify-content:center; align-items:center; gap:48px; flex-wrap:wrap; padding:6px 0 16px; margin-bottom:14px; border-bottom:1px solid var(--border); }
+.footer-partners{ display:flex; justify-content:center; align-items:stretch; gap:48px; flex-wrap:wrap; padding:6px 0 16px; margin-bottom:14px; border-bottom:1px solid var(--border); }
 .footer-partner{ display:flex; flex-direction:column; align-items:center; gap:2px; } /* rótulo em cima, logo embaixo */
 .footer-partner span{ font-size:9.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#a9b2bb; }
-.footer-partner img{ display:block; width:auto; }
+.footer-partner img{ display:block; width:auto; margin:auto 0; } /* rótulos alinhados no topo, logos centralizados entre si */
 .logo-fsb{ height:88px; }
 .logo-rb2{ height:118px; } /* a imagem tem margem branca própria */
 .footer-note{ margin:0; }
