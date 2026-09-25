@@ -986,3 +986,21 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .logo-rb2{ height:118px; } /* a imagem tem margem branca própria */
 .footer-note{ margin:0; }
 @media (max-width:560px){ .footer-partners{ gap:18px; } .logo-fsb{ height:70px; } .logo-rb2{ height:90px; } }
+
+/* Página Conhecer: Do FOMO ao JOMO */
+.site-page .sp-mo{ display:flex; flex-direction:column; }
+.site-page .sp-mo-tag{ align-self:flex-start; font-size:12px; font-weight:700; letter-spacing:.04em; border-radius:999px; padding:4px 12px; margin-bottom:12px; }
+.site-page .sp-mo-tag em{ font-weight:500; }
+.site-page .sp-mo ul{ list-style:none; padding:0; margin:14px 0 0; display:flex; flex-direction:column; gap:8px; }
+.site-page .sp-mo li{ position:relative; padding-left:22px; font-size:15.5px; }
+.site-page .sp-mo li::before{ content:''; position:absolute; left:4px; top:.6em; width:8px; height:8px; border-radius:50%; }
+.site-page .sp-fomo{ background:#f7f8fa; }
+.site-page .sp-fomo .sp-mo-tag{ background:#eef1f4; color:#6b7580; }
+.site-page .sp-fomo h3, .site-page .sp-fomo li{ color:#6b7580; }
+.site-page .sp-fomo li::before{ background:#c3cad2; }
+.site-page .sp-jomo{ background:var(--mint); border-color:#b9dcc9; }
+.site-page .sp-jomo .sp-mo-tag{ background:var(--green); color:#fff; }
+.site-page .sp-jomo h3{ color:var(--green); }
+.site-page .sp-jomo li::before{ background:var(--green); }
+.site-page .sp-mo-close{ text-align:center; font-size:clamp(17px,1.6vw,20px); color:#3b4450; margin:28px auto 0; max-width:640px; }
+.site-page .sp-mo-close strong{ color:var(--navy); }
