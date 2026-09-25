@@ -874,7 +874,7 @@ button.cc-wide-cta.cc-wide-cta{ width:auto; flex-shrink:0; padding-left:22px; pa
 .tab-bar a.tab-item{ text-decoration:none; }
 
 /* ===== Tela Grupos (usa os cards .ct-* da Tela Conteúdos) ===== */
-.gr-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:14px; }
+.gr-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:14px; }
 .gr-head h2{ font-family:'Cardo',Georgia,serif; font-size:24px; color:var(--navy); margin:0; font-weight:700; }
 .gr-head span{ font-size:14px; color:#6b7580; }
 .gr-card .ct-badge{ left:auto; right:10px; }
