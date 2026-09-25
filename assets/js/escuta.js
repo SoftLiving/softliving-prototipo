@@ -29,7 +29,7 @@
 
   let valor = null;   // resposta em edição
   const cabecalho = `
-    <div class="in-card-head"><h2>${ICON.headphones} Sua opinião vale créditos</h2></div>
+    <div class="in-card-head"><h2>Sua opinião vale créditos</h2></div>
     <p class="es-sub">Responda e ganhe <b>+1 crédito de bônus</b> por pergunta.</p>`;
 
   function render(){
@@ -45,7 +45,6 @@
     if(p.porque) campo += `<textarea class="es-porque" rows="2" placeholder="${p.porque}"></textarea>`;
     box.innerHTML = `${cabecalho}
       <div class="es-progress"><span>Pergunta ${n} de ${total}</span><span class="es-bar"><i style="width:${(n - 1) / total * 100}%"></i></span></div>
-      <p class="es-tema">${p.tema}</p>
       <p class="es-q">${p.t}</p>
       ${campo}
       <div class="es-actions">
