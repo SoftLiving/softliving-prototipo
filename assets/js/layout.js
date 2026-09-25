@@ -177,15 +177,6 @@ document.querySelectorAll('main [data-site-link]').forEach(el => el.addEventList
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('main a[href="#"]:not([data-goto]):not([data-site-link]), #sidebar a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
-// WhatsApp: número oficial ainda não definido
-const spToast = document.getElementById('spToast'); let spToastT;
-document.querySelectorAll('[data-whatsapp]').forEach(a => a.addEventListener('click', e => {
-  e.preventDefault();
-  spToast.textContent = 'Protótipo: o número oficial do WhatsApp ainda não foi definido.';
-  spToast.classList.add('show');
-  clearTimeout(spToastT); spToastT = setTimeout(() => spToast.classList.remove('show'), 3200);
-}));
-
 // Aviso de protótipo: abre na primeira visita da sessão
 const protoModal = document.getElementById('protoModal');
 function openProtoModal(){ protoModal.classList.add('show'); }
