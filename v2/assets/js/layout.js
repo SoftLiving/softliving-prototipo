@@ -15,6 +15,7 @@ const PAGINAS = {
   conteudos:    { url:'conteudos.html', v1:true },
   grupos:       { url:'grupos.html', v1:true },
   comunidades:  { url:'comunidades/inicio.html', v1:true },
+  conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },
 };
 function urlPagina(nome){
@@ -46,24 +47,56 @@ const ICONES = {
   mais:'<path d="M12 5v14M5 12h14"/>',
   seta:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   salvar:'<path d="M6 3h12v18l-6-4-6 4V3z"/>',
+  colunas:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
+  curtidas:'<path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/>',
+  comentarios:'<path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.2A8 8 0 1 1 21 12z"/>',
+  acompanhar:'<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/><path d="M3 5l2 1.5M21 5l-2 1.5"/>',
+  comunidades:'<rect x="4" y="3" width="16" height="18"/><path d="M9 21v-4h6v4M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M16 15h.01"/>',
+  conexoes:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+  membros:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/>',
+  parceiros:'<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>',
+  abrir:'<path d="M6 9l6 6 6-6"/>',
 };
 const icone = (nome, extra) => `<svg class="ic${extra ? ' ' + extra : ''}" viewBox="0 0 24 24" aria-hidden="true">${ICONES[nome]}</svg>`;
 const LOGO = '<span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>';
 
-// Minhas comunidades (atalhos do menu lateral): chave usada em comunidades/inicio.html?org=
-const MINHAS_COMUNIDADES = [
-  { org:'empresa', nome:'Claro', sigla:'C', cor:'#c0262d', fundo:'#fde8e8' },
-  { org:'condominio', nome:'American Flat', sigla:'AF', cor:'#013565', fundo:'#e8eef8' },
-  { org:'clube', nome:'Clube Caiçaras', sigla:'CC', cor:'#1F5519', fundo:'#e6f2ea' },
+// Menu lateral: os mesmos itens da versão 1, em quatro seções. Atividades abre um submenu.
+const MENU_SECOES = [
+  { titulo:'Principal', itens:[
+    { nome:'inicio', rotulo:'Início', icone:'inicio' },
+    { nome:'busca', rotulo:'Busca', icone:'busca' },
+    { nome:'notificacoes', rotulo:'Notificações', icone:'sino', aviso:3 },
+  ]},
+  { titulo:'Conteúdo', itens:[
+    { nome:'conteudos', rotulo:'Conteúdos', icone:'conteudos' },
+    { nome:'colunas', rotulo:'Colunas', icone:'colunas' },
+    { nome:'atividades', rotulo:'Atividades', icone:'salvar', sub:[
+      { nome:'curtidas', rotulo:'Curtidas', icone:'curtidas' },
+      { nome:'comentarios', rotulo:'Comentários', icone:'comentarios' },
+      { nome:'acompanhar', rotulo:'Acompanhar', icone:'acompanhar' },
+      { nome:'salvos', rotulo:'Salvos', icone:'salvar' },
+    ]},
+  ]},
+  { titulo:'Comunidade e benefícios', itens:[
+    { nome:'comunidades', rotulo:'Minhas Comunidades', icone:'comunidades' },
+    { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
+    { nome:'conexoes', rotulo:'Conexões', icone:'conexoes' },
+    { nome:'membros', rotulo:'Membros', icone:'membros' },
+    { nome:'parceiros', rotulo:'Parceiros', icone:'parceiros' },
+  ]},
+  { titulo:'Minha conta', itens:[
+    { nome:'carteira', rotulo:'Carteira', icone:'carteira' },
+    { nome:'indicacoes', rotulo:'Indicações', icone:'presente' },
+    { nome:'perfil', rotulo:'Meu perfil', icone:'perfil' },
+    { nome:'ajuda', rotulo:'Ajuda', icone:'ajuda' },
+  ]},
 ];
-
-const MENU = [
-  { nome:'inicio', rotulo:'Início', icone:'inicio' },
-  { nome:'conteudos', rotulo:'Conteúdos', icone:'conteudos' },
-  { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
-  { nome:'notificacoes', rotulo:'Notificações', icone:'sino', aviso:3 },
-  { nome:'perfil', rotulo:'Meu perfil', icone:'perfil' },
-];
+const itemMenu = m => `<a href="${urlPagina(m.nome)}" data-page="${m.nome}" title="${m.rotulo}">${icone(m.icone)}<span class="lbl">${m.rotulo}</span>${m.aviso ? `<span class="tag">${m.aviso}</span>` : ''}</a>`;
+const itemComSub = m => `
+  <div class="nav-grupo" data-grupo="${m.nome}">
+    <button type="button" class="nav-abre" aria-expanded="false" title="${m.rotulo}">${icone(m.icone)}<span class="lbl">${m.rotulo}</span>${icone('abrir', 'chev')}</button>
+    <div class="nav-sub">${m.sub.map(itemMenu).join('')}</div>
+  </div>`;
 
 function saudacao(){
   const h = new Date().getHours();
@@ -102,31 +135,11 @@ const LAYOUT_MENU = `
     <button class="collapse" id="collapseBtn" aria-label="Recolher menu" title="Recolher menu">${icone('voltar')}</button>
   </div>
 
+  ${MENU_SECOES.map(sec => `
   <div>
-    <div class="sec-t"><span class="lbl">Menu: ${MENU.length}</span></div>
-    <nav class="nav">
-      ${MENU.map(m => `<a href="${urlPagina(m.nome)}" data-page="${m.nome}" title="${m.rotulo}">${icone(m.icone)}<span class="lbl">${m.rotulo}</span>${m.aviso ? `<span class="tag">${m.aviso}</span>` : ''}</a>`).join('')}
-    </nav>
-  </div>
-
-  <div>
-    <div class="sec-t"><span class="lbl">Minhas comunidades: ${MINHAS_COMUNIDADES.length}</span></div>
-    <div class="box">
-      ${MINHAS_COMUNIDADES.map(c => `<a href="${V1_ROOT}comunidades/inicio.html?org=${c.org}" title="${c.nome}"><span class="dot" style="background:${c.fundo};color:${c.cor}">${c.sigla}</span><span class="lbl">${c.nome}</span></a>`).join('')}
-      <a href="#" class="add"><span class="dot">+</span><span class="lbl">Entrar com um código</span></a>
-    </div>
-  </div>
-
-  <div>
-    <div class="sec-t"><span class="lbl">Atalhos</span></div>
-    <div class="icons">
-      <a href="#" title="Carteira">${icone('carteira')}</a>
-      <a href="#" title="Indicações: +5 créditos por amigo">${icone('presente')}</a>
-      <a href="${V1_ROOT}grupo.html?g=12" title="Desapego">${icone('loja')}</a>
-      <a href="${urlPagina('simples')}" class="modo-simples" title="Modo simples: menos opções e letra maior">${icone('simples')}</a>
-      <a href="#" title="Ajuda">${icone('ajuda')}</a>
-    </div>
-  </div>
+    <div class="sec-t"><span class="lbl">${sec.titulo}</span></div>
+    <nav class="nav">${sec.itens.map(m => m.sub ? itemComSub(m) : itemMenu(m)).join('')}</nav>
+  </div>`).join('')}
 
   <div class="wallet">
     <small>Sua carteira</small>
@@ -229,6 +242,18 @@ const fecharMenu = () => app.classList.remove('open');
 document.getElementById('menuBtn').addEventListener('click', abrirMenu);
 document.getElementById('tabVoce').addEventListener('click', e => { e.preventDefault(); abrirMenu(); });
 document.getElementById('scrim').addEventListener('click', fecharMenu);
+
+// Submenu (Atividades): abre e fecha pelo botão; já vem aberto se a página atual for um dos itens dele.
+// Com o menu recolhido (só ícones), clicar em Atividades abre o menu para mostrar o submenu.
+document.querySelectorAll('.nav-grupo').forEach(grupo => {
+  const botao = grupo.querySelector('.nav-abre');
+  const abrir = aberto => { grupo.classList.toggle('open', aberto); botao.setAttribute('aria-expanded', aberto); };
+  abrir(!!grupo.querySelector('a.on'));
+  botao.addEventListener('click', () => {
+    if(app.classList.contains('mini')){ app.classList.remove('mini'); guardarPreferencia('v2MenuRecolhido', '0'); abrir(true); return; }
+    abrir(!grupo.classList.contains('open'));
+  });
+});
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
 // Modo simples: a escolha fica guardada para o index.html da versão 1

@@ -70,16 +70,15 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .nav a.on{ background:var(--green); color:#fff; box-shadow:0 6px 16px rgba(31,85,25,.22); }
 .nav .tag{ margin-left:auto; background:var(--red); color:#fff; font-size:11px; font-weight:700; border-radius:999px; min-width:20px; height:20px; display:grid; place-items:center; padding:0 6px; }
 .nav a.on .tag{ background:#fff; color:var(--green); }
-.box{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:6px; }
-.box a{ display:flex; align-items:center; gap:11px; padding:9px 10px; border-radius:12px; font-size:14px; font-weight:500; }
-.box a:hover{ background:var(--mint-2); }
-.box .dot{ width:30px; height:30px; border-radius:10px; display:grid; place-items:center; font-size:12px; font-weight:700; flex:none; }
-.box .add{ color:var(--muted); }
-.box .add .dot{ background:#f3f1ed; color:var(--muted); }
-.icons{ display:flex; justify-content:space-between; background:#fff; border:1px solid var(--line); border-radius:16px; padding:6px; }
-.icons a{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; color:#5d6773; }
-.icons a:hover{ background:var(--mint-2); color:var(--green); }
-.icons .ic{ width:19px; height:19px; }
+/* Item com submenu (Atividades): botão com a mesma cara dos links; o submenu abre embaixo, recuado */
+.nav-abre{ width:100%; display:flex; align-items:center; gap:12px; padding:11px 12px; border:none; background:none; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; text-align:left; }
+.nav-abre:hover{ background:var(--mint-2); }
+.nav-abre .chev{ margin-left:auto; width:16px; height:16px; color:#a9b2bb; transition:transform .2s; }
+.nav-grupo.open .nav-abre .chev{ transform:rotate(180deg); }
+.nav-sub{ display:none; padding-left:24px; }
+.nav-grupo.open .nav-sub{ display:block; }
+.nav-sub a{ font-size:14.5px; padding:9px 12px; }
+.nav-sub a .ic{ width:18px; height:18px; }
 .wallet{ margin-top:auto; background:var(--mint); border-radius:20px; padding:18px 16px; text-align:center; }
 .wallet small{ color:var(--green); font-size:12px; font-weight:600; }
 .wallet strong{ display:block; font-family:'Fraunces',serif; font-size:30px; color:var(--green); margin:2px 0 10px; }
@@ -90,14 +89,13 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Menu recolhido: só ícones (só no computador; no celular o menu é uma gaveta) */
 @media (min-width:981px){
   .app.mini .side{ width:84px; padding:22px 12px 16px; }
-  .app.mini .side .lbl, .app.mini .side .tag, .app.mini .me div, .app.mini .wallet p, .app.mini .wallet small, .app.mini .box .add{ display:none; }
+  .app.mini .side .lbl, .app.mini .side .tag, .app.mini .me div, .app.mini .wallet p, .app.mini .wallet small, .app.mini .nav-sub, .app.mini .nav-abre .chev{ display:none; }
   .app.mini .me{ flex-direction:column; }
   .app.mini .collapse{ position:static; transform:rotate(180deg); }
   .app.mini .nav a{ justify-content:center; padding:12px; }
   .app.mini .sec-t{ text-align:center; padding:0 0 8px; }
   .app.mini .sec-t::before{ content:"·"; }
-  .app.mini .box a{ justify-content:center; padding:7px; }
-  .app.mini .icons{ flex-direction:column; align-items:center; gap:2px; }
+  .app.mini .nav-abre{ justify-content:center; padding:12px; }
   .app.mini .wallet{ padding:12px 0; background:none; }
   .app.mini .wallet strong{ display:none; }
   .app.mini .wallet .btn{ width:48px; height:48px; padding:0; border-radius:50%; }
@@ -202,7 +200,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Botão salvar (cartões, matéria em destaque e lista) */
 .fav{ position:absolute; top:12px; right:12px; z-index:2; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.9); border:none; display:grid; place-items:center; color:var(--navy); padding:0; }
 .fav .ic{ width:16px; height:16px; }
-.fav.on{ background:var(--green); color:#fff; }
+.fav.on{ background:#fff; color:var(--text); } /* salvo: bandeirinha preta, preenchida e sempre visível */
 .fav.on .ic{ fill:currentColor; }
 /* Na matéria em destaque e na lista: no canto de cima à direita da caixa branca, só aparece no hover (ou se já foi salvo) */
 .destaque, .item{ position:relative; }
@@ -544,12 +542,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    Para a caixa não desalinhar o conteúdo, eles têm padding com margem negativa do mesmo tamanho. */
 .destaque{ display:block; padding:20px; margin:-20px; border-radius:26px; }
 .destaque:hover, .item:hover{ background:#fff; }
-.btn, .round, .collapse, .icons a, .box a, .vcard, .fav, .destaque, .item, .press{
+.btn, .round, .collapse, .vcard, .fav, .destaque, .item, .press{
   transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .fav:hover, .item:hover, .press:hover,
+.btn:hover, .round:hover, .collapse:hover, .fav:hover, .item:hover, .press:hover,
 .vcard:hover, .destaque:hover{ transform:translateY(-2px); }
-.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .fav:hover, .item:hover, .press:hover,
+.btn:hover, .round:hover, .collapse:hover, .fav:hover, .item:hover, .press:hover,
 .destaque:hover{ box-shadow:var(--sombra-hover); }
 .vcard:hover{ box-shadow:0 16px 36px rgba(1,53,101,.16); }
 /* No celular os cartões de assunto rolam para o lado: sem margem negativa, para não encostarem uns nos outros */
@@ -578,7 +576,7 @@ body{ background:
 /* Botões claros e caixas brancas: vidro claro */
 :root .btn.ghost, :root .btn.white, :root .round, :root .collapse,
 :root .caixa-branca, :root .plan:not(.featured):not(.vip), :root .step, :root .panel.off, :root .quote,
-:root .band.white, :root .press, :root .box, :root .icons, :root .rodape, :root .icon-cards .feat,
+:root .band.white, :root .press, :root .rodape, :root .icon-cards .feat,
 :root .feats.em-cartoes .feat, :root .side{
   background:var(--vidro-claro); border:1px solid var(--vidro-borda);
   -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
@@ -623,6 +621,11 @@ body{ background:
 /* Botão branco sobre o cartão verde: mais opaco para o texto verde continuar legível */
 :root .plan.featured .btn.white{ background:rgba(255,255,255,.88); }
 
+/* Salvo: fundo branco firme e bandeirinha preta (o vidro deixaria o ícone sumir) */
+:root .fav.on{ background:rgba(255,255,255,.95); color:var(--text); border-color:var(--line); }
+/* Na lista e no destaque (sobre a caixa branca): salvo = só a bandeirinha preta, sem círculo */
+:root .item .fav.on, :root .destaque .fav.on{ background:none; border-color:transparent; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
+:root .item .fav.on .ic, :root .destaque .fav.on .ic{ width:20px; height:20px; }
 /* Botão salvar sobre a caixa branca da lista: verde claro, para aparecer sobre o branco */
 :root .item .fav:not(.on){ background:var(--mint); border-color:#d3e8da; color:var(--green); }
 
