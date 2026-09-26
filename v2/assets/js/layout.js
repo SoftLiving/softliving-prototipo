@@ -234,16 +234,6 @@ const LAYOUT_BARRA = `
   document.querySelectorAll('.site-nav a[data-site]').forEach(a => a.classList.toggle('on', a.dataset.site === LAYOUT_SITE));
 })();
 
-// Barra lateral fixa na tela (computador): começa logo abaixo da barra de cima e, ao rolar, sobe até 46px do topo
-// (abaixo da faixa de protótipo). Fica sempre com a mesma altura e passa por cima do rodapé.
-const sideWrap = document.querySelector('.side-wrap');
-function posicionarMenu(){
-  document.documentElement.style.setProperty('--side-top', Math.max(46, Math.round(sideWrap.getBoundingClientRect().top)) + 'px');
-}
-posicionarMenu();
-addEventListener('scroll', posicionarMenu, { passive:true });
-addEventListener('resize', posicionarMenu);
-
 // Menu lateral: recolher (só ícones) no computador, gaveta no celular. A escolha de recolher fica guardada.
 const app = document.getElementById('app');
 function lerPreferencia(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
