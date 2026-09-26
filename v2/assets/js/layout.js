@@ -212,7 +212,9 @@ const LAYOUT_BARRA = `
   const app = document.createElement('div');
   app.className = 'app';
   app.id = 'app';
-  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="wrap"><main></main></div>${LAYOUT_RODAPE}</div>`;
+  // Painel lateral direito: mesmo formato e vidro do menu da esquerda, ainda vazio, com botão de recolher
+  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="wrap"><main></main></div>${LAYOUT_RODAPE}</div>
+    <aside class="side-dir" id="sideDir" aria-label="Painel lateral"><button class="collapse" id="collapseDir" aria-label="Recolher painel">${icone('voltar')}</button></aside>`;
   app.querySelector('main').append(...conteudo);
 
   // O topo ocupa a largura toda da janela (acima do menu lateral e do conteúdo)
@@ -246,6 +248,21 @@ collapseBtn.addEventListener('click', () => {
   esconderDica();
 });
 
+// Painel direito: recolher e abrir, com a escolha guardada
+const collapseDir = document.getElementById('collapseDir');
+function marcarDirRecolhido(mini){
+  app.classList.toggle('dir-mini', mini);
+  const rotulo = mini ? 'Abrir painel' : 'Recolher painel';
+  collapseDir.setAttribute('aria-label', rotulo);
+  collapseDir.dataset.dica = rotulo;
+}
+marcarDirRecolhido(lerPreferencia('v2PainelRecolhido') === '1');
+collapseDir.addEventListener('click', () => {
+  marcarDirRecolhido(!app.classList.contains('dir-mini'));
+  guardarPreferencia('v2PainelRecolhido', app.classList.contains('dir-mini') ? '1' : '0');
+  esconderDica();
+});
+
 // Dica do menu recolhido: ao passar o mouse num ícone, o nome do item aparece ao lado, numa caixa de vidro.
 // Usa o title de cada item (guardado em data-dica, para o navegador não mostrar a dica preta dele por cima).
 const dica = document.createElement('div');
@@ -257,13 +274,23 @@ function esconderDica(){ dica.classList.remove('show'); }
 document.querySelector('.side').addEventListener('mouseover', e => {
   const alvo = e.target.closest('[data-dica]');
   if(!alvo || !app.classList.contains('mini') || innerWidth <= 980) return esconderDica();
+  mostrarDica(alvo, 'direita');
+});
+// No painel direito, a dica do botão aparece à esquerda dele
+document.getElementById('sideDir').addEventListener('mouseover', e => {
+  const alvo = e.target.closest('[data-dica]');
+  if(!alvo) return esconderDica();
+  mostrarDica(alvo, 'esquerda');
+});
+function mostrarDica(alvo, lado){
   const r = alvo.getBoundingClientRect();
   dica.textContent = alvo.dataset.dica;
-  dica.style.left = (r.right + 12) + 'px';
+  dica.classList.toggle('a-esquerda', lado === 'esquerda');
+  dica.style.left = (lado === 'esquerda' ? r.left - 12 : r.right + 12) + 'px';
   dica.style.top = (r.top + r.height / 2) + 'px';
   dica.classList.add('show');
-});
-document.querySelector('.side').addEventListener('mouseleave', esconderDica);
+}
+['.side', '#sideDir'].forEach(sel => document.querySelector(sel).addEventListener('mouseleave', esconderDica));
 document.querySelector('.side').addEventListener('scroll', esconderDica);
 const abrirMenu = () => app.classList.add('open');
 const fecharMenu = () => app.classList.remove('open');
