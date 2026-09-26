@@ -62,13 +62,15 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Menu lateral */
 .side-wrap{ position:relative; margin:8px 0 8px 16px; width:264px; flex:none; } /* reserva o espaço da barra; a barra fica fixa na tela */
 .side{
-  height:100%; width:100%;
   background:rgba(255,255,255,.78); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border:1px solid var(--line); border-radius:26px; padding:22px 16px 16px;
-  display:flex; flex-direction:column; gap:18px; overflow-y:auto; scrollbar-width:none; transition:width .25s, padding .25s;
+  display:flex; flex-direction:column; gap:12px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:rgba(1,53,101,.22) transparent; transition:width .25s, padding .25s;
 }
-.side::-webkit-scrollbar{ display:none; }
-.me{ display:flex; align-items:center; gap:12px; position:relative; padding:0 4px 18px; border-bottom:1px solid var(--line); }
+/* Barra de rolagem fina e visível: o menu é mais alto que a tela e rola por dentro */
+.side::-webkit-scrollbar{ width:6px; }
+.side::-webkit-scrollbar-thumb{ background:rgba(1,53,101,.22); border-radius:999px; }
+.side::-webkit-scrollbar-track{ background:transparent; margin:18px 0; }
+.me{ display:flex; align-items:center; gap:12px; position:relative; padding:0 4px 14px; border-bottom:1px solid var(--line); }
 .avatar{ width:48px; height:48px; border-radius:50%; background:var(--mint); color:var(--green); display:grid; place-items:center; font-weight:700; flex:none; border:3px solid #fff; box-shadow:0 0 0 1px var(--line); }
 .me small{ display:block; color:var(--muted); font-size:12.5px; }
 .me strong{ font-family:'Fraunces',serif; font-size:21px; color:var(--navy); font-weight:600; }
@@ -76,14 +78,14 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Botão do menu esquerdo: fica na moldura (fora da área que rola), no alto à direita, ao lado do nome */
 .side-wrap > .collapse{ top:32px; right:12px; z-index:3; transition:left .25s, right .25s, width .25s, height .25s, border-radius .25s, transform .15s ease, box-shadow .15s ease; }
 .collapse .ic{ width:16px; height:16px; }
-.sec-t{ font-size:12px; color:var(--muted); padding:0 8px 8px; }
-.nav a{ display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; }
+.sec-t{ font-size:12px; color:var(--muted); padding:0 8px 4px; }
+.nav a{ display:flex; align-items:center; gap:12px; padding:8px 12px; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; }
 .nav a:hover{ background:var(--mint-2); }
 .nav a.on{ background:var(--green); color:#fff; box-shadow:0 6px 16px rgba(31,85,25,.22); }
 .nav .tag{ margin-left:auto; background:var(--red); color:#fff; font-size:11px; font-weight:700; border-radius:999px; min-width:20px; height:20px; display:grid; place-items:center; padding:0 6px; }
 .nav a.on .tag{ background:#fff; color:var(--green); }
 /* Item com submenu (Atividades): botão com a mesma cara dos links; o submenu abre embaixo, recuado */
-.nav-abre{ width:100%; display:flex; align-items:center; gap:12px; padding:11px 12px; border:none; background:none; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; text-align:left; }
+.nav-abre{ width:100%; display:flex; align-items:center; gap:12px; padding:8px 12px; border:none; background:none; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; text-align:left; }
 .nav-abre:hover{ background:var(--mint-2); }
 .nav-abre .chev{ margin-left:auto; width:16px; height:16px; color:#a9b2bb; transition:transform .2s; }
 .nav-grupo.open .nav-abre .chev{ transform:rotate(180deg); }
@@ -91,19 +93,21 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .nav-grupo.open .nav-sub{ display:block; }
 .nav-sub a{ font-size:14.5px; padding:9px 12px; }
 .nav-sub a .ic{ width:18px; height:18px; }
-.wallet{ margin-top:auto; background:var(--mint); border-radius:20px; padding:18px 16px; text-align:center; }
+.wallet{ margin-top:auto; background:var(--mint); border-radius:20px; padding:14px 14px; text-align:center; flex:none; }
 .wallet small{ color:var(--green); font-size:12px; font-weight:600; }
-.wallet strong{ display:block; font-family:'Fraunces',serif; font-size:30px; color:var(--green); margin:2px 0 10px; }
+.wallet strong{ display:block; font-family:'Fraunces',serif; font-size:26px; color:var(--green); margin:2px 0 8px; }
 .wallet .btn{ width:100%; justify-content:center; }
 .wallet p{ margin:8px 0 0; font-size:11.5px; color:#51705a; line-height:1.4; }
 .side .lbl{ white-space:nowrap; }
 
 
-/* Computador: a barra fica parada na tela, sempre com a mesma altura, e passa por cima do fundo do rodapé.
-   --side-top (layout.js): logo abaixo da barra de cima no topo da página; 46px depois de rolar. */
+/* Computador: a barra fica parada na tela e passa por cima do fundo do rodapé.
+   --side-top (layout.js): logo abaixo da barra de cima no topo da página; 46px depois de rolar.
+   A altura vai até 8px antes do fim da tela, então os últimos botões ficam sempre visíveis (e a barra rola por dentro se precisar).
+   Seletores com .app para não dependerem da ordem no arquivo. */
 @media (min-width:981px){
-  .side{ position:fixed; left:16px; top:var(--side-top, 113px); width:264px; height:calc(100vh - 54px); z-index:40; }
-  .side-wrap > .collapse{ position:fixed; top:calc(var(--side-top, 113px) + 32px); left:240px; right:auto; z-index:41; }
+  .app .side{ position:fixed; left:16px; top:var(--side-top, 113px); width:264px; height:calc(100vh - var(--side-top, 113px) - 8px); z-index:40; }
+  .app .side-wrap > .collapse{ position:fixed; top:calc(var(--side-top, 113px) + 32px); left:240px; right:auto; z-index:41; }
 }
 /* Menu recolhido: só ícones (só no computador; no celular o menu é uma gaveta) */
 @media (min-width:981px){
