@@ -83,10 +83,10 @@ menos de 1000px (container query).
   (Rede D'Or, Claro, Bradesco Saúde), com logo em tom sobre tom. Lista em `PATROCINADORES` no layout.js; os logos ficam em
   `assets/img/logo-*.png` com fundo transparente. `?apoio=1|2|3` no endereço mostra uma marca específica.
 
-- **Carrosséis:** blocos de conteúdos menores relacionados rolam dentro da própria área, com setas de voltar e avançar
-  (`ativarCarrossel(elemento, 'h' | 'v')` no layout.js). Horizontais: cartões de assunto, grupos da Início e sugestões da
-  Coluna do dia (quantos por vez: `--vis` no CSS). Verticais: listas de Últimas matérias e de Colunas (4 por vez).
-  No celular os horizontais rolam com o dedo, sem setas.
+- **Carrosséis:** blocos de conteúdos menores relacionados só se movem pelas setas: cada clique desliza um item, suave,
+  em loop (`ativarCarrossel(elemento, 'h' | 'v')` no layout.js). Sem rolagem automática, sem efeito ao passar o mouse e sem
+  rolagem pela roda do mouse. Horizontais: cartões de assunto, grupos da Início e sugestões da Coluna do dia (quantos por
+  vez: `--vis` no CSS). Verticais: listas de Últimas matérias e de Colunas (4 por vez).
 
 ## Observações
 

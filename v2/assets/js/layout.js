@@ -348,15 +348,13 @@ const PATROCINADORES = [
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
-// Carrossel: um bloco de conteúdos menores (trilho) rola sozinho, de forma contínua e suave, em loop (os itens são
-// repetidos no fim para a volta não ter salto). Pausa com o mouse em cima, com o foco do teclado ou com o toque; as
-// setas deslizam um item para cada lado. (A rolagem contínua vale mesmo com "reduzir animações" ligado no sistema:
-// foi um pedido explícito; ela é lenta e pausa com o mouse em cima.)
+// Carrossel: um bloco de conteúdos menores (trilho) só se move pelas setas: cada clique desliza um item, suave, e
+// cliques seguidos se somam. Em loop (os itens são repetidos no fim para a volta não ter salto). Sem rolagem automática,
+// sem efeito ao passar o mouse e sem rolagem pela roda do mouse (o CSS esconde a rolagem do trilho).
 // dir 'h': horizontal (setas nas laterais); dir 'v': vertical (setas em cima e embaixo), com altura de "visiveis" itens.
 // A página chama ativarCarrossel(elemento, dir) depois de preencher o elemento (e de novo sempre que trocar o conteúdo).
 // Quantos itens aparecem por vez na horizontal fica no CSS (--vis).
 const CARROSSEIS = [];
-const VELOCIDADE_CARROSSEL = { h:26, v:16 };            // pixels por segundo
 
 function ativarCarrossel(trilho, dir, visiveis = 4){
   let car = trilho.closest('.carrossel');
@@ -377,23 +375,14 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     car.ant = seta('ant', dir === 'h' ? 'Voltar' : 'Subir');
     car.prox = seta('prox', dir === 'h' ? 'Avançar' : 'Descer');
     car.append(car.ant, car.prox);
-    Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, pausado:false, deslize:null, ciclo:0, ultimaPosicao:0 });
-    // Pausa: mouse em cima, foco do teclado ou toque (volta 3 segundos depois de soltar)
-    car.addEventListener('mouseenter', () => car.pausado = true);
-    car.addEventListener('mouseleave', () => car.pausado = false);
-    car.addEventListener('focusin', () => car.pausado = true);
-    car.addEventListener('focusout', () => car.pausado = false);
-    trilho.addEventListener('touchstart', () => { car.pausado = true; clearTimeout(car.retomar); }, { passive:true });
-    trilho.addEventListener('touchend', () => { car.retomar = setTimeout(() => car.pausado = false, 3000); }, { passive:true });
-    // Rolagem feita pela pessoa (dedo, roda do mouse): o carrossel continua dali
-    // (ignora a rolagem feita pelo próprio carrossel: a posição da tela é arredondada para pixels inteiros)
-    trilho.addEventListener('scroll', () => {
-      const atual = dir === 'h' ? trilho.scrollLeft : trilho.scrollTop;
-      if(Math.abs(atual - car.ultimaPosicao) > 2) car.pos = atual;
-    }, { passive:true });
-    // Setas: deslizam um item (com a animação suave)
+    Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, deslize:null, ciclo:0 });
+    // Setas: deslizam um item (animação suave); clicar de novo durante o deslize soma mais um item
     const passoItem = () => { const a = trilho.children[0], b = trilho.children[1]; if(!a || !b) return 0; return dir === 'h' ? b.offsetLeft - a.offsetLeft : b.offsetTop - a.offsetTop; };
-    const deslizar = s => { car.deslize = { de:car.pos, para:car.pos + s * passoItem(), inicio:performance.now() }; };
+    const deslizar = s => {
+      const destino = (car.deslize ? car.deslize.para : car.pos) + s * passoItem();
+      car.deslize = { de:car.pos, para:destino, inicio:performance.now() };
+      if(!car.animando){ car.animando = true; requestAnimationFrame(t => animarCarrossel(car, t)); }
+    };
     car.ant.addEventListener('click', () => deslizar(-1));
     car.prox.addEventListener('click', () => deslizar(1));
     car.ajustarAltura = () => {
@@ -406,7 +395,6 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     addEventListener('resize', () => car.preparar());
     addEventListener('load', () => car.preparar());
     CARROSSEIS.push(car);
-    if(CARROSSEIS.length === 1) requestAnimationFrame(animarCarrosseis);
   }
   // Loop sem salto: repete os itens originais no fim (as cópias ficam escondidas para leitores de tela)
   car.preparar = () => {
@@ -428,31 +416,22 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     car.ciclo = dir === 'h' ? copia.offsetLeft - originais[0].offsetLeft : copia.offsetTop - originais[0].offsetTop;
   };
   car.pos = 0;
-  car.ultimaPosicao = 0;
   car.deslize = null;
   if(dir === 'h') trilho.scrollLeft = 0; else trilho.scrollTop = 0;
   car.preparar();
 }
 
-// Um só laço de animação para todos os carrosséis
-let ultimoQuadro = performance.now();
-function animarCarrosseis(agora){
-  const dt = Math.min(0.05, (agora - ultimoQuadro) / 1000);
-  ultimoQuadro = agora;
-  CARROSSEIS.forEach(car => {
-    if(!car.ciclo) return;
-    if(car.deslize){                                        // deslize das setas: 450ms, desacelerando no fim
-      const t = Math.min(1, (agora - car.deslize.inicio) / 450);
-      car.pos = car.deslize.de + (car.deslize.para - car.deslize.de) * (1 - Math.pow(1 - t, 3));
-      if(t === 1) car.deslize = null;
-    } else if(!car.pausado && !document.hidden){
-      car.pos += VELOCIDADE_CARROSSEL[car.sentido] * dt;
-    } else return;
-    car.pos = ((car.pos % car.ciclo) + car.ciclo) % car.ciclo;  // volta ao começo sem salto (as cópias estão lá)
-    if(car.sentido === 'h') car.trilho.scrollLeft = car.pos; else car.trilho.scrollTop = car.pos;
-    car.ultimaPosicao = car.sentido === 'h' ? car.trilho.scrollLeft : car.trilho.scrollTop;
-  });
-  requestAnimationFrame(animarCarrosseis);
+// Animação do deslize de um carrossel (450ms, desacelerando no fim); só roda enquanto há deslize
+function animarCarrossel(car, agora){
+  const d = car.deslize;
+  if(!d || !car.ciclo){ car.animando = false; return; }
+  const t = Math.min(1, (agora - d.inicio) / 450);
+  car.pos = d.de + (d.para - d.de) * (1 - Math.pow(1 - t, 3));
+  const volta = ((car.pos % car.ciclo) + car.ciclo) % car.ciclo;   // volta ao começo sem salto (as cópias estão lá)
+  if(volta !== car.pos){ d.de += volta - car.pos; d.para += volta - car.pos; car.pos = volta; }
+  if(car.sentido === 'h') car.trilho.scrollLeft = car.pos; else car.trilho.scrollTop = car.pos;
+  if(t < 1) requestAnimationFrame(tt => animarCarrossel(car, tt));
+  else { car.deslize = null; car.animando = false; }
 }
 
 // Aviso rápido no canto da tela

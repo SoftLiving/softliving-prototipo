@@ -871,16 +871,16 @@ body{ background:
 :root .tabbar{ background:rgba(255,255,255,.5); border-color:var(--vidro-borda); box-shadow:var(--vidro-brilho), var(--shadow); }
 
 /* ===== CARROSSEL (ativarCarrossel no layout.js) =====
-   Blocos de conteúdos menores rolam sozinhos, contínuos e suaves, em loop (pausam com o mouse em cima); setas deslizam um item.
+   Blocos de conteúdos menores só se movem pelas setas (cada clique desliza um item, suave, em loop); sem rolagem pela roda do mouse.
    Horizontal: --vis itens por vez, setas nas laterais. Vertical: altura de 4 itens, setas em cima e embaixo.
    O padding com margem negativa deixa espaço para a sombra e a subida dos cartões no hover. */
 .carrossel{ position:relative; }
 .trilho-h{ display:grid !important; grid-template-columns:none !important; grid-auto-flow:column; --gap:22px; gap:var(--gap) !important;
   grid-auto-columns:calc((100% - (var(--vis, 4) - 1) * var(--gap)) / var(--vis, 4));
-  overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none;
+  overflow:hidden;
   padding:14px !important; margin:-14px !important; }
 .trilho-h > *{ min-width:0; }
-.trilho-v{ position:relative; overflow-y:auto; overscroll-behavior-y:contain; scrollbar-width:none;
+.trilho-v{ position:relative; overflow:hidden;
   padding:8px 16px; margin:-8px -16px; }
 .trilho-v > *{ flex:none; }
 .trilho-h::-webkit-scrollbar, .trilho-v::-webkit-scrollbar{ display:none; }
@@ -907,10 +907,11 @@ body{ background:
 
 /* Coluna do conteúdo estreita: menos itens por vez */
 @container (max-width:1000px){ .cards.trilho-h{ --vis:2; } .cd-sug-lista.trilho-h{ --vis:3; } }
-/* Celular: os carrosséis horizontais rolam com o dedo (sem setas) e mostram um pedaço do próximo item */
+/* Celular: mostram um pedaço do próximo item; as setas continuam (única forma de mover) */
 @media (max-width:640px){
   .cards.trilho-h{ --vis:1.25; --gap:14px; }
   .groups.trilho-h{ --vis:1.4; }
   .cd-sug-lista.trilho-h{ --vis:1.7; }
-  .carrossel-h .car-btn{ display:none; }
+  .carrossel-h .car-ant{ left:-6px; }
+  .carrossel-h .car-prox{ right:-6px; }
 }
