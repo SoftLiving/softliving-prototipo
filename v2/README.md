@@ -51,6 +51,10 @@ assets/img/                 Logos da FSB e da RB2
   acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.
   Conteúdos com foto (cartões, matéria em destaque, itens de lista) ganham também uma caixa branca em volta no hover.
 
+- **Patrocinadores entre os conteúdos:** um `<div class="apoio"></div>` entre as seções recebe uma marca sorteada a cada
+  visita (sem repetir na página), com logo em tom sobre tom. Lista em `PATROCINADORES` no layout.js; para usar o logo de
+  verdade, acrescentar `logo:'assets/img/<arquivo>'` à marca.
+
 ## Observações
 
 - Fotos de exemplo do Unsplash, carregadas pela internet (sem internet aparece um fundo verde claro no lugar).

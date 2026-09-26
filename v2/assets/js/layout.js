@@ -243,6 +243,30 @@ document.querySelectorAll('main [data-site-link]').forEach(a => a.href = urlSite
 document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend',
   '<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 30 2, 80 2, 118 8" fill="none" stroke="#9fd0b0" stroke-width="5" stroke-linecap="round"/></svg>'));
 
+// Patrocinadores apoiadores: cada <div class="apoio"> entre os conteúdos recebe uma marca sorteada a cada visita,
+// sem repetir na mesma página. O logo aparece em tom sobre tom (discreto, na cor do fundo).
+// Para usar o logo de verdade, acrescente logo:'assets/img/<arquivo>' (o CSS deixa a imagem em tom sobre tom).
+// Enquanto não há arquivos, o logo é desenhado em texto com o estilo de cada marca (fonte, peso, espaçamento).
+const PATROCINADORES = [
+  { nome:"Rede D'Or", estilo:"font-family:Inter,sans-serif; font-weight:800; letter-spacing:-.03em;", texto:'Rede D’Or', sub:'São Luiz' },
+  { nome:'Aurora Casa', estilo:"font-family:'Fraunces',serif; font-weight:500; font-style:italic;", texto:'Aurora <b>Casa</b>' },
+  { nome:'Vela Turismo', estilo:"font-family:Inter,sans-serif; font-weight:300; letter-spacing:.32em; text-transform:uppercase; font-size:21px;", texto:'Vela Turismo' },
+  { nome:'Bússola Investimentos', estilo:"font-family:Georgia,serif; font-weight:700; letter-spacing:.02em;", texto:'Bússola', sub:'Investimentos' },
+  { nome:'Editora Ipê', estilo:"font-family:'Fraunces',serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase;", texto:'Editora Ipê' },
+];
+(function montarApoios(){
+  const vagas = document.querySelectorAll('main .apoio');
+  if(!vagas.length) return;
+  const sorteio = PATROCINADORES.map(p => [Math.random(), p]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  vagas.forEach((vaga, i) => {
+    const p = sorteio[i % sorteio.length];
+    const marca = p.logo
+      ? `<img src="${LAYOUT_ROOT}${p.logo}" alt="${p.nome}">`
+      : `<span class="marca" style="${p.estilo}" aria-label="${p.nome}"><span>${p.texto}</span>${p.sub ? `<small>${p.sub}</small>` : ''}</span>`;
+    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span>${marca}`;
+  });
+})();
+
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
