@@ -41,7 +41,10 @@ document.getElementById('colConta').textContent = `${COLUNISTAS.length} colunist
 function renderColunas(){
   // Navegue por autor
   document.getElementById('colAutores').innerHTML = COLUNISTAS.map((col, i) => `
-    <button type="button" class="autor ${colEstado.autor === i ? 'on' : ''}" data-autor="${i}" aria-pressed="${colEstado.autor === i}" title="${col.nome}">${avatarDe(col)}<span>${col.curto}</span></button>`).join('');
+    <button type="button" class="autor ${colEstado.autor === i ? 'on' : ''}" data-autor="${i}" aria-pressed="${colEstado.autor === i}">
+      ${avatarDe(col)}
+      <span class="autor-txt"><b>${col.nome}</b><span class="autor-nicho">${col.aba === 'SoftLiving' ? LOGO : col.aba}</span><small>${col.publicadas} ${col.publicadas === 1 ? 'coluna' : 'colunas'}</small></span>
+    </button>`).join('');
 
   // Todos os colunistas, com filtro por categoria
   // Abas com o nome curto da categoria (col.aba); o filtro usa a categoria completa
