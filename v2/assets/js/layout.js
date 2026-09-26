@@ -16,6 +16,7 @@ const PAGINAS = {
   grupos:       { url:'grupos.html' },
   colunas:      { url:'colunas.html' },
   busca:        { url:'busca.html' },
+  notificacoes: { url:'notificacoes.html' },
   comunidades:  { url:'comunidades/inicio.html', v1:true },
   conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },
@@ -167,7 +168,7 @@ const LAYOUT_CABECALHO = `
     <a href="${urlPagina('busca')}" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
     <a href="#" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
-    <a href="#" class="round" aria-label="Notificações">${icone('sino')}<i></i></a>
+    <a href="${urlPagina('notificacoes')}" class="round" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
     <a href="https://softliving.com.br/entrar" class="btn">Entrar</a>
   </div>
 </div>`;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notificações · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="notificacoes" data-root="">
+
+<!-- Tela Notificações: avisos de grupos, colunas, conteúdos, créditos e da SoftLiving. Sem datas (regra da v2):
+     separa só em "Não lidas" e "Anteriores". O que foi lido fica guardado no navegador (notificacoes.js). -->
+<div class="page-head">
+  <h1><span class="hl">Notificações</span></h1>
+  <p>O que aconteceu nos seus grupos, nas colunas que você acompanha e na sua carteira.</p>
+</div>
+
+<div class="nt-barra" data-lateral-topo>
+  <div class="seg" id="ntTipos" role="tablist"></div>
+  <button type="button" class="btn ghost" id="ntLerTodas">Marcar todas como lidas</button>
+</div>
+<div id="ntLista"></div>
+
+<section class="nt-pref caixa-branca" aria-labelledby="ntPrefTitulo">
+  <h2 id="ntPrefTitulo">Preferências de notificação</h2>
+  <p>Escolha o que quer receber. Dá para mudar quando quiser.</p>
+  <div id="ntPrefs"></div>
+</section>
+
+<div class="apoio"></div>
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/notificacoes.js"></script>
+</body>
+</html>
