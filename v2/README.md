@@ -21,6 +21,7 @@ assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · 
 assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver versão 1"), aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
 conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
+busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
                             navegue por autor, colunistas por categoria e colunas em destaque
 grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
@@ -28,6 +29,7 @@ assets/js/lateral.js        Coluna lateral da direita, comum à Início, Conteú
 assets/js/escuta.js         Pesquisa de escuta (cópia da v1), entra no topo da coluna lateral
 assets/js/conteudos.js      Tela Conteúdos
 assets/js/grupos.js         Tela Grupos
+assets/js/busca.js          Tela Busca (sem diferenciar acentos; termos destacados; buscas recentes na sessão)
 assets/js/colunas.js        Tela Colunas
 assets/js/colunas-dados.js  Colunistas (nomes das colunas, categorias e biografias do site); colunas de conteudos-dados.js + extras
 assets/js/inicio.js         Tela Início
@@ -49,6 +51,7 @@ assets/img/                 Logos da FSB e da RB2
 | Início | pronta para revisão |
 | Conteúdos (`conteudos.html`) | pronta para revisão |
 | Colunas (`colunas.html`) | pronta para revisão (a versão 1 não tinha esta página) |
+| Busca (`busca.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Leitura do artigo | a fazer |
 | Grupos (`grupos.html`) | pronta para revisão |
 | Página interna de grupo (inclui Desapego) | a fazer (abre a v1) |

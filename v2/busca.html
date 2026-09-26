@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busca · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="busca" data-root="">
+
+<!-- Tela Busca: busca em conteúdos e colunas, colunistas e grupos, com os resultados aparecendo enquanto se digita.
+     Endereço: busca.html?q=<termo>. Sem termo, mostra buscas populares, assuntos e as últimas buscas da sessão. -->
+<div class="page-head">
+  <h1><span class="hl">Busca</span></h1>
+  <p>Encontre conteúdos, colunas, colunistas e grupos do portal.</p>
+</div>
+
+<form class="busca busca-grande" id="bsForm" role="search" data-lateral-topo>
+  <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  <input type="search" id="bsCampo" placeholder="O que você procura? Ex.: longevidade, vinho, inteligência artificial" aria-label="Buscar no portal" autocomplete="off">
+  <button type="button" class="bs-limpar" id="bsLimpar" aria-label="Limpar a busca" hidden>✕</button>
+</form>
+
+<!-- Sem termo: sugestões -->
+<section id="bsSugestoes">
+  <div class="bs-bloco" id="bsRecentesBloco" hidden>
+    <div class="bs-bloco-topo"><h2>Buscas recentes</h2><button type="button" class="bs-link" id="bsApagar">Apagar</button></div>
+    <div class="bs-chips" id="bsRecentes"></div>
+  </div>
+  <div class="bs-bloco">
+    <h2>Buscas populares</h2>
+    <div class="bs-chips" id="bsPopulares"></div>
+  </div>
+  <div class="bs-bloco">
+    <h2>Navegue por assunto</h2>
+    <div class="bs-assuntos" id="bsAssuntos"></div>
+  </div>
+</section>
+
+<!-- Com termo: resultados em abas -->
+<section id="bsResultados" hidden>
+  <p class="bs-resumo" id="bsResumo" aria-live="polite"></p>
+  <div class="seg" id="bsTipos" role="tablist"></div>
+  <div id="bsLista"></div>
+</section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/busca.js"></script>
+</body>
+</html>
