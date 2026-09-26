@@ -54,6 +54,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .main{ overflow-x:clip; }
 .main > .wrap::after{ content:""; /* só a coluna principal; o rodapé fica sem a barra */ position:absolute; top:8px; bottom:0; left:100%; width:100vw; pointer-events:none;
   background:rgba(255,255,255,.55); border-radius:26px 0 0 26px; box-shadow:inset 1px 1px 0 rgba(255,255,255,.9), -8px 0 24px rgba(1,53,101,.04); }
+body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do topo (institucionais): sem o fundo claro à direita */
 
 /* Menu lateral */
 .side-wrap{ position:sticky; top:38px; height:calc(100vh - 54px); margin:8px 0 8px 16px; width:264px; flex:none; transition:width .25s; }
