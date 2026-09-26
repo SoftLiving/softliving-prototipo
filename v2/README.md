@@ -21,14 +21,15 @@ assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · 
 assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver versão 1"), aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
 conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
-colunas.html                Tela Colunas: coluna do dia, 8 colunistas (filtram a grade) e todas as colunas
+colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
+                            navegue por autor, colunistas por categoria e colunas em destaque
 grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
 assets/js/lateral.js        Coluna lateral da direita, comum à Início, Conteúdos e Grupos
 assets/js/escuta.js         Pesquisa de escuta (cópia da v1), entra no topo da coluna lateral
 assets/js/conteudos.js      Tela Conteúdos
 assets/js/grupos.js         Tela Grupos
 assets/js/colunas.js        Tela Colunas
-assets/js/colunas-dados.js  Colunistas (as colunas de cada um vêm de conteudos-dados.js, pelo nome do autor)
+assets/js/colunas-dados.js  Colunistas (nomes das colunas, categorias e biografias do site); colunas de conteudos-dados.js + extras
 assets/js/inicio.js         Tela Início
 assets/js/*-dados.js        Cópia dos dados da versão 1. conteudos-dados.js e grupos-dados.js ganharam o campo foto
 assets/img/                 Logos da FSB e da RB2

@@ -10,21 +10,30 @@
 </head>
 <body data-page="colunas" data-root="">
 
-<!-- Tela Colunas (referência: blocos "Coluna do dia" e "Colunas" da Início da versão 1): coluna do dia, colunistas e colunas -->
+<!-- Tela Colunas (referência: página de colunistas do site, softliving.com.br/app/colunistas):
+     coluna do dia com 4 sugestões, navegue por autor, colunistas por categoria e colunas em destaque -->
 <div class="page-head">
   <h1><span class="hl">Colunas</span></h1>
-  <p>Opinião, experiência e boas histórias de quem escreve para a <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>.</p>
+  <p>Perspectivas de quem sabe: cultura, saúde, longevidade e vida ativa. Leia a última coluna de cada autor gratuitamente; o arquivo está disponível com saldo na carteira.</p>
+  <button type="button" class="btn ghost" id="colArquivo"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4"/></svg>Ver arquivo completo de colunas</button>
 </div>
 
-<a href="#" class="destaque-largo" id="colDia" data-lateral-topo></a>
+<!-- Coluna do dia + 4 sugestões no mesmo box -->
+<section class="coluna-dia" id="colDia" data-lateral-topo></section>
 
 <section class="secao">
-  <div class="head"><div><h2>Colunistas</h2><p>Escolha um colunista para ver as colunas dele.</p></div></div>
+  <div class="head"><div><h2>Navegue por autor</h2><p id="colConta"></p></div></div>
+  <div class="autores" id="colAutores"></div>
+</section>
+
+<section class="secao">
+  <div class="head"><div><h2>Todos os colunistas</h2></div></div>
+  <div class="seg" id="colCategorias" role="tablist"></div>
   <div class="colunistas" id="colunistas"></div>
 </section>
 
 <section class="secao" id="colLista">
-  <div class="head"><div><h2 id="colTitulo">Todas as colunas</h2><p id="colSub"></p></div><button type="button" class="btn ghost" id="colTodas" hidden>Ver todas as colunas</button></div>
+  <div class="head"><div><h2 id="colTitulo">Colunas em destaque</h2><p id="colSub"></p></div><button type="button" class="btn ghost" id="colTodas" hidden>Ver todas as colunas</button></div>
   <div class="grade" id="colGrade"></div>
 </section>
 
