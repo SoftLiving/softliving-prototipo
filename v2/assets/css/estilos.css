@@ -547,7 +547,9 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .autor-col b{ display:block; font-size:14.5px; color:var(--navy); }
 .autor-col small{ font-size:12.5px; color:var(--muted); }
 .autor-col .av-col{ width:44px; height:44px; font-size:14px; }
-#colCategorias{ margin-bottom:18px; }
+/* Fichário com muitas abas: quebram em mais de uma linha (a última linha encosta no painel) */
+.tabs.folder.multi{ flex-wrap:wrap; overflow:visible; row-gap:6px; }
+@media (max-width:640px){ .tabs.folder.multi{ flex-wrap:nowrap; overflow-x:auto; } } /* no celular: uma linha que rola para o lado */
 @media (max-width:980px){ .cd-topo{ grid-template-columns:1fr; } .cd-topo .dl-foto{ min-height:220px; } }
 @media (max-width:640px){ .cd-sugestoes{ padding:18px; } .cd-sug-lista{ grid-template-columns:1fr 1fr; } }
 
