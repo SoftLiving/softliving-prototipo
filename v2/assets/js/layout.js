@@ -12,8 +12,8 @@ const V1_ROOT = LAYOUT_ROOT + '../';
 // Endereço de cada destino. Enquanto a página não existe na v2, aponta para a versão 1 (v1:true).
 const PAGINAS = {
   inicio:       { url:'index.html' },
-  conteudos:    { url:'conteudos.html', v1:true },
-  grupos:       { url:'grupos.html', v1:true },
+  conteudos:    { url:'conteudos.html' },
+  grupos:       { url:'grupos.html' },
   comunidades:  { url:'comunidades/inicio.html', v1:true },
   conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },

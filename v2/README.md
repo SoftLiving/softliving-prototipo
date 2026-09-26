@@ -20,6 +20,12 @@ institucional/              conhecer, como-funciona, beneficios, patrocinadores 
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
 assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver versão 1"), aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
+conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
+grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
+assets/js/lateral.js        Coluna lateral da direita, comum à Início, Conteúdos e Grupos
+assets/js/escuta.js         Pesquisa de escuta (cópia da v1), entra no topo da coluna lateral
+assets/js/conteudos.js      Tela Conteúdos
+assets/js/grupos.js         Tela Grupos
 assets/js/inicio.js         Tela Início
 assets/js/*-dados.js        Cópia dos dados da versão 1. conteudos-dados.js e grupos-dados.js ganharam o campo foto
 assets/img/                 Logos da FSB e da RB2
@@ -37,8 +43,10 @@ assets/img/                 Logos da FSB e da RB2
 | Página | Versão 2 |
 |---|---|
 | Início | pronta para revisão |
-| Conteúdos e leitura do artigo | a fazer (abre a v1) |
-| Grupos e página interna de grupo (inclui Desapego) | a fazer (abre a v1) |
+| Conteúdos (`conteudos.html`) | pronta para revisão |
+| Leitura do artigo | a fazer |
+| Grupos (`grupos.html`) | pronta para revisão |
+| Página interna de grupo (inclui Desapego) | a fazer (abre a v1) |
 | Minhas Comunidades (8 abas) | a fazer (abre a v1) |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
 | Institucional: Segurança | a fazer (abre a v1) |

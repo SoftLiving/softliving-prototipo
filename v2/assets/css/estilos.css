@@ -193,6 +193,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .lat-stat > span .ic{ width:18px; height:18px; }
 .lat-stat b{ display:block; font-size:15px; color:var(--navy); }
 .lat-stat small{ font-size:12px; color:var(--muted); }
+.lat-stat p{ margin:0; }
+.lat-vazio{ font-size:13.5px; color:var(--muted); margin:4px 0; }
 .lat-card .btn{ width:100%; justify-content:center; margin-top:12px; }
 /* Conheça a comunidade */
 .lat-membro{ display:flex; align-items:center; gap:12px; padding:7px 0; font-size:14.5px; font-weight:500; color:var(--text); }
@@ -431,6 +433,64 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .groups .vcard{ flex:0 0 70%; }
   .news, .photo-band{ border-radius:24px; }
   .news h2, .photo-band h2{ font-size:28px; }
+}
+
+/* ===== Telas Conteúdos e Grupos ===== */
+/* Cabeçalho da página (título e texto) */
+.page-head{ padding:36px 0 24px; max-width:720px; }
+.page-head h1{ font-size:50px; line-height:1.06; font-weight:700; }
+.page-head p{ font-size:17px; line-height:1.6; color:var(--text-2); margin:14px 0 0; }
+/* Busca grande */
+.busca{ display:flex; align-items:center; gap:12px; height:54px; padding:0 20px; border-radius:999px; margin-bottom:24px;
+  background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.85); color:var(--muted);
+  -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.busca:focus-within{ border-color:var(--green); }
+.busca input{ flex:1; min-width:0; border:none; outline:none; background:none; font-size:15px; box-shadow:none !important; }
+/* Destaque largo: foto à esquerda, texto à direita */
+.destaque-largo{ display:grid; grid-template-columns:1.1fr 1fr; border-radius:26px; overflow:hidden; margin-bottom:40px;
+  background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.85); box-shadow:var(--vidro-brilho), var(--vidro-sombra);
+  transition:transform .15s ease, box-shadow .15s ease; }
+.destaque-largo:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), 0 16px 36px rgba(1,53,101,.14); }
+.dl-foto{ position:relative; min-height:300px; overflow:hidden; }
+.dl-foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+.destaque-largo:hover .dl-foto img{ transform:scale(1.03); }
+.dl-texto{ padding:30px 32px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; }
+.dl-texto .kicker{ margin-bottom:14px; }
+.dl-texto h2{ font-size:28px; line-height:1.2; margin:6px 0 10px; }
+.dl-texto p{ color:var(--text-2); line-height:1.6; margin:0 0 12px; font-size:15px; }
+.dl-texto .btn{ margin-top:14px; }
+/* Abas em pílulas (Todos / Grátis / Premium, Todos / Participando / Disponíveis) */
+.seg{ display:inline-flex; gap:4px; padding:4px; border-radius:999px; margin-bottom:20px; flex-wrap:wrap;
+  background:rgba(255,255,255,.5); border:1px solid rgba(255,255,255,.85); box-shadow:var(--vidro-brilho); }
+.seg button{ border:none; background:none; border-radius:999px; padding:8px 16px; font-size:13.5px; font-weight:500; color:#5a6470; }
+.seg button small{ font-size:11.5px; color:var(--muted); margin-left:2px; }
+.seg button:hover{ color:var(--green); }
+.seg button.on{ background:#fff; color:var(--navy); font-weight:600; box-shadow:0 2px 8px rgba(1,53,101,.08); }
+/* Grade de cartões verticais: tantas colunas quantas couberem (mínimo 220px) */
+.grade{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:22px; }
+.vazio{ text-align:center; color:var(--muted); font-size:15px; padding:40px 0; }
+.lista-topo{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.lista-conta{ font-size:13.5px; color:var(--muted); margin-bottom:20px; }
+/* Detalhes dos cartões verticais nessas telas */
+.vc-autor{ display:block; font-size:12.5px; opacity:.85; margin:-8px 0 12px; }
+.vc-desc{ font-size:12.5px; line-height:1.45; opacity:.88; margin:-6px 0 12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.vc-topo{ position:absolute; top:12px; left:12px; display:flex; gap:6px; z-index:2; }
+.selo-vc{ background:rgba(255,255,255,.9); color:var(--green); font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:999px;
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.selo-vc.premium{ background:rgba(253,241,220,.92); color:#8a5a0e; }
+.selo-vc.novas{ background:var(--red); color:#fff; }
+.vc-sair{ display:inline-flex; align-items:center; background:rgba(255,255,255,.18); color:#fff; border:1px solid rgba(255,255,255,.5); border-radius:999px;
+  padding:8px 14px; font-size:12.5px; font-weight:600; white-space:nowrap; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); transition:background-color .15s ease; }
+.vc-sair:hover{ background:rgba(255,255,255,.3); }
+@media (max-width:980px){ .destaque-largo{ grid-template-columns:1fr; } .dl-foto{ min-height:220px; } }
+@media (max-width:640px){
+  .page-head{ padding:12px 0 18px; }
+  .page-head h1{ font-size:36px; }
+  .page-head p{ font-size:16px; }
+  .dl-texto{ padding:22px; }
+  .dl-texto h2{ font-size:23px; }
+  .grade{ grid-template-columns:1fr; }
+  .seg{ display:flex; }
 }
 
 /* ===== Páginas institucionais (Conhecer, Como funciona, Benefícios, Patrocinadores) ===== */

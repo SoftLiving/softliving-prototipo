@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grupos · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="grupos" data-root="">
+
+<!-- Tela Grupos (referência: grupos.html da versão 1): Todos/Participando/Disponíveis e grade de grupos com Participar/Sair -->
+<div class="page-head">
+  <h1><span class="hl">Grupos</span></h1>
+  <p>Encontre pessoas com os mesmos interesses e participe das conversas e encontros.</p>
+</div>
+
+<section class="secao" id="grLista" data-lateral-topo>
+  <div class="lista-topo">
+    <div class="seg" id="grTipos" role="tablist"></div>
+    <span class="lista-conta" id="grConta"></span>
+  </div>
+  <div class="grade" id="grGrade"></div>
+  <p class="vazio" id="grVazio" hidden></p>
+</section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/grupos.js"></script>
+</body>
+</html>

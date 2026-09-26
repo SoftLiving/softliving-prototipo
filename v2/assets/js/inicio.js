@@ -83,14 +83,6 @@ document.getElementById('groupList').innerHTML = ['Clube do Vinho', 'Yoga & Medi
 }).join('');
 document.querySelectorAll('#grupos a[href="../grupos.html"]').forEach(a => a.href = urlPagina('grupos'));
 
-// Coluna lateral · Meus grupos: os mesmos cinco grupos da versão 1, com foto (abrem a página interna da versão 1 por enquanto)
-document.getElementById('meusGrupos').innerHTML = ['Yoga & Meditação', 'Clube do Livro', 'Tecnologia Sem Medo', 'Culinária Saudável', 'Copa do Mundo'].map(nome => {
-  const g = GRUPOS.find(x => x.t === nome);
-  return `<a href="${V1_ROOT}grupo.html?g=${GRUPOS.indexOf(g)}" class="lat-grupo">
-    <img src="${fotoUrl(g.foto, 120)}" alt="" loading="lazy"><span><b>${g.t}</b><small>${g.cat}</small></span>
-    ${g.novos ? `<span class="novas" title="${g.novos} mensagens novas">${g.novos}</span>` : ''}${icone('seta')}</a>`;
-}).join('');
-
 // Newsletter (demonstração)
 document.getElementById('newsForm').addEventListener('submit', e => {
   e.preventDefault();
