@@ -48,7 +48,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* ===== Moldura: estrutura (menu lateral flutuante + área principal) ===== */
 .app{ display:flex; align-items:flex-start; }
 .main{ flex:1; min-width:0; }
-.wrap{ max-width:1180px; margin:0 auto; padding:0 36px; }
+.wrap{ max-width:1180px; margin:0; padding:0 36px 0 24px; } /* alinhado à esquerda, perto da barra: sobra espaço à direita (futuro painel) */
 
 /* Menu lateral */
 .side-wrap{ position:sticky; top:38px; height:calc(100vh - 54px); margin:8px 0 8px 16px; width:264px; flex:none; transition:width .25s; }
