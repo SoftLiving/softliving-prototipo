@@ -17,7 +17,7 @@ document.getElementById('colDia').innerHTML = `
   <a href="#" class="cd-topo">
     <div class="dl-foto foto"><img src="${fotoUrl(ultimaDia.foto, 1000)}" alt=""></div>
     <div class="dl-texto">
-      <span class="cd-selos"><span class="kicker">Coluna do dia</span><span class="selo-nova">Nova</span></span>
+      <span class="cd-selos"><span class="kicker">Coluna do dia</span></span>
       <h2>${autorDia.coluna}</h2>
       <span class="autor-col">${avatarDe(autorDia)}<span><b>${autorDia.nome}</b><small>${autorDia.categoria}</small></span></span>
       <p class="cd-bio">${autorDia.bio}</p>
@@ -43,13 +43,15 @@ function renderColunas(){
 
   // Todos os colunistas, com filtro por categoria
   // Abas com o nome curto da categoria (col.aba); o filtro usa a categoria completa
-  const categorias = [['Todos', 'Todos'], ...COLUNISTAS.map(col => [col.categoria, col.aba]).filter((c, i, lista) => lista.findIndex(x => x[0] === c[0]) === i)];
+  // SoftLiving é a primeira aba depois de Todos
+  const unicas = COLUNISTAS.map(col => [col.categoria, col.aba]).filter((c, i, lista) => lista.findIndex(x => x[0] === c[0]) === i);
+  const categorias = [['Todos', 'Todos'], ...unicas.filter(c => c[0] === 'SoftLiving'), ...unicas.filter(c => c[0] !== 'SoftLiving')];
   document.getElementById('colCategorias').innerHTML = categorias.map(([cat, aba]) => `<button type="button" role="tab" class="${cat === colEstado.categoria ? 'on' : ''}" aria-selected="${cat === colEstado.categoria}" data-cat="${cat}" title="${cat}">${aba === 'SoftLiving' ? LOGO : aba}</button>`).join('');
   document.getElementById('colunistas').innerHTML = COLUNISTAS.map((col, i) => ({ col, i }))
     .filter(({ col }) => colEstado.categoria === 'Todos' || col.categoria === colEstado.categoria)
     .map(({ col, i }) => `
     <button type="button" class="colunista ${colEstado.autor === i ? 'on' : ''}" data-autor="${i}" aria-pressed="${colEstado.autor === i}">
-      <span class="col-topo">${avatarDe(col)}<span class="selo-nova">Nova</span></span>
+      <span class="col-topo">${avatarDe(col)}</span>
       ${col.coluna ? `<span class="col-nome">${comLogo(col.coluna)}</span>` : ''}
       <b>${col.nome}</b>
       <span class="col-tema">${col.categoria === 'SoftLiving' ? LOGO : col.categoria}</span>
