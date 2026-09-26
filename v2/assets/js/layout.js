@@ -132,7 +132,7 @@ const LAYOUT_MENU = `
   <div class="me">
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
-    <button class="collapse" id="collapseBtn" aria-label="Recolher menu" title="Recolher menu">${icone('voltar')}</button>
+    <button class="collapse" id="collapseBtn" aria-label="Recolher menu">${icone('voltar')}</button>
   </div>
 
   ${MENU_SECOES.map(sec => `
@@ -232,11 +232,39 @@ const LAYOUT_BARRA = `
 const app = document.getElementById('app');
 function lerPreferencia(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
 function guardarPreferencia(k, v){ try { localStorage.setItem(k, v); } catch(e){} }
-if(lerPreferencia('v2MenuRecolhido') === '1') app.classList.add('mini');
-document.getElementById('collapseBtn').addEventListener('click', () => {
-  app.classList.toggle('mini');
+const collapseBtn = document.getElementById('collapseBtn');
+function marcarRecolhido(mini){
+  app.classList.toggle('mini', mini);
+  const rotulo = mini ? 'Abrir menu' : 'Recolher menu';
+  collapseBtn.setAttribute('aria-label', rotulo);
+  collapseBtn.dataset.dica = rotulo;
+}
+marcarRecolhido(lerPreferencia('v2MenuRecolhido') === '1');
+collapseBtn.addEventListener('click', () => {
+  marcarRecolhido(!app.classList.contains('mini'));
   guardarPreferencia('v2MenuRecolhido', app.classList.contains('mini') ? '1' : '0');
+  esconderDica();
 });
+
+// Dica do menu recolhido: ao passar o mouse num ícone, o nome do item aparece ao lado, numa caixa de vidro.
+// Usa o title de cada item (guardado em data-dica, para o navegador não mostrar a dica preta dele por cima).
+const dica = document.createElement('div');
+dica.className = 'dica';
+dica.setAttribute('role', 'tooltip');
+document.body.appendChild(dica);
+document.querySelectorAll('.side [title]').forEach(el => { el.dataset.dica = el.title; el.removeAttribute('title'); });
+function esconderDica(){ dica.classList.remove('show'); }
+document.querySelector('.side').addEventListener('mouseover', e => {
+  const alvo = e.target.closest('[data-dica]');
+  if(!alvo || !app.classList.contains('mini') || innerWidth <= 980) return esconderDica();
+  const r = alvo.getBoundingClientRect();
+  dica.textContent = alvo.dataset.dica;
+  dica.style.left = (r.right + 12) + 'px';
+  dica.style.top = (r.top + r.height / 2) + 'px';
+  dica.classList.add('show');
+});
+document.querySelector('.side').addEventListener('mouseleave', esconderDica);
+document.querySelector('.side').addEventListener('scroll', esconderDica);
 const abrirMenu = () => app.classList.add('open');
 const fecharMenu = () => app.classList.remove('open');
 document.getElementById('menuBtn').addEventListener('click', abrirMenu);
