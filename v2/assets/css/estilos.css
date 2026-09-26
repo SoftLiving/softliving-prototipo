@@ -386,6 +386,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .caixa-branca{ background:#fff; border-radius:30px; padding:56px; }
 .caixa-branca .panel.off{ background:#f6f5f2; border-color:#eeebe5; }
 .caixa-branca .band{ margin-top:40px; }
+.caixa-branca .inst-head:not(:first-child){ margin-top:64px; } /* segundo título dentro da mesma caixa */
 /* Itens com ícone em cartões de borda fina (Conhecer: Por que é diferente) */
 .feats.em-cartoes{ gap:18px; }
 .feats.em-cartoes .feat{ border:1px solid var(--line); border-radius:22px; padding:26px; }
