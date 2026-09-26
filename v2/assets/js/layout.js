@@ -214,7 +214,12 @@ const LAYOUT_BARRA = `
   conteudo.forEach(n => n.remove());
 
   const app = document.createElement('div');
-  app.className = 'app';
+  // Já nasce com o menu recolhido (se for a preferência) e sem animações enquanto carrega: ao trocar de página com o
+  // menu fechado, ele não abre e fecha
+  app.className = 'app carregando' + (lerPreferencia('v2MenuRecolhido') === '1' ? ' mini' : '');
+  const fimCarregando = () => app.classList.remove('carregando');
+  requestAnimationFrame(() => requestAnimationFrame(fimCarregando));
+  setTimeout(fimCarregando, 300);            // reserva, caso a aba esteja em segundo plano
   app.id = 'app';
   // .corpo: coluna do conteúdo (.wrap) e, nas páginas que têm, a coluna lateral da direita (<aside class="lateral">)
   app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="corpo"><div class="wrap"><main></main></div></div></div>`;

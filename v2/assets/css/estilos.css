@@ -14,7 +14,8 @@
   color-scheme:light;
 }
 *{ box-sizing:border-box; }
-[hidden]{ display:none !important; } /* elementos escondidos continuam escondidos mesmo com display nos estilos (ex.: .btn) */
+[hidden]{ display:none !important; }
+.app.carregando, .app.carregando *{ transition:none !important; } /* sem animação enquanto a página carrega (ex.: menu recolhido) */ /* elementos escondidos continuam escondidos mesmo com display nos estilos (ex.: .btn) */
 html{ scroll-behavior:smooth; }
 body{ margin:0; font-family:'Inter',Arial,sans-serif; color:var(--text); background:var(--paper); -webkit-font-smoothing:antialiased; }
 a{ color:inherit; text-decoration:none; }
