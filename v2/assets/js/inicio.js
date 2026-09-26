@@ -18,6 +18,8 @@ const seloPreco = c => c.badge === 'premium'
   ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
   : `<span class="vc-chip">Grátis</span>`;
 
+const botaoSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
+
 // Explore por assunto
 const tabs = document.getElementById('tabs');
 tabs.innerHTML = ASSUNTOS.map((a, i) => `<button type="button" role="tab" class="${i ? '' : 'on'}" data-i="${i}">${a[0]}</button>`).join('')
@@ -28,7 +30,7 @@ function mostrarAssunto(i){
   document.getElementById('cards').innerHTML = lista.map(c => `
     <a href="#" class="vcard">
       <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
-      <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
+      ${botaoSalvar}
       <div class="vc-info">
         <span class="vc-cat">${assuntoCurto(c.cat)}</span>
         <h3>${c.t}</h3>
@@ -42,7 +44,8 @@ function mostrarAssunto(i){
   });
 }
 tabs.addEventListener('click', e => { const b = e.target.closest('button'); if(b) mostrarAssunto(+b.dataset.i); });
-document.getElementById('cards').addEventListener('click', e => {
+// Botão salvar (cartões, destaque e lista): marca e desmarca, sem abrir o conteúdo
+document.querySelector('main').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(!fav) return;
   e.preventDefault();
@@ -54,12 +57,12 @@ mostrarAssunto(0);
 // Últimas matérias: a matéria em destaque e mais quatro
 const destaque = ITENS.find(c => c.destaque);
 document.getElementById('lead').innerHTML = `
-  <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>
+  <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
   <div class="meta"><span>${destaque.a}</span></div>`;
 document.getElementById('list').innerHTML = [1, 12, 7, 2].map(i => ITENS[i]).map(c => `
-  <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
+  <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
     <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
 document.getElementById('verTodas').href = urlPagina('conteudos');
