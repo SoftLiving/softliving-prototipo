@@ -14,6 +14,9 @@ Abra `v2/index.html` com dois cliques, ou pelo servidor de testes (`http://local
 ```
 index.html                  Tela Início (abertura com colagem, Explore por assunto, Últimas matérias,
                             Acontece nos grupos, patrocinadores apoiadores, newsletter)
+institucional/              conhecer, como-funciona, beneficios, patrocinadores (textos iguais aos da v1, novo visual).
+                            Links para páginas institucionais usam data-site-link="<nome>" e urlSite() no layout.js
+                            (SITES_V2 lista as que já existem na v2)
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
 assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver versão 1"), aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
@@ -37,7 +40,8 @@ assets/img/                 Logos da FSB e da RB2
 | Conteúdos e leitura do artigo | a fazer (abre a v1) |
 | Grupos e página interna de grupo (inclui Desapego) | a fazer (abre a v1) |
 | Minhas Comunidades (8 abas) | a fazer (abre a v1) |
-| Institucionais | a fazer (abrem a v1) |
+| Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
+| Institucional: Segurança | a fazer (abre a v1) |
 | Modo simples | a fazer (abre a v1) |
 
 ## Observações

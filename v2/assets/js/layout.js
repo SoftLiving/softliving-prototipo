@@ -21,8 +21,9 @@ function urlPagina(nome){
   const p = PAGINAS[nome];
   return p ? (p.v1 ? V1_ROOT : LAYOUT_ROOT) + p.url : '#';
 }
-// Páginas institucionais: ainda na versão 1
-const urlSite = site => V1_ROOT + 'institucional/' + site + '.html';
+// Páginas institucionais: as que já existem na v2 (v2/institucional/); as demais abrem a versão 1
+const SITES_V2 = ['conhecer', 'como-funciona', 'beneficios', 'patrocinadores'];
+const urlSite = site => (SITES_V2.includes(site) ? LAYOUT_ROOT : V1_ROOT) + 'institucional/' + site + '.html';
 
 // Fotos de exemplo (Unsplash) usadas nos dados: foto:"<id>"
 const fotoUrl = (id, largura) => `https://images.unsplash.com/photo-${id}?w=${largura || 800}&q=70`;
@@ -227,6 +228,15 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu()
 
 // Modo simples: a escolha fica guardada para o index.html da versão 1
 document.getElementById('modoSimplesBtn').addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples'));
+
+// Atalhos dentro das páginas: data-goto="grupos" leva a uma página do menu, data-site-link="seguranca" a uma
+// página institucional (v2 ou v1, conforme o que já foi refeito)
+document.querySelectorAll('main [data-goto]').forEach(a => a.href = urlPagina(a.dataset.goto));
+document.querySelectorAll('main [data-site-link]').forEach(a => a.href = urlSite(a.dataset.siteLink));
+
+// Palavra em destaque nos títulos (.hl): recebe o risco verde desenhado à mão por baixo
+document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend',
+  '<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 30 2, 80 2, 118 8" fill="none" stroke="#9fd0b0" stroke-width="5" stroke-linecap="round"/></svg>'));
 
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
