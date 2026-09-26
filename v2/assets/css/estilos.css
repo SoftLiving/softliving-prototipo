@@ -51,9 +51,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .wrap{ max-width:1180px; margin:0; padding:0 24px; position:relative; } /* alinhado à esquerda, perto da barra: sobra espaço à direita */
 /* Fundo mais claro em toda a direita: começa 24px depois do conteúdo (a mesma distância da barra esquerda ao conteúdo)
    e vai até a borda da janela. Área reservada para um painel futuro. */
-.main{ overflow-x:clip; }
+.main{ overflow-x:hidden; overflow-x:clip; } /* hidden: para navegadores sem clip (Safari antigo), senão a página fica mais larga que a tela */
 .main > .wrap::after{ content:""; /* só a coluna principal; o rodapé fica sem a barra */ position:absolute; top:8px; bottom:0; left:100%; width:100vw; pointer-events:none;
   background:rgba(255,255,255,.55); border-radius:26px 0 0 26px; box-shadow:inset 1px 1px 0 rgba(255,255,255,.9), -8px 0 24px rgba(1,53,101,.04); }
+@media (max-width:1200px){ .main > .wrap::after{ content:none; } } /* sem espaço à direita: nada de fundo claro (nem no celular) */
 body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do topo (institucionais): sem o fundo claro à direita */
 
 /* Menu lateral */
