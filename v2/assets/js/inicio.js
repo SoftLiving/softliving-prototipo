@@ -32,7 +32,7 @@ document.getElementById('collage').insertAdjacentHTML('afterbegin', COLAGEM.map(
 
 // Explore por assunto
 const tabs = document.getElementById('tabs');
-tabs.innerHTML = ASSUNTOS.map((a, i) => `<button type="button" class="${i ? '' : 'on'}" data-i="${i}">${a[0]}</button>`).join('')
+tabs.innerHTML = ASSUNTOS.map((a, i) => `<button type="button" role="tab" class="${i ? '' : 'on'}" data-i="${i}">${a[0]}</button>`).join('')
   + `<a href="${urlPagina('conteudos')}" class="btn ghost">Todos os assuntos</a>`;
 function mostrarAssunto(i){
   const cat = ASSUNTOS[i][1];
@@ -43,7 +43,11 @@ function mostrarAssunto(i){
         <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button></div>
       <h3>${c.t}</h3><small>${assuntoCurto(c.cat)} · ${leitura(c)}</small>
     </a>`).join('');
-  tabs.querySelectorAll('button').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+  tabs.querySelectorAll('button').forEach(b => {
+    const on = +b.dataset.i === i;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-selected', on);
+  });
 }
 tabs.addEventListener('click', e => { const b = e.target.closest('button'); if(b) mostrarAssunto(+b.dataset.i); });
 document.getElementById('cards').addEventListener('click', e => {

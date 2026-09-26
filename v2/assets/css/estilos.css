@@ -162,6 +162,14 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .tabs button.on{ background:#fff; border-color:var(--line); color:var(--navy); font-weight:600; box-shadow:0 2px 8px rgba(0,0,0,.04); }
 .tabs .btn{ margin-left:auto; }
 
+/* Fichário: abas encaixadas num painel verde claro (Explore por assunto) */
+.tabs.folder{ gap:4px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; }
+.tabs.folder button{ background:#d7e9dd; border:none; border-radius:16px 16px 0 0; padding:11px 20px; color:#4f6357; font-weight:500; box-shadow:none; }
+.tabs.folder button:hover{ color:var(--green); background:#cfe4d6; }
+.tabs.folder button.on{ background:var(--mint); color:var(--navy); font-weight:600; padding-top:14px; }
+.tabs.folder .btn{ align-self:center; margin-bottom:6px; }
+.folder-panel{ background:var(--mint); border-radius:0 24px 24px 24px; padding:26px; }
+
 /* Cartão com foto vertical */
 .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
 .card .imgw{ border-radius:20px; overflow:hidden; position:relative; }
@@ -188,11 +196,6 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .collage .a{ grid-row:1 / 3; }
 .collage .d{ grid-column:1 / 3; }
 .collage figcaption{ position:absolute; left:12px; bottom:12px; background:rgba(255,255,255,.92); border-radius:999px; font-size:12px; font-weight:600; padding:5px 11px; color:var(--navy); }
-.stamp{ position:absolute; left:-30px; top:26px; background:#fff; border-radius:16px; padding:12px 14px; box-shadow:var(--shadow); display:flex; gap:10px; align-items:center; font-size:12.5px; }
-.stamp b{ display:block; font-family:'Fraunces',serif; font-size:18px; color:var(--navy); }
-.stamp .avs{ display:flex; }
-.stamp .avs span{ width:28px; height:28px; border-radius:50%; border:2px solid #fff; margin-left:-8px; display:grid; place-items:center; font-size:10px; font-weight:700; }
-.stamp .avs span:first-child{ margin-left:0; }
 
 /* Últimas matérias */
 .stories{ display:grid; grid-template-columns:1.25fr 1fr; gap:28px; }
@@ -277,6 +280,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .tabs{ flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px; scrollbar-width:none; }
   .tabs button{ white-space:nowrap; }
   .tabs .btn{ display:none; }
+  .folder-panel{ padding:18px 16px 20px; border-radius:0 20px 20px 20px; }
+  .folder-panel .cards{ margin:0 -16px; padding:0 16px 4px; }
   .cards{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -16px; padding:0 16px 4px; gap:14px; scrollbar-width:none; }
   .cards .card{ flex:0 0 72%; scroll-snap-align:start; }
   .fgrid{ gap:22px; }
@@ -290,8 +295,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .hero h1{ font-size:38px; }
   .hero p{ font-size:16px; margin:18px 0 22px; }
   .collage{ grid-template-rows:140px 120px 100px; gap:10px; }
-  .stamp{ left:8px; top:-18px; }
-  .lead h3{ font-size:24px; }
+    .lead h3{ font-size:24px; }
   .item{ grid-template-columns:96px 1fr; padding:0; gap:12px; }
   .item img{ width:96px; height:84px; }
   .item h3{ font-size:15.5px; }
