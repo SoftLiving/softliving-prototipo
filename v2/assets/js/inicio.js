@@ -83,6 +83,27 @@ document.getElementById('groupList').innerHTML = ['Clube do Vinho', 'Yoga & Medi
 }).join('');
 document.querySelectorAll('#grupos a[href="../grupos.html"]').forEach(a => a.href = urlPagina('grupos'));
 
+// Colunas: a coluna do dia como principal (à direita) e 4 colunas resumidas (à esquerda), sem repetir as de Últimas matérias.
+// Usa COLUNISTAS/COLUNA_DO_DIA/TODAS_COLUNAS (colunas-dados.js).
+const comLogo = texto => texto.replace('SoftLiving', LOGO);
+const colunistaDe = c => COLUNISTAS.find(col => c.a.startsWith(col.nome));
+const rotuloColuna = col => col.coluna ? comLogo(col.coluna) : col.categoria;
+const colDoDia = COLUNISTAS.find(col => col.nome === COLUNA_DO_DIA.colunista);
+const ultimaDoDia = TODAS_COLUNAS().find(c => c.t === COLUNA_DO_DIA.ultima);
+document.getElementById('colPrincipal').innerHTML = `
+  <div class="imgw foto"><img src="${fotoUrl(ultimaDoDia.foto, 1100)}" alt=""></div>${botaoSalvar}
+  <span class="cat">Coluna do dia · ${rotuloColuna(colDoDia)}</span>
+  <h3>${ultimaDoDia.t}</h3><p>${colDoDia.bio.split('. ')[0]}.</p>
+  <div class="meta"><span>${colDoDia.nome}</span><i></i><span>${colDoDia.categoria}</span></div>`;
+document.getElementById('colLista').innerHTML = ['Aos patrocinadores do SoftLiving', 'O luxo de hoje é outra coisa', 'A Coragem de Mudar de Direção', 'Meu primeiro agente de IA']
+  .map(t => TODAS_COLUNAS().find(c => c.t === t)).map(c => {
+    const col = colunistaDe(c);
+    return `
+  <a href="colunas.html" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
+    <div><span class="cat">${rotuloColuna(col)}</span><h3>${comLogo(c.t)}</h3>
+    <div class="meta"><span>${col.nome}</span></div></div></a>`;
+  }).join('');
+
 // Newsletter (demonstração)
 document.getElementById('newsForm').addEventListener('submit', e => {
   e.preventDefault();
