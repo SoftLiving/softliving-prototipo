@@ -348,10 +348,16 @@ const PATROCINADORES = [
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
-// Carrossel: um bloco de conteúdos menores (trilho) rola dentro da própria área, com setas de voltar e avançar.
-// dir 'h': rola na horizontal (setas nas laterais); dir 'v': rola na vertical (setas em cima e embaixo), mostrando
-// "visiveis" itens por vez. A página chama ativarCarrossel(elemento, dir) depois de preencher o elemento (e de novo
-// sempre que trocar o conteúdo). Quantos itens aparecem por vez na horizontal fica no CSS (--vis).
+// Carrossel: um bloco de conteúdos menores (trilho) rola sozinho, de forma contínua e suave, em loop (os itens são
+// repetidos no fim para a volta não ter salto). Pausa com o mouse em cima, com o foco do teclado ou com o toque; as
+// setas deslizam um item para cada lado. (A rolagem contínua vale mesmo com "reduzir animações" ligado no sistema:
+// foi um pedido explícito; ela é lenta e pausa com o mouse em cima.)
+// dir 'h': horizontal (setas nas laterais); dir 'v': vertical (setas em cima e embaixo), com altura de "visiveis" itens.
+// A página chama ativarCarrossel(elemento, dir) depois de preencher o elemento (e de novo sempre que trocar o conteúdo).
+// Quantos itens aparecem por vez na horizontal fica no CSS (--vis).
+const CARROSSEIS = [];
+const VELOCIDADE_CARROSSEL = { h:26, v:16 };            // pixels por segundo
+
 function ativarCarrossel(trilho, dir, visiveis = 4){
   let car = trilho.closest('.carrossel');
   if(!car){
@@ -368,34 +374,85 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
       b.innerHTML = icone('voltar');
       return b;
     };
-    const ant = seta('ant', dir === 'h' ? 'Voltar' : 'Subir'), prox = seta('prox', dir === 'h' ? 'Mais' : 'Descer');
-    car.append(ant, prox);
-    const passo = s => dir === 'h'
-      ? trilho.scrollBy({ left: s * (trilho.clientWidth - 24), behavior:'smooth' })
-      : trilho.scrollBy({ top: s * (trilho.clientHeight - 16), behavior:'smooth' });
-    ant.addEventListener('click', () => passo(-1));
-    prox.addEventListener('click', () => passo(1));
-    car.atualizar = () => {
-      const pos = dir === 'h' ? trilho.scrollLeft : trilho.scrollTop;
-      const vis = dir === 'h' ? trilho.clientWidth : trilho.clientHeight;
-      const tot = dir === 'h' ? trilho.scrollWidth : trilho.scrollHeight;
-      ant.disabled = pos <= 2;
-      prox.disabled = pos + vis >= tot - 2;
-      car.classList.toggle('sem-rolagem', tot <= vis + 2);
-    };
+    car.ant = seta('ant', dir === 'h' ? 'Voltar' : 'Subir');
+    car.prox = seta('prox', dir === 'h' ? 'Avançar' : 'Descer');
+    car.append(car.ant, car.prox);
+    Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, pausado:false, deslize:null, ciclo:0, ultimaPosicao:0 });
+    // Pausa: mouse em cima, foco do teclado ou toque (volta 3 segundos depois de soltar)
+    car.addEventListener('mouseenter', () => car.pausado = true);
+    car.addEventListener('mouseleave', () => car.pausado = false);
+    car.addEventListener('focusin', () => car.pausado = true);
+    car.addEventListener('focusout', () => car.pausado = false);
+    trilho.addEventListener('touchstart', () => { car.pausado = true; clearTimeout(car.retomar); }, { passive:true });
+    trilho.addEventListener('touchend', () => { car.retomar = setTimeout(() => car.pausado = false, 3000); }, { passive:true });
+    // Rolagem feita pela pessoa (dedo, roda do mouse): o carrossel continua dali
+    // (ignora a rolagem feita pelo próprio carrossel: a posição da tela é arredondada para pixels inteiros)
+    trilho.addEventListener('scroll', () => {
+      const atual = dir === 'h' ? trilho.scrollLeft : trilho.scrollTop;
+      if(Math.abs(atual - car.ultimaPosicao) > 2) car.pos = atual;
+    }, { passive:true });
+    // Setas: deslizam um item (com a animação suave)
+    const passoItem = () => { const a = trilho.children[0], b = trilho.children[1]; if(!a || !b) return 0; return dir === 'h' ? b.offsetLeft - a.offsetLeft : b.offsetTop - a.offsetTop; };
+    const deslizar = s => { car.deslize = { de:car.pos, para:car.pos + s * passoItem(), inicio:performance.now() }; };
+    car.ant.addEventListener('click', () => deslizar(-1));
+    car.prox.addEventListener('click', () => deslizar(1));
     car.ajustarAltura = () => {
       if(dir !== 'v') return;
       trilho.style.maxHeight = '';
       const itens = trilho.children, alvo = itens[visiveis];
-      if(alvo) trilho.style.maxHeight = (alvo.offsetTop - itens[0].offsetTop + parseFloat(getComputedStyle(trilho).paddingTop) * 2 - parseFloat(getComputedStyle(trilho).rowGap || 0)) + 'px';
+      const cs = getComputedStyle(trilho);
+      if(alvo) trilho.style.maxHeight = (alvo.offsetTop - itens[0].offsetTop + parseFloat(cs.paddingTop) * 2 - parseFloat(cs.rowGap || 0)) + 'px';
     };
-    trilho.addEventListener('scroll', car.atualizar, { passive:true });
-    addEventListener('resize', () => { car.ajustarAltura(); car.atualizar(); });
-    addEventListener('load', () => { car.ajustarAltura(); car.atualizar(); });
+    addEventListener('resize', () => car.preparar());
+    addEventListener('load', () => car.preparar());
+    CARROSSEIS.push(car);
+    if(CARROSSEIS.length === 1) requestAnimationFrame(animarCarrosseis);
   }
+  // Loop sem salto: repete os itens originais no fim (as cópias ficam escondidas para leitores de tela)
+  car.preparar = () => {
+    trilho.querySelectorAll(':scope > .copia').forEach(c => c.remove());
+    car.ajustarAltura();
+    const cabe = dir === 'h' ? trilho.scrollWidth <= trilho.clientWidth + 2 : trilho.scrollHeight <= trilho.clientHeight + 2;
+    car.classList.toggle('sem-rolagem', cabe);
+    car.ciclo = 0;
+    if(cabe) return;
+    const originais = [...trilho.children];
+    originais.forEach(el => {
+      const c = el.cloneNode(true);
+      c.classList.add('copia');
+      c.setAttribute('aria-hidden', 'true');
+      c.querySelectorAll('a, button').forEach(x => x.tabIndex = -1);
+      trilho.appendChild(c);
+    });
+    const copia = trilho.querySelector(':scope > .copia');
+    car.ciclo = dir === 'h' ? copia.offsetLeft - originais[0].offsetLeft : copia.offsetTop - originais[0].offsetTop;
+  };
+  car.pos = 0;
+  car.ultimaPosicao = 0;
+  car.deslize = null;
   if(dir === 'h') trilho.scrollLeft = 0; else trilho.scrollTop = 0;
-  car.ajustarAltura();
-  car.atualizar();
+  car.preparar();
+}
+
+// Um só laço de animação para todos os carrosséis
+let ultimoQuadro = performance.now();
+function animarCarrosseis(agora){
+  const dt = Math.min(0.05, (agora - ultimoQuadro) / 1000);
+  ultimoQuadro = agora;
+  CARROSSEIS.forEach(car => {
+    if(!car.ciclo) return;
+    if(car.deslize){                                        // deslize das setas: 450ms, desacelerando no fim
+      const t = Math.min(1, (agora - car.deslize.inicio) / 450);
+      car.pos = car.deslize.de + (car.deslize.para - car.deslize.de) * (1 - Math.pow(1 - t, 3));
+      if(t === 1) car.deslize = null;
+    } else if(!car.pausado && !document.hidden){
+      car.pos += VELOCIDADE_CARROSSEL[car.sentido] * dt;
+    } else return;
+    car.pos = ((car.pos % car.ciclo) + car.ciclo) % car.ciclo;  // volta ao começo sem salto (as cópias estão lá)
+    if(car.sentido === 'h') car.trilho.scrollLeft = car.pos; else car.trilho.scrollTop = car.pos;
+    car.ultimaPosicao = car.sentido === 'h' ? car.trilho.scrollLeft : car.trilho.scrollTop;
+  });
+  requestAnimationFrame(animarCarrosseis);
 }
 
 // Aviso rápido no canto da tela

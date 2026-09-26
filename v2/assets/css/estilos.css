@@ -871,18 +871,18 @@ body{ background:
 :root .tabbar{ background:rgba(255,255,255,.5); border-color:var(--vidro-borda); box-shadow:var(--vidro-brilho), var(--shadow); }
 
 /* ===== CARROSSEL (ativarCarrossel no layout.js) =====
-   Blocos de conteúdos menores rolam dentro da própria área, com setas de voltar e avançar.
+   Blocos de conteúdos menores rolam sozinhos, contínuos e suaves, em loop (pausam com o mouse em cima); setas deslizam um item.
    Horizontal: --vis itens por vez, setas nas laterais. Vertical: altura de 4 itens, setas em cima e embaixo.
    O padding com margem negativa deixa espaço para a sombra e a subida dos cartões no hover. */
 .carrossel{ position:relative; }
 .trilho-h{ display:grid !important; grid-template-columns:none !important; grid-auto-flow:column; --gap:22px; gap:var(--gap) !important;
   grid-auto-columns:calc((100% - (var(--vis, 4) - 1) * var(--gap)) / var(--vis, 4));
-  overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:14px; scrollbar-width:none;
+  overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none;
   padding:14px !important; margin:-14px !important; }
-.trilho-h > *{ scroll-snap-align:start; min-width:0; }
-.trilho-v{ position:relative; overflow-y:auto; overscroll-behavior-y:contain; scroll-snap-type:y mandatory; scroll-padding-block:8px; scrollbar-width:none;
+.trilho-h > *{ min-width:0; }
+.trilho-v{ position:relative; overflow-y:auto; overscroll-behavior-y:contain; scrollbar-width:none;
   padding:8px 16px; margin:-8px -16px; }
-.trilho-v > *{ scroll-snap-align:start; flex:none; }
+.trilho-v > *{ flex:none; }
 .trilho-h::-webkit-scrollbar, .trilho-v::-webkit-scrollbar{ display:none; }
 .cards.trilho-h{ --vis:4; }
 .groups.trilho-h{ --vis:3; --gap:14px; }
@@ -894,7 +894,6 @@ body{ background:
   -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); transition:opacity .15s ease, box-shadow .15s ease, background-color .15s ease; }
 .car-btn .ic{ width:18px; height:18px; }
 .car-btn:hover{ background:#fff; box-shadow:var(--vidro-brilho), var(--sombra-hover); }
-.car-btn:disabled{ opacity:.35; cursor:default; box-shadow:var(--vidro-brilho); }
 .carrossel.sem-rolagem .car-btn{ display:none; }
 .carrossel-h .car-btn{ top:50%; transform:translateY(-50%); }
 .carrossel-h .car-ant{ left:-20px; }
