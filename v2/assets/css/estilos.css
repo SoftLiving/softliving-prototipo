@@ -625,7 +625,7 @@ body{ background:
 :root .fav.on{ background:rgba(255,255,255,.95); color:var(--text); border-color:var(--line); }
 /* Na lista e no destaque (sobre a caixa branca): salvo = só a bandeirinha preta, sem círculo */
 :root .item .fav.on, :root .destaque .fav.on{ background:none; border-color:transparent; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; }
-:root .item .fav.on .ic, :root .destaque .fav.on .ic{ width:20px; height:20px; }
+:root .item .fav.on .ic, :root .destaque .fav.on .ic{ width:14px; height:14px; }
 /* Botão salvar sobre a caixa branca da lista: verde claro, para aparecer sobre o branco */
 :root .item .fav:not(.on){ background:var(--mint); border-color:#d3e8da; color:var(--green); }
 
