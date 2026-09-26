@@ -105,7 +105,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 }
 
 /* Topo */
-.top{ display:flex; align-items:center; gap:22px; padding:20px 0; }
+.top{ display:flex; align-items:center; gap:22px; padding:16px 32px; border-bottom:1px solid var(--line); } /* largura toda da janela, acima do menu lateral */
 .top .brand{ font-size:26px; }
 .site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; }
 .site-nav a:hover, .site-nav a.on{ color:var(--green); }
@@ -256,10 +256,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .news .ok{ padding:10px 16px; font-size:14px; color:var(--green); font-weight:600; }
 
 /* ===== Telas médias ===== */
-/* Links institucionais do topo: só cabem com os botões a partir de ~1400px; abaixo disso ficam no rodapé */
-@media (max-width:1400px){ .site-nav{ display:none; } }
-@media (max-width:1060px){ .top{ gap:12px; } .tools{ gap:8px; } }
+/* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
+@media (max-width:1100px){ .site-nav{ display:none; } }
 @media (max-width:1180px){
+  .tabs.folder{ overflow-x:auto; scrollbar-width:none; }
+  .tabs.folder .btn{ display:none; } /* o botão Todos os assuntos não cabe ao lado das abas */
+  .tabs.folder button{ white-space:nowrap; }
   .hero h1{ font-size:48px; }
   .cards{ grid-template-columns:repeat(2,1fr); }
   .community{ grid-template-columns:1fr; }
@@ -282,7 +284,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 @media (max-width:640px){
   body{ padding-bottom:84px; }
   .wrap{ padding:0 16px; }
-  .top{ gap:10px; padding:14px 0; }
+  .top{ gap:10px; padding:12px 16px; }
   .top .brand{ font-size:23px; }
   .tools .btn{ display:none; }
   .head h2{ font-size:28px; }

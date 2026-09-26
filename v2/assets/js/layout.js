@@ -199,11 +199,12 @@ const LAYOUT_BARRA = `
   const app = document.createElement('div');
   app.className = 'app';
   app.id = 'app';
-  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="wrap">${LAYOUT_CABECALHO}<main></main></div>${LAYOUT_RODAPE}</div>`;
+  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="wrap"><main></main></div>${LAYOUT_RODAPE}</div>`;
   app.querySelector('main').append(...conteudo);
 
-  document.body.insertAdjacentHTML('afterbegin', LAYOUT_TOPO);
-  document.getElementById('protoModal').after(app);
+  // O topo ocupa a largura toda da janela (acima do menu lateral e do conteúdo)
+  document.body.insertAdjacentHTML('afterbegin', LAYOUT_TOPO + LAYOUT_CABECALHO);
+  document.querySelector('.top').after(app);
   app.insertAdjacentHTML('afterend', LAYOUT_BARRA);
 
   document.querySelectorAll('.nav a[data-page], .tabbar a[data-page]').forEach(a => {
