@@ -214,8 +214,11 @@ const LAYOUT_BARRA = `
   const app = document.createElement('div');
   app.className = 'app';
   app.id = 'app';
-  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="wrap"><main></main></div>${LAYOUT_RODAPE}</div>`;
+  // .corpo: coluna do conteúdo (.wrap) e, nas páginas que têm, a coluna lateral da direita (<aside class="lateral">)
+  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="corpo"><div class="wrap"><main></main></div></div>${LAYOUT_RODAPE}</div>`;
   app.querySelector('main').append(...conteudo);
+  const lateral = app.querySelector('main > aside.lateral');
+  if(lateral){ app.querySelector('.corpo').appendChild(lateral); app.classList.add('com-lateral'); }
 
   // O topo ocupa a largura toda da janela (acima do menu lateral e do conteúdo)
   document.body.insertAdjacentHTML('afterbegin', LAYOUT_TOPO + LAYOUT_CABECALHO);
@@ -295,8 +298,8 @@ document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('clic
 
 // Atalhos dentro das páginas: data-goto="grupos" leva a uma página do menu, data-site-link="seguranca" a uma
 // página institucional (v2 ou v1, conforme o que já foi refeito)
-document.querySelectorAll('main [data-goto]').forEach(a => a.href = urlPagina(a.dataset.goto));
-document.querySelectorAll('main [data-site-link]').forEach(a => a.href = urlSite(a.dataset.siteLink));
+document.querySelectorAll('.corpo [data-goto]').forEach(a => a.href = urlPagina(a.dataset.goto));
+document.querySelectorAll('.corpo [data-site-link]').forEach(a => a.href = urlSite(a.dataset.siteLink));
 
 // Palavra em destaque nos títulos (.hl): recebe o risco verde desenhado à mão por baixo
 document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend',

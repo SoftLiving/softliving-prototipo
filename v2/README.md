@@ -44,6 +44,15 @@ assets/img/                 Logos da FSB e da RB2
 | Institucional: Segurança | a fazer (abre a v1) |
 | Modo simples | a fazer (abre a v1) |
 
+## Coluna lateral da direita
+
+Páginas com `<aside class="lateral">` no HTML (por enquanto só a Início) ganham uma coluna à direita, numa faixa clara
+que vai até a borda da janela, a 24px do conteúdo. O `layout.js` a coloca ao lado do conteúdo (`.corpo`); abaixo de
+1360px ela desce para depois do conteúdo, em grade. Na Início ela tem os mesmos blocos da coluna da direita da versão 1:
+pesquisa de escuta (`escuta.js`, +1 crédito por resposta), Meus grupos, Hoje na SoftLiving, Conheça a comunidade e o
+box Clube de Saúde (parceria em aberto). Os cartões de assunto passam a 2 colunas quando a coluna do conteúdo fica com
+menos de 1000px (container query).
+
 ## Regras de visual
 
 - **Efeito vidro (padrão):** botões e boxes translúcidos, com desfoque, brilho na borda e sombra suave; o fundo da página

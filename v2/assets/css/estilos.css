@@ -49,13 +49,15 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .app{ display:flex; align-items:flex-start; }
 .main{ flex:1; min-width:0; }
 .wrap{ max-width:1180px; margin:0; padding:0 24px; position:relative; } /* alinhado à esquerda, perto da barra: sobra espaço à direita */
-/* Fundo mais claro em toda a direita: começa 24px depois do conteúdo (a mesma distância da barra esquerda ao conteúdo)
-   e vai até a borda da janela. Área reservada para um painel futuro. */
-.main{ overflow-x:hidden; overflow-x:clip; } /* hidden: para navegadores sem clip (Safari antigo), senão a página fica mais larga que a tela */
-.main > .wrap::after{ content:""; /* só a coluna principal; o rodapé fica sem a barra */ position:absolute; top:8px; bottom:0; left:100%; width:100vw; pointer-events:none;
-  background:rgba(255,255,255,.55); border-radius:26px 0 0 26px; box-shadow:inset 1px 1px 0 rgba(255,255,255,.9), -8px 0 24px rgba(1,53,101,.04); }
-@media (max-width:1200px){ .main > .wrap::after{ content:none; } } /* sem espaço à direita: nada de fundo claro (nem no celular) */
-body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do topo (institucionais): sem o fundo claro à direita */
+/* Corpo: coluna do conteúdo + coluna lateral da direita (só nas páginas que têm <aside class="lateral">, hoje a Início).
+   A lateral é a faixa clara que vai até a borda da janela, a 24px do conteúdo (a mesma distância da barra esquerda). */
+.main{ overflow-x:hidden; overflow-x:clip; }
+.corpo{ display:flex; align-items:stretch; }
+.corpo > .wrap{ flex:0 1 1180px; min-width:0; container-type:inline-size; }
+.lateral{ flex:1 0 340px; margin-top:8px; padding:24px 28px 40px 24px; border-radius:26px 0 0 26px;
+  background:rgba(255,255,255,.55); box-shadow:inset 1px 1px 0 rgba(255,255,255,.9), -8px 0 24px rgba(1,53,101,.04);
+  display:flex; flex-direction:column; gap:18px; }
+.lateral > *{ max-width:440px; width:100%; }
 
 /* Menu lateral */
 .side-wrap{ position:sticky; top:38px; height:calc(100vh - 54px); margin:8px 0 8px 16px; width:264px; flex:none; transition:width .25s; }
@@ -157,6 +159,84 @@ body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do top
 .toast{ position:fixed; left:50%; bottom:28px; transform:translate(-50%, 20px); background:var(--navy); color:#fff; font-size:14px; padding:12px 18px; border-radius:14px; opacity:0; pointer-events:none; transition:.25s; z-index:90; max-width:calc(100vw - 32px); }
 .toast.show{ opacity:1; transform:translate(-50%, 0); }
 
+/* ===== Coluna lateral da direita (Início): cartões ===== */
+.lat-card{ position:relative; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.85); border-radius:22px; padding:18px 18px 16px;
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95), 0 6px 18px rgba(1,53,101,.05); }
+.lat-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+.lat-head h2{ font-size:18px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.lat-head h2 .ic{ width:18px; height:18px; color:var(--green); }
+.lat-mais{ font-size:12.5px; font-weight:600; color:var(--green); white-space:nowrap; }
+.lat-mais:hover{ text-decoration:underline; }
+/* Meus grupos */
+.lat-grupo{ display:flex; align-items:center; gap:12px; padding:8px; margin:0 -8px; border-radius:14px; }
+.lat-grupo:hover{ background:rgba(255,255,255,.7); }
+.lat-grupo img{ width:42px; height:42px; border-radius:12px; object-fit:cover; flex:none; background:var(--mint); }
+.lat-grupo b{ display:block; font-size:14.5px; color:var(--navy); }
+.lat-grupo small{ font-size:12px; color:var(--muted); }
+.lat-grupo .novas{ margin-left:auto; background:var(--red); color:#fff; font-size:11px; font-weight:700; border-radius:999px; min-width:20px; height:20px; display:grid; place-items:center; padding:0 6px; }
+.lat-grupo > .ic{ margin-left:auto; width:16px; height:16px; color:#a9b2bb; flex:none; }
+.lat-grupo .novas + .ic{ margin-left:0; }
+.lat-centro{ display:block; text-align:center; font-size:13px; font-weight:600; color:var(--green); margin-top:10px; }
+.lat-centro:hover{ text-decoration:underline; }
+/* Hoje na SoftLiving */
+.lat-stat{ display:flex; align-items:center; gap:12px; padding:8px 0; }
+.lat-stat > span{ width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:var(--mint); color:var(--green); flex:none; }
+.lat-stat > span.azul{ background:#e8eef8; color:var(--navy); }
+.lat-stat > span.ouro{ background:#fdf1dc; color:#8a5a0e; }
+.lat-stat > span .ic{ width:18px; height:18px; }
+.lat-stat b{ display:block; font-size:15px; color:var(--navy); }
+.lat-stat small{ font-size:12px; color:var(--muted); }
+.lat-card .btn{ width:100%; justify-content:center; margin-top:12px; }
+/* Conheça a comunidade */
+.lat-membro{ display:flex; align-items:center; gap:12px; padding:7px 0; font-size:14.5px; font-weight:500; color:var(--text); }
+.lat-membro .av{ width:36px; height:36px; border-radius:50%; display:grid; place-items:center; color:#fff; font-size:12.5px; font-weight:700; flex:none; }
+.lat-membro:hover{ color:var(--green); }
+/* Clube de Saúde (parceria em aberto) */
+.lat-clube{ border-radius:22px; padding:20px; text-align:center; background:rgba(241,216,152,.45); border:1px dashed #d9b25a; }
+.lat-clube em{ display:block; font-style:normal; font-size:12.5px; color:#8a6414; }
+.lat-clube strong{ display:block; font-family:'Fraunces',serif; font-size:20px; color:#5c4108; margin:4px 0 8px; }
+.lat-clube a{ font-size:13px; font-weight:600; color:#8a6414; text-decoration:underline; }
+/* Pesquisa de escuta (escuta.js) */
+.es-box{ background:rgba(230,242,234,.7); }
+.es-sub{ font-size:12.5px; color:#5d6773; margin:-4px 0 12px; line-height:1.5; }
+.es-sub b{ color:#8a5a0e; }
+.es-progress{ display:flex; align-items:center; gap:10px; font-size:11.5px; color:#6b7580; margin-bottom:10px; }
+.es-progress span:first-child{ white-space:nowrap; }
+.es-bar{ flex:1; height:5px; background:#fff; border-radius:999px; overflow:hidden; }
+.es-bar i{ display:block; height:100%; background:var(--green); border-radius:999px; transition:width .3s ease; }
+.es-q{ font-size:15px; font-weight:600; color:var(--navy); line-height:1.4; margin:0 0 12px; }
+.es-ops{ display:flex; flex-wrap:wrap; gap:6px; }
+.es-op{ border:1px solid var(--line); background:#fff; border-radius:999px; padding:7px 12px; font-size:12.5px; font-weight:500; color:#333c47; }
+.es-op:hover{ border-color:#c3cad2; }
+.es-op.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+.es-nota{ display:grid; grid-template-columns:repeat(11,1fr); gap:3px; }
+.es-nota .es-op{ padding:6px 0; border-radius:8px; text-align:center; }
+.es-nota-legenda{ display:flex; justify-content:space-between; font-size:10.5px; color:#a9b2bb; margin-top:4px; }
+.es-texto, .es-porque{ width:100%; font-size:13.5px; border:1px solid var(--line); border-radius:12px; padding:8px 10px; font-family:inherit; }
+.es-porque{ margin-top:8px; }
+.es-hint{ display:block; font-size:11px; color:var(--muted); margin-top:5px; }
+.es-actions{ display:flex; align-items:center; gap:10px; margin-top:14px; }
+.es-send{ flex:1; background:#c98a2e; color:#fff; border:none; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:700; }
+.es-send:hover:not(:disabled){ background:#b47a24; }
+.es-send:disabled{ background:#ecdcbf; cursor:not-allowed; }
+.es-skip{ background:none; border:none; color:#6b7580; font-size:13px; font-weight:600; padding:6px; }
+.es-skip:hover{ color:var(--navy); }
+.es-fim-t{ font-size:14.5px; color:var(--navy); line-height:1.45; margin:0 0 6px; }
+.es-fim-t b{ color:#8a5a0e; }
+.es-fim-s{ font-size:12.5px; color:#6b7580; margin:0 0 12px; }
+.es-fim .es-send{ width:100%; }
+.es-toast{ position:absolute; top:14px; right:14px; background:var(--green); color:#fff; font-size:12px; font-weight:700; padding:5px 11px; border-radius:999px; animation:esToast 1.8s ease forwards; pointer-events:none; }
+@keyframes esToast{ 0%{ opacity:0; transform:translateY(6px); } 15%,75%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateY(-6px); } }
+
+/* Sem espaço ao lado do conteúdo: a lateral desce para depois dele, em grade */
+@media (max-width:1359px){
+  .corpo{ flex-direction:column; }
+  .corpo > .wrap{ flex:none; }
+  .lateral{ flex:none; margin:0 24px 56px; border-radius:26px; padding:24px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); align-items:start; }
+  .lateral > *{ max-width:none; }
+}
+@media (max-width:640px){ .lateral{ margin:0 16px 40px; padding:16px; } }
+
 /* ===== Componentes ===== */
 .btn{ display:inline-flex; align-items:center; gap:8px; background:var(--green); color:#fff; border:none; border-radius:999px; padding:11px 20px; font-size:14px; font-weight:600; white-space:nowrap; }
 .btn:hover{ background:var(--green-dark); }
@@ -181,7 +261,8 @@ body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do top
 .tabs .btn{ margin-left:auto; }
 
 /* Fichário: abas encaixadas num painel creme mais claro que o fundo (Explore por assunto) */
-.tabs.folder{ gap:4px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; }
+.tabs.folder{ gap:4px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } /* uma linha só; rola para o lado se não couber */
+.tabs.folder button{ white-space:nowrap; flex:none; }
 .tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 20px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
@@ -280,8 +361,9 @@ body[data-site] .main > .wrap::after{ content:none; } /* páginas do menu do top
 /* ===== Telas médias ===== */
 /* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
 @media (max-width:1100px){ .site-nav{ display:none; } }
-/* Telas entre 1181 e 1300px: cartões de assunto em 2 colunas e grupos embaixo do depoimento (em 4 colunas o título invade a foto) */
-@media (min-width:1181px) and (max-width:1300px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } }
+/* Coluna do conteúdo estreita (menos de 1000px, por exemplo com a lateral aberta): cartões de assunto em 2 colunas e grupos
+   embaixo do depoimento (em 4 colunas o título invade a foto) */
+@container (max-width:1000px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } .tabs.folder .btn{ display:none; } }
 @media (max-width:1180px){
   .tabs.folder{ overflow-x:auto; scrollbar-width:none; }
   .tabs.folder .btn{ display:none; } /* o botão Todos os assuntos não cabe ao lado das abas */
