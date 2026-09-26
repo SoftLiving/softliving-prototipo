@@ -128,11 +128,12 @@ const LAYOUT_TOPO = `
 
 const LAYOUT_MENU = `
 <div class="scrim" id="scrim"></div>
+<div class="side-wrap">
+<button class="collapse" id="collapseBtn" aria-label="Recolher menu">${icone('voltar')}</button>
 <aside class="side" id="side" aria-label="Menu">
   <div class="me">
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
-    <button class="collapse" id="collapseBtn" aria-label="Recolher menu">${icone('voltar')}</button>
   </div>
 
   ${MENU_SECOES.map(sec => `
@@ -147,7 +148,8 @@ const LAYOUT_MENU = `
     <a href="#" class="btn" title="Recarregar créditos">${icone('mais')}<span>Recarregar</span></a>
     <p>Primeira recarga de R$50 vale 50 créditos + 50 de bônus</p>
   </div>
-</aside>`;
+</aside>
+</div>`;
 
 const LAYOUT_CABECALHO = `
 <div class="top">
@@ -271,7 +273,7 @@ dica.setAttribute('role', 'tooltip');
 document.body.appendChild(dica);
 document.querySelectorAll('.side [title]').forEach(el => { el.dataset.dica = el.title; el.removeAttribute('title'); });
 function esconderDica(){ dica.classList.remove('show'); }
-document.querySelector('.side').addEventListener('mouseover', e => {
+document.querySelector('.side-wrap').addEventListener('mouseover', e => {
   const alvo = e.target.closest('[data-dica]');
   if(!alvo || !app.classList.contains('mini') || innerWidth <= 980) return esconderDica();
   mostrarDica(alvo, 'direita');
@@ -290,7 +292,7 @@ function mostrarDica(alvo, lado){
   dica.style.top = (r.top + r.height / 2) + 'px';
   dica.classList.add('show');
 }
-['.side', '#sideDir'].forEach(sel => document.querySelector(sel).addEventListener('mouseleave', esconderDica));
+['.side-wrap', '#sideDir'].forEach(sel => document.querySelector(sel).addEventListener('mouseleave', esconderDica));
 document.querySelector('.side').addEventListener('scroll', esconderDica);
 const abrirMenu = () => app.classList.add('open');
 const fecharMenu = () => app.classList.remove('open');
