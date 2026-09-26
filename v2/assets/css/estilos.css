@@ -6,7 +6,7 @@
 :root{
   --navy:#013565; --green:#1F5519; --green-2:#2e7a4f; --green-dark:#174313;
   --mint:#e6f2ea; --mint-2:#f1f8f3; --mint-line:#9fd0b0;
-  --paper:#faf8f4; --card:#fff; --line:#ece8e1; --line-2:#d9d4cb;
+  --paper:#faf8f4; --paper-light:#fffefb; --paper-dark:#f1ede5; --card:#fff; --line:#ece8e1; --line-2:#d9d4cb;
   --text:#1d2430; --text-2:#56606c; --muted:#7c8591;
   --gold-bg:#fff4dc; --gold:#8a5a0e; --red:#e5484d;
   --shadow:0 12px 30px rgba(1,53,101,.12);
@@ -162,13 +162,13 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .tabs button.on{ background:#fff; border-color:var(--line); color:var(--navy); font-weight:600; box-shadow:0 2px 8px rgba(0,0,0,.04); }
 .tabs .btn{ margin-left:auto; }
 
-/* Fichário: abas encaixadas num painel verde claro (Explore por assunto) */
+/* Fichário: abas encaixadas num painel creme mais claro que o fundo (Explore por assunto) */
 .tabs.folder{ gap:4px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; }
-.tabs.folder button{ background:#d7e9dd; border:none; border-radius:16px 16px 0 0; padding:11px 20px; color:#4f6357; font-weight:500; box-shadow:none; }
-.tabs.folder button:hover{ color:var(--green); background:#cfe4d6; }
-.tabs.folder button.on{ background:var(--mint); color:var(--navy); font-weight:600; padding-top:14px; }
+.tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 20px; color:#6b6558; font-weight:500; box-shadow:none; }
+.tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
+.tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
 .tabs.folder .btn{ align-self:center; margin-bottom:6px; }
-.folder-panel{ background:var(--mint); border-radius:0 24px 24px 24px; padding:26px; }
+.folder-panel{ background:var(--paper-light); border-radius:0 24px 24px 24px; padding:26px; }
 
 /* Cartão com foto vertical */
 .cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
