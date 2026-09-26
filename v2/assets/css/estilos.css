@@ -56,7 +56,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   height:100%; width:100%;
   background:rgba(255,255,255,.78); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border:1px solid var(--line); border-radius:26px; padding:22px 16px 16px;
-  display:flex; flex-direction:column; gap:18px; overflow-y:auto; scrollbar-width:none; transition:padding .25s;
+  display:flex; flex-direction:column; gap:18px; overflow-y:auto; scrollbar-width:none; transition:width .25s, padding .25s;
 }
 .side::-webkit-scrollbar{ display:none; }
 .me{ display:flex; align-items:center; gap:12px; position:relative; padding:0 4px 18px; border-bottom:1px solid var(--line); }
@@ -101,12 +101,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* Menu recolhido: só ícones (só no computador; no celular o menu é uma gaveta) */
 @media (min-width:981px){
-  .app.mini .side-wrap{ width:84px; }
-  .app.mini .side{ padding:22px 12px 16px; }
+  /* Recolhido: só a barra encolhe; a moldura mantém a largura, então o conteúdo não se mexe */
+  .app.mini .side{ width:84px; padding:22px 12px 16px; }
   .app.mini .side .lbl, .app.mini .side .tag, .app.mini .me div, .app.mini .wallet p, .app.mini .wallet small, .app.mini .nav-sub, .app.mini .nav-abre .chev{ display:none; }
   .app.mini .me{ flex-direction:column; }
   /* Recolhido: o botão vira uma etiqueta presa do lado de fora da barra, na mesma altura de quando está aberta */
-  .app.mini .side-wrap > .collapse{ right:-27px; width:28px; height:44px; top:24px; border-radius:0 12px 12px 0; border-left:none; }
+  .app.mini .side-wrap > .collapse{ right:auto; left:83px; width:28px; height:44px; top:24px; border-radius:0 12px 12px 0; border-left:none; }
   .app.mini .side-wrap > .collapse .ic{ transform:rotate(180deg); }
   .app.mini .nav a{ justify-content:center; padding:12px; }
   .app.mini .sec-t{ text-align:center; padding:0 0 8px; }
