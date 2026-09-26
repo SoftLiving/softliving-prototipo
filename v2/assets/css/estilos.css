@@ -60,7 +60,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .lateral > *{ max-width:440px; width:100%; }
 
 /* Menu lateral */
-.side-wrap{ position:sticky; top:38px; height:calc(100vh - 54px); margin:8px 0 8px 16px; width:264px; flex:none; transition:width .25s; }
+.side-wrap{ position:relative; margin:8px 0 8px 16px; width:264px; flex:none; } /* reserva o espaço da barra; a barra fica fixa na tela */
 .side{
   height:100%; width:100%;
   background:rgba(255,255,255,.78); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
@@ -74,7 +74,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .me strong{ font-family:'Fraunces',serif; font-size:21px; color:var(--navy); font-weight:600; }
 .collapse{ position:absolute; right:-4px; top:10px; width:28px; height:28px; border-radius:9px; border:1px solid var(--line); background:#fff; display:grid; place-items:center; padding:0; }
 /* Botão do menu esquerdo: fica na moldura (fora da área que rola), no alto à direita, ao lado do nome */
-.side-wrap > .collapse{ top:32px; right:12px; z-index:3; transition:right .25s, width .25s, height .25s, border-radius .25s, transform .15s ease, box-shadow .15s ease; }
+.side-wrap > .collapse{ top:32px; right:12px; z-index:3; transition:left .25s, right .25s, width .25s, height .25s, border-radius .25s, transform .15s ease, box-shadow .15s ease; }
 .collapse .ic{ width:16px; height:16px; }
 .sec-t{ font-size:12px; color:var(--muted); padding:0 8px 8px; }
 .nav a{ display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:14px; color:#4a5461; font-size:15px; font-weight:500; }
@@ -99,6 +99,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .side .lbl{ white-space:nowrap; }
 
 
+/* Computador: a barra fica parada na tela, sempre com a mesma altura, e passa por cima do fundo do rodapé.
+   --side-top (layout.js): logo abaixo da barra de cima no topo da página; 46px depois de rolar. */
+@media (min-width:981px){
+  .side{ position:fixed; left:16px; top:var(--side-top, 113px); width:264px; height:calc(100vh - 54px); z-index:40; }
+  .side-wrap > .collapse{ position:fixed; top:calc(var(--side-top, 113px) + 32px); left:240px; right:auto; z-index:41; }
+}
 /* Menu recolhido: só ícones (só no computador; no celular o menu é uma gaveta) */
 @media (min-width:981px){
   /* Recolhido: só a barra encolhe; a moldura mantém a largura, então o conteúdo não se mexe */
@@ -106,7 +112,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .app.mini .side .lbl, .app.mini .side .tag, .app.mini .me div, .app.mini .wallet p, .app.mini .wallet small, .app.mini .nav-sub, .app.mini .nav-abre .chev{ display:none; }
   .app.mini .me{ flex-direction:column; }
   /* Recolhido: o botão vira uma etiqueta presa do lado de fora da barra, na mesma altura de quando está aberta */
-  .app.mini .side-wrap > .collapse{ right:auto; left:83px; width:28px; height:44px; top:24px; border-radius:0 12px 12px 0; border-left:none; }
+  .app.mini .side-wrap > .collapse{ right:auto; left:99px; width:28px; height:44px; top:calc(var(--side-top, 113px) + 24px); border-radius:0 12px 12px 0; border-left:none; }
   .app.mini .side-wrap > .collapse .ic{ transform:rotate(180deg); }
   .app.mini .nav a{ justify-content:center; padding:12px; }
   .app.mini .sec-t{ text-align:center; padding:0 0 8px; }
