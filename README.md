@@ -4,6 +4,9 @@ Protótipo de front-end em HTML/CSS/JS puro (sem build, sem dependências além 
 
 Abra `index.html` (ou qualquer página) direto no navegador. Não precisa de servidor nem instalação.
 
+> **Versão 2 em construção:** a pasta `v2/` tem o novo layout com cara de portal de notícias, refeito página por página
+> (ver `v2/README.md`). Esta pasta raiz é a **versão 1** e fica intacta até a v2 ser aprovada.
+
 ## O que tem aqui
 
 - **Switcher de 3 comunidades fixas**, cada uma com um dropdown para trocar por qualquer uma das 12 comunidades fictícias cadastradas (favoritagem por troca)

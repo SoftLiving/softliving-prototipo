@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Início · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="inicio" data-root="">
+
+<!-- Abertura -->
+<div class="hero">
+  <div>
+    <span class="kicker">Portal sem anúncios · feito para a vida madura</span>
+    <h1>Histórias que deixam a vida mais <span class="hl">leve<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 30 2, 80 2, 118 8" fill="none" stroke="#9fd0b0" stroke-width="5" stroke-linecap="round"/></svg></span></h1>
+    <p>Conteúdos sobre saúde, casa, viagens, tecnologia e bem-estar, e grupos para conversar e se encontrar com quem tem os mesmos interesses.</p>
+    <div class="ctas">
+      <a href="#materias" class="btn">Começar a ler <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#grupos" class="btn ghost">Ver grupos</a>
+    </div>
+  </div>
+  <div class="collage" id="collage">
+    <div class="stamp">
+      <div class="avs"><span style="background:#e6f2ea;color:#1F5519">AS</span><span style="background:#e8eef8;color:#013565">LP</span><span style="background:#fff4dc;color:#8a5a0e">ZR</span></div>
+      <div><b>1.240</b>membros conversando hoje</div>
+    </div>
+  </div>
+</div>
+
+<!-- Explore por assunto -->
+<section class="secao" id="assuntos">
+  <div class="head"><div><h2>Explore por assunto</h2><p>Escolha um tema e veja o que há de novo.</p></div></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<!-- Últimas matérias -->
+<section class="secao" id="materias">
+  <div class="head"><div><h2>Últimas matérias</h2><p>O que a redação e os colunistas publicaram esta semana.</p></div><a href="../conteudos.html" class="btn ghost" id="verTodas">Ver todas</a></div>
+  <div class="stories">
+    <a href="#" class="lead" id="lead"></a>
+    <div class="list" id="list"></div>
+  </div>
+</section>
+
+<!-- Acontece nos grupos -->
+<section class="secao" id="grupos">
+  <div class="head"><div><h2>Acontece nos grupos</h2><p>Conversas, encontros e clubes da comunidade.</p></div><a href="../grupos.html" class="btn ghost">Todos os grupos</a></div>
+  <div class="community">
+    <div class="quote">
+      <div class="who"><span class="avatar" style="background:#fff4dc;color:#8a5a0e">MT</span><div><b>Marta T.</b><small>Clube do Livro · membro desde 2025</small></div></div>
+      <h3>“Voltei a ler um livro por mês”</h3>
+      <p>Entrei no grupo sem conhecer ninguém. Hoje a gente escolhe o livro juntos e se encontra uma vez por mês para conversar. É o compromisso que mais espero.</p>
+      <a href="../grupos.html" class="btn">Encontrar um grupo</a>
+    </div>
+    <div class="groups" id="groupList"></div>
+  </div>
+</section>
+
+<!-- Patrocinadores apoiadores (discreto) -->
+<div class="sponsors"><span>Com o apoio de</span><span class="s">Patrocinador A</span><span class="s">Patrocinador B</span><span class="s">Patrocinador C</span></div>
+
+<!-- Newsletter -->
+<div class="news">
+  <img class="foto" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=70" alt="" loading="lazy">
+  <div>
+    <h2>O melhor da <span class="sig sig-fixo sig-light"><span class="soft">Soft</span><span class="living">Living</span></span> no seu e-mail</h2>
+    <p>Uma seleção por semana, com as matérias mais lidas e os próximos encontros dos grupos.</p>
+    <form id="newsForm">
+      <input type="email" placeholder="Seu e-mail" aria-label="Seu e-mail" required>
+      <button class="btn" type="submit">Assinar</button>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/inicio.js"></script>
+</body>
+</html>
