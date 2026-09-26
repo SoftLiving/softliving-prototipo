@@ -42,8 +42,9 @@ function renderColunas(){
     <button type="button" class="autor ${colEstado.autor === i ? 'on' : ''}" data-autor="${i}" aria-pressed="${colEstado.autor === i}" title="${col.nome}">${avatarDe(col)}<span>${col.curto}</span></button>`).join('');
 
   // Todos os colunistas, com filtro por categoria
-  const categorias = ['Todos', ...new Set(COLUNISTAS.map(col => col.categoria))];
-  document.getElementById('colCategorias').innerHTML = categorias.map(c => `<button type="button" role="tab" class="${c === colEstado.categoria ? 'on' : ''}" aria-selected="${c === colEstado.categoria}" data-cat="${c}">${c === 'SoftLiving' ? LOGO : c}</button>`).join('');
+  // Abas com o nome curto da categoria (col.aba); o filtro usa a categoria completa
+  const categorias = [['Todos', 'Todos'], ...COLUNISTAS.map(col => [col.categoria, col.aba]).filter((c, i, lista) => lista.findIndex(x => x[0] === c[0]) === i)];
+  document.getElementById('colCategorias').innerHTML = categorias.map(([cat, aba]) => `<button type="button" role="tab" class="${cat === colEstado.categoria ? 'on' : ''}" aria-selected="${cat === colEstado.categoria}" data-cat="${cat}" title="${cat}">${aba === 'SoftLiving' ? LOGO : aba}</button>`).join('');
   document.getElementById('colunistas').innerHTML = COLUNISTAS.map((col, i) => ({ col, i }))
     .filter(({ col }) => colEstado.categoria === 'Todos' || col.categoria === colEstado.categoria)
     .map(({ col, i }) => `

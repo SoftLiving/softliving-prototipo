@@ -271,9 +271,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .tabs .btn{ margin-left:auto; }
 
 /* Fichário: abas encaixadas num painel creme mais claro que o fundo (Explore por assunto) */
-.tabs.folder{ gap:4px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } /* uma linha só; rola para o lado se não couber */
+.tabs.folder{ gap:6px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } /* uma linha só; rola para o lado se não couber */
 .tabs.folder button{ white-space:nowrap; flex:none; }
-.tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 20px; color:#6b6558; font-weight:500; box-shadow:none; }
+.tabs.folder.mais-abas{ -webkit-mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); } /* há mais abas à direita */
+.tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 16px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
 .tabs.folder .btn{ align-self:center; margin-bottom:6px; }
@@ -547,9 +548,6 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .autor-col b{ display:block; font-size:14.5px; color:var(--navy); }
 .autor-col small{ font-size:12.5px; color:var(--muted); }
 .autor-col .av-col{ width:44px; height:44px; font-size:14px; }
-/* Fichário com muitas abas: quebram em mais de uma linha (a última linha encosta no painel) */
-.tabs.folder.multi{ flex-wrap:wrap; overflow:visible; row-gap:6px; }
-@media (max-width:640px){ .tabs.folder.multi{ flex-wrap:nowrap; overflow-x:auto; } } /* no celular: uma linha que rola para o lado */
 @media (max-width:980px){ .cd-topo{ grid-template-columns:1fr; } .cd-topo .dl-foto{ min-height:220px; } }
 @media (max-width:640px){ .cd-sugestoes{ padding:18px; } .cd-sug-lista{ grid-template-columns:1fr 1fr; } }
 

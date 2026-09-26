@@ -379,11 +379,19 @@ function ajustarLogosEmTexto(){
     sig.classList.toggle('sig-light', contraste < 3);
   });
 }
+// Fichário que não cabe na largura: as abas rolam para o lado e a ponta direita esmaece enquanto houver mais abas
+function marcarRolagemAbas(){
+  document.querySelectorAll('.tabs.folder').forEach(t => t.classList.toggle('mais-abas', t.scrollLeft + t.clientWidth < t.scrollWidth - 2));
+}
+document.addEventListener('scroll', e => { if(e.target.classList && e.target.classList.contains('folder')) marcarRolagemAbas(); }, true);
+addEventListener('resize', marcarRolagemAbas);
+addEventListener('load', marcarRolagemAbas);
+
 let ajusteLogosPendente = false;
 function agendarAjusteLogos(){
   if(ajusteLogosPendente) return;
   ajusteLogosPendente = true;
-  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); });
+  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); });
 }
 agendarAjusteLogos();
 new MutationObserver(agendarAjusteLogos).observe(document.querySelector('main'), { childList:true, subtree:true });
