@@ -235,10 +235,11 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Faixa sobre foto (newsletter da Início e fechamento das institucionais) */
 .news, .photo-band{ position:relative; border-radius:30px; overflow:hidden; min-height:340px; display:grid; place-items:center; text-align:center; margin-bottom:72px; background:var(--navy); }
 .news img, .photo-band img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.news::after, .photo-band::after{ content:""; position:absolute; inset:0; background:rgba(1,30,58,.55); }
+.news::after{ content:""; position:absolute; inset:0; background:rgba(1,30,58,.55); }
 .news > div, .photo-band > div{ position:relative; z-index:1; padding:40px 24px; max-width:620px; }
 .news h2, .photo-band h2{ color:#fff; font-size:40px; line-height:1.12; }
 .news p, .photo-band p{ color:rgba(255,255,255,.85); margin:12px 0 24px; }
+.photo-band{ min-height:0; } /* nas institucionais: faixa em azul liso, sem foto */
 .news form{ display:flex; gap:8px; background:#fff; border-radius:999px; padding:6px; max-width:460px; margin:0 auto; }
 .news input{ flex:1; min-width:0; border:none; outline:none; padding:0 14px; font-size:14.5px; background:none; }
 .news .ok{ padding:10px 16px; font-size:14px; color:var(--green); font-weight:600; }
@@ -314,10 +315,9 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .btn.white{ background:#fff; color:var(--green); }
 .btn.white:hover{ background:var(--mint); }
 
-/* Vídeo: para publicar, trocar a <img> e o botão por <iframe src="https://www.youtube.com/embed/ID" allowfullscreen> dentro de .video */
-.video{ position:relative; border-radius:28px; overflow:hidden; aspect-ratio:5/4; }
-.video img, .video iframe{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:0; }
-.video::after{ content:""; position:absolute; inset:0; background:rgba(1,30,58,.18); pointer-events:none; }
+/* Espaço do vídeo: para publicar, trocar o botão e o aviso por <iframe src="https://www.youtube.com/embed/ID" allowfullscreen> dentro de .video */
+.video{ position:relative; border-radius:28px; overflow:hidden; aspect-ratio:16/10; background:var(--mint); border:1px solid #d3e8da; }
+.video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
 .video .play{ position:absolute; z-index:1; left:50%; top:50%; transform:translate(-50%,-50%); width:84px; height:84px; border-radius:50%; border:none; background:#fff; color:var(--green); display:grid; place-items:center; box-shadow:var(--shadow); transition:transform .2s; }
 .video .play:hover{ transform:translate(-50%,-50%) scale(1.06); }
 .video .play svg{ width:30px; height:30px; margin-left:4px; }
@@ -331,20 +331,15 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .inst-head p{ font-size:16.5px; line-height:1.6; color:var(--text-2); margin:12px 0 0; }
 .inst-note{ font-size:13.5px; color:var(--muted); line-height:1.6; margin:20px 0 0; }
 
-/* Foto + lista de itens lado a lado */
+/* Duas colunas lado a lado + grupos de itens com ícone */
 .split{ display:grid; grid-template-columns:1fr 1.15fr; gap:48px; align-items:center; }
-.split.rev{ grid-template-columns:1.15fr 1fr; }
-.split.rev .photo{ order:2; }
-.photo{ border-radius:28px; overflow:hidden; min-height:440px; position:relative; }
-.photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .feats{ display:grid; grid-template-columns:1fr 1fr; gap:30px 28px; }
-.feats.one{ grid-template-columns:1fr; gap:22px; }
+.feats.three{ grid-template-columns:repeat(3,1fr); }
+.feats.four{ grid-template-columns:repeat(4,1fr); }
 .feat .ic-box{ width:46px; height:46px; border-radius:14px; background:var(--mint); color:var(--green); display:grid; place-items:center; margin-bottom:14px; }
 .feat .ic-box svg{ width:22px; height:22px; }
 .feat h3{ font-size:19px; font-weight:600; margin-bottom:6px; }
 .feat p{ font-size:15px; line-height:1.6; color:var(--text-2); margin:0; }
-.feats.one .feat{ display:grid; grid-template-columns:46px 1fr; column-gap:16px; }
-.feats.one .feat .ic-box{ grid-row:1 / 3; margin:0; }
 
 /* Dois painéis em contraste (FOMO x JOMO, outros portais x SoftLiving) */
 .contrast{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
@@ -417,22 +412,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .rules li::before{ content:""; position:absolute; left:0; top:2px; width:22px; height:22px; border-radius:50%; background:var(--mint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F5519' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/13px no-repeat; }
 .rules b{ color:var(--navy); }
 
-/* Colagem da abertura (Benefícios) */
-.trio{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:200px 200px; gap:14px; }
-.trio figure{ margin:0; border-radius:24px; overflow:hidden; position:relative; }
-.trio figure:first-child{ grid-row:1 / 3; }
-.trio img{ width:100%; height:100%; object-fit:cover; }
-
-/* Cartões com foto (Benefícios: o que traz para a sua vida) */
-.photo-cards{ display:grid; grid-template-columns:repeat(6,1fr); gap:18px; }
-.photo-cards .pc{ grid-column:span 2; background:#fff; border:1px solid var(--line); border-radius:24px; overflow:hidden; }
-.photo-cards .pc.wide{ grid-column:span 3; }
-.photo-cards .img{ aspect-ratio:16/10; overflow:hidden; }
-.photo-cards .wide .img{ aspect-ratio:16/8; }
-.photo-cards img{ width:100%; height:100%; object-fit:cover; }
-.photo-cards .txt{ padding:20px 22px 24px; }
-.photo-cards h3{ font-size:20px; margin-bottom:6px; font-weight:600; }
-.photo-cards p{ font-size:15px; line-height:1.6; color:var(--text-2); margin:0; }
+/* Cartões com ícone (Benefícios: o que traz para a sua vida): 3 na primeira linha, 2 largos na segunda */
+.icon-cards{ display:grid; grid-template-columns:repeat(6,1fr); gap:18px; }
+.icon-cards .feat{ grid-column:span 2; background:#fff; border:1px solid var(--line); border-radius:24px; padding:28px; }
+.icon-cards .feat.wide{ grid-column:span 3; }
 
 /* Planos (Benefícios) e cotas (Patrocinadores) */
 .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; align-items:stretch; }
@@ -470,12 +453,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 @media (max-width:1180px){
   .inst-hero h1{ font-size:46px; }
   .steps, .plans, .pillars, .pillars.four{ grid-template-columns:1fr 1fr; }
-  .photo-cards .pc, .photo-cards .pc.wide{ grid-column:span 3; }
+  .icon-cards .feat, .icon-cards .feat.wide{ grid-column:span 3; }
+  .feats.four{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width:980px){
-  .inst-hero, .split, .split.rev, .contrast, .bands{ grid-template-columns:1fr; }
-  .split.rev .photo{ order:0; }
-  .photo{ min-height:320px; }
+  .inst-hero, .split, .contrast, .bands{ grid-template-columns:1fr; }
+  .feats.three{ grid-template-columns:1fr; }
   .band{ flex-direction:column; align-items:flex-start; }
   .press{ grid-template-columns:1fr auto; }
   .press .src{ grid-column:1 / 3; }
@@ -486,13 +469,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .lead{ font-size:16px; }
   .inst-sec{ padding-bottom:64px; }
   .inst-head h2{ font-size:29px; }
-  .feats, .steps, .plans, .pillars, .pillars.four{ grid-template-columns:1fr; }
-  .photo-cards{ grid-template-columns:1fr; }
-  .photo-cards .pc, .photo-cards .pc.wide{ grid-column:auto; }
+  .feats, .feats.four, .steps, .plans, .pillars, .pillars.four{ grid-template-columns:1fr; }
+  .icon-cards{ grid-template-columns:1fr; }
+  .icon-cards .feat, .icon-cards .feat.wide{ grid-column:auto; }
   .panel{ padding:24px; }
   .bigquote{ font-size:23px; }
   .band{ padding:26px 22px; }
-  .trio{ grid-template-rows:150px 150px; gap:10px; }
   .video .play{ width:66px; height:66px; }
   .wallet-card{ padding:22px; }
   .wallet-card .valor{ font-size:36px; }
