@@ -215,7 +215,7 @@ const LAYOUT_BARRA = `
   app.className = 'app';
   app.id = 'app';
   // .corpo: coluna do conteúdo (.wrap) e, nas páginas que têm, a coluna lateral da direita (<aside class="lateral">)
-  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="corpo"><div class="wrap"><main></main></div></div>${LAYOUT_RODAPE}</div>`;
+  app.innerHTML = LAYOUT_MENU + `<div class="main"><div class="corpo"><div class="wrap"><main></main></div></div></div>`;
   app.querySelector('main').append(...conteudo);
   const lateral = app.querySelector('main > aside.lateral');
   if(lateral){ app.querySelector('.corpo').appendChild(lateral); app.classList.add('com-lateral'); }
@@ -223,7 +223,8 @@ const LAYOUT_BARRA = `
   // O topo ocupa a largura toda da janela (acima do menu lateral e do conteúdo)
   document.body.insertAdjacentHTML('afterbegin', LAYOUT_TOPO + LAYOUT_CABECALHO);
   document.querySelector('.top').after(app);
-  app.insertAdjacentHTML('afterend', LAYOUT_BARRA);
+  // Rodapé fora da área com a barra lateral: ocupa a largura toda da página, de ponta a ponta
+  app.insertAdjacentHTML('afterend', LAYOUT_RODAPE + LAYOUT_BARRA);
 
   document.querySelectorAll('.nav a[data-page], .tabbar a[data-page]').forEach(a => {
     const on = a.dataset.page === LAYOUT_PAGE;
