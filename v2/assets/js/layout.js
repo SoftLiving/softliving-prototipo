@@ -38,6 +38,7 @@ const ICONES = {
   presente:'<rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3"/><path d="M12 5v16"/>',
   loja:'<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/>',
   simples:'<path d="M4 7h16M4 12h10M4 17h6"/>',
+  modo:'<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>',
   ajuda:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><path d="M12 17h.01"/>',
   busca:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
   menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
@@ -122,7 +123,7 @@ const LAYOUT_MENU = `
       <a href="#" title="Carteira">${icone('carteira')}</a>
       <a href="#" title="Indicações: +5 créditos por amigo">${icone('presente')}</a>
       <a href="${V1_ROOT}grupo.html?g=12" title="Desapego">${icone('loja')}</a>
-      <a href="${urlPagina('simples')}" id="modoSimplesBtn" title="Modo simples: menos opções e letra maior">${icone('simples')}</a>
+      <a href="${urlPagina('simples')}" class="modo-simples" title="Modo simples: menos opções e letra maior">${icone('simples')}</a>
       <a href="#" title="Ajuda">${icone('ajuda')}</a>
     </div>
   </div>
@@ -146,9 +147,11 @@ const LAYOUT_CABECALHO = `
     <a href="${urlSite('patrocinadores')}" data-site="patrocinadores">Patrocinadores</a>
   </nav>
   <div class="tools">
-    <label class="search">${icone('busca')}<input type="search" placeholder="Buscar no portal" aria-label="Buscar no portal"></label>
+    <a href="#" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
+    <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
+    <a href="#" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
     <a href="#" class="round" aria-label="Notificações">${icone('sino')}<i></i></a>
-    <a href="#" class="btn">Publicar</a>
+    <a href="https://softliving.com.br/entrar" class="btn">Entrar</a>
   </div>
 </div>`;
 
@@ -228,7 +231,7 @@ document.getElementById('scrim').addEventListener('click', fecharMenu);
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
 // Modo simples: a escolha fica guardada para o index.html da versão 1
-document.getElementById('modoSimplesBtn').addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples'));
+document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples')));
 
 // Atalhos dentro das páginas: data-goto="grupos" leva a uma página do menu, data-site-link="seguranca" a uma
 // página institucional (v2 ou v1, conforme o que já foi refeito)

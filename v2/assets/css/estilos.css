@@ -110,14 +110,16 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; }
 .site-nav a:hover, .site-nav a.on{ color:var(--green); }
 .tools{ margin-left:auto; display:flex; align-items:center; gap:10px; }
-.search{ display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line); border-radius:999px; padding:0 14px; width:230px; color:var(--muted); }
-.search:focus-within{ border-color:var(--green); }
-.search .ic{ width:17px; height:17px; }
-.search input{ border:none; outline:none; background:none; padding:9px 0; font-size:13.5px; width:100%; min-width:0; }
 .round{ width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid var(--line); display:grid; place-items:center; position:relative; padding:0; flex:none; }
 .round .ic{ width:18px; height:18px; }
 .round i{ position:absolute; top:8px; right:9px; width:8px; height:8px; border-radius:50%; background:var(--red); border:2px solid #fff; }
 .menu-btn{ display:none; }
+/* Botões do topo (Modo simples, créditos, Entrar): mesmo tamanho; a borda existe em todos para a altura bater */
+.tools .btn{ border:1px solid transparent; height:40px; padding:0 18px; }
+.btn.simples{ background:var(--mint); color:var(--green); border-color:#bfdcc9; }
+.btn.simples:hover{ background:#d6ebdd; }
+.btn.creditos{ background:#fdf1dc; color:#8a5a0e; border-color:#f0ddac; }
+.btn.creditos:hover{ background:#fbe8c6; }
 
 /* Rodapé */
 .rodape{ background:#fff; border-top:1px solid var(--line); padding:52px 0 0; }
@@ -254,8 +256,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .news .ok{ padding:10px 16px; font-size:14px; color:var(--green); font-weight:600; }
 
 /* ===== Telas médias ===== */
+/* Links institucionais do topo: só cabem com os botões a partir de ~1400px; abaixo disso ficam no rodapé */
+@media (max-width:1400px){ .site-nav{ display:none; } }
+@media (max-width:1060px){ .top{ gap:12px; } .tools{ gap:8px; } }
 @media (max-width:1180px){
-  .site-nav{ display:none; }
   .hero h1{ font-size:48px; }
   .cards{ grid-template-columns:repeat(2,1fr); }
   .community{ grid-template-columns:1fr; }
@@ -280,7 +284,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .wrap{ padding:0 16px; }
   .top{ gap:10px; padding:14px 0; }
   .top .brand{ font-size:23px; }
-  .search, .tools .btn{ display:none; }
+  .tools .btn{ display:none; }
   .head h2{ font-size:28px; }
   .head .btn{ display:none; }
   .tabs{ flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px; scrollbar-width:none; }
