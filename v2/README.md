@@ -44,6 +44,12 @@ assets/img/                 Logos da FSB e da RB2
 | Institucional: Segurança | a fazer (abre a v1) |
 | Modo simples | a fazer (abre a v1) |
 
+## Regras de visual
+
+- **Hover (igual à versão 1):** todo botão e toda caixa clicável sobe 2px e ganha sombra (`--sombra-hover`) ao passar
+  o mouse. A regra fica no fim do `estilos.css` ("REGRA DE HOVER"): ao criar um botão ou caixa clicável novo,
+  acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.
+
 ## Observações
 
 - Fotos de exemplo do Unsplash, carregadas pela internet (sem internet aparece um fundo verde claro no lugar).

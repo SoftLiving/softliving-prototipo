@@ -10,6 +10,7 @@
   --text:#1d2430; --text-2:#56606c; --muted:#7c8591;
   --gold-bg:#fff4dc; --gold:#8a5a0e; --red:#e5484d;
   --shadow:0 12px 30px rgba(1,53,101,.12);
+  --sombra-hover:0 10px 24px rgba(18,41,77,.1); /* regra de hover: ver o fim do arquivo */
   color-scheme:light;
 }
 *{ box-sizing:border-box; }
@@ -489,3 +490,18 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .press{ padding:22px; gap:14px; }
   .press .t{ font-size:18px; }
 }
+
+/* ===== REGRA DE HOVER (igual à versão 1) =====
+   Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
+   Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.
+   Exceções: abas do fichário (se subissem, desgrudariam do painel) e itens do menu lateral e da barra do celular.
+   Cartões com foto sem caixa (.card, .lead): o cartão sobe e a sombra vai só na foto. */
+.btn, .round, .collapse, .icons a, .box a, .card, .card .imgw, .card .fav, .lead, .lead .imgw, .item, .group, .press{
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
+.card:hover, .lead:hover{ transform:translateY(-2px); }
+.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
+.card:hover .imgw, .lead:hover .imgw{ box-shadow:var(--sombra-hover); }
+/* O botão de recolher o menu fica girado quando o menu está recolhido: sobe sem perder o giro */
+.app.mini .collapse:hover{ transform:rotate(180deg) translateY(2px); }
