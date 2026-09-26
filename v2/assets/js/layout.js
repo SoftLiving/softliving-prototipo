@@ -77,6 +77,7 @@ const LAYOUT_TOPO = `
   <span class="proto-short">Em construção · dados fictícios</span>
   <button type="button" onclick="openProtoModal()">Saiba mais</button>
   <a href="${V1_ROOT}inicio.html">Ver versão 1</a>
+  <button type="button" id="vidroBtn" class="vidro-toggle">Testar efeito vidro</button>
 </div>
 
 <div class="modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
@@ -231,6 +232,23 @@ document.getElementById('tabVoce').addEventListener('click', e => { e.preventDef
 document.getElementById('scrim').addEventListener('click', fecharMenu);
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
+// EXPERIMENTO · efeito vidro: botões e boxes translúcidos (classe .vidro no <html>). Liga e desliga pela faixa de
+// protótipo; a escolha fica guardada no navegador. Os estilos ficam no fim do estilos.css.
+const vidroBtn = document.getElementById('vidroBtn');
+function aplicarVidro(ligado){
+  document.documentElement.classList.toggle('vidro', ligado);
+  vidroBtn.textContent = ligado ? 'Desligar efeito vidro' : 'Testar efeito vidro';
+  vidroBtn.classList.toggle('on', ligado);
+}
+const vidroNoEndereco = new URLSearchParams(location.search).get('vidro'); // ?vidro=1 liga, ?vidro=0 desliga
+if(vidroNoEndereco !== null) guardarPreferencia('v2Vidro', vidroNoEndereco === '1' ? '1' : '0');
+aplicarVidro(lerPreferencia('v2Vidro') === '1');
+vidroBtn.addEventListener('click', () => {
+  const ligado = !document.documentElement.classList.contains('vidro');
+  guardarPreferencia('v2Vidro', ligado ? '1' : '0');
+  aplicarVidro(ligado);
+});
+
 // Modo simples: a escolha fica guardada para o index.html da versão 1
 document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples')));
 
@@ -330,4 +348,5 @@ function closeProtoModal(){
 }
 let protoVisto = false;
 try { protoVisto = sessionStorage.getItem('protoAviso') === '1'; } catch(e){}
+if(new URLSearchParams(location.search).get('aviso') === '0') protoVisto = true; // ?aviso=0: sem o aviso (capturas de tela)
 if(!protoVisto) openProtoModal();

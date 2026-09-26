@@ -201,12 +201,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* Últimas matérias */
 .stories{ display:grid; grid-template-columns:1.25fr 1fr; gap:28px; margin-top:40px; } /* afasta do subtítulo: a caixa branca do hover sobe 20px */
-.lead .imgw{ border-radius:24px; overflow:hidden; }
-.lead img{ width:100%; aspect-ratio:16/10; object-fit:cover; transition:transform .35s; }
-.lead:hover img{ transform:scale(1.03); }
-.lead .cat{ display:block; margin:18px 0 8px; }
-.lead h3{ font-size:30px; line-height:1.18; }
-.lead p{ color:var(--text-2); line-height:1.6; margin:10px 0 12px; font-size:15.5px; }
+.destaque .imgw{ border-radius:24px; overflow:hidden; }
+.destaque img{ width:100%; aspect-ratio:16/10; object-fit:cover; transition:transform .35s; }
+.destaque:hover img{ transform:scale(1.03); }
+.destaque .cat{ display:block; margin:18px 0 8px; }
+.destaque h3{ font-size:30px; line-height:1.18; }
+.destaque p{ color:var(--text-2); line-height:1.6; margin:10px 0 12px; font-size:15.5px; }
 .list{ display:flex; flex-direction:column; gap:14px; }
 .item{ display:grid; grid-template-columns:132px 1fr; gap:16px; align-items:center; padding:16px; margin:0 -16px; border-radius:24px; }
 .item img{ width:132px; height:104px; object-fit:cover; border-radius:14px; }
@@ -305,7 +305,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .hero{ padding:12px 0 48px; }
   .hero h1{ font-size:38px; }
   .hero p{ font-size:16px; margin:18px 0 22px; }
-      .lead h3{ font-size:24px; }
+      .destaque h3{ font-size:24px; }
   .item{ grid-template-columns:96px 1fr; padding:12px; margin:0 -12px; gap:12px; }
   .item img{ width:96px; height:84px; }
   .item h3{ font-size:15.5px; }
@@ -525,18 +525,89 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.
    Exceções: abas do fichário (se subissem, desgrudariam do painel) e itens do menu lateral e da barra do celular.
-   Conteúdos com foto (.card, .lead, .item): no hover ganham uma caixa branca em volta (foto + texto), além de subir e ganhar sombra.
+   Conteúdos com foto (.card, .destaque, .item): no hover ganham uma caixa branca em volta (foto + texto), além de subir e ganhar sombra.
    Para a caixa não desalinhar o conteúdo, eles têm padding com margem negativa do mesmo tamanho. */
-.card, .lead{ display:block; padding:20px; margin:-20px; border-radius:26px; }
-.card:hover, .lead:hover, .item:hover{ background:#fff; }
-.btn, .round, .collapse, .icons a, .box a, .card, .card .fav, .lead, .item, .group, .press{
+.card, .destaque{ display:block; padding:20px; margin:-20px; border-radius:26px; }
+.card:hover, .destaque:hover, .item:hover{ background:#fff; }
+.btn, .round, .collapse, .icons a, .box a, .card, .card .fav, .destaque, .item, .group, .press{
   transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 .btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
-.card:hover, .lead:hover{ transform:translateY(-2px); }
+.card:hover, .destaque:hover{ transform:translateY(-2px); }
 .btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
-.card:hover, .lead:hover{ box-shadow:var(--sombra-hover); }
+.card:hover, .destaque:hover{ box-shadow:var(--sombra-hover); }
 /* No celular os cartões de assunto rolam para o lado: sem margem negativa, para não encostarem uns nos outros */
-@media (max-width:640px){ .cards .card{ margin:0; padding:12px; } .lead{ padding:12px; margin:-12px; } } /* margem menor que a da página (16px) */
+@media (max-width:640px){ .cards .card{ margin:0; padding:12px; } .destaque{ padding:12px; margin:-12px; } } /* margem menor que a da página (16px) */
 /* O botão de recolher o menu fica girado quando o menu está recolhido: sobe sem perder o giro */
 .app.mini .collapse:hover{ transform:rotate(180deg) translateY(2px); }
+
+/* ===== EXPERIMENTO · EFEITO VIDRO (ligado pela faixa de protótipo: classe .vidro no <html>) =====
+   Botões e boxes translúcidos: fundo semitransparente, desfoque do que está atrás, brilho na borda de cima,
+   sombra interna embaixo e sombra suave por fora. Para descartar o teste, basta apagar esta seção. */
+.vidro-toggle{ border:1px solid #d9b25a !important; border-radius:999px; padding:1px 10px !important; text-decoration:none !important; background:#fff8e6 !important; }
+.vidro-toggle.on{ background:#c98a2e !important; color:#fff !important; }
+:root{
+  --vidro-claro:rgba(255,255,255,.42);
+  --vidro-borda:rgba(255,255,255,.85);
+  --vidro-brilho:inset 0 1px 1px rgba(255,255,255,.95), inset 0 -2px 6px rgba(1,53,101,.06);
+  --vidro-sombra:0 8px 24px rgba(1,53,101,.08);
+  --vidro-desfoque:blur(16px) saturate(1.6);
+}
+/* Fundo com manchas suaves de cor, para o vidro ter o que desfocar (só no teste) */
+html.vidro body{ background:
+  radial-gradient(40vw 40vw at 8% 12%, rgba(159,208,176,.35), transparent 70%),
+  radial-gradient(36vw 36vw at 92% 30%, rgba(241,216,152,.30), transparent 70%),
+  radial-gradient(44vw 44vw at 40% 85%, rgba(1,53,101,.08), transparent 70%),
+  var(--paper); background-attachment:fixed; }
+
+/* Botões claros e caixas brancas: vidro claro */
+html.vidro .btn.ghost, html.vidro .btn.white, html.vidro .round, html.vidro .collapse,
+html.vidro .caixa-branca, html.vidro .plan:not(.featured):not(.vip), html.vidro .step, html.vidro .panel.off, html.vidro .quote,
+html.vidro .band.white, html.vidro .press, html.vidro .box, html.vidro .icons, html.vidro .rodape, html.vidro .icon-cards .feat,
+html.vidro .feats.em-cartoes .feat, html.vidro .side{
+  background:var(--vidro-claro); border:1px solid var(--vidro-borda);
+  -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
+  box-shadow:var(--vidro-brilho), var(--vidro-sombra);
+}
+html.vidro .caixa-branca .panel.off, html.vidro .caixa-branca .band.white, html.vidro .caixa-branca .feats.em-cartoes .feat{ background:rgba(255,255,255,.35); }
+html.vidro .rodape{ border-width:1px 0 0; box-shadow:var(--vidro-brilho); }
+
+/* Botão verde: vidro verde */
+html.vidro .btn:not(.ghost):not(.white):not(.simples):not(.creditos){
+  background:rgba(31,85,25,.78); border:1px solid rgba(255,255,255,.35);
+  -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.45), inset 0 -3px 8px rgba(0,0,0,.18), 0 6px 18px rgba(31,85,25,.22);
+}
+html.vidro .btn:not(.ghost):not(.white):not(.simples):not(.creditos):hover{ background:rgba(23,67,19,.86); }
+/* Modo simples e créditos: vidro colorido */
+html.vidro .btn.simples{ background:rgba(230,242,234,.55); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+html.vidro .btn.creditos{ background:rgba(253,241,220,.6); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+
+/* Boxes coloridos: mantêm a cor, com transparência e brilho */
+html.vidro .plan.featured{ background:rgba(31,85,25,.82); border-color:rgba(255,255,255,.3); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.35), 0 18px 40px rgba(31,85,25,.22); }
+html.vidro .plan.vip, html.vidro .seal{ background:rgba(241,216,152,.55); border-color:rgba(255,255,255,.8); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), 0 18px 40px rgba(170,125,30,.12); }
+html.vidro .panel.on, html.vidro .band:not(.white), html.vidro .wallet{ background:rgba(230,242,234,.6); border:1px solid rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+html.vidro .news, html.vidro .photo-band{ background:rgba(1,53,101,.86); border:1px solid rgba(255,255,255,.25); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.25), 0 18px 40px rgba(1,53,101,.18); }
+
+/* Caixa do hover dos conteúdos: vidro em vez de branco */
+html.vidro .card:hover, html.vidro .destaque:hover, html.vidro .item:hover{
+  background:rgba(255,255,255,.5); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
+  box-shadow:var(--vidro-brilho), var(--sombra-hover);
+}
+/* Hover dos botões: mantém o brilho do vidro junto com a sombra da regra de hover */
+html.vidro .btn:hover, html.vidro .round:hover, html.vidro .collapse:hover{ box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+
+/* Sobre as fotos: selos, salvar, nome do grupo e play em vidro */
+html.vidro .badge, html.vidro .card .fav, html.vidro .group .info div, html.vidro .video .play, html.vidro .group .new{
+  background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.75);
+  -webkit-backdrop-filter:blur(10px) saturate(1.6); backdrop-filter:blur(10px) saturate(1.6);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.9), 0 4px 12px rgba(0,0,0,.08);
+}
+html.vidro .video{ background:rgba(230,242,234,.5); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+
+/* Botão branco sobre o cartão verde: mais opaco para o texto verde continuar legível */
+html.vidro .plan.featured .btn.white{ background:rgba(255,255,255,.88); }
+
+/* Barra do celular */
+html.vidro .tabbar{ background:rgba(255,255,255,.5); border-color:var(--vidro-borda); box-shadow:var(--vidro-brilho), var(--shadow); }
+
