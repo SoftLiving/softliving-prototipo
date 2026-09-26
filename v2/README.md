@@ -46,6 +46,12 @@ assets/img/                 Logos da FSB e da RB2
 
 ## Regras de visual
 
+- **Efeito vidro (padrão):** botões e boxes translúcidos, com desfoque, brilho na borda e sombra suave; o fundo da página
+  tem manchas suaves de cor para o vidro ter o que desfocar. Seção "EFEITO VIDRO" no fim do `estilos.css`: todo botão ou
+  box novo entra numa das listas de lá (vidro claro, verde ou colorido).
+- **Servidor de testes sem cache:** `.claude/servidor.py` (porta 8765) avisa o navegador para não guardar os arquivos;
+  depois de mudar CSS, JS ou imagens, basta recarregar a página.
+
 - **Hover (igual à versão 1):** todo botão e toda caixa clicável sobe 2px e ganha sombra (`--sombra-hover`) ao passar
   o mouse. A regra fica no fim do `estilos.css` ("REGRA DE HOVER"): ao criar um botão ou caixa clicável novo,
   acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.

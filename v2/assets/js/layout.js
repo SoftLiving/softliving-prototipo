@@ -77,7 +77,6 @@ const LAYOUT_TOPO = `
   <span class="proto-short">Em construção · dados fictícios</span>
   <button type="button" onclick="openProtoModal()">Saiba mais</button>
   <a href="${V1_ROOT}inicio.html">Ver versão 1</a>
-  <button type="button" id="vidroBtn" class="vidro-toggle">Testar efeito vidro</button>
 </div>
 
 <div class="modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
@@ -232,23 +231,6 @@ document.getElementById('tabVoce').addEventListener('click', e => { e.preventDef
 document.getElementById('scrim').addEventListener('click', fecharMenu);
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
-// EXPERIMENTO · efeito vidro: botões e boxes translúcidos (classe .vidro no <html>). Liga e desliga pela faixa de
-// protótipo; a escolha fica guardada no navegador. Os estilos ficam no fim do estilos.css.
-const vidroBtn = document.getElementById('vidroBtn');
-function aplicarVidro(ligado){
-  document.documentElement.classList.toggle('vidro', ligado);
-  vidroBtn.textContent = ligado ? 'Desligar efeito vidro' : 'Testar efeito vidro';
-  vidroBtn.classList.toggle('on', ligado);
-}
-const vidroNoEndereco = new URLSearchParams(location.search).get('vidro'); // ?vidro=1 liga, ?vidro=0 desliga
-if(vidroNoEndereco !== null) guardarPreferencia('v2Vidro', vidroNoEndereco === '1' ? '1' : '0');
-aplicarVidro(lerPreferencia('v2Vidro') === '1');
-vidroBtn.addEventListener('click', () => {
-  const ligado = !document.documentElement.classList.contains('vidro');
-  guardarPreferencia('v2Vidro', ligado ? '1' : '0');
-  aplicarVidro(ligado);
-});
-
 // Modo simples: a escolha fica guardada para o index.html da versão 1
 document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples')));
 
@@ -264,6 +246,7 @@ document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend'
 // Patrocinadores apoiadores: a faixa <div class="apoio"> da página (uma só por página) recebe uma marca sorteada
 // a cada visita. O logo aparece em tom sobre tom (discreto, na cor do fundo) pelo CSS.
 // altura: ajuste fino para os três logos parecerem do mesmo tamanho.
+const LOGOS_VERSAO = 2; // logos com fundo transparente
 const PATROCINADORES = [
   { nome:"Rede D'Or", logo:'assets/img/logo-rede-dor.png', altura:56 },
   { nome:'Claro', logo:'assets/img/logo-claro.png', altura:40 },
@@ -278,7 +261,8 @@ const PATROCINADORES = [
   if(escolhido) sorteio.unshift(escolhido);
   vagas.forEach((vaga, i) => {
     const p = sorteio[i % sorteio.length];
-    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span><img src="${LAYOUT_ROOT}${p.logo}" alt="${p.nome}" style="height:${p.altura}px">`;
+    // ?v=: muda quando o arquivo do logo muda, para o navegador não usar a imagem antiga guardada
+    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span><img src="${LAYOUT_ROOT}${p.logo}?v=${LOGOS_VERSAO}" alt="${p.nome}" style="height:${p.altura}px">`;
   });
 })();
 

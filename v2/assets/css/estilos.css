@@ -538,11 +538,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* O botão de recolher o menu fica girado quando o menu está recolhido: sobe sem perder o giro */
 .app.mini .collapse:hover{ transform:rotate(180deg) translateY(2px); }
 
-/* ===== EXPERIMENTO · EFEITO VIDRO (ligado pela faixa de protótipo: classe .vidro no <html>) =====
+/* ===== EFEITO VIDRO (visual padrão da versão 2, aprovado em 2026-09-26) =====
    Botões e boxes translúcidos: fundo semitransparente, desfoque do que está atrás, brilho na borda de cima,
-   sombra interna embaixo e sombra suave por fora. Para descartar o teste, basta apagar esta seção. */
-.vidro-toggle{ border:1px solid #d9b25a !important; border-radius:999px; padding:1px 10px !important; text-decoration:none !important; background:#fff8e6 !important; }
-.vidro-toggle.on{ background:#c98a2e !important; color:#fff !important; }
+   sombra interna embaixo e sombra suave por fora. Fica no fim do arquivo para valer sobre os estilos de cada tela.
+   Ao criar um botão ou box novo, acrescente-o nas listas abaixo (vidro claro, verde ou colorido). */
 :root{
   --vidro-claro:rgba(255,255,255,.42);
   --vidro-borda:rgba(255,255,255,.85);
@@ -550,61 +549,61 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   --vidro-sombra:0 8px 24px rgba(1,53,101,.08);
   --vidro-desfoque:blur(16px) saturate(1.6);
 }
-/* Fundo com manchas suaves de cor, para o vidro ter o que desfocar (só no teste) */
-html.vidro body{ background:
+/* Fundo com manchas suaves de cor, para o vidro ter o que desfocar */
+body{ background:
   radial-gradient(40vw 40vw at 8% 12%, rgba(159,208,176,.35), transparent 70%),
   radial-gradient(36vw 36vw at 92% 30%, rgba(241,216,152,.30), transparent 70%),
   radial-gradient(44vw 44vw at 40% 85%, rgba(1,53,101,.08), transparent 70%),
   var(--paper); background-attachment:fixed; }
 
 /* Botões claros e caixas brancas: vidro claro */
-html.vidro .btn.ghost, html.vidro .btn.white, html.vidro .round, html.vidro .collapse,
-html.vidro .caixa-branca, html.vidro .plan:not(.featured):not(.vip), html.vidro .step, html.vidro .panel.off, html.vidro .quote,
-html.vidro .band.white, html.vidro .press, html.vidro .box, html.vidro .icons, html.vidro .rodape, html.vidro .icon-cards .feat,
-html.vidro .feats.em-cartoes .feat, html.vidro .side{
+:root .btn.ghost, :root .btn.white, :root .round, :root .collapse,
+:root .caixa-branca, :root .plan:not(.featured):not(.vip), :root .step, :root .panel.off, :root .quote,
+:root .band.white, :root .press, :root .box, :root .icons, :root .rodape, :root .icon-cards .feat,
+:root .feats.em-cartoes .feat, :root .side{
   background:var(--vidro-claro); border:1px solid var(--vidro-borda);
   -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
   box-shadow:var(--vidro-brilho), var(--vidro-sombra);
 }
-html.vidro .caixa-branca .panel.off, html.vidro .caixa-branca .band.white, html.vidro .caixa-branca .feats.em-cartoes .feat{ background:rgba(255,255,255,.35); }
-html.vidro .rodape{ border-width:1px 0 0; box-shadow:var(--vidro-brilho); }
+:root .caixa-branca .panel.off, :root .caixa-branca .band.white, :root .caixa-branca .feats.em-cartoes .feat{ background:rgba(255,255,255,.35); }
+:root .rodape{ border-width:1px 0 0; box-shadow:var(--vidro-brilho); }
 
 /* Botão verde: vidro verde */
-html.vidro .btn:not(.ghost):not(.white):not(.simples):not(.creditos){
+:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos){
   background:rgba(31,85,25,.78); border:1px solid rgba(255,255,255,.35);
   -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.45), inset 0 -3px 8px rgba(0,0,0,.18), 0 6px 18px rgba(31,85,25,.22);
 }
-html.vidro .btn:not(.ghost):not(.white):not(.simples):not(.creditos):hover{ background:rgba(23,67,19,.86); }
+:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos):hover{ background:rgba(23,67,19,.86); }
 /* Modo simples e créditos: vidro colorido */
-html.vidro .btn.simples{ background:rgba(230,242,234,.55); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
-html.vidro .btn.creditos{ background:rgba(253,241,220,.6); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+:root .btn.simples{ background:rgba(230,242,234,.55); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+:root .btn.creditos{ background:rgba(253,241,220,.6); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
 
 /* Boxes coloridos: mantêm a cor, com transparência e brilho */
-html.vidro .plan.featured{ background:rgba(31,85,25,.82); border-color:rgba(255,255,255,.3); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.35), 0 18px 40px rgba(31,85,25,.22); }
-html.vidro .plan.vip, html.vidro .seal{ background:rgba(241,216,152,.55); border-color:rgba(255,255,255,.8); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), 0 18px 40px rgba(170,125,30,.12); }
-html.vidro .panel.on, html.vidro .band:not(.white), html.vidro .wallet{ background:rgba(230,242,234,.6); border:1px solid rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
-html.vidro .news, html.vidro .photo-band{ background:rgba(1,53,101,.86); border:1px solid rgba(255,255,255,.25); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.25), 0 18px 40px rgba(1,53,101,.18); }
+:root .plan.featured{ background:rgba(31,85,25,.82); border-color:rgba(255,255,255,.3); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.35), 0 18px 40px rgba(31,85,25,.22); }
+:root .plan.vip, :root .seal{ background:rgba(241,216,152,.55); border-color:rgba(255,255,255,.8); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), 0 18px 40px rgba(170,125,30,.12); }
+:root .panel.on, :root .band:not(.white), :root .wallet{ background:rgba(230,242,234,.6); border:1px solid rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+:root .news, :root .photo-band{ background:rgba(1,53,101,.86); border:1px solid rgba(255,255,255,.25); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.25), 0 18px 40px rgba(1,53,101,.18); }
 
 /* Caixa do hover dos conteúdos: vidro em vez de branco */
-html.vidro .card:hover, html.vidro .destaque:hover, html.vidro .item:hover{
+:root .card:hover, :root .destaque:hover, :root .item:hover{
   background:rgba(255,255,255,.5); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
   box-shadow:var(--vidro-brilho), var(--sombra-hover);
 }
 /* Hover dos botões: mantém o brilho do vidro junto com a sombra da regra de hover */
-html.vidro .btn:hover, html.vidro .round:hover, html.vidro .collapse:hover{ box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+:root .btn:hover, :root .round:hover, :root .collapse:hover{ box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 
 /* Sobre as fotos: selos, salvar, nome do grupo e play em vidro */
-html.vidro .badge, html.vidro .card .fav, html.vidro .group .info div, html.vidro .video .play, html.vidro .group .new{
+:root .badge, :root .card .fav, :root .group .info div, :root .video .play, :root .group .new{
   background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.75);
   -webkit-backdrop-filter:blur(10px) saturate(1.6); backdrop-filter:blur(10px) saturate(1.6);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.9), 0 4px 12px rgba(0,0,0,.08);
 }
-html.vidro .video{ background:rgba(230,242,234,.5); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+:root .video{ background:rgba(230,242,234,.5); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
 
 /* Botão branco sobre o cartão verde: mais opaco para o texto verde continuar legível */
-html.vidro .plan.featured .btn.white{ background:rgba(255,255,255,.88); }
+:root .plan.featured .btn.white{ background:rgba(255,255,255,.88); }
 
 /* Barra do celular */
-html.vidro .tabbar{ background:rgba(255,255,255,.5); border-color:var(--vidro-borda); box-shadow:var(--vidro-brilho), var(--shadow); }
+:root .tabbar{ background:rgba(255,255,255,.5); border-color:var(--vidro-borda); box-shadow:var(--vidro-brilho), var(--shadow); }
 
