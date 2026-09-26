@@ -348,6 +348,56 @@ const PATROCINADORES = [
 // Links ainda sem destino não fazem a página pular para o topo
 document.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 
+// Carrossel: um bloco de conteúdos menores (trilho) rola dentro da própria área, com setas de voltar e avançar.
+// dir 'h': rola na horizontal (setas nas laterais); dir 'v': rola na vertical (setas em cima e embaixo), mostrando
+// "visiveis" itens por vez. A página chama ativarCarrossel(elemento, dir) depois de preencher o elemento (e de novo
+// sempre que trocar o conteúdo). Quantos itens aparecem por vez na horizontal fica no CSS (--vis).
+function ativarCarrossel(trilho, dir, visiveis = 4){
+  let car = trilho.closest('.carrossel');
+  if(!car){
+    car = document.createElement('div');
+    car.className = `carrossel carrossel-${dir}`;
+    trilho.before(car);
+    car.append(trilho);
+    trilho.classList.add(`trilho-${dir}`);
+    const seta = (lado, rotulo) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = `car-btn car-${lado}`;
+      b.setAttribute('aria-label', rotulo);
+      b.innerHTML = icone('voltar');
+      return b;
+    };
+    const ant = seta('ant', dir === 'h' ? 'Voltar' : 'Subir'), prox = seta('prox', dir === 'h' ? 'Mais' : 'Descer');
+    car.append(ant, prox);
+    const passo = s => dir === 'h'
+      ? trilho.scrollBy({ left: s * (trilho.clientWidth - 24), behavior:'smooth' })
+      : trilho.scrollBy({ top: s * (trilho.clientHeight - 16), behavior:'smooth' });
+    ant.addEventListener('click', () => passo(-1));
+    prox.addEventListener('click', () => passo(1));
+    car.atualizar = () => {
+      const pos = dir === 'h' ? trilho.scrollLeft : trilho.scrollTop;
+      const vis = dir === 'h' ? trilho.clientWidth : trilho.clientHeight;
+      const tot = dir === 'h' ? trilho.scrollWidth : trilho.scrollHeight;
+      ant.disabled = pos <= 2;
+      prox.disabled = pos + vis >= tot - 2;
+      car.classList.toggle('sem-rolagem', tot <= vis + 2);
+    };
+    car.ajustarAltura = () => {
+      if(dir !== 'v') return;
+      trilho.style.maxHeight = '';
+      const itens = trilho.children, alvo = itens[visiveis];
+      if(alvo) trilho.style.maxHeight = (alvo.offsetTop - itens[0].offsetTop + parseFloat(getComputedStyle(trilho).paddingTop) * 2 - parseFloat(getComputedStyle(trilho).rowGap || 0)) + 'px';
+    };
+    trilho.addEventListener('scroll', car.atualizar, { passive:true });
+    addEventListener('resize', () => { car.ajustarAltura(); car.atualizar(); });
+    addEventListener('load', () => { car.ajustarAltura(); car.atualizar(); });
+  }
+  if(dir === 'h') trilho.scrollLeft = 0; else trilho.scrollTop = 0;
+  car.ajustarAltura();
+  car.atualizar();
+}
+
 // Aviso rápido no canto da tela
 let toastTimer;
 function mostrarAviso(texto){

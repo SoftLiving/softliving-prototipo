@@ -10,7 +10,7 @@ const colunaPorTitulo = t => TODAS_COLUNAS().find(c => c.t === t);
 const colEstado = { autor:null, categoria:'Todos' };
 const totalPublicadas = COLUNISTAS.reduce((s, col) => s + col.publicadas, 0);
 
-// Coluna do dia (topo) e, no mesmo box, 4 sugestões
+// Coluna do dia (topo) e, no mesmo box, sugestões num carrossel horizontal (4 por vez)
 const autorDia = COLUNISTAS.find(col => col.nome === COLUNA_DO_DIA.colunista);
 const ultimaDia = colunaPorTitulo(COLUNA_DO_DIA.ultima);
 document.getElementById('colDia').innerHTML = `
@@ -28,11 +28,13 @@ document.getElementById('colDia').innerHTML = `
   <div class="cd-sugestoes">
     <span class="cd-sug-titulo">Mais colunas para você</span>
     <div class="cd-sug-lista">
-      ${SUGESTOES_DO_DIA.map(colunaPorTitulo).map(c => `
+      ${[...SUGESTOES_DO_DIA.map(colunaPorTitulo), ...TODAS_COLUNAS().filter(c => c.t !== COLUNA_DO_DIA.ultima && !SUGESTOES_DO_DIA.includes(c.t))].map(c => `
       <a href="#" class="cd-sug"><img class="foto" src="${fotoUrl(c.foto, 400)}" alt="" loading="lazy">
         <b>${comLogo(c.t)}</b><small>${colunistaDe(c).nome}</small></a>`).join('')}
     </div>
   </div>`;
+
+ativarCarrossel(document.querySelector('#colDia .cd-sug-lista'), 'h');   // 4 por vez, com setas
 
 document.getElementById('colConta').textContent = `${COLUNISTAS.length} colunistas · ${totalPublicadas} colunas publicadas`;
 

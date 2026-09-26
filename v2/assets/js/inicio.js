@@ -26,7 +26,7 @@ tabs.innerHTML = ASSUNTOS.map((a, i) => `<button type="button" role="tab" class=
   + `<a href="${urlPagina('conteudos')}" class="btn ghost">Todos os assuntos</a>`;
 function mostrarAssunto(i){
   const cat = ASSUNTOS[i][1];
-  const lista = ITENS.filter(c => !cat || c.cat === cat).slice(0, 4);
+  const lista = ITENS.filter(c => !cat || c.cat === cat);   // todos do assunto: o carrossel mostra 4 por vez
   document.getElementById('cards').innerHTML = lista.map(c => `
     <a href="#" class="vcard">
       <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
@@ -42,6 +42,7 @@ function mostrarAssunto(i){
     b.classList.toggle('on', on);
     b.setAttribute('aria-selected', on);
   });
+  ativarCarrossel(document.getElementById('cards'), 'h');
 }
 tabs.addEventListener('click', e => { const b = e.target.closest('button'); if(b) mostrarAssunto(+b.dataset.i); });
 // Botão salvar (cartões, destaque e lista): marca e desmarca, sem abrir o conteúdo
@@ -54,22 +55,25 @@ document.querySelector('main').addEventListener('click', e => {
 });
 mostrarAssunto(0);
 
-// Últimas matérias: a matéria em destaque e mais quatro
+// Últimas matérias: a matéria em destaque e, ao lado, as outras num carrossel vertical (4 por vez)
 const destaque = ITENS.find(c => c.destaque);
+const ordemLista = [1, 12, 7, 2];
 document.getElementById('lead').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
   <div class="meta"><span>${destaque.a}</span></div>`;
-document.getElementById('list').innerHTML = [1, 12, 7, 2].map(i => ITENS[i]).map(c => `
+document.getElementById('list').innerHTML = [...ordemLista.map(i => ITENS[i]), ...ITENS.filter((c, i) => c !== destaque && !ordemLista.includes(i))].map(c => `
   <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
     <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
+ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
-// Acontece nos grupos: três grupos em destaque (abrem a página interna da versão 1 por enquanto)
-document.getElementById('groupList').innerHTML = ['Clube do Vinho', 'Yoga & Meditação', 'Clube do Livro'].map(nome => {
-  const g = GRUPOS.find(x => x.t === nome);
+// Acontece nos grupos: carrossel com todos os grupos (3 por vez), começando pelos três em destaque
+// (abrem a página interna da versão 1 por enquanto)
+const primeirosGrupos = ['Clube do Vinho', 'Yoga & Meditação', 'Clube do Livro'].map(nome => GRUPOS.find(x => x.t === nome));
+document.getElementById('groupList').innerHTML = [...primeirosGrupos, ...GRUPOS.filter(g => !primeirosGrupos.includes(g))].map(g => {
   const n = GRUPOS.indexOf(g);
   return `
   <a href="${V1_ROOT}grupo.html?g=${n}" class="vcard">
@@ -81,9 +85,10 @@ document.getElementById('groupList').innerHTML = ['Clube do Vinho', 'Yoga & Medi
       <div class="vc-row"><span class="vc-chip" title="${g.membros} ${g.membros === 1 ? 'membro' : 'membros'}">${icone('grupos')}${g.membros}</span><span class="vc-btn">${g.participando ? 'Ver grupo' : 'Participar ' + icone('mais')}</span></div>
     </div></a>`;
 }).join('');
+ativarCarrossel(document.getElementById('groupList'), 'h');
 document.querySelectorAll('#grupos a[href="../grupos.html"]').forEach(a => a.href = urlPagina('grupos'));
 
-// Colunas: a coluna do dia como principal (à direita) e 4 colunas resumidas (à esquerda), sem repetir as de Últimas matérias.
+// Colunas: a coluna do dia como principal (à direita) e, à esquerda, as outras colunas num carrossel vertical (4 por vez).
 // Usa COLUNISTAS/COLUNA_DO_DIA/TODAS_COLUNAS (colunas-dados.js).
 const comLogo = texto => texto.replace('SoftLiving', LOGO);
 const colunistaDe = c => COLUNISTAS.find(col => c.a.startsWith(col.nome));
@@ -95,14 +100,16 @@ document.getElementById('colPrincipal').innerHTML = `
   <span class="cat">Coluna do dia · ${rotuloColuna(colDoDia)}</span>
   <h3>${ultimaDoDia.t}</h3><p>${colDoDia.bio.split('. ')[0]}.</p>
   <div class="meta"><span>${colDoDia.nome}</span><i></i><span>${colDoDia.categoria}</span></div>`;
-document.getElementById('colLista').innerHTML = ['Aos patrocinadores do SoftLiving', 'O luxo de hoje é outra coisa', 'A Coragem de Mudar de Direção', 'Meu primeiro agente de IA']
-  .map(t => TODAS_COLUNAS().find(c => c.t === t)).map(c => {
+const primeirasColunas = ['Aos patrocinadores do SoftLiving', 'O luxo de hoje é outra coisa', 'A Coragem de Mudar de Direção', 'Meu primeiro agente de IA'].map(t => TODAS_COLUNAS().find(c => c.t === t));
+document.getElementById('colLista').innerHTML = [...primeirasColunas, ...TODAS_COLUNAS().filter(c => c !== ultimaDoDia && !primeirasColunas.includes(c))]
+  .map(c => {
     const col = colunistaDe(c);
     return `
   <a href="colunas.html" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${rotuloColuna(col)}</span><h3>${comLogo(c.t)}</h3>
     <div class="meta"><span>${col.nome}</span></div></div></a>`;
   }).join('');
+ativarCarrossel(document.getElementById('colLista'), 'v');
 
 // Newsletter (demonstração)
 document.getElementById('newsForm').addEventListener('submit', e => {
