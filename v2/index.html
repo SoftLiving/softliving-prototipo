@@ -24,7 +24,7 @@
 </div>
 
 <!-- Explore por assunto -->
-<section class="secao" id="assuntos">
+<section class="secao" id="assuntos" data-lateral-topo>
   <div class="head"><div><h2>Explore por assunto</h2><p>Escolha um tema e veja o que há de novo.</p></div></div>
   <!-- Fichário: abas por assunto encaixadas no painel de conteúdos -->
   <div class="tabs folder" id="tabs" role="tablist"></div>
@@ -70,7 +70,8 @@
 </div>
 
 <!-- Coluna lateral da direita (os mesmos conteúdos da coluna da direita da Início da versão 1).
-     O layout.js a coloca ao lado do conteúdo; a pesquisa de escuta entra no topo dela (escuta.js). -->
+     O layout.js a coloca ao lado do conteúdo, começando na altura do elemento com data-lateral-topo (Explore por assunto);
+     a pesquisa de escuta entra no topo dela (escuta.js). -->
 <aside class="lateral" aria-label="Coluna lateral">
   <section class="lat-card">
     <div class="lat-head"><h2><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M21 20c0-2.6-1.6-4.6-4-5.3"/></svg>Meus grupos</h2><a href="#" class="lat-mais" data-goto="grupos">Ver todos ›</a></div>

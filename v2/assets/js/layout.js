@@ -234,6 +234,21 @@ const LAYOUT_BARRA = `
   document.querySelectorAll('.site-nav a[data-site]').forEach(a => a.classList.toggle('on', a.dataset.site === LAYOUT_SITE));
 })();
 
+// Coluna lateral da direita: quando fica ao lado do conteúdo, começa na altura do elemento marcado com
+// data-lateral-topo (na Início, "Explore por assunto"); sem marcação, começa no topo do conteúdo. O fim fica
+// alinhado ao fim do último box pelo CSS.
+function alinharLateral(){
+  const lat = document.querySelector('.corpo > .lateral');
+  if(!lat) return;
+  const alvo = document.querySelector('main [data-lateral-topo]');
+  const aoLado = getComputedStyle(document.querySelector('.corpo')).flexDirection === 'row';
+  lat.style.marginTop = aoLado && alvo ? Math.round(alvo.getBoundingClientRect().top - document.querySelector('.corpo').getBoundingClientRect().top) + 'px' : '';
+}
+alinharLateral();
+addEventListener('resize', alinharLateral);
+addEventListener('load', alinharLateral);                        // depois de carregar fontes e imagens
+if(document.fonts) document.fonts.ready.then(alinharLateral);
+
 // Menu lateral: recolher (só ícones) no computador, gaveta no celular. A escolha de recolher fica guardada.
 const app = document.getElementById('app');
 function lerPreferencia(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
