@@ -261,27 +261,24 @@ document.querySelectorAll('main [data-site-link]').forEach(a => a.href = urlSite
 document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend',
   '<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10 C 30 2, 80 2, 118 8" fill="none" stroke="#9fd0b0" stroke-width="5" stroke-linecap="round"/></svg>'));
 
-// Patrocinadores apoiadores: cada <div class="apoio"> entre os conteúdos recebe uma marca sorteada a cada visita,
-// sem repetir na mesma página. O logo aparece em tom sobre tom (discreto, na cor do fundo).
-// Para usar o logo de verdade, acrescente logo:'assets/img/<arquivo>' (o CSS deixa a imagem em tom sobre tom).
-// Enquanto não há arquivos, o logo é desenhado em texto com o estilo de cada marca (fonte, peso, espaçamento).
+// Patrocinadores apoiadores: a faixa <div class="apoio"> da página (uma só por página) recebe uma marca sorteada
+// a cada visita. O logo aparece em tom sobre tom (discreto, na cor do fundo) pelo CSS.
+// altura: ajuste fino para os três logos parecerem do mesmo tamanho.
 const PATROCINADORES = [
-  { nome:"Rede D'Or", estilo:"font-family:Inter,sans-serif; font-weight:800; letter-spacing:-.03em;", texto:'Rede D’Or', sub:'São Luiz' },
-  { nome:'Aurora Casa', estilo:"font-family:'Fraunces',serif; font-weight:500; font-style:italic;", texto:'Aurora <b>Casa</b>' },
-  { nome:'Vela Turismo', estilo:"font-family:Inter,sans-serif; font-weight:300; letter-spacing:.32em; text-transform:uppercase; font-size:21px;", texto:'Vela Turismo' },
-  { nome:'Bússola Investimentos', estilo:"font-family:Georgia,serif; font-weight:700; letter-spacing:.02em;", texto:'Bússola', sub:'Investimentos' },
-  { nome:'Editora Ipê', estilo:"font-family:'Fraunces',serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase;", texto:'Editora Ipê' },
+  { nome:"Rede D'Or", logo:'assets/img/logo-rede-dor.png', altura:56 },
+  { nome:'Claro', logo:'assets/img/logo-claro.png', altura:40 },
+  { nome:'Bradesco Saúde', logo:'assets/img/logo-bradesco-saude.png', altura:48 },
 ];
 (function montarApoios(){
   const vagas = document.querySelectorAll('main .apoio');
   if(!vagas.length) return;
   const sorteio = PATROCINADORES.map(p => [Math.random(), p]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  // ?apoio=1, 2 ou 3 mostra um patrocinador específico (para apresentações e capturas de tela)
+  const escolhido = PATROCINADORES[+new URLSearchParams(location.search).get('apoio') - 1];
+  if(escolhido) sorteio.unshift(escolhido);
   vagas.forEach((vaga, i) => {
     const p = sorteio[i % sorteio.length];
-    const marca = p.logo
-      ? `<img src="${LAYOUT_ROOT}${p.logo}" alt="${p.nome}">`
-      : `<span class="marca" style="${p.estilo}" aria-label="${p.nome}"><span>${p.texto}</span>${p.sub ? `<small>${p.sub}</small>` : ''}</span>`;
-    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span>${marca}`;
+    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span><img src="${LAYOUT_ROOT}${p.logo}" alt="${p.nome}" style="height:${p.altura}px">`;
   });
 })();
 

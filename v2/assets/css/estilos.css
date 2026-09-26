@@ -235,10 +235,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* Patrocinador apoiador entre os conteúdos (sorteado no layout.js): discreto, logo em tom sobre tom */
 .apoio{ display:flex; align-items:center; justify-content:center; gap:26px; flex-wrap:wrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; margin-bottom:72px; min-height:96px; }
 .apoio-rotulo{ font-size:12px; color:#a8a194; letter-spacing:.02em; }
-.apoio .marca{ font-size:26px; line-height:1; color:#bdb6aa; white-space:nowrap; display:inline-flex; flex-direction:column; align-items:center; }
-.apoio .marca small{ font-family:Inter,sans-serif; font-style:normal; font-size:.38em; font-weight:600; letter-spacing:.22em; text-transform:uppercase; margin-top:5px; }
-.apoio .marca b{ font-weight:700; }
-.apoio img{ height:40px; width:auto; filter:grayscale(1) sepia(.25) opacity(.45); } /* logo de verdade: tom sobre tom */
+.apoio img{ width:auto; max-width:60vw; filter:grayscale(1) sepia(.35) opacity(.4); } /* tom sobre tom: logo (fundo transparente) em cinza-creme */
 
 /* Faixa azul-marinho lisa, sem foto (newsletter da Início e fechamento das institucionais) */
 .news, .photo-band{ position:relative; border-radius:30px; overflow:hidden; display:grid; place-items:center; text-align:center; margin-bottom:72px; background:var(--navy); }
