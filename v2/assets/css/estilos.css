@@ -155,8 +155,6 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .cat{ font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--green-2); }
 .meta{ font-size:12.5px; color:var(--muted); display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 .meta i{ width:3px; height:3px; border-radius:50%; background:#c3c8cf; }
-.badge{ position:absolute; top:12px; left:12px; background:rgba(255,255,255,.94); border-radius:999px; font-size:11.5px; font-weight:600; padding:4px 10px; color:var(--green); }
-.badge.premium{ color:var(--gold); background:var(--gold-bg); }
 .foto{ background:var(--mint); } /* cor de espera enquanto a foto carrega (ou sem internet) */
 
 /* Seções com título */
@@ -179,16 +177,33 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .folder-panel{ background:var(--paper-light); border-radius:0 24px 24px 24px; padding:26px; }
 
 /* Cartão com foto vertical */
-.cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:40px; } /* 2x a margem da caixa branca do hover */
-.card .imgw{ border-radius:20px; overflow:hidden; position:relative; }
-.card img{ width:100%; aspect-ratio:4/5; object-fit:cover; transition:transform .35s; }
-.card:hover img{ transform:scale(1.04); }
-.card h3{ font-size:17px; line-height:1.3; margin:12px 0 4px; font-weight:600; }
-.card small{ color:var(--muted); font-size:12.5px; }
-.card .fav{ position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.94); border:none; display:grid; place-items:center; color:var(--navy); padding:0; }
-.card .fav .ic{ width:16px; height:16px; }
-.card .fav.on{ background:var(--green); color:#fff; }
-.card .fav.on .ic{ fill:currentColor; }
+.cards{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+
+/* Cartão vertical com foto (assuntos e grupos): foto no cartão inteiro, moldura clara, desfoque que aparece aos poucos
+   na parte de baixo, texto branco por cima e botão branco arredondado */
+.vcard{ position:relative; display:block; aspect-ratio:3/4; border-radius:26px; overflow:hidden; isolation:isolate;
+  border:1px solid rgba(255,255,255,.6); background:var(--mint); box-shadow:0 10px 28px rgba(1,53,101,.10); } /* contorno branco bem fino */
+.vcard > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-1; transition:transform .5s; }
+.vcard:hover > img{ transform:scale(1.04); }
+.vc-blur{ position:absolute; inset:auto 0 0 0; height:66%; z-index:-1;
+  -webkit-backdrop-filter:blur(18px) saturate(1.2); backdrop-filter:blur(18px) saturate(1.2);
+  background:linear-gradient(to top, rgba(12,22,32,.6), rgba(12,22,32,.2) 70%, transparent);
+  -webkit-mask-image:linear-gradient(to top, #000 58%, transparent); mask-image:linear-gradient(to top, #000 58%, transparent); }
+.vc-info{ position:absolute; left:0; right:0; bottom:0; padding:18px 18px 16px; color:#fff; }
+.vc-cat{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.85; }
+.vc-info h3{ color:#fff; font-size:19px; line-height:1.25; font-weight:600; margin:6px 0 14px; text-shadow:0 1px 10px rgba(0,0,0,.18); }
+.vc-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.vc-chip{ display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#fff; white-space:nowrap; }
+.vc-chip .ic{ width:16px; height:16px; }
+.vc-chip.premium{ color:#ffe3a3; }
+.vc-btn{ display:inline-flex; align-items:center; gap:6px; background:#fff; color:var(--navy); border-radius:999px; padding:9px 16px; font-size:13.5px; font-weight:600; white-space:nowrap; box-shadow:0 4px 14px rgba(0,0,0,.14); transition:background-color .15s ease; }
+.vc-btn .ic{ width:15px; height:15px; }
+.vcard:hover .vc-btn{ background:var(--mint); }
+.vcard .fav{ position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.9); border:none; display:grid; place-items:center; color:var(--navy); padding:0; }
+.vcard .fav .ic{ width:16px; height:16px; }
+.vcard .fav.on{ background:var(--green); color:#fff; }
+.vcard .fav.on .ic{ fill:currentColor; }
+.vcard .new{ position:absolute; top:12px; left:12px; background:#fff; color:var(--green); font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:999px; }
 
 /* ===== Tela Início ===== */
 .hero{ display:grid; grid-template-columns:1.05fr 1fr; gap:48px; align-items:center; padding:36px 0 64px; }
@@ -223,14 +238,9 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .quote p{ color:var(--text-2); line-height:1.65; font-size:15px; margin:0 0 20px; }
 .quote .btn{ margin-top:auto; align-self:flex-start; }
 .groups{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.group{ position:relative; border-radius:22px; overflow:hidden; min-height:300px; display:flex; }
-.group img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s; }
-.group:hover img{ transform:scale(1.04); }
-.group .info{ position:relative; margin-top:auto; width:100%; padding:14px; }
-.group .info div{ background:rgba(255,255,255,.95); border-radius:16px; padding:12px 14px; }
-.group b{ display:block; font-size:15px; color:var(--navy); }
-.group small{ font-size:12px; color:var(--muted); }
-.group .new{ position:absolute; top:12px; left:12px; background:#fff; color:var(--green); font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:999px; }
+.groups .vc-info{ padding:14px 14px 12px; }
+.groups .vc-info h3{ font-size:16px; margin:4px 0 10px; }
+.groups .vc-btn{ padding:7px 12px; font-size:12.5px; }
 
 /* Patrocinador apoiador entre os conteúdos (sorteado no layout.js): discreto, logo em tom sobre tom */
 .apoio{ display:flex; align-items:center; justify-content:center; gap:26px; flex-wrap:wrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; margin-bottom:72px; min-height:96px; }
@@ -288,7 +298,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .folder-panel{ padding:18px 16px 20px; border-radius:0 20px 20px 20px; }
   .folder-panel .cards{ margin:0 -16px; padding:0 16px 4px; }
   .cards{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 -16px; padding:0 16px 4px; gap:14px; scrollbar-width:none; }
-  .cards .card{ flex:0 0 72%; scroll-snap-align:start; }
+  .cards .vcard{ flex:0 0 72%; scroll-snap-align:start; }
   .fgrid{ gap:22px; }
   .flogos{ gap:24px; }
   .flogo .logo-fsb{ height:70px; }
@@ -307,7 +317,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .item img{ width:96px; height:84px; }
   .item h3{ font-size:15.5px; }
   .groups{ display:flex; overflow-x:auto; margin:0 -16px; padding:0 16px; gap:12px; scrollbar-width:none; }
-  .group{ flex:0 0 70%; min-height:260px; }
+  .groups .vcard{ flex:0 0 70%; }
   .news, .photo-band{ border-radius:24px; }
   .news h2, .photo-band h2{ font-size:28px; }
 }
@@ -522,19 +532,21 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.
    Exceções: abas do fichário (se subissem, desgrudariam do painel) e itens do menu lateral e da barra do celular.
-   Conteúdos com foto (.card, .destaque, .item): no hover ganham uma caixa branca em volta (foto + texto), além de subir e ganhar sombra.
+   Conteúdos com foto sem moldura (.destaque, .item): no hover ganham uma caixa branca em volta (foto + texto), além de subir e ganhar sombra.
+   Cartões verticais (.vcard) já são uma caixa: só sobem e ganham sombra.
    Para a caixa não desalinhar o conteúdo, eles têm padding com margem negativa do mesmo tamanho. */
-.card, .destaque{ display:block; padding:20px; margin:-20px; border-radius:26px; }
-.card:hover, .destaque:hover, .item:hover{ background:#fff; }
-.btn, .round, .collapse, .icons a, .box a, .card, .card .fav, .destaque, .item, .group, .press{
+.destaque{ display:block; padding:20px; margin:-20px; border-radius:26px; }
+.destaque:hover, .item:hover{ background:#fff; }
+.btn, .round, .collapse, .icons a, .box a, .vcard, .vcard .fav, .destaque, .item, .press{
   transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
-.card:hover, .destaque:hover{ transform:translateY(-2px); }
-.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
-.card:hover, .destaque:hover{ box-shadow:var(--sombra-hover); }
+.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .vcard .fav:hover, .item:hover, .press:hover,
+.vcard:hover, .destaque:hover{ transform:translateY(-2px); }
+.btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .vcard .fav:hover, .item:hover, .press:hover,
+.destaque:hover{ box-shadow:var(--sombra-hover); }
+.vcard:hover{ box-shadow:0 16px 36px rgba(1,53,101,.16); }
 /* No celular os cartões de assunto rolam para o lado: sem margem negativa, para não encostarem uns nos outros */
-@media (max-width:640px){ .cards .card{ margin:0; padding:12px; } .destaque{ padding:12px; margin:-12px; } } /* margem menor que a da página (16px) */
+@media (max-width:640px){ .destaque{ padding:12px; margin:-12px; } } /* margem menor que a da página (16px) */
 /* O botão de recolher o menu fica girado quando o menu está recolhido: sobe sem perder o giro */
 .app.mini .collapse:hover{ transform:rotate(180deg) translateY(2px); }
 
@@ -586,7 +598,7 @@ body{ background:
 :root .news, :root .photo-band{ background:rgba(1,53,101,.86); border:1px solid rgba(255,255,255,.25); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:inset 0 1px 1px rgba(255,255,255,.25), 0 18px 40px rgba(1,53,101,.18); }
 
 /* Caixa do hover dos conteúdos: vidro em vez de branco */
-:root .card:hover, :root .destaque:hover, :root .item:hover{
+:root .destaque:hover, :root .item:hover{
   background:rgba(255,255,255,.5); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
   box-shadow:var(--vidro-brilho), var(--sombra-hover);
 }
@@ -594,7 +606,7 @@ body{ background:
 :root .btn:hover, :root .round:hover, :root .collapse:hover{ box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 
 /* Sobre as fotos: selos, salvar, nome do grupo e play em vidro */
-:root .badge, :root .card .fav, :root .group .info div, :root .video .play, :root .group .new{
+:root .vcard .fav, :root .video .play, :root .vcard .new{
   background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.75);
   -webkit-backdrop-filter:blur(10px) saturate(1.6); backdrop-filter:blur(10px) saturate(1.6);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.9), 0 4px 12px rgba(0,0,0,.08);

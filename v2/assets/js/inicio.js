@@ -15,8 +15,8 @@ const ASSUNTOS = [
 ];
 const assuntoCurto = cat => (ASSUNTOS.find(a => a[1] === cat) || [cat])[0];
 const seloPreco = c => c.badge === 'premium'
-  ? `<span class="badge premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
-  : `<span class="badge">Grátis</span>`;
+  ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
+  : `<span class="vc-chip">Grátis</span>`;
 
 // Explore por assunto
 const tabs = document.getElementById('tabs');
@@ -26,10 +26,14 @@ function mostrarAssunto(i){
   const cat = ASSUNTOS[i][1];
   const lista = ITENS.filter(c => !cat || c.cat === cat).slice(0, 4);
   document.getElementById('cards').innerHTML = lista.map(c => `
-    <a href="#" class="card">
-      <div class="imgw foto"><img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy">${seloPreco(c)}
-        <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button></div>
-      <h3>${c.t}</h3><small>${assuntoCurto(c.cat)}</small>
+    <a href="#" class="vcard">
+      <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+      <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
+      <div class="vc-info">
+        <span class="vc-cat">${assuntoCurto(c.cat)}</span>
+        <h3>${c.t}</h3>
+        <div class="vc-row">${seloPreco(c)}<span class="vc-btn">Ler ${icone('seta')}</span></div>
+      </div>
     </a>`).join('');
   tabs.querySelectorAll('button').forEach(b => {
     const on = +b.dataset.i === i;
@@ -65,9 +69,14 @@ document.getElementById('groupList').innerHTML = ['Clube do Vinho', 'Yoga & Medi
   const g = GRUPOS.find(x => x.t === nome);
   const n = GRUPOS.indexOf(g);
   return `
-  <a href="${V1_ROOT}grupo.html?g=${n}" class="group foto"><img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy">
+  <a href="${V1_ROOT}grupo.html?g=${n}" class="vcard">
+    <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
     ${g.novos ? `<span class="new">${g.novos} novas</span>` : ''}
-    <div class="info"><div><b>${g.t}</b><small>${g.cat} · ${g.membros} ${g.membros === 1 ? 'membro' : 'membros'}</small></div></div></a>`;
+    <div class="vc-info">
+      <span class="vc-cat">${g.cat}</span>
+      <h3>${g.t}</h3>
+      <div class="vc-row"><span class="vc-chip" title="${g.membros} ${g.membros === 1 ? 'membro' : 'membros'}">${icone('grupos')}${g.membros}</span><span class="vc-btn">${g.participando ? 'Ver grupo' : 'Participar ' + icone('mais')}</span></div>
+    </div></a>`;
 }).join('');
 document.querySelectorAll('#grupos a[href="../grupos.html"]').forEach(a => a.href = urlPagina('grupos'));
 
