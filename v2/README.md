@@ -49,6 +49,7 @@ assets/img/                 Logos da FSB e da RB2
 - **Hover (igual à versão 1):** todo botão e toda caixa clicável sobe 2px e ganha sombra (`--sombra-hover`) ao passar
   o mouse. A regra fica no fim do `estilos.css` ("REGRA DE HOVER"): ao criar um botão ou caixa clicável novo,
   acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.
+  Conteúdos com foto (cartões, matéria em destaque, itens de lista) ganham também uma caixa branca em volta no hover.
 
 ## Observações
 

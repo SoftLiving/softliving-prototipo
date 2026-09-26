@@ -214,8 +214,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .lead h3{ font-size:30px; line-height:1.18; }
 .lead p{ color:var(--text-2); line-height:1.6; margin:10px 0 12px; font-size:15.5px; }
 .list{ display:flex; flex-direction:column; gap:14px; }
-.item{ display:grid; grid-template-columns:132px 1fr; gap:16px; align-items:center; padding:10px; border-radius:18px; }
-.item:hover{ background:#fff; }
+.item{ display:grid; grid-template-columns:132px 1fr; gap:16px; align-items:center; padding:12px; margin:0 -12px; border-radius:22px; }
 .item img{ width:132px; height:104px; object-fit:cover; border-radius:14px; }
 .item h3{ font-size:17px; line-height:1.3; margin:4px 0 6px; font-weight:600; }
 
@@ -311,7 +310,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .hero p{ font-size:16px; margin:18px 0 22px; }
   .collage{ grid-template-rows:140px 120px 100px; gap:10px; }
     .lead h3{ font-size:24px; }
-  .item{ grid-template-columns:96px 1fr; padding:0; gap:12px; }
+  .item{ grid-template-columns:96px 1fr; padding:8px; margin:0 -8px; gap:12px; }
   .item img{ width:96px; height:84px; }
   .item h3{ font-size:15.5px; }
   .groups{ display:flex; overflow-x:auto; margin:0 -16px; padding:0 16px; gap:12px; scrollbar-width:none; }
@@ -530,13 +529,18 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.
    Exceções: abas do fichário (se subissem, desgrudariam do painel) e itens do menu lateral e da barra do celular.
-   Cartões com foto sem caixa (.card, .lead): o cartão sobe e a sombra vai só na foto. */
-.btn, .round, .collapse, .icons a, .box a, .card, .card .imgw, .card .fav, .lead, .lead .imgw, .item, .group, .press{
+   Conteúdos com foto (.card, .lead, .item): no hover ganham uma caixa branca em volta (foto + texto), além de subir e ganhar sombra.
+   Para a caixa não desalinhar o conteúdo, eles têm padding com margem negativa do mesmo tamanho. */
+.card, .lead{ display:block; padding:12px; margin:-12px; border-radius:22px; }
+.card:hover, .lead:hover, .item:hover{ background:#fff; }
+.btn, .round, .collapse, .icons a, .box a, .card, .card .fav, .lead, .item, .group, .press{
   transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 .btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
 .card:hover, .lead:hover{ transform:translateY(-2px); }
 .btn:hover, .round:hover, .collapse:hover, .icons a:hover, .box a:hover, .card .fav:hover, .item:hover, .group:hover, .press:hover,
-.card:hover .imgw, .lead:hover .imgw{ box-shadow:var(--sombra-hover); }
+.card:hover, .lead:hover{ box-shadow:var(--sombra-hover); }
+/* No celular os cartões de assunto rolam para o lado: sem margem negativa, para não encostarem uns nos outros */
+@media (max-width:640px){ .cards .card{ margin:0; padding:8px; } }
 /* O botão de recolher o menu fica girado quando o menu está recolhido: sobe sem perder o giro */
 .app.mini .collapse:hover{ transform:rotate(180deg) translateY(2px); }
