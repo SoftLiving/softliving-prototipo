@@ -457,6 +457,15 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .plan.vip .tag{ background:#fff; color:var(--gold); }
 .plan.vip h3{ color:var(--gold); }
 
+/* Cotas de patrocínio: boxes altos (2,5x o cartão comum), textos claros e com mais espaço entre linhas */
+.plans.cotas .plan{ min-height:760px; padding:48px 40px 36px; }
+.plans.cotas .kind{ font-size:12.5px; margin-bottom:14px; }
+.plans.cotas h3{ font-size:34px; margin-bottom:34px; }
+.plans.cotas ul{ gap:22px; }
+.plans.cotas li{ font-size:16px; line-height:1.9; color:var(--muted); padding-left:32px; }
+.plans.cotas li::before{ top:6px; }
+.plans.cotas .term{ font-size:14px; padding-top:20px; }
+
 /* Selo co-fundador */
 .seal{ display:flex; gap:28px; align-items:center; background:#f1d898; border:1px solid #d9b25a; border-radius:28px; padding:36px 40px; box-shadow:0 18px 40px rgba(170,125,30,.14); } /* dourado, no tom da Assinatura VIP da versão 1 */
 .seal .medal{ width:92px; height:92px; flex:none; border-radius:50%; background:#fffaf0; color:#8a6414; display:grid; place-items:center; box-shadow:0 0 0 8px rgba(255,250,240,.45); }
@@ -488,6 +497,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .icon-cards{ grid-template-columns:1fr; }
   .icon-cards .feat, .icon-cards .feat.wide{ grid-column:auto; }
   .panel{ padding:24px; }
+  .plans.cotas .plan{ min-height:0; padding:32px 26px 26px; }
+  .plans.cotas h3{ font-size:28px; margin-bottom:22px; }
   .caixa-branca{ padding:30px 18px; border-radius:24px; }
   .bigquote{ font-size:23px; }
   .band{ padding:26px 22px; }
