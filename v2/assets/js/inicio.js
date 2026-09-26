@@ -1,4 +1,4 @@
-// VERSÃO 2 · Tela Início: colagem de abertura, "Explore por assunto", "Últimas matérias" e "Acontece nos grupos".
+// VERSÃO 2 · Tela Início: "Explore por assunto", "Últimas matérias" e "Acontece nos grupos".
 // Usa CONTEUDOS (conteudos-dados.js), GRUPOS (grupos-dados.js) e fotoUrl/urlPagina/mostrarAviso (layout.js).
 
 // Sem tempo de leitura e sem data de publicação em nenhum lugar (pedido do usuário)
@@ -17,16 +17,6 @@ const assuntoCurto = cat => (ASSUNTOS.find(a => a[1] === cat) || [cat])[0];
 const seloPreco = c => c.badge === 'premium'
   ? `<span class="badge premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
   : `<span class="badge">Grátis</span>`;
-
-// Colagem de abertura: uma foto de cada assunto
-const COLAGEM = [
-  { cls:'a', foto:'1506377247377-2a5b3b417ebb', rotulo:'Turismo e viagem', w:700 },
-  { foto:'1544367567-0f2fcb009e0b', rotulo:'Bem-estar', w:500 },
-  { foto:'1586023492125-27b2c045efd7', rotulo:'Casa', w:500 },
-  { cls:'d', foto:'1543269865-cbf427effbad', rotulo:'Encontros', w:900 },
-];
-document.getElementById('collage').insertAdjacentHTML('afterbegin', COLAGEM.map(f =>
-  `<figure class="foto ${f.cls || ''}"><img src="${fotoUrl(f.foto, f.w)}" alt=""><figcaption>${f.rotulo}</figcaption></figure>`).join(''));
 
 // Explore por assunto
 const tabs = document.getElementById('tabs');
