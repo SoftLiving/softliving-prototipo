@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colunas · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="colunas" data-root="">
+
+<!-- Tela Colunas (referência: blocos "Coluna do dia" e "Colunas" da Início da versão 1): coluna do dia, colunistas e colunas -->
+<div class="page-head">
+  <h1><span class="hl">Colunas</span></h1>
+  <p>Opinião, experiência e boas histórias de quem escreve para a <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>.</p>
+</div>
+
+<a href="#" class="destaque-largo" id="colDia" data-lateral-topo></a>
+
+<section class="secao">
+  <div class="head"><div><h2>Colunistas</h2><p>Escolha um colunista para ver as colunas dele.</p></div></div>
+  <div class="colunistas" id="colunistas"></div>
+</section>
+
+<section class="secao" id="colLista">
+  <div class="head"><div><h2 id="colTitulo">Todas as colunas</h2><p id="colSub"></p></div><button type="button" class="btn ghost" id="colTodas" hidden>Ver todas as colunas</button></div>
+  <div class="grade" id="colGrade"></div>
+</section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/colunas.js"></script>
+</body>
+</html>

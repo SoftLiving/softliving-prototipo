@@ -14,6 +14,7 @@
   color-scheme:light;
 }
 *{ box-sizing:border-box; }
+[hidden]{ display:none !important; } /* elementos escondidos continuam escondidos mesmo com display nos estilos (ex.: .btn) */
 html{ scroll-behavior:smooth; }
 body{ margin:0; font-family:'Inter',Arial,sans-serif; color:var(--text); background:var(--paper); -webkit-font-smoothing:antialiased; }
 a{ color:inherit; text-decoration:none; }
@@ -493,6 +494,23 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .seg{ display:flex; }
 }
 
+/* ===== Tela Colunas ===== */
+.colunistas{ display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px; }
+.colunista{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; text-align:left; padding:18px; border-radius:22px; font:inherit; color:var(--text);
+  background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.85); box-shadow:var(--vidro-brilho), var(--vidro-sombra);
+  -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); }
+.colunista:not(.on):hover{ box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.colunista.on{ border-color:var(--green); box-shadow:0 0 0 2px var(--green), var(--vidro-sombra); background:rgba(230,242,234,.7); }
+.colunista b{ font-family:'Fraunces',serif; font-size:17px; font-weight:600; color:var(--navy); margin-top:8px; }
+.col-tema{ font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green-2); }
+.col-ultima{ font-size:13.5px; line-height:1.45; color:var(--text-2); margin-top:6px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.colunista small{ font-size:12px; color:var(--muted); margin-top:4px; }
+.av-col{ width:52px; height:52px; border-radius:50%; display:grid; place-items:center; color:#fff; font-weight:700; font-size:16px; flex:none; border:3px solid rgba(255,255,255,.9); box-shadow:0 4px 12px rgba(1,53,101,.12); }
+.autor-col{ display:flex; align-items:center; gap:12px; margin-top:4px; }
+.autor-col b{ display:block; font-size:14.5px; color:var(--navy); }
+.autor-col small{ font-size:12.5px; color:var(--muted); }
+.autor-col .av-col{ width:44px; height:44px; font-size:14px; }
+
 /* ===== Páginas institucionais (Conhecer, Como funciona, Benefícios, Patrocinadores) ===== */
 .inst-hero{ display:grid; grid-template-columns:1.05fr 1fr; gap:48px; align-items:center; padding:36px 0 80px; }
 /* Abertura: título e parágrafo ocupam a metade esquerda da página (com ou sem vídeo à direita); parágrafo justificado */
@@ -708,10 +726,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    Para a caixa não desalinhar o conteúdo, eles têm padding com margem negativa do mesmo tamanho. */
 .destaque{ display:block; padding:20px; margin:-20px; border-radius:26px; }
 .destaque:hover, .item:hover{ background:#fff; }
-.btn, .round, .collapse, .vcard, .fav, .destaque, .item, .press{
+.btn, .round, .collapse, .vcard, .fav, .destaque, .item, .press, .colunista{
   transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
 }
-.btn:hover, .round:hover, .collapse:hover, .fav:hover, .item:hover, .press:hover,
+.btn:hover, .round:hover, .collapse:hover, .fav:hover, .item:hover, .press:hover, .colunista:hover,
 .vcard:hover, .destaque:hover{ transform:translateY(-2px); }
 .btn:hover, .round:hover, .collapse:hover, .fav:hover, .item:hover, .press:hover,
 .destaque:hover{ box-shadow:var(--sombra-hover); }

@@ -14,6 +14,7 @@ const PAGINAS = {
   inicio:       { url:'index.html' },
   conteudos:    { url:'conteudos.html' },
   grupos:       { url:'grupos.html' },
+  colunas:      { url:'colunas.html' },
   comunidades:  { url:'comunidades/inicio.html', v1:true },
   conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },
