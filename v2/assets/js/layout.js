@@ -159,10 +159,6 @@ const LAYOUT_RODAPE = `
       <div>
         <a href="${urlPagina('inicio')}" class="sig" style="font-size:24px"><span class="soft">Soft</span><span class="living">Living</span></a>
         <p>Portal de conteúdo e comunidades, sem anúncios, com patrocinadores apoiadores.</p>
-        <div class="logos">
-          <img src="${LAYOUT_ROOT}assets/img/logo-fsb.png" alt="FSB, assessoria de imprensa" title="Assessoria de imprensa">
-          <img src="${LAYOUT_ROOT}assets/img/logo-rb2-digital.png" alt="RB2 Consultoria Estratégica" title="Consultoria estratégica">
-        </div>
       </div>
       <div><h4>A ${LOGO}</h4>
         <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
@@ -172,6 +168,11 @@ const LAYOUT_RODAPE = `
         <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${V1_ROOT}conexoes.html">Conexões</a><a href="#">Parceiros</a></div>
       <div><h4>Sua conta</h4>
         <a href="#">Carteira</a><a href="#">Indicações</a><a href="#">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="#">Ajuda</a></div>
+    </div>
+    <!-- Linha própria para os logos dos parceiros, cada um com um título pequeno em cima -->
+    <div class="flogos">
+      <div class="flogo"><span>Assessoria de imprensa</span><img class="logo-fsb" src="${LAYOUT_ROOT}assets/img/logo-fsb.png" alt="FSB"></div>
+      <div class="flogo"><span>Consultoria estratégica</span><img class="logo-rb2" src="${LAYOUT_ROOT}assets/img/logo-rb2-digital.png" alt="RB2 Consultoria Estratégica"></div>
     </div>
     <p class="fnote">Protótipo conceitual SoftLiving, para apresentação e aprovação. Conteúdos, dados, números, pessoas e fotos são fictícios. Nomes e marcas de terceiros são usados apenas para ilustrar a proposta e não indicam parceria, vínculo ou endosso.</p>
     <div class="fbottom"><span>© 2026 ${LOGO} · Protótipo versão 2</span><span>Privacidade · Termos de uso</span></div>
