@@ -34,8 +34,8 @@ const DATA = {
           {day:"29", month:"OUT", t:"Maratona de séries com a comunidade", time:"20:00", place:"Online"},
         ],
         recommended: [
-          {t:"Como ler sua fatura em 3 minutos", m:"Claro · 3 min", r:"você concluiu 70%"},
-          {t:"Golpes pelo celular: como se proteger", m:"SoftLiving · 6 min", r:"você concluiu 35%"},
+          {t:"Como ler sua fatura em 3 minutos", m:"Claro", r:"você concluiu 70%"},
+          {t:"Golpes pelo celular: como se proteger", m:"SoftLiving", r:"você concluiu 35%"},
         ],
         quicklinks: [{icon:"document",label:"2ª via da fatura"},{icon:"chart",label:"Meu consumo"},{icon:"phone",label:"Falar com o suporte"},{icon:"gift",label:"Meus benefícios"}],
         extra: { title:"Seus benefícios de cliente", tag:"Atualizado", items:[
@@ -156,8 +156,8 @@ const DATA = {
       {day:"02", month:"OUT", t:"Avaliação postural com fisioterapeuta", time:"13:00 – 17:00", place:"Sala de Bem-estar"},
     ],
     recommended: [
-      {t:"Saúde e trabalho: o que você precisa saber", m:"SoftLiving · 8 min", r:"você concluiu 80%"},
-      {t:"Como identificar sinais de burnout na equipe", m:"SoftLiving · 6 min", r:"você concluiu 64%"},
+      {t:"Saúde e trabalho: o que você precisa saber", m:"SoftLiving", r:"você concluiu 80%"},
+      {t:"Como identificar sinais de burnout na equipe", m:"SoftLiving", r:"você concluiu 64%"},
     ],
     quicklinks: [{icon:"stethoscope",label:"Meu plano de saúde"},{icon:"brain",label:"Psicologia (EAP)"},{icon:"gift",label:"Meus benefícios"},{icon:"clipboard",label:"Falar com RH"}],
     extra: { title:"Seus benefícios corporativos", tag:"Atualizado", items:[
@@ -174,9 +174,9 @@ const DATA = {
     ]},
     poll: { title:"Escuta psicossocial — 2º semestre 2026", publico:"Atendimento + Operações", elegiveis:82, respostas:59, participacao:"72%", status:"em andamento" },
     conteudos: [
-      {t:"Saúde e trabalho: o que você precisa saber", m:"SoftLiving · 8 min · 76 iniciaram · 61 concluíram", r:"80% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à Claro", m:"Interno · 4 min · 90 iniciaram · 84 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Ergonomia no home office", m:"SoftLiving · 5 min · 54 iniciaram · 38 concluíram", r:"71% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Saúde e trabalho: o que você precisa saber", m:"SoftLiving · 76 iniciaram · 61 concluíram", r:"80% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à Claro", m:"Interno · 90 iniciaram · 84 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Ergonomia no home office", m:"SoftLiving · 54 iniciaram · 38 concluíram", r:"71% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos, guias e dicas sobre bem-estar, carreira e segurança do trabalho — pensados para o seu dia a dia na Claro.",
@@ -435,8 +435,8 @@ const DATA = {
       {day:"12", month:"OUT", t:"Festa das crianças", time:"14:00 – 18:00", place:"Salão de Festas"},
     ],
     recommended: [
-      {t:"Como jogar sinuca: guia para iniciantes", m:"SoftLiving · 5 min", r:"58% de conclusão"},
-      {t:"Airbnb no condomínio: regras para anfitriões", m:"Interno · 3 min", r:"88% de conclusão"},
+      {t:"Como jogar sinuca: guia para iniciantes", m:"SoftLiving", r:"58% de conclusão"},
+      {t:"Airbnb no condomínio: regras para anfitriões", m:"Interno", r:"88% de conclusão"},
     ],
     quicklinks: [{icon:"calendar",label:"Reservar espaço"},{icon:"document",label:"Regras do condomínio"},{icon:"door",label:"Portaria"},{icon:"car",label:"Vagas de garagem"}],
     extra: { title:"Classificados", tag:"Novo", items:[
@@ -446,9 +446,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa de satisfação — portaria 24h", publico:"Todos os moradores", elegiveis:143, respostas:61, participacao:"43%", status:"em andamento" },
     conteudos: [
-      {t:"Como jogar sinuca: guia para iniciantes", m:"SoftLiving · 5 min · 32 iniciaram · 19 concluíram", r:"58% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Airbnb no condomínio: regras para anfitriões", m:"Interno · 3 min · 40 iniciaram · 35 concluíram", r:"88% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Atividade física na academia do prédio", m:"SoftLiving · 7 min · 29 iniciaram · 19 concluíram", r:"66% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como jogar sinuca: guia para iniciantes", m:"SoftLiving · 32 iniciaram · 19 concluíram", r:"58% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Airbnb no condomínio: regras para anfitriões", m:"Interno · 40 iniciaram · 35 concluíram", r:"88% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Atividade física na academia do prédio", m:"SoftLiving · 29 iniciaram · 19 concluíram", r:"66% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos, guias e dicas sobre convivência, segurança e vida em comunidade — pensados para o seu dia a dia no American Flat.",
@@ -544,8 +544,8 @@ const DATA = {
       {day:"05", month:"OUT", t:"Oficina de artesanato", time:"15:00 – 17:00", place:"Sala de Jogos"},
     ],
     recommended: [
-      {t:"Investimentos para 50+: primeiros passos", m:"SoftLiving · 9 min", r:"55% de conclusão"},
-      {t:"Guia de alongamento antes do tênis", m:"SoftLiving · 4 min", r:"77% de conclusão"},
+      {t:"Investimentos para 50+: primeiros passos", m:"SoftLiving", r:"55% de conclusão"},
+      {t:"Guia de alongamento antes do tênis", m:"SoftLiving", r:"77% de conclusão"},
     ],
     quicklinks: [{icon:"tennis",label:"Reservar quadra"},{icon:"restaurant",label:"Cardápio do restaurante"},{icon:"calendar",label:"Agenda de aulas"},{icon:"phone",label:"Falar com a diretoria"}],
     extra: { title:"Placar & torneios", tag:"Ao vivo", items:[
@@ -555,9 +555,9 @@ const DATA = {
     ]},
     poll: { title:"Enquete: novo horário da hidroginástica", publico:"Sócios do clube", elegiveis:264, respostas:140, participacao:"53%", status:"em andamento" },
     conteudos: [
-      {t:"Investimentos para 50+: primeiros passos", m:"SoftLiving · 9 min · 88 iniciaram · 48 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Guia de alongamento antes do tênis", m:"SoftLiving · 4 min · 61 iniciaram · 47 concluíram", r:"77% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Como funciona o rodízio da quadra de bocha", m:"Interno · 2 min · 120 iniciaram · 114 concluíram", r:"95% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Investimentos para 50+: primeiros passos", m:"SoftLiving · 88 iniciaram · 48 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Guia de alongamento antes do tênis", m:"SoftLiving · 61 iniciaram · 47 concluíram", r:"77% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como funciona o rodízio da quadra de bocha", m:"Interno · 120 iniciaram · 114 concluíram", r:"95% de conclusão entre quem iniciou", badge:"Obrigatório"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos, guias e dicas sobre esportes, bem-estar e vida social — pensados para o seu dia a dia no Clube Caiçaras.",
@@ -636,8 +636,8 @@ const DATA = {
       {day:"07", month:"SET", t:"Tour histórico do centro", time:"09:00", place:"Recepção"},
     ],
     recommended: [
-      {t:"Guia de praias próximas ao hotel", m:"SoftLiving · 6 min", r:"você concluiu 40%"},
-      {t:"Onde jantar a menos de 1km", m:"SoftLiving · 4 min", r:"você concluiu 20%"},
+      {t:"Guia de praias próximas ao hotel", m:"SoftLiving", r:"você concluiu 40%"},
+      {t:"Onde jantar a menos de 1km", m:"SoftLiving", r:"você concluiu 20%"},
     ],
     quicklinks: [{icon:"calendar",label:"Reservar horário no spa"},{icon:"restaurant",label:"Cardápio do restaurante"},{icon:"phone",label:"Falar com a recepção"},{icon:"car",label:"Solicitar transfer"}],
     extra: { title:"Benefícios do hóspede", tag:"Novo", items:[
@@ -647,9 +647,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa de satisfação — Verão 2026", publico:"Hóspedes de julho e agosto", elegiveis:410, respostas:265, participacao:"65%", status:"em andamento" },
     conteudos: [
-      {t:"Guia de praias próximas ao hotel", m:"SoftLiving · 6 min · 50 iniciaram · 20 concluíram", r:"40% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas ao Hotel Vista Mar", m:"Interno · 3 min · 90 iniciaram · 85 concluíram", r:"94% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Onde jantar a menos de 1km", m:"SoftLiving · 4 min · 30 iniciaram · 6 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Guia de praias próximas ao hotel", m:"SoftLiving · 50 iniciaram · 20 concluíram", r:"40% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas ao Hotel Vista Mar", m:"Interno · 90 iniciaram · 85 concluíram", r:"94% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Onde jantar a menos de 1km", m:"SoftLiving · 30 iniciaram · 6 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos e dicas sobre hospedagem, gastronomia e turismo local — pensados para a sua estadia no Hotel Vista Mar.",
@@ -718,8 +718,8 @@ const DATA = {
       {day:"12", month:"SET", t:"Brunch de domingo", time:"10:00 – 13:00", place:"Terraço"},
     ],
     recommended: [
-      {t:"Como funciona nosso programa de fidelidade", m:"Interno · 3 min", r:"você concluiu 60%"},
-      {t:"Harmonizações: vinho e queijo", m:"SoftLiving · 5 min", r:"você concluiu 10%"},
+      {t:"Como funciona nosso programa de fidelidade", m:"Interno", r:"você concluiu 60%"},
+      {t:"Harmonizações: vinho e queijo", m:"SoftLiving", r:"você concluiu 10%"},
     ],
     quicklinks: [{icon:"calendar",label:"Fazer uma reserva"},{icon:"restaurant",label:"Ver cardápio completo"},{icon:"phone",label:"Falar com o salão"},{icon:"gift",label:"Meus benefícios"}],
     extra: { title:"Programa de fidelidade", tag:"Atualizado", items:[
@@ -729,9 +729,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: novo cardápio de inverno", publico:"Clientes frequentes", elegiveis:180, respostas:96, participacao:"53%", status:"em andamento" },
     conteudos: [
-      {t:"Como funciona nosso programa de fidelidade", m:"Interno · 3 min · 60 iniciaram · 36 concluíram", r:"60% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas ao Sabor & Arte", m:"Interno · 2 min · 80 iniciaram · 74 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Harmonizações: vinho e queijo", m:"SoftLiving · 5 min · 20 iniciaram · 2 concluíram", r:"10% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como funciona nosso programa de fidelidade", m:"Interno · 60 iniciaram · 36 concluíram", r:"60% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas ao Sabor & Arte", m:"Interno · 80 iniciaram · 74 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Harmonizações: vinho e queijo", m:"SoftLiving · 20 iniciaram · 2 concluíram", r:"10% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre gastronomia, harmonizações e novidades — pensados para clientes do Sabor & Arte.",
@@ -800,8 +800,8 @@ const DATA = {
       {day:"15", month:"SET", t:"Feira de estágios", time:"10:00 – 16:00", place:"Pátio principal"},
     ],
     recommended: [
-      {t:"Como emitir seu histórico escolar", m:"Interno · 2 min", r:"você concluiu 70%"},
-      {t:"Guia da biblioteca: empréstimos e renovações", m:"Interno · 3 min", r:"você concluiu 15%"},
+      {t:"Como emitir seu histórico escolar", m:"Interno", r:"você concluiu 70%"},
+      {t:"Guia da biblioteca: empréstimos e renovações", m:"Interno", r:"você concluiu 15%"},
     ],
     quicklinks: [{icon:"calendar",label:"Ver grade de horários"},{icon:"book",label:"Portal da biblioteca"},{icon:"chat",label:"Falar com a secretaria"},{icon:"money",label:"2ª via de boleto"}],
     extra: { title:"Benefícios do estudante", tag:"Atualizado", items:[
@@ -811,9 +811,9 @@ const DATA = {
     ]},
     poll: { title:"Avaliação institucional — 2º semestre", publico:"Todos os alunos matriculados", elegiveis:2400, respostas:980, participacao:"41%", status:"em andamento" },
     conteudos: [
-      {t:"Como emitir seu histórico escolar", m:"Interno · 2 min · 200 iniciaram · 140 concluíram", r:"70% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à Faculdade Horizonte", m:"Interno · 4 min · 300 iniciaram · 280 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Guia da biblioteca: empréstimos e renovações", m:"Interno · 3 min · 80 iniciaram · 12 concluíram", r:"15% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como emitir seu histórico escolar", m:"Interno · 200 iniciaram · 140 concluíram", r:"70% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à Faculdade Horizonte", m:"Interno · 300 iniciaram · 280 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Guia da biblioteca: empréstimos e renovações", m:"Interno · 80 iniciaram · 12 concluíram", r:"15% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre vida acadêmica, carreira e serviços — pensados para alunos da Faculdade Horizonte.",
@@ -882,8 +882,8 @@ const DATA = {
       {day:"10", month:"SET", t:"Desafio de resistência PowerFit", time:"09:00", place:"Área externa"},
     ],
     recommended: [
-      {t:"Como montar sua ficha de treino", m:"SoftLiving · 5 min", r:"você concluiu 55%"},
-      {t:"Alongamento pós-treino: guia rápido", m:"SoftLiving · 3 min", r:"você concluiu 30%"},
+      {t:"Como montar sua ficha de treino", m:"SoftLiving", r:"você concluiu 55%"},
+      {t:"Alongamento pós-treino: guia rápido", m:"SoftLiving", r:"você concluiu 30%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar avaliação física"},{icon:"activity",label:"Ver grade de aulas"},{icon:"chat",label:"Falar com um instrutor"},{icon:"money",label:"Meu plano e pagamento"}],
     extra: { title:"Benefícios do aluno", tag:"Novo", items:[
@@ -893,9 +893,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: horários de pico", publico:"Alunos ativos", elegiveis:600, respostas:310, participacao:"52%", status:"em andamento" },
     conteudos: [
-      {t:"Como montar sua ficha de treino", m:"SoftLiving · 5 min · 100 iniciaram · 55 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à PowerFit", m:"Interno · 3 min · 130 iniciaram · 120 concluíram", r:"92% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Alongamento pós-treino: guia rápido", m:"SoftLiving · 3 min · 40 iniciaram · 12 concluíram", r:"30% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como montar sua ficha de treino", m:"SoftLiving · 100 iniciaram · 55 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à PowerFit", m:"Interno · 130 iniciaram · 120 concluíram", r:"92% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Alongamento pós-treino: guia rápido", m:"SoftLiving · 40 iniciaram · 12 concluíram", r:"30% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre treino, nutrição e bem-estar — pensados para alunos da PowerFit.",
@@ -964,8 +964,8 @@ const DATA = {
       {day:"20", month:"SET", t:"Recital de meio de ano", time:"19:00", place:"Auditório Allegro"},
     ],
     recommended: [
-      {t:"Como praticar piano em 20 minutos por dia", m:"SoftLiving · 4 min", r:"você concluiu 65%"},
-      {t:"Teoria musical: lendo partituras", m:"SoftLiving · 6 min", r:"você concluiu 25%"},
+      {t:"Como praticar piano em 20 minutos por dia", m:"SoftLiving", r:"você concluiu 65%"},
+      {t:"Teoria musical: lendo partituras", m:"SoftLiving", r:"você concluiu 25%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar aula extra"},{icon:"music",label:"Repertório do semestre"},{icon:"chat",label:"Falar com seu professor"},{icon:"money",label:"Mensalidade e pagamentos"}],
     extra: { title:"Benefícios do aluno", tag:"Atualizado", items:[
@@ -975,9 +975,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: horários preferidos", publico:"Alunos e responsáveis", elegiveis:85, respostas:52, participacao:"61%", status:"em andamento" },
     conteudos: [
-      {t:"Como praticar piano em 20 minutos por dia", m:"SoftLiving · 4 min · 40 iniciaram · 26 concluíram", r:"65% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à Escola Allegro", m:"Interno · 3 min · 50 iniciaram · 47 concluíram", r:"94% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Teoria musical: lendo partituras", m:"SoftLiving · 6 min · 20 iniciaram · 5 concluíram", r:"25% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como praticar piano em 20 minutos por dia", m:"SoftLiving · 40 iniciaram · 26 concluíram", r:"65% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à Escola Allegro", m:"Interno · 50 iniciaram · 47 concluíram", r:"94% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Teoria musical: lendo partituras", m:"SoftLiving · 20 iniciaram · 5 concluíram", r:"25% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre técnica, teoria e vida musical — pensados para alunos da Escola Allegro.",
@@ -1046,8 +1046,8 @@ const DATA = {
       {day:"18", month:"SET", t:"Bate-papo: como economizar em viagens", time:"19:30", place:"Online"},
     ],
     recommended: [
-      {t:"Documentos essenciais para viajar", m:"SoftLiving · 4 min", r:"você concluiu 45%"},
-      {t:"Como montar um roteiro econômico", m:"SoftLiving · 6 min", r:"você concluiu 10%"},
+      {t:"Documentos essenciais para viajar", m:"SoftLiving", r:"você concluiu 45%"},
+      {t:"Como montar um roteiro econômico", m:"SoftLiving", r:"você concluiu 10%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar consultoria de viagem"},{icon:"map",label:"Ver pacotes disponíveis"},{icon:"chat",label:"Falar com um agente"},{icon:"money",label:"Simular parcelamento"}],
     extra: { title:"Benefícios do cliente", tag:"Atualizado", items:[
@@ -1057,9 +1057,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: próximos destinos desejados", publico:"Clientes cadastrados", elegiveis:520, respostas:210, participacao:"40%", status:"em andamento" },
     conteudos: [
-      {t:"Documentos essenciais para viajar", m:"SoftLiving · 4 min · 90 iniciaram · 40 concluíram", r:"45% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à Bella Viagens", m:"Interno · 3 min · 110 iniciaram · 102 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Como montar um roteiro econômico", m:"SoftLiving · 6 min · 30 iniciaram · 3 concluíram", r:"10% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Documentos essenciais para viajar", m:"SoftLiving · 90 iniciaram · 40 concluíram", r:"45% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à Bella Viagens", m:"Interno · 110 iniciaram · 102 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Como montar um roteiro econômico", m:"SoftLiving · 30 iniciaram · 3 concluíram", r:"10% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre roteiros, documentos e dicas de viagem — pensados para clientes da Bella Viagens.",
@@ -1128,8 +1128,8 @@ const DATA = {
       {day:"11", month:"SET", t:"Campanha de clareamento com desconto", time:"Todo o dia", place:"Todas as unidades"},
     ],
     recommended: [
-      {t:"Como escovar os dentes corretamente", m:"SoftLiving · 3 min", r:"você concluiu 80%"},
-      {t:"Sinais de que você precisa de um canal", m:"SoftLiving · 4 min", r:"você concluiu 20%"},
+      {t:"Como escovar os dentes corretamente", m:"SoftLiving", r:"você concluiu 80%"},
+      {t:"Sinais de que você precisa de um canal", m:"SoftLiving", r:"você concluiu 20%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar consulta"},{icon:"stethoscope",label:"Ver meus tratamentos"},{icon:"chat",label:"Falar com a recepção"},{icon:"money",label:"2ª via de boleto"}],
     extra: { title:"Benefícios do paciente", tag:"Novo", items:[
@@ -1139,9 +1139,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa de satisfação — atendimento", publico:"Pacientes atendidos no mês", elegiveis:850, respostas:410, participacao:"48%", status:"em andamento" },
     conteudos: [
-      {t:"Como escovar os dentes corretamente", m:"SoftLiving · 3 min · 200 iniciaram · 160 concluíram", r:"80% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas à Clínica SorrisoTotal", m:"Interno · 2 min · 220 iniciaram · 205 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Sinais de que você precisa de um canal", m:"SoftLiving · 4 min · 60 iniciaram · 12 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Como escovar os dentes corretamente", m:"SoftLiving · 200 iniciaram · 160 concluíram", r:"80% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas à Clínica SorrisoTotal", m:"Interno · 220 iniciaram · 205 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Sinais de que você precisa de um canal", m:"SoftLiving · 60 iniciaram · 12 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre saúde bucal e tratamentos — pensados para pacientes da Clínica SorrisoTotal.",
@@ -1210,8 +1210,8 @@ const DATA = {
       {day:"14", month:"SET", t:"Dia do relaxamento em dobro", time:"Todo o dia", place:"Todas as salas"},
     ],
     recommended: [
-      {t:"Benefícios da massagem relaxante", m:"SoftLiving · 4 min", r:"você concluiu 50%"},
-      {t:"Respiração consciente: um guia de 5 minutos", m:"SoftLiving · 5 min", r:"você concluiu 15%"},
+      {t:"Benefícios da massagem relaxante", m:"SoftLiving", r:"você concluiu 50%"},
+      {t:"Respiração consciente: um guia de 5 minutos", m:"SoftLiving", r:"você concluiu 15%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar uma sessão"},{icon:"wind",label:"Ver terapias disponíveis"},{icon:"chat",label:"Falar com a recepção"},{icon:"gift",label:"Meus pacotes e créditos"}],
     extra: { title:"Benefícios do cliente", tag:"Novo", items:[
@@ -1221,9 +1221,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: novas terapias desejadas", publico:"Clientes cadastrados", elegiveis:210, respostas:98, participacao:"47%", status:"em andamento" },
     conteudos: [
-      {t:"Benefícios da massagem relaxante", m:"SoftLiving · 4 min · 60 iniciaram · 30 concluíram", r:"50% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas ao Zen Wellness", m:"Interno · 2 min · 70 iniciaram · 65 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Respiração consciente: um guia de 5 minutos", m:"SoftLiving · 5 min · 20 iniciaram · 3 concluíram", r:"15% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Benefícios da massagem relaxante", m:"SoftLiving · 60 iniciaram · 30 concluíram", r:"50% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas ao Zen Wellness", m:"Interno · 70 iniciaram · 65 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Respiração consciente: um guia de 5 minutos", m:"SoftLiving · 20 iniciaram · 3 concluíram", r:"15% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre terapias, relaxamento e bem-estar — pensados para clientes do Zen Wellness.",
@@ -1292,8 +1292,8 @@ const DATA = {
       {day:"21", month:"SET", t:"Workshop de adestramento básico", time:"14:00", place:"Área externa"},
     ],
     recommended: [
-      {t:"Sinais de que seu pet precisa ir ao veterinário", m:"SoftLiving · 4 min", r:"você concluiu 55%"},
-      {t:"Como escovar os dentes do seu cão", m:"SoftLiving · 3 min", r:"você concluiu 20%"},
+      {t:"Sinais de que seu pet precisa ir ao veterinário", m:"SoftLiving", r:"você concluiu 55%"},
+      {t:"Como escovar os dentes do seu cão", m:"SoftLiving", r:"você concluiu 20%"},
     ],
     quicklinks: [{icon:"calendar",label:"Agendar banho e tosa"},{icon:"stethoscope",label:"Agendar consulta veterinária"},{icon:"chat",label:"Falar com a loja"},{icon:"gift",label:"Meus pontos de fidelidade"}],
     extra: { title:"Benefícios do tutor", tag:"Atualizado", items:[
@@ -1303,9 +1303,9 @@ const DATA = {
     ]},
     poll: { title:"Pesquisa: novos serviços desejados", publico:"Tutores cadastrados", elegiveis:640, respostas:280, participacao:"44%", status:"em andamento" },
     conteudos: [
-      {t:"Sinais de que seu pet precisa ir ao veterinário", m:"SoftLiving · 4 min · 90 iniciaram · 50 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
-      {t:"Boas-vindas ao Amigo Fiel", m:"Interno · 2 min · 100 iniciaram · 93 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
-      {t:"Como escovar os dentes do seu cão", m:"SoftLiving · 3 min · 30 iniciaram · 6 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Sinais de que seu pet precisa ir ao veterinário", m:"SoftLiving · 90 iniciaram · 50 concluíram", r:"55% de conclusão entre quem iniciou", badge:"Recomendado"},
+      {t:"Boas-vindas ao Amigo Fiel", m:"Interno · 100 iniciaram · 93 concluíram", r:"93% de conclusão entre quem iniciou", badge:"Obrigatório"},
+      {t:"Como escovar os dentes do seu cão", m:"SoftLiving · 30 iniciaram · 6 concluíram", r:"20% de conclusão entre quem iniciou", badge:"Recomendado"},
     ],
     conteudosCuradoria: {
       subtitle: "Artigos sobre saúde, comportamento e cuidados — pensados para tutores do Amigo Fiel.",
@@ -1389,8 +1389,8 @@ const DATA = {
           {day:"20", month:"SET", t:"Consulta — Clínico geral", time:"10:30", place:"Unidade Ipanema"},
         ],
         recommended: [
-          {t:"Como se preparar para exames de sangue", m:"Rede Dor · 3 min", r:"você concluiu 60%"},
-          {t:"Entendendo seu plano de saúde", m:"Rede Dor · 5 min", r:"você concluiu 20%"},
+          {t:"Como se preparar para exames de sangue", m:"Rede Dor", r:"você concluiu 60%"},
+          {t:"Entendendo seu plano de saúde", m:"Rede Dor", r:"você concluiu 20%"},
         ],
         quicklinks: [{icon:"calendar",label:"Agendar consulta"},{icon:"document",label:"Ver resultados de exames"},{icon:"stethoscope",label:"Buscar especialista"},{icon:"phone",label:"Falar com atendimento"}],
         extra: { title:"Seus benefícios", tag:"Atualizado", items:[
@@ -1474,8 +1474,8 @@ const DATA = {
           {day:"18", month:"SET", t:"Semana de vacinação dos colaboradores", time:"08:00 – 17:00", place:"Enfermaria interna"},
         ],
         recommended: [
-          {t:"Protocolo de segurança do paciente", m:"Rede Dor · 6 min", r:"você concluiu 80%"},
-          {t:"Como preencher o prontuário eletrônico", m:"Rede Dor · 4 min", r:"você concluiu 45%"},
+          {t:"Protocolo de segurança do paciente", m:"Rede Dor", r:"você concluiu 80%"},
+          {t:"Como preencher o prontuário eletrônico", m:"Rede Dor", r:"você concluiu 45%"},
         ],
         quicklinks: [{icon:"calendar",label:"Ver escala de plantão"},{icon:"gift",label:"Meus benefícios"},{icon:"chat",label:"Falar com RH"},{icon:"document",label:"Meus holerites"}],
         extra: { title:"Benefícios do colaborador", tag:"Atualizado", items:[

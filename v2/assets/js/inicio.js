@@ -1,8 +1,8 @@
 // VERSÃO 2 · Tela Início: colagem de abertura, "Explore por assunto", "Últimas matérias" e "Acontece nos grupos".
 // Usa CONTEUDOS (conteudos-dados.js), GRUPOS (grupos-dados.js) e fotoUrl/urlPagina/mostrarAviso (layout.js).
 
-// Tempo de leitura e data fictícios, estáveis por conteúdo
-const ITENS = CONTEUDOS.map((c, i) => ({ ...c, min: 3 + (i * 7) % 6, dia: 25 - i }));
+// Sem tempo de leitura e sem data de publicação em nenhum lugar (pedido do usuário)
+const ITENS = CONTEUDOS;
 
 // Assuntos: rótulo curto do filtro → categoria dos dados
 const ASSUNTOS = [
@@ -17,8 +17,6 @@ const assuntoCurto = cat => (ASSUNTOS.find(a => a[1] === cat) || [cat])[0];
 const seloPreco = c => c.badge === 'premium'
   ? `<span class="badge premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
   : `<span class="badge">Grátis</span>`;
-const dataCurta = c => `${c.dia} set`;
-const leitura = c => `${c.min} min de leitura`;
 
 // Colagem de abertura: uma foto de cada assunto
 const COLAGEM = [
@@ -41,7 +39,7 @@ function mostrarAssunto(i){
     <a href="#" class="card">
       <div class="imgw foto"><img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy">${seloPreco(c)}
         <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button></div>
-      <h3>${c.t}</h3><small>${assuntoCurto(c.cat)} · ${leitura(c)}</small>
+      <h3>${c.t}</h3><small>${assuntoCurto(c.cat)}</small>
     </a>`).join('');
   tabs.querySelectorAll('button').forEach(b => {
     const on = +b.dataset.i === i;
@@ -65,11 +63,11 @@ document.getElementById('lead').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
-  <div class="meta"><span>${destaque.a}</span><i></i><span>${dataCurta(destaque)}</span><i></i><span>${leitura(destaque)}</span></div>`;
+  <div class="meta"><span>${destaque.a}</span></div>`;
 document.getElementById('list').innerHTML = [1, 12, 7, 2].map(i => ITENS[i]).map(c => `
   <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
-    <div class="meta"><span>${dataCurta(c)}</span><i></i><span>${leitura(c)}</span></div></div></a>`).join('');
+    <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
 // Acontece nos grupos: três grupos em destaque (abrem a página interna da versão 1 por enquanto)
