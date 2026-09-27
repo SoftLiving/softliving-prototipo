@@ -173,7 +173,7 @@ const LAYOUT_CABECALHO = `
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
     <a href="${urlPagina('carteira')}" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
     <a href="${urlPagina('notificacoes')}" class="round sino" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
-    <a href="https://softliving.com.br/entrar" class="btn">Entrar</a>
+    <a href="https://softliving.com.br/entrar" class="btn entrar">Entrar</a>
   </div>
 </div>`;
 
@@ -551,6 +551,40 @@ criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
       <a href="${urlPagina('carteira')}">${icone('carteira')}Ver extrato e carteira</a>
       <a href="${urlPagina('indicacoes')}">${icone('presente')}Indique e ganhe 5 de bônus</a>
     </nav>`;
+});
+
+// Janela de entrada (botão Entrar): Google, Apple ou Facebook, ou e-mail e senha. Protótipo: nada é enviado nem guardado.
+const ENTRAR_SOCIAL = [
+  ['Google', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.2v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14.2a6.6 6.6 0 0 1 0-4.3V7.1H2.2a11 11 0 0 0 0 9.9l3.6-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.2 7.1l3.6 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg>'],
+  ['Apple', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M16.4 12.6c0-2.4 2-3.5 2-3.6a4.4 4.4 0 0 0-3.4-1.9c-1.5-.1-2.8.9-3.5.9s-1.8-.8-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3a10 10 0 0 0 1.3-2.6 3.9 3.9 0 0 1-2.5-3.6zM14.1 5.5A4 4 0 0 0 15 2.6a4.1 4.1 0 0 0-2.7 1.4 3.8 3.8 0 0 0-1 2.8 3.4 3.4 0 0 0 2.8-1.3z"/></svg>'],
+  ['Facebook', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1877F2"/><path fill="#fff" d="M13.4 19v-6h2l.3-2.4h-2.3V9.1c0-.7.2-1.2 1.2-1.2h1.2V5.8a16 16 0 0 0-1.8-.1c-1.8 0-3 1.1-3 3.1v1.8H9v2.4h2v6h2.4z"/></svg>'],
+];
+const botaoEntrar = document.querySelector('.top .entrar');
+criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j => {
+  j.innerHTML = `
+    <div class="enj-topo"><b>Entrar na ${LOGO}</b><p>Bem-vindo de volta. Escolha como quer entrar.</p></div>
+    <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
+    <p class="enj-ou"><span>ou com seu e-mail</span></p>
+    <form class="enj-form" id="enForm" novalidate>
+      <label>E-mail<input type="email" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
+      <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
+      <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
+      <button type="submit" class="btn enj-entrar">Entrar</button>
+    </form>
+    <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
+}, (e, j) => {
+  const ver = e.target.closest('.enj-ver');
+  if(ver){ const c = j.querySelector('input[name="senha"]'); const mostrar = c.type === 'password'; c.type = mostrar ? 'text' : 'password'; ver.textContent = mostrar ? 'Ocultar' : 'Mostrar'; ver.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha'); return; }
+  const social = e.target.closest('[data-social]');
+  if(social){ mostrarAviso(`Entrar com ${social.dataset.social}: fora deste protótipo`); return; }
+  if(e.target.closest('.enj-esqueci')){ e.preventDefault(); mostrarAviso('Recuperar senha: fora deste protótipo'); return; }
+  if(e.target.closest('.enj-criar')){ e.preventDefault(); mostrarAviso('Cadastro: fora deste protótipo'); }
+});
+document.addEventListener('submit', e => {
+  if(e.target.id !== 'enForm') return;
+  e.preventDefault();
+  e.target.reset();                                      // nada é enviado nem guardado
+  mostrarAviso('Entrada: fora deste protótipo');
 });
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista

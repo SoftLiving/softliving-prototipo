@@ -1251,6 +1251,31 @@ body{ background:
 .ntj-todas:hover{ background:rgba(255,255,255,.7); }
 .sino[aria-expanded="true"]{ background:#fff; border-color:var(--mint-line); }
 @media (max-width:640px){ .janela-topo, .nt-janela{ position:fixed; top:64px; left:16px; right:16px !important; width:auto; max-width:none; } }
+/* Janela de entrada (botão Entrar) */
+.en-janela{ width:360px; max-height:calc(100vh - 110px); overflow-y:auto; }
+.enj-topo{ padding:20px 22px 6px; }
+.enj-topo b{ font-family:'Fraunces',serif; font-size:22px; color:var(--navy); }
+.enj-topo p{ margin:4px 0 0; font-size:14px; color:var(--text-2); }
+.enj-social{ display:flex; flex-direction:column; gap:8px; padding:14px 22px 4px; }
+.enj-social-bt{ display:flex; align-items:center; justify-content:center; gap:10px; height:44px; border-radius:999px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; font-weight:600; color:var(--text);
+  cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.enj-social-bt svg{ width:19px; height:19px; flex:none; }
+.enj-social-bt:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.enj-ou{ display:flex; align-items:center; gap:10px; margin:14px 22px 10px; font-size:12.5px; color:var(--muted); }
+.enj-ou::before, .enj-ou::after{ content:""; flex:1; height:1px; background:var(--line); }
+.enj-form{ display:flex; flex-direction:column; gap:12px; padding:0 22px; }
+.enj-form > label{ display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:600; color:var(--text); }
+.enj-form input[type="email"], .enj-form input[type="password"], .enj-form input[type="text"]{ height:44px; padding:0 14px; border-radius:12px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; font-weight:400; }
+.enj-senha{ position:relative; display:flex; }
+.enj-senha input{ flex:1; min-width:0; padding-right:80px !important; }
+.enj-ver{ position:absolute; right:6px; top:50%; transform:translateY(-50%); border:none; background:none; font:inherit; font-size:12.5px; font-weight:600; color:var(--green); padding:6px 8px; cursor:pointer; }
+.enj-linha{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:13px; }
+.enj-lembrar{ display:inline-flex; align-items:center; gap:6px; color:var(--text-2); }
+.enj-esqueci, .enj-criar{ color:var(--green); font-weight:600; }
+.enj-esqueci:hover, .enj-criar:hover{ text-decoration:underline; }
+.enj-entrar{ width:100%; justify-content:center; height:46px; }
+.enj-cadastro{ margin:14px 0 0; padding:14px 22px 18px; border-top:1px solid var(--line); font-size:13.5px; color:var(--text-2); text-align:center; }
+.entrar[aria-expanded="true"]{ box-shadow:0 0 0 3px rgba(31,85,25,.18); }
 .creditos[aria-expanded="true"]{ background:#fbe8c6; border-color:#e9cf93; }
 
 /* Janela dos créditos */
