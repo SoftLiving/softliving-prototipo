@@ -172,8 +172,7 @@
 /* Incluir / excluir o estabelecimento de Minhas Comunidades */
 .es-comunidade{ display:inline-flex; align-items:center; gap:6px; }
 .es-comunidade .btn .ic{ width:16px; height:16px; }
-.btn.es-dentro{ background:var(--mint); color:var(--green); border:1px solid var(--mint-line); }
-.btn.es-dentro:hover{ background:#d6ebdd; }
+.btn.es-dentro, .btn.es-dentro:hover{ color:#fff; } /* o vidro verde padrão da v2 vale para o fundo; o texto fica branco */
 .es-dentro .ic{ stroke-width:2.4; }
 .round.es-excluir{ width:36px; height:36px; font-size:12px; color:var(--muted); }
 .round.es-excluir:hover{ color:#b3261e; }
