@@ -22,6 +22,10 @@ const PAGINAS = {
   indicacoes:   { url:'indicacoes.html' },
   perfil:       { url:'perfil.html' },
   ajuda:        { url:'ajuda.html' },
+  curtidas:     { url:'curtidas.html' },
+  comentarios:  { url:'comentarios.html' },
+  acompanhar:   { url:'acompanhar.html' },
+  salvos:       { url:'salvos.html' },
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html' },
@@ -597,6 +601,24 @@ function atualizarNotificacoes(){
 }
 atualizarNotificacoes();
 
+// Salvos (botão da bandeirinha nos cartões): guardados no navegador pelo título do conteúdo; a página Salvos lista.
+// marcarSalvos() acende a bandeirinha dos já salvos em qualquer lista (roda sempre que o conteúdo da página muda).
+const SALVOS_INICIAIS = ['Na Suíça, um vinho para chamar de seu', 'A casa não precisa parecer decorada', 'Agente de IA anti-golpe'];
+function lerSalvos(){ try { const v = JSON.parse(localStorage.getItem('v2Salvos')); return Array.isArray(v) ? v : [...SALVOS_INICIAIS]; } catch(e){ return [...SALVOS_INICIAIS]; } }
+function gravarSalvos(lista){ try { localStorage.setItem('v2Salvos', JSON.stringify(lista)); } catch(e){} }
+function tituloDoFav(fav){
+  const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, article') || fav.parentElement;
+  const h = cartao && cartao.querySelector('h1, h2, h3');
+  return h ? h.textContent.trim() : '';
+}
+function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
+function alternarSalvo(fav){
+  const t = tituloDoFav(fav), l = lerSalvos(), salvo = !l.includes(t);
+  gravarSalvos(salvo ? [...l, t] : l.filter(x => x !== t));
+  marcarSalvos();
+  return salvo;
+}
+
 // Aviso rápido no canto da tela
 let toastTimer;
 function mostrarAviso(texto){
@@ -635,12 +657,13 @@ function marcarRolagemAbas(){
 document.addEventListener('scroll', e => { if(e.target.classList && e.target.classList.contains('folder')) marcarRolagemAbas(); }, true);
 addEventListener('resize', marcarRolagemAbas);
 addEventListener('load', marcarRolagemAbas);
+addEventListener('load', marcarSalvos);
 
 let ajusteLogosPendente = false;
 function agendarAjusteLogos(){
   if(ajusteLogosPendente) return;
   ajusteLogosPendente = true;
-  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); });
+  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); marcarSalvos(); });
 }
 agendarAjusteLogos();
 new MutationObserver(agendarAjusteLogos).observe(document.querySelector('main'), { childList:true, subtree:true });

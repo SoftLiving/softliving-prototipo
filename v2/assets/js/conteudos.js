@@ -68,8 +68,8 @@ document.getElementById('ctGrade').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(fav){
     e.preventDefault();
-    fav.classList.toggle('on');
-    mostrarAviso(fav.classList.contains('on') ? 'Salvo para ler depois' : 'Removido dos salvos');
+    const salvo = alternarSalvo(fav);
+    mostrarAviso(salvo ? 'Salvo para ler depois' : 'Removido dos salvos');
     return;
   }
   const destravar = e.target.closest('[data-destravar]');

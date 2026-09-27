@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curtidas · Atividades · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="curtidas" data-root="">
+
+<!-- Atividades · Curtidas. As quatro páginas (Curtidas, Comentários, Acompanhar, Salvos) usam o mesmo atividades.js,
+     que monta o título, as abas e a lista conforme data-page. -->
+<div class="page-head">
+  <h1 id="atTitulo"></h1>
+  <p id="atSub"></p>
+</div>
+
+<nav class="seg at-abas" id="atAbas" role="tablist" aria-label="Atividades" data-lateral-topo></nav>
+<section class="secao" id="atConteudo"></section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/atividades.js"></script>
+</body>
+</html>
