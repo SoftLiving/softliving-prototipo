@@ -1038,6 +1038,43 @@ a.me:hover{ background:rgba(255,255,255,.6); }
   .aj-temas{ grid-template-columns:1fr; }
 }
 
+/* Ajuda: conteúdo e coluna da direita com o mesmo tamanho; a coluna vira o chat do assistente de IA */
+@media (min-width:1360px){ body[data-page="ajuda"] .corpo > .wrap, body[data-page="ajuda"] .aj-lateral{ flex:1 1 0; min-width:0; } }
+.aj-lateral{ padding:24px; }
+.aj-lateral > *{ max-width:none; }
+.ajc{ position:sticky; top:24px; display:flex; flex-direction:column; height:min(720px, calc(100vh - 48px)); border-radius:24px; overflow:hidden;
+  background:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.95); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.ajc-topo{ display:flex; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid var(--line); }
+.ajc-av{ display:grid; place-items:center; width:44px; height:44px; flex:none; border-radius:50%; background:var(--green); color:#fff; font-weight:700; font-size:14px; letter-spacing:.04em; }
+.ajc-topo b{ display:block; font-family:'Fraunces',serif; font-size:18px; color:var(--navy); }
+.ajc-topo small{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted); }
+.ajc-topo small i{ width:8px; height:8px; border-radius:50%; background:#2fb56a; flex:none; }
+.ajc-msgs{ flex:1; overflow-y:auto; overscroll-behavior:contain; display:flex; flex-direction:column; gap:10px; padding:18px; scrollbar-width:thin; scrollbar-color:#cfd6dc transparent; }
+.ajc-msg{ max-width:86%; padding:11px 14px; border-radius:18px; font-size:14.5px; line-height:1.55; }
+.ajc-msg.ia{ align-self:flex-start; background:var(--mint); color:var(--text); border-bottom-left-radius:6px; }
+.ajc-msg.eu{ align-self:flex-end; background:var(--navy); color:#fff; border-bottom-right-radius:6px; }
+.ajc-fonte{ display:block; margin-top:8px; font-size:12px; color:var(--green); font-weight:600; }
+.ajc-digitando{ display:inline-flex; gap:4px; padding:4px 2px; }
+.ajc-digitando i{ width:7px; height:7px; border-radius:50%; background:var(--green); opacity:.35; animation:ajcPonto 1s infinite; }
+.ajc-digitando i:nth-child(2){ animation-delay:.15s; }
+.ajc-digitando i:nth-child(3){ animation-delay:.3s; }
+@keyframes ajcPonto{ 50%{ opacity:1; transform:translateY(-2px); } }
+.ajc-sugestoes{ display:flex; flex-wrap:wrap; gap:8px; padding:0 18px 12px; }
+.ajc-sugestoes button{ border:1px solid var(--mint-line); background:#fff; color:var(--green); border-radius:999px; padding:8px 13px; font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease; }
+.ajc-sugestoes button:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.ajc-form{ display:flex; gap:8px; padding:12px 14px; border-top:1px solid var(--line); }
+.ajc-form input{ flex:1; min-width:0; height:46px; padding:0 16px; border-radius:999px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; }
+.ajc-enviar{ width:46px; height:46px; flex:none; border-radius:50%; border:none; background:var(--green); color:#fff; display:grid; place-items:center; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ajc-enviar .ic{ width:19px; height:19px; }
+.ajc-enviar:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.ajc-nota{ margin:0; padding:0 18px 12px; font-size:11.5px; color:var(--muted); text-align:center; }
+@media (max-width:1359px){
+  .aj-lateral{ display:block; }
+  .ajc{ position:static; height:600px; }
+}
+@media (max-width:640px){ .ajc{ height:540px; } }
+
 /* ===== REGRA DE HOVER (igual à versão 1) =====
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.

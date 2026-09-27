@@ -35,7 +35,7 @@ function renderAjuda(){
   const lista = AJ_PERGUNTAS.filter(([k, p, r]) => (!ajTema || k === ajTema) && (!termo || semAcentoAj(p + ' ' + r).includes(termo)));
   document.getElementById('ajTitulo').textContent = ajTema ? AJ_TEMAS.find(t => t[0] === ajTema)[1] : termo ? 'Resultados' : 'Perguntas frequentes';
   document.getElementById('ajPerguntas').innerHTML = lista.map(([, p, r]) => `
-    <details class="aj-pergunta"><summary>${p.replace(/SoftLiving/g, LOGO)}</summary><p>${r.replace(/SoftLiving/g, LOGO)}</p></details>`).join('');
+    <details class="aj-pergunta"><summary><span>${p.replace(/SoftLiving/g, LOGO)}</span></summary><p>${r.replace(/SoftLiving/g, LOGO)}</p></details>`).join('');
   document.getElementById('ajVazio').hidden = !!lista.length;
 }
 
@@ -51,3 +51,66 @@ document.getElementById('ajForm').addEventListener('submit', ev => {
   mostrarAviso('Mensagem registrada. No protótipo, nada é enviado');
 });
 renderAjuda();
+
+// ===== Chat do assistente de IA (coluna da direita) =====
+// Protótipo: não há IA de verdade. O "assistente" procura a pergunta frequente mais parecida com o que a pessoa
+// escreveu (palavras em comum, sem acento) e responde com ela; sem nada parecido, sugere o contato por e-mail.
+const AJ_SUGESTOES = ['Como ganho créditos de bônus?', 'Posso sacar meus créditos?', 'Como entro em um grupo?', 'Esqueci minha senha'];
+const AJ_IGNORAR = new Set(['como', 'para', 'que', 'uma', 'meu', 'minha', 'meus', 'minhas', 'posso', 'qual', 'quais', 'onde', 'com', 'por', 'dos', 'das', 'nos', 'nas', 'sao', 'esta', 'isso', 'voce', 'tem', 'ter', 'sobre', 'quero', 'saber', 'fazer', 'faco']);
+const ajPalavras = t => semAcentoAj(t).replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(p => p.length > 2 && !AJ_IGNORAR.has(p))
+  .map(p => p.replace(/(oes|aes|s)$/, ''));                          // plural simples: créditos = crédito, grupos = grupo
+function ajResponder(texto){
+  const busca = ajPalavras(texto);
+  let melhor = null, nota = 0;
+  AJ_PERGUNTAS.forEach(([, p, r]) => {
+    const naPergunta = new Set(ajPalavras(p)), naResposta = new Set(ajPalavras(r));
+    const n = busca.reduce((s, w) => s + (naPergunta.has(w) ? 2 : naResposta.has(w) ? 1 : 0), 0);
+    if(n > nota){ nota = n; melhor = [p, r]; }
+  });
+  if(melhor && nota >= 2) return `${melhor[1]}<span class="ajc-fonte">Da pergunta: “${melhor[0]}”</span>`;
+  return 'Não encontrei essa resposta por aqui. Você pode escrever para <b>ajuda@softliving.com.br</b> ou usar o formulário “Fale com a gente”, que respondemos em até um dia útil.';
+}
+
+const ajChat = document.querySelector('.aj-lateral');
+ajChat.innerHTML = `
+  <section class="ajc">
+    <header class="ajc-topo">
+      <span class="ajc-av" aria-hidden="true">IA</span>
+      <div><b>Assistente <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></b><small><i></i>Responde na hora sobre créditos, grupos e sua conta</small></div>
+    </header>
+    <div class="ajc-msgs" id="ajcMsgs" aria-live="polite"></div>
+    <div class="ajc-sugestoes" id="ajcSugestoes">${AJ_SUGESTOES.map(s => `<button type="button" data-pergunta="${s}">${s}</button>`).join('')}</div>
+    <form class="ajc-form" id="ajcForm">
+      <input type="text" id="ajcCampo" placeholder="Escreva sua pergunta" aria-label="Pergunta para o assistente" autocomplete="off">
+      <button type="submit" class="ajc-enviar" aria-label="Enviar pergunta"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button>
+    </form>
+    <p class="ajc-nota">Assistente de demonstração: as respostas vêm das perguntas frequentes.</p>
+  </section>`;
+const ajcMsgs = document.getElementById('ajcMsgs');
+function ajcMensagem(html, quem){
+  const m = document.createElement('div');
+  m.className = 'ajc-msg ' + quem;
+  m.innerHTML = html.replace(/SoftLiving(?![^<]*<\/span>)/g, LOGO);
+  ajcMsgs.appendChild(m);
+  ajcMsgs.scrollTop = ajcMsgs.scrollHeight;
+  return m;
+}
+function ajcPerguntar(texto){
+  texto = texto.trim();
+  if(!texto) return;
+  ajcMensagem(texto.replace(/</g, '&lt;'), 'eu');
+  document.getElementById('ajcSugestoes').hidden = true;
+  const digitando = ajcMensagem('<span class="ajc-digitando"><i></i><i></i><i></i></span>', 'ia');
+  setTimeout(() => { digitando.remove(); ajcMensagem(ajResponder(texto), 'ia'); }, 700);
+}
+ajcMensagem('Olá, Rafael! Sou o assistente da SoftLiving. Pergunte o que quiser sobre créditos, grupos, conteúdos ou sua conta.', 'ia');
+document.getElementById('ajcForm').addEventListener('submit', ev => {
+  ev.preventDefault();
+  const campo = document.getElementById('ajcCampo');
+  ajcPerguntar(campo.value);
+  campo.value = '';
+});
+document.getElementById('ajcSugestoes').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-pergunta]');
+  if(b) ajcPerguntar(b.dataset.pergunta);
+});
