@@ -41,7 +41,7 @@ document.getElementById('esPagina').innerHTML = `
       <div class="es-beneficio">
         <span class="es-ben-rotulo">${icone('presente')}Benefício para membros</span>
         <b>${e.b}</b>
-        ${e.beneficioDet ? `<p>${e.beneficioDet}</p>` : ''}
+        ${e.beneficioDet ? `<p>${e.beneficioDet.replace('SoftLiving', LOGO)}</p>` : ''}
       </div>
       ${infos.length ? `<ul class="es-infos">${infos.map(([ic, v]) => `<li>${esIcone(ic)}<span>${v}</span></li>`).join('')}</ul>` : ''}
     </aside>
@@ -61,7 +61,7 @@ const ES_CHECK = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d
 function renderBotaoComunidade(){
   const dentro = estNasComunidades().includes(e.id);
   document.getElementById('esComunidade').innerHTML = dentro
-    ? `<a href="${urlPagina('comunidades')}" class="btn es-dentro" title="Ver em Minhas Comunidades">${ES_CHECK}Em Minhas Comunidades</a><button type="button" class="round es-excluir" data-acao="excluir" aria-label="Excluir de Minhas Comunidades" title="Excluir de Minhas Comunidades">✕</button>`
+    ? `<a href="${urlPagina('comunidades')}?tipo=estabelecimentos&est=${e.id}" class="btn es-dentro" title="Ver em Minhas Comunidades">${ES_CHECK}Em Minhas Comunidades</a><button type="button" class="round es-excluir" data-acao="excluir" aria-label="Excluir de Minhas Comunidades" title="Excluir de Minhas Comunidades">✕</button>`
     : `<button type="button" class="btn ghost" data-acao="incluir">${icone('comunidades')}Incluir em Minhas Comunidades</button>`;
 }
 document.getElementById('esComunidade').addEventListener('click', ev => {

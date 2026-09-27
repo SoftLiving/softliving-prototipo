@@ -1,6 +1,9 @@
 // VERSÃO 2 · Minhas Comunidades (cópia da versão 1 com o visual da v2): troca de comunidade, público
 // (ex.: Paciente/Colaborador) e conteúdo de cada aba. Cada aba é uma página própria (v2/comunidades/<arquivo>.html);
 // a aba atual vem de <body data-tab="...">. As abas são um fichário (links); a pesquisa da comunidade vai na .lateral.
+// Dois tipos no mesmo painel, com layouts diferentes (escolha no topo, ?tipo=comunidades|estabelecimentos):
+//  · Comunidades: grupos fechados (condomínio, clube, faculdade, escola, academia, empresa...) com as 8 abas;
+//  · Estabelecimentos: negócios abertos ao público (lojas, restaurantes, hotéis...) que a pessoa incluiu, em layout de vitrine.
 let currentOrg = 'empresa';
 let currentTab = 'inicio';
 let pinnedSlots = ['empresa', 'condominio', 'clube'];
@@ -14,8 +17,14 @@ function defaultAudience(orgKey){
 }
 let currentAudience = defaultAudience(currentOrg);
 
-// Estabelecimentos incluídos em Minhas Comunidades (botão na página de cada um): entram no topo da lista "Trocar por"
-// e abrem a página do estabelecimento
+// Organizações de DATA que são estabelecimentos (abertos ao público): saíram da lista de comunidades e agora estão
+// em ESTABELECIMENTOS (estabelecimentos-dados.js), com layout de vitrine
+const ORGS_ESTABELECIMENTO = ['hotel', 'restaurante', 'turismo', 'clinica', 'spa', 'petshop'];
+const ehComunidade = k => DATA[k] && !ORGS_ESTABELECIMENTO.includes(k);
+const COMUNIDADES = Object.keys(DATA).filter(ehComunidade);
+let cmTipo = 'comunidades';
+let estAtual = null;
+// Estabelecimentos incluídos em Minhas Comunidades (botão na página de cada um)
 function estabelecimentosIncluidos(){
   if(typeof ESTABELECIMENTOS === 'undefined') return [];
   return estNasComunidades().map(id => ESTABELECIMENTOS.find(x => x.id === id)).filter(Boolean);
@@ -26,7 +35,7 @@ function renderOrgSwitcher(){
   el.innerHTML = pinnedSlots.map((key, i) => {
     const org = DATA[key];
     const active = key === currentOrg ? 'active-navy' : '';
-    const otherOrgs = Object.keys(DATA).filter(k => !pinnedSlots.includes(k))
+    const otherOrgs = COMUNIDADES.filter(k => !pinnedSlots.includes(k))
       .sort((a, b) => (DROPDOWN_FIRST.includes(b) ? 1 : 0) - (DROPDOWN_FIRST.includes(a) ? 1 : 0));
     return `
       <div class="org-card-wrap ${active}">
@@ -41,7 +50,6 @@ function renderOrgSwitcher(){
         ${openDropdownSlot === i ? `
           <div class="org-dropdown">
             <p class="org-dropdown-label">Trocar por</p>
-            ${estabelecimentosIncluidos().map(e => `<a class="org-dropdown-item" href="${urlEstabelecimento(e)}">${ICON.store}<span>${e.n}<small>Estabelecimento · ${e.cat}</small></span></a>`).join('')}
             ${otherOrgs.map(k => `<button class="org-dropdown-item" data-slot="${i}" data-neworg="${k}">${ICON[DATA[k].orgIcon]}<span>${DATA[k].name}<small>${DATA[k].orgType}</small></span></button>`).join('')}
           </div>` : ''}
       </div>`;
@@ -896,12 +904,91 @@ function renderContent(){
 }
 
 function renderAll(){
+  renderTipos();
+  const est = cmTipo === 'estabelecimentos';
+  ['orgSwitcherWrap', 'audienceToggleWrap', 'tabBar', 'content'].forEach(id => document.getElementById(id).hidden = est);
+  document.getElementById('cmEstab').hidden = !est;
+  if(est){ renderEstabelecimentos(); salvarEstadoComunidades(); return; }
   renderOrgSwitcher();
   renderHeaderInfo();
   renderTabBar();
   renderContent();
   renderEscutaComunidade();
 }
+
+// Escolha do tipo no topo do painel: Comunidades (grupos fechados) ou Estabelecimentos (abertos ao público)
+function renderTipos(){
+  const n = { comunidades:COMUNIDADES.length, estabelecimentos:estabelecimentosIncluidos().length };
+  document.getElementById('cmTipos').innerHTML = [
+    ['comunidades', 'Comunidades', 'Condomínio, clube, faculdade, empresa...', 'users'],
+    ['estabelecimentos', 'Estabelecimentos', 'Lojas, restaurantes, hotéis, serviços...', 'store'],
+  ].map(([k, l, d, ic]) => `<a href="inicio.html?tipo=${k}" role="tab" class="cm-tipo${k === cmTipo ? ' on' : ''}" aria-selected="${k === cmTipo}">${ICON[ic]}<span><b>${l} <small>${n[k]}</small></b><em>${d}</em></span></a>`).join('');
+}
+
+// ===== Layout dos estabelecimentos (vitrine) =====
+const EST_INFO_IC = { endereco:'pin', horario:'calendar', telefone:'phone', site:'globe' };
+function renderEstabelecimentos(){
+  const lista = estabelecimentosIncluidos();
+  const el = document.getElementById('cmEstab');
+  document.getElementById('orgTitle').textContent = 'Estabelecimentos';
+  document.getElementById('orgSubtitle').textContent = 'Lojas, restaurantes, hotéis e serviços que você incluiu nas suas comunidades, com as novidades e os benefícios de cada um.';
+  if(!lista.length){
+    el.innerHTML = `<div class="cm-est-vazio"><p>Você ainda não incluiu nenhum estabelecimento.</p><p>Na página de um estabelecimento, toque em <b>Incluir em Minhas Comunidades</b>.</p><a href="${urlPagina('vitrine')}" class="btn">${ICON.store}Explorar as Vitrines</a></div>`;
+    renderLateralEstab(lista);
+    return;
+  }
+  if(!lista.some(e => e.id === estAtual)) estAtual = lista[0].id;
+  const e = lista.find(x => x.id === estAtual);
+  const infos = ['endereco', 'horario', 'telefone', 'site'].filter(k => e[k]);
+  el.innerHTML = `
+    <div class="cm-est-lista" role="tablist" aria-label="Seus estabelecimentos">
+      ${lista.map(x => `<button type="button" role="tab" class="cm-est-item${x.id === e.id ? ' on' : ''}" aria-selected="${x.id === e.id}" data-est="${x.id}"><span class="vt-logo" style="color:${x.cor}">${siglaEstab(x.n)}</span><span><b>${x.n}</b><small>${x.cat} · ${x.bairro}</small></span></button>`).join('')}
+      <a href="${urlPagina('vitrine')}" class="cm-est-mais">${ICON.plus}<span>Encontrar mais na Vitrine</span></a>
+    </div>
+    <article class="cm-vitrine">
+      <div class="es-capa" style="background-image:url('${fotoUrl(e.foto, 1400)}')"></div>
+      <header class="es-topo">
+        <span class="es-logo" style="color:${e.cor}">${siglaEstab(e.n)}</span>
+        <div class="es-nome">
+          <h2>${e.n}</h2>
+          <p>${e.cat} · ${e.bairro}</p>
+          <div class="es-acoes">
+            <a href="${urlEstabelecimento(e)}" class="btn">Ver vitrine completa</a>
+            <button type="button" class="btn ghost" data-excluir-est="${e.id}">Excluir de Minhas Comunidades</button>
+          </div>
+        </div>
+      </header>
+      <div class="es-corpo">
+        <div>
+          <section class="es-sobre"><h2>Sobre</h2><p>${e.sobre || e.d}</p></section>
+          ${e.novidades ? `<section class="cm-novidades"><h2>Novidades</h2>${e.novidades.map(([t, d]) => `<div class="cm-novidade"><b>${t}</b><p>${d}</p></div>`).join('')}</section>` : ''}
+        </div>
+        <aside class="es-lado">
+          <div class="es-beneficio"><span class="es-ben-rotulo">${ICON.gift}Benefício para membros</span><b>${e.b}</b>${e.beneficioDet ? `<p>${e.beneficioDet.replace('SoftLiving', LOGO)}</p>` : ''}</div>
+          ${infos.length ? `<ul class="es-infos">${infos.map(k => `<li>${ICON[EST_INFO_IC[k]]}<span>${e[k]}</span></li>`).join('')}</ul>` : ''}
+        </aside>
+      </div>
+      ${e.galeria ? `<section class="es-galeria" aria-label="Fotos">${e.galeria.map(f => `<img src="${fotoUrl(f, 700)}" alt="" loading="lazy">`).join('')}</section>` : ''}
+    </article>`;
+  renderLateralEstab(lista);
+}
+// Coluna lateral dos estabelecimentos: outros da Vitrine que a pessoa ainda não incluiu
+function renderLateralEstab(lista){
+  const lado = document.querySelector('.lateral');
+  escutaAtual = null;
+  const outros = ESTABELECIMENTOS.filter(x => !lista.some(y => y.id === x.id)).slice(0, 4);
+  lado.innerHTML = `<div class="lat-card"><div class="lat-head"><h2>${ICON.store}Descubra na Vitrine</h2></div>
+    ${outros.map(x => `<a href="${urlEstabelecimento(x)}" class="cm-lat-est"><img src="${fotoUrl(x.foto, 160)}" alt="" loading="lazy"><span><b>${x.n}</b><small>${x.cat} · ${x.bairro}</small></span></a>`).join('')}
+    <a href="${urlPagina('vitrine')}" class="btn ghost">${ICON.store}Ver todas as Vitrines</a></div>`;
+}
+document.getElementById('cmEstab').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-est], [data-excluir-est]'); if(!b) return;
+  if(b.dataset.est){ estAtual = +b.dataset.est; renderAll(); return; }
+  const e = ESTABELECIMENTOS.find(x => x.id === +b.dataset.excluirEst);
+  definirEstNasComunidades(e.id, false);
+  mostrarAviso(`${e.n} excluído de Minhas Comunidades`);
+  renderAll();
+});
 
 // Pesquisa de escuta da comunidade (comunidades-escuta.js), na coluna da direita.
 // Só é remontada quando muda a comunidade ou o público, para não perder a resposta em edição.
@@ -934,15 +1021,18 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeOrgDropd
 
 // Estado que atravessa as abas: vem do endereço (?org=...&publico=...) e, na falta dele, da sessão do navegador
 function salvarEstadoComunidades(){
-  try { sessionStorage.setItem('comunidadesEstado', JSON.stringify({ org:currentOrg, publico:currentAudience, pinned:pinnedSlots })); } catch(e){}
+  try { sessionStorage.setItem('comunidadesEstado', JSON.stringify({ org:currentOrg, publico:currentAudience, pinned:pinnedSlots, tipo:cmTipo, est:estAtual })); } catch(e){}
 }
 (function restaurarEstadoComunidades(){
   let salvo = null;
   try { salvo = JSON.parse(sessionStorage.getItem('comunidadesEstado') || 'null'); } catch(e){}
-  if(salvo && Array.isArray(salvo.pinned) && salvo.pinned.length === 3 && salvo.pinned.every(k => DATA[k])) pinnedSlots = salvo.pinned;
+  if(salvo && Array.isArray(salvo.pinned) && salvo.pinned.length === 3 && salvo.pinned.every(ehComunidade)) pinnedSlots = salvo.pinned;
   const params = new URLSearchParams(location.search);
+  const tipo = params.get('tipo') || (params.get('org') ? 'comunidades' : salvo && salvo.tipo);
+  cmTipo = tipo === 'estabelecimentos' ? 'estabelecimentos' : 'comunidades';
+  estAtual = params.get('est') != null ? +params.get('est') : salvo && salvo.est != null ? salvo.est : null;
   const org = params.get('org') || (salvo && salvo.org);
-  if(org && DATA[org]){
+  if(org && ehComunidade(org)){
     currentOrg = org;
     if(!pinnedSlots.includes(org)) pinnedSlots[pinnedSlots.length - 1] = org;
   }

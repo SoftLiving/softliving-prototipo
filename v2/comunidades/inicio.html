@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/estilos.css">
 <link rel="stylesheet" href="../assets/css/comunidades.css">
+<link rel="stylesheet" href="../assets/css/vitrine.css">
 </head>
 <body data-page="comunidades" data-tab="inicio" data-root="../">
 
@@ -20,11 +21,14 @@
     <h1 class="org-title" id="orgTitle"></h1>
     <p class="org-subtitle" id="orgSubtitle"></p>
   </div>
-  <div class="org-switcher-wrap"><div class="org-switcher" id="orgSwitcher"></div></div>
+  <nav class="cm-tipos" id="cmTipos" role="tablist" aria-label="Tipo" data-lateral-topo></nav>
+  <div class="org-switcher-wrap" id="orgSwitcherWrap"><div class="org-switcher" id="orgSwitcher"></div></div>
   <div id="audienceToggleWrap"></div>
 
-  <nav class="tabs folder cm-abas" id="tabBar" role="tablist" aria-label="Abas da comunidade" data-lateral-topo></nav>
+  <nav class="tabs folder cm-abas" id="tabBar" role="tablist" aria-label="Abas da comunidade"></nav>
   <div class="folder-panel cm-painel" id="content"></div>
+  <!-- Estabelecimentos incluídos (layout de vitrine), quando o tipo escolhido é Estabelecimentos -->
+  <div class="cm-estab" id="cmEstab" hidden></div>
 </div>
 
 <!-- Coluna lateral: pesquisa de escuta da comunidade (sem créditos) -->
