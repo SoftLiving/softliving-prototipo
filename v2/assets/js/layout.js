@@ -18,6 +18,7 @@ const PAGINAS = {
   busca:        { url:'busca.html' },
   notificacoes: { url:'notificacoes.html' },
   vitrine:      { url:'vitrine.html' },
+  carteira:     { url:'carteira.html' },
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html', v1:true },
@@ -148,7 +149,7 @@ const LAYOUT_MENU = `
   <div class="wallet">
     <small>Sua carteira</small>
     <strong class="saldo-creditos">41 créditos</strong>
-    <a href="#" class="btn" title="Recarregar créditos">${icone('mais')}<span>Recarregar</span></a>
+    <a href="${urlPagina('carteira')}#recarga" class="btn" title="Recarregar créditos">${icone('mais')}<span>Recarregar</span></a>
     <p>Primeira recarga de R$50 vale 50 créditos + 50 de bônus</p>
   </div>
 </aside>
@@ -167,7 +168,7 @@ const LAYOUT_CABECALHO = `
   <div class="tools">
     <a href="${urlPagina('busca')}" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
-    <a href="#" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
+    <a href="${urlPagina('carteira')}" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
     <a href="${urlPagina('notificacoes')}" class="round sino" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
     <a href="https://softliving.com.br/entrar" class="btn">Entrar</a>
   </div>
@@ -188,7 +189,7 @@ const LAYOUT_RODAPE = `
       <div><h4>Comunidade</h4>
         <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="#">Parceiros</a></div>
       <div><h4>Sua conta</h4>
-        <a href="#">Carteira</a><a href="#">Indicações</a><a href="#">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="#">Ajuda</a></div>
+        <a href="${urlPagina('carteira')}">Carteira</a><a href="#">Indicações</a><a href="#">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="#">Ajuda</a></div>
     </div>
     <!-- Linha própria para os logos dos parceiros, cada um com um título pequeno em cima -->
     <div class="flogos">
@@ -205,7 +206,7 @@ const LAYOUT_BARRA = `
   <a href="${urlPagina('inicio')}" data-page="inicio">${icone('inicio')}Início</a>
   <a href="${urlPagina('conteudos')}" data-page="conteudos">${icone('conteudos')}Conteúdos</a>
   <a href="${urlPagina('grupos')}" data-page="grupos">${icone('grupos')}Grupos</a>
-  <a href="#" data-page="carteira">${icone('carteira')}Carteira</a>
+  <a href="${urlPagina('carteira')}" data-page="carteira">${icone('carteira')}Carteira</a>
   <a href="#" id="tabVoce">${icone('perfil')}Você</a>
 </nav>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>`;
@@ -450,7 +451,7 @@ const NOTIFICACOES = [
   { id:2, tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
     txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=1`] },
   { id:3, tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
-    txt:'Você ganhou <b>5 créditos de bônus</b> por responder à pesquisa da semana.', acao:['Ver carteira', '#'] },
+    txt:'Você ganhou <b>5 créditos de bônus</b> por responder à pesquisa da semana.', acao:['Ver carteira', urlPagina('carteira')] },
   { id:4, tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
     txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=4`], lida:true },
   { id:5, tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
