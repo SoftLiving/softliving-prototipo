@@ -15,7 +15,8 @@ const VALORES = [20, 50, 100, 200];
 const BONUS_RECARGA = { 20:0, 50:5, 100:15, 200:40 };
 const BONUS_PRIMEIRA = { 50:50 };
 const PRIMEIRA_RECARGA = true;                 // ainda não houve recarga
-const bonusDe = v => PRIMEIRA_RECARGA && BONUS_PRIMEIRA[v] ? BONUS_PRIMEIRA[v] : BONUS_RECARGA[v];
+// Os cartões de valor mostram sempre a tabela das recargas; a oferta da primeira recarga fica só no box dourado do saldo
+const bonusDe = v => BONUS_RECARGA[v];
 let valor = 50, forma = 'Pix', filtro = 'tudo';
 
 function renderSaldo(){
