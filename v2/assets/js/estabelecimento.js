@@ -44,9 +44,12 @@ document.getElementById('esPagina').innerHTML = `
         ${e.beneficioDet ? `<p>${e.beneficioDet.replace('SoftLiving', LOGO)}</p>` : ''}
       </div>
       ${infos.length ? `<ul class="es-infos">${infos.map(([ic, v]) => `<li>${esIcone(ic)}<span>${v}</span></li>`).join('')}</ul>` : ''}
+      ${htmlExtras(e)}
     </aside>
   </div>
 
+  ${htmlCatalogo(e)}
+  ${htmlAvaliacoes(e)}
   ${e.galeria ? `<section class="es-galeria" aria-label="Fotos">${e.galeria.map(f => `<img src="${fotoUrl(f, 700)}" alt="" loading="lazy">`).join('')}</section>` : ''}`;
 
 // Protótipo: salvar alterna o botão; como chegar só avisa

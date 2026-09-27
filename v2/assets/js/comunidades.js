@@ -954,8 +954,10 @@ function renderEstabelecimento(e){
         <aside class="es-lado">
           <div class="es-beneficio"><span class="es-ben-rotulo">${ICON.gift}Benefício para membros</span><b>${e.b}</b>${e.beneficioDet ? `<p>${e.beneficioDet.replace('SoftLiving', LOGO)}</p>` : ''}</div>
           ${infos.length ? `<ul class="es-infos">${infos.map(k => `<li>${ICON[EST_INFO_IC[k]]}<span>${e[k]}</span></li>`).join('')}</ul>` : ''}
+          ${typeof htmlExtras === 'function' ? htmlExtras(e) : ''}
         </aside>
       </div>
+      ${typeof htmlCatalogo === 'function' ? htmlCatalogo(e, 4) : ''}
       ${e.galeria ? `<section class="es-galeria" aria-label="Fotos">${e.galeria.map(f => `<img src="${fotoUrl(f, 700)}" alt="" loading="lazy">`).join('')}</section>` : ''}
     </article>`;
   renderLateralEstab();

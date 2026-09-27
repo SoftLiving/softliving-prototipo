@@ -31,7 +31,8 @@ ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e con
 simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável
 curtidas/comentarios/acompanhar/salvos.html  Atividades (atividades.js); Salvos lê a bandeirinha dos cartões (lerSalvos no layout.js)
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
-estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, galeria
+estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, produtos e serviços
+                            (estabelecimentos-catalogo.js), comodidades, o que a comunidade diz, galeria
 comunidades/*.html          Minhas Comunidades: os boxes (lista Trocar por) mostram comunidades fechadas, com as 8 abas (?org=...&publico=...),
                             e estabelecimentos incluídos pelo usuário, em layout de vitrine (?org=est:<id> ou ?est=<id>)
 colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
