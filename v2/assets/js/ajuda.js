@@ -55,7 +55,15 @@ renderAjuda();
 // ===== Chat do assistente de IA (coluna da direita) =====
 // Protótipo: não há IA de verdade. O "assistente" procura a pergunta frequente mais parecida com o que a pessoa
 // escreveu (palavras em comum, sem acento) e responde com ela; sem nada parecido, sugere o contato por e-mail.
-const AJ_SUGESTOES = ['Como ganho créditos de bônus?', 'Posso sacar meus créditos?', 'Como entro em um grupo?', 'Esqueci minha senha'];
+// Perguntas prontas: sempre 3, sorteadas entre as perguntas frequentes; trocam a cada resposta (sem repetir a última feita)
+function ajSortear(evitar){
+  const lista = AJ_PERGUNTAS.map(q => q[1]).filter(q => q !== evitar);
+  for(let i = lista.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [lista[i], lista[j]] = [lista[j], lista[i]]; }
+  return lista.slice(0, 3);
+}
+function ajRenderSugestoes(evitar){
+  document.getElementById('ajcSugestoes').innerHTML = ajSortear(evitar).map(q => `<button type="button" data-pergunta="${q}">${q.replace(/SoftLiving/g, LOGO)}</button>`).join('');
+}
 const AJ_IGNORAR = new Set(['como', 'para', 'que', 'uma', 'meu', 'minha', 'meus', 'minhas', 'posso', 'qual', 'quais', 'onde', 'com', 'por', 'dos', 'das', 'nos', 'nas', 'sao', 'esta', 'isso', 'voce', 'tem', 'ter', 'sobre', 'quero', 'saber', 'fazer', 'faco']);
 const ajPalavras = t => semAcentoAj(t).replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(p => p.length > 2 && !AJ_IGNORAR.has(p))
   .map(p => p.replace(/(oes|aes|s)$/, ''));                          // plural simples: créditos = crédito, grupos = grupo
@@ -79,7 +87,7 @@ ajChat.innerHTML = `
       <div><b>Assistente <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></b><small><i></i>Responde na hora sobre créditos, grupos e sua conta</small></div>
     </header>
     <div class="ajc-msgs" id="ajcMsgs" aria-live="polite"></div>
-    <div class="ajc-sugestoes" id="ajcSugestoes">${AJ_SUGESTOES.map(s => `<button type="button" data-pergunta="${s}">${s}</button>`).join('')}</div>
+    <div class="ajc-sugestoes" id="ajcSugestoes" aria-label="Perguntas prontas"></div>
     <form class="ajc-form" id="ajcForm">
       <input type="text" id="ajcCampo" placeholder="Escreva sua pergunta" aria-label="Pergunta para o assistente" autocomplete="off">
       <button type="submit" class="ajc-enviar" aria-label="Enviar pergunta"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button>
@@ -99,10 +107,10 @@ function ajcPerguntar(texto){
   texto = texto.trim();
   if(!texto) return;
   ajcMensagem(texto.replace(/</g, '&lt;'), 'eu');
-  document.getElementById('ajcSugestoes').hidden = true;
   const digitando = ajcMensagem('<span class="ajc-digitando"><i></i><i></i><i></i></span>', 'ia');
-  setTimeout(() => { digitando.remove(); ajcMensagem(ajResponder(texto), 'ia'); }, 700);
+  setTimeout(() => { digitando.remove(); ajcMensagem(ajResponder(texto), 'ia'); ajRenderSugestoes(texto); }, 700);
 }
+ajRenderSugestoes();
 ajcMensagem('Olá, Rafael! Sou o assistente da SoftLiving. Pergunte o que quiser sobre créditos, grupos, conteúdos ou sua conta.', 'ia');
 document.getElementById('ajcForm').addEventListener('submit', ev => {
   ev.preventDefault();
