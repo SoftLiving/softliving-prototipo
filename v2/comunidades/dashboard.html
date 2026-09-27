@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minhas Comunidades · Dashboard · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/estilos.css">
+<link rel="stylesheet" href="../assets/css/comunidades.css">
+</head>
+<body data-page="comunidades" data-tab="dashboard" data-root="../">
+
+<!-- Minhas Comunidades · aba Dashboard. Mesma estrutura da versão 1: troca de comunidade (3 boxes com "Trocar por"),
+     público (quando a comunidade tem mais de um), abas em páginas próprias e a pesquisa da comunidade na coluna lateral.
+     A comunidade e o público passam de uma aba para outra pelo endereço (?org=...&publico=...). Tudo é montado por comunidades.js. -->
+<div class="cm">
+  <div class="page-head cm-head">
+    <p class="cm-kicker">Suas comunidades <span class="cm-selo">Proposta · em aprovação</span></p>
+    <h1 class="org-title" id="orgTitle"></h1>
+    <p class="org-subtitle" id="orgSubtitle"></p>
+  </div>
+  <div class="org-switcher-wrap"><div class="org-switcher" id="orgSwitcher"></div></div>
+  <div id="audienceToggleWrap"></div>
+
+  <nav class="tabs folder cm-abas" id="tabBar" role="tablist" aria-label="Abas da comunidade" data-lateral-topo></nav>
+  <div class="folder-panel cm-painel" id="content"></div>
+</div>
+
+<!-- Coluna lateral: pesquisa de escuta da comunidade (sem créditos) -->
+<aside class="lateral" aria-label="Pesquisa da comunidade"></aside>
+
+<script src="../assets/js/layout.js"></script>
+<script src="../assets/js/comunidades-icones.js"></script>
+<script src="../assets/js/comunidades-dados.js"></script>
+<script src="../assets/js/escuta.js"></script>
+<script src="../assets/js/comunidades-escuta.js"></script>
+<script src="../assets/js/comunidades.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ const PAGINAS = {
   colunas:      { url:'colunas.html' },
   busca:        { url:'busca.html' },
   notificacoes: { url:'notificacoes.html' },
-  comunidades:  { url:'comunidades/inicio.html', v1:true },
+  comunidades:  { url:'comunidades/inicio.html' },
   conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },
 };

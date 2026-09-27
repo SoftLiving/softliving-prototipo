@@ -22,6 +22,8 @@ assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver ve
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
 conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
+notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
+comunidades/*.html          Minhas Comunidades: 8 abas em páginas próprias (?org=...&publico=...)
 colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
                             navegue por autor, colunistas por categoria e colunas em destaque
 grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
@@ -30,6 +32,9 @@ assets/js/escuta.js         Pesquisa de escuta (cópia da v1), entra no topo da 
 assets/js/conteudos.js      Tela Conteúdos
 assets/js/grupos.js         Tela Grupos
 assets/js/busca.js          Tela Busca (sem diferenciar acentos; termos destacados; buscas recentes na sessão)
+assets/js/notificacoes.js   Tela Notificações (os avisos NOTIFICACOES e o controle de lidas ficam no layout.js)
+assets/js/comunidades.js    Minhas Comunidades (cópia da v1 com abas em fichário; usa comunidades-icones.js e comunidades-dados.js)
+assets/css/comunidades.css  Estilos de Minhas Comunidades: base da v1 presa a .cm + camada da v2 no fim
 assets/js/colunas.js        Tela Colunas
 assets/js/colunas-dados.js  Colunistas (nomes das colunas, categorias e biografias do site); colunas de conteudos-dados.js + extras
 assets/js/inicio.js         Tela Início
@@ -55,7 +60,8 @@ assets/img/                 Logos da FSB e da RB2
 | Leitura do artigo | a fazer |
 | Grupos (`grupos.html`) | pronta para revisão |
 | Página interna de grupo (inclui Desapego) | a fazer (abre a v1) |
-| Minhas Comunidades (8 abas) | a fazer (abre a v1) |
+| Notificações (`notificacoes.html` + janela do sino) | pronta para revisão |
+| Minhas Comunidades (8 abas, `comunidades/`) | pronta para revisão |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
 | Institucional: Segurança | a fazer (abre a v1) |
 | Modo simples | a fazer (abre a v1) |
