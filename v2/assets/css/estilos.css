@@ -445,7 +445,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* ===== Telas Conteúdos e Grupos ===== */
 /* Cabeçalho da página (título e texto) */
-.page-head{ padding:36px 0 24px; max-width:720px; }
+.page-head{ padding:36px 0 24px; } /* subtítulo sem limite de largura: vai até o lado direito do conteúdo */
 .page-head h1{ font-size:50px; line-height:1.06; font-weight:700; }
 .page-head p{ font-size:17px; line-height:1.6; color:var(--text-2); margin:14px 0 0; }
 /* Busca grande */
