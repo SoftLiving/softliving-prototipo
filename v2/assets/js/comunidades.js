@@ -14,6 +14,13 @@ function defaultAudience(orgKey){
 }
 let currentAudience = defaultAudience(currentOrg);
 
+// Estabelecimentos incluídos em Minhas Comunidades (botão na página de cada um): entram no topo da lista "Trocar por"
+// e abrem a página do estabelecimento
+function estabelecimentosIncluidos(){
+  if(typeof ESTABELECIMENTOS === 'undefined') return [];
+  return estNasComunidades().map(id => ESTABELECIMENTOS.find(x => x.id === id)).filter(Boolean);
+}
+
 function renderOrgSwitcher(){
   const el = document.getElementById('orgSwitcher');
   el.innerHTML = pinnedSlots.map((key, i) => {
@@ -34,6 +41,7 @@ function renderOrgSwitcher(){
         ${openDropdownSlot === i ? `
           <div class="org-dropdown">
             <p class="org-dropdown-label">Trocar por</p>
+            ${estabelecimentosIncluidos().map(e => `<a class="org-dropdown-item" href="${urlEstabelecimento(e)}">${ICON.store}<span>${e.n}<small>Estabelecimento · ${e.cat}</small></span></a>`).join('')}
             ${otherOrgs.map(k => `<button class="org-dropdown-item" data-slot="${i}" data-neworg="${k}">${ICON[DATA[k].orgIcon]}<span>${DATA[k].name}<small>${DATA[k].orgType}</small></span></button>`).join('')}
           </div>` : ''}
       </div>`;
@@ -46,7 +54,7 @@ function renderOrgSwitcher(){
     openDropdownSlot = (openDropdownSlot === i) ? null : i;
     renderOrgSwitcher();
   }));
-  el.querySelectorAll('.org-dropdown-item').forEach(btn => btn.addEventListener('click', (e) => {
+  el.querySelectorAll('.org-dropdown-item[data-neworg]').forEach(btn => btn.addEventListener('click', (e) => {
     e.stopPropagation();
     const i = +btn.dataset.slot;
     const newOrg = btn.dataset.neworg;
@@ -887,30 +895,8 @@ function renderContent(){
   document.getElementById('content').innerHTML = RENDERERS[currentTab](active);
 }
 
-// Estabelecimentos que a pessoa incluiu em Minhas Comunidades (botão na página de cada estabelecimento)
-function renderEstabelecimentos(){
-  const el = document.getElementById('cmEstab');
-  if(!el || typeof ESTABELECIMENTOS === 'undefined') return;
-  const lista = estNasComunidades().map(id => ESTABELECIMENTOS.find(x => x.id === id)).filter(Boolean);
-  el.hidden = !lista.length;
-  el.innerHTML = `<p class="cm-estab-titulo">Estabelecimentos nas suas comunidades</p>
-    <div class="cm-estab-lista">${lista.map(e => `
-      <div class="cm-estab-item">
-        <a href="${urlEstabelecimento(e)}"><span class="vt-logo" style="color:${e.cor}">${siglaEstab(e.n)}</span><span><b>${e.n}</b><small>${e.cat} · ${e.bairro}</small></span></a>
-        <button type="button" class="cm-estab-excluir" data-excluir="${e.id}" aria-label="Excluir ${e.n} de Minhas Comunidades" title="Excluir de Minhas Comunidades">✕</button>
-      </div>`).join('')}</div>`;
-}
-document.addEventListener('click', ev => {
-  const b = ev.target.closest('[data-excluir]'); if(!b) return;
-  const e = ESTABELECIMENTOS.find(x => x.id === +b.dataset.excluir);
-  definirEstNasComunidades(+b.dataset.excluir, false);
-  renderEstabelecimentos();
-  mostrarAviso(`${e.n} excluído de Minhas Comunidades`);
-});
-
 function renderAll(){
   renderOrgSwitcher();
-  renderEstabelecimentos();
   renderHeaderInfo();
   renderTabBar();
   renderContent();
