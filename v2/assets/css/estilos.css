@@ -1224,9 +1224,11 @@ body{ background:
 /* ===== Janela do sino (notificações resumidas, no topo de todas as páginas) ===== */
 .top{ position:relative; z-index:40; } /* a janela do sino fica por cima do conteúdo */
 .tools{ position:relative; }
-.nt-janela{ position:absolute; top:calc(100% + 12px); right:0; z-index:60; width:380px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden;
+.janela-topo, .nt-janela{ position:absolute; top:calc(100% + 12px); right:0; z-index:60; width:380px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden;
   background:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), 0 18px 44px rgba(1,53,101,.16);
   -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); animation:ntj-abre .16s ease; }
+/* janela dos créditos usa a mesma base (vidro, sombra, animação de abrir) */
+.cr-janela{ width:320px; }
 @keyframes ntj-abre{ from{ opacity:0; transform:translateY(-6px); } }
 .ntj-topo{ display:flex; align-items:center; gap:8px; padding:16px 18px 12px; border-bottom:1px solid var(--line); }
 .ntj-topo b{ font-family:'Fraunces',serif; font-size:19px; color:var(--navy); }
@@ -1234,7 +1236,9 @@ body{ background:
 .ntj-ler{ margin-left:auto; border:none; background:none; padding:0; font-size:12.5px; font-weight:600; color:var(--green); white-space:nowrap; }
 .ntj-ler:hover{ text-decoration:underline; }
 .ntj-ler:disabled{ color:var(--muted); text-decoration:none; cursor:default; }
-.ntj-lista{ display:flex; flex-direction:column; padding:6px; }
+.ntj-lista{ display:flex; flex-direction:column; padding:6px; max-height:min(360px, calc(100vh - 220px)); overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#cfd6dc transparent; } /* todas as notificações, com rolagem */
+.ntj-lista::-webkit-scrollbar{ width:6px; }
+.ntj-lista::-webkit-scrollbar-thumb{ background:#cfd6dc; border-radius:999px; }
 .ntj-item{ position:relative; display:flex; align-items:center; gap:12px; padding:10px 30px 10px 12px; border-radius:14px; font-size:14px; line-height:1.4; color:var(--text); text-decoration:none; }
 .ntj-item b{ color:var(--navy); }
 .ntj-item.nova{ background:rgba(230,242,234,.7); }
@@ -1246,4 +1250,22 @@ body{ background:
 .ntj-todas{ display:block; text-align:center; padding:13px; border-top:1px solid var(--line); font-size:14px; font-weight:600; color:var(--green); }
 .ntj-todas:hover{ background:rgba(255,255,255,.7); }
 .sino[aria-expanded="true"]{ background:#fff; border-color:var(--mint-line); }
-@media (max-width:640px){ .nt-janela{ position:fixed; top:64px; left:16px; right:16px; width:auto; max-width:none; } }
+@media (max-width:640px){ .janela-topo, .nt-janela{ position:fixed; top:64px; left:16px; right:16px !important; width:auto; max-width:none; } }
+.creditos[aria-expanded="true"]{ background:#fbe8c6; border-color:#e9cf93; }
+
+/* Janela dos créditos */
+.crj-saldo{ padding:18px 20px 14px; border-bottom:1px solid var(--line); }
+.crj-saldo small{ font-size:12px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+.crj-saldo p{ margin:4px 0 8px; font-size:15px; color:var(--text-2); }
+.crj-saldo p b{ font-family:'Fraunces',serif; font-size:38px; line-height:1; color:var(--green); margin-right:4px; }
+.crj-partes{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--text-2); }
+.crj-partes span{ display:inline-flex; align-items:center; gap:7px; }
+.crj-oferta{ margin:12px; padding:14px 16px; border-radius:16px; background:#fdf1dc; border:1px solid #f0ddac; }
+.crj-oferta span{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#8a5a0e; }
+.crj-oferta span .ic{ width:15px; height:15px; }
+.crj-oferta p{ margin:6px 0 12px; font-size:14.5px; line-height:1.45; color:#5c3c08; }
+.crj-oferta .btn{ width:100%; justify-content:center; }
+.crj-links{ display:flex; flex-direction:column; padding:0 6px 8px; }
+.crj-links a{ display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:12px; font-size:14px; font-weight:600; color:var(--navy); }
+.crj-links a .ic{ width:17px; height:17px; color:var(--green); }
+.crj-links a:hover{ background:#fff; }

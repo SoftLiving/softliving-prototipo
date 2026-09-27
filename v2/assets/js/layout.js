@@ -482,44 +482,76 @@ function ntAvatar(n){
   return `<span class="nt-av nt-av-ic">${icone(NT_ICONES[n.tipo])}</span>`;
 }
 
-// Janela do sino: abre embaixo do botão com as notificações resumidas; fecha ao clicar fora, no sino de novo ou com Esc
+// Janelas do topo (sino e créditos): abrem embaixo do botão; fecham ao clicar fora, no botão de novo ou com Esc.
+// Só uma fica aberta por vez. render() monta o conteúdo toda vez que a janela abre.
+const JANELAS_TOPO = [];
+function criarJanelaTopo(botao, classe, id, rotulo, render, aoClicar){
+  const j = document.createElement('div');
+  j.className = 'janela-topo ' + classe;
+  j.id = id;
+  j.setAttribute('role', 'dialog');
+  j.setAttribute('aria-label', rotulo);
+  j.hidden = true;
+  botao.after(j);
+  botao.setAttribute('aria-haspopup', 'dialog');
+  botao.setAttribute('aria-expanded', 'false');
+  botao.setAttribute('aria-controls', id);
+  const janela = { j, botao, render };
+  janela.abrir = abrir => {
+    if(abrir){ JANELAS_TOPO.forEach(o => o !== janela && !o.j.hidden && o.abrir(false)); render(j); }
+    // alinhada à direita do botão; no celular ocupa a largura da tela, logo abaixo do topo
+    const celular = matchMedia('(max-width:640px)').matches;
+    j.style.top = abrir && celular ? (botao.getBoundingClientRect().bottom + 10) + 'px' : '';
+    j.style.right = abrir && !celular ? (botao.parentElement.getBoundingClientRect().right - botao.getBoundingClientRect().right) + 'px' : '';
+    j.hidden = !abrir;
+    botao.setAttribute('aria-expanded', abrir);
+  };
+  botao.addEventListener('click', e => { e.preventDefault(); janela.abrir(j.hidden); });
+  j.addEventListener('click', e => { e.stopPropagation(); if(aoClicar) aoClicar(e, j); });  // clique dentro não conta como "fora"
+  JANELAS_TOPO.push(janela);
+  return janela;
+}
+document.addEventListener('click', e => JANELAS_TOPO.forEach(o => { if(!o.j.hidden && !o.botao.contains(e.target)) o.abrir(false); }));
+document.addEventListener('keydown', e => { if(e.key !== 'Escape') return; JANELAS_TOPO.forEach(o => { if(!o.j.hidden){ o.abrir(false); o.botao.focus(); } }); });
+
+// Janela do sino: todas as notificações resumidas, numa lista com rolagem
 const sino = document.querySelector('.top .sino');
-const janelaNotif = document.createElement('div');
-janelaNotif.className = 'nt-janela';
-janelaNotif.id = 'ntJanela';
-janelaNotif.setAttribute('role', 'dialog');
-janelaNotif.setAttribute('aria-label', 'Notificações');
-janelaNotif.hidden = true;
-sino.after(janelaNotif);
-sino.setAttribute('aria-haspopup', 'dialog');
-sino.setAttribute('aria-expanded', 'false');
-sino.setAttribute('aria-controls', 'ntJanela');
-function renderJanelaNotif(){
+function renderJanelaNotif(j){
   const novas = naoLidas().length;
-  janelaNotif.innerHTML = `
+  j.innerHTML = `
     <div class="ntj-topo"><b>Notificações</b>${novas ? `<span class="ntj-conta">${novas} ${novas === 1 ? 'nova' : 'novas'}</span>` : ''}
       <button type="button" class="ntj-ler" ${novas ? '' : 'disabled'}>Marcar como lidas</button></div>
-    <div class="ntj-lista">${NOTIFICACOES.slice(0, 5).map(n => `
-      <a href="${n.acao[1]}" class="ntj-item${ehNova(n) ? ' nova' : ''}" data-id="${n.id}">${ntAvatar(n)}<span>${n.curto}</span>${ehNova(n) ? '<i aria-label="Não lida"></i>' : ''}</a>`).join('')}
+    <div class="ntj-lista">${NOTIFICACOES.map(n => `
+      <a href="${n.acao[1]}" class="ntj-item${ehNova(n) ? ' nova' : ''}" data-id="${n.id}">${ntAvatar(n)}<span>${n.curto.replace('SoftLiving', LOGO)}</span>${ehNova(n) ? '<i aria-label="Não lida"></i>' : ''}</a>`).join('')}
     </div>
     <a href="${urlPagina('notificacoes')}" class="ntj-todas">Ver todas as notificações</a>`;
 }
-function abrirJanelaNotif(abrir){
-  if(abrir) renderJanelaNotif();
-  // no celular a janela ocupa a largura da tela e começa logo abaixo do sino (a faixa de protótipo muda de altura)
-  janelaNotif.style.top = abrir && matchMedia('(max-width:640px)').matches ? (sino.getBoundingClientRect().bottom + 10) + 'px' : '';
-  janelaNotif.hidden = !abrir;
-  sino.setAttribute('aria-expanded', abrir);
-}
-sino.addEventListener('click', e => { e.preventDefault(); abrirJanelaNotif(janelaNotif.hidden); });
-janelaNotif.addEventListener('click', e => {
-  e.stopPropagation();                                   // clique dentro da janela não conta como "clique fora" (a lista é redesenhada)
-  if(e.target.closest('.ntj-ler')){ marcarTodasLidas(); renderJanelaNotif(); return; }
+const janelaNotif = criarJanelaTopo(sino, 'nt-janela', 'ntJanela', 'Notificações', renderJanelaNotif, (e, j) => {
+  if(e.target.closest('.ntj-ler')){ const rolagem = j.querySelector('.ntj-lista').scrollTop; marcarTodasLidas(); renderJanelaNotif(j); j.querySelector('.ntj-lista').scrollTop = rolagem; return; }
   const item = e.target.closest('.ntj-item');
   if(item) marcarLida(+item.dataset.id);
 });
-document.addEventListener('click', e => { if(!janelaNotif.hidden && !janelaNotif.contains(e.target) && !sino.contains(e.target)) abrirJanelaNotif(false); });
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && !janelaNotif.hidden){ abrirJanelaNotif(false); sino.focus(); } });
+
+// Janela dos créditos: saldo (comprados e bônus), oferta da primeira recarga e atalhos da carteira
+const botaoCreditos = document.querySelector('.top .creditos');
+criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
+  const bonus = SALDO_BASE + lerBonusCreditos();           // no protótipo, todo o saldo é bônus (ainda sem recarga)
+  j.innerHTML = `
+    <div class="crj-saldo">
+      <small>Saldo disponível</small>
+      <p><b>${bonus}</b> créditos</p>
+      <div class="crj-partes"><span><i class="ct-ponto comprados"></i>0 comprados</span><span><i class="ct-ponto bonus"></i>${bonus} de bônus</span></div>
+    </div>
+    <div class="crj-oferta">
+      <span>${icone('presente')}Primeira recarga</span>
+      <p><b>R$50</b> viram <b>50 créditos + 50 de bônus</b></p>
+      <a href="${urlPagina('carteira')}#recarga" class="btn">${icone('mais')}Recarregar</a>
+    </div>
+    <nav class="crj-links">
+      <a href="${urlPagina('carteira')}">${icone('carteira')}Ver extrato e carteira</a>
+      <a href="${urlPagina('indicacoes')}">${icone('presente')}Indique e ganhe 5 de bônus</a>
+    </nav>`;
+});
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista
 function atualizarNotificacoes(){
