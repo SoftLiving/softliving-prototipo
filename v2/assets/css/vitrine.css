@@ -119,3 +119,51 @@
   .vt-marca{ padding:32px 22px; }
   .vt-marca h2, .vt-titulo h2{ font-size:26px; }
 }
+
+/* ===== Página de um estabelecimento (estabelecimento.html): simples, uma coluna ===== */
+.es-pagina{ max-width:980px; padding:26px 0 64px; }
+.es-voltar{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:var(--muted); margin-bottom:16px; }
+.es-voltar .ic{ width:16px; height:16px; }
+.es-voltar:hover{ color:var(--green); }
+.es-capa{ aspect-ratio:21 / 9; border-radius:30px; background-size:cover; background-position:center; box-shadow:0 18px 40px rgba(1,53,101,.14); }
+.es-topo{ display:flex; align-items:flex-start; gap:20px; padding:0 28px; margin-top:-48px; } /* só o logo avança sobre a foto; nome e botões ficam abaixo dela */
+.es-logo{ display:grid; place-items:center; width:104px; height:104px; flex:none; border-radius:50%; background:#fff; border:4px solid #fff;
+  font-family:'Fraunces',serif; font-weight:700; font-size:36px; letter-spacing:-.02em; box-shadow:0 12px 30px rgba(1,53,101,.18); }
+.es-nome{ flex:1; min-width:0; padding-top:62px; }
+.es-nome h1{ font-size:40px; line-height:1.1; font-weight:700; }
+.es-nome p{ margin:6px 0 0; font-size:15px; color:var(--text-2); }
+.es-acoes{ display:flex; gap:10px; padding-top:66px; }
+.es-acoes .btn .ic{ width:16px; height:16px; }
+#esSalvar.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
+#esSalvar.on .ic{ fill:currentColor; }
+
+.es-corpo{ display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:40px; margin:44px 0 40px; padding:0 4px; }
+.es-sobre h2{ font-size:24px; margin-bottom:12px; }
+.es-sobre p{ font-size:17px; line-height:1.75; color:var(--text-2); margin:0; }
+.es-lado{ display:flex; flex-direction:column; gap:14px; }
+.es-beneficio{ padding:20px 22px; border-radius:22px; background:linear-gradient(135deg, #fff6e2, #fdecc8); border:1px solid #f0ddac; }
+.es-ben-rotulo{ display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:#8a5a0e; }
+.es-ben-rotulo .ic{ width:16px; height:16px; }
+.es-beneficio b{ display:block; font-family:'Fraunces',serif; font-size:22px; color:#5c3c08; margin:10px 0 6px; }
+.es-beneficio p{ margin:0; font-size:14px; line-height:1.55; color:#7a5c12; }
+.es-infos{ list-style:none; margin:0; padding:8px 20px; border-radius:22px;
+  background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.es-infos li{ display:flex; gap:12px; align-items:flex-start; padding:12px 0; font-size:14.5px; line-height:1.5; color:var(--text); }
+.es-infos li + li{ border-top:1px solid var(--line); }
+.es-infos .ic{ width:18px; height:18px; color:var(--green); margin-top:2px; }
+
+.es-galeria{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:12px; }
+.es-galeria img{ width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; transition:transform .15s ease, box-shadow .15s ease; }
+.es-galeria img:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+
+@container (max-width:760px){
+  .es-topo{ flex-wrap:wrap; padding:0 16px; margin-top:-42px; gap:14px; }
+  .es-logo{ width:84px; height:84px; font-size:28px; }
+  .es-nome{ flex-basis:calc(100% - 100px); padding-top:48px; }
+  .es-nome h1{ font-size:30px; }
+  .es-acoes{ width:100%; padding:0; }
+  .es-acoes .btn{ flex:1; justify-content:center; }
+  .es-corpo{ grid-template-columns:1fr; gap:24px; margin-top:30px; }
+  .es-galeria{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .es-capa{ aspect-ratio:16 / 10; border-radius:24px; }
+}
