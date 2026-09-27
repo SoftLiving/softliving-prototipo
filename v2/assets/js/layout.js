@@ -178,6 +178,7 @@ const LAYOUT_CABECALHO = `
     <a href="${urlPagina('carteira')}" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
     <a href="${urlPagina('notificacoes')}" class="round sino" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
     <a href="https://softliving.com.br/entrar" class="btn entrar">Entrar</a>
+    <a href="${urlPagina('perfil')}" class="round avatar-topo" aria-label="Sua conta" title="Sua conta" hidden>RB</a>
   </div>
 </div>`;
 
@@ -565,15 +566,17 @@ const ENTRAR_SOCIAL = [
   ['Facebook', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1877F2"/><path fill="#fff" d="M13.4 19v-6h2l.3-2.4h-2.3V9.1c0-.7.2-1.2 1.2-1.2h1.2V5.8a16 16 0 0 0-1.8-.1c-1.8 0-3 1.1-3 3.1v1.8H9v2.4h2v6h2.4z"/></svg>'],
 ];
 const botaoEntrar = document.querySelector('.top .entrar');
-criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j => {
+const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j => {
   j.innerHTML = `
     <div class="enj-topo"><b>Entrar na ${LOGO}</b><p>Bem-vindo de volta. Escolha como quer entrar.</p></div>
     <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
     <p class="enj-ou"><span>ou com seu e-mail</span></p>
     <form class="enj-form" id="enForm" novalidate>
-      <label>E-mail<input type="email" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
+      <p class="enj-dica">Protótipo: entre com login <b>123</b> e senha <b>123</b>.</p>
+      <label>E-mail ou login<input type="text" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
       <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
+      <p class="enj-erro" id="enErro" role="alert" hidden>Login ou senha incorretos. No protótipo, use 123 e 123.</p>
       <button type="submit" class="btn enj-entrar">Entrar</button>
     </form>
     <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
@@ -585,12 +588,43 @@ criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j 
   if(e.target.closest('.enj-esqueci')){ e.preventDefault(); mostrarAviso('Recuperar senha: fora deste protótipo'); return; }
   if(e.target.closest('.enj-criar')){ e.preventDefault(); mostrarAviso('Cadastro: fora deste protótipo'); }
 });
+// Simulação de entrada (protótipo): login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
+// Com a pessoa logada, o botão Entrar dá lugar ao avatar, que abre a janela da conta com a opção Sair.
+const lerLogado = () => { try { return localStorage.getItem('v2Logado') === '1'; } catch(e){ return false; } };
+function marcarLogado(logado){
+  try { if(logado) localStorage.setItem('v2Logado', '1'); else localStorage.removeItem('v2Logado'); } catch(e){}
+  botaoEntrar.hidden = logado;
+  botaoAvatar.hidden = !logado;
+}
 document.addEventListener('submit', e => {
   if(e.target.id !== 'enForm') return;
   e.preventDefault();
-  e.target.reset();                                      // nada é enviado nem guardado
-  mostrarAviso('Entrada: fora deste protótipo');
+  const f = e.target, ok = f.email.value.trim() === '123' && f.senha.value === '123';
+  document.getElementById('enErro').hidden = ok;
+  if(!ok){ f.senha.value = ''; f.senha.focus(); return; }
+  janelaEntrar.abrir(false);
+  marcarLogado(true);
+  mostrarAviso('Você entrou. Bem-vindo de volta, Rafael!');
 });
+
+// Janela da conta (avatar): nome, atalhos e Sair
+const botaoAvatar = document.querySelector('.top .avatar-topo');
+criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
+  j.innerHTML = `
+    <div class="cnj-topo"><span class="cnj-av">RB</span><div><b>Rafael Barros</b><small>ra•••••@exemplo.com</small></div></div>
+    <nav class="crj-links">
+      <a href="${urlPagina('perfil')}">${icone('perfil')}Meu perfil</a>
+      <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${SALDO_BASE + lerBonusCreditos()} créditos</span></a>
+      <a href="${urlPagina('ajuda')}">${icone('ajuda')}Ajuda</a>
+    </nav>
+    <button type="button" class="cnj-sair">Sair da conta</button>`;
+}, e => {
+  if(!e.target.closest('.cnj-sair')) return;
+  JANELAS_TOPO.forEach(o => !o.j.hidden && o.abrir(false));
+  marcarLogado(false);
+  mostrarAviso('Você saiu da conta');
+});
+marcarLogado(lerLogado());
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista
 function atualizarNotificacoes(){
