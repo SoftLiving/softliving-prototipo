@@ -114,3 +114,18 @@ document.getElementById('ajcSugestoes').addEventListener('click', ev => {
   const b = ev.target.closest('[data-pergunta]');
   if(b) ajcPerguntar(b.dataset.pergunta);
 });
+
+// Altura do chat: sempre cabe inteiro na tela (do cabeçalho do assistente até o campo e o botão de enviar), em qualquer
+// resolução. Com o chat ao lado do conteúdo, vai do topo dele até 24px acima do fim da janela; ao rolar a página ele
+// gruda a 24px do topo e cresce até ocupar a altura da janela. Com o chat embaixo do conteúdo, a altura vem do CSS.
+const ajcCaixa = document.querySelector('.ajc');
+function ajustarChat(){
+  if(getComputedStyle(ajcCaixa).position !== 'sticky'){ ajcCaixa.style.height = ''; return; }
+  const topo = Math.max(24, ajcCaixa.getBoundingClientRect().top);
+  ajcCaixa.style.height = Math.max(360, innerHeight - topo - 24) + 'px';
+}
+addEventListener('resize', ajustarChat);
+addEventListener('scroll', ajustarChat, { passive:true });
+addEventListener('load', ajustarChat);
+if(document.fonts) document.fonts.ready.then(ajustarChat);
+ajustarChat();
