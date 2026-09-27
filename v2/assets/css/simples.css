@@ -69,6 +69,48 @@
 .sm-steps{ margin:0; padding-left:1.3em; display:flex; flex-direction:column; gap:.6em; line-height:1.55; }
 .sm-footer{ text-align:center; font-size:14px; color:#6b7580; padding:20px; }
 
+/* Ampliação: Novidades, salvos, ouvir, pedidos, recarga em 3 passos, comunidades e benefícios */
+.sm-novidades{ margin:.4em 0 1.2em; }
+.sm-novidades .sm-card-title{ font-size:1.15em; margin-bottom:.5em; }
+.sm-novidade{ display:flex; align-items:center; gap:.7em; min-height:3.4em; padding:.5em 1em; margin-bottom:8px; border-radius:18px; color:var(--text);
+  background:var(--mint); border:2px solid var(--mint-line); }
+.sm-novidade b{ color:var(--navy); }
+.sm-novidade span{ flex:1; }
+.sm-novidade svg.ic{ width:1.4em; height:1.4em; color:var(--green); flex-shrink:0; }
+.sm-novidade svg.ic:last-child{ width:1em; height:1em; transform:rotate(-90deg); }
+.sm-row-destaque{ margin-bottom:14px; background:var(--mint) !important; border-color:var(--mint-line) !important; }
+.sm-row-foto img{ width:3.2em; height:3.2em; border-radius:12px; object-fit:cover; flex-shrink:0; }
+.sm-ler-acoes{ margin:.2em 0 1em; }
+.sm-marcado{ background:var(--mint); border-color:var(--mint-line); color:var(--green); }
+.sm-pedidos .sm-card-title{ font-size:1.15em; }
+.sm-pedido{ display:flex; align-items:center; gap:.7em; flex-wrap:wrap; padding:.6em 0; border-top:1px solid var(--line); }
+.sm-pedido > span:nth-child(2){ flex:1; min-width:10em; }
+.sm-pedido b{ display:block; color:var(--navy); }
+.sm-pedido small{ font-size:.85em; color:#4a5360; }
+.sm-pedido .sm-actions{ margin:0; }
+.sm-indicar{ margin-top:1em; }
+.sm-codigo{ font-family:'Fraunces',serif; font-size:1.8em; font-weight:700; letter-spacing:.06em; color:var(--navy); margin:0 0 .3em; }
+.sm-whats{ background:#25d366 !important; border-color:#25d366 !important; }
+.sm-passo{ display:inline-block; font-size:.85em; font-weight:700; color:var(--green); background:var(--mint); border-radius:999px; padding:.2em .8em; margin:0 0 .6em; }
+.sm-valor span{ display:flex; flex-direction:column; }
+.sm-valor b{ font-family:'Fraunces',serif; font-size:1.5em; }
+.sm-valor small{ font-size:.8em; font-weight:600; color:var(--green); }
+.sm-pix{ font-family:monospace; font-size:.9em; word-break:break-all; background:#f1ede5; border-radius:12px; padding:.7em 1em; margin:0 0 1em; }
+.sm-balance svg.ic{ width:1.2em; height:1.2em; color:var(--green); }
+.sm-aviso{ background:#fdf6e3; border-color:#f0ddac; }
+.sm-aviso .sm-meta{ display:flex; align-items:center; gap:.4em; color:#7a5c12; font-weight:700; }
+.sm-aviso .sm-meta svg.ic{ width:1.1em; height:1.1em; }
+.sm-beneficio{ padding:.8em 1em; margin:.3em 0 1em; border-radius:16px; background:#fdf1dc; border:1px solid #f0ddac; }
+.sm-beneficio .sm-meta{ display:flex; align-items:center; gap:.4em; color:#8a5a0e; font-weight:700; }
+.sm-beneficio .sm-meta svg.ic{ width:1.1em; height:1.1em; }
+.sm-beneficio .sm-card-title{ color:#5c3c08; margin:.1em 0 .2em; }
+.sm-beneficio .sm-text{ margin:0; color:#7a5c12; }
+.sm-infos{ margin:0 0 1em; }
+.sm-infos p{ display:flex; align-items:center; gap:.5em; margin:.3em 0; }
+.sm-infos svg.ic{ width:1.2em; height:1.2em; color:var(--green); flex-shrink:0; }
+.sm-novidade{ transition:transform .15s ease, box-shadow .15s ease; }
+.sm-novidade:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+
 /* Regra de hover da v2: botões e caixas clicáveis sobem 2px com sombra */
 .sm-big, .sm-row, .sm-btn, .sm-back, .sm-top-btn, .sm-fontsize button{ transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease; }
 .sm-big:hover, a.sm-row:hover, .sm-btn:hover, .sm-back:hover, .sm-top-btn:hover, .sm-fontsize button:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }

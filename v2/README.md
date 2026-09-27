@@ -28,7 +28,7 @@ carteira.html               Tela Carteira: saldo (comprados + bônus), recarga (
 indicacoes.html             Tela Indicações: link de convite, convite por e-mail, como funciona e lista
 perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
 ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
-simples.html                Modo simples (sem layout.js): 6 opções grandes, uma tarefa por tela, letra ajustável
+simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável
 curtidas/comentarios/acompanhar/salvos.html  Atividades (atividades.js); Salvos lê a bandeirinha dos cartões (lerSalvos no layout.js)
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, galeria
