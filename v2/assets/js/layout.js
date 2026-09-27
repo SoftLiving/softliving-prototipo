@@ -17,6 +17,7 @@ const PAGINAS = {
   colunas:      { url:'colunas.html' },
   busca:        { url:'busca.html' },
   notificacoes: { url:'notificacoes.html' },
+  vitrine:      { url:'vitrine.html' },
   comunidades:  { url:'comunidades/inicio.html' },
   conexoes:     { url:'conexoes.html', v1:true },
   simples:      { url:'simples.html', v1:true },
@@ -81,6 +82,7 @@ const MENU_SECOES = [
     ]},
   ]},
   { titulo:'Comunidade e benefícios', itens:[
+    { nome:'vitrine', rotulo:'Vitrines', icone:'loja' },
     { nome:'comunidades', rotulo:'Minhas Comunidades', icone:'comunidades' },
     { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
     { nome:'conexoes', rotulo:'Conexões', icone:'conexoes' },
