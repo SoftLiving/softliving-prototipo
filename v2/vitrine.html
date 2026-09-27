@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitrine · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+<link rel="stylesheet" href="assets/css/vitrine.css">
+</head>
+<body data-page="vitrine" data-root="">
+
+<!-- ESBOÇO · Vitrine de estabelecimentos (marcas, produtos e serviços). Visual de revista, sem cara de painel.
+     Estabelecimentos, pessoas e depoimentos são fictícios. Montado por vitrine.js. -->
+
+<!-- Capa editorial: texto e busca à esquerda, mosaico de fotos à direita -->
+<section class="vt-capa">
+  <div class="vt-capa-texto">
+    <p class="kicker">Vitrine <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></p>
+    <h1>Lugares, marcas e serviços que a <span class="hl">comunidade</span> recomenda</h1>
+    <p class="vt-lead">Restaurantes, clínicas, lojas e passeios escolhidos por quem vive o Rio, muitos com benefícios só para membros.</p>
+    <form class="busca vt-busca" role="search" onsubmit="event.preventDefault()">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" placeholder="Procure um lugar, produto ou serviço" aria-label="Buscar na vitrine">
+    </form>
+  </div>
+  <div class="vt-mosaico" id="vtMosaico" aria-hidden="true"></div>
+</section>
+
+<!-- Categorias em círculos com foto -->
+<nav class="vt-categorias" id="vtCategorias" aria-label="Categorias"></nav>
+
+<!-- Em destaque: cartões verticais grandes -->
+<section class="vt-bloco">
+  <div class="vt-titulo"><h2>Em destaque na vitrine</h2><p>Escolhidos a dedo este mês.</p></div>
+  <div class="vt-destaques" id="vtDestaques"></div>
+</section>
+
+<!-- Coleções com curadoria: uma foto grande e três lugares ao lado -->
+<section class="vt-bloco" id="vtColecoes"></section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- Recomendado pela comunidade -->
+<section class="vt-bloco">
+  <div class="vt-titulo"><h2>Recomendado pela comunidade</h2><p>O que os membros contam dos lugares que frequentam.</p></div>
+  <div class="vt-recomendas" id="vtRecomendas"></div>
+</section>
+
+<!-- Por bairro -->
+<section class="vt-bloco">
+  <div class="vt-titulo"><h2>Perto de você</h2><p>Escolha um bairro e veja o que tem por lá.</p></div>
+  <div class="vt-bairros" id="vtBairros"></div>
+</section>
+
+<!-- Chamada para as marcas -->
+<section class="vt-marca">
+  <div>
+    <p class="kicker">Para marcas e negócios</p>
+    <h2>Tem um negócio? Monte a vitrine da sua marca</h2>
+    <p>Fotos, história, produtos e um benefício para a comunidade, em uma página bonita, sem anúncios piscando.</p>
+    <a href="#" class="btn white vt-quero">Quero minha vitrine</a>
+  </div>
+</section>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/vitrine.js"></script>
+</body>
+</html>

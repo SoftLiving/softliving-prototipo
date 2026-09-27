@@ -1,0 +1,121 @@
+/* VERSÃO 2 · ESBOÇO da Vitrine de estabelecimentos (vitrine.html). Visual de revista: fotos grandes, coleções,
+   depoimentos. Segue as regras da v2: vidro, Fraunces, hover subindo 2px com sombra, sem datas. */
+.corpo > .wrap{ container-type:inline-size; }
+
+/* Capa editorial */
+.vt-capa{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.05fr); gap:44px; align-items:center; padding:36px 0 30px; }
+.vt-capa .kicker .sig{ font-size:14px; }
+.vt-capa h1{ font-size:52px; line-height:1.06; font-weight:700; margin:18px 0 0; }
+.vt-lead{ font-size:17px; line-height:1.6; color:var(--text-2); margin:18px 0 26px; max-width:520px; }
+.vt-busca{ max-width:520px; margin:0; }
+.vt-mosaico{ position:relative; display:grid; grid-template-columns:1.25fr 1fr; grid-template-rows:170px 170px 120px; gap:12px; }
+.vt-mosaico img{ width:100%; height:100%; object-fit:cover; border-radius:22px; box-shadow:0 14px 34px rgba(1,53,101,.14); }
+.vt-m1{ grid-row:1 / 3; }
+.vt-m2{ grid-row:1 / 2; }
+.vt-m3{ grid-row:2 / 4; }
+.vt-m4{ grid-row:3 / 4; }
+.vt-flutua{ position:absolute; left:-26px; bottom:26px; display:flex; align-items:center; gap:12px; max-width:250px; padding:14px 18px; border-radius:20px;
+  background:rgba(255,255,255,.78); border:1px solid rgba(255,255,255,.95); box-shadow:var(--vidro-brilho), 0 16px 36px rgba(1,53,101,.16);
+  -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); }
+.vt-flutua b{ font-family:'Fraunces',serif; font-size:34px; color:var(--green); line-height:1; }
+.vt-flutua span{ font-size:13px; line-height:1.35; color:var(--text-2); }
+
+/* Categorias em círculos */
+.vt-categorias{ display:flex; gap:22px; overflow-x:auto; scrollbar-width:none; padding:10px 4px 16px; margin:0 -4px 20px; }
+.vt-categorias::-webkit-scrollbar{ display:none; }
+.vt-cat{ flex:none; display:flex; flex-direction:column; align-items:center; gap:9px; width:88px; font-size:13.5px; font-weight:600; color:var(--navy); text-align:center; }
+.vt-cat img{ width:84px; height:84px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 0 0 2px var(--mint-line), 0 8px 20px rgba(1,53,101,.12); transition:transform .15s ease, box-shadow .15s ease; }
+.vt-cat:hover img{ transform:translateY(-2px); box-shadow:0 0 0 2px var(--green), 0 12px 24px rgba(1,53,101,.16); }
+.vt-cat:hover{ color:var(--green); }
+
+/* Blocos */
+.vt-bloco{ margin:26px 0 52px; }
+.vt-titulo{ margin-bottom:20px; }
+.vt-titulo h2{ font-size:32px; font-weight:700; }
+.vt-titulo p{ color:var(--text-2); font-size:15.5px; margin:6px 0 0; }
+
+/* Em destaque: cartão vertical com logo e benefício */
+.vt-destaques.trilho-h{ --vis:4; --gap:20px; }
+.vt-card .vc-info{ padding-top:40px; }
+.vt-logo{ display:grid; place-items:center; width:48px; height:48px; border-radius:50%; background:#fff; font-family:'Fraunces',serif; font-weight:700; font-size:17px;
+  letter-spacing:-.02em; box-shadow:0 6px 16px rgba(0,0,0,.18); margin-bottom:12px; }
+.vt-beneficio{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:#8a5a0e; background:#fdf1dc; border:1px solid #f0ddac; border-radius:999px; padding:5px 11px; }
+.vt-beneficio .ic{ width:14px; height:14px; }
+.vc-topo .vt-beneficio{ background:rgba(253,241,220,.92); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+
+/* Coleções */
+.vt-colecao{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:18px; margin-bottom:22px; }
+.vt-colecao.invertida .vt-col-capa{ order:2; }
+.vt-col-capa{ position:relative; min-height:420px; border-radius:28px; overflow:hidden; background-size:cover; background-position:center; display:flex; align-items:flex-end; }
+.vt-col-capa::before{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(1,30,50,0) 35%, rgba(1,30,50,.72)); }
+.vt-col-capa > div{ position:relative; padding:28px; color:#fff; }
+.vt-col-capa .kicker{ background:rgba(255,255,255,.2); color:#fff; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.vt-col-capa h2{ color:#fff; font-size:34px; line-height:1.1; margin:14px 0 10px; }
+.vt-col-capa p{ margin:0; font-size:15px; line-height:1.55; opacity:.92; max-width:420px; }
+.vt-col-lista{ display:flex; flex-direction:column; gap:12px; }
+.vt-mini{ flex:1; display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:center; padding:12px; border-radius:22px;
+  background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.vt-mini img{ width:120px; height:100%; min-height:110px; object-fit:cover; border-radius:16px; }
+.vt-mini h3{ font-size:19px; margin:4px 0 4px; }
+.vt-mini p{ font-size:13.5px; line-height:1.5; color:var(--text-2); margin:0 0 10px; }
+.vt-mini-cat{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); }
+
+/* Recomendado pela comunidade */
+.vt-recomendas{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:18px; }
+.vt-reco{ display:flex; flex-direction:column; border-radius:24px; overflow:hidden; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.vt-reco-foto{ position:relative; height:170px; background-size:cover; background-position:center; }
+.vt-reco-foto .vt-logo{ position:absolute; left:18px; bottom:-24px; margin:0; border:3px solid #fff; }
+.vt-reco-txt{ padding:34px 20px 20px; display:flex; flex-direction:column; flex:1; }
+.vt-reco blockquote{ font-family:'Fraunces',serif; font-size:18px; line-height:1.45; color:var(--navy); margin:8px 0 18px; flex:1; }
+.vt-quem{ display:flex; align-items:center; gap:10px; margin:0; font-size:13px; color:var(--muted); }
+.vt-quem b{ display:block; color:var(--text); font-size:14px; }
+.vt-quem .av-col{ width:38px; height:38px; font-size:13px; border-width:2px; }
+
+/* Por bairro */
+.vt-bairros{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:14px; }
+.vt-bairro{ position:relative; height:180px; border-radius:22px; overflow:hidden; background-size:cover; background-position:center; display:flex; align-items:flex-end; }
+.vt-bairro::before{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(1,30,50,.7)); }
+.vt-bairro span{ position:relative; padding:16px 18px; color:rgba(255,255,255,.88); font-size:13px; }
+.vt-bairro b{ display:block; color:#fff; font-family:'Fraunces',serif; font-size:22px; }
+
+/* Chamada para as marcas */
+.vt-marca{ position:relative; border-radius:30px; overflow:hidden; margin:10px 0 60px; padding:48px 40px; color:#fff;
+  background:linear-gradient(90deg, rgba(1,53,101,.94) 45%, rgba(1,53,101,.35)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=70') center/cover; }
+.vt-marca > div{ max-width:520px; }
+.vt-marca .kicker{ background:rgba(255,255,255,.16); color:#fff; }
+.vt-marca h2{ color:#fff; font-size:34px; line-height:1.12; margin:16px 0 12px; }
+.vt-marca p{ font-size:16px; line-height:1.6; opacity:.9; margin:0 0 22px; }
+
+/* Regra de hover da v2 */
+.vt-mini, .vt-reco, .vt-bairro{ transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.vt-mini:hover, .vt-reco:hover, .vt-bairro:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.vt-mini:hover, .vt-reco:hover{ background:#fff; }
+
+/* Larguras menores (o conteúdo divide a tela com o menu) */
+@container (max-width:1000px){
+  .vt-capa{ grid-template-columns:1fr; gap:30px; }
+  .vt-flutua{ left:14px; }
+  .vt-destaques.trilho-h{ --vis:3; }
+  .vt-colecao{ grid-template-columns:1fr; }
+  .vt-colecao.invertida .vt-col-capa{ order:0; }
+  .vt-col-capa{ min-height:300px; }
+  .vt-recomendas{ grid-template-columns:1fr; }
+  .vt-reco{ flex-direction:row; }
+  .vt-reco-foto{ width:36%; height:auto; flex:none; }
+  .vt-reco-foto .vt-logo{ left:auto; right:-24px; bottom:auto; top:18px; }
+  .vt-reco-txt{ padding:20px 20px 20px 40px; }
+  .vt-bairros{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+}
+@container (max-width:600px){
+  .vt-capa h1{ font-size:38px; }
+  .vt-mosaico{ grid-template-rows:120px 120px 90px; gap:8px; }
+  .vt-destaques.trilho-h{ --vis:1.3; --gap:14px; }
+  .vt-mini{ grid-template-columns:96px 1fr; }
+  .vt-mini img{ width:96px; }
+  .vt-reco{ flex-direction:column; }
+  .vt-reco-foto{ width:auto; height:150px; }
+  .vt-reco-foto .vt-logo{ right:auto; left:18px; top:auto; bottom:-24px; }
+  .vt-reco-txt{ padding:34px 18px 18px; }
+  .vt-marca{ padding:32px 22px; }
+  .vt-marca h2, .vt-titulo h2{ font-size:26px; }
+}
