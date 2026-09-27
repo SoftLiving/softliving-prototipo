@@ -24,7 +24,7 @@ const PAGINAS = {
   ajuda:        { url:'ajuda.html' },
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
-  simples:      { url:'simples.html', v1:true },
+  simples:      { url:'simples.html' },
 };
 function urlPagina(nome){
   const p = PAGINAS[nome];
@@ -321,7 +321,7 @@ document.querySelectorAll('.nav-grupo').forEach(grupo => {
 });
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
-// Modo simples: a escolha fica guardada para o index.html da versão 1
+// Modo simples (v2/simples.html): a escolha também fica guardada, para o index.html da versão 1
 document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples')));
 
 // Atalhos dentro das páginas: data-goto="grupos" leva a uma página do menu, data-site-link="seguranca" a uma

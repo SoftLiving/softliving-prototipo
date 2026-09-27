@@ -28,6 +28,7 @@ carteira.html               Tela Carteira: saldo (comprados + bônus), recarga (
 indicacoes.html             Tela Indicações: link de convite, convite por e-mail, como funciona e lista
 perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
 ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
+simples.html                Modo simples (sem layout.js): 6 opções grandes, uma tarefa por tela, letra ajustável
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, galeria
 comunidades/*.html          Minhas Comunidades: 8 abas em páginas próprias (?org=...&publico=...)
@@ -72,6 +73,7 @@ assets/img/                 Logos da FSB e da RB2
 | Amigos (`amigos.html`, antiga Conexões) | pronta para revisão |
 | Carteira (`carteira.html`) | pronta para revisão |
 | Indicações, Meu perfil, Ajuda | prontas para revisão |
+| Modo simples (`simples.html`) | pronto para revisão |
 | Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
