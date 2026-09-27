@@ -168,7 +168,7 @@ const LAYOUT_CABECALHO = `
     <a href="${urlPagina('busca')}" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
     <a href="#" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
-    <a href="${urlPagina('notificacoes')}" class="round" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
+    <a href="${urlPagina('notificacoes')}" class="round sino" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
     <a href="https://softliving.com.br/entrar" class="btn">Entrar</a>
   </div>
 </div>`;
@@ -440,6 +440,91 @@ function animarCarrossel(car, agora){
   if(t < 1) requestAnimationFrame(tt => animarCarrossel(car, tt));
   else { car.deslize = null; car.animando = false; }
 }
+
+// Notificações (fictícias): usadas pela janela do sino no topo (todas as páginas) e pela página Notificações.
+// Sem datas nem horários (regra da v2). curto: texto resumido da janela do sino. av: sigla e cor do colunista, ou foto.
+// O que foi lido fica guardado no navegador (v2NotifLidas); o número do menu e a bolinha do sino acompanham.
+const NOTIFICACOES = [
+  { id:1, tipo:'colunas', av:{ sigla:'SM', cor:'#b0513a' }, curto:'<b>Sofia Martellini</b> publicou uma nova coluna',
+    txt:'<b>Sofia Martellini</b> publicou uma nova coluna: “Como o boom das canetas emagrecedoras está impactando a moda?”', acao:['Ler coluna', urlPagina('colunas')] },
+  { id:2, tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
+    txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=1`] },
+  { id:3, tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
+    txt:'Você ganhou <b>5 créditos de bônus</b> por responder à pesquisa da semana.', acao:['Ver carteira', '#'] },
+  { id:4, tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
+    txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=4`], lida:true },
+  { id:5, tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
+    txt:'Novo conteúdo sobre um assunto que você segue: <b>“Na Suíça, um vinho para chamar de seu”</b>.', acao:['Ler', urlPagina('conteudos')], lida:true },
+  { id:6, tipo:'colunas', av:{ sigla:'ZR', cor:'#2f8578' }, curto:'<b>Zé Roberto</b> respondeu ao seu comentário',
+    txt:'<b>Zé Roberto</b> respondeu ao seu comentário na coluna <b>Toque do Barão</b>.', acao:['Ver resposta', urlPagina('colunas')], lida:true },
+  { id:7, tipo:'grupos', foto:'1510812431401-41d2bd2722f3', curto:'Convite para o <b>Clube do Vinho</b>',
+    txt:'Você foi convidado para o <b>Clube do Vinho</b>, grupo gratuito da coluna de vinhos.', acao:['Participar', urlPagina('grupos')], lida:true },
+  { id:8, tipo:'softliving', curto:'Boas-vindas! Complete seu perfil',
+    txt:'Boas-vindas à SoftLiving! Complete seu perfil para receber conteúdos do seu jeito.', acao:['Completar perfil', '#'], lida:true },
+];
+const NT_ICONES = { grupos:'grupos', colunas:'colunas', conteudos:'conteudos', creditos:'carteira', softliving:'sino' };
+const ntLidas = new Set((() => { try { return JSON.parse(localStorage.getItem('v2NotifLidas')) || []; } catch(e){ return []; } })());
+const ehNova = n => !n.lida && !ntLidas.has(n.id);
+const naoLidas = () => NOTIFICACOES.filter(ehNova);
+function gravarLidas(){
+  try { localStorage.setItem('v2NotifLidas', JSON.stringify([...ntLidas])); } catch(e){}
+  atualizarNotificacoes();
+}
+function marcarLida(id){ ntLidas.add(id); gravarLidas(); }
+function marcarTodasLidas(){ naoLidas().forEach(n => ntLidas.add(n.id)); gravarLidas(); }
+function ntAvatar(n){
+  if(n.av) return `<span class="av-col nt-av" style="background:${n.av.cor}">${n.av.sigla}</span>`;
+  if(n.foto) return `<img class="nt-av" src="${fotoUrl(n.foto, 120)}" alt="">`;
+  return `<span class="nt-av nt-av-ic">${icone(NT_ICONES[n.tipo])}</span>`;
+}
+
+// Janela do sino: abre embaixo do botão com as notificações resumidas; fecha ao clicar fora, no sino de novo ou com Esc
+const sino = document.querySelector('.top .sino');
+const janelaNotif = document.createElement('div');
+janelaNotif.className = 'nt-janela';
+janelaNotif.id = 'ntJanela';
+janelaNotif.setAttribute('role', 'dialog');
+janelaNotif.setAttribute('aria-label', 'Notificações');
+janelaNotif.hidden = true;
+sino.after(janelaNotif);
+sino.setAttribute('aria-haspopup', 'dialog');
+sino.setAttribute('aria-expanded', 'false');
+sino.setAttribute('aria-controls', 'ntJanela');
+function renderJanelaNotif(){
+  const novas = naoLidas().length;
+  janelaNotif.innerHTML = `
+    <div class="ntj-topo"><b>Notificações</b>${novas ? `<span class="ntj-conta">${novas} ${novas === 1 ? 'nova' : 'novas'}</span>` : ''}
+      <button type="button" class="ntj-ler" ${novas ? '' : 'disabled'}>Marcar como lidas</button></div>
+    <div class="ntj-lista">${NOTIFICACOES.slice(0, 5).map(n => `
+      <a href="${n.acao[1]}" class="ntj-item${ehNova(n) ? ' nova' : ''}" data-id="${n.id}">${ntAvatar(n)}<span>${n.curto}</span>${ehNova(n) ? '<i aria-label="Não lida"></i>' : ''}</a>`).join('')}
+    </div>
+    <a href="${urlPagina('notificacoes')}" class="ntj-todas">Ver todas as notificações</a>`;
+}
+function abrirJanelaNotif(abrir){
+  if(abrir) renderJanelaNotif();
+  // no celular a janela ocupa a largura da tela e começa logo abaixo do sino (a faixa de protótipo muda de altura)
+  janelaNotif.style.top = abrir && matchMedia('(max-width:640px)').matches ? (sino.getBoundingClientRect().bottom + 10) + 'px' : '';
+  janelaNotif.hidden = !abrir;
+  sino.setAttribute('aria-expanded', abrir);
+}
+sino.addEventListener('click', e => { e.preventDefault(); abrirJanelaNotif(janelaNotif.hidden); });
+janelaNotif.addEventListener('click', e => {
+  e.stopPropagation();                                   // clique dentro da janela não conta como "clique fora" (a lista é redesenhada)
+  if(e.target.closest('.ntj-ler')){ marcarTodasLidas(); renderJanelaNotif(); return; }
+  const item = e.target.closest('.ntj-item');
+  if(item) marcarLida(+item.dataset.id);
+});
+document.addEventListener('click', e => { if(!janelaNotif.hidden && !janelaNotif.contains(e.target) && !sino.contains(e.target)) abrirJanelaNotif(false); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && !janelaNotif.hidden){ abrirJanelaNotif(false); sino.focus(); } });
+
+// Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista
+function atualizarNotificacoes(){
+  const n = naoLidas().length;
+  document.querySelectorAll('.nav a[data-page="notificacoes"] .tag').forEach(t => { t.textContent = n; t.hidden = !n; });
+  sino.querySelector('i').hidden = !n;
+  if(typeof renderNotificacoes === 'function') renderNotificacoes();
+}
+atualizarNotificacoes();
 
 // Aviso rápido no canto da tela
 let toastTimer;
