@@ -29,3 +29,12 @@ Object.assign(ESTABELECIMENTOS[0], {
 });
 ESTABELECIMENTOS.forEach((e, i) => e.id = e.id || i);
 const urlEstabelecimento = e => `${LAYOUT_ROOT}estabelecimento.html?e=${e.id}`;
+
+// Estabelecimentos incluídos em Minhas Comunidades (botão na página de cada um); ficam guardados no navegador
+function estNasComunidades(){ try { return JSON.parse(localStorage.getItem('v2EstComunidades')) || []; } catch(e){ return []; } }
+function definirEstNasComunidades(id, incluir){
+  const lista = estNasComunidades().filter(x => x !== id);
+  if(incluir) lista.push(id);
+  try { localStorage.setItem('v2EstComunidades', JSON.stringify(lista)); } catch(e){}
+}
+const siglaEstab = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2).slice(0, 2).map(p => p[0]).join('');

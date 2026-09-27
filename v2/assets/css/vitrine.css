@@ -132,7 +132,7 @@
 .es-nome{ flex:1; min-width:0; padding-top:62px; }
 .es-nome h1{ font-size:40px; line-height:1.1; font-weight:700; }
 .es-nome p{ margin:6px 0 0; font-size:15px; color:var(--text-2); }
-.es-acoes{ display:flex; gap:10px; padding-top:66px; }
+.es-acoes{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; } /* abaixo do nome */
 .es-acoes .btn .ic{ width:16px; height:16px; }
 #esSalvar.on{ background:var(--navy); color:#fff; border-color:var(--navy); }
 #esSalvar.on .ic{ fill:currentColor; }
@@ -161,9 +161,19 @@
   .es-logo{ width:84px; height:84px; font-size:28px; }
   .es-nome{ flex-basis:calc(100% - 100px); padding-top:48px; }
   .es-nome h1{ font-size:30px; }
-  .es-acoes{ width:100%; padding:0; }
   .es-acoes .btn{ flex:1; justify-content:center; }
+  .es-comunidade{ width:100%; }
+  .es-comunidade .btn{ flex:1; justify-content:center; }
   .es-corpo{ grid-template-columns:1fr; gap:24px; margin-top:30px; }
   .es-galeria{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
   .es-capa{ aspect-ratio:16 / 10; border-radius:24px; }
 }
+
+/* Incluir / excluir o estabelecimento de Minhas Comunidades */
+.es-comunidade{ display:inline-flex; align-items:center; gap:6px; }
+.es-comunidade .btn .ic{ width:16px; height:16px; }
+.btn.es-dentro{ background:var(--mint); color:var(--green); border:1px solid var(--mint-line); }
+.btn.es-dentro:hover{ background:#d6ebdd; }
+.es-dentro .ic{ stroke-width:2.4; }
+.round.es-excluir{ width:36px; height:36px; font-size:12px; color:var(--muted); }
+.round.es-excluir:hover{ color:#b3261e; }

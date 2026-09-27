@@ -24,10 +24,11 @@ document.getElementById('esPagina').innerHTML = `
     <div class="es-nome">
       <h1>${e.n}</h1>
       <p>${e.cat} · ${e.bairro}</p>
-    </div>
-    <div class="es-acoes">
+      <div class="es-acoes">
+      <span class="es-comunidade" id="esComunidade"></span>
       <button type="button" class="btn ghost" id="esSalvar">${icone('salvar')}Salvar</button>
-      ${e.endereco ? `<a href="#" class="btn" id="esChegar">${esIcone('local')}Como chegar</a>` : ''}
+        ${e.endereco ? `<a href="#" class="btn" id="esChegar">${esIcone('local')}Como chegar</a>` : ''}
+      </div>
     </div>
   </header>
 
@@ -55,5 +56,21 @@ salvar.addEventListener('click', () => {
   salvar.lastChild.textContent = on ? 'Salvo' : 'Salvar';
   mostrarAviso(on ? `${e.n} salvo nos seus favoritos` : 'Removido dos favoritos');
 });
+// Minhas Comunidades: incluir o estabelecimento nas comunidades que sigo, ou excluir
+const ES_CHECK = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+function renderBotaoComunidade(){
+  const dentro = estNasComunidades().includes(e.id);
+  document.getElementById('esComunidade').innerHTML = dentro
+    ? `<a href="${urlPagina('comunidades')}" class="btn es-dentro" title="Ver em Minhas Comunidades">${ES_CHECK}Em Minhas Comunidades</a><button type="button" class="round es-excluir" data-acao="excluir" aria-label="Excluir de Minhas Comunidades" title="Excluir de Minhas Comunidades">✕</button>`
+    : `<button type="button" class="btn ghost" data-acao="incluir">${icone('comunidades')}Incluir em Minhas Comunidades</button>`;
+}
+document.getElementById('esComunidade').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-acao]'); if(!b) return;
+  const incluir = b.dataset.acao === 'incluir';
+  definirEstNasComunidades(e.id, incluir);
+  renderBotaoComunidade();
+  mostrarAviso(incluir ? `${e.n} incluído em Minhas Comunidades` : `${e.n} excluído de Minhas Comunidades`);
+});
+renderBotaoComunidade();
 const chegar = document.getElementById('esChegar');
 if(chegar) chegar.addEventListener('click', ev => { ev.preventDefault(); mostrarAviso('Mapa: fora deste protótipo'); });
