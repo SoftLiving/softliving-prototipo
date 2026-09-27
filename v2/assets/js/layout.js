@@ -86,8 +86,6 @@ const MENU_SECOES = [
     { nome:'comunidades', rotulo:'Minhas Comunidades', icone:'comunidades' },
     { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
     { nome:'conexoes', rotulo:'Conexões', icone:'conexoes' },
-    { nome:'membros', rotulo:'Membros', icone:'membros' },
-    { nome:'parceiros', rotulo:'Parceiros', icone:'parceiros' },
   ]},
   { titulo:'Minha conta', itens:[
     { nome:'carteira', rotulo:'Carteira', icone:'carteira' },
