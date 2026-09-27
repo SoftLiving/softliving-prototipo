@@ -855,6 +855,10 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .ct-valor b{ font-family:'Fraunces',serif; font-size:26px; color:var(--navy); }
 .ct-valor span{ font-size:13px; color:var(--text-2); }
 .ct-valor.on{ background:#fff; box-shadow:0 0 0 2px var(--green), var(--vidro-sombra); }
+.ct-valor em{ font-style:normal; font-size:12.5px; font-weight:600; color:var(--green); margin-top:2px; }
+.ct-oferta-faixas{ list-style:none; display:flex; flex-direction:column; gap:6px; width:100%; padding:0; margin:0 0 16px; }
+.ct-oferta-faixas li{ display:flex; justify-content:space-between; gap:10px; padding:7px 12px; border-radius:12px; background:rgba(255,255,255,.55); font-size:14px; color:#5c3c08; }
+.ct-oferta-faixas b{ color:#5c3c08; }
 .ct-selo{ position:absolute; top:-10px; right:12px; font-size:11px !important; font-weight:700; color:#8a5a0e !important; background:#fdf1dc; border:1px solid #f0ddac; border-radius:999px; padding:3px 9px; }
 .ct-pagar{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 .ct-pagar .seg{ margin:0; }

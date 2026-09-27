@@ -11,7 +11,9 @@ const EXTRATO = [
   { t:'Boas-vindas à SoftLiving', d:'Bônus de cadastro', v:20, b:true },
 ];
 const VALORES = [20, 50, 100, 200];
-const PRIMEIRA_RECARGA = true;                 // ainda não houve recarga: a de R$50 ganha 100% de bônus
+// Bônus progressivo da primeira recarga: R$50 = 100%, R$100 = 120%, R$200 = 150% (R$20 sem bônus)
+const BONUS_RECARGA = { 20:0, 50:50, 100:120, 200:300 };
+const PRIMEIRA_RECARGA = true;                 // ainda não houve recarga: vale o bônus progressivo
 let valor = 50, forma = 'Pix', filtro = 'tudo';
 
 function renderSaldo(){
@@ -30,21 +32,22 @@ function renderSaldo(){
     ${PRIMEIRA_RECARGA ? `
     <div class="ct-oferta">
       <span class="ct-oferta-rotulo">${icone('presente')}Primeira recarga</span>
-      <p><b>R$50</b> viram <b>50 créditos + 50 de bônus</b></p>
+      <p>Bônus de até <b>150%</b>: quanto maior a recarga, maior o bônus</p>
+      <ul class="ct-oferta-faixas">${[50, 100, 200].map(v => `<li><b>R$${v}</b><span>+${BONUS_RECARGA[v]} de bônus</span></li>`).join('')}</ul>
       <a href="#recarga" class="btn">${icone('mais')}Recarregar</a>
     </div>` : ''}`;
 }
 
 function renderRecarga(){
   document.getElementById('ctValores').innerHTML = VALORES.map(v => {
-    const dobra = PRIMEIRA_RECARGA && v === 50;
-    return `<button type="button" role="radio" aria-checked="${v === valor}" class="ct-valor${v === valor ? ' on' : ''}${dobra ? ' dobra' : ''}" data-valor="${v}">
-      ${dobra ? '<span class="ct-selo">+100% de bônus</span>' : ''}
-      <b>R$${v}</b><span>${v} créditos${dobra ? ' + 50 de bônus' : ''}</span></button>`;
+    const bonus = PRIMEIRA_RECARGA ? BONUS_RECARGA[v] : 0;
+    return `<button type="button" role="radio" aria-checked="${v === valor}" class="ct-valor${v === valor ? ' on' : ''}" data-valor="${v}">
+      ${bonus ? `<span class="ct-selo">+${Math.round(bonus / v * 100)}% de bônus</span>` : ''}
+      <b>R$${v}</b><span>${v} créditos${bonus ? ` + ${bonus} de bônus` : ''}</span>${bonus ? `<em>${v + bonus} créditos no total</em>` : ''}</button>`;
   }).join('');
   document.getElementById('ctForma').innerHTML = ['Pix', 'Cartão'].map(f =>
     `<button type="button" role="radio" aria-checked="${f === forma}" class="${f === forma ? 'on' : ''}" data-forma="${f}">${f}</button>`).join('');
-  const bonus = PRIMEIRA_RECARGA && valor === 50 ? 50 : 0;
+  const bonus = PRIMEIRA_RECARGA ? BONUS_RECARGA[valor] : 0;
   document.getElementById('ctResumo').innerHTML = `Você recebe <b>${valor} créditos</b>${bonus ? ` + <b>${bonus} de bônus</b>` : ''}`;
   document.getElementById('ctPagar').textContent = `Pagar R$${valor} com ${forma}`;
 }

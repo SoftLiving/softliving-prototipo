@@ -153,7 +153,7 @@ const LAYOUT_MENU = `
     <small>Sua carteira</small>
     <strong class="saldo-creditos">41 créditos</strong>
     <a href="${urlPagina('carteira')}#recarga" class="btn" title="Recarregar créditos">${icone('mais')}<span>Recarregar</span></a>
-    <p>Primeira recarga de R$50 vale 50 créditos + 50 de bônus</p>
+    <p>Primeira recarga com até 150% de bônus</p>
   </div>
 </aside>
 </div>`;
@@ -544,7 +544,7 @@ criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
     </div>
     <div class="crj-oferta">
       <span>${icone('presente')}Primeira recarga</span>
-      <p><b>R$50</b> viram <b>50 créditos + 50 de bônus</b></p>
+      <p>Bônus de até <b>150%</b>: R$50 ganha +50, R$100 ganha +120 e R$200 ganha +300</p>
       <a href="${urlPagina('carteira')}#recarga" class="btn">${icone('mais')}Recarregar</a>
     </div>
     <nav class="crj-links">

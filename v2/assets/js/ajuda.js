@@ -1,6 +1,6 @@
 // VERSÃO 2 · Tela Ajuda: perguntas frequentes por tema, busca sem acento e contato (nenhuma mensagem é enviada).
 // As respostas seguem as regras do portal: sem anúncios, conteúdo de cliente sempre grátis, R$1 = 1 crédito,
-// cadastro = 20 de bônus, 1ª recarga de R$50 = 50 + 50 de bônus, indicação = 5 de bônus, créditos não sacáveis.
+// cadastro = 20 de bônus, 1ª recarga com bônus progressivo (R$50 +50, R$100 +120, R$200 +300), indicação = 5 de bônus, créditos não sacáveis.
 const AJ_TEMAS = [
   ['comecar', 'Primeiros passos', 'inicio'],
   ['creditos', 'Créditos e carteira', 'carteira'],
@@ -14,7 +14,7 @@ const AJ_PERGUNTAS = [
   ['comecar', 'Preciso pagar para usar?', 'Não. Cadastro, grupos gratuitos, amigos e muitos conteúdos são grátis. Alguns conteúdos do acervo e clubes de assinatura usam créditos.'],
   ['comecar', 'O que é o Modo simples?', 'Uma forma de ver o portal com menos opções na tela e letra maior. Você liga pelo botão Modo simples, no topo, e volta quando quiser.'],
   ['creditos', 'Como funcionam os créditos?', 'R$1 vale 1 crédito. Você recarrega por Pix ou cartão e usa os créditos para destravar conteúdos completos e participar de clubes de assinatura.'],
-  ['creditos', 'Como ganho créditos de bônus?', 'Você ganha 20 de bônus no cadastro, 50 de bônus na primeira recarga de R$50, 5 de bônus por indicação aprovada e 1 por pergunta respondida nas pesquisas de opinião.'],
+  ['creditos', 'Como ganho créditos de bônus?', 'Você ganha 20 de bônus no cadastro, bônus na primeira recarga (100% em R$50, 120% em R$100 e 150% em R$200), 5 de bônus por indicação aprovada e 1 por pergunta respondida nas pesquisas de opinião.'],
   ['creditos', 'Posso sacar meus créditos?', 'Não. Créditos e bônus são de uso interno da SoftLiving e não podem ser sacados. O bônus fica numa carteira separada.'],
   ['grupos', 'Como entro em um grupo?', 'Na página Grupos, escolha um grupo e toque em Participar. Grupos premium usam créditos; os gratuitos são abertos a todos os membros.'],
   ['grupos', 'Como adiciono amigos?', 'Na página Amigos, veja as sugestões de pessoas dos seus grupos e toque em Adicionar. Quando a pessoa aceitar, vocês passam a ser amigos.'],
