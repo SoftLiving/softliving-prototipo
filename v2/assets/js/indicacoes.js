@@ -27,10 +27,23 @@ function renderIndicacoes(){
     </div>`).join('');
 }
 
-document.getElementById('inCopiar').addEventListener('click', () => {
-  const link = 'https://' + document.getElementById('inLink').textContent;
-  if(navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {});
-  mostrarAviso('Link copiado. É só colar na mensagem para quem você quer convidar');
+// Formas de indicar: copiar o código ou o link, WhatsApp (mensagem pronta) e o compartilhar do próprio aparelho
+const IN_CODIGO = document.getElementById('inCodigo').textContent.trim();
+const IN_LINK = document.getElementById('inLink').textContent.trim();
+const IN_MENSAGEM = `Estou na SoftLiving, um portal sem anúncios com conteúdos e grupos para uma vida melhor. Entre com meu convite e ganhe 20 créditos de bônus: ${IN_LINK}`;
+function copiar(texto, aviso){
+  if(navigator.clipboard) navigator.clipboard.writeText(texto).catch(() => {});
+  mostrarAviso(aviso);
+}
+document.getElementById('inWhats').href = 'https://wa.me/?text=' + encodeURIComponent(IN_MENSAGEM);
+document.querySelector('.in-botoes').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-copiar]'); if(!b) return;
+  if(b.dataset.copiar === 'codigo') copiar(IN_CODIGO, `Código ${IN_CODIGO} copiado`);
+  else copiar(IN_LINK, 'Link copiado. É só colar na mensagem para quem você quer convidar');
+});
+document.getElementById('inCompartilhar').addEventListener('click', () => {
+  if(navigator.share) navigator.share({ title:'Convite SoftLiving', text:IN_MENSAGEM, url:IN_LINK }).catch(() => {});
+  else copiar(IN_MENSAGEM, 'Mensagem de convite copiada. Cole onde quiser compartilhar');
 });
 document.getElementById('inEmail').addEventListener('submit', ev => {
   ev.preventDefault();

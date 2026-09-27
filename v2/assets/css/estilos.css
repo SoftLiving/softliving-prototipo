@@ -895,16 +895,33 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 }
 
 /* ===== Tela Indicações ===== */
-.in-convite{ display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:16px; margin-bottom:44px; }
-.in-link-bloco, .in-resumo{ padding:24px; border-radius:26px; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
-.in-link-bloco h2{ font-size:22px; margin-bottom:14px; }
-.in-link{ display:flex; align-items:center; gap:10px; padding:6px 6px 6px 18px; border-radius:999px; background:var(--mint); margin-bottom:14px; }
-.in-link span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; color:var(--green); font-size:15px; }
-.in-email{ display:flex; gap:10px; }
-.in-email input{ flex:1; min-width:0; height:44px; padding:0 16px; border-radius:999px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; }
-.in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:14px; background:#fdf1dc; border-color:#f0ddac; }
+.in-convite{ display:flex; flex-direction:column; gap:14px; margin-bottom:44px; }
+/* Cartão do convite (referência aprovada): fundo azul para verde, caixas translúcidas e botões em pílula */
+.in-cartao{ padding:28px; border-radius:28px; color:#fff; background:linear-gradient(135deg, #013565 0%, #2c5b58 55%, #3f7a45 100%); box-shadow:0 18px 40px rgba(1,53,101,.2); }
+.in-rotulo{ display:flex; align-items:center; gap:9px; margin:0; font-size:15px; font-weight:600; color:rgba(255,255,255,.88); }
+.in-rotulo .ic{ width:19px; height:19px; }
+.in-codigo{ font-family:'Fraunces',serif; font-size:40px; font-weight:700; letter-spacing:.06em; margin:10px 0 16px; line-height:1.1; }
+.in-link-box{ padding:12px 16px; border-radius:16px; background:rgba(255,255,255,.14); margin-bottom:14px; }
+.in-link-box small{ display:block; font-size:12.5px; color:rgba(255,255,255,.7); margin-bottom:4px; }
+.in-link-box span{ display:block; font-size:15px; font-weight:500; word-break:break-all; }
+.in-botoes{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+.in-bt{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:10px 16px; font:inherit; font-size:14px; font-weight:600; color:#fff; background:rgba(255,255,255,.18);
+  cursor:pointer; white-space:nowrap; transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.in-bt .ic{ width:17px; height:17px; }
+.in-bt:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.18); background:rgba(255,255,255,.26); }
+.in-bt.in-whats{ background:#25d366; color:#fff; }
+.in-bt.in-whats:hover{ background:#20bd5a; }
+.in-bt.in-branco{ background:#fff; color:var(--navy); }
+.in-bt.in-branco:hover{ background:#f3f7f4; }
+.in-email{ display:flex; gap:10px; margin-bottom:14px; }
+.in-email input{ flex:1; min-width:0; height:44px; padding:0 16px; border-radius:999px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font:inherit; font-size:14.5px; }
+.in-email input::placeholder{ color:rgba(255,255,255,.7); }
+.in-regras{ margin:0; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.12); font-size:13.5px; line-height:1.6; color:rgba(255,255,255,.92); }
+.in-regras a{ color:#fff; text-decoration:underline; font-weight:600; }
+.in-regras .sig .soft, .in-regras .sig .living{ color:#fff; }
+.in-resumo{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px; padding:18px 22px; border-radius:22px; background:#fdf1dc; border:1px solid #f0ddac; }
 .in-resumo div{ display:flex; align-items:baseline; gap:10px; }
-.in-resumo b{ font-family:'Fraunces',serif; font-size:32px; line-height:1; color:#8a5a0e; min-width:44px; }
+.in-resumo b{ font-family:'Fraunces',serif; font-size:30px; line-height:1; color:#8a5a0e; }
 .in-resumo span{ font-size:14px; color:#6b4c10; }
 .in-passos{ list-style:none; counter-reset:passo; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; padding:0; margin:14px 0 0; }
 .in-passos li{ counter-increment:passo; padding:20px; border-radius:22px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); }
@@ -992,7 +1009,8 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 .aj-form select, .aj-form textarea{ width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; }
 
 @container (max-width:760px){
-  .in-convite, .aj-contato{ grid-template-columns:1fr; }
+  .aj-contato{ grid-template-columns:1fr; }
+  .in-resumo{ grid-template-columns:1fr; }
   .in-passos{ grid-template-columns:1fr; }
   .aj-temas{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
   .pf-numeros{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
@@ -1001,6 +1019,8 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 }
 @media (max-width:640px){
   .in-email{ flex-direction:column; }
+  .in-cartao{ padding:22px 18px; }
+  .in-codigo{ font-size:32px; }
   .pf-id{ padding:0 18px; }
   .pf-nome h1{ font-size:28px; }
   .aj-temas{ grid-template-columns:1fr; }
