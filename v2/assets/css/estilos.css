@@ -126,6 +126,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* Topo */
 .top{ display:flex; align-items:center; gap:22px; padding:16px 32px; border-bottom:1px solid var(--line); } /* largura toda da janela, acima do menu lateral */
+/* No computador, o logo e o menu de cima começam alinhados à esquerda com o conteúdo (menu lateral 16 + 264 + 24 de respiro) */
+@media (min-width:981px){ .top{ padding-left:304px; } }
 .top .brand{ font-size:26px; }
 .site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; }
 .site-nav a:hover, .site-nav a.on{ color:var(--green); }
@@ -375,7 +377,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* ===== Telas médias ===== */
 /* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
-@media (max-width:1100px){ .site-nav{ display:none; } }
+@media (max-width:1419px){ .site-nav{ display:none; } } /* com o topo alinhado ao conteúdo, o menu institucional só cabe a partir de 1420px */
 /* Coluna do conteúdo estreita (menos de 1000px, por exemplo com a lateral aberta): cartões de assunto em 2 colunas e grupos
    embaixo do depoimento (em 4 colunas o título invade a foto) */
 @container (max-width:1000px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } .tabs.folder .btn{ display:none; } }
