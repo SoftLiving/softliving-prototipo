@@ -45,9 +45,9 @@ function renderMeusGrupos(){
   </section>
 
   <section class="lat-card">
-    <div class="lat-head"><h2>${LAT_ICONE_PESSOAS}Conheça a comunidade</h2><a href="${urlPagina('conexoes')}" class="lat-mais">Ver todos ›</a></div>
+    <div class="lat-head"><h2>${LAT_ICONE_PESSOAS}Conheça a comunidade</h2><a href="${urlPagina('amigos')}" class="lat-mais">Ver todos ›</a></div>
     ${LAT_MEMBROS.map(m => `<a href="#" class="lat-membro"><span class="av" style="background:${m.cor}">${m.sigla}</span>${m.nome}</a>`).join('')}
-    <a href="${urlPagina('conexoes')}" class="btn ghost">${LAT_ICONE_PESSOAS}Explorar comunidade</a>
+    <a href="${urlPagina('amigos')}" class="btn ghost">${LAT_ICONE_PESSOAS}Explorar comunidade</a>
   </section>
 
   <div class="lat-clube">

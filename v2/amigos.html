@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amigos · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="amigos" data-root="">
+
+<!-- Tela Amigos (antiga Conexões, que na versão 1 estava em branco): pedidos de amizade, seus amigos e sugestões
+     de pessoas dos mesmos grupos. Pessoas fictícias. Montada por amigos.js. -->
+<div class="page-head">
+  <h1><span class="hl">Amigos</span></h1>
+  <p>As pessoas que você conheceu na SoftLiving, nos grupos, nas comunidades e nos encontros.</p>
+</div>
+
+<!-- Pedidos de amizade (só aparece se houver) -->
+<section class="am-pedidos" id="amPedidos" hidden data-lateral-topo></section>
+
+<section class="secao" id="amLista">
+  <div class="lista-topo">
+    <div class="seg" id="amTipos" role="tablist"></div>
+    <form class="busca am-busca" role="search" onsubmit="event.preventDefault()">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" id="amBusca" placeholder="Procurar por nome ou grupo" aria-label="Procurar amigos">
+    </form>
+  </div>
+  <div class="am-grade" id="amGrade"></div>
+  <p class="vazio" id="amVazio" hidden></p>
+</section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/amigos.js"></script>
+</body>
+</html>

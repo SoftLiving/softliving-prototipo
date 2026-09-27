@@ -19,7 +19,7 @@ const PAGINAS = {
   notificacoes: { url:'notificacoes.html' },
   vitrine:      { url:'vitrine.html' },
   comunidades:  { url:'comunidades/inicio.html' },
-  conexoes:     { url:'conexoes.html', v1:true },
+  amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html', v1:true },
 };
 function urlPagina(nome){
@@ -56,7 +56,7 @@ const ICONES = {
   comentarios:'<path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.2A8 8 0 1 1 21 12z"/>',
   acompanhar:'<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2 2 0 0 0 4 0"/><path d="M3 5l2 1.5M21 5l-2 1.5"/>',
   comunidades:'<rect x="4" y="3" width="16" height="18"/><path d="M9 21v-4h6v4M8 7h.01M12 7h.01M16 7h.01M8 11h.01M12 11h.01M16 11h.01M8 15h.01M16 15h.01"/>',
-  conexoes:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>',
+  amigos:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.4 2.7-6 6-6s6 2.6 6 6"/><path d="M15.5 10.5l1.8 1.8 3.7-3.8"/>',
   membros:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/>',
   parceiros:'<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>',
   abrir:'<path d="M6 9l6 6 6-6"/>',
@@ -85,7 +85,7 @@ const MENU_SECOES = [
     { nome:'vitrine', rotulo:'Vitrines', icone:'loja' },
     { nome:'comunidades', rotulo:'Minhas Comunidades', icone:'comunidades' },
     { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
-    { nome:'conexoes', rotulo:'Conexões', icone:'conexoes' },
+    { nome:'amigos', rotulo:'Amigos', icone:'amigos', aviso:2 },
   ]},
   { titulo:'Minha conta', itens:[
     { nome:'carteira', rotulo:'Carteira', icone:'carteira' },
@@ -186,7 +186,7 @@ const LAYOUT_RODAPE = `
       <div><h4>Conteúdos</h4>
         <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="#">Colunistas</a></div>
       <div><h4>Comunidade</h4>
-        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${V1_ROOT}conexoes.html">Conexões</a><a href="#">Parceiros</a></div>
+        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="#">Parceiros</a></div>
       <div><h4>Sua conta</h4>
         <a href="#">Carteira</a><a href="#">Indicações</a><a href="#">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="#">Ajuda</a></div>
     </div>

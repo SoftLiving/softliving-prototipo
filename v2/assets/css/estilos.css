@@ -796,6 +796,39 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
   .press .t{ font-size:18px; }
 }
 
+/* ===== Tela Amigos (antiga Conexões) ===== */
+.am-pedidos{ margin-bottom:34px; }
+.am-pedidos h2{ font-size:22px; margin-bottom:14px; }
+.am-pedidos h2 small{ font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:var(--muted); margin-left:4px; }
+.am-ped-lista{ display:flex; flex-direction:column; gap:10px; }
+.am-pedido{ display:flex; align-items:center; gap:14px; padding:14px 16px; border-radius:22px;
+  background:rgba(230,242,234,.7); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.am-ped-txt{ flex:1; min-width:0; }
+.am-ped-txt > b{ display:block; font-size:16px; color:var(--navy); }
+.am-ped-txt span b{ color:var(--navy); font-weight:600; }
+.am-ped-txt span{ font-size:13.5px; color:var(--text-2); }
+.am-ped-acoes{ display:flex; gap:8px; }
+.am-busca{ width:320px; max-width:100%; height:44px; margin-bottom:20px; }
+.am-grade{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:18px; }
+.am-card{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 18px 20px; border-radius:24px;
+  background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.am-card:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:rgba(255,255,255,.85); }
+.am-card .am-av{ width:76px; height:76px; font-size:24px; font-family:'Fraunces',serif; }
+.am-card h3{ font-size:19px; margin:14px 0 4px; }
+.am-ctx{ font-size:13px; line-height:1.45; color:var(--text-2); margin:0 0 12px; }
+.am-ctx b{ color:var(--navy); font-weight:600; }
+.am-gostos{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:16px; }
+.am-gostos span{ font-size:12px; font-weight:500; color:var(--green); background:var(--mint); border-radius:999px; padding:4px 10px; }
+.am-card .btn{ margin-top:auto; }
+.am-card .btn .ic{ width:16px; height:16px; }
+.am-enviado{ color:var(--muted) !important; }
+@media (max-width:640px){
+  .am-pedido{ flex-wrap:wrap; }
+  .am-ped-acoes{ width:100%; }
+  .am-ped-acoes .btn{ flex:1; justify-content:center; }
+  .am-busca{ width:100%; }
+}
+
 /* ===== REGRA DE HOVER (igual à versão 1) =====
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.

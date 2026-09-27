@@ -23,6 +23,7 @@ assets/js/layout.js         Moldura comum: faixa de protótipo (com link "Ver ve
 conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
+amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, galeria
 comunidades/*.html          Minhas Comunidades: 8 abas em páginas próprias (?org=...&publico=...)
@@ -64,6 +65,7 @@ assets/img/                 Logos da FSB e da RB2
 | Página interna de grupo (inclui Desapego) | a fazer (abre a v1) |
 | Notificações (`notificacoes.html` + janela do sino) | pronta para revisão |
 | Minhas Comunidades (8 abas, `comunidades/`) | pronta para revisão |
+| Amigos (`amigos.html`, antiga Conexões) | pronta para revisão |
 | Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
