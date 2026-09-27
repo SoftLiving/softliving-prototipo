@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indicações · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="indicacoes" data-root="">
+
+<!-- Tela Indicações: link de convite, como funciona, resumo e lista de indicações. Regra: 5 créditos de bônus por
+     indicação aprovada; quem é indicado ganha os 20 de bônus do cadastro. Sem WhatsApp. Montada por indicacoes.js. -->
+<div class="page-head">
+  <h1><span class="hl">Indicações</span></h1>
+  <p>Convide pessoas para a <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> e ganhe 5 créditos de bônus por indicação aprovada.</p>
+</div>
+
+<section class="in-convite" data-lateral-topo>
+  <div class="in-link-bloco">
+    <h2>Seu link de convite</h2>
+    <div class="in-link"><span id="inLink">softliving.com.br/convite/rafael</span><button type="button" class="btn" id="inCopiar">Copiar link</button></div>
+    <form class="in-email" id="inEmail">
+      <input type="email" id="inEmailCampo" placeholder="Ou convide por e-mail: nome@exemplo.com" aria-label="E-mail de quem você quer convidar" required>
+      <button type="submit" class="btn ghost">Enviar convite</button>
+    </form>
+  </div>
+  <div class="in-resumo" id="inResumo"></div>
+</section>
+
+<section class="ct-bloco">
+  <h2>Como funciona</h2>
+  <ol class="in-passos">
+    <li><b>Você convida</b><span>Mande seu link ou um convite por e-mail para quem você gosta.</span></li>
+    <li><b>A pessoa se cadastra</b><span>Ela entra na <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> e já ganha 20 créditos de bônus.</span></li>
+    <li><b>Você ganha 5 de bônus</b><span>Quando a indicação é aprovada, o bônus cai na sua carteira.</span></li>
+  </ol>
+</section>
+
+<section class="ct-bloco">
+  <h2>Suas indicações</h2>
+  <div class="in-lista" id="inLista"></div>
+</section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/indicacoes.js"></script>
+</body>
+</html>

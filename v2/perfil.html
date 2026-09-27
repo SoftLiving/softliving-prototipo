@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu perfil · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="perfil" data-root="">
+
+<!-- Tela Meu perfil: cabeçalho com foto (iniciais), números, sobre mim, interesses, grupos, amigos e conta.
+     Sobre e interesses podem ser editados (guardados no navegador). Sem datas. Montada por perfil.js. -->
+<section class="pf-topo" id="pfTopo" data-lateral-topo></section>
+
+<div class="pf-corpo">
+  <section class="pf-bloco">
+    <div class="pf-bloco-topo"><h2>Sobre mim</h2><button type="button" class="bs-link" id="pfEditarSobre">Editar</button></div>
+    <div id="pfSobre"></div>
+  </section>
+
+  <section class="pf-bloco">
+    <div class="pf-bloco-topo"><h2>Interesses</h2><span class="pf-dica">Toque para marcar ou desmarcar</span></div>
+    <div class="pf-interesses" id="pfInteresses"></div>
+  </section>
+
+  <section class="pf-bloco">
+    <div class="pf-bloco-topo"><h2>Meus grupos</h2><a href="grupos.html" class="bs-link">Ver todos</a></div>
+    <div class="pf-grupos" id="pfGrupos"></div>
+  </section>
+
+  <section class="pf-bloco">
+    <div class="pf-bloco-topo"><h2>Amigos</h2><a href="amigos.html" class="bs-link">Ver todos</a></div>
+    <div class="pf-amigos" id="pfAmigos"></div>
+  </section>
+
+  <section class="pf-bloco">
+    <h2>Conta e privacidade</h2>
+    <div class="pf-conta" id="pfConta"></div>
+  </section>
+</div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/perfil.js"></script>
+</body>
+</html>

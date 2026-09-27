@@ -19,6 +19,9 @@ const PAGINAS = {
   notificacoes: { url:'notificacoes.html' },
   vitrine:      { url:'vitrine.html' },
   carteira:     { url:'carteira.html' },
+  indicacoes:   { url:'indicacoes.html' },
+  perfil:       { url:'perfil.html' },
+  ajuda:        { url:'ajuda.html' },
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html', v1:true },
@@ -135,10 +138,10 @@ const LAYOUT_MENU = `
 <div class="side-wrap">
 <button class="collapse" id="collapseBtn" aria-label="Recolher menu">${icone('voltar')}</button>
 <aside class="side" id="side" aria-label="Menu">
-  <div class="me">
+  <a href="${urlPagina('perfil')}" class="me" title="Meu perfil">
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
-  </div>
+  </a>
 
   ${MENU_SECOES.map(sec => `
   <div>
@@ -189,7 +192,7 @@ const LAYOUT_RODAPE = `
       <div><h4>Comunidade</h4>
         <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="#">Parceiros</a></div>
       <div><h4>Sua conta</h4>
-        <a href="${urlPagina('carteira')}">Carteira</a><a href="#">Indicações</a><a href="#">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="#">Ajuda</a></div>
+        <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('ajuda')}">Ajuda</a></div>
     </div>
     <!-- Linha própria para os logos dos parceiros, cada um com um título pequeno em cima -->
     <div class="flogos">

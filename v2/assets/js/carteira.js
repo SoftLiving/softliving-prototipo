@@ -50,7 +50,7 @@ function renderRecarga(){
 }
 
 document.getElementById('ctGanhe').innerHTML = [
-  ['presente', 'Indique um amigo', '5 créditos de bônus por indicação aprovada.', 'Indicar', '#'],
+  ['presente', 'Indique um amigo', '5 créditos de bônus por indicação aprovada.', 'Indicar', urlPagina('indicacoes')],
   ['comentarios', 'Responda às pesquisas', '1 crédito de bônus por pergunta respondida.', 'Responder', urlPagina('inicio')],
   ['perfil', 'Cadastro', '20 créditos de bônus ao criar a conta.', null, null],
 ].map(([ic, t, d, acao, url]) => `

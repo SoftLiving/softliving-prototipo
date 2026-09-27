@@ -894,6 +894,118 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
   .ct-extrato{ padding:4px 14px; }
 }
 
+/* ===== Tela Indicações ===== */
+.in-convite{ display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:16px; margin-bottom:44px; }
+.in-link-bloco, .in-resumo{ padding:24px; border-radius:26px; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.in-link-bloco h2{ font-size:22px; margin-bottom:14px; }
+.in-link{ display:flex; align-items:center; gap:10px; padding:6px 6px 6px 18px; border-radius:999px; background:var(--mint); margin-bottom:14px; }
+.in-link span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:600; color:var(--green); font-size:15px; }
+.in-email{ display:flex; gap:10px; }
+.in-email input{ flex:1; min-width:0; height:44px; padding:0 16px; border-radius:999px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; }
+.in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:14px; background:#fdf1dc; border-color:#f0ddac; }
+.in-resumo div{ display:flex; align-items:baseline; gap:10px; }
+.in-resumo b{ font-family:'Fraunces',serif; font-size:32px; line-height:1; color:#8a5a0e; min-width:44px; }
+.in-resumo span{ font-size:14px; color:#6b4c10; }
+.in-passos{ list-style:none; counter-reset:passo; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; padding:0; margin:14px 0 0; }
+.in-passos li{ counter-increment:passo; padding:20px; border-radius:22px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); }
+.in-passos li::before{ content:counter(passo); display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--green); color:#fff; font-weight:700; margin-bottom:12px; }
+.in-passos b{ display:block; font-family:'Fraunces',serif; font-size:18px; color:var(--navy); margin-bottom:4px; }
+.in-passos span{ font-size:14px; line-height:1.5; color:var(--text-2); }
+.in-lista{ margin-top:14px; border-radius:22px; padding:4px 20px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.in-item{ display:flex; align-items:center; gap:14px; padding:14px 0; }
+.in-item + .in-item{ border-top:1px solid var(--line); }
+.in-item > div{ flex:1; min-width:0; }
+.in-item b{ display:block; font-size:15px; color:var(--text); overflow:hidden; text-overflow:ellipsis; }
+.in-item small{ font-size:13px; color:var(--muted); }
+.in-av{ width:40px; height:40px; font-size:14px; border-width:2px; }
+.in-status{ font-size:12.5px; font-weight:600; border-radius:999px; padding:5px 11px; white-space:nowrap; background:#f1ede5; color:var(--muted); }
+.in-status.aprovada{ background:var(--mint); color:var(--green); }
+
+/* ===== Tela Meu perfil ===== */
+.pf-topo{ margin:28px 0 36px; border-radius:28px; overflow:hidden; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.pf-capa{ height:130px; background:var(--mint); }
+.pf-id{ display:flex; align-items:flex-end; gap:18px; padding:0 26px; margin-top:-48px; flex-wrap:wrap; }
+.pf-avatar{ display:grid; place-items:center; width:112px; height:112px; flex:none; border-radius:50%; background:var(--green); color:#fff; font-family:'Fraunces',serif; font-weight:700; font-size:38px; border:5px solid #fff; box-shadow:0 10px 26px rgba(1,53,101,.16); }
+.pf-nome{ flex:1; min-width:200px; padding-bottom:6px; }
+.pf-nome h1{ font-size:36px; font-weight:700; }
+.pf-nome p{ margin:4px 0 0; color:var(--text-2); font-size:15px; }
+.pf-id .btn{ margin-bottom:10px; }
+.pf-id .btn .ic{ width:16px; height:16px; }
+.pf-numeros{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); margin-top:22px; border-top:1px solid var(--line); }
+.pf-numeros a{ display:flex; flex-direction:column; align-items:center; padding:16px 8px; transition:background-color .15s ease; }
+.pf-numeros a + a{ border-left:1px solid var(--line); }
+.pf-numeros a:hover{ background:rgba(255,255,255,.7); }
+.pf-numeros b{ font-family:'Fraunces',serif; font-size:26px; color:var(--navy); }
+.pf-numeros span{ font-size:13px; color:var(--muted); }
+.pf-bloco{ margin-bottom:38px; }
+.pf-bloco h2{ font-size:24px; margin-bottom:14px; }
+.pf-bloco-topo{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
+.pf-bloco-topo h2{ margin:0; }
+.pf-dica{ font-size:13px; color:var(--muted); }
+.pf-sobre{ font-size:16.5px; line-height:1.7; color:var(--text-2); margin:0; max-width:720px; }
+#pfSobreCampo{ width:100%; padding:14px 16px; border-radius:18px; border:1px solid var(--line-2); font:inherit; font-size:15.5px; line-height:1.6; background:#fff; }
+.pf-editar-acoes{ display:flex; gap:10px; margin-top:10px; }
+.pf-interesses{ display:flex; flex-wrap:wrap; gap:8px; }
+.pf-chip{ border-radius:999px; padding:9px 16px; font:inherit; font-size:14px; font-weight:500; color:var(--text-2); background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.pf-chip:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.pf-chip.on{ background:var(--mint); color:var(--green); border-color:var(--mint-line); font-weight:600; }
+.pf-grupos{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
+.pf-grupo{ display:flex; align-items:center; gap:12px; padding:8px; border-radius:18px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease; }
+.pf-grupo:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.pf-grupo img{ width:52px; height:52px; border-radius:12px; object-fit:cover; flex:none; }
+.pf-grupo b{ display:block; font-size:14.5px; color:var(--navy); }
+.pf-grupo small{ font-size:12.5px; color:var(--muted); }
+.pf-amigos{ display:flex; flex-wrap:wrap; gap:18px; }
+.pf-amigo{ display:flex; flex-direction:column; align-items:center; gap:6px; font-size:13px; font-weight:500; color:var(--text-2); }
+.pf-amigo .av-col{ width:58px; height:58px; font-family:'Fraunces',serif; font-size:18px; transition:transform .15s ease; }
+.pf-amigo:hover .av-col{ transform:translateY(-2px); }
+.pf-conta{ border-radius:22px; padding:4px 20px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.pf-linha{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; flex-wrap:wrap; }
+.pf-linha + .pf-linha{ border-top:1px solid var(--line); }
+.pf-linha > span{ flex:1; min-width:200px; }
+.pf-linha b{ display:block; font-size:15px; color:var(--text); }
+.pf-linha small{ font-size:13px; color:var(--muted); }
+.pf-linha .seg{ margin:0; }
+.pf-sair{ color:#b3261e !important; }
+a.me{ color:inherit; border-radius:16px; transition:background-color .15s ease; }
+a.me:hover{ background:rgba(255,255,255,.6); }
+
+/* ===== Tela Ajuda ===== */
+.aj-busca{ height:58px; max-width:720px; }
+.aj-temas{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; margin-bottom:40px; }
+.aj-tema{ display:flex; align-items:center; gap:12px; padding:16px 18px; border-radius:20px; font:inherit; font-size:15px; font-weight:600; color:var(--navy); text-align:left;
+  background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.aj-tema:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.aj-tema .ic{ width:22px; height:22px; color:var(--green); }
+.aj-tema.on{ background:var(--mint); box-shadow:0 0 0 2px var(--green), var(--vidro-sombra); }
+.aj-perguntas{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+.aj-pergunta{ border-radius:20px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); }
+.aj-pergunta summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:18px 20px; font-weight:600; font-size:15.5px; color:var(--navy); }
+.aj-pergunta summary::-webkit-details-marker{ display:none; }
+.aj-pergunta summary::after{ content:"+"; font-size:22px; font-weight:400; color:var(--green); line-height:1; }
+.aj-pergunta[open] summary::after{ content:"\2212"; }
+.aj-pergunta p{ margin:0; padding:0 20px 18px; font-size:15px; line-height:1.65; color:var(--text-2); }
+.aj-contato{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.3fr); gap:24px; padding:26px; border-radius:26px; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.aj-contato p{ color:var(--text-2); font-size:15px; margin:6px 0 0; }
+.aj-email{ font-weight:600; color:var(--green) !important; margin-top:14px !important; }
+.aj-form{ display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+.aj-form select, .aj-form textarea{ width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; }
+
+@container (max-width:760px){
+  .in-convite, .aj-contato{ grid-template-columns:1fr; }
+  .in-passos{ grid-template-columns:1fr; }
+  .aj-temas{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .pf-numeros{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .pf-numeros a:nth-child(3){ border-left:none; }
+  .pf-numeros a:nth-child(n+3){ border-top:1px solid var(--line); }
+}
+@media (max-width:640px){
+  .in-email{ flex-direction:column; }
+  .pf-id{ padding:0 18px; }
+  .pf-nome h1{ font-size:28px; }
+  .aj-temas{ grid-template-columns:1fr; }
+}
+
 /* ===== REGRA DE HOVER (igual à versão 1) =====
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
    Ao criar um botão ou caixa clicável novo, acrescente o seletor nas duas listas abaixo.

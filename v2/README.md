@@ -25,6 +25,9 @@ busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupo
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
 carteira.html               Tela Carteira: saldo (comprados + bônus), recarga (Pix/cartão), bônus e extrato
+indicacoes.html             Tela Indicações: link de convite, convite por e-mail, como funciona e lista
+perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
+ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, galeria
 comunidades/*.html          Minhas Comunidades: 8 abas em páginas próprias (?org=...&publico=...)
@@ -68,6 +71,7 @@ assets/img/                 Logos da FSB e da RB2
 | Minhas Comunidades (8 abas, `comunidades/`) | pronta para revisão |
 | Amigos (`amigos.html`, antiga Conexões) | pronta para revisão |
 | Carteira (`carteira.html`) | pronta para revisão |
+| Indicações, Meu perfil, Ajuda | prontas para revisão |
 | Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |

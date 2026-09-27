@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajuda · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-page="ajuda" data-root="">
+
+<!-- Tela Ajuda: busca nas perguntas frequentes, temas, perguntas (abre e fecha) e contato por e-mail/formulário.
+     Sem WhatsApp. Respostas seguem as regras do portal (créditos, grátis, sem anúncios). Montada por ajuda.js. -->
+<div class="page-head">
+  <h1><span class="hl">Ajuda</span></h1>
+  <p>Tire suas dúvidas sobre a <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>. Se não encontrar o que procura, fale com a gente.</p>
+</div>
+
+<form class="busca aj-busca" role="search" onsubmit="event.preventDefault()" data-lateral-topo>
+  <svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+  <input type="search" id="ajBusca" placeholder="Digite sua dúvida. Ex.: créditos, grupos, senha" aria-label="Buscar na ajuda">
+</form>
+
+<div class="aj-temas" id="ajTemas"></div>
+
+<section class="ct-bloco">
+  <h2 id="ajTitulo">Perguntas frequentes</h2>
+  <div class="aj-perguntas" id="ajPerguntas"></div>
+  <p class="vazio" id="ajVazio" hidden>Nenhuma pergunta encontrada. Tente outra palavra ou fale com a gente abaixo.</p>
+</section>
+
+<section class="ct-bloco aj-contato">
+  <div>
+    <h2>Fale com a gente</h2>
+    <p>Respondemos por e-mail em até um dia útil.</p>
+    <p class="aj-email">ajuda@softliving.com.br</p>
+  </div>
+  <form id="ajForm" class="aj-form">
+    <select id="ajAssunto" aria-label="Assunto">
+      <option>Créditos e carteira</option><option>Minha conta</option><option>Grupos e amigos</option><option>Conteúdos</option><option>Outro assunto</option>
+    </select>
+    <textarea id="ajMsg" rows="4" placeholder="Conte sua dúvida com suas palavras" aria-label="Mensagem" required></textarea>
+    <button type="submit" class="btn">Enviar mensagem</button>
+  </form>
+</section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/ajuda.js"></script>
+</body>
+</html>
