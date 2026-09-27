@@ -907,7 +907,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 }
 
 /* ===== Tela Indicações ===== */
-.in-convite{ display:flex; flex-direction:column; gap:14px; margin-bottom:44px; }
+.in-convite{ display:grid; grid-template-columns:minmax(0, 1fr) 260px; gap:16px; align-items:stretch; margin-bottom:44px; } /* cartão do convite + resumo ao lado */
 /* Cartão do convite (referência aprovada): fundo azul para verde, caixas translúcidas e botões em pílula */
 .in-cartao{ padding:28px; border-radius:28px; color:#fff; background:linear-gradient(135deg, #013565 0%, #2c5b58 55%, #3f7a45 100%); box-shadow:0 18px 40px rgba(1,53,101,.2); }
 .in-rotulo{ display:flex; align-items:center; gap:9px; margin:0; font-size:15px; font-weight:600; color:rgba(255,255,255,.88); }
@@ -931,9 +931,10 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-regras{ margin:0; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.12); font-size:13.5px; line-height:1.6; color:rgba(255,255,255,.92); }
 .in-regras a{ color:#fff; text-decoration:underline; font-weight:600; }
 .in-regras .sig .soft, .in-regras .sig .living{ color:#fff; }
-.in-resumo{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px; padding:18px 22px; border-radius:22px; background:#fdf1dc; border:1px solid #f0ddac; }
-.in-resumo div{ display:flex; align-items:baseline; gap:10px; }
-.in-resumo b{ font-family:'Fraunces',serif; font-size:30px; line-height:1; color:#8a5a0e; }
+.in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:22px; padding:24px 22px; border-radius:28px; background:#fdf1dc; border:1px solid #f0ddac; }
+.in-resumo div{ display:flex; flex-direction:column; gap:4px; }
+.in-resumo div + div{ padding-top:18px; border-top:1px solid #f0ddac; }
+.in-resumo b{ font-family:'Fraunces',serif; font-size:38px; line-height:1; color:#8a5a0e; }
 .in-resumo span{ font-size:14px; color:#6b4c10; }
 .in-passos{ list-style:none; counter-reset:passo; display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; padding:0; margin:14px 0 0; }
 .in-passos li{ counter-increment:passo; padding:20px; border-radius:22px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); }
@@ -1022,7 +1023,9 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 
 @container (max-width:760px){
   .aj-contato{ grid-template-columns:1fr; }
-  .in-resumo{ grid-template-columns:1fr; }
+  .in-convite{ grid-template-columns:1fr; }
+  .in-resumo{ flex-direction:row; flex-wrap:wrap; gap:16px 28px; }
+  .in-resumo div + div{ padding-top:0; border-top:none; }
   .in-passos{ grid-template-columns:1fr; }
   .aj-temas{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
   .pf-numeros{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
