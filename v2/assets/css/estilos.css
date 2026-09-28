@@ -1434,11 +1434,12 @@ body{ background:
 @media (max-width:640px){
   .lateral{ margin:0 16px 48px; padding:16px; grid-template-columns:minmax(0, 1fr); }
 }
-/* Curtidas e Salvos no celular: capa mais baixa (deitada), para não ocupar a tela inteira */
+/* Curtidas, Salvos e Grupos no celular: capa mais baixa (deitada), para não ocupar a tela inteira */
 @media (max-width:640px){
-  .vcard.at-card{ aspect-ratio:4 / 3; }
-  .vcard.at-card .vc-blur{ height:80%; }
-  .vcard.at-card .vc-info{ padding:14px 16px 14px; }
-  .vcard.at-card .vc-info h3{ font-size:17px; margin:4px 0 6px; }
+  .vcard.at-card, .grade .vcard-grupo{ aspect-ratio:4 / 3; }
+  .vcard.at-card .vc-blur, .grade .vcard-grupo .vc-blur{ height:85%; }
+  .vcard.at-card .vc-info, .grade .vcard-grupo .vc-info{ padding:14px 16px 14px; }
+  .vcard.at-card .vc-info h3, .grade .vcard-grupo .vc-info h3{ font-size:17px; margin:4px 0 6px; }
   .vcard.at-card .vc-autor{ margin:-2px 0 10px; }
+  .grade .vcard-grupo .vc-desc{ margin:0 0 10px; -webkit-line-clamp:2; }
 }
