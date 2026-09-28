@@ -58,7 +58,7 @@ const resColunista = (col, p) => `
     <span class="autor-txt"><b>${destacar(col.nome, p)}</b><span class="autor-nicho">${col.aba === 'SoftLiving' ? LOGO : destacar(col.aba, p)}</span><small>${col.coluna ? destacar(col.coluna, p) + ' · ' : ''}${col.publicadas} colunas</small></span>
   </a>`;
 const resGrupo = (g, p) => `
-  <a href="${V1_ROOT}grupo.html?g=${GRUPOS.indexOf(g)}" class="item res-item">
+  <a href="${urlGrupo(GRUPOS.indexOf(g))}" class="item res-item">
     <img class="foto" src="${fotoUrl(g.foto, 300)}" alt="" loading="lazy">
     <div><span class="cat">Grupo · ${destacar(g.cat, p)}</span><h3>${destacar(g.t, p)}</h3><p>${destacar(g.d, p)}</p>
     <div class="meta"><span>${g.membros} ${g.membros === 1 ? 'membro' : 'membros'}</span><i></i><span>${g.participando ? 'Você participa' : g.premium ? 'Premium' : 'Grátis'}</span></div></div></a>`;

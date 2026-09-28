@@ -35,7 +35,7 @@ function renderInteresses(){
     `<button type="button" class="pf-chip${interesses.includes(i) ? ' on' : ''}" aria-pressed="${interesses.includes(i)}" data-interesse="${i}">${interesses.includes(i) ? '✓ ' : ''}${i}</button>`).join('');
 }
 document.getElementById('pfGrupos').innerHTML = grupos.map(g => `
-  <a href="${V1_ROOT}grupo.html?g=${GRUPOS.indexOf(g)}" class="pf-grupo"><img src="${fotoUrl(g.foto, 160)}" alt="" loading="lazy"><span><b>${g.t}</b><small>${g.cat}</small></span></a>`).join('');
+  <a href="${urlGrupo(GRUPOS.indexOf(g))}" class="pf-grupo"><img src="${fotoUrl(g.foto, 160)}" alt="" loading="lazy"><span><b>${g.t}</b><small>${g.cat}</small></span></a>`).join('');
 document.getElementById('pfAmigos').innerHTML = PF_AMIGOS.map(([s, c, n]) => `
   <a href="${urlPagina('amigos')}" class="pf-amigo"><span class="av-col" style="background:${c}">${s}</span>${n}</a>`).join('');
 function renderConta(){

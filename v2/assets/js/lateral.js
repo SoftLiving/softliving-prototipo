@@ -20,7 +20,7 @@ function renderMeusGrupos(){
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
   }).slice(0, 5);
   alvo.innerHTML = lista.length ? lista.map(g => `
-    <a href="${V1_ROOT}grupo.html?g=${GRUPOS.indexOf(g)}" class="lat-grupo">
+    <a href="${urlGrupo(GRUPOS.indexOf(g))}" class="lat-grupo">
       <img src="${fotoUrl(g.foto, 120)}" alt="" loading="lazy"><span><b>${g.t}</b><small>${g.cat}</small></span>
       ${g.novos ? `<span class="novas" title="${g.novos} mensagens novas">${g.novos}</span>` : ''}${icone('seta')}</a>`).join('')
     : '<p class="lat-vazio">Você ainda não participa de nenhum grupo.</p>';

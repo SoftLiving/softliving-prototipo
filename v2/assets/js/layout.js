@@ -6,10 +6,10 @@
 const LAYOUT_ROOT = document.body.dataset.root || '';
 const LAYOUT_PAGE = document.body.dataset.page || '';
 const LAYOUT_SITE = document.body.dataset.site || '';
-// Raiz da versão 1 (pasta acima de v2/): páginas ainda não refeitas na v2 abrem a versão 1
-const V1_ROOT = LAYOUT_ROOT + '../';
+// Página interna de um grupo: ainda em construção. Por enquanto abre Grupos com o grupo destacado (grupos.js).
+const urlGrupo = i => `${LAYOUT_ROOT}grupos.html?g=${i}`;
 
-// Endereço de cada destino. Enquanto a página não existe na v2, aponta para a versão 1 (v1:true).
+// Endereço de cada destino (páginas do menu).
 const PAGINAS = {
   inicio:       { url:'index.html' },
   conteudos:    { url:'conteudos.html' },
@@ -32,11 +32,11 @@ const PAGINAS = {
 };
 function urlPagina(nome){
   const p = PAGINAS[nome];
-  return p ? (p.v1 ? V1_ROOT : LAYOUT_ROOT) + p.url : '#';
+  return p ? LAYOUT_ROOT + p.url : '#';
 }
-// Páginas institucionais: as que já existem na v2 (v2/institucional/); as demais abrem a versão 1
-const SITES_V2 = ['conhecer', 'como-funciona', 'beneficios', 'patrocinadores'];
-const urlSite = site => (SITES_V2.includes(site) ? LAYOUT_ROOT : V1_ROOT) + 'institucional/' + site + '.html';
+// Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre a Ajuda (Conta e privacidade).
+const SITES = ['conhecer', 'como-funciona', 'beneficios', 'patrocinadores'];
+const urlSite = site => SITES.includes(site) ? `${LAYOUT_ROOT}institucional/${site}.html` : urlPagina('ajuda');
 
 // Fotos de exemplo (Unsplash) usadas nos dados: foto:"<id>"
 const fotoUrl = (id, largura) => `https://images.unsplash.com/photo-${id}?w=${largura || 800}&q=70`;
@@ -120,7 +120,6 @@ const LAYOUT_TOPO = `
   <span class="proto-long">Em construção · conteúdos, números, pessoas e fotos são fictícios. Marcas apenas ilustram a proposta, sem vínculo ou endosso.</span>
   <span class="proto-short">Em construção · dados fictícios</span>
   <button type="button" onclick="openProtoModal()">Saiba mais</button>
-  <a href="${V1_ROOT}inicio.html">Ver versão 1</a>
 </div>
 
 <div class="modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
@@ -193,9 +192,9 @@ const LAYOUT_RODAPE = `
       <div><h4>A ${LOGO}</h4>
         <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
       <div><h4>Conteúdos</h4>
-        <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="#">Colunistas</a></div>
+        <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="${urlPagina('colunas')}">Colunistas</a></div>
       <div><h4>Comunidade</h4>
-        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${V1_ROOT}grupo.html?g=12">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="#">Parceiros</a></div>
+        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${urlGrupo(12)}">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="${urlPagina('vitrine')}">Vitrines</a></div>
       <div><h4>Sua conta</h4>
         <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('ajuda')}">Ajuda</a></div>
     </div>
@@ -326,7 +325,7 @@ document.querySelectorAll('.nav-grupo').forEach(grupo => {
 });
 document.addEventListener('keydown', e => { if(e.key === 'Escape'){ fecharMenu(); closeProtoModal(); } });
 
-// Modo simples (v2/simples.html): a escolha também fica guardada, para o index.html da versão 1
+// Modo simples (simples.html): a escolha fica guardada no navegador
 document.querySelectorAll('.modo-simples').forEach(a => a.addEventListener('click', () => guardarPreferencia('modoPreferido', 'simples')));
 
 // Atalhos dentro das páginas: data-goto="grupos" leva a uma página do menu, data-site-link="seguranca" a uma
@@ -457,11 +456,11 @@ const NOTIFICACOES = [
   { id:1, tipo:'colunas', av:{ sigla:'SM', cor:'#b0513a' }, curto:'<b>Sofia Martellini</b> publicou uma nova coluna',
     txt:'<b>Sofia Martellini</b> publicou uma nova coluna: “Como o boom das canetas emagrecedoras está impactando a moda?”', acao:['Ler coluna', urlPagina('colunas')] },
   { id:2, tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
-    txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=1`] },
+    txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', urlGrupo(1)] },
   { id:3, tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
     txt:'Você ganhou <b>5 créditos de bônus</b> por responder à pesquisa da semana.', acao:['Ver carteira', urlPagina('carteira')] },
   { id:4, tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
-    txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', `${V1_ROOT}grupo.html?g=4`], lida:true },
+    txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', urlGrupo(4)], lida:true },
   { id:5, tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
     txt:'Novo conteúdo sobre um assunto que você segue: <b>“Na Suíça, um vinho para chamar de seu”</b>.', acao:['Ler', urlPagina('conteudos')], lida:true },
   { id:6, tipo:'colunas', av:{ sigla:'ZR', cor:'#2f8578' }, curto:'<b>Zé Roberto</b> respondeu ao seu comentário',

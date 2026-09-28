@@ -71,12 +71,12 @@ ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
 // Acontece nos grupos: carrossel com todos os grupos (3 por vez), começando pelos três em destaque
-// (abrem a página interna da versão 1 por enquanto)
+// (a página interna do grupo está em construção: por enquanto abrem Grupos com o grupo destacado)
 const primeirosGrupos = ['Clube do Vinho', 'Yoga & Meditação', 'Clube do Livro'].map(nome => GRUPOS.find(x => x.t === nome));
 document.getElementById('groupList').innerHTML = [...primeirosGrupos, ...GRUPOS.filter(g => !primeirosGrupos.includes(g))].map(g => {
   const n = GRUPOS.indexOf(g);
   return `
-  <a href="${V1_ROOT}grupo.html?g=${n}" class="vcard">
+  <a href="${urlGrupo(n)}" class="vcard">
     <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
     ${g.novos ? `<span class="new">${g.novos} novas</span>` : ''}
     <div class="vc-info">

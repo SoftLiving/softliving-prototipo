@@ -1,6 +1,6 @@
 // VERSÃO 2 · Tela Grupos (referência: grupos.js da versão 1): Todos/Participando/Disponíveis e grade de cartões verticais.
 // Participar/Sair ficam no cartão (valem para a sessão, como na versão 1); clicar no resto do cartão abre a página do grupo
-// (ainda a da versão 1). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
+// (ainda em construção: por enquanto volta para esta página com o grupo destacado). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
 
 const grEstado = { tipo:'todos' };
 
@@ -12,7 +12,7 @@ function renderGrupos(){
 
   const lista = GRUPOS.map((g, i) => ({ ...g, i })).filter(g => grEstado.tipo === 'todos' || (grEstado.tipo === 'participando') === g.participando);
   document.getElementById('grGrade').innerHTML = lista.map(g => `
-    <a href="${V1_ROOT}grupo.html?g=${g.i}" class="vcard vcard-grupo">
+    <a href="${urlGrupo(g.i)}" class="vcard vcard-grupo">
       <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
       <span class="vc-topo">
         ${g.premium ? '<span class="selo-vc premium">Premium</span>' : '<span class="selo-vc">Grátis</span>'}
@@ -47,3 +47,10 @@ document.getElementById('grGrade').addEventListener('click', e => {
   renderMeusGrupos();
 });
 renderGrupos();
+(function destacarGrupo(){
+  const g = +new URLSearchParams(location.search).get('g');
+  if(!new URLSearchParams(location.search).has('g') || !GRUPOS[g]) return;
+  const cartao = document.querySelector(`#grGrade a[href$="?g=${g}"]`);
+  if(cartao){ cartao.classList.add('destacado'); cartao.scrollIntoView({ behavior:'smooth', block:'center' }); }
+  mostrarAviso(`${GRUPOS[g].t}: a página do grupo está em construção`);
+})();
