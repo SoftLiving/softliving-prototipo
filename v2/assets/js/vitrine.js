@@ -22,7 +22,6 @@ const BAIRROS = [
 
 const siglaDe = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2 || /^[A-ZÀ-Ú]/.test(p)).slice(0, 2).map(p => p[0]).join('');
 const monograma = e => `<span class="vt-logo" style="color:${e.cor}">${siglaDe(e.n)}</span>`;
-const seloBeneficio = e => `<span class="vt-beneficio">${icone('presente')}${e.b}</span>`;
 
 document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
   <a href="#" class="vt-cat"><img src="${fotoUrl(f, 200)}" alt=""><span>${c}</span></a>`).join('');
@@ -31,7 +30,6 @@ document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
 document.getElementById('vtDestaques').innerHTML = ESTABELECIMENTOS.slice(0, 8).map(e => `
   <a href="${urlEstabelecimento(e)}" class="vcard vt-card">
     <img src="${fotoUrl(e.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
-    <span class="vc-topo">${seloBeneficio(e)}</span>
     <div class="vc-info">
       ${monograma(e)}
       <span class="vc-cat">${e.cat} · ${e.bairro}</span>
@@ -52,7 +50,7 @@ document.getElementById('vtColecoes').innerHTML = COLECOES.map((c, i) => `
       ${c.itens.map(est).map(e => `
         <a href="${urlEstabelecimento(e)}" class="vt-mini">
           <img src="${fotoUrl(e.foto, 300)}" alt="" loading="lazy">
-          <div><span class="vt-mini-cat">${e.cat} · ${e.bairro}</span><h3>${e.n}</h3><p>${e.d}</p>${seloBeneficio(e)}</div>
+          <div><span class="vt-mini-cat">${e.cat} · ${e.bairro}</span><h3>${e.n}</h3><p>${e.d}</p></div>
         </a>`).join('')}
     </div>
   </article>`).join('');
