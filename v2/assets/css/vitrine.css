@@ -157,9 +157,9 @@
 .es-galeria img:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 
 @container (max-width:760px){
-  .es-topo{ flex-wrap:wrap; padding:0 16px; margin-top:-42px; gap:14px; }
+  .es-topo{ flex-direction:column; align-items:flex-start; padding:0 16px; margin-top:-42px; gap:10px; } /* celular: logo em cima, nome e botões embaixo, na largura toda */
   .es-logo{ width:84px; height:84px; font-size:28px; }
-  .es-nome{ flex-basis:calc(100% - 100px); padding-top:48px; }
+  .es-nome{ width:100%; padding-top:0; }
   .es-nome h1{ font-size:30px; }
   .es-acoes .btn{ flex:1; justify-content:center; }
   .es-comunidade{ width:100%; }
@@ -340,3 +340,11 @@
 .cm-novidade{ padding:14px 16px; border-radius:18px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); margin-bottom:10px; }
 .cm-novidade b{ display:block; font-size:15.5px; color:var(--navy); margin-bottom:2px; }
 .cm-novidade p{ margin:0; font-size:14.5px; line-height:1.55; color:var(--text-2); }
+
+/* Celular: botões do estabelecimento empilhados, na largura toda */
+@container (max-width:560px){
+  .es-acoes{ flex-direction:column; align-items:stretch; }
+  .es-acoes .btn, .es-comunidade{ width:100%; }
+  .es-comunidade .btn{ flex:1; }
+  .es-selos span{ font-size:12px; }
+}

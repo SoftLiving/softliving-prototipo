@@ -124,3 +124,11 @@
   .sm-fontsize span{ display:none; }
   .sm-row-static{ flex-wrap:wrap; }
 }
+
+/* Celular: topo compacto (logo e botões na mesma área, menores) */
+@media (max-width:640px){
+  .sm-header{ gap:8px; }
+  .sm-header-actions{ gap:6px; width:100%; justify-content:space-between; }
+  .sm-fontsize button{ min-width:44px; height:42px; }
+  .sm-top-btn{ height:42px; padding:0 14px; font-size:15px; }
+}

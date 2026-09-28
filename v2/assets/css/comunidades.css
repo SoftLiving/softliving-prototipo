@@ -471,3 +471,7 @@
 .cm-lat-est:hover b{ color:var(--green); }
 .lat-head h2 svg.ic{ width:18px; height:18px; }
 
+/* Celular: cartões de serviços em uma coluna (em duas colunas ficavam estreitos demais para ler) */
+@container cm (max-width:460px){
+  .cm .svc-grid{ grid-template-columns:1fr; }
+}

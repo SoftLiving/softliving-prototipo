@@ -346,6 +346,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* Acontece nos grupos */
 .community{ display:grid; grid-template-columns:1fr 1.6fr; gap:22px; align-items:stretch; }
+.community > *{ min-width:0; } /* sem isso, o carrossel de grupos alarga a coluna no celular */
 .quote{ background:#fff; border:1px solid var(--line); border-radius:24px; padding:28px; display:flex; flex-direction:column; }
 .quote .who{ display:flex; gap:12px; align-items:center; }
 .quote .who .avatar{ width:44px; height:44px; font-size:14px; }
@@ -1105,7 +1106,7 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 .at-av{ width:34px; height:34px; font-size:12px; border-width:2px; }
 .at-sec{ font-size:22px; margin:6px 0 14px; }
 .at-sec + .autores, .at-sec + .vazio{ margin-bottom:34px; }
-.at-sec + .autores{ grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
+.at-sec + .autores{ grid-template-columns:repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
 .at-autor{ position:relative; }
 .at-deixar{ margin-left:auto; padding:7px 14px; font-size:13px; flex:none; }
 .at-deixar:hover{ color:#b3261e !important; }
@@ -1118,6 +1119,9 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 .at-conversa small{ font-size:13px; color:var(--muted); }
 .at-novas{ font-size:12.5px; font-weight:600; color:#fff; background:var(--green); border-radius:999px; padding:4px 10px; white-space:nowrap; }
 .at-emdia{ font-size:12.5px; color:var(--muted); white-space:nowrap; }
+
+/* Celular: nenhum botão passa da largura da tela; textos longos quebram em duas linhas */
+@media (max-width:640px){ .btn{ max-width:100%; white-space:normal; text-align:center; line-height:1.3; } }
 
 /* ===== REGRA DE HOVER (igual à versão 1) =====
    Todo botão e toda caixa clicável sobe 2px e ganha sombra ao passar o mouse.
@@ -1401,3 +1405,32 @@ body{ background:
 .crj-links a{ display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:12px; font-size:14px; font-weight:600; color:var(--navy); }
 .crj-links a .ic{ width:17px; height:17px; color:var(--green); }
 .crj-links a:hover{ background:#fff; }
+
+/* ===== CELULAR (revisão geral de responsividade, 2026-09-28) =====
+   Fica no fim do arquivo para valer sobre as regras de cada tela. */
+/* Carrosséis: no celular e em telas de toque, deslizam com o dedo (sem setas e sem as cópias do loop);
+   a lista vertical vira uma lista normal */
+@media (max-width:640px), (hover:none) and (pointer:coarse){
+  .carrossel .car-btn{ display:none !important; }
+  .trilho-h{ overflow-x:auto !important; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+  .trilho-h > *{ scroll-snap-align:start; }
+  .trilho-h > .copia, .trilho-v > .copia{ display:none !important; }
+  .trilho-v{ max-height:none !important; overflow:visible !important; }
+}
+@media (max-width:640px){
+  /* texto justificado abre buracos em coluna estreita */
+  .hero p, .inst-hero .lead{ text-align:left; hyphens:manual; }
+  /* Indicações: campo de e-mail com altura própria quando empilha */
+  .in-email input{ flex:none; width:100%; }
+  .in-email .in-bt{ justify-content:center; }
+  /* Acompanhar: botão embaixo do nome do colunista */
+  .at-autor{ flex-wrap:wrap; }
+  .at-autor .autor-txt{ flex:1 1 calc(100% - 70px); min-width:0; }
+  .at-deixar{ margin-left:0; width:100%; justify-content:center; }
+  /* respiro nas bordas e nada passa da tela */
+  img, video{ max-width:100%; }
+}
+/* Celulares pequenos (320px): a coluna lateral, que desce para baixo do conteúdo, cabe na largura */
+@media (max-width:640px){
+  .lateral{ margin:0 16px 48px; padding:16px; grid-template-columns:minmax(0, 1fr); }
+}
