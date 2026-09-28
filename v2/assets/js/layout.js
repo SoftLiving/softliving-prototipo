@@ -173,6 +173,7 @@ const LAYOUT_CABECALHO = `
     <a href="${urlSite('patrocinadores')}" data-site="patrocinadores">Patrocinadores</a>
   </nav>
   <div class="tools">
+    <button type="button" class="saiba-mais" aria-label="Saiba mais sobre a SoftLiving">Saiba mais${icone('abrir', 'chev')}</button>
     <a href="${urlPagina('busca')}" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
     <a href="${urlPagina('carteira')}" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
@@ -595,6 +596,7 @@ function marcarLogado(logado){
   try { if(logado) localStorage.setItem('v2Logado', '1'); else localStorage.removeItem('v2Logado'); } catch(e){}
   botaoEntrar.hidden = logado;
   botaoAvatar.hidden = !logado;
+  document.body.classList.toggle('logado', logado);          // o CSS usa para decidir o que cabe no topo do celular
 }
 document.addEventListener('submit', e => {
   if(e.target.id !== 'enForm') return;
@@ -625,6 +627,20 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   mostrarAviso('Você saiu da conta');
 });
 marcarLogado(lerLogado());
+
+// Janela "Saiba mais": as páginas institucionais, para quando o menu Conhecer / Como funciona... não cabe no topo
+// (celular e telas menores). No computador largo o botão fica escondido e o menu aparece inteiro.
+const SAIBA_MAIS = [
+  ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
+  ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
+  ['beneficios', 'Benefícios', 'O que você ganha como membro'],
+  ['seguranca', 'Segurança', 'Privacidade e cuidado com seus dados'],
+  ['patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
+];
+criarJanelaTopo(document.querySelector('.top .saiba-mais'), 'sm-janela', 'smJanela', 'Saiba mais sobre a SoftLiving', j => {
+  j.innerHTML = `<div class="smj-topo"><b>Conheça a ${LOGO}</b></div>
+    <nav class="smj-links">${SAIBA_MAIS.map(([k, n, d]) => `<a href="${urlSite(k)}"${k === LAYOUT_SITE ? ' aria-current="page" class="on"' : ''}><b>${n}</b><small>${d.replace('SoftLiving', LOGO)}</small></a>`).join('')}</nav>`;
+});
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista
 function atualizarNotificacoes(){
