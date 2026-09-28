@@ -1463,7 +1463,7 @@ body{ background:
   .janela-topo, .nt-janela, .sm-janela, .cr-janela, .en-janela, .cn-janela{ width:auto; }
 }
 /* Celulares muito estreitos: a busca sai do topo (continua no menu, em Busca) */
-@media (max-width:359px){ .tools a.round[href$="busca.html"]{ display:none; } .saiba-mais .chev{ display:none; } }
+@media (max-width:359px){ .saiba-mais .chev{ display:none; } }
 .sm-janela{ width:320px; }
 .smj-topo{ padding:16px 20px 12px; border-bottom:1px solid var(--line); }
 .smj-topo b{ font-family:'Fraunces',serif; font-size:18px; color:var(--navy); }
@@ -1481,7 +1481,6 @@ body{ background:
   .tools .btn.entrar:not([hidden]){ display:inline-flex; height:36px; padding:0 14px; font-size:13px; }
   body:not(.logado) .tools .sino{ display:none; }
 }
-@media (max-width:980px){ .tools a.round[href$="busca.html"]{ display:none; } } /* celular e tablet: sem a lupa no topo (a Busca fica no menu) */
 @media (max-width:374px){                                   /* celulares estreitos: logo e Saiba mais um pouco menores */
   .top{ gap:4px; padding:10px 10px; }
   .tools{ gap:4px; }

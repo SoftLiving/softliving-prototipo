@@ -174,7 +174,6 @@ const LAYOUT_CABECALHO = `
   </nav>
   <div class="tools">
     <button type="button" class="saiba-mais" aria-label="Saiba mais sobre a SoftLiving">Saiba mais${icone('abrir', 'chev')}</button>
-    <a href="${urlPagina('busca')}" class="round" aria-label="Buscar no portal" title="Buscar no portal">${icone('busca')}</a>
     <a href="${urlPagina('simples')}" class="btn simples modo-simples" title="Ver o portal com menos opções e letra maior">${icone('modo')}Modo simples</a>
     <a href="${urlPagina('carteira')}" class="btn creditos" title="Sua carteira de créditos">${icone('carteira')}<span class="saldo-creditos">41 créditos</span></a>
     <a href="${urlPagina('notificacoes')}" class="round sino" aria-label="Notificações" title="Notificações">${icone('sino')}<i></i></a>
