@@ -2,102 +2,119 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Como Funciona · SoftLiving (Protótipo · em aprovação)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como funciona · SoftLiving (Protótipo · versão 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 <body data-site="como-funciona" data-root="../">
 
-<!-- Página institucional: como-funciona -->
-<div class="wrap site-page" data-site="como-funciona">
-  <section class="sp-hero">
-<div class="sp-container sp-hero-grid sp-hero-video">
+<!-- Abertura com vídeo -->
+<div class="inst-hero">
   <div>
-    <h1>Simples. Acolhedor. Para você.</h1>
-    <p class="sp-lead">Cada passo do <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> foi desenhado para ser claro e tranquilo, pensando também em quem usa uma plataforma digital pela primeira vez.</p>
+    <span class="kicker">Cadastro em menos de 5 minutos</span>
+    <h1>Simples. Acolhedor. Para <span class="hl">você</span>.</h1>
+    <p class="lead">Cada passo do <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> foi desenhado para ser claro e tranquilo, pensando também em quem usa uma plataforma digital pela primeira vez.</p>
+    <div class="ctas">
+      <a class="btn lg" href="https://softliving.com.br/cadastro/boas-vindas">Começar meu cadastro</a>
+      <a class="btn ghost lg" href="#passos">Ver os passos</a>
+    </div>
   </div>
-  <!-- Espaço do vídeo: para publicar, troque este bloco por <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Vídeo SoftLiving" allowfullscreen></iframe> dentro de .sp-video -->
-  <div class="sp-video">
-    <button type="button" class="sp-play" aria-label="Assistir ao vídeo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg></button>
-    <span class="sp-video-note">Vídeo em breve</span>
+  <!-- Vídeo: para publicar, trocar o botão e o aviso por <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Vídeo SoftLiving" allowfullscreen></iframe> -->
+  <div class="video">
+    <button type="button" class="play" aria-label="Assistir ao vídeo" onclick="mostrarAviso('O vídeo entra aqui assim que ficar pronto')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg></button>
+    <span class="note">Vídeo em breve</span>
   </div>
-</div>
-  </section>
-
-  <section class="sp-block">
-<div class="sp-container">
-  <div class="sp-section-head"><h2>Seis passos, no seu ritmo</h2></div>
-  <div class="sp-grid sp-g3">
-    <div class="sp-card"><div class="sp-step-num">1</div><span class="sp-step-meta">cerca de 1 min</span><h3>Faça seu cadastro</h3><p>Nome, e-mail e senha, e você já ganha 20 créditos de bônus. Perfil e interesses você completa depois, quando quiser.</p></div>
-    <div class="sp-card"><div class="sp-step-num">2</div><span class="sp-step-meta">Grátis e com créditos</span><h3>Acesse conteúdos</h3><p>Muitos conteúdos são gratuitos, já outros são pagos com créditos, para valorizar os especialistas escolhidos pela nossa curadoria.</p></div>
-    <div class="sp-card"><div class="sp-step-num">3</div><span class="sp-step-meta">Sempre disponível</span><h3>Explore os Grupos</h3><p>Entre em grupos por interesse, conheça pessoas com gostos parecidos e participe de conversas e atividades.</p></div>
-    <div class="sp-card"><div class="sp-step-num">4</div><span class="sp-step-meta">Quando quiser</span><h3>Vá aos encontros presenciais</h3><p>Eventos organizados pela nossa curadoria, para levar a conversa da tela para a vida real. Ingresso pago à parte.</p></div>
-    <div class="sp-card"><div class="sp-step-num">5</div><span class="sp-step-meta">Sempre disponível</span><h3>Aproveite os parceiros</h3><p>Produtos e serviços de parceiros selecionados, com condições especiais para a comunidade.</p></div>
-    <div class="sp-card"><div class="sp-step-num">6</div><span class="sp-step-meta">Opcional</span><h3>Faça sua primeira recarga</h3><p>Com um Pix de R$50 você recebe 50 créditos e mais 50 de bônus. Os créditos liberam conteúdos completos e clubes de assinatura.</p></div>
-  </div>
-</div>
-  </section>
-
-  <section class="sp-block sp-alt">
-<div class="sp-container">
-  <div class="sp-section-head">
-    <h2>Sua carteira de créditos</h2>
-    <p>Funciona como um cartão pré-pago: você recarrega, usa quando quiser e recarrega de novo quando precisar.</p>
-  </div>
-  <table class="sp-wallet">
-    <tr><td>R$1 = 1 crédito</td><td>Recarga por Pix ou cartão</td></tr>
-    <tr><td>Bônus de cadastro</td><td>20 créditos de bônus ao criar a conta</td></tr>
-    <tr><td>Primeira recarga com 100% de bônus</td><td>R$50 viram 50 créditos mais 50 de bônus</td></tr>
-    <tr><td>Indique um amigo</td><td>5 créditos de bônus por indicação aprovada</td></tr>
-    <tr><td>Onde usar</td><td>Conteúdos pagos e clubes de assinatura</td></tr>
-    <tr><td>Sem prazo de validade</td><td>Use no seu tempo</td></tr>
-    <tr><td>Sem obrigação</td><td>Recarregue só se quiser</td></tr>
-  </table>
-  <p class="sp-note">Créditos e bônus são de uso interno e não podem ser sacados. O bônus fica numa carteira separada. Eventos presenciais são pagos por ingresso, fora da carteira.</p>
-</div>
-  </section>
-
-  <section class="sp-block">
-<div class="sp-container">
-  <div class="sp-section-head">
-    <h2>Indique e ganhe bônus</h2>
-    <p>Convide alguém para o <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> e receba 5 créditos de bônus quando a indicação for aprovada.</p>
-  </div>
-  <ul class="sp-rules">
-    <li><strong>Bônus, não dinheiro:</strong> o benefício é de uso na plataforma. Não é sacável, não é transferível e não é renda ou comissão.</li>
-    <li><strong>Conforme a campanha:</strong> cada indicação é analisada, e a liberação segue as regras da campanha vigente.</li>
-    <li><strong>Sem ganhos em cadeia:</strong> só quem indicou diretamente pode receber, quando elegível. Não há múltiplos níveis nem comissão recorrente.</li>
-    <li><strong>Antifraude:</strong> autoindicação, cadastro duplicado ou abuso cancelam a indicação.</li>
-  </ul>
-</div>
-  </section>
-
-  <section class="sp-closing">
-<div class="sp-container">
-  <h2>Pronto para começar?</h2>
-  <p>Leva menos de 5 minutos, no seu ritmo.</p>
-  <a class="sp-btn sp-btn-primary sp-btn-lg" href="https://softliving.com.br/cadastro/boas-vindas">Começar meu cadastro</a>
-</div>
-  </section>
-
-  <section class="sp-block">
-<div class="sp-container sp-grid" style="gap:16px">
-  <div class="sp-inline-band">
-    <div><h3>Sua marca quer fazer parte?</h3><p>O <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> oferece cotas de patrocínio para marcas de qualquer segmento que queiram estar presentes num ambiente sem ruído.</p></div>
-    <a class="sp-btn sp-btn-primary" href="patrocinadores.html">Seja patrocinador</a>
-  </div>
-  <div class="sp-inline-band">
-    <div><h3>Tem um negócio local?</h3><p>Restaurantes, lojas, cafés, academias e serviços podem entrar gratuitamente no <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> com um perfil de estabelecimento: apresentação, endereços e condições especiais para a comunidade. A entrada passa pela nossa curadoria.</p></div>
-    <a class="sp-btn sp-btn-green" href="https://softliving.com.br/cadastro/boas-vindas">Cadastrar meu estabelecimento</a>
-  </div>
-</div>
-  </section>
 </div>
 
-<script src="../assets/js/comum.js"></script>
+<!-- Seis passos -->
+<section class="inst-sec" id="passos">
+  <div class="inst-head"><h2>Seis passos, no seu ritmo</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><br><span class="meta-chip">cerca de 1 min</span><h3>Faça seu cadastro</h3><p>Nome, e-mail e senha, e você já ganha 20 créditos de bônus. Perfil e interesses você completa depois, quando quiser.</p></div>
+    <div class="step"><span class="n">02</span><br><span class="meta-chip">Grátis e com créditos</span><h3>Acesse conteúdos</h3><p>Muitos conteúdos são gratuitos, já outros são pagos com créditos, para valorizar os especialistas escolhidos pela nossa curadoria.</p></div>
+    <div class="step"><span class="n">03</span><br><span class="meta-chip">Sempre disponível</span><h3>Explore os Grupos</h3><p>Entre em grupos por interesse, conheça pessoas com gostos parecidos e participe de conversas e atividades.</p></div>
+    <div class="step"><span class="n">04</span><br><span class="meta-chip">Quando quiser</span><h3>Vá aos encontros presenciais</h3><p>Eventos organizados pela nossa curadoria, para levar a conversa da tela para a vida real. Ingresso pago à parte.</p></div>
+    <div class="step"><span class="n">05</span><br><span class="meta-chip">Sempre disponível</span><h3>Aproveite os parceiros</h3><p>Produtos e serviços de parceiros selecionados, com condições especiais para a comunidade.</p></div>
+    <div class="step"><span class="n">06</span><br><span class="meta-chip">Opcional</span><h3>Faça sua primeira recarga</h3><p>Com um Pix de R$50 você recebe 50 créditos e mais 50 de bônus. Nas recargas seguintes, o bônus vai de 10% a 20%. Os créditos liberam conteúdos completos e clubes de assinatura.</p></div>
+  </div>
+</section>
+
+<!-- Carteira de créditos -->
+<section class="inst-sec">
+  <div class="split">
+    <div>
+      <div class="inst-head">
+        <h2>Sua carteira de créditos</h2>
+        <p>Funciona como um cartão pré-pago: você recarrega, usa quando quiser e recarrega de novo quando precisar.</p>
+      </div>
+      <div class="wallet-card">
+        <div class="top-line"><span class="sig sig-fixo sig-light"><span class="soft">Soft</span><span class="living">Living</span></span><span>Carteira de créditos</span></div>
+        <div class="valor">R$1 = 1 crédito<small>Recarga por Pix ou cartão · sem prazo de validade</small></div>
+        <div class="bonus"><span>+20 no cadastro</span><span>+50 na 1ª recarga</span><span>+5 por indicação</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="rows">
+        <div><b>R$1 = 1 crédito</b><span>Recarga por Pix ou cartão</span></div>
+        <div><b>Bônus de cadastro</b><span>20 créditos de bônus ao criar a conta</span></div>
+        <div><b>Primeira recarga com 100% de bônus</b><span>R$50 viram 50 créditos mais 50 de bônus. Depois: R$50 +5, R$100 +15 e R$200 +40 de bônus</span></div>
+        <div><b>Indique um amigo</b><span>5 créditos de bônus por indicação aprovada</span></div>
+        <div><b>Onde usar</b><span>Conteúdos pagos e clubes de assinatura</span></div>
+        <div><b>Sem prazo de validade</b><span>Use no seu tempo</span></div>
+        <div><b>Sem obrigação</b><span>Recarregue só se quiser</span></div>
+      </div>
+      <p class="inst-note">Créditos e bônus são de uso interno e não podem ser sacados. O bônus fica numa carteira separada. Eventos presenciais são pagos por ingresso, fora da carteira.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Indique e ganhe -->
+<section class="inst-sec">
+  <div class="split">
+    <div>
+      <div class="inst-head">
+        <h2>Indique e ganhe <span class="hl">bônus</span></h2>
+        <p>Convide alguém para o <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> e receba 5 créditos de bônus quando a indicação for aprovada.</p>
+      </div>
+    </div>
+    <div>
+      <ul class="rules">
+        <li><b>Bônus, não dinheiro:</b> o benefício é de uso na plataforma. Não é sacável, não é transferível e não é renda ou comissão.</li>
+        <li><b>Conforme a campanha:</b> cada indicação é analisada, e a liberação segue as regras da campanha vigente.</li>
+        <li><b>Sem ganhos em cadeia:</b> só quem indicou diretamente pode receber, quando elegível. Não há múltiplos níveis nem comissão recorrente.</li>
+        <li><b>Antifraude:</b> autoindicação, cadastro duplicado ou abuso cancelam a indicação.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Fechamento -->
+<div class="photo-band">
+  <div>
+    <h2>Pronto para começar?</h2>
+    <p>Leva menos de 5 minutos, no seu ritmo.</p>
+    <a class="btn white lg" href="https://softliving.com.br/cadastro/boas-vindas">Começar meu cadastro</a>
+  </div>
+</div>
+
+<!-- Marcas e negócios locais -->
+<section class="inst-sec">
+  <div class="bands">
+    <div class="band">
+      <h3>Sua marca quer fazer parte?</h3>
+      <p>O <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> oferece cotas de patrocínio para marcas de qualquer segmento que queiram estar presentes num ambiente sem ruído.</p>
+      <a class="btn" href="patrocinadores.html">Seja patrocinador</a>
+    </div>
+    <div class="band white">
+      <h3>Tem um negócio local?</h3>
+      <p>Restaurantes, lojas, cafés, academias e serviços podem entrar gratuitamente no <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span> com um perfil de estabelecimento: apresentação, endereços e condições especiais para a comunidade. A entrada passa pela nossa curadoria.</p>
+      <a class="btn ghost" href="https://softliving.com.br/cadastro/boas-vindas">Cadastrar meu estabelecimento</a>
+    </div>
+  </div>
+</section>
+
 <script src="../assets/js/layout.js"></script>
-
 </body>
 </html>

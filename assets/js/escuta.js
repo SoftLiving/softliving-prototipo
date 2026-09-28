@@ -1,9 +1,9 @@
-// Box de pesquisa de escuta: rodadas de 3 a 5 perguntas sorteadas, uma por vez.
+// VERSÃO 2 · Box de pesquisa de escuta (cópia da versão 1, com as classes da coluna lateral .lateral): rodadas de 3 a 5 perguntas sorteadas, uma por vez.
 // Pergunta respondida não volta; pergunta pulada pode aparecer em outra rodada.
 // O estado de cada pesquisa fica na sessão do navegador, com uma chave própria.
 //
 // montarEscuta({ lado, perguntas, chave, descricao, recompensa })
-//   lado: coluna da direita (.in-side) onde o box entra, no topo
+//   lado: coluna da direita (.lateral) onde o box entra, no topo
 //   perguntas: lista no formato de escuta-dados.js
 //   chave: nome do estado na sessão (uma pesquisa = uma chave)
 //   descricao: texto abaixo do título
@@ -27,7 +27,7 @@ function montarEscuta({ lado, perguntas, chave, descricao, recompensa = { tipo:'
   if(!lado || !perguntas || !perguntas.length) return;
   lado.querySelectorAll('.es-box').forEach(b => b.remove());
   const box = document.createElement('section');
-  box.className = 'in-card es-box';
+  box.className = 'lat-card es-box';
   lado.prepend(box);
 
   const R = recompensa.tipo;
@@ -58,7 +58,7 @@ function montarEscuta({ lado, perguntas, chave, descricao, recompensa = { tipo:'
 
   let valor = null;   // resposta em edição
   const cabecalho = `
-    <div class="in-card-head"><h2>${txt.titulo}</h2></div>
+    <div class="lat-head"><h2>${txt.titulo}</h2></div>
     <p class="es-sub">${descricao || txt.desc}</p>`;
 
   function render(){
@@ -137,5 +137,5 @@ function montarEscuta({ lado, perguntas, chave, descricao, recompensa = { tipo:'
 
 // Pesquisa geral: Início, Conteúdos e Grupos (quem começa numa continua na outra), valendo créditos do portal
 if(typeof ESCUTA_PERGUNTAS !== 'undefined'){
-  montarEscuta({ lado: document.querySelector('.in-side'), perguntas: ESCUTA_PERGUNTAS, chave: 'escutaEstado' });
+  montarEscuta({ lado: document.querySelector('.lateral'), perguntas: ESCUTA_PERGUNTAS, chave: 'escutaEstado' });
 }

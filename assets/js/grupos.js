@@ -1,48 +1,56 @@
-// ===== Tela Grupos =====
-// Capa: degradê colorido sorteado a cada carregamento, com o ícone do tema.
-GRUPOS.forEach(g => g.capa = sorteiaDegrade());
-const grState = { tab:'todos' };
+// VERSÃO 2 · Tela Grupos (referência: grupos.js da versão 1): Todos/Participando/Disponíveis e grade de cartões verticais.
+// Participar/Sair ficam no cartão (valem para a sessão, como na versão 1); clicar no resto do cartão abre a página do grupo
+// (ainda em construção: por enquanto volta para esta página com o grupo destacado). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
+
+const grEstado = { tipo:'todos' };
 
 function renderGrupos(){
   const nPart = GRUPOS.filter(g => g.participando).length;
-  document.getElementById('grCount').textContent = `${GRUPOS.length} grupos`;
-  document.getElementById('grTabs').innerHTML = [['todos','Todos',GRUPOS.length],['participando','Participando',nPart],['disponiveis','Disponíveis',GRUPOS.length - nPart]]
-    .map(([k,l,n]) => `<button type="button" class="ct-tab ${k===grState.tab?'active':''}" data-tab="${k}">${l} (${n})</button>`).join('');
+  document.getElementById('grConta').textContent = `${GRUPOS.length} grupos`;
+  const tipos = [['todos', 'Todos', GRUPOS.length], ['participando', 'Participando', nPart], ['disponiveis', 'Disponíveis', GRUPOS.length - nPart]];
+  document.getElementById('grTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === grEstado.tipo ? 'on' : ''}" aria-selected="${k === grEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
 
-  const list = GRUPOS.map((g, i) => ({...g, i})).filter(g => grState.tab === 'todos' || (grState.tab === 'participando') === g.participando);
-  document.getElementById('grGrid').innerHTML = list.map(g => `
-    <article class="ct-card gr-card" data-abrir="${g.i}">
-      <div class="ct-cover">
-        <div class="ct-ph" style="background:${g.capa};">${ICON[g.icon] || ICON.users}</div>
-        ${g.premium ? `<span class="ct-badge premium">${ICON.star} Premium</span>` : `<span class="ct-badge gratis">Grátis</span>`}
-      </div>
-      <div class="ct-body">
-        <span class="ct-cat">${ICON[g.icon] || ICON.users} ${g.cat}</span>
-        <div class="gr-title-row"><h3 class="ct-title"><a href="grupo.html?g=${g.i}">${g.t}</a></h3>${g.novos ? `<span class="gr-new">${g.novos} novos</span>` : ''}</div>
-        <p class="ct-excerpt">${g.d}</p>
-        <div class="gr-foot">
-          <span class="gr-members">${ICON.users} ${g.membros} membro${g.membros === 1 ? '' : 's'}</span>
+  const lista = GRUPOS.map((g, i) => ({ ...g, i })).filter(g => grEstado.tipo === 'todos' || (grEstado.tipo === 'participando') === g.participando);
+  document.getElementById('grGrade').innerHTML = lista.map(g => `
+    <a href="${urlGrupo(g.i)}" class="vcard vcard-grupo">
+      <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+      <span class="vc-topo">
+        ${g.premium ? '<span class="selo-vc premium">Premium</span>' : '<span class="selo-vc">Grátis</span>'}
+        ${g.novos ? `<span class="selo-vc novas">${g.novos} novas</span>` : ''}
+      </span>
+      <div class="vc-info">
+        <span class="vc-cat">${g.cat}</span>
+        <h3>${g.t}</h3>
+        <p class="vc-desc">${g.d}</p>
+        <div class="vc-row">
+          <span class="vc-chip" title="${g.membros} ${g.membros === 1 ? 'membro' : 'membros'}">${icone('grupos')}${g.membros}</span>
           ${g.participando
-            ? `<span class="gr-in">✓ Participando</span><button type="button" class="gr-leave" data-sair="${g.i}">${ICON.logout} Sair</button>`
-            : `<button type="button" class="gr-join" data-participar="${g.i}">Participar</button>`}
+            ? `<span class="vc-sair" data-sair="${g.i}">Participando · Sair</span>`
+            : `<span class="vc-btn" data-participar="${g.i}">Participar ${icone('mais')}</span>`}
         </div>
       </div>
-    </article>`).join('');
-  document.getElementById('grEmpty').hidden = list.length > 0;
-  document.getElementById('grEmpty').textContent = grState.tab === 'participando'
-    ? 'Você ainda não participa de nenhum grupo.' : 'Você já participa de todos os grupos.';
+    </a>`).join('');
+  const vazio = document.getElementById('grVazio');
+  vazio.hidden = lista.length > 0;
+  vazio.textContent = grEstado.tipo === 'participando' ? 'Você ainda não participa de nenhum grupo.' : 'Você já participa de todos os grupos.';
 }
 
-// Participar / Sair ficam no próprio card; clicar em qualquer outro ponto do card abre a página do grupo
-document.getElementById('grGrid').addEventListener('click', e => {
+document.getElementById('grTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ grEstado.tipo = b.dataset.tipo; renderGrupos(); } });
+document.getElementById('grGrade').addEventListener('click', e => {
   const entrar = e.target.closest('[data-participar]'), sair = e.target.closest('[data-sair]');
-  if(entrar || sair){
-    alternarParticipacao(GRUPOS[+(entrar || sair).dataset[entrar ? 'participar' : 'sair']], !!entrar);
-    renderGrupos();
-    return;
-  }
-  const card = e.target.closest('[data-abrir]');
-  if(card && !e.target.closest('a')) location.href = 'grupo.html?g=' + card.dataset.abrir;
+  if(!entrar && !sair) return;          // resto do cartão: abre a página do grupo
+  e.preventDefault();
+  const g = GRUPOS[+(entrar ? entrar.dataset.participar : sair.dataset.sair)];
+  alternarParticipacao(g, !!entrar);
+  mostrarAviso(entrar ? `Você entrou no grupo ${g.t}` : `Você saiu do grupo ${g.t}`);
+  renderGrupos();
+  renderMeusGrupos();
 });
-document.getElementById('grTabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if(b){ grState.tab = b.dataset.tab; renderGrupos(); } });
 renderGrupos();
+(function destacarGrupo(){
+  const g = +new URLSearchParams(location.search).get('g');
+  if(!new URLSearchParams(location.search).has('g') || !GRUPOS[g]) return;
+  const cartao = document.querySelector(`#grGrade a[href$="?g=${g}"]`);
+  if(cartao){ cartao.classList.add('destacado'); cartao.scrollIntoView({ behavior:'smooth', block:'center' }); }
+  mostrarAviso(`${GRUPOS[g].t}: a página do grupo está em construção`);
+})();

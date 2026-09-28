@@ -2,15 +2,94 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>SoftLiving (Protótipo · em aprovação)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Início · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
 </head>
-<body>
-<script>
-  // Abre o modo que a pessoa escolheu por último (Modo simples ou completo); padrão: completo
-  let destino = 'inicio.html';
-  try { if(localStorage.getItem('modoPreferido') === 'simples') destino = 'simples.html'; } catch(e){}
-  location.replace(destino);
-</script>
-<p><a href="inicio.html">Abrir o protótipo</a> · <a href="simples.html">Abrir o Modo simples</a></p>
+<body data-page="inicio" data-root="">
+
+<!-- Abertura -->
+<div class="hero">
+  <div>
+    <span class="kicker">Portal sem anúncios · feito para uma vida melhor</span>
+    <h1>Histórias que deixam a vida mais <span class="hl">leve</span></h1>
+    <p>Conteúdos sobre saúde, casa, viagens, tecnologia e bem-estar, e grupos para conversar e se encontrar com quem tem os mesmos interesses.</p>
+    <div class="ctas">
+      <a href="#materias" class="btn">Começar a ler <svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#grupos" class="btn ghost">Ver grupos</a>
+    </div>
+  </div>
+</div>
+
+<!-- Explore por assunto -->
+<section class="secao" id="assuntos" data-lateral-topo>
+  <div class="head"><div><h2>Explore por assunto</h2><p>Escolha um tema e veja o que há de novo.</p></div></div>
+  <!-- Fichário: abas por assunto encaixadas no painel de conteúdos -->
+  <div class="tabs folder" id="tabs" role="tablist"></div>
+  <div class="folder-panel"><div class="cards" id="cards"></div></div>
+</section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Últimas matérias -->
+<section class="secao" id="materias">
+  <div class="head"><div><h2>Últimas matérias</h2><p>O que a redação e os colunistas publicaram esta semana.</p></div><a href="../conteudos.html" class="btn ghost" id="verTodas">Ver todas</a></div>
+  <div class="stories">
+    <a href="#" class="destaque" id="lead"></a>
+    <div class="list" id="list"></div>
+  </div>
+</section>
+
+<!-- Acontece nos grupos -->
+<section class="secao" id="grupos">
+  <div class="head"><div><h2>Acontece nos grupos</h2><p>Conversas, encontros e clubes da comunidade.</p></div><a href="../grupos.html" class="btn ghost">Todos os grupos</a></div>
+  <div class="community">
+    <div class="quote">
+      <div class="who"><span class="avatar" style="background:#fff4dc;color:#8a5a0e">MT</span><div><b>Marta T.</b><small>Clube do Livro · membro desde 2025</small></div></div>
+      <h3>“Voltei a ler um livro por mês”</h3>
+      <p>Entrei no grupo sem conhecer ninguém. Hoje a gente escolhe o livro juntos e se encontra uma vez por mês para conversar. É o compromisso que mais espero.</p>
+      <a href="../grupos.html" class="btn">Encontrar um grupo</a>
+    </div>
+    <div class="groups" id="groupList"></div>
+  </div>
+</section>
+
+<!-- Colunas: mesma estrutura de Últimas matérias, espelhada (4 colunas resumidas à esquerda, coluna principal à direita) -->
+<section class="secao" id="colunas">
+  <div class="head"><div><h2>Colunas</h2><p>Perspectivas de quem sabe: cultura, saúde, longevidade e vida ativa.</p></div><a href="colunas.html" class="btn ghost" data-goto="colunas">Ver todas</a></div>
+  <div class="stories invertida">
+    <div class="list" id="colLista"></div>
+    <a href="colunas.html" class="destaque" id="colPrincipal"></a>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<div class="news">
+  <div>
+    <h2>O melhor da <span class="sig sig-fixo sig-light"><span class="soft">Soft</span><span class="living">Living</span></span> no seu e-mail</h2>
+    <p>Uma seleção por semana, com as matérias mais lidas e os próximos encontros dos grupos.</p>
+    <form id="newsForm">
+      <input type="email" placeholder="Seu e-mail" aria-label="Seu e-mail" required>
+      <button class="btn" type="submit">Assinar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Coluna lateral da direita (os mesmos blocos da coluna da direita da versão 1, montados por lateral.js).
+     O layout.js a coloca ao lado do conteúdo, começando na altura do elemento com data-lateral-topo (Explore por assunto);
+     a pesquisa de escuta entra no topo dela (escuta.js). -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/inicio.js"></script>
 </body>
 </html>
