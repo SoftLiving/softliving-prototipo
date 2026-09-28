@@ -6,7 +6,7 @@
 .vt-capa{ padding:36px 0 30px; max-width:760px; }
 .vt-capa .kicker .sig{ font-size:14px; }
 .vt-capa h1{ font-size:52px; line-height:1.06; font-weight:700; margin:18px 0 0; }
-.vt-lead{ font-size:17px; line-height:1.6; color:var(--text-2); margin:18px 0 26px; max-width:520px; }
+.vt-lead{ font-size:17px; line-height:1.6; color:var(--text-2); margin:18px 0 0; max-width:520px; }
 .vt-busca{ max-width:520px; margin:0; }
 .vt-mosaico{ position:relative; display:grid; grid-template-columns:1.25fr 1fr; grid-template-rows:170px 170px 120px; gap:12px; }
 .vt-mosaico img{ width:100%; height:100%; object-fit:cover; border-radius:22px; box-shadow:0 14px 34px rgba(1,53,101,.14); }
