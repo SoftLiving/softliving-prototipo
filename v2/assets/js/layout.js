@@ -675,7 +675,7 @@ function avisoLateral(){
   if(!lat) return;
   const aviso = lat.querySelector('.lat-aviso');
   if(aviso){ lat.prepend(aviso); return; }
-  lat.insertAdjacentHTML('afterbegin', `<div class="lat-aviso" role="note"><b>Protótipo</b><p>Os conteúdos desta coluna vão ter relação com a página em que você está navegando.</p></div>`);
+  lat.insertAdjacentHTML('afterbegin', `<div class="lat-aviso" role="note"><b>Protótipo</b><p>Os conteúdos desta coluna vão ter relação com a página em que você está navegando, e nem todas as páginas terão essa coluna de contexto.</p></div>`);
 }
 document.addEventListener('DOMContentLoaded', avisoLateral);
 
