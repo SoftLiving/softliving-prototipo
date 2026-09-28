@@ -1476,12 +1476,12 @@ body{ background:
 @media (max-width:640px){ .sm-janela{ width:auto; } }          /* janela do Saiba mais na largura da tela */
 @media (min-width:641px) and (max-width:820px){ .tools > .btn.creditos{ display:none; } } /* tablet estreito: saldo fica no menu (Sua carteira) */
 /* Celular: o botão Entrar também aparece no topo. Sem conta, o sino sai (não há notificações); logado, voltam sino e
-   avatar. Em telas até 480px a lupa sai do topo (a Busca continua no menu). */
+   avatar. No celular (até 640px) a lupa sai do topo (a Busca continua no menu). */
 @media (max-width:640px){
   .tools .btn.entrar:not([hidden]){ display:inline-flex; height:36px; padding:0 14px; font-size:13px; }
   body:not(.logado) .tools .sino{ display:none; }
 }
-@media (max-width:480px){ .tools a.round[href$="busca.html"]{ display:none; } }
+@media (max-width:640px){ .tools a.round[href$="busca.html"]{ display:none; } } /* celular: sem a lupa no topo (a Busca fica no menu) */
 @media (max-width:374px){                                   /* celulares estreitos: logo e Saiba mais um pouco menores */
   .top{ gap:4px; padding:10px 10px; }
   .tools{ gap:4px; }
