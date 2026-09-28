@@ -24,11 +24,6 @@ const siglaDe = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2 |
 const monograma = e => `<span class="vt-logo" style="color:${e.cor}">${siglaDe(e.n)}</span>`;
 const seloBeneficio = e => `<span class="vt-beneficio">${icone('presente')}${e.b}</span>`;
 
-// Capa: mosaico com quatro fotos e um cartão de vidro por cima
-document.getElementById('vtMosaico').innerHTML = ['Bistrô Alecrim', 'Ateliê Linho & Barro', 'Estúdio Respira', 'Floricultura Ramo'].map((n, i) =>
-  `<img class="vt-m${i + 1}" src="${fotoUrl(est(n).foto, i ? 500 : 800)}" alt="">`).join('') +
-  `<div class="vt-flutua"><b>${ESTABELECIMENTOS.length * 4}</b><span>estabelecimentos com benefício para membros</span></div>`;
-
 document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
   <a href="#" class="vt-cat"><img src="${fotoUrl(f, 200)}" alt=""><span>${c}</span></a>`).join('');
 

@@ -3,7 +3,7 @@
 .corpo > .wrap{ container-type:inline-size; }
 
 /* Capa editorial */
-.vt-capa{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.05fr); gap:44px; align-items:center; padding:36px 0 30px; }
+.vt-capa{ padding:36px 0 30px; max-width:760px; }
 .vt-capa .kicker .sig{ font-size:14px; }
 .vt-capa h1{ font-size:52px; line-height:1.06; font-weight:700; margin:18px 0 0; }
 .vt-lead{ font-size:17px; line-height:1.6; color:var(--text-2); margin:18px 0 26px; max-width:520px; }
