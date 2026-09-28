@@ -668,6 +668,17 @@ function alternarSalvo(fav){
   return salvo;
 }
 
+// Aviso de protótipo no topo da coluna da direita: os conteúdos dela vão acompanhar a página atual.
+// Entra depois que as páginas montam a coluna (DOMContentLoaded); chamar de novo só move o aviso para o topo.
+function avisoLateral(){
+  const lat = document.querySelector('.lateral');
+  if(!lat) return;
+  const aviso = lat.querySelector('.lat-aviso');
+  if(aviso){ lat.prepend(aviso); return; }
+  lat.insertAdjacentHTML('afterbegin', `<div class="lat-aviso" role="note"><b>Protótipo</b><p>Os conteúdos desta coluna vão ter relação com a página em que você está navegando.</p></div>`);
+}
+document.addEventListener('DOMContentLoaded', avisoLateral);
+
 // Aviso rápido no canto da tela
 let toastTimer;
 function mostrarAviso(texto){

@@ -968,9 +968,11 @@ function renderLateralEstab(){
   escutaAtual = null;
   const incluidos = estNasComunidades();
   const outros = ESTABELECIMENTOS.filter(x => !incluidos.includes(x.id)).slice(0, 4);
-  lado.innerHTML = `<div class="lat-card cm-lat-descubra"><div class="lat-head"><h2>${ICON.store}Descubra na Vitrine</h2></div>
+  lado.querySelectorAll(':scope > :not(.lat-aviso)').forEach(x => x.remove());
+  lado.insertAdjacentHTML('beforeend', `<div class="lat-card cm-lat-descubra"><div class="lat-head"><h2>${ICON.store}Descubra na Vitrine</h2></div>
     ${outros.map(x => `<a href="${urlEstabelecimento(x)}" class="cm-lat-est"><img src="${fotoUrl(x.foto, 160)}" alt="" loading="lazy"><span><b>${x.n}</b><small>${x.cat} · ${x.bairro}</small></span></a>`).join('')}
-    <a href="${urlPagina('vitrine')}" class="btn ghost">${ICON.store}Ver todas as Vitrines</a></div>`;
+    <a href="${urlPagina('vitrine')}" class="btn ghost">${ICON.store}Ver todas as Vitrines</a></div>`);
+  avisoLateral();
 }
 document.getElementById('cmEstab').addEventListener('click', ev => {
   const b = ev.target.closest('[data-excluir-est]'); if(!b) return;
@@ -997,11 +999,12 @@ function renderEscutaComunidade(){
   const perguntas = Array.isArray(conjunto) ? conjunto : conjunto && conjunto[currentAudience];
   const lado = document.querySelector('.lateral');
   lado.querySelectorAll('.cm-lat-descubra').forEach(x => x.remove());
-  if(!perguntas){ lado.innerHTML = ''; return; }
+  if(!perguntas){ lado.querySelectorAll(':scope > :not(.lat-aviso)').forEach(x => x.remove()); return; }
   // Pesquisas de comunidades são só pesquisa, sem créditos (inclusive as de colaboradores, por enquanto).
   const publico = org.audiences ? ` · ${org.audiences[currentAudience].audienceLabel}` : '';
   montarEscuta({ lado, perguntas, chave, recompensa: { tipo:'nenhuma' },
     descricao: `Pesquisa ${org.name}${publico}. Sua opinião ajuda a melhorar esta comunidade.` });
+  avisoLateral();                                         // o aviso de protótipo volta para o topo da coluna
 }
 
 // Fecha o dropdown "Trocar por" ao clicar fora dele ou apertar Esc
