@@ -48,13 +48,7 @@ function renderMeusGrupos(){
     <div class="lat-head"><h2>${LAT_ICONE_PESSOAS}Conheça a comunidade</h2><a href="${urlPagina('amigos')}" class="lat-mais">Ver todos ›</a></div>
     ${LAT_MEMBROS.map(m => `<a href="#" class="lat-membro"><span class="av" style="background:${m.cor}">${m.sigla}</span>${m.nome}</a>`).join('')}
     <a href="${urlPagina('amigos')}" class="btn ghost">${LAT_ICONE_PESSOAS}Explorar comunidade</a>
-  </section>
-
-  <div class="lat-clube">
-    <em>Clube de Saúde ${LOGO}</em>
-    <strong>Parceria em aberto</strong>
-    <a href="${urlSite('patrocinadores')}">Conheça as cotas de patrocínio</a>
-  </div>`;
+  </section>`;
   lateral.querySelectorAll('a[href="#"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
   renderMeusGrupos();
   if(typeof agendarAjusteLogos === 'function') agendarAjusteLogos();
