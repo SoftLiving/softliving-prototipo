@@ -70,7 +70,7 @@ function renderAmigos(){
   const conta = k => PESSOAS.filter(p => k === 'amigo' ? p.s === 'amigo' : p.s === 'sugestao' || p.s === 'enviado').length;
   document.getElementById('amTipos').innerHTML = AM_TIPOS.map(([k, l]) =>
     `<button type="button" role="tab" class="${k === amTipo ? 'on' : ''}" aria-selected="${k === amTipo}" data-tipo="${k}">${l} <small>${conta(k)}</small></button>`).join('');
-  const termo = semAcentoAm(document.getElementById('amBusca').value.trim());
+  const termo = '';                                       // a busca fica só na página Busca
   const lista = PESSOAS.filter(p => (amTipo === 'amigo' ? p.s === 'amigo' : p.s === 'sugestao' || p.s === 'enviado')
     && (!termo || semAcentoAm(`${p.nome} ${p.grupo} ${p.gostos.join(' ')}`).includes(termo)));
   document.getElementById('amGrade').innerHTML = lista.map(cartao).join('');
@@ -80,7 +80,6 @@ function renderAmigos(){
 }
 
 document.getElementById('amTipos').addEventListener('click', ev => { const b = ev.target.closest('button'); if(b){ amTipo = b.dataset.tipo; renderAmigos(); } });
-document.getElementById('amBusca').addEventListener('input', renderAmigos);
 document.querySelector('main').addEventListener('click', ev => {
   const b = ev.target.closest('button'); if(!b) return;
   const d = b.dataset, nome = id => PESSOAS.find(x => x.id === +id).nome;

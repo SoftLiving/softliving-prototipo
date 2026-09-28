@@ -63,7 +63,6 @@ function renderConteudos(){
 
 document.getElementById('ctAssuntos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.assunto = +b.dataset.i; renderConteudos(); } });
 document.getElementById('ctTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.tipo = b.dataset.tipo; renderConteudos(); } });
-document.getElementById('ctBusca').addEventListener('input', e => { ctEstado.busca = e.target.value.trim(); renderConteudos(); });
 document.getElementById('ctGrade').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(fav){

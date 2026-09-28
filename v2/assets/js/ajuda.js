@@ -31,7 +31,7 @@ const semAcentoAj = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(
 function renderAjuda(){
   document.getElementById('ajTemas').innerHTML = AJ_TEMAS.map(([k, t, ic]) =>
     `<button type="button" class="aj-tema${k === ajTema ? ' on' : ''}" aria-pressed="${k === ajTema}" data-tema="${k}">${icone(ic)}<span>${t}</span></button>`).join('');
-  const termo = semAcentoAj(document.getElementById('ajBusca').value.trim());
+  const termo = '';                                       // a busca fica só na página Busca (e no chat do assistente)
   const lista = AJ_PERGUNTAS.filter(([k, p, r]) => (!ajTema || k === ajTema) && (!termo || semAcentoAj(p + ' ' + r).includes(termo)));
   document.getElementById('ajTitulo').textContent = ajTema ? AJ_TEMAS.find(t => t[0] === ajTema)[1] : termo ? 'Resultados' : 'Perguntas frequentes';
   document.getElementById('ajPerguntas').innerHTML = lista.map(([, p, r]) => `
@@ -44,7 +44,6 @@ document.getElementById('ajTemas').addEventListener('click', ev => {
   ajTema = ajTema === b.dataset.tema ? null : b.dataset.tema;
   renderAjuda();
 });
-document.getElementById('ajBusca').addEventListener('input', renderAjuda);
 document.getElementById('ajForm').addEventListener('submit', ev => {
   ev.preventDefault();
   document.getElementById('ajMsg').value = '';
