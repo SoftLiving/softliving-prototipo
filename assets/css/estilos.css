@@ -498,7 +498,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .page-head p{ font-size:16px; }
   .dl-texto{ padding:22px; }
   .dl-texto h2{ font-size:23px; }
-  .grade{ grid-template-columns:1fr; }
+  .grade{ grid-template-columns:repeat(auto-fill, minmax(min(100%, 165px), 1fr)); gap:16px; } /* 1 por linha no celular; 2 a partir de ~420px, para a capa não ficar enorme */
+  .grade:has(.at-card, .vcard-grupo){ grid-template-columns:1fr; } /* Curtidas, Salvos e Grupos: capa deitada, uma por linha */
   .seg{ display:flex; }
 }
 
@@ -1272,8 +1273,10 @@ body{ background:
 .carrossel-v .car-ant .ic{ transform:rotate(90deg); }
 .carrossel-v .car-prox .ic{ transform:rotate(-90deg); }
 
-/* Coluna do conteúdo estreita: menos itens por vez */
-@container (max-width:1000px){ .cards.trilho-h{ --vis:2; } .cd-sug-lista.trilho-h{ --vis:3; } }
+/* Coluna do conteúdo estreita: menos itens por vez. As capas de artigo seguem o tamanho dos cartões de grupo
+   (3 por vez, cerca de 230 a 330px de largura); só abaixo de 720px passam a 2 por vez */
+@container (max-width:1000px){ .cards.trilho-h{ --vis:3; } .cd-sug-lista.trilho-h{ --vis:3; } }
+@container (max-width:720px){ .cards.trilho-h{ --vis:2; } }
 /* Celular: mostram um pedaço do próximo item; as setas continuam (única forma de mover) */
 @media (max-width:640px){
   .cards.trilho-h{ --vis:1.25; --gap:14px; }
@@ -1282,6 +1285,7 @@ body{ background:
   .carrossel-h .car-ant{ left:-6px; }
   .carrossel-h .car-prox{ right:-6px; }
 }
+@media (min-width:481px) and (max-width:640px){ .cards.trilho-h, .groups.trilho-h{ --vis:2.2; } } /* celular deitado: capa do tamanho padrão */
 
 /* ===== Tela Notificações ===== */
 .nt-barra{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; }
