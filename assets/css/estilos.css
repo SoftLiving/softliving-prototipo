@@ -129,7 +129,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* No computador, o logo e o menu de cima começam alinhados à esquerda com o conteúdo (menu lateral 16 + 264 + 24 de respiro) */
 @media (min-width:981px){ .top{ padding-left:304px; } }
 .top .brand{ font-size:32px; }
-.site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; }
+.site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; white-space:nowrap; }
 .site-nav a:hover, .site-nav a.on{ color:var(--green); }
 .tools{ margin-left:auto; display:flex; align-items:center; gap:10px; }
 .round{ width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid var(--line); display:grid; place-items:center; position:relative; padding:0; flex:none; }
@@ -400,7 +400,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* ===== Telas médias ===== */
 /* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
-@media (max-width:1419px){ .site-nav{ display:none; } } /* com o topo alinhado ao conteúdo, o menu institucional só cabe a partir de 1420px */
+@media (max-width:1359px){ .site-nav{ display:none; } } /* o menu institucional cabe no topo a partir de 1360px; abaixo disso fica no rodapé (e no Saiba mais do celular) */
 /* Coluna do conteúdo estreita (menos de 1000px, por exemplo com a lateral aberta): cartões de assunto em 2 colunas e grupos
    embaixo do depoimento (em 4 colunas o título invade a foto) */
 @container (max-width:1000px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } .tabs.folder .btn{ display:none; } }
@@ -434,6 +434,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .top{ gap:10px; padding:12px 16px; }
   .top .brand{ font-size:27px; }
   .tools > .btn{ display:none; } /* só os botões do topo; os de dentro das janelas (ex.: Entrar do formulário) continuam */
+  .tools > .btn.simples{ display:inline-flex; font-size:0; gap:0; width:36px; height:36px; padding:0; justify-content:center; border-radius:50%; } /* Modo simples: só o ícone */
+  .tools > .btn.simples .ic{ width:18px; height:18px; }
   .head h2{ font-size:28px; }
   .head .btn{ display:none; }
   .tabs{ flex-wrap:nowrap; overflow-x:auto; margin:0 -16px 18px; padding:0 16px; scrollbar-width:none; }
@@ -1490,16 +1492,14 @@ body{ background:
   .grade .vcard-grupo .vc-topo{ top:18px; left:18px; flex-direction:column; align-items:flex-start; gap:4px; }
   .grade .vcard-grupo .selo-vc{ font-size:10.5px; padding:3px 8px; }
 }
-}
-/* Botão "Saiba mais" do topo: só aparece quando o menu institucional não cabe (abaixo de 1420px) */
+/* Botão "Saiba mais" do topo: só no celular (no computador e no tablet os institucionais ficam no menu do topo, quando
+   cabem, e no rodapé) */
 .saiba-mais{ display:none; align-items:center; gap:4px; height:40px; padding:0 14px; border-radius:999px; border:1px solid var(--line); background:#fff; font:inherit; font-size:14px; font-weight:600; color:var(--navy); cursor:pointer; white-space:nowrap;
   transition:transform .15s ease, box-shadow .15s ease; }
 .saiba-mais .chev{ width:15px; height:15px; transition:transform .15s ease; }
 .saiba-mais:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 .saiba-mais[aria-expanded="true"] .chev{ transform:rotate(180deg); }
-@media (max-width:1419px){ .saiba-mais{ display:inline-flex; } }
-/* Entre 981 e 1280px, "Modo simples" fica só com o ícone (a dica mostra o nome), para o topo caber com o Saiba mais */
-@media (min-width:641px) and (max-width:1280px){ .tools .btn.simples{ font-size:0; gap:0; width:40px; padding:0; justify-content:center; } .tools .btn.simples .ic{ width:18px; height:18px; } }
+@media (max-width:640px){ .saiba-mais{ display:inline-flex; } }
 /* Celular: topo compacto para caber menu, logo, Saiba mais, busca e sino */
 @media (max-width:640px){
   .top{ padding:10px 12px; gap:6px; }
@@ -1538,6 +1538,23 @@ body{ background:
   .tools .btn.entrar:not([hidden]){ padding:0 11px; }
 }
 @media (max-width:640px){ .janela-topo{ max-height:calc(100vh - 190px); overflow-y:auto; } } /* acima da barra inferior do celular */
+/* Topo do celular com o botão Modo simples (só ícone): até 400px o Saiba mais fica sem a setinha e os espaços diminuem;
+   até 374px os botões redondos ficam com 32px, para caber logado (menu, logo, Saiba mais, Modo simples, sino e avatar) */
+@media (max-width:400px){
+  .top{ gap:4px; padding-left:10px; padding-right:10px; }
+  .tools{ gap:4px; }
+  .top .brand{ font-size:20px; }
+  .saiba-mais{ padding:0 10px; }
+  .saiba-mais .chev{ display:none; }
+}
+@media (max-width:374px){
+  .top .brand{ font-size:18px; }
+  .top .round, .tools .round.avatar-topo, .tools > .btn.simples{ width:32px; height:32px; }
+  .tools > .btn.simples .ic{ width:16px; height:16px; }
+  .saiba-mais{ height:32px; padding:0 8px; font-size:12px; }
+  .tools .btn.entrar:not([hidden]){ height:32px; padding:0 10px; font-size:12.5px; }
+}
+@media (max-width:340px){ .top{ gap:3px; padding-left:8px; padding-right:8px; } .tools{ gap:3px; } .saiba-mais{ padding:0 7px; font-size:11.5px; } .top .brand{ font-size:17px; } }
 /* Aviso de protótipo no topo da coluna da direita */
 .lat-aviso{ padding:12px 14px; border-radius:16px; background:#fdf6e3; border:1px dashed #e3c77f; color:#7a5c12; }
 .lat-aviso b{ display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:#c98a2e; border-radius:999px; padding:2px 9px; margin-bottom:6px; }

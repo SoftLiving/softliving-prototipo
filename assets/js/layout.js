@@ -51,7 +51,7 @@ const ICONES = {
   presente:'<rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3"/><path d="M12 5v16"/>',
   loja:'<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/>',
   simples:'<path d="M4 7h16M4 12h10M4 17h6"/>',
-  modo:'<circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/>',
+  modo:'<path d="M3 19 8.5 5 14 19M5.3 14h6.4"/><circle cx="18" cy="16.2" r="2.8"/><path d="M20.8 13v6"/>',   // "Aa": letra maior, leitura mais fácil
   ajuda:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1.5 1-1.5 2.2"/><path d="M12 17h.01"/>',
   busca:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
   menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
@@ -626,7 +626,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 });
 marcarLogado(lerLogado());
 
-// Janela "Saiba mais": as páginas institucionais, para quando o menu Conhecer / Como funciona... não cabe no topo
+// Janela "Saiba mais" (só no celular): as páginas institucionais, que no computador ficam no menu do topo (a partir de 1360px) e no rodapé
 // (celular e telas menores). No computador largo o botão fica escondido e o menu aparece inteiro.
 const SAIBA_MAIS = [
   ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
