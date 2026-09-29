@@ -29,7 +29,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .sig{ font-family:'Times New Roman',Times,serif; font-weight:700; white-space:nowrap; letter-spacing:0; text-transform:none; } /* o logo nunca fica em maiúsculas, mesmo dentro de rótulos */
 .sig .soft{ color:#013565; font-style:italic; }
 .sig .living{ color:#1F5519; font-style:normal; }
-.sig.sig-light .soft, .sig.sig-light .living{ color:#fff; }
+.sig.sig-light .soft, .sig.sig-light .living, .es-box .sig .soft, .es-box .sig .living{ color:#fff; } /* logo claro em fundo escuro (a pesquisa é azul) */
 
 /* ===== Moldura: faixa de protótipo (não removível) ===== */
 .proto{ position:sticky; top:0; z-index:50; background:#fdf6e3; color:#7a5c12; border-bottom:1px solid #f0ddac; font-size:12px; line-height:1.4; text-align:center; padding:6px 12px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; }
@@ -210,33 +210,38 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .lat-clube strong{ display:block; font-family:'Fraunces',serif; font-size:20px; color:#5c4108; margin:4px 0 8px; }
 .lat-clube a{ font-size:13px; font-weight:600; color:#8a6414; text-decoration:underline; }
 /* Pesquisa de escuta (escuta.js) */
-.es-box{ background:rgba(230,242,234,.7); }
-.es-sub{ font-size:12.5px; color:#5d6773; margin:-4px 0 12px; line-height:1.5; }
-.es-sub b{ color:#8a5a0e; }
-.es-progress{ display:flex; align-items:center; gap:10px; font-size:11.5px; color:#6b7580; margin-bottom:10px; }
+.es-box{ background:linear-gradient(160deg, #0b4a85, var(--navy) 70%); border-color:rgba(255,255,255,.18); color:#fff;
+  box-shadow:0 12px 30px rgba(1,53,101,.22), inset 0 1px 0 rgba(255,255,255,.14); } /* pesquisa de opinião: box azul */
+.es-box .lat-head h2{ color:#fff; }
+.es-sub{ font-size:12.5px; color:rgba(255,255,255,.78); margin:-4px 0 12px; line-height:1.5; }
+.es-sub b{ color:#f5c46b; }
+.es-progress{ display:flex; align-items:center; gap:10px; font-size:11.5px; color:rgba(255,255,255,.72); margin-bottom:10px; }
 .es-progress span:first-child{ white-space:nowrap; }
-.es-bar{ flex:1; height:5px; background:#fff; border-radius:999px; overflow:hidden; }
-.es-bar i{ display:block; height:100%; background:var(--green); border-radius:999px; transition:width .3s ease; }
-.es-q{ font-size:15px; font-weight:600; color:var(--navy); line-height:1.4; margin:0 0 12px; }
+.es-bar{ flex:1; height:5px; background:rgba(255,255,255,.18); border-radius:999px; overflow:hidden; }
+.es-bar i{ display:block; height:100%; background:#f5c46b; border-radius:999px; transition:width .3s ease; }
+.es-q{ font-size:15px; font-weight:600; color:#fff; line-height:1.4; margin:0 0 12px; }
 .es-ops{ display:flex; flex-wrap:wrap; gap:6px; }
-.es-op{ border:1px solid var(--line); background:#fff; border-radius:999px; padding:7px 12px; font-size:12.5px; font-weight:500; color:#333c47; }
-.es-op:hover{ border-color:#c3cad2; }
-.es-op.on{ background:var(--navy); border-color:var(--navy); color:#fff; }
+.es-op{ border:1px solid rgba(255,255,255,.32); background:rgba(255,255,255,.1); border-radius:999px; padding:7px 12px; font-size:12.5px; font-weight:500; color:#fff; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.es-op:hover{ background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.55); transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.18); }
+.es-op.on{ background:#fff; border-color:#fff; color:var(--navy); font-weight:700; }
 .es-nota{ display:grid; grid-template-columns:repeat(11,1fr); gap:3px; }
 .es-nota .es-op{ padding:6px 0; border-radius:8px; text-align:center; }
-.es-nota-legenda{ display:flex; justify-content:space-between; font-size:10.5px; color:#a9b2bb; margin-top:4px; }
-.es-texto, .es-porque{ width:100%; font-size:13.5px; border:1px solid var(--line); border-radius:12px; padding:8px 10px; font-family:inherit; }
+.es-nota-legenda{ display:flex; justify-content:space-between; font-size:10.5px; color:rgba(255,255,255,.6); margin-top:4px; }
+.es-texto, .es-porque{ width:100%; font-size:13.5px; border:1px solid rgba(255,255,255,.3); border-radius:12px; padding:8px 10px; font-family:inherit; background:#fff; color:var(--text); }
 .es-porque{ margin-top:8px; }
-.es-hint{ display:block; font-size:11px; color:var(--muted); margin-top:5px; }
+.es-hint{ display:block; font-size:11px; color:rgba(255,255,255,.65); margin-top:5px; }
 .es-actions{ display:flex; align-items:center; gap:10px; margin-top:14px; }
-.es-send{ flex:1; background:#c98a2e; color:#fff; border:none; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:700; }
-.es-send:hover:not(:disabled){ background:#b47a24; }
-.es-send:disabled{ background:#ecdcbf; cursor:not-allowed; }
-.es-skip{ background:none; border:none; color:#6b7580; font-size:13px; font-weight:600; padding:6px; }
-.es-skip:hover{ color:var(--navy); }
-.es-fim-t{ font-size:14.5px; color:var(--navy); line-height:1.45; margin:0 0 6px; }
-.es-fim-t b{ color:#8a5a0e; }
-.es-fim-s{ font-size:12.5px; color:#6b7580; margin:0 0 12px; }
+.es-send{ flex:1; background:#e0a13f; color:#1d2430; border:none; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:700; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.es-send:hover:not(:disabled){ background:#f0b556; transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.22); }
+.es-send:disabled{ background:rgba(255,255,255,.14); color:rgba(255,255,255,.5); cursor:not-allowed; }
+.es-skip{ background:none; border:none; color:rgba(255,255,255,.75); font-size:13px; font-weight:600; padding:6px; cursor:pointer; }
+.es-skip:hover{ color:#fff; }
+.es-fim-t{ font-size:14.5px; color:#fff; line-height:1.45; margin:0 0 6px; }
+.es-fim-t b{ color:#f5c46b; }
+.es-fim-s{ font-size:12.5px; color:rgba(255,255,255,.75); margin:0 0 12px; }
+.es-fim-s b{ color:#fff; }
 .es-fim .es-send{ width:100%; }
 .es-toast{ position:absolute; top:14px; right:14px; background:var(--green); color:#fff; font-size:12px; font-weight:700; padding:5px 11px; border-radius:999px; animation:esToast 1.8s ease forwards; pointer-events:none; }
 @keyframes esToast{ 0%{ opacity:0; transform:translateY(6px); } 15%,75%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateY(-6px); } }

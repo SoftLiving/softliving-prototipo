@@ -74,7 +74,7 @@ function montarEscuta({ lado, perguntas, chave, descricao, recompensa = { tipo:'
     if(p.porque) campo += `<textarea class="es-porque" rows="2" placeholder="${p.porque}"></textarea>`;
     box.innerHTML = `${cabecalho}
       <div class="es-progress"><span>Pergunta ${n} de ${total}</span><span class="es-bar"><i style="width:${(n - 1) / total * 100}%"></i></span></div>
-      <p class="es-q">${p.t}</p>
+      <p class="es-q">${p.t.replace(/SoftLiving/g, LOGO)}</p>
       ${campo}
       <div class="es-actions">
         <button type="button" class="es-send" disabled>${txt.botao}</button>
