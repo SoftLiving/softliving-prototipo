@@ -54,29 +54,64 @@ document.getElementById('ajForm').addEventListener('submit', ev => {
 renderAjuda();
 
 // ===== Chat do assistente de IA (coluna da direita) =====
-// Protótipo: não há IA de verdade. O "assistente" procura a pergunta frequente mais parecida com o que a pessoa
-// escreveu (palavras em comum, sem acento) e responde com ela; sem nada parecido, sugere o contato por e-mail.
-// Perguntas prontas: sempre 3, sorteadas entre as perguntas frequentes; trocam a cada resposta (sem repetir a última feita)
+// Protótipo: não há IA de verdade. O "assistente" procura o trecho mais parecido com o que a pessoa escreveu (palavras em
+// comum, sem acento) e responde com ele; sem nada parecido, sugere o contato por e-mail.
+// Fonte das respostas: a base de conhecimento em conhecimento/*.md (a lista de arquivos fica em conhecimento/arquivos.txt;
+// cada "## Assunto" de um arquivo vira uma resposta, com a linha opcional "Palavras: ..." para sinônimos). Se os arquivos
+// não carregarem (por exemplo, abrindo o HTML direto do disco, sem o servidor), o chat usa as perguntas frequentes acima.
+let AJ_BASE = AJ_PERGUNTAS.map(([, p, r]) => ({ titulo:p, palavras:'', texto:r, html:r, fonte:'Perguntas frequentes' }));
+
+// Markdown simples para HTML: parágrafos, listas com "- " (também dentro de listas) e **negrito**
+function ajMd(md){
+  const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '$1');
+  const blocos = md.trim().split(/\n\s*\n/);
+  return blocos.map(b => {
+    const linhas = b.split('\n');
+    if(linhas.every(l => /^\s*- /.test(l))) return `<ul>${linhas.map(l => `<li${/^\s{2,}-/.test(l) ? ' class="sub"' : ''}>${esc(l.replace(/^\s*- /, ''))}</li>`).join('')}</ul>`;
+    return `<p>${linhas.map(esc).join(' ')}</p>`;
+  }).join('');
+}
+function ajLerMd(nome, md){
+  md = md.replace(/\r/g, '');
+  const tema = (md.match(/^# (.+)$/m) || [, nome])[1].trim();
+  return md.split(/^## /m).slice(1).map(sec => {
+    const linhas = sec.split('\n');
+    const titulo = linhas.shift().trim();
+    let palavras = '';
+    if(/^Palavras:/i.test((linhas[0] || '').trim())) palavras = linhas.shift().replace(/^\s*Palavras:\s*/i, '');
+    const texto = linhas.join('\n').trim();
+    return { titulo, palavras, texto, html:ajMd(texto), fonte:`${tema} (${nome})` };
+  }).filter(x => x.texto);
+}
+const ajBaseCarregada = fetch('conhecimento/arquivos.txt', { cache:'no-store' })
+  .then(r => r.ok ? r.text() : Promise.reject())
+  .then(t => Promise.all(t.split(/\r?\n/).map(n => n.trim()).filter(n => n && !n.startsWith('#'))
+    .map(n => fetch('conhecimento/' + n, { cache:'no-store' }).then(r => r.ok ? r.text() : '').then(md => ajLerMd(n, md)).catch(() => []))))
+  .then(listas => { const base = listas.flat(); if(base.length){ AJ_BASE = base; document.querySelector('.ajc-nota').textContent = 'Assistente de demonstração: as respostas vêm da base de conhecimento do Suporte.'; } })
+  .catch(() => {});
+
+// Perguntas prontas: sempre 3, sorteadas entre os assuntos da base; trocam a cada resposta (sem repetir a última feita)
 function ajSortear(evitar){
-  const lista = AJ_PERGUNTAS.map(q => q[1]).filter(q => q !== evitar);
+  const lista = AJ_BASE.map(q => q.titulo).filter(q => q.endsWith('?') && q !== evitar);
   for(let i = lista.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [lista[i], lista[j]] = [lista[j], lista[i]]; }
   return lista.slice(0, 3);
 }
 function ajRenderSugestoes(evitar){
-  document.getElementById('ajcSugestoes').innerHTML = ajSortear(evitar).map(q => `<button type="button" data-pergunta="${q}">${q.replace(/SoftLiving/g, LOGO)}</button>`).join('');
+  document.getElementById('ajcSugestoes').innerHTML = ajSortear(evitar).map(q => `<button type="button" data-pergunta="${q.replace(/"/g, '&quot;')}">${q.replace(/SoftLiving/g, LOGO)}</button>`).join('');
 }
-const AJ_IGNORAR = new Set(['como', 'para', 'que', 'uma', 'meu', 'minha', 'meus', 'minhas', 'posso', 'qual', 'quais', 'onde', 'com', 'por', 'dos', 'das', 'nos', 'nas', 'sao', 'esta', 'isso', 'voce', 'tem', 'ter', 'sobre', 'quero', 'saber', 'fazer', 'faco']);
+const AJ_IGNORAR = new Set(['como', 'para', 'que', 'uma', 'meu', 'minha', 'meus', 'minhas', 'posso', 'qual', 'quais', 'onde', 'com', 'por', 'dos', 'das', 'nos', 'nas', 'sao', 'esta', 'isso', 'voce', 'tem', 'ter', 'sobre', 'quero', 'saber', 'fazer', 'faco', 'ser', 'the', 'mais', 'muito', 'pelo', 'pela']);
 const ajPalavras = t => semAcentoAj(t).replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(p => p.length > 2 && !AJ_IGNORAR.has(p))
   .map(p => p.replace(/(oes|aes|s)$/, ''));                          // plural simples: créditos = crédito, grupos = grupo
+// Nota: palavra no título do assunto ou em "Palavras" vale 2; no texto da resposta vale 1
 function ajResponder(texto){
-  const busca = ajPalavras(texto);
+  const busca = [...new Set(ajPalavras(texto))];
   let melhor = null, nota = 0;
-  AJ_PERGUNTAS.forEach(([, p, r]) => {
-    const naPergunta = new Set(ajPalavras(p)), naResposta = new Set(ajPalavras(r));
-    const n = busca.reduce((s, w) => s + (naPergunta.has(w) ? 2 : naResposta.has(w) ? 1 : 0), 0);
-    if(n > nota){ nota = n; melhor = [p, r]; }
+  AJ_BASE.forEach(item => {
+    const fortes = new Set(ajPalavras(item.titulo + ' ' + item.palavras)), fracas = new Set(ajPalavras(item.texto));
+    const n = busca.reduce((s, w) => s + (fortes.has(w) ? 2 : fracas.has(w) ? 1 : 0), 0);
+    if(n > nota){ nota = n; melhor = item; }
   });
-  if(melhor && nota >= 2) return `${melhor[1]}<span class="ajc-fonte">Da pergunta: “${melhor[0]}”</span>`;
+  if(melhor && nota >= 2) return `${melhor.html}<span class="ajc-fonte">Fonte: ${melhor.fonte} › “${melhor.titulo}”</span>`;
   return 'Não encontrei essa resposta por aqui. Você pode escrever para <b>suporte@softliving.com.br</b> ou usar o formulário “Fale com a gente”, que respondemos em até um dia útil.';
 }
 
@@ -112,6 +147,7 @@ function ajcPerguntar(texto){
   setTimeout(() => { digitando.remove(); ajcMensagem(ajResponder(texto), 'ia'); ajRenderSugestoes(texto); }, 700);
 }
 ajRenderSugestoes();
+ajBaseCarregada.then(() => ajRenderSugestoes());
 ajcMensagem('Olá, Rafael! Sou o assistente da SoftLiving. Pergunte o que quiser sobre créditos, grupos, conteúdos ou sua conta.', 'ia');
 document.getElementById('ajcForm').addEventListener('submit', ev => {
   ev.preventDefault();

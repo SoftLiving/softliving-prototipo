@@ -13,6 +13,8 @@ Abra `index.html` com dois cliques, ou pelo servidor de testes (`http://localhos
 ```
 index.html                  Tela Início (abertura com colagem, Explore por assunto, Últimas matérias,
                             Acontece nos grupos, patrocinadores apoiadores, newsletter)
+conhecimento/               base de conhecimento do assistente do Suporte: arquivos .md (um por tema, cada "## Assunto"
+                            vira uma resposta) listados em arquivos.txt. Ver conhecimento/LEIA-ME.md.
 institucional/              conhecer, como-funciona, beneficios, patrocinadores (novo visual).
                             Links para páginas institucionais usam data-site-link="<nome>" e urlSite() no layout.js
                             (SITES lista as que existem; Segurança ainda abre o Suporte)

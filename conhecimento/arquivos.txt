@@ -1,0 +1,7 @@
+sobre.md
+creditos.md
+conteudos-e-colunas.md
+grupos-e-amigos.md
+comunidades-e-estabelecimentos.md
+conta-e-privacidade.md
+contato.md
