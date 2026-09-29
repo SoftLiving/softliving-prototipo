@@ -34,7 +34,7 @@ function urlPagina(nome){
   const p = PAGINAS[nome];
   return p ? LAYOUT_ROOT + p.url : '#';
 }
-// Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre a Ajuda (Conta e privacidade).
+// Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre o Suporte (Conta e privacidade).
 const SITES = ['conhecer', 'como-funciona', 'beneficios', 'patrocinadores'];
 const urlSite = site => SITES.includes(site) ? `${LAYOUT_ROOT}institucional/${site}.html` : urlPagina('ajuda');
 
@@ -99,7 +99,7 @@ const MENU_SECOES = [
     { nome:'carteira', rotulo:'Carteira', icone:'carteira' },
     { nome:'indicacoes', rotulo:'Indicações', icone:'presente' },
     { nome:'perfil', rotulo:'Meu perfil', icone:'perfil' },
-    { nome:'ajuda', rotulo:'Ajuda', icone:'ajuda' },
+    { nome:'ajuda', rotulo:'Suporte', icone:'ajuda' },
   ]},
 ];
 const itemMenu = m => `<a href="${urlPagina(m.nome)}" data-page="${m.nome}" title="${m.rotulo}">${icone(m.icone)}<span class="lbl">${m.rotulo}</span>${m.aviso ? `<span class="tag">${m.aviso}</span>` : ''}</a>`;
@@ -196,7 +196,7 @@ const LAYOUT_RODAPE = `
       <div><h4>Comunidade</h4>
         <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${urlGrupo(12)}">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="${urlPagina('vitrine')}">Vitrines</a></div>
       <div><h4>Sua conta</h4>
-        <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('ajuda')}">Ajuda</a></div>
+        <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('ajuda')}">Suporte</a></div>
     </div>
     <!-- Linha própria para os logos dos parceiros, cada um com um título pequeno em cima -->
     <div class="flogos">
@@ -615,7 +615,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
     <nav class="crj-links">
       <a href="${urlPagina('perfil')}">${icone('perfil')}Meu perfil</a>
       <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${SALDO_BASE + lerBonusCreditos()} créditos</span></a>
-      <a href="${urlPagina('ajuda')}">${icone('ajuda')}Ajuda</a>
+      <a href="${urlPagina('ajuda')}">${icone('ajuda')}Suporte</a>
     </nav>
     <button type="button" class="cnj-sair">Sair da conta</button>`;
 }, e => {

@@ -15,7 +15,7 @@ index.html                  Tela Início (abertura com colagem, Explore por assu
                             Acontece nos grupos, patrocinadores apoiadores, newsletter)
 institucional/              conhecer, como-funciona, beneficios, patrocinadores (novo visual).
                             Links para páginas institucionais usam data-site-link="<nome>" e urlSite() no layout.js
-                            (SITES lista as que existem; Segurança ainda abre a Ajuda)
+                            (SITES lista as que existem; Segurança ainda abre o Suporte)
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
 assets/js/layout.js         Moldura comum: faixa de protótipo, aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
@@ -76,13 +76,13 @@ assets/img/                 Logos da FSB e da RB2
 | Minhas Comunidades (8 abas, `comunidades/`) | pronta para revisão |
 | Amigos (`amigos.html`, antiga Conexões) | pronta para revisão |
 | Carteira (`carteira.html`) | pronta para revisão |
-| Indicações, Meu perfil, Ajuda | prontas para revisão |
+| Indicações, Meu perfil, Suporte (ajuda.html) | prontas para revisão |
 | Modo simples (`simples.html`) | pronto para revisão |
 | Atividades (Curtidas, Comentários, Acompanhar, Salvos) | prontas para revisão |
 | Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
 | Institucionais: Conhecer, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
-| Institucional: Segurança | a fazer (por enquanto o link abre a Ajuda) |
+| Institucional: Segurança | a fazer (por enquanto o link abre o Suporte) |
 
 ## Coluna lateral da direita
 

@@ -75,7 +75,7 @@ function ajResponder(texto){
     if(n > nota){ nota = n; melhor = [p, r]; }
   });
   if(melhor && nota >= 2) return `${melhor[1]}<span class="ajc-fonte">Da pergunta: “${melhor[0]}”</span>`;
-  return 'Não encontrei essa resposta por aqui. Você pode escrever para <b>ajuda@softliving.com.br</b> ou usar o formulário “Fale com a gente”, que respondemos em até um dia útil.';
+  return 'Não encontrei essa resposta por aqui. Você pode escrever para <b>suporte@softliving.com.br</b> ou usar o formulário “Fale com a gente”, que respondemos em até um dia útil.';
 }
 
 const ajChat = document.querySelector('.aj-lateral');
