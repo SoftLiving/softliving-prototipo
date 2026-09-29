@@ -124,9 +124,9 @@ document.getElementById('ajcSugestoes').addEventListener('click', ev => {
   if(b) ajcPerguntar(b.dataset.pergunta);
 });
 
-// Celular e tablet (a coluna não cabe ao lado, abaixo de 1360px): o chat sobe para logo depois dos temas, antes das
+// Celular e tablet (a coluna não cabe ao lado, abaixo de 1200px): o chat sobe para logo depois dos temas, antes das
 // perguntas frequentes, em vez de ficar no fim da página. No computador volta para a coluna da direita.
-const ajLado = matchMedia('(min-width:1360px)');
+const ajLado = matchMedia('(min-width:1200px)');
 function posicionarChat(){
   if(ajLado.matches){ if(ajChat.parentElement !== document.querySelector('.corpo')) document.querySelector('.corpo').appendChild(ajChat); }
   else if(ajChat.previousElementSibling !== document.getElementById('ajTemas')) document.getElementById('ajTemas').after(ajChat);

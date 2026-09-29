@@ -241,8 +241,11 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .es-toast{ position:absolute; top:14px; right:14px; background:var(--green); color:#fff; font-size:12px; font-weight:700; padding:5px 11px; border-radius:999px; animation:esToast 1.8s ease forwards; pointer-events:none; }
 @keyframes esToast{ 0%{ opacity:0; transform:translateY(6px); } 15%,75%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateY(-6px); } }
 
+/* Notebooks (1200 a 1439px, como 1280 e 1366): as três colunas continuam (menu, conteúdo e lateral), com a lateral mais estreita */
+@media (min-width:1200px) and (max-width:1439px){ .lateral{ flex-basis:300px; padding:20px 20px 32px 20px; } }
 /* Sem espaço ao lado do conteúdo: a lateral desce para depois dele, em grade */
-@media (max-width:1359px){
+/* (abaixo de 1200px: tablets, tablets deitados e telas pequenas) */
+@media (max-width:1199px){
   .corpo{ flex-direction:column; }
   .corpo > .wrap{ flex:none; }
   .lateral{ flex:none; margin:0 24px 56px; border-radius:26px; padding:24px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); align-items:start; }
@@ -1063,7 +1066,7 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 }
 
 /* Ajuda: conteúdo e coluna da direita com o mesmo tamanho; a coluna vira o chat do assistente de IA */
-@media (min-width:1360px){ body[data-page="ajuda"] .corpo > .wrap, body[data-page="ajuda"] .aj-lateral{ flex:1 1 0; min-width:0; } }
+@media (min-width:1200px){ body[data-page="ajuda"] .corpo > .wrap, body[data-page="ajuda"] .aj-lateral{ flex:1 1 0; min-width:0; } }
 .aj-lateral{ padding:24px; }
 .aj-lateral > *{ max-width:none; }
 .ajc{ position:sticky; top:24px; display:flex; flex-direction:column; height:calc(100vh - 48px); /* a altura exata é ajustada pelo ajuda.js */ border-radius:24px; overflow:hidden;
@@ -1093,7 +1096,7 @@ a.me:hover{ background:rgba(255,255,255,.6); }
 .ajc-enviar .ic{ width:19px; height:19px; }
 .ajc-enviar:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 .ajc-nota{ margin:0; padding:0 18px 12px; font-size:11.5px; color:var(--muted); text-align:center; }
-@media (max-width:1359px){
+@media (max-width:1199px){
   .aj-lateral{ display:block; }
   .ajc{ position:static; height:600px; }
 }
