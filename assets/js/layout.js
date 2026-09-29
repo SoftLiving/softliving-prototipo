@@ -393,8 +393,17 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, deslize:null, ciclo:0 });
     // Setas: deslizam um item (animação suave); clicar de novo durante o deslize soma mais um item
     const passoItem = () => { const a = trilho.children[0], b = trilho.children[1]; if(!a || !b) return 0; return dir === 'h' ? b.offsetLeft - a.offsetLeft : b.offsetTop - a.offsetTop; };
+    // Destino: o começo do item seguinte (ou anterior). Os itens podem ter alturas diferentes (no celular, títulos de
+    // uma ou duas linhas), então o passo vem da posição de cada item e não de um tamanho fixo
+    const inicios = () => { const itens = [...trilho.children], o = dir === 'h' ? 'offsetLeft' : 'offsetTop'; return itens.map(e => e[o] - itens[0][o]); };
     const deslizar = s => {
-      const destino = (car.deslize ? car.deslize.para : car.pos) + s * passoItem();
+      let base = car.deslize ? car.deslize.para : car.pos;
+      if(s < 0 && base < 1 && car.ciclo){                  // no começo: pula para a mesma posição nas cópias, sem salto visível
+        base += car.ciclo; car.pos += car.ciclo;
+        if(car.deslize){ car.deslize.de += car.ciclo; car.deslize.para += car.ciclo; }
+      }
+      const pos = inicios();
+      const destino = s > 0 ? (pos.find(p => p > base + 1) ?? base + passoItem()) : ([...pos].reverse().find(p => p < base - 1) ?? base - passoItem());
       car.deslize = { de:car.pos, para:destino, inicio:performance.now() };
       if(!car.animando){ car.animando = true; requestAnimationFrame(t => animarCarrossel(car, t)); }
     };
