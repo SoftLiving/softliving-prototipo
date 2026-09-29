@@ -277,6 +277,25 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .tabs.folder{ gap:6px; margin-bottom:0; align-items:flex-end; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } /* uma linha só; rola para o lado se não couber */
 .tabs.folder button{ white-space:nowrap; flex:none; }
 .tabs.folder.mais-abas{ -webkit-mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); } /* há mais abas à direita */
+.tabs.folder.abas-antes{ -webkit-mask-image:linear-gradient(to left, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to left, #000 calc(100% - 64px), transparent); }
+.tabs.folder.mais-abas.abas-antes{ -webkit-mask-image:linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent); }
+/* Setas do fichário (layout.js): aparecem só quando há abas escondidas daquele lado; a da direita pisca até a primeira rolagem */
+.abas-rolar{ position:relative; }
+.abas-seta{ position:absolute; top:4px; z-index:3; width:34px; height:34px; border-radius:50%; display:none; place-items:center; padding:0; cursor:pointer; color:var(--navy);
+  background:rgba(255,255,255,.92); border:1px solid rgba(255,255,255,.95); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.abas-seta .ic{ width:16px; height:16px; }
+.abas-ant{ left:-4px; }
+.abas-ant .ic{ transform:rotate(180deg); }
+.abas-prox{ right:-4px; }
+.abas-rolar.tem-mais .abas-prox, .abas-rolar.tem-antes .abas-ant{ display:grid; }
+.abas-seta:hover{ background:#fff; transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); animation:none; }
+.abas-prox.piscando{ animation:abas-piscar 1.6s ease-in-out infinite; }
+@keyframes abas-piscar{
+  0%, 100%{ transform:translateX(0); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16), 0 0 0 0 rgba(31,85,25,.35); }
+  50%{ transform:translateX(4px); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16), 0 0 0 7px rgba(31,85,25,0); }
+}
+@media (prefers-reduced-motion:reduce){ .abas-prox.piscando{ animation:none; } }
 .tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 16px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }

@@ -709,9 +709,36 @@ function ajustarLogosEmTexto(){
     sig.classList.toggle('sig-light', contraste < 3);
   });
 }
-// Fichário que não cabe na largura: as abas rolam para o lado e a ponta direita esmaece enquanto houver mais abas
+// Fichário que não cabe na largura: as abas rolam para o lado, a ponta direita esmaece enquanto houver mais abas e
+// aparecem setas (a da direita pisca até a pessoa rolar as abas pela primeira vez, para mostrar que há mais abas)
+function prepararSetasAbas(t){
+  if(t.parentElement.classList.contains('abas-rolar')) return;
+  const caixa = document.createElement('div');
+  caixa.className = 'abas-rolar';
+  t.before(caixa);
+  caixa.append(t);
+  ['ant', 'prox'].forEach(lado => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = `abas-seta abas-${lado}` + (lado === 'prox' ? ' piscando' : '');
+    b.setAttribute('aria-label', lado === 'prox' ? 'Ver mais abas' : 'Voltar às primeiras abas');
+    b.tabIndex = -1;
+    b.innerHTML = icone('seta');
+    b.addEventListener('click', () => { t.scrollBy({ left:(lado === 'prox' ? 1 : -1) * t.clientWidth * .7, behavior:'smooth' }); setTimeout(marcarRolagemAbas, 450); });
+    caixa.append(b);
+  });
+}
 function marcarRolagemAbas(){
-  document.querySelectorAll('.tabs.folder').forEach(t => t.classList.toggle('mais-abas', t.scrollLeft + t.clientWidth < t.scrollWidth - 2));
+  document.querySelectorAll('.tabs.folder').forEach(t => {
+    prepararSetasAbas(t);
+    const caixa = t.parentElement, visivel = !t.hidden && t.clientWidth > 0;
+    const mais = visivel && t.scrollLeft + t.clientWidth < t.scrollWidth - 2, antes = visivel && t.scrollLeft > 2;
+    t.classList.toggle('mais-abas', mais);
+    t.classList.toggle('abas-antes', antes);
+    caixa.classList.toggle('tem-mais', mais);
+    caixa.classList.toggle('tem-antes', antes);
+    if(antes) caixa.querySelector('.abas-prox').classList.remove('piscando'); // já entendeu que rola: para de piscar
+  });
 }
 document.addEventListener('scroll', e => { if(e.target.classList && e.target.classList.contains('folder')) marcarRolagemAbas(); }, true);
 addEventListener('resize', marcarRolagemAbas);
