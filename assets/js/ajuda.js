@@ -122,6 +122,17 @@ document.getElementById('ajcSugestoes').addEventListener('click', ev => {
   if(b) ajcPerguntar(b.dataset.pergunta);
 });
 
+// Celular e tablet (a coluna não cabe ao lado, abaixo de 1360px): o chat sobe para logo depois do título, antes dos temas e
+// das perguntas frequentes, em vez de ficar no fim da página. No computador volta para a coluna da direita.
+const ajLado = matchMedia('(min-width:1360px)');
+function posicionarChat(){
+  if(ajLado.matches){ if(ajChat.parentElement !== document.querySelector('.corpo')) document.querySelector('.corpo').appendChild(ajChat); }
+  else if(ajChat.nextElementSibling !== document.getElementById('ajTemas')) document.getElementById('ajTemas').before(ajChat);
+  ajChat.classList.toggle('aj-no-topo', !ajLado.matches);
+}
+ajLado.addEventListener('change', () => { posicionarChat(); ajustarChat(); });
+posicionarChat();
+
 // Altura do chat: sempre cabe inteiro na tela (do cabeçalho do assistente até o campo e o botão de enviar), em qualquer
 // resolução. Com o chat ao lado do conteúdo, vai do topo dele até 24px acima do fim da janela; ao rolar a página ele
 // gruda a 24px do topo e cresce até ocupar a altura da janela. Com o chat embaixo do conteúdo, a altura vem do CSS.
