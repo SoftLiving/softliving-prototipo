@@ -1438,14 +1438,31 @@ body{ background:
 @media (max-width:640px){
   .lateral{ margin:0 16px 48px; padding:16px; grid-template-columns:minmax(0, 1fr); }
 }
-/* Curtidas, Salvos e Grupos no celular: capa mais baixa (deitada), para não ocupar a tela inteira */
+/* Curtidas, Salvos e Grupos no celular: modo lista (foto pequena à esquerda e texto ao lado, como os cartões das coleções
+   da Vitrine), em vez da capa grande */
 @media (max-width:640px){
-  .vcard.at-card, .grade .vcard-grupo{ aspect-ratio:4 / 3; }
-  .vcard.at-card .vc-blur, .grade .vcard-grupo .vc-blur{ height:85%; }
-  .vcard.at-card .vc-info, .grade .vcard-grupo .vc-info{ padding:14px 16px 14px; }
-  .vcard.at-card .vc-info h3, .grade .vcard-grupo .vc-info h3{ font-size:17px; margin:4px 0 6px; }
-  .vcard.at-card .vc-autor{ margin:-2px 0 10px; }
-  .grade .vcard-grupo .vc-desc{ margin:0 0 10px; -webkit-line-clamp:2; }
+  .grade:has(.at-card, .vcard-grupo){ gap:12px; }
+  .vcard.at-card, .grade .vcard-grupo{ aspect-ratio:auto; display:grid; grid-template-columns:96px minmax(0, 1fr); gap:14px; align-items:center;
+    padding:12px; border-radius:22px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+  .vcard.at-card:hover, .grade .vcard-grupo:hover{ background:#fff; }
+  .vcard.at-card > img, .grade .vcard-grupo > img{ position:static; width:96px; height:100%; min-height:104px; border-radius:16px; z-index:auto; }
+  .vcard.at-card:hover > img, .grade .vcard-grupo:hover > img{ transform:none; }
+  .vcard.at-card .vc-blur, .grade .vcard-grupo .vc-blur{ display:none; }
+  .vcard.at-card .vc-info, .grade .vcard-grupo .vc-info{ position:static; padding:0; color:var(--text); }
+  .vcard.at-card .vc-cat, .grade .vcard-grupo .vc-cat{ color:var(--green); opacity:1; padding-right:34px; }
+  .vcard.at-card .vc-info h3, .grade .vcard-grupo .vc-info h3{ color:var(--navy); text-shadow:none; font-size:17px; margin:4px 0 4px; padding-right:34px; }
+  .vcard.at-card .vc-autor{ color:var(--text-2); opacity:1; margin:0 0 10px; font-size:12.5px; }
+  .grade .vcard-grupo .vc-desc{ color:var(--text-2); opacity:1; margin:0 0 10px; -webkit-line-clamp:2; }
+  .vcard.at-card .vc-row, .grade .vcard-grupo .vc-row{ flex-wrap:wrap; gap:8px; } /* 320px: o botão desce se não couber */
+  .vcard.at-card .vc-chip, .grade .vcard-grupo .vc-chip{ color:var(--text-2); }
+  .vcard.at-card .vc-chip.premium{ color:#8a5a0e; }
+  .vcard.at-card .vc-btn, .grade .vcard-grupo .vc-btn{ padding:7px 13px; font-size:13px; border:1px solid var(--line); box-shadow:none; }
+  .grade .vcard-grupo .vc-sair{ color:var(--navy); background:rgba(1,53,101,.05); border-color:var(--line); padding:7px 12px; }
+  .vcard.at-card .at-acao, .vcard.at-card .fav{ top:10px; right:10px; width:32px; height:32px; }
+  /* selos do grupo (Grátis/Premium e novas) sobre a foto pequena, um embaixo do outro */
+  .grade .vcard-grupo .vc-topo{ top:18px; left:18px; flex-direction:column; align-items:flex-start; gap:4px; }
+  .grade .vcard-grupo .selo-vc{ font-size:10.5px; padding:3px 8px; }
+}
 }
 /* Botão "Saiba mais" do topo: só aparece quando o menu institucional não cabe (abaixo de 1420px) */
 .saiba-mais{ display:none; align-items:center; gap:4px; height:40px; padding:0 14px; border-radius:999px; border:1px solid var(--line); background:#fff; font:inherit; font-size:14px; font-weight:600; color:var(--navy); cursor:pointer; white-space:nowrap;
