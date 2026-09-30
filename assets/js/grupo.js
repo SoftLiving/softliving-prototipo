@@ -307,9 +307,7 @@ document.getElementById('gdTopo').addEventListener('click', ev => {
     alternarParticipacao(grupo, false);
     mostrarAviso(`Você saiu do ${grupo.t}`);
   } else if(ev.target.closest('#gdConvidar')){
-    const link = location.href.split('#')[0];
-    if(navigator.clipboard) navigator.clipboard.writeText(link).catch(() => {});
-    mostrarAviso('Link do grupo copiado. É só colar na conversa com seus amigos');
+    abrirCompartilhar({ titulo:grupo.t, texto:'Vem participar comigo do grupo', url:location.href.split('#')[0] });
     return;
   } else return;
   renderTudo();

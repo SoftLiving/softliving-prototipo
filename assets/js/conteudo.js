@@ -163,8 +163,7 @@ pagina.addEventListener('click', ev => {
     gravarSalvos(on ? [...l, c.t] : l.filter(x => x !== c.t));
     mostrarAviso(on ? 'Salvo para ler depois' : 'Removido dos salvos');
   } else if(d.compartilhar !== undefined){
-    if(navigator.clipboard) navigator.clipboard.writeText(location.href).catch(() => {});
-    mostrarAviso('Link copiado. É só colar na conversa');
+    abrirCompartilhar({ titulo:c.t, texto:'Achei que você ia gostar deste conteúdo da SoftLiving:', url:location.href.split('#')[0] });
     return;
   } else if(d.ouvir !== undefined){
     if(!('speechSynthesis' in window)){ mostrarAviso('Seu navegador não consegue ler o texto em voz alta'); return; }

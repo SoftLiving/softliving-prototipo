@@ -763,6 +763,59 @@ document.addEventListener('DOMContentLoaded', avisoLateral);
 
 // Aviso rápido no canto da tela
 let toastTimer;
+// Janela de compartilhar (leitura, colunista, grupo): WhatsApp, E-mail, Facebook, copiar o link e, no celular, o
+// compartilhar do próprio aparelho. abrirCompartilhar({ titulo, texto, url }); fecha no X, no fundo ou com Esc.
+const COMP_ICONES = {
+  whatsapp:'<path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/>',
+  email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',
+  facebook:'<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8z"/>',
+  link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  mais:'<circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/>',
+};
+function abrirCompartilhar({ titulo = document.title, texto = '', url = location.href } = {}){
+  let j = document.getElementById('compJanela');
+  if(!j){
+    j = document.createElement('div');
+    j.id = 'compJanela'; j.className = 'comp-fundo'; j.hidden = true;
+    document.body.appendChild(j);
+    j.addEventListener('click', ev => { if(ev.target === j || ev.target.closest('[data-comp-fechar]')) fecharCompartilhar(); });
+    document.addEventListener('keydown', ev => { if(ev.key === 'Escape' && !j.hidden) fecharCompartilhar(); });
+  }
+  const msg = `${texto ? texto + ' ' : ''}${titulo}`.trim();
+  const ic = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${COMP_ICONES[n]}</svg>`;
+  const opcoes = [
+    ['whatsapp', 'WhatsApp', `https://wa.me/?text=${encodeURIComponent(msg + '\n' + url)}`],
+    ['email', 'E-mail', `mailto:?subject=${encodeURIComponent(titulo)}&body=${encodeURIComponent(msg + '\n\n' + url)}`],
+    ['facebook', 'Facebook', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`],
+  ];
+  j.innerHTML = `
+    <div class="comp-caixa" role="dialog" aria-modal="true" aria-labelledby="compTitulo" tabindex="-1">
+      <button type="button" class="comp-fechar" data-comp-fechar aria-label="Fechar">✕</button>
+      <h2 id="compTitulo">Compartilhar</h2>
+      <p class="comp-o-que">${titulo.replace(/SoftLiving/g, LOGO)}</p>
+      <div class="comp-opcoes">
+        ${opcoes.map(([k, n, href]) => `<a class="comp-op comp-${k}" href="${href}" target="_blank" rel="noopener" data-comp-fechar>${ic(k)}<span>${n}</span></a>`).join('')}
+        <button type="button" class="comp-op comp-link" data-comp-copiar>${ic('link')}<span>Copiar link</span></button>
+        ${navigator.share ? `<button type="button" class="comp-op comp-mais" data-comp-nativo>${ic('mais')}<span>Mais opções</span></button>` : ''}
+      </div>
+      <div class="comp-campo"><input type="text" readonly value="${url}" aria-label="Link"><button type="button" class="btn" data-comp-copiar>Copiar</button></div>
+    </div>`;
+  j.querySelectorAll('[data-comp-copiar]').forEach(b => b.addEventListener('click', () => {
+    if(navigator.clipboard) navigator.clipboard.writeText(url).catch(() => {});
+    j.querySelector('.comp-campo input').select();
+    mostrarAviso('Link copiado. É só colar na conversa');
+  }));
+  const nativo = j.querySelector('[data-comp-nativo]');
+  if(nativo) nativo.addEventListener('click', () => { navigator.share({ title:titulo, text:msg, url }).catch(() => {}); fecharCompartilhar(); });
+  j.hidden = false;
+  document.body.classList.add('comp-aberta');
+  j.querySelector(".comp-caixa").focus();   // foco na janela (teclado: Tab passa pelas opções), sem destacar uma opção
+}
+function fecharCompartilhar(){
+  const j = document.getElementById('compJanela'); if(!j) return;
+  j.hidden = true; document.body.classList.remove('comp-aberta');
+}
+
 function mostrarAviso(texto){
   const t = document.getElementById('toast');
   t.textContent = texto;

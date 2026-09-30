@@ -96,7 +96,6 @@ document.getElementById('clPagina').addEventListener('click', ev => {
     mostrarAviso(on ? `Você agora acompanha ${col.nome}. Avisamos quando sair coluna nova` : `Você deixou de acompanhar ${col.nome}`);
     render();
   } else if(b.dataset.compartilhar !== undefined){
-    if(navigator.clipboard) navigator.clipboard.writeText(location.href).catch(() => {});
-    mostrarAviso('Link do colunista copiado. É só colar na conversa');
+    abrirCompartilhar({ titulo:`${col.nome}${col.coluna ? ' · ' + col.coluna : ''}`, texto:'Conheça as colunas de', url:location.href });
   }
 });
