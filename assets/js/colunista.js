@@ -66,8 +66,8 @@ function render(){
     ${anteriores.length ? `
     <section class="cl-sec">
       <div class="cl-arquivo-topo">
-        <div><h2 class="cl-titulo">Arquivo</h2><p class="cl-sub">${anteriores.length} ${anteriores.length === 1 ? 'coluna anterior' : 'colunas anteriores'} de ${col.publicadas} ${col.publicadas === 1 ? 'publicada' : 'publicadas'}</p></div>
-        <div class="cl-desbloqueie">${clIcone('cadeado')}<div><b>Desbloqueie o arquivo</b><span>1ª coluna: 8 créditos · demais: 2 créditos cada</span></div></div>
+        <div><h2 class="cl-titulo">Outras colunas</h2><p class="cl-sub">${anteriores.length} ${anteriores.length === 1 ? 'coluna anterior' : 'colunas anteriores'} de ${col.publicadas} ${col.publicadas === 1 ? 'publicada' : 'publicadas'}</p></div>
+        <div class="cl-desbloqueie">${clIcone('cadeado')}<div><b>Desbloqueie as outras colunas</b><span>1ª coluna: 8 créditos · demais: 2 créditos cada</span></div></div>
       </div>
       <div class="cl-grade">${anteriores.map(x => `
         <a href="${urlConteudo(x.t)}" class="vcard">
