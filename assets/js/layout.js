@@ -396,15 +396,23 @@ const fraseApoio = p => {
     const coluna = getComputedStyle(faixa).gridTemplateColumns.split(' ').length > 1 ? (faixa.clientWidth - logo.offsetWidth) / 2 - gap : faixa.clientWidth;
     const inteira = r.scrollWidth, limite = Math.max(120, coluna), linha = parseFloat(getComputedStyle(r).lineHeight);
     r.style.whiteSpace = '';
-    // Regra: sempre 2 linhas; nunca 1; no máximo 3 (só quando a coluna é estreita demais para 2).
+    // Regra: sempre exatamente 2 linhas, em qualquer resolução (nunca 1, nunca 3 ou mais).
     // Começa na metade da frase (garante pelo menos 2 linhas) e vai abrindo até caber em 2.
     r.style.fontSize = '';
     let largura = Math.ceil(inteira / 2);
     do { r.style.maxWidth = Math.min(largura, limite) + 'px'; largura += 6; }
     while(r.offsetHeight > linha * 2.5 && largura < limite);
-    // Se nem na largura toda coube em 3 linhas, a letra diminui um pouco até caber (mínimo de 11px)
+    // Se nem na largura toda coube em 2 linhas, a letra diminui aos poucos até caber (e a largura volta a ser a metade
+    // da frase no novo tamanho, para continuar em 2 linhas e não virar 1)
     let tamanho = parseFloat(getComputedStyle(r).fontSize);
-    while(r.offsetHeight > parseFloat(getComputedStyle(r).lineHeight) * 3.5 && tamanho > 11){ tamanho -= .5; r.style.fontSize = tamanho + 'px'; }
+    const linhas = () => Math.round(r.offsetHeight / parseFloat(getComputedStyle(r).lineHeight));
+    while(linhas() > 2 && tamanho > 9){
+      tamanho -= .5; r.style.fontSize = tamanho + 'px';
+      r.style.maxWidth = 'none'; r.style.whiteSpace = 'nowrap';
+      const nova = r.scrollWidth; r.style.whiteSpace = '';
+      let l = Math.ceil(nova / 2);
+      do { r.style.maxWidth = Math.min(l, limite) + 'px'; l += 6; } while(linhas() > 2 && l < limite);
+    }
   });
   duasLinhas();
   if(document.fonts) document.fonts.ready.then(duasLinhas);
