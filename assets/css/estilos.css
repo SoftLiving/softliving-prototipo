@@ -415,10 +415,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .apoio{ display:grid; grid-template-columns:minmax(0, 1fr) auto minmax(0, 1fr); align-items:center; gap:26px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; margin-bottom:72px; min-height:96px; }
 .apoio > img{ grid-column:2; } /* logo no centro exato da faixa; a frase fica à esquerda dele */
 .apoio-rotulo{ grid-column:1; justify-self:end; font-size:13.5px; line-height:1.5; color:#a8a194; letter-spacing:.01em; text-align:right; text-wrap:balance; } /* frase sorteada; a largura vem do layout.js (sempre 2 linhas iguais) */
-@media (max-width:900px){ /* celular e tablet: frase centralizada acima do logo */
+@media (max-width:900px){ /* celular e tablet: logo primeiro e a frase centralizada abaixo dele */
   .apoio{ grid-template-columns:minmax(0, 1fr); gap:14px; justify-items:center; }
-  .apoio > img{ grid-column:1; }
-  .apoio-rotulo{ justify-self:center; text-align:center; }
+  .apoio > img{ grid-column:1; grid-row:1; }
+  .apoio-rotulo{ grid-row:2; justify-self:center; text-align:center; }
 }
 .apoio-rotulo .sig .soft, .apoio-rotulo .sig .living{ color:inherit !important; } /* na faixa de apoio, o logo em texto fica no mesmo tom da frase e do logo do apoiador */
 .apoio img{ width:auto; max-width:60vw; filter:grayscale(1) sepia(.35) opacity(.4); } /* tom sobre tom: logo (fundo transparente) em cinza-creme */
