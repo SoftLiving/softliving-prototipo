@@ -2,7 +2,7 @@
 // Usa CONTEUDOS (conteudos-dados.js), GRUPOS (grupos-dados.js) e fotoUrl/urlPagina/mostrarAviso (layout.js).
 
 // Sem tempo de leitura e sem data de publicação em nenhum lugar (pedido do usuário)
-const ITENS = CONTEUDOS;
+const ITENS = embaralhar(CONTEUDOS);   // Explore por assunto: ordem sorteada a cada carregamento
 
 // Assuntos: rótulo curto do filtro → categoria dos dados
 const ASSUNTOS = [
@@ -55,25 +55,25 @@ document.querySelector('main').addEventListener('click', e => {
 });
 mostrarAssunto(0);
 
-// Últimas matérias: a matéria em destaque e, ao lado, as outras num carrossel vertical (4 por vez)
-const destaque = ITENS.find(c => c.destaque);
-const ordemLista = [1, 12, 7, 2];
+// Últimas matérias: a matéria em destaque e, ao lado, as outras num carrossel vertical (4 por vez).
+// Sorteio próprio (diferente do Explore por assunto), a cada carregamento: o primeiro sorteado vira o destaque
+const ULTIMAS = embaralhar(CONTEUDOS);
+const destaque = ULTIMAS[0];
 document.getElementById('lead').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
   <div class="meta"><span>${destaque.a}</span></div>`;
-document.getElementById('list').innerHTML = [...ordemLista.map(i => ITENS[i]), ...ITENS.filter((c, i) => c !== destaque && !ordemLista.includes(i))].map(c => `
+document.getElementById('list').innerHTML = ULTIMAS.slice(1).map(c => `
   <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
     <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
 ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
-// Acontece nos grupos: carrossel com todos os grupos (3 por vez), começando pelos três em destaque
+// Acontece nos grupos: carrossel com todos os grupos (3 por vez), em ordem sorteada a cada carregamento
 // (a página interna do grupo está em construção: por enquanto abrem Grupos com o grupo destacado)
-const primeirosGrupos = ['Clube do Vinho', 'Yoga & Meditação', 'Clube do Livro'].map(nome => GRUPOS.find(x => x.t === nome));
-document.getElementById('groupList').innerHTML = [...primeirosGrupos, ...GRUPOS.filter(g => !primeirosGrupos.includes(g))].map(g => {
+document.getElementById('groupList').innerHTML = embaralhar(GRUPOS).map(g => {
   const n = GRUPOS.indexOf(g);
   return `
   <a href="${urlGrupo(n)}" class="vcard">
@@ -100,8 +100,8 @@ document.getElementById('colPrincipal').innerHTML = `
   <span class="cat">Coluna do dia · ${rotuloColuna(colDoDia)}</span>
   <h3>${ultimaDoDia.t}</h3><p>${colDoDia.bio.split('. ')[0]}.</p>
   <div class="meta"><span>${colDoDia.nome}</span><i></i><span>${colDoDia.categoria}</span></div>`;
-const primeirasColunas = ['Aos patrocinadores do SoftLiving', 'O luxo de hoje é outra coisa', 'A Coragem de Mudar de Direção', 'Meu primeiro agente de IA'].map(t => TODAS_COLUNAS().find(c => c.t === t));
-document.getElementById('colLista').innerHTML = [...primeirasColunas, ...TODAS_COLUNAS().filter(c => c !== ultimaDoDia && !primeirasColunas.includes(c))]
+// as outras colunas em ordem sorteada a cada carregamento (a coluna do dia continua fixa)
+document.getElementById('colLista').innerHTML = embaralhar(TODAS_COLUNAS().filter(c => c !== ultimaDoDia))
   .map(c => {
     const col = colunistaDe(c);
     return `
