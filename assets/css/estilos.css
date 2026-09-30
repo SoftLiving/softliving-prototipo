@@ -1435,7 +1435,7 @@ body{ background:
 @media (max-width:640px){ .nt-barra .btn{ width:100%; justify-content:center; margin-bottom:16px; } }
 
 /* ===== Janela do sino (notificações resumidas, no topo de todas as páginas) ===== */
-.top{ position:relative; z-index:40; } /* a janela do sino fica por cima do conteúdo */
+.top{ position:relative; z-index:45; } /* as janelas do topo (sino, créditos, conta, entrar, saiba mais) ficam por cima de todo o conteúdo, inclusive da faixa de boxes de Minhas Comunidades (40); abaixo só da faixa de protótipo (50) */
 .tools{ position:relative; }
 .janela-topo, .nt-janela{ position:absolute; top:calc(100% + 12px); right:0; z-index:60; width:380px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden;
   background:rgba(255,255,255,.82); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), 0 18px 44px rgba(1,53,101,.16);
