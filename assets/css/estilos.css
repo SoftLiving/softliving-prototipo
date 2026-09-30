@@ -736,6 +736,10 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 /* Caixa branca: destaca um trecho inteiro sobre o fundo creme (Conhecer: carteira de créditos + patrocinadores) */
 .caixa-branca{ background:#fff; border-radius:30px; padding:56px; }
 .caixa-branca .panel.off{ background:#f6f5f2; border-color:#eeebe5; }
+/* Comparação sem caixas (Quem somos, O que nos move): só as etiquetas, títulos e textos, alinhados ao título da seção */
+:root .contrast.sem-caixa .panel{ background:none; border:none; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; border-radius:0; padding:0; }
+.contrast.sem-caixa{ gap:48px; }
+.contrast.sem-caixa .panel.on .tag{ background:var(--mint); } /* sem a caixa verde, a etiqueta JOMO ganha o verde-claro */
 .caixa-branca .band{ margin-top:40px; }
 .caixa-branca .inst-head:not(:first-child){ margin-top:64px; } /* segundo título dentro da mesma caixa */
 /* Itens com ícone em cartões de borda fina (Conhecer: Por que é diferente) */
