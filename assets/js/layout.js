@@ -669,6 +669,13 @@ function tituloDoFav(fav){
   return h ? h.textContent.trim() : '';
 }
 function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
+// Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada
+// carregamento da página (a ordem se mantém enquanto a pessoa troca abas e filtros)
+function embaralhar(lista){
+  const a = [...lista];
+  for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
 function alternarSalvo(fav){
   const t = tituloDoFav(fav), l = lerSalvos(), salvo = !l.includes(t);
   gravarSalvos(salvo ? [...l, t] : l.filter(x => x !== t));

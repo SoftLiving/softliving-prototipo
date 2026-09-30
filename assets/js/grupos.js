@@ -3,6 +3,7 @@
 // (ainda em construção: por enquanto volta para esta página com o grupo destacado). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
 
 const grEstado = { tipo:'todos' };
+const GR_ORDEM = embaralhar(GRUPOS.map((g, i) => i));   // ordem sorteada a cada carregamento
 
 function renderGrupos(){
   const nPart = GRUPOS.filter(g => g.participando).length;
@@ -10,7 +11,7 @@ function renderGrupos(){
   const tipos = [['todos', 'Todos', GRUPOS.length], ['participando', 'Participando', nPart], ['disponiveis', 'Disponíveis', GRUPOS.length - nPart]];
   document.getElementById('grTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === grEstado.tipo ? 'on' : ''}" aria-selected="${k === grEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
 
-  const lista = GRUPOS.map((g, i) => ({ ...g, i })).filter(g => grEstado.tipo === 'todos' || (grEstado.tipo === 'participando') === g.participando);
+  const lista = GR_ORDEM.map(i => ({ ...GRUPOS[i], i })).filter(g => grEstado.tipo === 'todos' || (grEstado.tipo === 'participando') === g.participando);
   document.getElementById('grGrade').innerHTML = lista.map(g => `
     <a href="${urlGrupo(g.i)}" class="vcard vcard-grupo">
       <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>

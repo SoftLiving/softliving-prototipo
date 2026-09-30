@@ -27,7 +27,7 @@ document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
   <a href="#" class="vt-cat"><img src="${fotoUrl(f, 200)}" alt=""><span>${c}</span></a>`).join('');
 
 // Em destaque: cartão vertical com foto, logo, bairro e benefício
-document.getElementById('vtDestaques').innerHTML = ESTABELECIMENTOS.slice(0, 8).map(e => `
+document.getElementById('vtDestaques').innerHTML = embaralhar(ESTABELECIMENTOS).slice(0, 8).map(e => `   // 8 sorteados a cada carregamento
   <a href="${urlEstabelecimento(e)}" class="vcard vt-card">
     <img src="${fotoUrl(e.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
     <div class="vc-info">
@@ -41,13 +41,13 @@ document.getElementById('vtDestaques').innerHTML = ESTABELECIMENTOS.slice(0, 8).
 ativarCarrossel(document.getElementById('vtDestaques'), 'h');
 
 // Coleções: alternam o lado da foto
-document.getElementById('vtColecoes').innerHTML = COLECOES.map((c, i) => `
+document.getElementById('vtColecoes').innerHTML = embaralhar(COLECOES).map((c, i) => `
   <article class="vt-colecao${i % 2 ? ' invertida' : ''}">
     <div class="vt-col-capa" style="background-image:url('${fotoUrl(c.foto, 900)}')">
       <div><p class="kicker">Coleção</p><h2>${c.t}</h2><p>${c.d}</p></div>
     </div>
     <div class="vt-col-lista">
-      ${c.itens.map(est).map(e => `
+      ${embaralhar(c.itens).map(est).map(e => `
         <a href="${urlEstabelecimento(e)}" class="vt-mini">
           <img src="${fotoUrl(e.foto, 300)}" alt="" loading="lazy">
           <div><span class="vt-mini-cat">${e.cat} · ${e.bairro}</span><h3>${e.n}</h3><p>${e.d}</p></div>
@@ -55,7 +55,7 @@ document.getElementById('vtColecoes').innerHTML = COLECOES.map((c, i) => `
     </div>
   </article>`).join('');
 
-document.getElementById('vtRecomendas').innerHTML = RECOMENDAS.map(r => { const e = est(r.e); return `
+document.getElementById('vtRecomendas').innerHTML = embaralhar(RECOMENDAS).map(r => { const e = est(r.e); return `
   <a href="${urlEstabelecimento(e)}" class="vt-reco">
     <div class="vt-reco-foto" style="background-image:url('${fotoUrl(e.foto, 600)}')">${monograma(e)}</div>
     <div class="vt-reco-txt">

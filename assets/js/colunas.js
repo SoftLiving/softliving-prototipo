@@ -6,6 +6,7 @@
 const comLogo = (texto, claro) => texto.replace('SoftLiving', claro ? '<span class="sig sig-fixo sig-light"><span class="soft">Soft</span><span class="living">Living</span></span>' : LOGO);
 const avatarDe = col => `<span class="av-col" style="background:${col.cor}">${col.sigla}</span>`;
 const colunistaDe = c => COLUNISTAS.find(col => c.a.startsWith(col.nome));
+const COL_ORDEM = embaralhar(TODAS_COLUNAS());   // colunas em destaque: ordem sorteada a cada carregamento
 const colunaPorTitulo = t => TODAS_COLUNAS().find(c => c.t === t);
 const colEstado = { autor:null, categoria:'Todos' };
 const totalPublicadas = COLUNISTAS.reduce((s, col) => s + col.publicadas, 0);
@@ -28,7 +29,7 @@ document.getElementById('colDia').innerHTML = `
   <div class="cd-sugestoes">
     <span class="cd-sug-titulo">Mais colunas para você</span>
     <div class="cd-sug-lista">
-      ${[...SUGESTOES_DO_DIA.map(colunaPorTitulo), ...TODAS_COLUNAS().filter(c => c.t !== COLUNA_DO_DIA.ultima && !SUGESTOES_DO_DIA.includes(c.t))].map(c => `
+      ${embaralhar(TODAS_COLUNAS().filter(c => c.t !== COLUNA_DO_DIA.ultima)).map(c => `
       <a href="#" class="cd-sug"><img class="foto" src="${fotoUrl(c.foto, 400)}" alt="" loading="lazy">
         <b>${comLogo(c.t)}</b><small>${colunistaDe(c).nome}</small></a>`).join('')}
     </div>
@@ -66,7 +67,7 @@ function renderColunas(){
 
   // Colunas em destaque (ou as do autor escolhido)
   const autor = colEstado.autor === null ? null : COLUNISTAS[colEstado.autor];
-  const lista = autor ? colunasDe(autor.nome) : TODAS_COLUNAS();
+  const lista = autor ? colunasDe(autor.nome) : COL_ORDEM;
   document.getElementById('colTitulo').textContent = autor ? `Colunas de ${autor.nome}` : 'Colunas em destaque';
   document.getElementById('colSub').textContent = autor ? (autor.coluna || autor.categoria) : 'A última coluna de cada autor é gratuita.';
   document.getElementById('colTodas').hidden = !autor;

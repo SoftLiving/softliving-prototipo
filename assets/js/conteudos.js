@@ -22,8 +22,9 @@ const ctBotao = c => c.badge === 'premium'
   : `<span class="vc-btn">Ler ${icone('seta')}</span>`;
 const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
 
-// Destaque: o conteúdo marcado como destaque nos dados
-const ctD = CONTEUDOS.find(c => c.destaque);
+// Ordem aleatória a cada carregamento; o destaque é o primeiro da ordem sorteada
+const CT_ORDEM = embaralhar(CONTEUDOS);
+const ctD = CT_ORDEM[0];
 document.getElementById('ctDestaque').innerHTML = `
   <div class="dl-foto foto"><img src="${fotoUrl(ctD.foto, 1000)}" alt=""></div>
   <div class="dl-texto">
@@ -41,7 +42,7 @@ function renderConteudos(){
 
   const cat = CT_ASSUNTOS[ctEstado.assunto][1];
   const q = ctEstado.busca.toLowerCase();
-  const porAssuntoEBusca = CONTEUDOS.filter(c => (!cat || c.cat === cat) && (!q || `${c.t} ${c.a} ${c.cat} ${c.e}`.toLowerCase().includes(q)));
+  const porAssuntoEBusca = CT_ORDEM.filter(c => (!cat || c.cat === cat) && (!q || `${c.t} ${c.a} ${c.cat} ${c.e}`.toLowerCase().includes(q)));
   const nGratis = porAssuntoEBusca.filter(c => c.badge === 'gratis').length;
   const tipos = [['todos', 'Todos', porAssuntoEBusca.length], ['gratis', 'Grátis', nGratis], ['premium', 'Premium', porAssuntoEBusca.length - nGratis]];
   document.getElementById('ctTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === ctEstado.tipo ? 'on' : ''}" aria-selected="${k === ctEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
