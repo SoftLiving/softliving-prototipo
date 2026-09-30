@@ -25,6 +25,7 @@ const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depoi
 // Ordem aleatória a cada carregamento; o destaque é o primeiro da ordem sorteada
 const CT_ORDEM = embaralhar(CONTEUDOS);
 const ctD = CT_ORDEM[0];
+document.getElementById('ctDestaque').href = urlConteudo(ctD.t);
 document.getElementById('ctDestaque').innerHTML = `
   <div class="dl-foto foto"><img src="${fotoUrl(ctD.foto, 1000)}" alt=""></div>
   <div class="dl-texto">
@@ -49,7 +50,7 @@ function renderConteudos(){
 
   const lista = porAssuntoEBusca.filter(c => ctEstado.tipo === 'todos' || (ctEstado.tipo === 'gratis' ? c.badge === 'gratis' : c.badge !== 'gratis'));
   document.getElementById('ctGrade').innerHTML = lista.map(c => `
-    <a href="#" class="vcard">
+    <a href="${urlConteudo(c.t)}" class="vcard">
       <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
       ${ctSalvar}
       <div class="vc-info">
@@ -72,11 +73,6 @@ document.getElementById('ctGrade').addEventListener('click', e => {
     mostrarAviso(salvo ? 'Salvo para ler depois' : 'Removido dos salvos');
     return;
   }
-  const destravar = e.target.closest('[data-destravar]');
-  if(destravar){
-    e.preventDefault();
-    const n = +destravar.dataset.destravar;
-    mostrarAviso(`Destravar este conteúdo usa ${n} ${n === 1 ? 'crédito' : 'créditos'} (demonstração)`);
-  }
+  // "Destravar" abre a leitura, onde fica o convite para destravar com créditos
 });
 renderConteudos();

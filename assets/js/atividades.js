@@ -38,7 +38,7 @@ const cartao = (c, acao) => `
       <span class="vc-cat">${AT_ASSUNTO[c.cat] || c.cat}</span>
       <h3>${c.t.replace('SoftLiving', LOGO)}</h3>
       <span class="vc-autor">${c.a.replace('SoftLiving', LOGO)}</span>
-      <div class="vc-row">${selo(c)}<a href="${urlPagina('conteudos')}" class="vc-btn">Ler ${icone('seta')}</a></div>
+      <div class="vc-row">${selo(c)}<a href="${urlConteudo(c.t)}" class="vc-btn">Ler ${icone('seta')}</a></div>
     </div>
   </article>`;
 const avatar = (nome, cor) => `<span class="av-col at-av" style="background:${cor || '#013565'}">${nome.split(' ').filter(p => p.length > 2).slice(0, 2).map(p => p[0]).join('')}</span>`;
@@ -62,7 +62,7 @@ const RENDER = {
   comentarios(){
     return `<div class="at-comentarios">${COMENTARIOS.map((m, i) => { const c = ctd(m.c); return `
       <article class="at-coment">
-        <a href="${urlPagina('conteudos')}" class="at-coment-alvo"><img src="${fotoUrl(c.foto, 200)}" alt="" loading="lazy"><span><small>Você comentou em</small><b>${c.t}</b></span></a>
+        <a href="${urlConteudo(c.t)}#ldComentarios" class="at-coment-alvo"><img src="${fotoUrl(c.foto, 200)}" alt="" loading="lazy"><span><small>Você comentou em</small><b>${c.t}</b></span></a>
         <blockquote>${m.txt}</blockquote>
         <div class="at-coment-meta"><span>${icone('curtidas')}${m.curt} curtidas</span><span>${icone('comentarios')}${m.resp.length ? `${m.resp.length} ${m.resp.length === 1 ? 'resposta' : 'respostas'}` : 'Nenhuma resposta ainda'}</span></div>
         ${m.resp.length ? `<div class="at-respostas">${m.resp.map(([quem, t]) => `<div class="at-resp">${avatar(quem, corDe(quem))}<p><b>${quem}</b>${t}</p></div>`).join('')}</div>` : ''}
@@ -79,7 +79,7 @@ const RENDER = {
         </div>`).join('')}</div>` : '<p class="vazio">Você não acompanha nenhum colunista.</p>'}
       <h2 class="at-sec">Conversas</h2>
       <div class="at-conversas">${CONVERSAS.map(v => { const c = ctd(v.c); return `
-        <a href="${urlPagina('conteudos')}" class="at-conversa">
+        <a href="${urlConteudo(c.t)}#ldComentarios" class="at-conversa">
           <img src="${fotoUrl(c.foto, 200)}" alt="" loading="lazy">
           <span><b>${c.t}</b><small>${v.pessoas} pessoas na conversa</small></span>
           ${v.novas ? `<span class="at-novas">${v.novas} ${v.novas === 1 ? 'nova' : 'novas'}</span>` : '<span class="at-emdia">Em dia</span>'}

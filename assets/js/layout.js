@@ -6,6 +6,8 @@
 const LAYOUT_ROOT = document.body.dataset.root || '';
 const LAYOUT_PAGE = document.body.dataset.page || '';
 const LAYOUT_SITE = document.body.dataset.site || '';
+// Página de leitura de um conteúdo ou coluna (conteudo.html?t=<título>)
+const urlConteudo = t => `${LAYOUT_ROOT}conteudo.html?t=${encodeURIComponent(t)}`;
 // Página interna de um grupo (grupo.html?g=<número em GRUPOS>)
 const urlGrupo = i => `${LAYOUT_ROOT}grupo.html?g=${i}`;
 
@@ -523,7 +525,7 @@ function animarCarrossel(car, agora){
 // O que foi lido fica guardado no navegador (v2NotifLidas); o número do menu e a bolinha do sino acompanham.
 const NOTIFICACOES = [
   { id:1, tipo:'colunas', av:{ sigla:'SM', cor:'#b0513a' }, curto:'<b>Sofia Martellini</b> publicou uma nova coluna',
-    txt:'<b>Sofia Martellini</b> publicou uma nova coluna: “Como o boom das canetas emagrecedoras está impactando a moda?”', acao:['Ler coluna', urlPagina('colunas')] },
+    txt:'<b>Sofia Martellini</b> publicou uma nova coluna: “Como o boom das canetas emagrecedoras está impactando a moda?”', acao:['Ler coluna', urlConteudo('Como o boom das canetas emagrecedoras está impactando a moda?')] },
   { id:2, tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
     txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', urlGrupo(1)] },
   { id:3, tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
@@ -531,7 +533,7 @@ const NOTIFICACOES = [
   { id:4, tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
     txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', urlGrupo(4)], lida:true },
   { id:5, tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
-    txt:'Novo conteúdo sobre um assunto que você segue: <b>“Na Suíça, um vinho para chamar de seu”</b>.', acao:['Ler', urlPagina('conteudos')], lida:true },
+    txt:'Novo conteúdo sobre um assunto que você segue: <b>“Na Suíça, um vinho para chamar de seu”</b>.', acao:['Ler', urlConteudo('Na Suíça, um vinho para chamar de seu')], lida:true },
   { id:6, tipo:'colunas', av:{ sigla:'ZR', cor:'#2f8578' }, curto:'<b>Zé Roberto</b> respondeu ao seu comentário',
     txt:'<b>Zé Roberto</b> respondeu ao seu comentário na coluna <b>Toque do Barão</b>.', acao:['Ver resposta', urlPagina('colunas')], lida:true },
   { id:7, tipo:'grupos', foto:'1510812431401-41d2bd2722f3', curto:'Convite para o <b>Clube do Vinho</b>',
@@ -728,7 +730,7 @@ function gravarSalvos(lista){ try { localStorage.setItem('v2Salvos', JSON.string
 function tituloDoFav(fav){
   const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, article') || fav.parentElement;
   const h = cartao && cartao.querySelector('h1, h2, h3');
-  return h ? h.textContent.trim() : '';
+  return h ? h.textContent.replace(/‑/g, '-').trim() : '';   // o texto.js troca o hífen por um que não quebra; aqui volta ao normal
 }
 function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
 // Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada

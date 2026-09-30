@@ -1,0 +1,112 @@
+/* ===== Leitura de um conteúdo ou coluna (conteudo.html + conteudo.js) =====
+   Cabeçalho e foto na largura da coluna do conteúdo; o texto numa coluna de leitura mais estreita (cerca de 70 caracteres
+   por linha), letra grande e ajustável, ações à esquerda do texto (no celular, numa faixa acima dele).
+   Efeito vidro e hover padrão (sobe 2px com sombra). Sem tempo de leitura nem data de publicação. */
+.ld{ padding:26px 0 40px; }
+.ld-voltar{ margin-bottom:22px; }
+.es-voltar{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:var(--muted); }
+.es-voltar .ic{ width:16px; height:16px; }
+.es-voltar:hover{ color:var(--green); }
+
+/* Cabeçalho */
+.ld-topo{ max-width:860px; margin-bottom:30px; }
+.ld-selos{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.ld-assunto, .ld-gratis, .ld-premium{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; border-radius:999px; padding:5px 12px; }
+.ld-assunto{ background:var(--mint); color:var(--green); }
+.ld-gratis{ background:rgba(255,255,255,.75); color:var(--navy); border:1px solid var(--line); }
+.ld-premium{ background:#fdf1dc; color:#8a5a0e; border:1px solid #f0ddac; }
+.ld-premium .ic{ width:13px; height:13px; }
+.ld-topo h1{ font-size:52px; line-height:1.08; font-weight:700; margin:0 0 16px; }
+.ld-resumo{ font-size:21px; line-height:1.55; color:var(--text-2); margin:0 0 24px; font-family:'Fraunces',serif; font-weight:500; }
+.ld-autor-linha{ display:flex; align-items:center; gap:12px; }
+.ld-av{ width:46px; height:46px; font-size:15px; border-width:2px; }
+.ld-av.grande{ width:72px; height:72px; font-size:22px; }
+.ld-autor-txt b{ display:block; font-size:15.5px; color:var(--navy); }
+.ld-autor-txt small{ font-size:13px; color:var(--muted); }
+
+/* Foto de capa */
+.ld-capa{ aspect-ratio:21 / 9; border-radius:30px; background-size:cover; background-position:center; box-shadow:0 18px 40px rgba(1,53,101,.14); margin-bottom:44px; }
+
+/* Corpo: ações + texto */
+.ld-corpo{ display:grid; grid-template-columns:130px minmax(0, 720px); gap:36px; justify-content:center; margin-bottom:56px; }
+.ld-acoes{ position:sticky; top:96px; align-self:start; display:flex; flex-direction:column; gap:8px; }
+.ld-acao{ display:flex; align-items:center; gap:9px; width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.9); background:rgba(255,255,255,.62);
+  box-shadow:var(--vidro-brilho); font:inherit; font-size:13.5px; font-weight:600; color:var(--navy); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.ld-acao .ic{ width:18px; height:18px; flex:none; }
+.ld-acao:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:#fff; }
+.ld-acao.on{ background:var(--mint); color:var(--green); }
+.ld-acao.on .ic{ fill:currentColor; }
+.ld-acao[data-curtir].on{ color:#c0392b; background:#fdecea; }
+.ld-letra{ display:flex; gap:6px; margin-top:4px; }
+.ld-letra button{ flex:1; padding:8px 0; border-radius:12px; border:1px solid var(--line); background:#fff; font:inherit; font-weight:700; color:var(--navy); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ld-letra button:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+
+.ld-texto{ --ld-escala:1; font-size:calc(18.5px * var(--ld-escala)); }
+.ld-texto p{ font-size:1em; line-height:1.85; color:var(--text); margin:0 0 1.2em; }
+.ld-texto h2{ font-size:1.5em; line-height:1.25; margin:1.6em 0 .6em; }
+.ld-texto > p:first-of-type + p::first-letter{ float:left; font-family:'Fraunces',serif; font-weight:700; font-size:3.4em; line-height:.9; margin:.08em .12em 0 0; color:var(--green); } /* capitular no primeiro parágrafo */
+.ld-demo{ font-size:13px !important; color:var(--muted) !important; margin-bottom:1.6em !important; padding:8px 12px; border-radius:12px; background:#fdf6e3; border:1px dashed #e3c77f; display:inline-block; }
+
+/* Convite para destravar (conteúdo premium) */
+.ld-trava{ position:relative; margin-top:-5em; padding:6em 0 0; text-align:center; background:linear-gradient(to bottom, rgba(250,248,244,0), var(--paper) 42%); }
+.ld-trava > *{ position:relative; }
+.ld-trava-ic{ display:inline-grid; place-items:center; width:54px; height:54px; border-radius:50%; background:#fdf1dc; color:#8a5a0e; margin-bottom:10px; }
+.ld-trava-ic .ic{ width:24px; height:24px; }
+.ld-trava h2{ margin:0 0 .4em !important; }
+.ld-trava p{ max-width:520px; margin:0 auto 1.2em !important; color:var(--text-2) !important; font-size:16px !important; }
+.ld-trava-link{ display:block; margin-top:12px; font-size:14px; font-weight:600; color:var(--green); text-decoration:underline; }
+
+/* Quem escreveu */
+.ld-quem{ display:flex; gap:20px; align-items:flex-start; max-width:886px; margin:0 auto 48px; padding:26px 28px; border-radius:26px;
+  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.ld-rotulo{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); }
+.ld-quem h2{ font-size:24px; margin:4px 0 2px; }
+.ld-quem-sub{ margin:0 0 10px; font-size:14px; font-weight:600; color:var(--muted); }
+.ld-quem p{ font-size:15px; line-height:1.65; color:var(--text-2); margin:0 0 14px; }
+
+/* Comentários */
+.ld-comentarios{ max-width:886px; margin:0 auto 56px; }
+.ld-comentarios > h2{ font-size:26px; margin-bottom:16px; }
+.ld-comentarios > h2 small{ font-family:'Inter',sans-serif; font-size:15px; color:var(--muted); font-weight:600; }
+.ld-comentar{ display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
+.ld-comentar textarea{ flex:1; min-width:0; min-height:48px; padding:12px 14px; border-radius:16px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:15px; resize:vertical; }
+.ld-enviar{ width:48px; height:48px; flex:none; border-radius:50%; border:none; background:var(--green); color:#fff; display:grid; place-items:center; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ld-enviar .ic{ width:19px; height:19px; }
+.ld-enviar:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.ld-comentario{ display:flex; gap:12px; padding:16px 0; }
+.ld-comentario + .ld-comentario{ border-top:1px solid var(--line); }
+.ld-comentario > div{ flex:1; min-width:0; }
+.ld-comentario b{ font-size:14.5px; color:var(--navy); }
+.ld-comentario b small{ color:var(--muted); font-weight:500; }
+.ld-comentario p{ margin:3px 0 0; font-size:15px; line-height:1.6; color:var(--text); }
+.ld-curtir-com{ display:inline-flex; align-items:center; gap:5px; margin-top:6px; padding:4px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; color:var(--muted);
+  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, color .15s ease; }
+.ld-curtir-com .ic{ width:14px; height:14px; }
+.ld-curtir-com:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); color:#c0392b; }
+.ld-curtir-com.on{ color:#c0392b; border-color:#f3c4bd; }
+.ld-curtir-com.on .ic{ fill:currentColor; }
+
+/* Continue lendo */
+.ld-mais > h2{ font-size:30px; margin-bottom:18px; }
+.ld-mais-grade{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:22px; }
+
+/* Coluna do conteúdo estreita (notebook com a coluna da direita, tablet e celular) */
+@container (max-width:900px){
+  .ld-corpo{ grid-template-columns:minmax(0, 1fr); gap:18px; }
+  .ld-acoes{ position:static; flex-direction:row; flex-wrap:wrap; }
+  .ld-acao{ width:auto; }
+  .ld-letra{ margin:0 0 0 auto; }
+  .ld-letra button{ width:44px; }
+}
+@media (max-width:640px){
+  .ld-topo h1{ font-size:34px; }
+  .ld-resumo{ font-size:18px; }
+  .ld-capa{ aspect-ratio:16 / 10; border-radius:22px; margin-bottom:26px; }
+  .ld-acao span{ display:none; }                  /* no celular, só os ícones */
+  .ld-acao{ padding:10px; }
+  .ld-texto{ font-size:calc(17.5px * var(--ld-escala)); }
+  .ld-quem{ flex-direction:column; padding:20px; }
+  .ld-mais-grade{ grid-template-columns:minmax(0, 1fr); }
+  .ld-mais-grade .vcard{ aspect-ratio:4 / 3; }
+}
+@media (min-width:641px) and (max-width:980px){ .ld-mais-grade{ grid-template-columns:repeat(2, minmax(0, 1fr)); } .ld-mais-grade .vcard:nth-child(3){ display:none; } }

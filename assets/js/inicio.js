@@ -28,7 +28,7 @@ function mostrarAssunto(i){
   const cat = ASSUNTOS[i][1];
   const lista = ITENS.filter(c => !cat || c.cat === cat);   // todos do assunto: o carrossel mostra 4 por vez
   document.getElementById('cards').innerHTML = lista.map(c => `
-    <a href="#" class="vcard">
+    <a href="${urlConteudo(c.t)}" class="vcard">
       <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
       ${botaoSalvar}
       <div class="vc-info">
@@ -59,13 +59,14 @@ mostrarAssunto(0);
 // Sorteio próprio (diferente do Explore por assunto), a cada carregamento: o primeiro sorteado vira o destaque
 const ULTIMAS = embaralhar(CONTEUDOS);
 const destaque = ULTIMAS[0];
+document.getElementById('lead').href = urlConteudo(destaque.t);
 document.getElementById('lead').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
   <div class="meta"><span>${destaque.a}</span></div>`;
 document.getElementById('list').innerHTML = ULTIMAS.slice(1).map(c => `
-  <a href="#" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
+  <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
     <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
 ativarCarrossel(document.getElementById('list'), 'v');
@@ -95,6 +96,7 @@ const colunistaDe = c => COLUNISTAS.find(col => c.a.startsWith(col.nome));
 const rotuloColuna = col => col.coluna ? comLogo(col.coluna) : col.categoria;
 const colDoDia = COLUNISTAS.find(col => col.nome === COLUNA_DO_DIA.colunista);
 const ultimaDoDia = TODAS_COLUNAS().find(c => c.t === COLUNA_DO_DIA.ultima);
+document.getElementById('colPrincipal').href = urlConteudo(ultimaDoDia.t);
 document.getElementById('colPrincipal').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(ultimaDoDia.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">Coluna do dia · ${rotuloColuna(colDoDia)}</span>
@@ -105,7 +107,7 @@ document.getElementById('colLista').innerHTML = embaralhar(TODAS_COLUNAS().filte
   .map(c => {
     const col = colunistaDe(c);
     return `
-  <a href="colunas.html" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
+  <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${rotuloColuna(col)}</span><h3>${comLogo(c.t)}</h3>
     <div class="meta"><span>${col.nome}</span></div></div></a>`;
   }).join('');

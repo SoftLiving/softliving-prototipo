@@ -15,7 +15,7 @@ const totalPublicadas = COLUNISTAS.reduce((s, col) => s + col.publicadas, 0);
 const autorDia = COLUNISTAS.find(col => col.nome === COLUNA_DO_DIA.colunista);
 const ultimaDia = colunaPorTitulo(COLUNA_DO_DIA.ultima);
 document.getElementById('colDia').innerHTML = `
-  <a href="#" class="cd-topo">
+  <a href="${urlConteudo(ultimaDia.t)}" class="cd-topo">
     <div class="dl-foto foto"><img src="${fotoUrl(ultimaDia.foto, 1000)}" alt=""></div>
     <div class="dl-texto">
       <span class="cd-selos"><span class="kicker">Coluna do dia</span></span>
@@ -30,7 +30,7 @@ document.getElementById('colDia').innerHTML = `
     <span class="cd-sug-titulo">Mais colunas para você</span>
     <div class="cd-sug-lista">
       ${embaralhar(TODAS_COLUNAS().filter(c => c.t !== COLUNA_DO_DIA.ultima)).map(c => `
-      <a href="#" class="cd-sug"><img class="foto" src="${fotoUrl(c.foto, 400)}" alt="" loading="lazy">
+      <a href="${urlConteudo(c.t)}" class="cd-sug"><img class="foto" src="${fotoUrl(c.foto, 400)}" alt="" loading="lazy">
         <b>${comLogo(c.t)}</b><small>${colunistaDe(c).nome}</small></a>`).join('')}
     </div>
   </div>`;
@@ -74,7 +74,7 @@ function renderColunas(){
   document.getElementById('colGrade').innerHTML = lista.map(c => {
     const col = colunistaDe(c);
     return `
-    <a href="#" class="vcard">
+    <a href="${urlConteudo(c.t)}" class="vcard">
       <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
       <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
       <div class="vc-info">

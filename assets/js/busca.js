@@ -47,7 +47,7 @@ const resConteudo = (c, p) => {
   const col = colunistaDe(c);
   const rotulo = col ? (col.coluna || col.aba) : (BS_ASSUNTOS.find(a => a[1] === c.cat) || [c.cat])[0];
   return `
-  <a href="${col ? urlPagina('colunas') : '#'}" class="item res-item">
+  <a href="${urlConteudo(c.t)}" class="item res-item">
     <img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
     <div><span class="cat">${col ? 'Coluna · ' : ''}${destacar(rotulo, p)}</span><h3>${destacar(c.t, p)}</h3>
     ${c.e ? `<p>${destacar(c.e, p)}</p>` : ''}<div class="meta"><span>${destacar(c.a, p)}</span><i></i><span>${c.badge === 'premium' ? `${c.credits} crédito` : 'Grátis'}</span></div></div></a>`;
