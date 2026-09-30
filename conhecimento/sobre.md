@@ -7,7 +7,7 @@ A SoftLiving é um portal de conteúdo e comunidades feito para uma vida melhor.
 
 - lê conteúdos e colunas de especialistas sobre saúde, casa, viagens, tecnologia e bem-estar;
 - participa de grupos e encontra pessoas com os mesmos interesses;
-- acessa suas comunidades (empresa, condomínio, clube) e os benefícios dos estabelecimentos parceiros.
+- acessa suas comunidades (empresa, condomínio, clube, entre outras) e os benefícios dos estabelecimentos parceiros.
 
 ## A SoftLiving tem anúncios?
 Palavras: propaganda, propagandas, publicidade, anunciante, patrocinador, patrocínio, comercial

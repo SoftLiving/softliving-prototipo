@@ -702,7 +702,7 @@ const SAIBA_MAIS = [
   ['quem-somos', 'Quem somos', 'Propósito, missão, visão e valores'],
   ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
   ['beneficios', 'Benefícios', 'O que você ganha como membro'],
-  ['empresas-e-grupos', 'Empresas e grupos', 'Para empresas, condomínios, clubes e NR-1'],
+  ['empresas-e-grupos', 'Empresas e grupos', 'Para empresas e todo tipo de grupo, e a NR-1'],
   ['seguranca', 'Segurança', 'Privacidade e cuidado com seus dados'],
   ['patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
 ];

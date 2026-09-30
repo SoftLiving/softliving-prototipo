@@ -20,7 +20,7 @@ const AJ_PERGUNTAS = [
   ['grupos', 'Como adiciono amigos?', 'Na página Amigos, veja as sugestões de pessoas dos seus grupos e toque em Adicionar. Quando a pessoa aceitar, vocês passam a ser amigos.'],
   ['conteudos', 'Por que alguns conteúdos usam créditos?', 'Para valorizar os especialistas escolhidos pela nossa curadoria, sem publicidade interrompendo a leitura. Você sempre sabe antes o que é grátis e o que usa créditos.'],
   ['conteudos', 'Como salvo um conteúdo para ler depois?', 'Toque no marcador que aparece no canto do conteúdo. Os salvos ficam em Atividades, no menu.'],
-  ['comunidades', 'O que é Minhas Comunidades?', 'O espaço das comunidades de que você faz parte, como sua empresa, seu condomínio ou seu clube, com conteúdos, serviços e grupos só para os membros de cada uma.'],
+  ['comunidades', 'O que é Minhas Comunidades?', 'O espaço das comunidades de que você faz parte, como sua empresa, seu condomínio ou seu clube, entre outras, com conteúdos, serviços e grupos só para os membros de cada uma.'],
   ['comunidades', 'Os conteúdos da minha comunidade são pagos?', 'Não. Conteúdo publicado pela sua comunidade é sempre grátis para os membros.'],
   ['conta', 'Como altero meus dados?', 'Em Meu perfil você edita o Sobre mim, seus interesses e quem pode ver seu perfil.'],
   ['conta', 'Esqueci minha senha. E agora?', 'Na tela de entrada, toque em Esqueci minha senha. Enviamos um link para o seu e-mail para você criar uma nova.'],

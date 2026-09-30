@@ -4,7 +4,7 @@
 Palavras: comunidade, minha empresa, condomínio, clube, faculdade, academia
 
 É o espaço das comunidades de que você faz parte, como sua empresa, seu condomínio,
-seu clube, sua faculdade ou sua academia. Cada comunidade tem conteúdos, serviços,
+seu clube, sua faculdade ou sua academia, entre outras. Cada comunidade tem conteúdos, serviços,
 grupos e avisos só para os seus membros.
 
 ## Os conteúdos da minha comunidade são pagos?
@@ -16,7 +16,7 @@ Não. Conteúdo publicado pela sua comunidade é **sempre grátis** para os memb
 Palavras: diferença, loja, restaurante, hotel, vitrine, aberto ao público
 
 - **Comunidades** são fechadas: só participam os membros (por exemplo, os colaboradores de uma empresa ou os moradores de um condomínio).
-- **Estabelecimentos** são abertos ao público: lojas, restaurantes, hotéis, clínicas, spas, pet shops e outros serviços. Eles aparecem em **Vitrines**.
+- **Estabelecimentos** são abertos ao público: lojas, restaurantes, hotéis, clínicas, spas e pet shops, entre outros. Eles aparecem em **Vitrines**.
 
 Os dois podem aparecer em Minhas Comunidades, na lista "Trocar por".
 
