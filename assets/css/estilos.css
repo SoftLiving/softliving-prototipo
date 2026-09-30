@@ -413,7 +413,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 
 /* Patrocinador apoiador entre os conteúdos (sorteado no layout.js): discreto, logo em tom sobre tom */
 .apoio{ display:flex; align-items:center; justify-content:center; gap:26px; flex-wrap:wrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:26px 0; margin-bottom:72px; min-height:96px; }
-.apoio-rotulo{ font-size:12px; color:#a8a194; letter-spacing:.02em; }
+.apoio-rotulo{ max-width:440px; font-size:13.5px; line-height:1.5; color:#a8a194; letter-spacing:.01em; text-align:right; text-wrap:balance; } /* frase sorteada sobre o apoio da marca */
+@media (max-width:640px){ .apoio-rotulo{ text-align:center; } }
 .apoio img{ width:auto; max-width:60vw; filter:grayscale(1) sepia(.35) opacity(.4); } /* tom sobre tom: logo (fundo transparente) em cinza-creme */
 
 /* Faixa azul-marinho lisa, sem foto (newsletter da Início e fechamento das institucionais) */

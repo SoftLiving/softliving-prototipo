@@ -342,11 +342,40 @@ document.querySelectorAll('.hl').forEach(hl => hl.insertAdjacentHTML('beforeend'
 // a cada visita. O logo aparece em tom sobre tom (discreto, na cor do fundo) pelo CSS.
 // altura: ajuste fino para os três logos parecerem do mesmo tamanho.
 const LOGOS_VERSAO = 2; // logos com fundo transparente
+// art: artigo da marca ("a Claro", "o Bradesco Saúde"), usado nas frases de apoio.
 const PATROCINADORES = [
-  { nome:"Rede D'Or", logo:'assets/img/logo-rede-dor.png', altura:56 },
-  { nome:'Claro', logo:'assets/img/logo-claro.png', altura:40 },
-  { nome:'Bradesco Saúde', logo:'assets/img/logo-bradesco-saude.png', altura:48 },
+  { nome:"Rede D'Or", art:'a', logo:'assets/img/logo-rede-dor.png', altura:56 },
+  { nome:'Claro', art:'a', logo:'assets/img/logo-claro.png', altura:40 },
+  { nome:'Bradesco Saúde', art:'o', logo:'assets/img/logo-bradesco-saude.png', altura:48 },
 ];
+// No lugar de "Com o apoio de": uma frase sorteada a cada visita, sobre por que a marca apoia o projeto.
+// M = "A Claro" (começo da frase), m = "a Claro", de = "da Claro", S = logo SoftLiving em texto.
+const FRASES_APOIO = [
+  ({ M, S }) => `${M} apoia o bem-estar de quem faz parte da ${S}`,
+  ({ M }) => `${M} apoia um projeto que conecta pessoas para viver melhor`,
+  ({ M, S }) => `${M} acredita em um digital mais humano e apoia a ${S}`,
+  ({ m }) => `Com ${m}, mais tempo de qualidade para você`,
+  ({ M }) => `${M} apoia conteúdo de qualidade, sem anúncios interrompendo a sua leitura`,
+  ({ M }) => `${M} apoia encontros de verdade, dentro e fora da tela`,
+  ({ M }) => `${M} incentiva uma vida mais ativa, saudável e conectada`,
+  ({ M, S }) => `${M} apoia a ${S} para você navegar sem pressa e sem ruído`,
+  ({ M }) => `${M} apoia quem escolhe o que realmente importa`,
+  ({ M }) => `${M} apoia comunidades que cuidam umas das outras`,
+  ({ M }) => `${M} apoia uma longevidade com mais qualidade de vida`,
+  ({ de }) => `Este espaço sem anúncios tem o apoio ${de}`,
+  ({ M }) => `${M} apoia o bem-estar digital de toda a família`,
+  ({ M }) => `${M} apoia a troca de conhecimento entre gerações`,
+  ({ M }) => `${M} apoia a curadoria que valoriza o seu tempo`,
+  ({ M }) => `${M} apoia a alegria de ficar de fora do que não importa`,
+  ({ M }) => `${M} apoia a conexão entre pessoas com os mesmos interesses`,
+  ({ m }) => `Viver melhor é um projeto coletivo, e ${m} faz parte dele`,
+  ({ M }) => `${M} apoia um ambiente digital seguro e acolhedor`,
+  ({ M }) => `${M} apoia quem cria conteúdo com cuidado e respeito`,
+];
+const fraseApoio = p => {
+  const m = `${p.art} ${p.nome}`, M = m.charAt(0).toUpperCase() + m.slice(1), de = `${p.art === 'a' ? 'da' : 'do'} ${p.nome}`;
+  return FRASES_APOIO[Math.floor(Math.random() * FRASES_APOIO.length)]({ M, m, de, S:LOGO });
+};
 (function montarApoios(){
   const vagas = document.querySelectorAll('main .apoio');
   if(!vagas.length) return;
@@ -357,7 +386,7 @@ const PATROCINADORES = [
   vagas.forEach((vaga, i) => {
     const p = sorteio[i % sorteio.length];
     // ?v=: muda quando o arquivo do logo muda, para o navegador não usar a imagem antiga guardada
-    vaga.innerHTML = `<span class="apoio-rotulo">Com o apoio de</span><img src="${LAYOUT_ROOT}${p.logo}?v=${LOGOS_VERSAO}" alt="${p.nome}" style="height:${p.altura}px">`;
+    vaga.innerHTML = `<span class="apoio-rotulo">${fraseApoio(p)}</span><img src="${LAYOUT_ROOT}${p.logo}?v=${LOGOS_VERSAO}" alt="${p.nome}" style="height:${p.altura}px">`;
   });
 })();
 
