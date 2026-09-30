@@ -1064,6 +1064,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-bloco-topo{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
 .pf-bloco-topo h2{ margin:0; }
 .pf-dica{ font-size:13px; color:var(--muted); }
+.pf-bloco-topo.junto{ justify-content:flex-start; flex-wrap:wrap; column-gap:14px; row-gap:2px; } /* Interesses: a dica fica logo ao lado do título */
 .pf-sobre{ font-size:16.5px; line-height:1.7; color:var(--text-2); margin:0; max-width:720px; }
 #pfSobreCampo{ width:100%; padding:14px 16px; border-radius:18px; border:1px solid var(--line-2); font:inherit; font-size:15.5px; line-height:1.6; background:#fff; }
 .pf-editar-acoes{ display:flex; gap:10px; margin-top:10px; }
