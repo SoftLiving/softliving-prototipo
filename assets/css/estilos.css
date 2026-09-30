@@ -1064,8 +1064,13 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-linha small{ font-size:13px; color:var(--muted); }
 .pf-linha .seg{ margin:0; }
 .pf-sair{ color:#b3261e !important; }
-a.me{ color:inherit; border-radius:16px; transition:background-color .15s ease; }
-a.me:hover{ background:rgba(255,255,255,.6); }
+/* Saudação do menu (leva ao Meu perfil): no hover, um fundo de vidro com a mesma folga em volta do avatar e do nome,
+   que para antes do botão de recolher e não pega o espaço da linha divisória */
+a.me{ color:inherit; isolation:isolate; }
+a.me::before{ content:""; position:absolute; inset:-7px 36px 7px -7px; z-index:-1; border-radius:18px;
+  background:rgba(255,255,255,.8); box-shadow:var(--vidro-brilho), var(--sombra-hover); opacity:0; transition:opacity .15s ease; }
+a.me:hover::before{ opacity:1; }
+.app.mini a.me::before{ inset:-6px -6px 8px; }
 
 /* ===== Tela Ajuda ===== */
 .aj-busca{ height:58px; max-width:720px; }
