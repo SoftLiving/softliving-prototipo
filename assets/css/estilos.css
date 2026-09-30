@@ -327,10 +327,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   72%{ opacity:1; transform:translateX(0); }
   100%{ opacity:0; transform:translateX(14px); visibility:hidden; }
 }
-@media (max-width:640px) and (prefers-reduced-motion:reduce), (hover:none) and (pointer:coarse) and (prefers-reduced-motion:reduce){
-  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ animation:abas-dica-calma 3.2s ease forwards; }
-}
-@keyframes abas-dica-calma{ 0%, 80%{ opacity:.6; } 100%{ opacity:0; visibility:hidden; } }
+/* Esta dica roda uma vez só e dura 3,6s, então vale também com "reduzir animações" ligado no aparelho (pedido do usuário) */
 .tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 16px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
