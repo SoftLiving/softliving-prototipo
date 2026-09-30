@@ -61,6 +61,16 @@
 .sm-msg p{ margin:.1em 0 0; }
 .sm-label{ display:block; font-size:1em; font-weight:700; color:var(--navy); margin:1em 0 .4em; }
 .sm-body textarea{ width:100%; font:inherit; font-size:1em; border:2px solid var(--sm-borda); border-radius:16px; padding:.7em .9em; background:#fff; }
+/* Entrar na conta: campos grandes, erro e dica bem visíveis */
+.sm-entrar input{ width:100%; font:inherit; font-size:1.1em; min-height:3em; border:2px solid var(--sm-borda); border-radius:16px; padding:0 .9em; background:#fff; }
+.sm-entrar input:focus{ outline:3px solid var(--green); outline-offset:2px; }
+.sm-entrar .sm-label:first-child{ margin-top:0; }
+.sm-erro{ margin:.8em 0 0; padding:.7em .9em; border-radius:14px; background:#fdecea; color:#b3261e; font-weight:600; }
+.sm-dica{ margin:1em 0 0; font-size:.9em; color:var(--muted); }
+/* Botão Entrar do topo em verde (quando a pessoa ainda não entrou) */
+.sm-top-btn.sm-top-entrar{ background:var(--green); border-color:var(--green); color:#fff; }
+.sm-top-btn.sm-top-entrar:hover{ background:var(--green-dark); }
+.sm-convite-entrar{ margin:.6em 0 1.2em; }
 .sm-chat{ display:flex; flex-direction:column; gap:.6em; }
 .sm-bubble{ max-width:80%; margin:0; padding:.7em 1em; border-radius:18px; background:#f1ede5; color:var(--text); }
 .sm-bubble.eu{ align-self:flex-end; background:var(--mint); color:#1f3d2f; }

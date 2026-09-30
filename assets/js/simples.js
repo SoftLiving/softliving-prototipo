@@ -28,6 +28,17 @@
   const voltar = (destino, rotulo) => `<a class="sm-back" href="#${destino}">${ic('chevron')} ${rotulo}</a>`;
   const titulo = t => `<h1 class="sm-title">${t}</h1>`;
   const hora = new Date().getHours();
+
+  // Entrar e sair (login simulado, o mesmo do modo completo: login 123 e senha 123, guardado em v2Logado).
+  // O botão do topo mostra "Entrar" ou "Sair"; sair pede confirmação, para ninguém sair sem querer.
+  const logado = () => ler('v2Logado') === '1';
+  const definirLogado = sim => { try { if(sim) localStorage.setItem('v2Logado', '1'); else localStorage.removeItem('v2Logado'); } catch(e){} };
+  const atualizarConta = () => {
+    const b = document.getElementById('smConta');
+    b.textContent = logado() ? 'Sair' : 'Entrar';
+    b.href = logado() ? '#sair' : '#entrar';
+    b.classList.toggle('sm-top-entrar', !logado());
+  };
   const saudacao = hora < 12 ? 'Bom dia' : hora < 18 ? 'Boa tarde' : 'Boa noite';
 
   // Assuntos (sub-segmentos) de Ler conteúdos: "Todos" + as categorias dos conteúdos, cada uma com um ícone
@@ -97,6 +108,27 @@
 
   // ---------- telas ----------
   const TELAS = {
+    entrar(){
+      if(logado()) return `${voltar('inicio', 'Voltar ao início')}${titulo('Você já entrou')}
+        <p class="sm-lead">Você já está na sua conta.</p><div class="sm-actions"><a class="sm-btn sm-primary" href="#inicio">Ir para o início ${ic('chevron')}</a></div>`;
+      return `${voltar('inicio', 'Voltar ao início')}${titulo('Entrar na sua conta')}
+        <form class="sm-card sm-entrar" id="smEntrar" novalidate>
+          <label class="sm-label" for="smLogin">Seu e-mail ou login</label>
+          <input id="smLogin" name="login" type="text" autocomplete="username" placeholder="Digite aqui">
+          <label class="sm-label" for="smSenha">Sua senha</label>
+          <input id="smSenha" name="senha" type="password" autocomplete="current-password" placeholder="Digite aqui">
+          <p class="sm-erro" id="smErro" role="alert" hidden>Login ou senha incorretos. Confira e tente de novo.</p>
+          <div class="sm-actions"><button type="submit" class="sm-btn sm-primary">Entrar</button></div>
+          <p class="sm-dica">Protótipo: use login <b>123</b> e senha <b>123</b>.</p>
+        </form>`;
+    },
+    sair(){
+      if(!logado()) return `${voltar('inicio', 'Voltar ao início')}${titulo('Você saiu da conta')}
+        <p class="sm-lead">Para voltar, é só tocar em Entrar.</p><div class="sm-actions"><a class="sm-btn sm-primary" href="#entrar">Entrar</a></div>`;
+      return `${voltar('inicio', 'Voltar ao início')}${titulo('Sair da conta?')}
+        <p class="sm-lead">Você pode entrar de novo quando quiser.</p>
+        <div class="sm-actions"><button type="button" class="sm-btn sm-primary" data-sair>Sim, sair</button><a class="sm-btn" href="#inicio">Continuar na conta</a></div>`;
+    },
     inicio(){
       const opcoes = [['conteudos','book','Ler conteúdos'], ['grupos','users','Meus grupos'], ['conversar','chat','Conversar'],
                       ['encontros','calendar','Encontros'], ['comunidades','building','Minhas comunidades'], ['beneficios','gift','Benefícios'],
@@ -110,11 +142,12 @@
         ['carteira', 'gift', 'Você ganhou <b>5 créditos de bônus</b>'],
       ].slice(0, 3);
       return `
-        <p class="sm-hello">${saudacao}, Rafael</p>
-        <section class="sm-novidades" aria-label="Novidades para você">
+        <p class="sm-hello">${logado() ? `${saudacao}, Rafael` : `${saudacao}!`}</p>
+        ${logado() ? '' : `<a class="sm-novidade sm-convite-entrar" href="#entrar">${ic('users')}<span><b>Entre na sua conta</b> para ver seus grupos, conversas e créditos</span>${ic('chevron')}</a>`}
+        ${logado() ? `<section class="sm-novidades" aria-label="Novidades para você">
           <h2 class="sm-card-title">Novidades para você</h2>
           ${novidades.map(([h, i, t]) => `<a class="sm-novidade" href="#${h}">${ic(i)}<span>${t}</span>${ic('chevron')}</a>`).join('')}
-        </section>
+        </section>` : ''}
         <p class="sm-lead">O que você quer fazer hoje?</p>
         <div class="sm-grid">${opcoes.map(([h, i, t]) => `<a class="sm-big" href="#${h}">${ic(i)}<span>${t}</span></a>`).join('')}</div>`;
     },
@@ -413,6 +446,7 @@
     sm.querySelectorAll('[data-escala]').forEach(b => b.addEventListener('click', () => {
       nivel = Math.min(ESCALAS.length - 1, Math.max(0, nivel + +b.dataset.escala)); aplicarEscala();
     }));
+    atualizarConta();
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', mostrar);
@@ -447,11 +481,23 @@
       if(navigator.clipboard) navigator.clipboard.writeText('Entre na SoftLiving com meu convite e ganhe 20 créditos de bônus: https://softliving.com.br/cadastro/boas-vindas?ref=74194EB9').catch(() => {});
       t.textContent = 'Convite copiado';
     }
+    else if(t.dataset.sair !== undefined){ definirLogado(false); location.hash = 'sair'; mostrar(); }
     else if(t.dataset.copiarPix !== undefined){ t.textContent = 'Código copiado'; }
     else if(t.dataset.enviarEquipe !== undefined){
       if(!texto()) return;
       document.getElementById('smForm').innerHTML = '<p class="sm-text"><b>Mensagem enviada.</b> Nossa equipe vai responder por e-mail.</p>';
     }
+  });
+
+  sm.addEventListener('submit', e => {
+    if(e.target.id !== 'smEntrar') return;
+    e.preventDefault();
+    const f = e.target, ok = f.login.value.trim() === '123' && f.senha.value === '123';
+    document.getElementById('smErro').hidden = ok;
+    if(!ok){ f.senha.value = ''; f.login.focus(); return; }
+    definirLogado(true);
+    location.hash = 'inicio';
+    mostrar();
   });
 
   mostrar();
