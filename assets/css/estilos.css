@@ -444,8 +444,10 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* ===== Telas médias ===== */
 /* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
 @media (max-width:1359px){ .site-nav{ display:none; } } /* o menu institucional cabe no topo a partir de 1360px; abaixo disso fica no rodapé (e no Saiba mais do celular) */
-/* 1360 a 1479px: com os 5 links institucionais no topo, "Modo simples" fica só com o ícone (a dica mostra o nome) para caber */
-@media (min-width:1360px) and (max-width:1479px){ .tools > .btn.simples{ font-size:0; gap:0; width:40px; padding:0; justify-content:center; } .tools > .btn.simples .ic{ width:18px; height:18px; } }
+/* 1360 a 1599px: com os 6 links institucionais no topo, "Modo simples" fica só com o ícone (a dica mostra o nome) para caber */
+@media (min-width:1360px) and (max-width:1599px){ .tools > .btn.simples{ font-size:0; gap:0; width:40px; padding:0; justify-content:center; } .tools > .btn.simples .ic{ width:18px; height:18px; } }
+/* 1360 a 1439px (notebooks de 1366): menu institucional um pouco mais compacto e créditos sem a palavra, para os 6 links caberem */
+@media (min-width:1360px) and (max-width:1439px){ .site-nav{ gap:13px; font-size:13px; margin-left:4px; } .tools > .btn.creditos{ padding:0 12px; } .tools > .btn.creditos .saldo-creditos{ font-size:0; } .tools > .btn.creditos .saldo-creditos::before{ content:attr(data-n); font-size:14px; } }
 /* Coluna do conteúdo estreita (menos de 1000px, por exemplo com a lateral aberta): cartões de assunto em 2 colunas e grupos
    embaixo do depoimento (em 4 colunas o título invade a foto) */
 @container (max-width:1000px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } .tabs.folder .btn{ display:none; } }
@@ -801,6 +803,11 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 
 /* Planos (Benefícios) e cotas (Patrocinadores) */
 .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; align-items:stretch; }
+.plans.dois{ grid-template-columns:repeat(2, minmax(0, 1fr)); } /* Empresas e grupos: as duas licenças */
+@media (max-width:760px){ .plans.dois{ grid-template-columns:minmax(0, 1fr); } }
+.plan-sub{ font-size:15px; line-height:1.6; color:var(--text-2); margin:6px 0 16px; }
+.nr1-aviso{ margin-top:28px !important; padding:16px 20px; border-radius:18px; background:#fdf6e3; border:1px dashed #e3c77f; color:#7a5c12 !important; }
+.eg-perguntas{ max-width:820px; }
 .plan{ background:#fff; border:1px solid var(--line); border-radius:26px; padding:30px; display:flex; flex-direction:column; }
 .plan .tag{ align-self:flex-start; font-size:12px; font-weight:700; border-radius:999px; padding:5px 12px; background:var(--mint); color:var(--green); margin-bottom:18px; }
 .plan h3{ font-size:26px; margin-bottom:10px; }

@@ -15,7 +15,8 @@ index.html                  Tela Início (abertura com colagem, Explore por assu
                             Acontece nos grupos, patrocinadores apoiadores, newsletter)
 conhecimento/               base de conhecimento do assistente do Suporte: arquivos .md (um por tema, cada "## Assunto"
                             vira uma resposta) listados em arquivos.txt. Ver conhecimento/LEIA-ME.md.
-institucional/              conhecer, quem-somos, como-funciona, beneficios, patrocinadores (novo visual).
+institucional/              conhecer, quem-somos, como-funciona, beneficios, empresas-e-grupos (B2B2C, licenças e NR-1),
+                            patrocinadores (novo visual).
                             Links para páginas institucionais usam data-site-link="<nome>" e urlSite() no layout.js
                             (SITES lista as que existem; Segurança ainda abre o Suporte)
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
@@ -85,7 +86,7 @@ assets/img/                 Logos da FSB e da RB2
 | Atividades (Curtidas, Comentários, Acompanhar, Salvos) | prontas para revisão |
 | Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
-| Institucionais: Conhecer, Quem somos, Como funciona, Benefícios, Patrocinadores (`institucional/`) | prontas para revisão |
+| Institucionais: Conhecer, Quem somos, Como funciona, Benefícios, Empresas e grupos, Patrocinadores (`institucional/`) | prontas para revisão |
 | Institucional: Segurança | a fazer (por enquanto o link abre o Suporte) |
 
 ## Coluna lateral da direita
