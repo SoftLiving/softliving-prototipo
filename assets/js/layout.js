@@ -396,9 +396,15 @@ const fraseApoio = p => {
     const coluna = getComputedStyle(faixa).gridTemplateColumns.split(' ').length > 1 ? (faixa.clientWidth - logo.offsetWidth) / 2 - gap : faixa.clientWidth;
     const inteira = r.scrollWidth, limite = Math.max(120, coluna), linha = parseFloat(getComputedStyle(r).lineHeight);
     r.style.whiteSpace = '';
+    // Regra: sempre 2 linhas; nunca 1; no máximo 3 (só quando a coluna é estreita demais para 2).
+    // Começa na metade da frase (garante pelo menos 2 linhas) e vai abrindo até caber em 2.
+    r.style.fontSize = '';
     let largura = Math.ceil(inteira / 2);
     do { r.style.maxWidth = Math.min(largura, limite) + 'px'; largura += 6; }
     while(r.offsetHeight > linha * 2.5 && largura < limite);
+    // Se nem na largura toda coube em 3 linhas, a letra diminui um pouco até caber (mínimo de 11px)
+    let tamanho = parseFloat(getComputedStyle(r).fontSize);
+    while(r.offsetHeight > parseFloat(getComputedStyle(r).lineHeight) * 3.5 && tamanho > 11){ tamanho -= .5; r.style.fontSize = tamanho + 'px'; }
   });
   duasLinhas();
   if(document.fonts) document.fonts.ready.then(duasLinhas);
