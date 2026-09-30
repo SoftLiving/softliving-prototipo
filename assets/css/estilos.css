@@ -1064,12 +1064,17 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-linha small{ font-size:13px; color:var(--muted); }
 .pf-linha .seg{ margin:0; }
 .pf-sair{ color:#b3261e !important; }
-/* Saudação do menu (leva ao Meu perfil): no hover, um fundo de vidro com a mesma folga em volta do avatar e do nome,
-   que para antes do botão de recolher e não pega o espaço da linha divisória */
+/* Saudação do menu (leva ao Meu perfil): no hover, um fundo de vidro que vai de lado a lado do bloco do menu (passa por
+   baixo da seta de recolher) e aparece da esquerda para a direita, com a borda da frente em degradê.
+   A máscara tem 2,5x a largura: parada à direita fica toda transparente; ao deslizar para a esquerda, revela o fundo. */
 a.me{ color:inherit; isolation:isolate; }
-a.me::before{ content:""; position:absolute; inset:-7px 36px 7px -7px; z-index:-1; border-radius:18px;
-  background:rgba(255,255,255,.8); box-shadow:var(--vidro-brilho), var(--sombra-hover); opacity:0; transition:opacity .15s ease; }
-a.me:hover::before{ opacity:1; }
+a.me::before{ content:""; position:absolute; inset:-7px -7px 7px -7px; z-index:-1; border-radius:18px;
+  background:linear-gradient(to right, rgba(255,255,255,.95), rgba(255,255,255,.7) 70%, rgba(230,242,234,.75));
+  box-shadow:var(--vidro-brilho), var(--sombra-hover);
+  -webkit-mask-image:linear-gradient(to right, #000 45%, transparent 55%); mask-image:linear-gradient(to right, #000 45%, transparent 55%);
+  -webkit-mask-size:250% 100%; mask-size:250% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-position:100% 0; mask-position:100% 0; transition:-webkit-mask-position .5s ease, mask-position .5s ease; }
+a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-position:0 0; }
 .app.mini a.me::before{ inset:-6px -6px 8px; }
 
 /* ===== Tela Ajuda ===== */
