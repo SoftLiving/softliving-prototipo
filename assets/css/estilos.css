@@ -1075,7 +1075,9 @@ a.me::before{ content:""; position:absolute; inset:-7px -7px 7px -7px; z-index:-
   -webkit-mask-size:250% 100%; mask-size:250% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
   -webkit-mask-position:100% 0; mask-position:100% 0; transition:-webkit-mask-position .5s ease, mask-position .5s ease; }
 a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-position:0 0; }
-.app.mini a.me::before{ inset:-6px -6px 8px; }
+/* Menu fechado (só ícones): sem a animação; o fundo só aparece em volta do avatar */
+.app.mini a.me::before{ inset:-6px -6px 8px; -webkit-mask-image:none; mask-image:none; opacity:0; transition:opacity .15s ease; }
+.app.mini a.me:hover::before, .app.mini a.me:focus-visible::before{ opacity:1; }
 
 /* ===== Tela Ajuda ===== */
 .aj-busca{ height:58px; max-width:720px; }
