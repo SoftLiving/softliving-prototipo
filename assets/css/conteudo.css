@@ -36,7 +36,7 @@
 .ld-acao:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:#fff; }
 .ld-acao.on{ background:var(--mint); color:var(--green); }
 .ld-acao.on .ic{ fill:currentColor; }
-.ld-acao[data-curtir].on{ color:#c0392b; background:#fdecea; }
+.ld-acao.ouvindo{ color:#c0392b; background:#fdecea; border-color:#f3c4bd; } /* Curtir e Salvar ativados ficam verdes; Ouvir, enquanto lê, fica vermelho */
 .ld-letra{ display:flex; gap:6px; margin-top:4px; }
 .ld-letra button{ flex:1; padding:8px 0; border-radius:12px; border:1px solid var(--line); background:#fff; font:inherit; font-weight:700; color:var(--navy); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
 .ld-letra button:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }

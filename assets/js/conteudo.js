@@ -168,11 +168,11 @@ pagina.addEventListener('click', ev => {
     return;
   } else if(d.ouvir !== undefined){
     if(!('speechSynthesis' in window)){ mostrarAviso('Seu navegador não consegue ler o texto em voz alta'); return; }
-    if(speechSynthesis.speaking){ pararLeitura(); b.querySelector('span').textContent = 'Ouvir'; return; }
+    if(speechSynthesis.speaking){ pararLeitura(); b.querySelector('span').textContent = 'Ouvir'; b.classList.remove('ouvindo'); return; }
     const fala = new SpeechSynthesisUtterance([c.t, resumo, ...(liberado() ? paragrafos : paragrafos.slice(0, 3))].map(p => p.replace(/^## /, '')).join('. '));
     fala.lang = 'pt-BR'; fala.rate = .95;
-    fala.onend = () => { const s = pagina.querySelector('[data-ouvir] span'); if(s) s.textContent = 'Ouvir'; };
-    speechSynthesis.speak(fala); b.querySelector('span').textContent = 'Parar';
+    fala.onend = () => { const o = pagina.querySelector('[data-ouvir]'); if(o){ o.querySelector('span').textContent = 'Ouvir'; o.classList.remove('ouvindo'); } };
+    speechSynthesis.speak(fala); b.querySelector('span').textContent = 'Parar'; b.classList.add('ouvindo');
     return;
   } else if(d.letra){
     ldGravar('v2LeituraLetra', Math.min(2, Math.max(0, nivelLetra() + +d.letra)));
