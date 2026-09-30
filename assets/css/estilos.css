@@ -308,6 +308,24 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   50%{ transform:translateX(4px); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16), 0 0 0 7px rgba(31,85,25,0); }
 }
 @media (prefers-reduced-motion:reduce){ .abas-prox.piscando{ animation:none; } }
+/* Celular e telas de toque: a seta não fica fixa sobre as abas. Ela aparece translúcida, pisca três vezes para mostrar
+   que as abas rolam para o lado e some sozinha (sem receber toque); a pessoa arrasta as abas com o dedo.
+   A seta da esquerda não aparece. Volta a piscar se as abas voltarem ao começo e ainda houver mais para ver. */
+@media (max-width:640px), (hover:none) and (pointer:coarse){
+  .abas-rolar .abas-ant{ display:none !important; }
+  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ pointer-events:none; animation:abas-dica 3.2s ease-in-out forwards; }
+}
+@keyframes abas-dica{
+  0%{ opacity:0; transform:translateX(0); }
+  12%, 38%, 64%{ opacity:.75; transform:translateX(3px); }
+  25%, 51%{ opacity:.25; transform:translateX(0); }
+  80%{ opacity:.6; }
+  100%{ opacity:0; transform:translateX(0); visibility:hidden; }
+}
+@media (max-width:640px) and (prefers-reduced-motion:reduce), (hover:none) and (pointer:coarse) and (prefers-reduced-motion:reduce){
+  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ animation:abas-dica-calma 3.2s ease forwards; }
+}
+@keyframes abas-dica-calma{ 0%, 80%{ opacity:.6; } 100%{ opacity:0; visibility:hidden; } }
 .tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 16px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
