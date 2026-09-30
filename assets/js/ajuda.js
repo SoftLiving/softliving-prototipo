@@ -43,8 +43,6 @@ document.getElementById('ajTemas').addEventListener('click', ev => {
   const b = ev.target.closest('[data-tema]'); if(!b) return;
   ajTema = ajTema === b.dataset.tema ? null : b.dataset.tema;
   renderAjuda();
-  // celular e tablet: o chat fica entre os temas e as perguntas, então a página desce até as perguntas do tema escolhido
-  if(ajTema && document.querySelector('.aj-no-topo')) document.getElementById('ajTitulo').scrollIntoView({ behavior:'smooth', block:'start' });
 });
 document.getElementById('ajForm').addEventListener('submit', ev => {
   ev.preventDefault();
@@ -160,12 +158,12 @@ document.getElementById('ajcSugestoes').addEventListener('click', ev => {
   if(b) ajcPerguntar(b.dataset.pergunta);
 });
 
-// Celular e tablet (a coluna não cabe ao lado, abaixo de 1200px): o chat sobe para logo depois dos temas, antes das
-// perguntas frequentes, em vez de ficar no fim da página. No computador volta para a coluna da direita.
+// Celular e tablet (a coluna não cabe ao lado, abaixo de 1200px): o chat é o primeiro conteúdo, logo depois do título
+// da página e antes dos temas e das perguntas frequentes, em vez de ficar no fim da página. No computador volta para a coluna da direita.
 const ajLado = matchMedia('(min-width:1200px)');
 function posicionarChat(){
   if(ajLado.matches){ if(ajChat.parentElement !== document.querySelector('.corpo')) document.querySelector('.corpo').appendChild(ajChat); }
-  else if(ajChat.previousElementSibling !== document.getElementById('ajTemas')) document.getElementById('ajTemas').after(ajChat);
+  else if(ajChat.nextElementSibling !== document.getElementById('ajTemas')) document.getElementById('ajTemas').before(ajChat);
   ajChat.classList.toggle('aj-no-topo', !ajLado.matches);
 }
 ajLado.addEventListener('change', () => { posicionarChat(); ajustarChat(); });

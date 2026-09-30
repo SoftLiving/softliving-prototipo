@@ -1165,7 +1165,7 @@ a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-
   .ajc{ position:static; height:600px; }
 }
 @media (max-width:640px){ .ajc{ height:540px; } }
-/* Chat no topo da página (celular e tablet, movido pelo ajuda.js): depois dos temas e antes das perguntas frequentes */
+/* Chat no topo da página (celular e tablet, movido pelo ajuda.js): primeiro conteúdo, antes dos temas e das perguntas */
 main > .aj-lateral.aj-no-topo{ margin:0 0 32px; }
 #ajTitulo{ scroll-margin-top:96px; } /* ao escolher um tema no celular, o título das perguntas não fica embaixo do topo */
 @media (min-width:641px){ .aj-no-topo .ajc{ height:500px; } } /* no topo, o chat não precisa ser tão alto no tablet */
