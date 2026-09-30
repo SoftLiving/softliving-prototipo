@@ -72,7 +72,7 @@ ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
 // Acontece nos grupos: carrossel com todos os grupos (3 por vez), em ordem sorteada a cada carregamento
-// (a página interna do grupo está em construção: por enquanto abrem Grupos com o grupo destacado)
+// (cada cartão abre a página do grupo, grupo.html?g=n)
 document.getElementById('groupList').innerHTML = embaralhar(GRUPOS).map(g => {
   const n = GRUPOS.indexOf(g);
   return `

@@ -1,6 +1,6 @@
 // VERSÃO 2 · Tela Grupos (referência: grupos.js da versão 1): Todos/Participando/Disponíveis e grade de cartões verticais.
 // Participar/Sair ficam no cartão (valem para a sessão, como na versão 1); clicar no resto do cartão abre a página do grupo
-// (ainda em construção: por enquanto volta para esta página com o grupo destacado). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
+// (grupo.html?g=n). Usa GRUPOS e alternarParticipacao (grupos-dados.js), renderMeusGrupos (lateral.js) e layout.js.
 
 const grEstado = { tipo:'todos' };
 const GR_ORDEM = embaralhar(GRUPOS.map((g, i) => i));   // ordem sorteada a cada carregamento
@@ -48,10 +48,8 @@ document.getElementById('grGrade').addEventListener('click', e => {
   renderMeusGrupos();
 });
 renderGrupos();
-(function destacarGrupo(){
-  const g = +new URLSearchParams(location.search).get('g');
-  if(!new URLSearchParams(location.search).has('g') || !GRUPOS[g]) return;
-  const cartao = document.querySelector(`#grGrade a[href$="?g=${g}"]`);
-  if(cartao){ cartao.classList.add('destacado'); cartao.scrollIntoView({ behavior:'smooth', block:'center' }); }
-  mostrarAviso(`${GRUPOS[g].t}: a página do grupo está em construção`);
+// Endereço antigo (grupos.html?g=n, de quando a página do grupo estava em construção): leva para a página do grupo
+(function enderecoAntigo(){
+  const q = new URLSearchParams(location.search);
+  if(q.has('g') && GRUPOS[+q.get('g')]) location.replace(urlGrupo(+q.get('g')));
 })();

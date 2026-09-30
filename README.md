@@ -41,6 +41,8 @@ comunidades/*.html          Minhas Comunidades: os boxes (lista Trocar por) most
 colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
                             navegue por autor, colunistas por categoria e colunas em destaque
 grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
+grupo.html                  Página interna do grupo (?g=n#aba): capa, selos e ações; abas Conversas, Mural, Encontros e
+                            Membros; grupos de desapego com a aba Anúncios (grupo.js, grupo.css, desapego-dados.js)
 assets/js/lateral.js        Coluna lateral da direita, comum à Início, Conteúdos e Grupos
 assets/js/escuta.js         Pesquisa de escuta (cópia da v1), entra no topo da coluna lateral
 assets/js/conteudos.js      Tela Conteúdos
@@ -73,7 +75,7 @@ assets/img/                 Logos da FSB e da RB2
 | Busca (`busca.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Leitura do artigo | a fazer |
 | Grupos (`grupos.html`) | pronta para revisão |
-| Página interna de grupo (inclui Desapego) | a fazer (por enquanto o link abre Grupos com o grupo destacado) |
+| Página interna de grupo (`grupo.html`, inclui Desapego) | pronta para revisão |
 | Notificações (`notificacoes.html` + janela do sino) | pronta para revisão |
 | Minhas Comunidades (8 abas, `comunidades/`) | pronta para revisão |
 | Amigos (`amigos.html`, antiga Conexões) | pronta para revisão |

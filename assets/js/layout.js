@@ -6,8 +6,8 @@
 const LAYOUT_ROOT = document.body.dataset.root || '';
 const LAYOUT_PAGE = document.body.dataset.page || '';
 const LAYOUT_SITE = document.body.dataset.site || '';
-// Página interna de um grupo: ainda em construção. Por enquanto abre Grupos com o grupo destacado (grupos.js).
-const urlGrupo = i => `${LAYOUT_ROOT}grupos.html?g=${i}`;
+// Página interna de um grupo (grupo.html?g=<número em GRUPOS>)
+const urlGrupo = i => `${LAYOUT_ROOT}grupo.html?g=${i}`;
 
 // Endereço de cada destino (páginas do menu).
 const PAGINAS = {

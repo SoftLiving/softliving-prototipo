@@ -1,0 +1,141 @@
+/* ===== Página interna de um grupo (grupo.html + grupo.js) =====
+   Usa a base da página de estabelecimento (vitrine.css: es-voltar, es-capa, es-topo, es-nome, es-selos, es-acoes, es-abas).
+   Aqui ficam só as partes próprias do grupo, com o efeito vidro e o hover padrão (sobe 2px com sombra). */
+.gd-logo{ color:var(--green); font-size:34px; }
+.gd-selo-premium{ color:#8a5a0e !important; background:#fdf1dc !important; border-color:#f0ddac !important; }
+.btn.gd-membro{ cursor:default; }
+.btn.gd-membro:hover{ transform:none; }
+.btn .ic{ width:16px; height:16px; }
+.gd-abas button{ display:inline-flex; align-items:center; gap:7px; }
+.gd-abas button .ic{ width:16px; height:16px; }
+
+/* Caixa de vidro comum */
+.gd-topicos, .gd-detalhe, .gd-aviso, .gd-pessoa, .gd-anuncio, .gd-form, .gd-seguranca{
+  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+
+/* Avatares */
+.gd-av{ width:42px; height:42px; font-size:14px; border-width:2px; }
+.gd-av.mini{ width:26px; height:26px; font-size:10.5px; border-width:1.5px; box-shadow:none; }
+
+/* Aviso para quem ainda não participa */
+.gd-trava{ display:flex; align-items:center; gap:8px; margin:0 0 16px; padding:12px 16px; border-radius:16px; background:#fdf6e3; border:1px dashed #e3c77f; color:#7a5c12; font-size:14px; }
+.gd-trava .ic{ width:17px; height:17px; flex:none; }
+.gd-nota{ font-size:13.5px; color:var(--muted); margin:6px 4px 0; }
+
+/* ----- Conversas: lista de tópicos + tópico aberto ----- */
+.gd-conversas > *{ min-width:0; }
+.gd-conversas{ display:grid; grid-template-columns:minmax(0, 300px) minmax(0, 1fr); gap:18px; align-items:start; margin-bottom:40px; }
+.gd-topicos{ display:flex; flex-direction:column; gap:4px; padding:8px; border-radius:22px; }
+.gd-topico{ display:block; width:100%; text-align:left; border:none; background:none; padding:12px 14px; border-radius:16px; font:inherit; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.gd-topico b{ display:block; font-size:14.5px; color:var(--navy); line-height:1.35; }
+.gd-topico small{ display:inline-flex; align-items:center; gap:5px; margin-top:4px; font-size:12.5px; color:var(--muted); }
+.gd-topico small .ic{ width:13px; height:13px; }
+.gd-topico:hover{ background:#fff; transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.gd-topico.on{ background:var(--mint); box-shadow:inset 0 0 0 1.5px rgba(31,85,25,.35); }
+.gd-topico.arquivado b{ color:var(--text-2); }
+.gd-detalhe{ padding:22px 24px; border-radius:24px; }
+.gd-detalhe h2{ font-size:24px; margin:0 0 6px; }
+.gd-guia{ margin:0 0 18px; font-size:15px; line-height:1.6; color:var(--text-2); }
+.gd-comentar{ display:flex; align-items:flex-start; gap:10px; margin-bottom:18px; }
+.gd-comentar textarea{ flex:1; min-width:0; min-height:46px; padding:12px 14px; border-radius:16px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; resize:vertical; }
+.gd-enviar{ width:46px; height:46px; flex:none; border-radius:50%; border:none; background:var(--green); color:#fff; display:grid; place-items:center; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.gd-enviar .ic{ width:19px; height:19px; }
+.gd-enviar:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+.gd-comentarios{ display:flex; flex-direction:column; }
+.gd-comentario{ display:flex; gap:12px; padding:14px 0; }
+.gd-comentario + .gd-comentario{ border-top:1px solid var(--line); }
+.gd-comentario > div{ flex:1; min-width:0; }
+.gd-quem{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 3px; font-size:14px; }
+.gd-quem b{ color:var(--navy); }
+.gd-quem small{ color:var(--muted); font-weight:500; }
+.gd-tag{ display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--green); background:var(--mint); border-radius:999px; padding:2px 9px; }
+.gd-tag .ic{ width:12px; height:12px; }
+.gd-txt{ margin:0; font-size:15px; line-height:1.6; color:var(--text); }
+.gd-curtir{ display:inline-flex; align-items:center; gap:5px; margin-top:6px; padding:4px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, color .15s ease; }
+.gd-curtir .ic{ width:14px; height:14px; }
+.gd-curtir:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); color:#c0392b; }
+.gd-curtir.on{ color:#c0392b; border-color:#f3c4bd; }
+.gd-curtir.on .ic{ fill:currentColor; }
+
+/* ----- Mural ----- */
+.gd-mural{ display:flex; flex-direction:column; gap:12px; margin-bottom:40px; }
+.gd-aviso{ display:flex; gap:12px; padding:18px 20px; border-radius:22px; }
+.gd-aviso > div{ flex:1; min-width:0; }
+.gd-aviso.fixo{ background:linear-gradient(135deg, rgba(230,242,234,.9), rgba(255,255,255,.7)); border-color:rgba(191,220,201,.9); }
+
+/* ----- Encontros (usa .es-evento do vitrine.css) ----- */
+.gd-encontros{ margin-bottom:40px; }
+.gd-data{ display:grid; place-items:center; width:52px; height:52px; flex:none; border-radius:16px; background:var(--mint); color:var(--green); }
+.gd-data .ic{ width:24px; height:24px; }
+.gd-onde{ display:flex; align-items:center; gap:6px; }
+.gd-onde .ic{ width:15px; height:15px; color:var(--green); flex:none; }
+.gd-evento .gd-vou{ flex:none; }
+.gd-evento{ transition:transform .15s ease, box-shadow .15s ease; }
+
+/* ----- Membros ----- */
+.gd-membros{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap:10px; margin-bottom:40px; }
+.gd-pessoa{ min-width:0; display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:18px; }
+.gd-pessoa > div{ flex:1; min-width:0; }
+.gd-pessoa b{ display:block; font-size:14.5px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.gd-pessoa b small{ color:var(--muted); font-weight:500; }
+.gd-pessoa > div > small{ font-size:12.5px; font-weight:600; color:var(--green); }
+.gd-mais{ margin:-26px 4px 40px; }
+.btn.gd-add{ height:36px; padding:0 12px; font-size:13px; flex:none; }
+.btn.gd-add.on{ color:var(--muted); }
+
+/* ----- Anúncios (grupos de desapego) ----- */
+.gd-anuncios{ margin-bottom:40px; }
+.gd-seguranca{ display:flex; gap:12px; align-items:flex-start; padding:16px 18px; border-radius:20px; margin-bottom:18px; }
+.gd-seguranca > .ic{ width:22px; height:22px; color:var(--green); flex:none; margin-top:2px; }
+.gd-seguranca b{ display:block; color:var(--navy); font-size:15px; margin-bottom:2px; }
+.gd-seguranca span{ font-size:14px; line-height:1.55; color:var(--text-2); }
+.gd-anuncios-topo{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; }
+.gd-form{ padding:20px 22px; border-radius:22px; margin-bottom:18px; display:flex; flex-direction:column; gap:12px; }
+.gd-form[hidden]{ display:none; }
+.gd-form-grade{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; }
+.gd-form label{ display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:600; color:var(--navy); }
+.gd-form label[hidden]{ display:none; }
+.gd-form input, .gd-form select, .gd-form textarea{ padding:11px 13px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; font-weight:400; color:var(--text); }
+.gd-form-acoes{ display:flex; gap:10px; flex-wrap:wrap; }
+.gd-grade-anuncios{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:14px; }
+.gd-anuncio{ display:flex; flex-direction:column; border-radius:22px; overflow:hidden; transition:transform .15s ease, box-shadow .15s ease; }
+.gd-anuncio:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.gd-anuncio-capa{ position:relative; height:96px; background:linear-gradient(135deg, #e6f2ea, #fdf1dc); display:flex; align-items:flex-end; justify-content:space-between; padding:12px 14px; }
+.gd-anuncio-tipo{ font-size:13px; font-weight:700; border-radius:999px; padding:5px 12px; background:#fff; color:var(--green); box-shadow:0 2px 8px rgba(1,53,101,.08); }
+.gd-anuncio-tipo.doacao{ color:#7a3b52; }
+.gd-anuncio-tipo.troca{ color:#3d6b8c; }
+.gd-anuncio-cat{ font-size:11.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); }
+.gd-anuncio-corpo{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.gd-anuncio-corpo h3{ font-size:18px; margin:0; }
+.gd-anuncio-corpo p{ margin:0; font-size:14px; line-height:1.5; color:var(--text-2); }
+.gd-anuncio-info{ display:flex; align-items:center; gap:5px; font-size:13px !important; }
+.gd-anuncio-info .ic{ width:14px; height:14px; color:var(--green); flex:none; }
+.gd-anuncio-quem{ display:flex; align-items:center; gap:8px; font-size:13px !important; font-weight:600; color:var(--navy) !important; margin-top:auto !important; padding-top:6px; }
+.gd-anuncio .btn{ align-self:flex-start; height:38px; padding:0 14px; font-size:13.5px; }
+.gd-anuncio-acoes{ display:flex; flex-wrap:wrap; gap:8px; }
+.gd-anuncio.concluido{ opacity:.6; }
+.gd-anuncio.concluido .gd-anuncio-tipo{ background:var(--navy); color:#fff; }
+.gd-msg{ display:flex; flex-direction:column; gap:8px; }
+.gd-msg textarea{ padding:10px 12px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:13.5px; resize:vertical; }
+.gd-enviado{ display:flex; align-items:center; gap:6px; font-size:13px !important; font-weight:600; color:var(--green) !important; }
+.gd-enviado .ic{ width:15px; height:15px; flex:none; }
+
+/* ----- Celular e telas estreitas ----- */
+@container (max-width:760px){
+  .gd-conversas{ grid-template-columns:minmax(0, 1fr); }
+  .gd-topicos{ flex-direction:row; overflow-x:auto; scrollbar-width:none; padding:6px; }
+  .gd-topico{ flex:0 0 220px; }
+  .gd-detalhe{ padding:18px 16px; }
+  .gd-form-grade{ grid-template-columns:1fr; }
+  .gd-evento{ flex-wrap:wrap; }
+  .gd-evento .gd-vou{ width:100%; justify-content:center; }
+  .gd-abas{ overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+  .gd-abas button{ white-space:nowrap; flex:none; }
+}
+@media (max-width:640px){
+  .gd-membros{ grid-template-columns:minmax(0, 1fr); }
+  .gd-anuncios-topo .btn{ width:100%; justify-content:center; }
+  .gd-anuncios-topo .seg{ max-width:100%; overflow-x:auto; scrollbar-width:none; }
+}
