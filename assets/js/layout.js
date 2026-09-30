@@ -764,21 +764,13 @@ addEventListener('load', marcarRolagemAbas);
 addEventListener('load', marcarSalvos);
 
 let ajusteLogosPendente = false;
-// Regra do portal: nunca quebrar palavra no fim da linha. Palavras com hífen (bem-estar, tornando-se) usam o hífen
-// que não quebra (U+2011), para não ficar "bem-" numa linha e "estar" na outra. Campos de texto ficam de fora.
-const HIFEN_PALAVRA = /([A-Za-zÀ-ÿ0-9])-(?=[A-Za-zÀ-ÿ0-9])/g;
-function hifensInquebraveis(raiz = document.body){
-  const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, { acceptNode: n =>
-    n.nodeValue.includes('-') && !n.parentElement.closest('script, style, textarea, input, code, pre, [contenteditable]') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT });
-  for(let n; (n = w.nextNode());){ const v = n.nodeValue.replace(HIFEN_PALAVRA, '$1‑'); if(v !== n.nodeValue) n.nodeValue = v; }
-}
 function agendarAjusteLogos(){
   if(ajusteLogosPendente) return;
   ajusteLogosPendente = true;
-  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); marcarSalvos(); hifensInquebraveis(); });
+  requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); marcarSalvos(); });
 }
 agendarAjusteLogos();
-new MutationObserver(agendarAjusteLogos).observe(document.body, { childList:true, subtree:true });
+new MutationObserver(agendarAjusteLogos).observe(document.querySelector('main'), { childList:true, subtree:true });
 
 // Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta), guardados na sessão
 const SALDO_BASE = 41;
