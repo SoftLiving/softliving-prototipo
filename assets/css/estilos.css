@@ -1067,10 +1067,16 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-sobre{ font-size:16.5px; line-height:1.7; color:var(--text-2); margin:0; max-width:720px; }
 #pfSobreCampo{ width:100%; padding:14px 16px; border-radius:18px; border:1px solid var(--line-2); font:inherit; font-size:15.5px; line-height:1.6; background:#fff; }
 .pf-editar-acoes{ display:flex; gap:10px; margin-top:10px; }
-.pf-interesses{ display:flex; flex-wrap:wrap; gap:8px; }
-.pf-chip{ border-radius:999px; padding:9px 16px; font:inherit; font-size:14px; font-weight:500; color:var(--text-2); background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
-.pf-chip:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
-.pf-chip.on{ background:var(--mint); color:var(--green); border-color:var(--mint-line); font-weight:600; }
+/* Interesses: um bloco só, como a faixa de números do perfil; células coladas, separadas por linhas finas (sem pílulas).
+   As linhas são desenhadas em cada célula (à direita e embaixo; as da borda somem no recorte do bloco), então o espaço
+   que sobrar na última linha fica da cor do bloco. Marcado: verde-claro com ✓ */
+.pf-interesses{ display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); background:#fbfaf7; border:1px solid var(--line);
+  border-radius:22px; overflow:hidden; box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.pf-chip{ display:flex; align-items:center; gap:8px; min-height:52px; padding:12px 16px; border:none; border-radius:0; font:inherit; font-size:14.5px; font-weight:500; text-align:left;
+  color:var(--text-2); background:#fbfaf7; box-shadow:1px 0 0 var(--line), 0 1px 0 var(--line); cursor:pointer; transition:background-color .15s ease, color .15s ease; }
+.pf-chip:hover{ background:#fff; color:var(--navy); }
+.pf-chip.on{ background:var(--mint); color:var(--green); font-weight:600; }
+.pf-chip.on:hover{ background:#dcefe3; }
 .pf-grupos{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
 .pf-grupo{ display:flex; align-items:center; gap:12px; padding:8px; border-radius:18px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease; }
 .pf-grupo:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
