@@ -102,7 +102,9 @@
   .ld-topo h1{ font-size:34px; }
   .ld-resumo{ font-size:18px; }
   .ld-capa{ aspect-ratio:16 / 10; border-radius:22px; margin-bottom:26px; }
-  .ld-acao span{ display:none; }                  /* no celular, só os ícones */
+  .ld-acao span{ display:none; }                  /* no celular, só os ícones… */
+  .ld-acao[data-ouvir] span{ display:inline; }    /* …menos o Ouvir, que mostra o nome: uma das ferramentas mais úteis para o público 50+ */
+  .ld-acao[data-ouvir]{ padding:10px 14px; }
   .ld-acao{ padding:10px; }
   .ld-texto{ font-size:calc(17.5px * var(--ld-escala)); }
   .ld-quem{ flex-direction:column; padding:20px; }
@@ -111,3 +113,16 @@
 }
 @media (min-width:641px) and (max-width:980px){ .ld-mais-grade{ grid-template-columns:repeat(2, minmax(0, 1fr)); } .ld-mais-grade .vcard:nth-child(3){ display:none; } }
 .ld-autor-txt a{ color:inherit; } .ld-autor-txt a:hover b{ color:var(--green); text-decoration:underline; }
+
+/* Comentários: Curtir e Responder, respostas logo abaixo */
+.ld-com-acoes{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.ld-com-acoes .ld-curtir-com{ margin-top:0; }
+.ld-responder:hover{ color:var(--green) !important; }
+.ld-responder.on{ color:var(--green); border-color:#bfdcc9; background:var(--mint); }
+.ld-respostas{ margin-top:12px; padding-left:14px; border-left:2px solid var(--line); display:flex; flex-direction:column; gap:12px; }
+.ld-resposta{ display:flex; gap:10px; }
+.ld-resposta > div{ flex:1; min-width:0; }
+.ld-av.mini{ width:34px; height:34px; font-size:12px; border-width:2px; }
+.ld-tag-autor{ display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); background:var(--mint); border-radius:999px; padding:2px 8px; vertical-align:2px; }
+.ld-form-resposta{ margin-top:12px; }
+.ld-form-resposta .ld-enviar{ width:42px; height:42px; }

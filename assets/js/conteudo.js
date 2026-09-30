@@ -9,6 +9,8 @@ const LD_ICONES = {
   ouvir:'<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
   cadeado:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   enviar:'<path d="M4 12l16-8-6 16-2.5-6.5z"/>',
+  acompanhar:'<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+  responder:'<path d="M9 7 4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>',
 };
 const ldIcone = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${LD_ICONES[n]}</svg>`;
 const ldLer = (k, p) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? p : v; } catch(e){ return p; } };
@@ -29,6 +31,9 @@ const resumo = c.e || (col ? `${col.coluna ? `Da coluna ${col.coluna}.` : ''} Um
 const premium = c.badge === 'premium';
 let destravados = ldLer('v2Destravados', []);
 const liberado = () => !premium || destravados.includes(c.t);
+// Acompanhar a conversa (comentários) deste conteúdo: a mesma lista de Atividades › Acompanhar › Conversas
+const CONVERSAS_INICIAIS = ['Agente de IA anti-golpe', 'A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Na Suíça, um vinho para chamar de seu'];
+const acompanhando = () => ldLer('v2Conversas', CONVERSAS_INICIAIS).includes(c.t);
 
 // Texto completo (demonstração); as colunas que não têm texto ganham um texto curto de exemplo
 const paragrafos = TEXTOS_COMPLETOS[c.t] || [
@@ -47,7 +52,8 @@ const autor = col
 const COMENTADORES = [['Maria Helena Sobral', '#7a3b52'], ['Claudio Brito', '#3d6b8c'], ['Luciana Russi', '#2f8578'], ['Paulo Regis', '#8a5a0e']];
 const FALAS = ['Que texto bonito. Li duas vezes e mandei para minha irmã.', 'Gostei muito da forma simples de explicar. Quero mais conteúdos assim.', 'Me identifiquei demais. Obrigada por escrever sobre isso com tanto cuidado.', 'Ótima leitura para começar o dia. Anotei as dicas.'];
 const semente = [...c.t].reduce((s, ch) => s + ch.charCodeAt(0), 0);
-const comentarios = [0, 1, 2].map(k => { const [n, cor] = COMENTADORES[(semente + k) % 4]; return { n, cor, txt:FALAS[(semente + k * 3) % 4], curt:(semente + k * 7) % 12 }; });
+const comentarios = [0, 1, 2].map(k => { const [n, cor] = COMENTADORES[(semente + k) % 4]; return { n, cor, txt:FALAS[(semente + k * 3) % 4], curt:(semente + k * 7) % 12, respostas:[] }; });
+let respondendo = null;   // número do comentário com o campo de resposta aberto
 
 // Voltar: para a página de onde a pessoa veio (Início, Conteúdos, Colunas, Busca...); sem origem, Conteúdos ou Colunas
 const voltarPara = (() => {
@@ -60,6 +66,8 @@ const voltarPara = (() => {
   } catch(e){}
   return col ? { href:urlPagina('colunas'), rotulo:'Colunas' } : { href:urlPagina('conteudos'), rotulo:'Conteúdos' };
 })();
+
+comentarios[0].respostas.push({ n:col ? col.nome : `Redação ${LOGO}`, cor:autor.cor, sigla:autor.sigla, txt:'Agradeço a leitura e o carinho! Que bom que o texto fez sentido para você.', autor:true });
 
 // ===== Montagem =====
 const siglaDe = n => n.split(' ').filter(p => /^[A-ZÀ-Ú]/.test(p)).slice(0, 2).map(p => p[0]).join('');
@@ -87,6 +95,7 @@ function render(){
       <aside class="ld-acoes" aria-label="Ações do conteúdo">
         <button type="button" class="ld-acao ${curtido ? 'on' : ''}" data-curtir title="Curtir">${ldIcone('curtir')}<span>Curtir</span></button>
         <button type="button" class="ld-acao ${salvo ? 'on' : ''}" data-salvar title="Salvar para ler depois">${icone('salvar')}<span>Salvar</span></button>
+        <button type="button" class="ld-acao ${acompanhando() ? 'on' : ''}" data-acompanhar title="Receber aviso de comentários novos">${ldIcone('acompanhar')}<span>${acompanhando() ? 'Acompanhando' : 'Acompanhar'}</span></button>
         <button type="button" class="ld-acao" data-compartilhar title="Compartilhar">${ldIcone('compartilhar')}<span>Compartilhar</span></button>
         <button type="button" class="ld-acao" data-ouvir title="Ouvir o texto">${ldIcone('ouvir')}<span>Ouvir</span></button>
         <span class="ld-letra" role="group" aria-label="Tamanho da letra"><button type="button" data-letra="-1" aria-label="Diminuir a letra">A−</button><button type="button" data-letra="1" aria-label="Aumentar a letra">A+</button></span>
@@ -126,7 +135,22 @@ function render(){
         <div class="ld-comentario">
           <span class="av-col ld-av" style="background:${m.cor}" aria-hidden="true">${siglaDe(m.n)}</span>
           <div><b>${m.n}${m.eu ? ' <small>(você)</small>' : ''}</b><p>${m.txt}</p>
-            <button type="button" class="ld-curtir-com ${m.curti ? 'on' : ''}" data-curtir-com="${i}">${ldIcone('curtir')}${m.curt + (m.curti ? 1 : 0) || ''}</button></div>
+            <div class="ld-com-acoes">
+              <button type="button" class="ld-curtir-com ${m.curti ? 'on' : ''}" data-curtir-com="${i}" aria-label="Curtir o comentário">${ldIcone('curtir')}${m.curt + (m.curti ? 1 : 0) || 'Curtir'}</button>
+              <button type="button" class="ld-curtir-com ld-responder ${respondendo === i ? 'on' : ''}" data-responder="${i}">${ldIcone('responder')}Responder</button>
+            </div>
+            ${m.respostas.length ? `<div class="ld-respostas">${m.respostas.map(r => `
+              <div class="ld-resposta">
+                <span class="av-col ld-av mini" style="background:${r.cor}" aria-hidden="true">${r.sigla || siglaDe(r.n)}</span>
+                <div><b>${r.n}${r.eu ? ' <small>(você)</small>' : ''}${r.autor ? ' <span class="ld-tag-autor">Autor</span>' : ''}</b><p>${r.txt}</p></div>
+              </div>`).join('')}</div>` : ''}
+            ${respondendo === i ? `
+              <form class="ld-comentar ld-form-resposta" data-form-resposta="${i}">
+                <span class="av-col ld-av mini" style="background:#013565" aria-hidden="true">RB</span>
+                <textarea name="txt" rows="2" placeholder="Responder a ${m.n.split(' ')[0]}…" aria-label="Sua resposta" required></textarea>
+                <button type="submit" class="ld-enviar" aria-label="Publicar resposta">${ldIcone('enviar')}</button>
+              </form>` : ''}
+          </div>
         </div>`).join('')}
     </section>` : ''}
     <section class="ld-mais">
@@ -182,14 +206,31 @@ pagina.addEventListener('click', ev => {
     mostrarAviso('Conteúdo destravado. No protótipo, nenhum crédito é descontado');
   } else if(d.curtirCom){
     const m = comentarios[+d.curtirCom]; m.curti = !m.curti;
+  } else if(d.acompanhar !== undefined){
+    const l = ldLer('v2Conversas', CONVERSAS_INICIAIS), on = !l.includes(c.t);
+    ldGravar('v2Conversas', on ? [...l, c.t] : l.filter(x => x !== c.t));
+    mostrarAviso(on ? 'Você vai receber um aviso quando houver comentários novos' : 'Você deixou de acompanhar esta conversa');
+  } else if(d.responder){
+    respondendo = respondendo === +d.responder ? null : +d.responder;
+    const y = scrollY; render(); scrollTo(0, y);
+    const campo = pagina.querySelector('.ld-form-resposta textarea'); if(campo) campo.focus({ preventScroll:true });
+    return;
   } else return;
   const y = scrollY; render(); scrollTo(0, y);
 });
 pagina.addEventListener('submit', ev => {
   ev.preventDefault();
   const t = ev.target.txt.value.trim(); if(!t) return;
-  comentarios.unshift({ n:'Rafael Barros', cor:'#013565', txt:escLd(t), curt:0, eu:true });
-  mostrarAviso('Comentário publicado');
+  const resp = ev.target.dataset.formResposta;
+  if(resp !== undefined){
+    comentarios[+resp].respostas.push({ n:'Rafael Barros', cor:'#013565', txt:escLd(t), eu:true });
+    respondendo = null;
+    mostrarAviso('Resposta publicada');
+  } else {
+    comentarios.unshift({ n:'Rafael Barros', cor:'#013565', txt:escLd(t), curt:0, eu:true, respostas:[] });
+    if(respondendo !== null) respondendo++;
+    mostrarAviso('Comentário publicado');
+  }
   const y = scrollY; render(); scrollTo(0, y);
 });
 addEventListener('pagehide', pararLeitura);

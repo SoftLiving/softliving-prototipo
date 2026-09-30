@@ -19,11 +19,13 @@ const COMENTARIOS = [
   { c:'O bem-estar do encontro presencial', txt:'Depois que comecei a ir aos encontros do grupo Amigos, minha semana mudou.', resp:[['Alexandre Duarte', 'E a gente adora ter você por lá!']], curt:11 },
 ];
 let colunistasSeguidos = atLer('v2Acompanhando', ['Sofia Martellini', 'Zé Roberto', 'Lucia Paes de Barros', 'Bernardo Leitão']);
-const CONVERSAS = [
-  { c:'Agente de IA anti-golpe', novas:3, pessoas:12 },
-  { c:'A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', novas:0, pessoas:28 },
-  { c:'Na Suíça, um vinho para chamar de seu', novas:1, pessoas:7 },
-];
+// Conversas acompanhadas: lista guardada no navegador (v2Conversas), a mesma do botão Acompanhar da leitura
+const CONVERSAS_DADOS = {
+  'Agente de IA anti-golpe':{ novas:3, pessoas:12 },
+  'A Revolução da Longevidade: Estamos Preparados para Viver Tanto?':{ novas:0, pessoas:28 },
+  'Na Suíça, um vinho para chamar de seu':{ novas:1, pessoas:7 },
+};
+const CONVERSAS_FN = () => atLer('v2Conversas', Object.keys(CONVERSAS_DADOS)).filter(ctd).map(t => ({ c:t, ...(CONVERSAS_DADOS[t] || { novas:0, pessoas:4 }) }));
 
 const atAba = AT_ABAS.find(a => a[0] === LAYOUT_PAGE) || AT_ABAS[0];
 document.getElementById('atTitulo').innerHTML = `<span class="hl">${atAba[1]}</span>`;
@@ -45,7 +47,7 @@ const avatar = (nome, cor) => `<span class="av-col at-av" style="background:${co
 const corDe = nome => (COLUNISTAS.find(c => c.nome === nome) || {}).cor || ['#2f8578', '#7a3b52', '#b0513a', '#5b4b8a'][nome.length % 4];
 
 function contas(){
-  return { curtidas:curtidas.filter(ctd).length, comentarios:COMENTARIOS.length, acompanhar:colunistasSeguidos.length + CONVERSAS.length, salvos:lerSalvos().filter(ctd).length };
+  return { curtidas:curtidas.filter(ctd).length, comentarios:COMENTARIOS.length, acompanhar:colunistasSeguidos.length + CONVERSAS_FN().length, salvos:lerSalvos().filter(ctd).length };
 }
 function renderAbas(){
   const n = contas();
@@ -78,7 +80,7 @@ const RENDER = {
           <button type="button" class="btn ghost at-deixar" data-deixar="${col.nome}">Acompanhando</button>
         </div>`).join('')}</div>` : '<p class="vazio">Você não acompanha nenhum colunista.</p>'}
       <h2 class="at-sec">Conversas</h2>
-      <div class="at-conversas">${CONVERSAS.map(v => { const c = ctd(v.c); return `
+      <div class="at-conversas">${CONVERSAS_FN().map(v => { const c = ctd(v.c); return `
         <a href="${urlConteudo(c.t)}#ldComentarios" class="at-conversa">
           <img src="${fotoUrl(c.foto, 200)}" alt="" loading="lazy">
           <span><b>${c.t}</b><small>${v.pessoas} pessoas na conversa</small></span>
