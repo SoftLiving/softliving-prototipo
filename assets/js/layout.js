@@ -355,19 +355,19 @@ const FRASES_APOIO = [
   ({ M }) => `${M} apoia um projeto que conecta pessoas para viver melhor`,
   ({ M, S }) => `${M} acredita em um digital mais humano e apoia a ${S}`,
   ({ m }) => `Com ${m}, mais tempo de qualidade para você`,
-  ({ M }) => `${M} apoia conteúdo de qualidade, sem anúncios interrompendo a sua leitura`,
+  ({ M }) => `${M} apoia conteúdo de qualidade, sem anúncios`,
   ({ M }) => `${M} apoia encontros de verdade, dentro e fora da tela`,
   ({ M }) => `${M} incentiva uma vida mais ativa, saudável e conectada`,
-  ({ M, S }) => `${M} apoia a ${S} para você navegar sem pressa e sem ruído`,
+  ({ M }) => `${M} apoia uma navegação sem pressa e sem ruído`,
   ({ M }) => `${M} apoia quem escolhe o que realmente importa`,
   ({ M }) => `${M} apoia comunidades que cuidam umas das outras`,
-  ({ M }) => `${M} apoia uma longevidade com mais qualidade de vida`,
+  ({ M }) => `${M} apoia uma longevidade mais plena`,
   ({ de }) => `Este espaço sem anúncios tem o apoio ${de}`,
   ({ M }) => `${M} apoia o bem-estar digital de toda a família`,
   ({ M }) => `${M} apoia a troca de conhecimento entre gerações`,
   ({ M }) => `${M} apoia a curadoria que valoriza o seu tempo`,
   ({ M }) => `${M} apoia a alegria de ficar de fora do que não importa`,
-  ({ M }) => `${M} apoia a conexão entre pessoas com os mesmos interesses`,
+  ({ M }) => `${M} apoia quem se conecta por interesses em comum`,
   ({ m }) => `Viver melhor é um projeto coletivo, e ${m} faz parte dele`,
   ({ M }) => `${M} apoia um ambiente digital seguro e acolhedor`,
   ({ M }) => `${M} apoia quem cria conteúdo com cuidado e respeito`,
@@ -388,6 +388,21 @@ const fraseApoio = p => {
     // ?v=: muda quando o arquivo do logo muda, para o navegador não usar a imagem antiga guardada
     vaga.innerHTML = `<span class="apoio-rotulo">${fraseApoio(p)}</span><img src="${LAYOUT_ROOT}${p.logo}?v=${LOGOS_VERSAO}" alt="${p.nome}" style="height:${p.altura}px">`;
   });
+  // A frase sempre em 2 linhas de tamanho parecido: começa com a metade da frase inteira como largura e vai abrindo
+  // até caber em 2 linhas; o text-wrap:balance do CSS equilibra as duas. Refaz quando as fontes carregam e ao mudar a janela.
+  const duasLinhas = () => document.querySelectorAll('main .apoio-rotulo').forEach(r => {
+    r.style.maxWidth = 'none'; r.style.whiteSpace = 'nowrap';
+    const faixa = r.parentElement, logo = faixa.querySelector('img'), gap = parseFloat(getComputedStyle(faixa).columnGap) || 0;
+    const coluna = getComputedStyle(faixa).gridTemplateColumns.split(' ').length > 1 ? (faixa.clientWidth - logo.offsetWidth) / 2 - gap : faixa.clientWidth;
+    const inteira = r.scrollWidth, limite = Math.max(120, coluna), linha = parseFloat(getComputedStyle(r).lineHeight);
+    r.style.whiteSpace = '';
+    let largura = Math.ceil(inteira / 2);
+    do { r.style.maxWidth = Math.min(largura, limite) + 'px'; largura += 6; }
+    while(r.offsetHeight > linha * 2.5 && largura < limite);
+  });
+  duasLinhas();
+  if(document.fonts) document.fonts.ready.then(duasLinhas);
+  addEventListener('resize', duasLinhas);
 })();
 
 // Links ainda sem destino não fazem a página pular para o topo
