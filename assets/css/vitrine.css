@@ -121,7 +121,7 @@
 }
 
 /* ===== Página de um estabelecimento (estabelecimento.html): simples, uma coluna ===== */
-.es-pagina{ max-width:980px; padding:26px 0 64px; }
+.es-pagina{ padding:26px 0 64px; } /* mesma largura das outras telas (a coluna do conteúdo, até 1180px); vale para estabelecimento e página do grupo */
 .es-voltar{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:var(--muted); margin-bottom:16px; }
 .es-voltar .ic{ width:16px; height:16px; }
 .es-voltar:hover{ color:var(--green); }
@@ -348,3 +348,8 @@
   .es-comunidade .btn{ flex:1; }
   .es-selos span{ font-size:12px; }
 }
+
+/* Em destaque na vitrine no celular: cartões do mesmo tamanho dos de Conteúdos (cerca de 290px de largura em 375px;
+   2 por vez e um pedaço do terceiro a partir de 481px), em vez do cartão quase da largura da tela */
+@media (max-width:480px){ .vt-destaques.trilho-h{ --vis:1.25; --gap:14px; } }
+@media (min-width:481px) and (max-width:640px){ .vt-destaques.trilho-h{ --vis:2.2; --gap:14px; } }
