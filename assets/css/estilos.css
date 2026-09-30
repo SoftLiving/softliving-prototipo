@@ -646,6 +646,10 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .btn.lg{ padding:14px 26px; font-size:15px; }
 .btn.white{ background:#fff; color:var(--green); }
 .btn.white:hover{ background:var(--mint); }
+/* Botão das faixas azuis de fechamento (institucionais): verde sólido com texto dourado, bem legível no azul */
+:root .btn.cta-dourado{ background:var(--green); color:#f5c46b; border:none; box-shadow:0 6px 18px rgba(0,0,0,.22); }
+/* hover: o padrão do portal (sobe 2px e a sombra aumenta), sem mudar as cores */
+:root .btn.cta-dourado:hover{ background:var(--green); color:#f5c46b; transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.32); }
 
 /* Espaço do vídeo: para publicar, trocar o botão e o aviso por <iframe src="https://www.youtube.com/embed/ID" allowfullscreen> dentro de .video */
 .video{ position:relative; border-radius:28px; overflow:hidden; aspect-ratio:16/10; background:var(--mint); border:1px solid #d3e8da; }
@@ -1226,12 +1230,12 @@ body{ background:
 :root .rodape{ border-width:1px 0 0; box-shadow:var(--vidro-brilho); }
 
 /* Botão verde: vidro verde */
-:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos){
+:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos):not(.cta-dourado){
   background:rgba(31,85,25,.78); border:1px solid rgba(255,255,255,.35);
   -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
   box-shadow:inset 0 1px 1px rgba(255,255,255,.45), inset 0 -3px 8px rgba(0,0,0,.18), 0 6px 18px rgba(31,85,25,.22);
 }
-:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos):hover{ background:rgba(23,67,19,.86); }
+:root .btn:not(.ghost):not(.white):not(.simples):not(.creditos):not(.cta-dourado):hover{ background:rgba(23,67,19,.86); }
 /* Modo simples e créditos: vidro colorido */
 :root .btn.simples{ background:rgba(230,242,234,.55); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
 :root .btn.creditos{ background:rgba(253,241,220,.6); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
