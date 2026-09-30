@@ -313,14 +313,19 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
    A seta da esquerda não aparece. Volta a piscar se as abas voltarem ao começo e ainda houver mais para ver. */
 @media (max-width:640px), (hover:none) and (pointer:coarse){
   .abas-rolar .abas-ant{ display:none !important; }
-  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ pointer-events:none; animation:abas-dica 3.2s ease-in-out forwards; }
+  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ pointer-events:none; animation:abas-dica 3.6s ease-in-out forwards; }
 }
+/* Pisca forte (quase some e volta cheia) enquanto desliza para a direita, como quem aponta "tem mais para lá" */
 @keyframes abas-dica{
-  0%{ opacity:0; transform:translateX(0); }
-  12%, 38%, 64%{ opacity:.75; transform:translateX(3px); }
-  25%, 51%{ opacity:.25; transform:translateX(0); }
-  80%{ opacity:.6; }
-  100%{ opacity:0; transform:translateX(0); visibility:hidden; }
+  0%{ opacity:0; transform:translateX(-14px); }
+  10%{ opacity:1; transform:translateX(0); }
+  20%{ opacity:.1; transform:translateX(12px); }
+  30%{ opacity:1; transform:translateX(-4px); }
+  40%{ opacity:.1; transform:translateX(12px); }
+  50%{ opacity:1; transform:translateX(-4px); }
+  60%{ opacity:.1; transform:translateX(12px); }
+  72%{ opacity:1; transform:translateX(0); }
+  100%{ opacity:0; transform:translateX(14px); visibility:hidden; }
 }
 @media (max-width:640px) and (prefers-reduced-motion:reduce), (hover:none) and (pointer:coarse) and (prefers-reduced-motion:reduce){
   .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ animation:abas-dica-calma 3.2s ease forwards; }
