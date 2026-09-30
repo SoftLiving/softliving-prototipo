@@ -74,4 +74,16 @@ function definirEstNasComunidades(id, incluir){
   if(incluir) lista.push(id);
   try { localStorage.setItem('v2EstComunidades', JSON.stringify(lista)); } catch(e){}
 }
+// Vitrines favoritas (botão Salvar da página de cada estabelecimento); aparecem no Meu perfil.
+// Sem nada guardado, começa com três favoritas de exemplo.
+const EST_FAVORITOS_INICIAIS = ['Bistrô Alecrim', 'Estúdio Respira', 'Vinhos da Serra'];
+function estFavoritos(){
+  try { const v = JSON.parse(localStorage.getItem('v2EstFavoritos')); if(Array.isArray(v)) return v; } catch(e){}
+  return EST_FAVORITOS_INICIAIS.map(n => (ESTABELECIMENTOS.find(x => x.n === n) || {}).id).filter(x => x != null);
+}
+function definirEstFavorito(id, favorito){
+  const lista = estFavoritos().filter(x => x !== id);
+  if(favorito) lista.push(id);
+  try { localStorage.setItem('v2EstFavoritos', JSON.stringify(lista)); } catch(e){}
+}
 const siglaEstab = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2).slice(0, 2).map(p => p[0]).join('');

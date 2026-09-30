@@ -226,10 +226,12 @@ document.getElementById('esReservar').addEventListener('click', abrirReserva);
 
 // Salvar, como chegar e Minhas Comunidades (incluir / excluir)
 const salvar = document.getElementById('esSalvar');
+if(estFavoritos().includes(e.id)){ salvar.classList.add('on'); salvar.lastChild.textContent = 'Salvo'; }
 salvar.addEventListener('click', () => {
   const on = salvar.classList.toggle('on');
   salvar.lastChild.textContent = on ? 'Salvo' : 'Salvar';
-  mostrarAviso(on ? `${e.n} salvo nos seus favoritos` : 'Removido dos favoritos');
+  definirEstFavorito(e.id, on);   // aparece em Meu perfil › Minhas vitrines favoritas
+  mostrarAviso(on ? `${e.n} salvo nas suas vitrines favoritas` : 'Removido das vitrines favoritas');
 });
 const ES_CHECK = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 function renderBotaoComunidade(){

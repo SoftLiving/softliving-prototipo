@@ -8,6 +8,10 @@ let sobre = pfLer('v2PerfilSobre', 'Carioca, apaixonado por boas conversas, vinh
 let interesses = pfLer('v2PerfilInteresses', ['Vinhos', 'Viagem', 'Tecnologia', 'Longevidade']);
 let privacidade = pfLer('v2PerfilPrivacidade', 'Membros');
 const grupos = GRUPOS.filter(g => g.participando);
+// Minhas comunidades (as comunidades fechadas de DATA, as mesmas de Minhas Comunidades) e vitrines favoritas
+// (estabelecimentos salvos na página de cada um: estFavoritos(), em estabelecimentos-dados.js)
+const PF_FORA = ['hotel', 'restaurante', 'turismo', 'clinica', 'spa', 'petshop'];   // estes são estabelecimentos, não comunidades
+const PF_COMUNIDADES = typeof DATA === 'undefined' ? [] : Object.keys(DATA).filter(k => !PF_FORA.includes(k));
 const saldo = SALDO_BASE + lerBonusCreditos();
 
 document.getElementById('pfTopo').innerHTML = `
@@ -20,7 +24,7 @@ document.getElementById('pfTopo').innerHTML = `
   <div class="pf-numeros">
     <a href="${urlPagina('amigos')}"><b>${PF_AMIGOS.length}</b><span>amigos</span></a>
     <a href="${urlPagina('grupos')}"><b>${grupos.length}</b><span>grupos</span></a>
-    <a href="${urlPagina('comunidades')}"><b>3</b><span>comunidades</span></a>
+    <a href="${urlPagina('comunidades')}"><b>${PF_COMUNIDADES.length}</b><span>comunidades</span></a>
     <a href="${urlPagina('carteira')}"><b>${saldo}</b><span>créditos</span></a>
   </div>`;
 
@@ -65,3 +69,13 @@ document.querySelector('main').addEventListener('click', ev => {
 renderSobre(false);
 renderInteresses();
 renderConta();
+
+document.getElementById('pfComunidades').innerHTML = PF_COMUNIDADES.map(k => `
+  <a href="${LAYOUT_ROOT}comunidades/inicio.html?org=${k}" class="pf-grupo pf-comunidade"><span class="pf-com-ic">${(typeof ICON !== 'undefined' && ICON[DATA[k].orgIcon]) || icone('comunidades')}</span><span><b>${DATA[k].name.replace('SoftLiving', LOGO)}</b><small>${DATA[k].orgType}</small></span></a>`).join('');
+function renderVitrines(){
+  const favs = estFavoritos().map(id => ESTABELECIMENTOS.find(x => x.id === id)).filter(Boolean);
+  document.getElementById('pfVitrines').innerHTML = favs.length ? favs.map(e => `
+    <a href="${urlEstabelecimento(e)}" class="pf-grupo"><img src="${fotoUrl(e.foto, 160)}" alt="" loading="lazy"><span><b>${e.n}</b><small>${e.cat} · ${e.bairro}</small>${e.b ? `<em class="pf-beneficio">${e.b}</em>` : ''}</span></a>`).join('')
+    : `<p class="pf-vazio">Nenhuma vitrine favorita ainda. Na página de um estabelecimento, toque em <b>Salvar</b>.</p>`;
+}
+renderVitrines();
