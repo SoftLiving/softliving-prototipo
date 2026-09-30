@@ -27,7 +27,8 @@ document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
   <a href="#" class="vt-cat"><img src="${fotoUrl(f, 200)}" alt=""><span>${c}</span></a>`).join('');
 
 // Em destaque: cartão vertical com foto, logo, bairro e benefício
-document.getElementById('vtDestaques').innerHTML = embaralhar(ESTABELECIMENTOS).slice(0, 8).map(e => `   // 8 sorteados a cada carregamento
+// 8 estabelecimentos sorteados a cada carregamento
+document.getElementById('vtDestaques').innerHTML = embaralhar(ESTABELECIMENTOS).slice(0, 8).map(e => `
   <a href="${urlEstabelecimento(e)}" class="vcard vt-card">
     <img src="${fotoUrl(e.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
     <div class="vc-info">
