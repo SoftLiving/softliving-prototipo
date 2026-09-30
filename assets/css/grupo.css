@@ -139,3 +139,5 @@
   .gd-anuncios-topo .btn{ width:100%; justify-content:center; }
   .gd-anuncios-topo .seg{ max-width:100%; overflow-x:auto; scrollbar-width:none; }
 }
+/* Campos de comentar e de mensagem: contorno fino dourado ao escrever, como na leitura */
+.gd-comentar textarea:focus, .gd-msg textarea:focus{ outline:none; border-color:#e0a13f; box-shadow:0 0 0 1px rgba(224,161,63,.45); }

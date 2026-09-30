@@ -126,3 +126,5 @@
 .ld-tag-autor{ display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); background:var(--mint); border-radius:999px; padding:2px 8px; vertical-align:2px; }
 .ld-form-resposta{ margin-top:12px; }
 .ld-form-resposta .ld-enviar{ width:42px; height:42px; }
+/* Campo de comentar e responder: ao escrever, contorno fino dourado (no lugar do contorno escuro do navegador) */
+.ld-comentar textarea:focus{ outline:none; border-color:#e0a13f; box-shadow:0 0 0 1px rgba(224,161,63,.45); }
