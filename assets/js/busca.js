@@ -53,7 +53,7 @@ const resConteudo = (c, p) => {
     ${c.e ? `<p>${destacar(c.e, p)}</p>` : ''}<div class="meta"><span>${destacar(c.a, p)}</span><i></i><span>${c.badge === 'premium' ? `${c.credits} crédito` : 'Grátis'}</span></div></div></a>`;
 };
 const resColunista = (col, p) => `
-  <a href="${urlPagina('colunas')}" class="autor">
+  <a href="${urlColunista(col.nome)}" class="autor">
     <span class="av-col" style="background:${col.cor}">${col.sigla}</span>
     <span class="autor-txt"><b>${destacar(col.nome, p)}</b><span class="autor-nicho">${col.aba === 'SoftLiving' ? LOGO : destacar(col.aba, p)}</span><small>${col.coluna ? destacar(col.coluna, p) + ' · ' : ''}${col.publicadas} colunas</small></span>
   </a>`;

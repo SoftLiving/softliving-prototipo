@@ -110,3 +110,4 @@
   .ld-mais-grade .vcard{ aspect-ratio:4 / 3; }
 }
 @media (min-width:641px) and (max-width:980px){ .ld-mais-grade{ grid-template-columns:repeat(2, minmax(0, 1fr)); } .ld-mais-grade .vcard:nth-child(3){ display:none; } }
+.ld-autor-txt a{ color:inherit; } .ld-autor-txt a:hover b{ color:var(--green); text-decoration:underline; }

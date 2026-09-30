@@ -8,6 +8,9 @@ const LAYOUT_PAGE = document.body.dataset.page || '';
 const LAYOUT_SITE = document.body.dataset.site || '';
 // Página de leitura de um conteúdo ou coluna (conteudo.html?t=<título>)
 const urlConteudo = t => `${LAYOUT_ROOT}conteudo.html?t=${encodeURIComponent(t)}`;
+// Apresentação de um colunista (colunista.html?c=bernardo-leitao, o mesmo formato do site)
+const slugNome = n => n.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const urlColunista = nome => `${LAYOUT_ROOT}colunista.html?c=${slugNome(nome)}`;
 // Página interna de um grupo (grupo.html?g=<número em GRUPOS>)
 const urlGrupo = i => `${LAYOUT_ROOT}grupo.html?g=${i}`;
 

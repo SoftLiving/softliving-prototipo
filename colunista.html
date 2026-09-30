@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colunista · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+<link rel="stylesheet" href="assets/css/colunista.css">
+</head>
+<body data-page="colunas" data-root="">
+
+<!-- Apresentação individual de um colunista (colunista.html?c=<nome-do-colunista>, como no site:
+     softliving.com.br/app/colunistas/bernardo-leitao). Montada por colunista.js a partir de COLUNISTAS e das colunas.
+     Estrutura do site: apresentação e bio, número de colunas, compartilhar, última coluna (grátis), arquivo com as
+     anteriores e o valor para desbloquear, e o colunista anterior e o próximo. Sem data de publicação (regra da v2). -->
+<article class="cl" id="clPagina"></article>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<script src="assets/js/texto.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/colunas-dados.js"></script>
+<script src="assets/js/colunista.js"></script>
+</body>
+</html>

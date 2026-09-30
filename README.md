@@ -42,6 +42,8 @@ comunidades/*.html          Minhas Comunidades: os boxes (lista Trocar por) most
 colunas.html                Tela Colunas (referência: softliving.com.br/app/colunistas): coluna do dia com 4 sugestões,
                             navegue por autor, colunistas por categoria e colunas em destaque
 grupos.html                 Tela Grupos: Todos/Participando/Disponíveis, grade com Participar/Sair
+colunista.html              Apresentação de um colunista (?c=bernardo-leitao, como no site): bio, colunas publicadas,
+                            acompanhar, última coluna, arquivo, anterior e próximo (colunista.js, colunista.css)
 conteudo.html               Leitura de um conteúdo ou coluna (?t=título): cabeçalho, capa, texto completo (demonstração),
                             ações (curtir, salvar, compartilhar, ouvir, letra), destravar premium, autor, comentários
                             e Continue lendo (conteudo.js, conteudo.css)

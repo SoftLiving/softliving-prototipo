@@ -79,7 +79,7 @@ function render(){
       ${resumo ? `<p class="ld-resumo">${comLogoLd(escLd(resumo))}</p>` : ''}
       <div class="ld-autor-linha">
         <span class="av-col ld-av" style="background:${autor.cor}" aria-hidden="true">${autor.sigla}</span>
-        <span class="ld-autor-txt"><b>${autor.nome}</b><small>${autor.sub}</small></span>
+        <span class="ld-autor-txt">${col ? `<a href="${urlColunista(col.nome)}"><b>${autor.nome}</b></a>` : `<b>${autor.nome}</b>`}<small>${autor.sub}</small></span>
       </div>
     </header>
     <div class="ld-capa" style="background-image:url('${fotoUrl(c.foto, 1600)}')" role="img" aria-label="Foto do conteúdo"></div>
@@ -112,7 +112,7 @@ function render(){
         <h2>${autor.nome}</h2>
         <p class="ld-quem-sub">${autor.sub}</p>
         <p>${comLogoLd(autor.bio)}</p>
-        ${col ? `<a href="${urlPagina('colunas')}" class="btn ghost">Ver as colunas de ${col.nome.split(' ')[0]}</a>` : ''}
+        ${col ? `<a href="${urlColunista(col.nome)}" class="btn ghost">Conhecer ${col.nome.split(' ')[0]} e as colunas</a>` : ''}
       </div>
     </section>
     <section class="ld-comentarios" id="ldComentarios">

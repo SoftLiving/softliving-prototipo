@@ -56,14 +56,14 @@ function renderColunas(){
   document.getElementById('colunistas').innerHTML = COLUNISTAS.map((col, i) => ({ col, i }))
     .filter(({ col }) => colEstado.categoria === 'Todos' || col.categoria === colEstado.categoria)
     .map(({ col, i }) => `
-    <button type="button" class="colunista ${colEstado.autor === i ? 'on' : ''}" data-autor="${i}" aria-pressed="${colEstado.autor === i}">
+    <a href="${urlColunista(col.nome)}" class="colunista">
       <span class="col-topo">${avatarDe(col)}</span>
       ${col.coluna ? `<span class="col-nome">${comLogo(col.coluna)}</span>` : ''}
       <b>${col.nome}</b>
       <span class="col-tema">${col.categoria === 'SoftLiving' ? LOGO : col.categoria}</span>
       <span class="col-bio">${comLogo(col.bio)}</span>
-      <span class="col-rodape"><small>${col.publicadas} ${col.publicadas === 1 ? 'coluna' : 'colunas'}</small><span class="col-ler">Ler agora →</span></span>
-    </button>`).join('');
+      <span class="col-rodape"><small>${col.publicadas} ${col.publicadas === 1 ? 'coluna' : 'colunas'}</small><span class="col-ler">Conhecer →</span></span>
+    </a>`).join('');
 
   // Colunas em destaque (ou as do autor escolhido)
   const autor = colEstado.autor === null ? null : COLUNISTAS[colEstado.autor];
