@@ -35,7 +35,7 @@ function urlPagina(nome){
   return p ? LAYOUT_ROOT + p.url : '#';
 }
 // Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre o Suporte (Conta e privacidade).
-const SITES = ['conhecer', 'como-funciona', 'beneficios', 'patrocinadores'];
+const SITES = ['conhecer', 'quem-somos', 'como-funciona', 'beneficios', 'patrocinadores'];
 const urlSite = site => SITES.includes(site) ? `${LAYOUT_ROOT}institucional/${site}.html` : urlPagina('ajuda');
 
 // Fotos de exemplo (Unsplash) usadas nos dados: foto:"<id>"
@@ -167,6 +167,7 @@ const LAYOUT_CABECALHO = `
   <a href="${urlPagina('inicio')}" class="sig brand" aria-label="SoftLiving, voltar ao início"><span class="soft">Soft</span><span class="living">Living</span></a>
   <nav class="site-nav" aria-label="Sobre a SoftLiving">
     <a href="${urlSite('conhecer')}" data-site="conhecer">Conhecer</a>
+    <a href="${urlSite('quem-somos')}" data-site="quem-somos">Quem somos</a>
     <a href="${urlSite('como-funciona')}" data-site="como-funciona">Como funciona</a>
     <a href="${urlSite('beneficios')}" data-site="beneficios">Benefícios</a>
     <a href="${urlSite('patrocinadores')}" data-site="patrocinadores">Patrocinadores</a>
@@ -190,7 +191,7 @@ const LAYOUT_RODAPE = `
         <p>Portal de conteúdo e comunidades, sem anúncios, com patrocinadores apoiadores.</p>
       </div>
       <div><h4>A ${LOGO}</h4>
-        <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
+        <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('quem-somos')}">Quem somos</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
       <div><h4>Conteúdos</h4>
         <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="${urlPagina('colunas')}">Colunistas</a></div>
       <div><h4>Comunidade</h4>
@@ -639,6 +640,7 @@ marcarLogado(lerLogado());
 // (celular e telas menores). No computador largo o botão fica escondido e o menu aparece inteiro.
 const SAIBA_MAIS = [
   ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
+  ['quem-somos', 'Quem somos', 'Propósito, missão, visão e valores'],
   ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
   ['beneficios', 'Benefícios', 'O que você ganha como membro'],
   ['seguranca', 'Segurança', 'Privacidade e cuidado com seus dados'],

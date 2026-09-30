@@ -129,7 +129,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* No computador, o logo e o menu de cima começam alinhados à esquerda com o conteúdo (menu lateral 16 + 264 + 24 de respiro) */
 @media (min-width:981px){ .top{ padding-left:304px; } }
 .top .brand{ font-size:32px; }
-.site-nav{ display:flex; gap:22px; font-size:13.5px; color:#5a6470; margin-left:10px; white-space:nowrap; }
+.site-nav{ display:flex; gap:18px; font-size:13.5px; color:#5a6470; margin-left:10px; white-space:nowrap; }
 .site-nav a:hover, .site-nav a.on{ color:var(--green); }
 .tools{ margin-left:auto; display:flex; align-items:center; gap:10px; }
 .round{ width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid var(--line); display:grid; place-items:center; position:relative; padding:0; flex:none; }
@@ -406,6 +406,8 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 /* ===== Telas médias ===== */
 /* Links institucionais do topo: só cabem junto com os botões a partir de ~1100px; abaixo disso ficam no rodapé */
 @media (max-width:1359px){ .site-nav{ display:none; } } /* o menu institucional cabe no topo a partir de 1360px; abaixo disso fica no rodapé (e no Saiba mais do celular) */
+/* 1360 a 1479px: com os 5 links institucionais no topo, "Modo simples" fica só com o ícone (a dica mostra o nome) para caber */
+@media (min-width:1360px) and (max-width:1479px){ .tools > .btn.simples{ font-size:0; gap:0; width:40px; padding:0; justify-content:center; } .tools > .btn.simples .ic{ width:18px; height:18px; } }
 /* Coluna do conteúdo estreita (menos de 1000px, por exemplo com a lateral aberta): cartões de assunto em 2 colunas e grupos
    embaixo do depoimento (em 4 colunas o título invade a foto) */
 @container (max-width:1000px){ .cards{ grid-template-columns:repeat(2,1fr); } .community{ grid-template-columns:1fr; } .tabs.folder .btn{ display:none; } }
