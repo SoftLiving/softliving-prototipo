@@ -146,9 +146,10 @@ function renderTopo(){
         <b>${amigos[0]}</b>${amigos.length > 1 ? ` e mais ${amigos.length - 1} ${amigos.length === 2 ? 'amigo' : 'amigos'}` : ''} ${amigos.length > 1 ? 'participam' : 'participa'} deste grupo</p>` : ''}
       <div class="es-acoes">
         ${grupo.participando
-          ? `<span class="btn gd-membro">${gdIcone('check')}Você participa</span><button type="button" class="btn ghost" id="gdSair">${gdIcone('sair')}Sair do grupo</button>`
+          ? `<span class="btn gd-membro">${gdIcone('check')}Você participa</span>`
           : `<button type="button" class="btn" id="gdEntrar">${icone('mais')}Participar${grupo.premium ? ' · 10 créditos por mês' : ''}</button>`}
         <button type="button" class="btn ghost" id="gdConvidar">${gdIcone('convidar')}Convidar amigos</button>
+        ${grupo.participando ? `<button type="button" class="btn ghost" id="gdSair">${gdIcone('sair')}Sair do grupo</button>` : ''}
       </div>
     </div>`;
 }
