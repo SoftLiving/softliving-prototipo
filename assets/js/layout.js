@@ -743,6 +743,20 @@ if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
     </section>`);
   const boxEntrar = document.querySelector('.pla-box');
   boxEntrar.addEventListener('click', e => cliqueEntrar(e, boxEntrar));
+  // Box centralizado na tela inteira, não só na área do conteúdo (que começa depois do espaço do menu lateral);
+  // se a tela for estreita, para logo ao lado do menu, sem passar por cima dele.
+  function centralizarBox(){
+    boxEntrar.style.translate = '';
+    if(document.body.classList.contains('logado')) return;
+    const r = boxEntrar.getBoundingClientRect(), menu = document.querySelector('.side').getBoundingClientRect();
+    const minimo = menu.right > 0 ? menu.right + 16 : 0;              // no celular o menu é a gaveta escondida
+    const dx = Math.max(innerWidth / 2 - (r.left + r.width / 2), minimo - r.left);
+    boxEntrar.style.translate = `${Math.round(dx)}px 0`;
+  }
+  centralizarBox();
+  addEventListener('resize', centralizarBox);
+  addEventListener('load', centralizarBox);
+  document.getElementById('collapseBtn').addEventListener('click', () => requestAnimationFrame(centralizarBox));
 }
 marcarLogado(lerLogado());
 

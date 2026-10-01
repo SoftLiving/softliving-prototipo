@@ -1719,6 +1719,7 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
   body.pede-login:not(.logado) .app.mini .side-wrap:hover, body.pede-login:not(.logado) .app.mini .side-wrap:focus-within{ opacity:1; }
 }
 /* Tela de login: o box de entrada no centro, sobre o fundo de sempre do site; mesmo conteúdo e visual da janela Entrar */
+body.pede-login:not(.logado) .main{ overflow-x:visible; }   /* o box é centralizado na tela (layout.js) e pode passar da borda da área do conteúdo */
 .pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 0; }
 .pla-box{ width:100%; max-width:420px; border-radius:26px; overflow:hidden;
   background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.95); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
