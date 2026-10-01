@@ -48,13 +48,33 @@
 .ld-demo{ font-size:13px !important; color:var(--muted) !important; margin-bottom:1.6em !important; padding:8px 12px; border-radius:12px; background:#fdf6e3; border:1px dashed #e3c77f; display:inline-block; }
 
 /* Convite para destravar (conteúdo premium) */
-.ld-trava{ position:relative; margin-top:-5em; padding:6em 0 0; text-align:center; background:linear-gradient(to bottom, rgba(250,248,244,0), var(--paper) 42%); }
+.ld-trava{ position:relative; margin-top:-4.5em; padding-top:5.5em; background:linear-gradient(to bottom, rgba(250,248,244,0), var(--paper) 30%); }
 .ld-trava > *{ position:relative; }
+/* Prévia: o parágrafo seguinte, desfocado e sumindo aos poucos, por baixo do convite */
+.ld-texto .ld-previa{ filter:blur(4px); opacity:.75; user-select:none; pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom, #000 20%, transparent); mask-image:linear-gradient(to bottom, #000 20%, transparent); }
+/* A seguir neste conteúdo: os intertítulos das partes fechadas */
+.ld-seguir{ margin:0 0 22px; padding:18px 22px; border-radius:20px; background:rgba(255,255,255,.55); border:1px dashed var(--line-2); }
+.ld-seguir .ld-rotulo{ display:block; margin-bottom:8px; }
+.ld-seguir ol{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.ld-seguir li{ display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-size:17px !important; line-height:1.35; color:var(--navy); margin:0 !important; }
+.ld-seguir li .ic{ width:15px; height:15px; flex:none; color:#b8892e; }
+/* Box do convite */
+.ld-trava-box{ text-align:center; padding:30px 30px 24px; border-radius:28px; background:linear-gradient(180deg, #fffaf0, #fff); border:1px solid #f0ddac;
+  box-shadow:0 18px 40px rgba(138,90,14,.12), var(--vidro-brilho); }
 .ld-trava-ic{ display:inline-grid; place-items:center; width:54px; height:54px; border-radius:50%; background:#fdf1dc; color:#8a5a0e; margin-bottom:10px; }
 .ld-trava-ic .ic{ width:24px; height:24px; }
-.ld-trava h2{ margin:0 0 .4em !important; }
-.ld-trava p{ max-width:520px; margin:0 auto 1.2em !important; color:var(--text-2) !important; font-size:16px !important; }
-.ld-trava-link{ display:block; margin-top:12px; font-size:14px; font-weight:600; color:var(--green); text-decoration:underline; }
+.ld-trava-box h2{ margin:0 0 .45em !important; }
+.ld-trava-box .ld-trava-msg{ max-width:540px; margin:0 auto 18px !important; color:var(--text-2) !important; font-size:16.5px !important; line-height:1.6 !important; }
+.ld-motivos{ list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:0 0 20px; padding:0; }
+.ld-motivos li{ display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border-radius:999px; background:#e3f2ea; color:#1f5c3d; font-size:13.5px !important; font-weight:600; line-height:1.2; margin:0 !important; }
+.ld-motivos li .ic{ width:15px; height:15px; flex:none; }
+.ld-trava-preco{ display:flex; justify-content:center; flex-wrap:wrap; gap:6px 18px; margin:0 0 16px; font-size:14px; color:var(--text-2); }
+.ld-trava-preco b{ color:var(--navy); }
+.ld-trava-preco .falta b{ color:#b3261e; }
+.ld-trava-box .btn.lg .ic{ width:17px; height:17px; }
+.ld-trava-box .ld-trava-nota{ margin:12px auto 0 !important; max-width:460px; font-size:13px !important; color:var(--muted) !important; line-height:1.5 !important; }
+.ld-trava-link{ display:inline-block; margin-top:10px; font-size:14px; font-weight:600; color:var(--green); text-decoration:underline; }
 
 /* Quem escreveu */
 .ld-quem{ display:flex; gap:20px; align-items:flex-start; max-width:886px; margin:0 auto 48px; padding:26px 28px; border-radius:26px;
@@ -99,6 +119,9 @@
   .ld-letra button{ width:44px; }
 }
 @media (max-width:640px){
+  .ld-trava-box{ padding:24px 18px 20px; border-radius:22px; }
+  .ld-seguir{ padding:14px 16px; }
+  .ld-motivos li{ font-size:12.5px !important; }
   .ld-topo h1{ font-size:34px; }
   .ld-resumo{ font-size:18px; }
   .ld-capa{ aspect-ratio:16 / 10; border-radius:22px; margin-bottom:26px; }
