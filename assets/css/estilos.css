@@ -227,8 +227,9 @@ body{ overflow-x:hidden; overflow-x:clip; }
 .es-box{ background:linear-gradient(160deg, #0b4a85, var(--navy) 70%); border-color:rgba(255,255,255,.18); color:#fff;
   box-shadow:0 12px 30px rgba(1,53,101,.22), inset 0 1px 0 rgba(255,255,255,.14); } /* pesquisa de opinião: box azul */
 .es-box .lat-head h2{ color:#fff; }
-.es-sub{ font-size:12.5px; color:rgba(255,255,255,.78); margin:-4px 0 12px; line-height:1.5; }
-.es-sub b{ color:#f5c46b; }
+/* .es-box na frente: a página de estabelecimento (vitrine.css) também tem um .es-sub, cinza, que deixava este ilegível */
+.es-box .es-sub{ font-size:12.5px; color:rgba(255,255,255,.82); margin:-4px 0 12px; line-height:1.5; }
+.es-box .es-sub b{ color:#f5c46b; }
 .es-progress{ display:flex; align-items:center; gap:10px; font-size:11.5px; color:rgba(255,255,255,.72); margin-bottom:10px; }
 .es-progress span:first-child{ white-space:nowrap; }
 .es-bar{ flex:1; height:5px; background:rgba(255,255,255,.18); border-radius:999px; overflow:hidden; }
@@ -249,7 +250,7 @@ body{ overflow-x:hidden; overflow-x:clip; }
 .es-send{ flex:1; background:#e0a13f; color:#1d2430; border:none; border-radius:999px; padding:10px 14px; font-size:13px; font-weight:700; cursor:pointer;
   transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .es-send:hover:not(:disabled){ background:#f0b556; transform:translateY(-2px); box-shadow:0 8px 18px rgba(0,0,0,.22); }
-.es-send:disabled{ background:rgba(255,255,255,.14); color:rgba(255,255,255,.5); cursor:not-allowed; }
+.es-send:disabled{ background:rgba(255,255,255,.14); color:rgba(255,255,255,.72); cursor:not-allowed; }   /* desativado até escolher uma resposta, mas legível */
 .es-skip{ background:none; border:none; color:rgba(255,255,255,.75); font-size:13px; font-weight:600; padding:6px; cursor:pointer; }
 .es-skip:hover{ color:#fff; }
 .es-fim-t{ font-size:14.5px; color:#fff; line-height:1.45; margin:0 0 6px; }
