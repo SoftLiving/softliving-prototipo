@@ -814,13 +814,12 @@ function tituloDoFav(fav){
 function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
 // Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada
 // carregamento da página (a ordem se mantém enquanto a pessoa troca abas e filtros)
-// Selo de acesso dos conteúdos (todos os cartões do site): Grátis, o preço em créditos com cadeado (pago, ainda
-// fechado) ou Desbloqueado (pago e já destravado pela pessoa). O destravar acontece na tela do conteúdo (conteudo.js),
-// que guarda o título em v2Destravados; conteúdos com badge 'destravado' nos dados já vêm desbloqueados.
+// Selo de acesso dos conteúdos (todos os cartões do site): Grátis ou o preço em créditos com cadeado (pago, ainda
+// fechado). Conteúdo pago já destravado pela pessoa fica sem selo. O destravar acontece na tela do conteúdo
+// (conteudo.js), que guarda o título em v2Destravados; conteúdos com badge 'destravado' nos dados já vêm destravados.
 function lerDestravados(){ try { const v = JSON.parse(localStorage.getItem('v2Destravados')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
 function seloAcesso(c){
-  if(c.badge === 'destravado' || (c.badge === 'premium' && lerDestravados().includes(c.t)))
-    return `<span class="selo-acesso liberado">${icone('cadeadoAberto')}Desbloqueado</span>`;
+  if(c.badge === 'destravado' || (c.badge === 'premium' && lerDestravados().includes(c.t))) return '';
   if(c.badge === 'premium') return `<span class="selo-acesso pago">${icone('cadeado')}${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`;
   return '<span class="selo-acesso gratis">Grátis</span>';
 }

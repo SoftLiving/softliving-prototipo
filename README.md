@@ -123,8 +123,8 @@ menos de 1000px (container query).
   Entrar com os campos vazios, ou e-mail `123` e senha `123`.
 
 - **Selo de acesso nos cartões de conteúdo:** todo cartão de conteúdo mostra um selo (`seloAcesso(c)` no `layout.js`):
-  "Grátis" (verde), o preço com cadeado, ex. "2 créditos" (dourado), ou "Desbloqueado" com cadeado aberto (azul) para
-  conteúdo pago que a pessoa já destravou. O destravar é feito na tela do conteúdo, depois de clicar no cartão: debita os
+  "Grátis" (verde) ou o preço com cadeado, ex. "2 créditos" (dourado); conteúdo pago que a pessoa já destravou fica
+  sem selo. O destravar é feito na tela do conteúdo, depois de clicar no cartão: debita os
   créditos da carteira (`comprarConteudo` no `layout.js`, compras em `v2Compras`, que entram no extrato da Carteira) e
   fica guardado em `v2Destravados`. O saldo de todo o site vem de `saldoCreditos()`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
 
