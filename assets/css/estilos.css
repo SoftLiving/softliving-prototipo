@@ -57,7 +57,9 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .wrap{ max-width:1180px; margin:0; padding:0 24px; position:relative; } /* alinhado à esquerda, perto da barra: sobra espaço à direita */
 /* Corpo: coluna do conteúdo + coluna lateral da direita (só nas páginas que têm <aside class="lateral">, hoje a Início).
    A lateral é a faixa clara que vai até a borda da janela, a 24px do conteúdo (a mesma distância da barra esquerda). */
-.main{ overflow-x:hidden; overflow-x:clip; }
+/* O corte do que passa para o lado fica na janela (body), não na área do conteúdo: assim as sombras e caixas brancas do
+   hover perto da borda do conteúdo não são cortadas, e a página continua sem rolagem para o lado. */
+body{ overflow-x:hidden; overflow-x:clip; }
 .corpo{ display:flex; align-items:stretch; }
 .corpo > .wrap{ flex:0 1 1180px; min-width:0; container-type:inline-size; }
 .lateral{ flex:1 0 340px; margin:36px 0 72px; padding:24px 28px 40px 24px; /* topo alinhado ao primeiro elemento do conteúdo (abertura) e fim alinhado ao fim do último box (newsletter) */ border-radius:26px 0 0 26px;
@@ -1374,8 +1376,12 @@ body{ background:
   overflow:hidden;
   padding:14px !important; margin:-14px !important; }
 .trilho-h > *{ min-width:0; }
+/* Lados: cabem a caixa branca do hover (16px) e a sombra (24px). À direita, 40px só com a coluna da direita ao lado
+   (a partir de 1200px); abaixo disso, até a borda da página (24px; 16px no celular), para não criar rolagem para o lado. */
 .trilho-v{ position:relative; overflow:hidden;
-  padding:8px 16px; margin:-8px -16px; }
+  padding:8px 24px 8px 40px; margin:-8px -24px -8px -40px; }
+@media (min-width:1200px){ .trilho-v{ padding-right:40px; margin-right:-40px; } }
+@media (max-width:640px){ .trilho-v{ padding:8px 16px; margin:-8px -16px; } }
 .trilho-v > *{ flex:none; }
 .trilho-h::-webkit-scrollbar, .trilho-v::-webkit-scrollbar{ display:none; }
 .cards.trilho-h{ --vis:4; }
@@ -1719,7 +1725,6 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
   body.pede-login:not(.logado) .app.mini .side-wrap:hover, body.pede-login:not(.logado) .app.mini .side-wrap:focus-within{ opacity:1; }
 }
 /* Tela de login: o box de entrada no centro, sobre o fundo de sempre do site; mesmo conteúdo e visual da janela Entrar */
-body.pede-login:not(.logado) .main{ overflow-x:visible; }   /* o box é centralizado na tela (layout.js) e pode passar da borda da área do conteúdo */
 .pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 0; }
 .pla-box{ width:100%; max-width:420px; border-radius:26px; overflow:hidden;
   background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.95); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
