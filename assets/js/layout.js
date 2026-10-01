@@ -756,10 +756,15 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
   document.body.prepend(tela);
   const ctx = tela.getContext('2d');
   const ESCALA = 0.25;                                           // desenha a 25% do tamanho da tela (bordas mais definidas)
-  const VELOCIDADE = 4;                                          // multiplica a velocidade de todas as ondas
+  const VELOCIDADE = 7;                                          // multiplica a velocidade de todas as ondas
   const sorteio = (a, b) => a + Math.random() * (b - a);
   // Cada mancha: centro, duas ondas por eixo, raio que respira e tom de verde que passeia (matiz 75 a 150)
-  const manchas = Array.from({ length: 9 }, (_, i) => ({
+  // Movimento extra de cada mancha: terceira onda no caminho (muda de direção mais vezes), giro e esticar/achatar
+  const extras = () => ({
+    cx3: sorteio(.04, .1), cy3: sorteio(.04, .1), f3: sorteio(.09, .16), p3: sorteio(0, 6.3), p4: sorteio(0, 6.3),
+    giro: sorteio(0, 6.3), fgiro: sorteio(-.08, .08), estica: sorteio(.25, .55), festica: sorteio(.04, .09), pestica: sorteio(0, 6.3),
+  });
+  const manchas = Array.from({ length: 9 }, (_, i) => ({ ...extras(),
     cx: sorteio(.1, .9), cy: sorteio(.1, .9),
     ax: sorteio(.18, .38), ay: sorteio(.16, .34), bx: sorteio(.06, .16), by: sorteio(.06, .16),
     fx: sorteio(.018, .045), fy: sorteio(.015, .04), gx: sorteio(.05, .09), gy: sorteio(.045, .085),
@@ -770,7 +775,7 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
     a: sorteio(.55, .85), nitida: false,
   }));
   // Quatro manchas menores e de borda firme: pontos menos embaçados no meio do desfoque
-  for(let i = 0; i < 4; i++) manchas.push({
+  for(let i = 0; i < 4; i++) manchas.push({ ...extras(),
     cx: sorteio(.15, .85), cy: sorteio(.15, .85),
     ax: sorteio(.2, .35), ay: sorteio(.18, .3), bx: sorteio(.05, .12), by: sorteio(.05, .12),
     fx: sorteio(.025, .05), fy: sorteio(.02, .045), gx: sorteio(.06, .1), gy: sorteio(.05, .09),
@@ -800,11 +805,16 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
     ctx.fillStyle = base;
     ctx.fillRect(0, 0, w, h);
     manchas.forEach(b => {
-      const x = (b.cx + b.ax * Math.sin(t * b.fx + b.px) + b.bx * Math.sin(t * b.gx + b.qx)) * w;
-      const y = (b.cy + b.ay * Math.sin(t * b.fy + b.py) + b.by * Math.sin(t * b.gy + b.qy)) * h;
+      const x = (b.cx + b.ax * Math.sin(t * b.fx + b.px) + b.bx * Math.sin(t * b.gx + b.qx) + b.cx3 * Math.sin(t * b.f3 + b.p3)) * w;
+      const y = (b.cy + b.ay * Math.sin(t * b.fy + b.py) + b.by * Math.sin(t * b.gy + b.qy) + b.cy3 * Math.cos(t * b.f3 * 1.3 + b.p4)) * h;
       const r = b.r * (1 + .22 * Math.sin(t * b.fr + b.pr)) * m;
       const tom = b.h + 22 * Math.sin(t * b.fh + b.ph);
-      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      // forma oval que gira e estica/achata: desenha o círculo num espaço girado e esticado
+      const e = 1 + b.estica * Math.sin(t * b.festica + b.pestica);
+      ctx.setTransform(1, 0, 0, 1, x, y);
+      ctx.rotate(b.giro + t * b.fgiro);
+      ctx.scale(e, 1 / e);
+      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r);
       g.addColorStop(0, `hsla(${tom}, 48%, ${b.l}%, ${b.a})`);
       if(b.nitida){                                               // cor firme até perto da borda, que some rápido
         g.addColorStop(.72, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .9})`);
@@ -812,8 +822,9 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
       } else g.addColorStop(.55, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .45})`);
       g.addColorStop(1, `hsla(${tom}, 48%, ${b.l}%, 0)`);
       ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
+      ctx.fillRect(-r, -r, r * 2, r * 2);
     });
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
   requestAnimationFrame(quadro);
 }
