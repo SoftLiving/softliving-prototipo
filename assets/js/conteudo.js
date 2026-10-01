@@ -79,8 +79,7 @@ function corpoTexto(){
 }
 
 // ===== Convite para destravar (conteúdo pago) =====
-// Prévia: depois dos parágrafos abertos, o próximo aparece desfocado e some aos poucos, e a lista "A seguir" mostra os
-// intertítulos das partes fechadas. No box, o título, a mensagem e três motivos são sorteados a cada vez que o conteúdo
+// Prévia: depois dos parágrafos abertos, o próximo aparece desfocado e some aos poucos. No box, o título, a mensagem e três motivos são sorteados a cada vez que o conteúdo
 // abre (10 títulos e 10 mensagens), sempre explicando por que pagar: a SoftLiving não vende anúncios nem dados, e a
 // curadoria com especialistas é paga pelos créditos de quem lê.
 const travaPreco = `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}`;
@@ -107,7 +106,6 @@ const trava = { titulo:embaralhar(TRAVA_TITULOS)[0], mensagem:embaralhar(TRAVA_M
 function htmlTrava(){
   const resto = paragrafos.slice(3);
   const borrado = resto.find(p => !p.startsWith('## '));
-  const partes = resto.filter(p => p.startsWith('## ')).map(p => p.slice(3)).slice(0, 4);
   const saldo = saldoCreditos(), logado = lerLogado(), falta = saldo < c.credits;
   const botao = !logado ? `<button type="button" class="btn lg" data-entrar-destravar>Entrar para destravar</button>`
     : falta ? `<a href="${urlPagina('carteira')}#recarga" class="btn lg">Recarregar créditos</a>`
@@ -115,11 +113,6 @@ function htmlTrava(){
   return `
     ${borrado ? `<p class="ld-previa" aria-hidden="true">${comLogoLd(escLd(borrado))}</p>` : ''}
     <div class="ld-trava">
-      ${partes.length ? `
-      <div class="ld-seguir">
-        <span class="ld-rotulo">A seguir neste conteúdo</span>
-        <ol>${partes.map(t => `<li>${ldIcone('cadeado')}<span>${comLogoLd(escLd(t))}</span></li>`).join('')}</ol>
-      </div>` : ''}
       <div class="ld-trava-box">
         <span class="ld-trava-ic">${ldIcone('cadeado')}</span>
         <h2>${trava.titulo}</h2>
@@ -130,7 +123,7 @@ function htmlTrava(){
           ${logado ? `<span class="${falta ? 'falta' : ''}">Seu saldo: <b>${saldo} créditos</b></span>` : ''}
         </div>
         ${botao}
-        <p class="ld-trava-nota">${falta && logado ? `${c.credits - saldo === 1 ? 'Falta 1 crédito' : `Faltam ${c.credits - saldo} créditos`}. Na primeira recarga, R$50 viram 100 créditos.` : `Ao destravar, ${travaPreco} saem da sua carteira. Destravado uma vez, fica na sua conta para sempre.`}</p>
+        <p class="ld-trava-nota">${falta && logado ? `${c.credits - saldo === 1 ? 'Falta 1 crédito' : `Faltam ${c.credits - saldo} créditos`}. Na primeira recarga, R$50 viram 100 créditos.` : `Ao destravar, ${travaPreco} ${c.credits === 1 ? 'sai' : 'saem'} da sua carteira. Destravado uma vez, fica na sua conta para sempre.`}</p>
         <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
       </div>
     </div>`;
