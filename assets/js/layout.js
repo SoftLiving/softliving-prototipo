@@ -755,7 +755,8 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
   tela.setAttribute('aria-hidden', 'true');
   document.body.prepend(tela);
   const ctx = tela.getContext('2d');
-  const ESCALA = 0.12;                                           // desenha a 12% do tamanho da tela
+  const ESCALA = 0.25;                                           // desenha a 25% do tamanho da tela (bordas mais definidas)
+  const VELOCIDADE = 4;                                          // multiplica a velocidade de todas as ondas
   const sorteio = (a, b) => a + Math.random() * (b - a);
   // Cada mancha: centro, duas ondas por eixo, raio que respira e tom de verde que passeia (matiz 75 a 150)
   const manchas = Array.from({ length: 9 }, (_, i) => ({
@@ -766,8 +767,19 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
     r: sorteio(.32, .58), fr: sorteio(.03, .07), pr: sorteio(0, 6.3),
     h: sorteio(85, 140), fh: sorteio(.01, .03), ph: sorteio(0, 6.3),
     l: i < 3 ? sorteio(68, 80) : i < 6 ? sorteio(42, 55) : sorteio(18, 30),   // claras, médias e escuras
-    a: sorteio(.55, .85),
+    a: sorteio(.55, .85), nitida: false,
   }));
+  // Quatro manchas menores e de borda firme: pontos menos embaçados no meio do desfoque
+  for(let i = 0; i < 4; i++) manchas.push({
+    cx: sorteio(.15, .85), cy: sorteio(.15, .85),
+    ax: sorteio(.2, .35), ay: sorteio(.18, .3), bx: sorteio(.05, .12), by: sorteio(.05, .12),
+    fx: sorteio(.025, .05), fy: sorteio(.02, .045), gx: sorteio(.06, .1), gy: sorteio(.05, .09),
+    px: sorteio(0, 6.3), py: sorteio(0, 6.3), qx: sorteio(0, 6.3), qy: sorteio(0, 6.3),
+    r: sorteio(.07, .13), fr: sorteio(.05, .1), pr: sorteio(0, 6.3),
+    h: sorteio(80, 140), fh: sorteio(.02, .04), ph: sorteio(0, 6.3),
+    l: i % 2 ? sorteio(72, 84) : sorteio(22, 34),
+    a: sorteio(.55, .75), nitida: true,
+  });
   function ajustarTamanho(){
     tela.width = Math.max(64, Math.round(innerWidth * ESCALA));
     tela.height = Math.max(64, Math.round(innerHeight * ESCALA));
@@ -778,9 +790,9 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
   let ultimo = 0;
   function quadro(agora){
     requestAnimationFrame(quadro);
-    if(document.body.classList.contains('logado') || agora - ultimo < 40) return;   // ~25 quadros por segundo
+    if(document.body.classList.contains('logado') || agora - ultimo < 33) return;   // ~30 quadros por segundo
     ultimo = agora;
-    const t = (agora - inicio) / 1000, w = tela.width, h = tela.height, m = Math.max(w, h);
+    const t = (agora - inicio) / 1000 * VELOCIDADE, w = tela.width, h = tela.height, m = Math.max(w, h);
     ctx.globalCompositeOperation = 'source-over';
     const base = ctx.createLinearGradient(0, 0, w, h);
     base.addColorStop(0, `hsl(${100 + 12 * Math.sin(t * .02)}, 38%, 62%)`);
@@ -794,7 +806,10 @@ if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduc
       const tom = b.h + 22 * Math.sin(t * b.fh + b.ph);
       const g = ctx.createRadialGradient(x, y, 0, x, y, r);
       g.addColorStop(0, `hsla(${tom}, 48%, ${b.l}%, ${b.a})`);
-      g.addColorStop(.55, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .45})`);
+      if(b.nitida){                                               // cor firme até perto da borda, que some rápido
+        g.addColorStop(.72, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .9})`);
+        g.addColorStop(.9, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .25})`);
+      } else g.addColorStop(.55, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .45})`);
       g.addColorStop(1, `hsla(${tom}, 48%, ${b.l}%, 0)`);
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
