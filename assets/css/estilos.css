@@ -1731,9 +1731,32 @@ body.pede-login:not(.logado) .top{ background:rgba(255,255,255,.72); -webkit-bac
 .pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 24px; }
 /* Página sem login: o conteúdo ocupa a largura toda (sem o espaço da coluna da direita), para a foto ir de ponta a ponta */
 body.pede-login:not(.logado) .corpo::after{ content:none !important; }
-body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; }
+body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; max-width:none; }   /* box e telas centralizados também em telas largas */
 /* Box de vidro: mesmo conteúdo da janela Entrar, em branco sobre a foto */
-.pla-box{ width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden; text-shadow:0 1px 2px rgba(10,40,10,.35);
+/* Telas de vidro em volta do box (computador): linhas finas em verde claro e transparente, levemente inclinadas, em
+   profundidades diferentes, flutuando devagar. Abaixo de 1200px somem (não há espaço ao lado do box). */
+.pede-login-aviso{ position:relative; perspective:1400px; }
+.pla-telas{ position:absolute; inset:0; max-width:1500px; margin:0 auto; pointer-events:none; }
+.pla-tela{ position:absolute; width:270px; padding:12px 14px 14px; border-radius:20px; color:rgba(232,246,222,.85);
+  background:linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); border:1px solid rgba(235,248,225,.45);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); box-shadow:0 18px 40px rgba(10,40,10,.12);
+  animation:plaFlutua 11s ease-in-out infinite alternate; }
+.pla-tela svg{ display:block; width:100%; height:auto; stroke:rgba(232,246,222,.72); stroke-width:1.1; stroke-linecap:round; stroke-linejoin:round; }
+.pla-tela-topo{ display:flex; align-items:center; gap:5px; margin-bottom:10px; }
+.pla-tela-topo b{ flex:1; font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:rgba(240,250,232,.85); }
+.pla-tela-topo span{ width:6px; height:6px; border-radius:50%; border:1px solid rgba(232,246,222,.6); }
+/* posição, inclinação e profundidade de cada tela (as mais distantes, menores e mais apagadas) */
+.pla-tela.t1{ left:1%;  top:4%;  --rot:rotateY(14deg) rotateZ(-2deg); width:300px; }
+.pla-tela.t2{ left:4%;  top:40%; --rot:rotateY(18deg) translateZ(-60px); opacity:.8; animation-delay:-3s; }
+.pla-tela.t3{ left:0%;  top:70%; --rot:rotateY(12deg) rotateZ(1.5deg); width:290px; animation-delay:-6s; }
+.pla-tela.t4{ right:1%; top:3%;  --rot:rotateY(-14deg) rotateZ(2deg); width:250px; animation-delay:-2s; }
+.pla-tela.t5{ right:3%; top:35%; --rot:rotateY(-18deg); width:300px; animation-delay:-8s; }
+.pla-tela.t6{ right:0%; top:70%; --rot:rotateY(-12deg) rotateZ(-1.5deg) translateZ(-50px); opacity:.8; animation-delay:-5s; }
+@keyframes plaFlutua{ from{ transform:var(--rot) translateY(0); } to{ transform:var(--rot) translateY(-14px); } }
+@media (prefers-reduced-motion: reduce){ .pla-tela{ animation:none; transform:var(--rot); } }
+@media (max-width:1439px){ .pla-tela{ width:230px !important; } }
+@media (max-width:1199px){ .pla-telas{ display:none; } }
+.pla-box{ position:relative; z-index:1; width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden; text-shadow:0 1px 2px rgba(10,40,10,.35);
   background:linear-gradient(160deg, rgba(255,255,255,.22), rgba(20,60,20,.22)); border:1.5px solid rgba(255,255,255,.75);
   -webkit-backdrop-filter:blur(18px) saturate(1.3); backdrop-filter:blur(18px) saturate(1.3); box-shadow:0 24px 60px rgba(0,0,0,.25); }
 .pla-box .enj-topo{ padding:30px 28px 6px; }

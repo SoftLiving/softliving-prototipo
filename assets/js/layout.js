@@ -731,6 +731,49 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   marcarLogado(false);
   mostrarAviso('Você saiu da conta');
 });
+// Telas de vidro em volta do box de login: ilustram o que o portal tem depois de entrar. Só linhas finas num verde claro
+// e transparente, sem cor chapada; decorativas (aria-hidden, sem clique). Cada uma: [classe de posição, título, desenho].
+const TELAS_LOGIN_LISTA = [
+  ['t1', 'Conteúdos', `
+    <rect x="8" y="10" width="68" height="44" rx="6"/><path d="M14 46l14-14 10 9 8-6 14 11"/><circle cx="62" cy="22" r="4"/>
+    <rect x="86" y="10" width="68" height="44" rx="6"/><path d="M92 46l18-16 12 10 8-5 18 11"/>
+    <rect x="164" y="10" width="68" height="44" rx="6"/><path d="M170 46l12-10 10 6 14-12 20 16"/><circle cx="182" cy="22" r="3.5"/>
+    <path d="M8 64h56M8 72h40M86 64h60M86 72h36M164 64h52M164 72h44"/>
+    <rect x="8" y="86" width="224" height="44" rx="8"/><rect x="16" y="94" width="40" height="28" rx="5"/><path d="M66 100h100M66 110h130M66 118h70"/><path d="M208 102l6 6-6 6"/>`],
+  ['t2', 'Grupos', `
+    <circle cx="22" cy="22" r="10"/><circle cx="22" cy="19" r="3.5"/><path d="M15 29a8 8 0 0 1 14 0"/>
+    <rect x="40" y="10" width="120" height="26" rx="13"/><path d="M52 20h80M52 27h50"/>
+    <circle cx="218" cy="62" r="10"/><circle cx="218" cy="59" r="3.5"/><path d="M211 69a8 8 0 0 1 14 0"/>
+    <rect x="80" y="48" width="126" height="26" rx="13"/><path d="M92 58h90M92 65h60"/>
+    <circle cx="22" cy="102" r="10"/><circle cx="22" cy="99" r="3.5"/><path d="M15 109a8 8 0 0 1 14 0"/>
+    <rect x="40" y="88" width="150" height="34" rx="14"/><path d="M52 100h110M52 108h80M52 115h40"/>
+    <rect x="10" y="132" width="220" height="14" rx="7"/><path d="M218 139h-6"/>`],
+  ['t3', 'Minhas Comunidades', `
+    <rect x="8" y="8" width="62" height="20" rx="10"/><rect x="76" y="8" width="62" height="20" rx="10"/><rect x="144" y="8" width="62" height="20" rx="10"/>
+    <path d="M22 18h34M90 18h34M158 18h34"/>
+    <rect x="8" y="40" width="224" height="28" rx="9"/><rect x="16" y="46" width="16" height="16" rx="4"/><path d="M42 50h90M42 58h60"/><path d="M214 50l5 4-5 4"/>
+    <rect x="8" y="76" width="224" height="28" rx="9"/><circle cx="24" cy="90" r="8"/><path d="M42 86h110M42 94h70"/><path d="M214 86l5 4-5 4"/>
+    <rect x="8" y="112" width="224" height="28" rx="9"/><path d="M18 132v-12l6-4 6 4v12M22 132v-6h4v6"/><path d="M42 122h80M42 130h100"/><path d="M214 122l5 4-5 4"/>`],
+  ['t4', 'Carteira', `
+    <rect x="10" y="8" width="132" height="82" rx="12"/><path d="M10 30h132"/><rect x="22" y="44" width="22" height="16" rx="3"/><path d="M22 76h60M100 76h28"/>
+    <path d="M160 90V60M178 90V44M196 90V52M214 90V28M232 90V38" stroke-width="5" stroke-linecap="round"/>
+    <path d="M10 104h222"/><path d="M10 118h80M10 128h120"/><circle cx="214" cy="122" r="11"/><path d="M214 116v12M208 122h12"/>`],
+  ['t5', 'Vitrine', `
+    <circle cx="28" cy="28" r="18"/><circle cx="76" cy="28" r="18"/><circle cx="124" cy="28" r="18"/><circle cx="172" cy="28" r="18"/><circle cx="220" cy="28" r="18" stroke-dasharray="3 4"/>
+    <path d="M20 32c4-8 12-8 16 0M70 22h12v12H70zM118 34l6-12 6 12zM166 30a6 6 0 1 0 12 0a6 6 0 1 0-12 0"/>
+    <path d="M12 56h32M60 56h32M108 56h32M156 56h32"/>
+    <rect x="8" y="70" width="108" height="72" rx="10"/><path d="M8 100h108M18 112h60M18 122h80M18 132h40"/><path d="M30 92l14-12 12 8 14-10 18 14"/>
+    <rect x="126" y="70" width="108" height="72" rx="10"/><path d="M126 100h108M136 112h70M136 122h50M136 132h76"/><path d="M146 92l18-14 14 10 10-6 18 10"/>`],
+  ['t6', 'Colunas', `
+    <circle cx="30" cy="30" r="20"/><circle cx="30" cy="25" r="7"/><path d="M17 44a15 15 0 0 1 26 0"/>
+    <path d="M62 22h110M62 32h70"/>
+    <path d="M14 70c0-8 6-12 12-12M30 70c0-8 6-12 12-12" stroke-width="2"/>
+    <path d="M14 82h214M14 94h200M14 106h214M14 118h160M14 130h190"/>`],
+];
+const TELAS_LOGIN = `<div class="pla-telas" aria-hidden="true">${TELAS_LOGIN_LISTA.map(([c, t, d]) => `
+  <div class="pla-tela ${c}"><div class="pla-tela-topo"><b>${t}</b><span></span><span></span><span></span></div>
+    <svg viewBox="0 0 240 150" fill="none">${d}</svg></div>`).join('')}</div>`;
+
 // Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
 // aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
 const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
@@ -739,6 +782,7 @@ if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   // Fundo verde abstrato na tela toda (CSS) e o box de vidro com o mesmo conteúdo da janela Entrar
   document.querySelector('main').insertAdjacentHTML('afterbegin', `
     <section class="pede-login-aviso">
+      ${TELAS_LOGIN}
       <div class="pla-box" role="region" aria-label="Entrar na SoftLiving">${htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Entre para ver seu perfil, seus créditos, suas atividades e suas comunidades.')}</div>
     </section>`);
   const boxEntrar = document.querySelector('.pla-box');
