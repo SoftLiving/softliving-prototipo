@@ -1712,12 +1712,39 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
 .me-visitante .avatar{ display:grid; place-items:center; }
 .me-visitante .avatar .ic{ width:20px; height:20px; }
 .me-visitante strong{ color:var(--green); }
-.pede-login-aviso{ max-width:520px; margin:56px auto 72px; padding:40px 32px; text-align:center; border-radius:26px;
-  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
-.pede-login-aviso h1{ font-size:30px; margin:16px 0 10px; }
-.pede-login-aviso p{ margin:0; font-size:16px; line-height:1.6; color:var(--text-2); }
-.pede-login-aviso .pla-ic{ display:inline-grid; place-items:center; width:64px; height:64px; border-radius:50%; background:var(--mint); color:var(--green); }
-.pede-login-aviso .pla-ic .ic{ width:28px; height:28px; }
-.pede-login-aviso .pla-entrar{ margin:24px auto 14px; min-width:200px; justify-content:center; }
-.pede-login-aviso .pla-cadastro{ font-size:14px; color:var(--muted); }
-@media (max-width:640px){ .pede-login-aviso{ margin:28px 0 48px; padding:30px 20px; } .pede-login-aviso h1{ font-size:25px; } }
+.pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:24px 0 56px; padding:48px 24px; border-radius:30px;
+  background:#5d7d3e var(--pla-foto) center / cover no-repeat; box-shadow:0 18px 40px rgba(1,53,101,.14); }
+/* Página sem login: o conteúdo ocupa a largura toda (sem o espaço da coluna da direita), para a foto ir de ponta a ponta */
+body.pede-login:not(.logado) .corpo::after{ content:none !important; }
+body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; }
+/* Box de vidro: mesmo conteúdo da janela Entrar, em branco sobre a foto */
+.pla-box{ width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden;
+  background:linear-gradient(160deg, rgba(255,255,255,.30), rgba(255,255,255,.10)); border:1.5px solid rgba(255,255,255,.75);
+  -webkit-backdrop-filter:blur(18px) saturate(1.3); backdrop-filter:blur(18px) saturate(1.3); box-shadow:0 24px 60px rgba(0,0,0,.25); }
+.pla-box .enj-topo{ padding:30px 28px 6px; }
+.pla-box .enj-topo b, .pla-box .enj-topo b .sig .soft, .pla-box .enj-topo b .sig .living{ color:#fff; font-size:30px; }
+.pla-box .enj-topo p{ color:rgba(255,255,255,.92); font-size:15px; line-height:1.5; margin-top:8px; }
+.pla-box .enj-social{ padding:18px 28px 4px; }
+.pla-box .enj-social-bt{ background:rgba(255,255,255,.88); border-color:rgba(255,255,255,.9); }
+.pla-box .enj-ou{ margin:16px 28px 12px; color:rgba(255,255,255,.9); }
+.pla-box .enj-ou::before, .pla-box .enj-ou::after{ background:rgba(255,255,255,.55); }
+.pla-box .enj-form{ padding:0 28px; }
+.pla-box .enj-form > label, .pla-box .enj-lembrar{ color:#fff; }
+.pla-box .enj-form input[type="text"], .pla-box .enj-form input[type="password"]{ height:50px; border-radius:14px; color:#fff;
+  background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.7); }
+.pla-box .enj-form input::placeholder{ color:rgba(255,255,255,.75); }
+.pla-box .enj-form input:focus{ outline:none; border-color:#fff; background:rgba(255,255,255,.22); }
+.pla-box .enj-lembrar input{ accent-color:#7fa65a; }
+.pla-box .enj-ver, .pla-box .enj-esqueci, .pla-box .enj-criar{ color:#fff; }
+.pla-box .enj-esqueci, .pla-box .enj-criar{ text-decoration:underline; text-underline-offset:3px; }
+.pla-box .enj-dica{ background:rgba(253,246,227,.92); }
+.pla-box .enj-erro{ color:#fff; background:rgba(179,38,30,.85); padding:8px 12px; border-radius:12px; }
+.pla-box .enj-entrar{ height:52px; font-size:16px; border:1.5px solid rgba(255,255,255,.6) !important; background:linear-gradient(90deg, #a9bf72, #3f6b1e) !important; } /* !important: vence o verde padrão do efeito vidro */
+.pla-box .enj-entrar:hover{ background:linear-gradient(90deg, #b6cb80, #345a18) !important; }
+.pla-box .enj-cadastro{ margin-top:18px; padding:16px 28px 24px; border-top-color:rgba(255,255,255,.35); color:#fff; }
+@media (max-width:640px){
+  .pede-login-aviso{ min-height:calc(100vh - 190px); margin:12px 0 40px; padding:28px 14px; border-radius:24px; }
+  .pla-box .enj-topo{ padding:24px 20px 4px; } .pla-box .enj-topo b{ font-size:26px; }
+  .pla-box .enj-social, .pla-box .enj-form{ padding-left:20px; padding-right:20px; } .pla-box .enj-ou{ margin-left:20px; margin-right:20px; }
+  .pla-box .enj-cadastro{ padding:14px 20px 20px; }
+}

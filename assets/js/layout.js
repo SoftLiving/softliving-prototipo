@@ -328,7 +328,11 @@ document.getElementById('menuBtn').addEventListener('click', abrirMenu);
 document.getElementById('tabVoce').addEventListener('click', e => { e.preventDefault(); abrirMenu(); });
 document.getElementById('scrim').addEventListener('click', fecharMenu);
 // Topo do menu sem login: "Entrar" no lugar do nome abre a janela de entrada
-document.querySelector('.me-visitante').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); fecharMenu(); scrollTo(0, 0); janelaEntrar.abrir(true); });
+document.querySelector('.me-visitante').addEventListener('click', e => {
+  e.preventDefault(); e.stopPropagation(); fecharMenu(); scrollTo(0, 0);
+  const box = document.querySelector('.pla-box');                 // nas páginas que pedem login, o box já está na tela
+  if(box) box.querySelector('input[name="email"]').focus(); else janelaEntrar.abrir(true);
+});
 
 // Submenu (Atividades): abre e fecha pelo botão; já vem aberto se a página atual for um dos itens dele.
 // Com o menu recolhido (só ícones), clicar em Atividades abre o menu para mostrar o submenu.
@@ -649,29 +653,31 @@ const ENTRAR_SOCIAL = [
   ['Apple', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M16.4 12.6c0-2.4 2-3.5 2-3.6a4.4 4.4 0 0 0-3.4-1.9c-1.5-.1-2.8.9-3.5.9s-1.8-.8-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3a10 10 0 0 0 1.3-2.6 3.9 3.9 0 0 1-2.5-3.6zM14.1 5.5A4 4 0 0 0 15 2.6a4.1 4.1 0 0 0-2.7 1.4 3.8 3.8 0 0 0-1 2.8 3.4 3.4 0 0 0 2.8-1.3z"/></svg>'],
   ['Facebook', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1877F2"/><path fill="#fff" d="M13.4 19v-6h2l.3-2.4h-2.3V9.1c0-.7.2-1.2 1.2-1.2h1.2V5.8a16 16 0 0 0-1.8-.1c-1.8 0-3 1.1-3 3.1v1.8H9v2.4h2v6h2.4z"/></svg>'],
 ];
-const botaoEntrar = document.querySelector('.top .entrar');
-const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j => {
-  j.innerHTML = `
-    <div class="enj-topo"><b>Entrar na ${LOGO}</b><p>Bem-vindo de volta. Escolha como quer entrar.</p></div>
+// O conteúdo (htmlEntrar) e os cliques (cliqueEntrar) são os mesmos na janela do topo e no box das páginas que pedem login.
+const htmlEntrar = (titulo, texto) => `
+    <div class="enj-topo"><b>${titulo}</b><p>${texto}</p></div>
     <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
     <p class="enj-ou"><span>ou com seu e-mail</span></p>
-    <form class="enj-form" id="enForm" novalidate>
+    <form class="enj-form" novalidate>
       <p class="enj-dica">Protótipo: entre com login <b>123</b> e senha <b>123</b>.</p>
       <label>E-mail ou login<input type="text" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
       <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
-      <p class="enj-erro" id="enErro" role="alert" hidden>Login ou senha incorretos. No protótipo, use 123 e 123.</p>
+      <p class="enj-erro" role="alert" hidden>Login ou senha incorretos. No protótipo, use 123 e 123.</p>
       <button type="submit" class="btn enj-entrar">Entrar</button>
     </form>
     <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
-}, (e, j) => {
+function cliqueEntrar(e, j){
   const ver = e.target.closest('.enj-ver');
   if(ver){ const c = j.querySelector('input[name="senha"]'); const mostrar = c.type === 'password'; c.type = mostrar ? 'text' : 'password'; ver.textContent = mostrar ? 'Ocultar' : 'Mostrar'; ver.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha'); return; }
   const social = e.target.closest('[data-social]');
   if(social){ mostrarAviso(`Entrar com ${social.dataset.social}: fora deste protótipo`); return; }
   if(e.target.closest('.enj-esqueci')){ e.preventDefault(); mostrarAviso('Recuperar senha: fora deste protótipo'); return; }
   if(e.target.closest('.enj-criar')){ e.preventDefault(); mostrarAviso('Cadastro: fora deste protótipo'); }
-});
+}
+const botaoEntrar = document.querySelector('.top .entrar');
+const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving',
+  j => { j.innerHTML = htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Escolha como quer entrar.'); }, cliqueEntrar);
 // Simulação de entrada (protótipo): login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
 // Com a pessoa logada, o botão Entrar dá lugar ao avatar, que abre a janela da conta com a opção Sair.
 const lerLogado = () => { try { return localStorage.getItem('v2Logado') === '1'; } catch(e){ return false; } };
@@ -682,10 +688,10 @@ function marcarLogado(logado){
   document.body.classList.toggle('logado', logado);          // o CSS usa para decidir o que cabe no topo do celular
 }
 document.addEventListener('submit', e => {
-  if(e.target.id !== 'enForm') return;
+  if(!e.target.classList.contains('enj-form')) return;
   e.preventDefault();
   const f = e.target, ok = f.email.value.trim() === '123' && f.senha.value === '123';
-  document.getElementById('enErro').hidden = ok;
+  f.querySelector('.enj-erro').hidden = ok;
   if(!ok){ f.senha.value = ''; f.senha.focus(); return; }
   janelaEntrar.abrir(false);
   marcarLogado(true);
@@ -714,15 +720,13 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
+  // Foto de paisagem ao fundo e o box de vidro com o mesmo conteúdo da janela Entrar
   document.querySelector('main').insertAdjacentHTML('afterbegin', `
-    <section class="pede-login-aviso">
-      <span class="pla-ic">${icone('perfil')}</span>
-      <h1>Entre para ver esta página</h1>
-      <p>Seu perfil, seus créditos, suas atividades e suas comunidades ficam guardados na sua conta. Entre para continuar.</p>
-      <button type="button" class="btn pla-entrar">Entrar</button>
-      <p class="pla-cadastro">Ainda não tem conta? Cadastre-se e ganhe 20 créditos de bônus.</p>
+    <section class="pede-login-aviso" style="--pla-foto:url('${fotoUrl('1500530855697-b586d89ba3ee', 1800)}')">
+      <div class="pla-box" role="region" aria-label="Entrar na SoftLiving">${htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Entre para ver seu perfil, seus créditos, suas atividades e suas comunidades.')}</div>
     </section>`);
-  document.querySelector('.pla-entrar').addEventListener('click', e => { e.stopPropagation(); scrollTo(0, 0); janelaEntrar.abrir(true); });
+  const boxEntrar = document.querySelector('.pla-box');
+  boxEntrar.addEventListener('click', e => cliqueEntrar(e, boxEntrar));
 }
 marcarLogado(lerLogado());
 
