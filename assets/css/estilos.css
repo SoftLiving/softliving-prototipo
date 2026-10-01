@@ -1415,11 +1415,14 @@ body{ background:
 .car-btn .ic{ width:18px; height:18px; }
 .car-btn:hover{ background:#fff; box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 .carrossel.sem-rolagem .car-btn{ display:none; }
-/* Com mouse (computador): as setas só aparecem ao passar o mouse no carrossel (ou ao navegar por ele com o teclado) e
-   somem devagar ao sair, como a saída lenta do hover. No celular e no tablet, sem mouse, ficam sempre à vista. */
+/* Com mouse (computador): sobre o carrossel, só a seta do lado de onde o mouse está acende, aos poucos, conforme o
+   mouse se aproxima dela (--perto, de 0 a 1, calculado no ativarCarrossel do layout.js); a outra fica apagada. Ao sair
+   do carrossel, apaga devagar. Navegando com o teclado, as duas aparecem inteiras. No celular e no tablet, sem mouse,
+   ficam sempre à vista. */
 @media (hover:hover){
   .carrossel .car-btn{ opacity:0; pointer-events:none; transition:opacity .6s cubic-bezier(.22, .61, .36, 1), background-color .15s ease, box-shadow .15s ease; }
-  .carrossel:hover .car-btn, .carrossel:focus-within .car-btn{ opacity:1; pointer-events:auto; transition:opacity .15s ease, background-color .15s ease, box-shadow .15s ease; }
+  .carrossel:hover .car-btn{ opacity:var(--perto, 0); pointer-events:auto; transition:opacity .2s linear, background-color .15s ease, box-shadow .15s ease; }
+  .carrossel:hover .car-btn:hover, .carrossel:has(:focus-visible) .car-btn{ opacity:1; pointer-events:auto; }   /* foco só do teclado (clicar na seta não acende as duas) */
 }
 .carrossel-h .car-btn{ top:50%; transform:translateY(-50%); }
 .carrossel-h .car-ant{ left:-20px; }

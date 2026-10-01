@@ -160,8 +160,9 @@ menos de 1000px (container query).
 
 - **Carrosséis em Conteúdos e Vitrine:** as listas dentro dos blocos (coleções, Estilo e casa, Saúde, Tecnologia)
   usam o carrossel vertical, 3 por vez; as setas só aparecem quando há mais itens do que cabem.
-- **Setas dos carrosséis:** em aparelhos com mouse, só aparecem ao passar o mouse no carrossel (somem devagar ao sair);
-  no celular e no tablet ficam sempre à vista. Vale para todos os carrosséis do site.
+- **Setas dos carrosséis:** em aparelhos com mouse, sobre o carrossel só acende a seta do lado de onde o mouse está, aos
+  poucos, conforme ele se aproxima dela (a outra fica apagada); ao sair, apaga devagar. Pelo teclado, as duas aparecem.
+  No celular e no tablet ficam sempre à vista. Vale para todos os carrosséis do site (`ativarCarrossel` no `layout.js`).
 
 - **Carrosséis:** blocos de conteúdos menores relacionados só se movem pelas setas: cada clique desliza um item, suave,
   em loop (`ativarCarrossel(elemento, 'h' | 'v')` no layout.js). Sem rolagem automática, sem efeito ao passar o mouse e sem

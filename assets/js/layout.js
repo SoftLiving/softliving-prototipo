@@ -474,6 +474,23 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     car.prox = seta('prox', dir === 'h' ? 'Avançar' : 'Descer');
     car.append(car.ant, car.prox);
     Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, deslize:null, ciclo:0 });
+    // Com mouse: só a seta do lado de onde o mouse está acende, e acende aos poucos conforme ele se aproxima dela
+    // (--perto vai de 0 a 1; o CSS usa como opacidade). A outra fica apagada. Ao sair do carrossel, apaga devagar.
+    if(matchMedia('(hover:hover)').matches){
+      car.addEventListener('mousemove', e => {
+        const r = car.getBoundingClientRect();
+        const alcance = (dir === 'h' ? r.width : r.height) * .6;   // a partir de 60% do carrossel de distância, apagada
+        const dist = b => { const c = b.getBoundingClientRect(); return Math.hypot(e.clientX - (c.left + c.width / 2), e.clientY - (c.top + c.height / 2)); };
+        const da = dist(car.ant), dp = dist(car.prox), perto = Math.min(da, dp);
+        const nivel = Math.max(0, Math.min(1, 1.15 - perto / alcance));   // 1 já um pouco antes de chegar na seta
+        [[car.ant, da <= dp], [car.prox, dp < da]].forEach(([b, estePerto]) => {
+          const v = estePerto ? nivel : 0;
+          b.style.setProperty('--perto', v.toFixed(3));
+          b.style.pointerEvents = v > .15 ? '' : 'none';             // apagada não recebe clique por engano
+        });
+      });
+      car.addEventListener('mouseleave', () => [car.ant, car.prox].forEach(b => { b.style.setProperty('--perto', 0); b.style.pointerEvents = ''; }));
+    }
     // Setas: deslizam um item (animação suave); clicar de novo durante o deslize soma mais um item
     const passoItem = () => { const a = trilho.children[0], b = trilho.children[1]; if(!a || !b) return 0; return dir === 'h' ? b.offsetLeft - a.offsetLeft : b.offsetTop - a.offsetTop; };
     // Destino: o começo do item seguinte (ou anterior). Os itens podem ter alturas diferentes (no celular, títulos de
