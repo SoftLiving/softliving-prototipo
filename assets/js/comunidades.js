@@ -254,21 +254,15 @@ function renderInicio(org){
 }
 
 
-// Regra de negócio: conteúdo publicado pelo cliente é sempre gratuito.
-// Só o acervo SoftLiving pode ser premium (destravado com créditos).
+// Regra de negócio: em Minhas Comunidades não há conteúdo pago; tudo é gratuito, inclusive o acervo SoftLiving.
+// Por isso os cartões não mostram etiqueta de Grátis nem de créditos, e não há filtro Grátis/Premium.
 // Card sem autor cadastrado = conteúdo do próprio cliente.
 function normalizeCard(c, org){
-  const author = c.a || org.name;
-  if(author === 'SoftLiving') return {...c, a:author};
-  return {...c, a:author, badge:'gratis', credits:undefined, cta:'Ler agora'};
+  return {...c, a:c.a || org.name, badge:'gratis', credits:undefined, cta:'Ler agora'};
 }
 
 function authorHTML(c){
   return `<p class="cc-author">${c.a === 'SoftLiving' ? 'Acervo SoftLiving' : 'Por ' + c.a}</p>`;
-}
-
-function badgeHTML(c){
-  return `<span class="cc-badge ${c.badge}">${c.badge==='gratis'?ICON.unlock+' Grátis':c.badge==='destravado'?ICON.unlock+' Destravado':ICON.lock+' '+c.credits+' créditos'}</span>`;
 }
 
 function renderMosaic(cards){
@@ -281,7 +275,7 @@ function renderMosaic(cards){
   const regularCard = c => `
     <div class="cc-card c2">
       <div class="cc-body">
-        <div class="cc-cat-row"><p class="cc-cat-label">${c.cat}</p>${badgeHTML(c)}</div>
+        <div class="cc-cat-row"><p class="cc-cat-label">${c.cat}</p></div>
         <p class="cc-card-title">${c.t}</p>
         <p class="cc-excerpt">${c.e}</p>
         ${authorHTML(c)}
@@ -293,7 +287,7 @@ function renderMosaic(cards){
   <div class="cc-mosaic">
     <div class="cc-card cc-feature-lg c4">
       <div class="cc-body">
-        <div class="cc-cat-row"><p class="cc-cat-label">${feature.cat}</p>${badgeHTML(feature)}</div>
+        <div class="cc-cat-row"><p class="cc-cat-label">${feature.cat}</p></div>
         <p class="cc-card-title cc-feature-title">${feature.t}</p>
         <p class="cc-excerpt">${feature.e}</p>
         ${authorHTML(feature)}
@@ -309,7 +303,7 @@ function renderMosaic(cards){
             <p class="cc-cat-label">${c.cat}</p>
             <p class="cc-list-title">${c.t}</p>
           </div>
-          ${badgeHTML(c)}
+          
         </div>`).join('')}
     </div>
 
@@ -318,7 +312,7 @@ function renderMosaic(cards){
     <div class="cc-card cc-wide c6">
       <div class="cc-wide-icon">${ICON[wide.icon]}</div>
       <div class="cc-wide-body">
-        <div class="cc-cat-row"><p class="cc-cat-label">${wide.cat}</p>${badgeHTML(wide)}</div>
+        <div class="cc-cat-row"><p class="cc-cat-label">${wide.cat}</p></div>
         <p class="cc-card-title">${wide.t}</p>
         <p class="cc-excerpt">${wide.e}</p>
         ${authorHTML(wide)}
@@ -756,8 +750,6 @@ function renderServicos(org){
 function renderConteudos(org){
   if(org.conteudosCuradoria){
     const cc = {...org.conteudosCuradoria, cards: org.conteudosCuradoria.cards.map(c => normalizeCard(c, org))};
-    const gratisCount = cc.cards.filter(c => c.badge === 'gratis').length;
-    const premiumCount = cc.cards.filter(c => c.badge !== 'gratis').length;
     return `
     <h2 class="cc-title serif">Conteúdos e Curadoria</h2>
     <p class="cc-subtitle">${cc.subtitle}</p>
@@ -780,12 +772,6 @@ function renderConteudos(org){
             <p class="t">${f.t}</p>
           </div>
         </div>`).join('')}
-    </div>
-
-    <div class="cc-tabs">
-      <button class="cc-tab active">Todos (${cc.cards.length})</button>
-      <button class="cc-tab">Grátis (${gratisCount})</button>
-      <button class="cc-tab">Premium (${premiumCount})</button>
     </div>
 
     ${renderMosaic(cc.cards)}

@@ -182,7 +182,6 @@
 .cm .activate-card button svg.ic{ width:14px; height:14px; }
 .cm .cc-search svg.ic{ position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--muted); width:15px; height:15px; }
 .cm .cc-author{ display:flex; align-items:center; gap:6px; }
-.cm .cc-badge{ display:inline-flex; align-items:center; gap:4px; }
 .cm .qlink{ display:flex; align-items:center; gap:8px; }
 .cm .cell-name-row{ display:flex; align-items:center; gap:8px; }
 .cm .cc-title{ font-size:26px; margin:0 0 4px; }
@@ -200,9 +199,6 @@
 .cm .cc-featured .tag{ font-size:10px; font-weight:700; color:#a8e0c9; letter-spacing:.05em; margin:0 0 3px; }
 .cm .cc-featured .t{ font-weight:700; font-size:14px; margin:0 0 2px; color:#fff; }
 .cm .cc-featured .a{ font-size:12px; color:rgba(255,255,255,.7); margin:0; }
-.cm .cc-tabs{ display:flex; gap:8px; margin-bottom:18px; }
-.cm .cc-tab{ padding:8px 18px; border-radius:999px; font-size:13px; font-weight:600; border:1px solid var(--border); background:#fff; cursor:pointer; color:#333c47; }
-.cm .cc-tab.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
 .cm .cc-grid{ column-count:3; column-gap:16px; }
 .cm .cc-grid .cc-card{ break-inside:avoid; margin-bottom:16px; }
 @container cm (max-width:720px){
@@ -236,11 +232,6 @@
   .cm button.cc-wide-cta.cc-wide-cta{width:100%;}
 }
 .cm .cc-card{ border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; display:flex; flex-direction:column; }
-.cm .cc-badge svg.ic{ width:11px; height:11px; }
-.cm .cc-badge{ font-size:11px; font-weight:700; padding:4px 10px; border-radius:999px; flex-shrink:0; }
-.cm .cc-badge.gratis{ background:#e3f2ea; color:#1f5c3d; }
-.cm .cc-badge.premium{ background:#fdf0d3; color:#8a5a12; }
-.cm .cc-badge.destravado{ background:#dff3e6; color:#1f5c3d; }
 .cm .cc-cat-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; }
 .cm .cc-cat-row .cc-cat-label{ margin:0; }
 .cm .cc-body{ padding:14px 16px; display:flex; flex-direction:column; flex:1; }
@@ -415,10 +406,10 @@
 .cm input, .cm select, .cm textarea{ border-radius:12px; }
 
 /* Regra de hover da v2: botões e caixas clicáveis sobem 2px com sombra */
-.cm .btn-primary, .cm .btn-secondary, .cm .svc-card-btn, .cm .mem-card, .cm .cc-card, .cm .qlink, .cm .mem-cta, .cm .cc-cta, .cm .cancel-btn, .cm .market-item, .cm .cc-featured, .cm .audience-pill, .cm .cc-cat, .cm .cc-tab{
+.cm .btn-primary, .cm .btn-secondary, .cm .svc-card-btn, .cm .mem-card, .cm .cc-card, .cm .qlink, .cm .mem-cta, .cm .cc-cta, .cm .cancel-btn, .cm .market-item, .cm .cc-featured, .cm .audience-pill, .cm .cc-cat{
   transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .cm .btn-primary:hover, .cm .btn-secondary:hover, .cm .svc-card-btn:hover, .cm .mem-card:hover, .cm .cc-card:hover, .cm .qlink:hover, .cm .mem-cta:hover, .cm .cc-cta:hover,
-.cm .cancel-btn:hover, .cm .market-item:hover, .cm .cc-featured:hover, .cm .cc-cat:hover, .cm .cc-tab:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.cm .cancel-btn:hover, .cm .market-item:hover, .cm .cc-featured:hover, .cm .cc-cat:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 
 /* Box estreito / celular (regras do bloco responsivo da v1) */
 @container cm (max-width:720px){
