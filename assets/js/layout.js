@@ -881,12 +881,22 @@ function mostrarAviso(texto){
   toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
-// Regra do logo em texto (.sig): se o fundo atrás dele confunde as cores da marca (azul #013565 e verde #1F5519),
-// o logo passa a ser branco (classe .sig-light). Vale para todas as páginas, inclusive conteúdo gerado depois.
+// Regra do logo em texto (.sig): se o fundo atrás dele é escuro e confunde as cores da marca (azul #013565 e verde
+// #1F5519), o logo passa para as versões claras das mesmas cores (classe .sig-light), com a mesma fonte. Vale para a
+// página inteira (conteúdo, coluna da direita, janelas do topo, chat), inclusive o que aparece depois.
+// O fundo considerado é a primeira cor sólida atrás do logo; um degradê conta pela média das cores dele, e uma foto de
+// fundo conta como escura (no site, texto sobre foto fica sempre sobre uma camada escura).
 function corDeFundo(el){
   for(; el; el = el.parentElement){
-    const m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+    const cs = getComputedStyle(el);
+    const m = cs.backgroundColor.match(/[\d.]+/g);
     if(m && (m[3] === undefined || +m[3] > 0.5)) return m.slice(0, 3).map(Number);
+    const img = cs.backgroundImage;
+    if(img && img !== 'none'){
+      if(/url\(/.test(img)) return [30, 40, 50];
+      const cores = [...img.matchAll(/rgba?\(([^)]+)\)/g)].map(x => x[1].split(',').map(Number)).filter(c => c[3] === undefined || c[3] > 0.5);
+      if(cores.length) return [0, 1, 2].map(i => Math.round(cores.reduce((t, c) => t + c[i], 0) / cores.length));
+    }
   }
   return [255, 255, 255];
 }
@@ -945,7 +955,7 @@ function agendarAjusteLogos(){
   requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); marcarSalvos(); });
 }
 agendarAjusteLogos();
-new MutationObserver(agendarAjusteLogos).observe(document.querySelector('main'), { childList:true, subtree:true });
+new MutationObserver(agendarAjusteLogos).observe(document.body, { childList:true, subtree:true });   // a página inteira (o chat da Ajuda fica fora do main)
 
 // Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta), guardados na sessão
 const SALDO_BASE = 41;

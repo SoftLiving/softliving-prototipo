@@ -33,7 +33,12 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .sig{ font-family:'Times New Roman',Times,serif; font-weight:700; white-space:nowrap; letter-spacing:0; text-transform:none; } /* o logo nunca fica em maiúsculas, mesmo dentro de rótulos */
 .sig .soft{ color:#013565; font-style:italic; }
 .sig .living{ color:#1F5519; font-style:normal; }
-.sig.sig-light .soft, .sig.sig-light .living, .es-box .sig .soft, .es-box .sig .living{ color:#fff; } /* logo claro em fundo escuro (a pesquisa é azul) */
+/* Logo em fundo escuro: versões claras das cores da marca, mesma fonte (Soft em itálico, Living normal).
+   A classe .sig-light é posta pelo layout.js sempre que o fundo atrás do logo é escuro (ver "Regra do logo em texto"). */
+.sig.sig-light .soft, .es-box .sig .soft{ color:#d6e6f5; }
+.sig.sig-light .living, .es-box .sig .living{ color:#cfe9c4; }
+/* Cartões com foto (texto sempre branco sobre a foto): o logo também fica nas cores claras */
+.vc-info .sig .soft{ color:#d6e6f5; } .vc-info .sig .living{ color:#cfe9c4; }
 
 /* ===== Moldura: faixa de protótipo (não removível) ===== */
 .proto{ position:sticky; top:0; z-index:50; background:#fdf6e3; color:#7a5c12; border-bottom:1px solid #f0ddac; font-size:12px; line-height:1.4; text-align:center; padding:6px 12px; display:flex; gap:8px; justify-content:center; align-items:center; flex-wrap:wrap; }
@@ -1034,7 +1039,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-email input::placeholder{ color:rgba(255,255,255,.7); }
 .in-regras{ margin:0; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.12); font-size:13.5px; line-height:1.6; color:rgba(255,255,255,.92); }
 .in-regras a{ color:#fff; text-decoration:underline; font-weight:600; }
-.in-regras .sig .soft, .in-regras .sig .living{ color:#fff; }
+.in-regras .sig .soft{ color:#d6e6f5; } .in-regras .sig .living{ color:#cfe9c4; }   /* fundo escuro: cores claras da marca */
 .in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:22px; padding:24px 22px; border-radius:28px; background:#fdf1dc; border:1px solid #f0ddac; }
 .in-resumo div{ display:flex; flex-direction:column; gap:4px; }
 .in-resumo div + div{ padding-top:18px; border-top:1px solid #f0ddac; }

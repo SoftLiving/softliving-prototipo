@@ -125,6 +125,12 @@ menos de 1000px (container query).
 - **Minhas Comunidades sem conteúdo pago:** tudo é gratuito (inclusive o acervo SoftLiving), então os cartões não
   mostram etiqueta de Grátis nem de créditos e não há filtro Grátis/Premium (`normalizeCard` no `comunidades.js`).
 
+- **Logo em fundo escuro:** o logo em texto (`.sig`, "Soft" em itálico e "Living", na fonte original) usa as cores da
+  marca (azul `#013565` e verde `#1F5519`); sobre fundo escuro passa para as versões claras delas (azul-claro `#d6e6f5`
+  e verde-claro `#cfe9c4`). É automático em todo o site (`ajustarLogosEmTexto` no `layout.js` põe a classe `.sig-light`
+  quando o fundo atrás do logo é escuro, inclusive degradês e fotos, e em conteúdo que aparece depois, como o chat da
+  Ajuda). Para um logo que nunca deve mudar, usar a classe `.sig-fixo`.
+
 - **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
   (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.
 
