@@ -25,3 +25,18 @@ const CONTEUDOS = [
   {foto:"1460925895917-afdab827c52f", cat:"Tecnologia e serviços digitais", t:"Banco pelo celular, com segurança", e:"Pix, boletos e extratos no aplicativo do banco, sem cair em golpes.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1543269865-cbf427effbad", cat:"Saúde mental e qualidade de vida", t:"Mais conexão, menos solidão", e:"O papel da tecnologia na vida madura: usada com propósito, ela aproxima pessoas.", a:"Redação SoftLiving", icon:"chat", badge:"destravado"},
 ];
+
+// PROTÓTIPO · TESTE DE PAGAMENTOS: com TESTE_PAGAMENTOS ligado, cerca de 90% dos conteúdos ficam pagos (1, 2 ou 3
+// créditos), para testar o destravar e o débito na carteira. Ficam grátis só os títulos de CONTEUDOS_SEMPRE_GRATIS (e,
+// nas colunas, a última da coluna do dia, em colunas-dados.js). Os já destravados nos dados continuam destravados.
+// Para voltar ao normal, mude TESTE_PAGAMENTOS para false: valem de novo os badges escritos acima.
+const TESTE_PAGAMENTOS = true;
+const CONTEUDOS_SEMPRE_GRATIS = ['Aos patrocinadores do SoftLiving'];
+function bloquearParaTeste(lista, gratis){
+  if(!TESTE_PAGAMENTOS) return;
+  lista.forEach((c, i) => {
+    if(c.badge !== 'gratis' || gratis.includes(c.t)) return;
+    c.badge = 'premium'; c.credits = [1, 2, 3][i % 3];
+  });
+}
+bloquearParaTeste(CONTEUDOS, CONTEUDOS_SEMPRE_GRATIS);

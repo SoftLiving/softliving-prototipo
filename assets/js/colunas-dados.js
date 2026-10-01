@@ -30,6 +30,8 @@ const COLUNAS_EXTRAS = [
 
 // Coluna do dia (como no site): Sofia Martellini, com a última coluna dela grátis
 const COLUNA_DO_DIA = { colunista:'Sofia Martellini', ultima:'Como o boom das canetas emagrecedoras está impactando a moda?' };
+// Teste de pagamentos (conteudos-dados.js): as colunas extras também ficam pagas, menos a última da coluna do dia
+if(typeof bloquearParaTeste === 'function') bloquearParaTeste(COLUNAS_EXTRAS, [COLUNA_DO_DIA.ultima]);
 // Sugestões no mesmo box da coluna do dia (as primeiras "Colunas em destaque" do site)
 const SUGESTOES_DO_DIA = ['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Na Suíça, um vinho para chamar de seu', 'O bem-estar do encontro presencial', 'Aos patrocinadores do SoftLiving'];
 

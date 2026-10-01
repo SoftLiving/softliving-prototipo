@@ -128,6 +128,10 @@ menos de 1000px (container query).
   créditos da carteira (`comprarConteudo` no `layout.js`, compras em `v2Compras`, que entram no extrato da Carteira) e
   fica guardado em `v2Destravados`. O saldo de todo o site vem de `saldoCreditos()`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
 
+- **Teste de pagamentos (ligado):** `TESTE_PAGAMENTOS = true` no `conteudos-dados.js` deixa cerca de 90% dos conteúdos
+  pagos (1, 2 ou 3 créditos); ficam grátis só a carta "Aos patrocinadores do SoftLiving" e a última coluna da coluna do
+  dia. Para voltar ao normal, mudar para `false`.
+
 - **Minhas Comunidades sem conteúdo pago:** tudo é gratuito (inclusive o acervo SoftLiving), então os cartões não
   mostram etiqueta de Grátis nem de créditos e não há filtro Grátis/Premium (`normalizeCard` no `comunidades.js`).
 
