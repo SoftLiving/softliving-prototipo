@@ -28,10 +28,10 @@
 .ld-capa{ aspect-ratio:21 / 9; border-radius:30px; background-size:cover; background-position:center; box-shadow:0 18px 40px rgba(1,53,101,.14); margin-bottom:44px; }
 
 /* Corpo: ações + texto */
-.ld-corpo{ display:grid; grid-template-columns:130px minmax(0, 720px); gap:36px; justify-content:center; margin-bottom:56px; }
+.ld-corpo{ display:grid; grid-template-columns:160px minmax(0, 720px); gap:36px; justify-content:center; margin-bottom:56px; }
 .ld-acoes{ position:sticky; top:96px; align-self:start; display:flex; flex-direction:column; gap:8px; }
 .ld-acao{ display:flex; align-items:center; gap:9px; width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.9); background:rgba(255,255,255,.62);
-  box-shadow:var(--vidro-brilho); font:inherit; font-size:13.5px; font-weight:600; color:var(--navy); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+  box-shadow:var(--vidro-brilho); font:inherit; font-size:13.5px; font-weight:600; color:var(--navy); white-space:nowrap; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
 .ld-acao .ic{ width:18px; height:18px; flex:none; }
 .ld-acao:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:#fff; }
 .ld-acao.on{ background:var(--mint); color:var(--green); }
