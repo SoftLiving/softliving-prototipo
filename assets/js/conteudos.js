@@ -57,6 +57,11 @@ const ctMini = c => `
     <img src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
     <div><span class="vt-mini-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span><h3>${c.t}</h3><p>${c.e}</p><span class="ct-mini-autor">${c.a}</span></div>
   </a>`;
+// Item de lista (o mesmo da Início e da Busca): miniatura, assunto, título, autor e preço
+const ctItem = c => `
+  <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${ctSalvar}
+    <div><span class="cat">${ctRotulo(c.cat)}</span><h3>${c.t}</h3>
+    <div class="meta"><span>${c.a}</span><span class="ct-item-preco${c.badge === 'premium' ? ' premium' : ''}">${ctPrecoTexto(c)}</span></div></div></a>`;
 // "Ver todos" de um assunto: leva à lista completa já filtrada
 const ctVerTodos = i => `<button type="button" class="ct-ver-todos" data-ver="${i}"><b>Ver todos de ${CT_ASSUNTOS[i][0]}</b><span>${ctDoAssunto(CT_ASSUNTOS[i][1]).length} conteúdos ${icone('seta')}</span></button>`;
 
@@ -130,7 +135,7 @@ document.getElementById('ct-softliving').innerHTML = `
     </div>
   </a>`;
 
-// 5) Todos os conteúdos: fichário de assuntos, Todos/Grátis/Premium e grade (ordem sorteada a cada visita)
+// 5) Todos os conteúdos: fichário de assuntos, Todos/Grátis/Premium e lista em 3 colunas (ordem sorteada a cada visita)
 const CT_ORDEM = embaralhar(CONTEUDOS);
 function renderConteudos(){
   const abas = document.getElementById('ctAssuntos');
@@ -144,7 +149,7 @@ function renderConteudos(){
   document.getElementById('ctTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === ctEstado.tipo ? 'on' : ''}" aria-selected="${k === ctEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
 
   const lista = porAssuntoEBusca.filter(c => ctEstado.tipo === 'todos' || (ctEstado.tipo === 'gratis' ? c.badge === 'gratis' : c.badge !== 'gratis'));
-  document.getElementById('ctGrade').innerHTML = lista.map(ctVertical).join('');
+  document.getElementById('ctGrade').innerHTML = lista.map(ctItem).join('');
   document.getElementById('ctVazio').hidden = lista.length > 0;
   marcarSalvos();
 }
