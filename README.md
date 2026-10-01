@@ -111,7 +111,7 @@ menos de 1000px (container query).
   (`assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
   vidro (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo da janela Entrar do topo: os dois
   saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Na tela de login o menu lateral fica sempre
-  recolhido. O "Entrar" do topo do menu lateral leva à página `entrar.html` (mesma tela), que depois de entrar volta
+  recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral leva à página `entrar.html` (mesma tela), que depois de entrar volta
   para a página de onde a pessoa veio. Sem login também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e
   os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em Entrar com os campos vazios, ou e-mail `123` e senha `123`.
 

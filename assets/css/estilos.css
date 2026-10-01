@@ -1718,6 +1718,12 @@ body.pede-login:not(.logado)::before{ content:''; position:fixed; inset:0; z-ind
 /* Rodapé na cor de sempre: o vidro claro dele fica sobre o papel, não sobre o verde do fundo */
 :root body.pede-login:not(.logado) .rodape{ background:linear-gradient(var(--vidro-claro), var(--vidro-claro)), var(--paper); }
 body.pede-login:not(.logado) .side{ background:rgba(255,255,255,.86); }   /* menu legível sobre o verde escuro */
+/* Menu recolhido na tela de login (computador): 30% visível, para o box ser o foco; volta a 100% ao passar o mouse ou
+   navegar pelo teclado. No celular o menu é a gaveta e não muda. */
+@media (min-width:981px){
+  body.pede-login:not(.logado) .app.mini .side-wrap{ opacity:.3; transition:opacity .2s ease; }
+  body.pede-login:not(.logado) .app.mini .side-wrap:hover, body.pede-login:not(.logado) .app.mini .side-wrap:focus-within{ opacity:1; }
+}
 body.pede-login:not(.logado) .top{ background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom-color:rgba(255,255,255,.6); }
 .pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 24px; }
 /* Página sem login: o conteúdo ocupa a largura toda (sem o espaço da coluna da direita), para a foto ir de ponta a ponta */
