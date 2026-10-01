@@ -18,12 +18,11 @@ document.getElementById('colDia').innerHTML = `
   <a href="${urlConteudo(ultimaDia.t)}" class="cd-topo">
     <div class="dl-foto foto"><img src="${fotoUrl(ultimaDia.foto, 1000)}" alt=""></div>
     <div class="dl-texto">
-      <span class="cd-selos"><span class="kicker">Coluna do dia</span></span>
+      <span class="cd-selos"><span class="kicker">Coluna do dia</span>${seloAcesso(ultimaDia)}</span>
       <h2>${autorDia.coluna}</h2>
       <span class="autor-col">${avatarDe(autorDia)}<span><b>${autorDia.nome}</b><small>${autorDia.categoria}</small></span></span>
       <p class="cd-bio">${autorDia.bio}</p>
-      <span class="cd-ultima"><small>Última coluna · grátis</small><b>${ultimaDia.t}</b></span>
-      <span class="btn">Ler a coluna grátis ${icone('seta')}</span>
+      <span class="cd-ultima"><small>Última coluna</small><b>${ultimaDia.t}</b></span>
     </div>
   </a>
   <div class="cd-sugestoes">
@@ -81,7 +80,7 @@ function renderColunas(){
         <span class="vc-cat">${col.coluna ? comLogo(col.coluna, true) : col.categoria}</span>
         <h3>${comLogo(c.t, true)}</h3>
         <span class="vc-autor">${col.nome}</span>
-        <div class="vc-row">${c.badge === 'premium' ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}</div>
+        <div class="vc-row">${seloAcesso(c)}</div>
       </div>
     </a>`;
   }).join('');

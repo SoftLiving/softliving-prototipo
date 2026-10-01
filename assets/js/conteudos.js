@@ -49,7 +49,7 @@ const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo[0];   // o primeiro
 ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
   <article class="vt-colecao invertida">
     <a href="${urlConteudo(moda.t)}" class="vt-col-capa" style="background-image:url('${fotoUrl(moda.foto, 900)}')">
-      <div><p class="kicker">Estilo e casa · ${ctPrecoTexto(moda)}</p><h2>${moda.t}</h2><p>${moda.e}</p></div>
+      <div><p class="kicker">Estilo e casa</p> ${seloAcesso(moda)}<h2>${moda.t}</h2><p>${moda.e}</p></div>
     </a>
     <div class="vt-col-lista" id="ctEstiloLista">${estilo.filter(c => c !== moda).map(ctMini).join('')}</div>
   </article>`);
@@ -66,7 +66,8 @@ ctBloco(4, 'Destinos para ir com calma.', `
   <a href="${urlConteudo(viagem.t)}" class="ct-faixa" style="background-image:url('${fotoUrl(viagem.foto, 1400)}')">
     ${ctSalvar}
     <div class="ct-faixa-txt">
-      <span class="vc-cat">Viagem · ${ctPrecoTexto(viagem)}</span>
+      ${seloAcesso(viagem)}
+      <span class="vc-cat">Viagem</span>
       <h3>${viagem.t}</h3>
       <p>${viagem.e}</p>
     </div>
@@ -80,7 +81,7 @@ document.getElementById('ct-softliving').innerHTML = `
       <p class="kicker">Palavra da ${LOGO}</p>
       <h3>${carta.t}</h3>
       <p>${carta.e}</p>
-      <span class="ct-carta-autor">${carta.a}</span>
+      <span class="ct-carta-autor">${carta.a}</span> ${seloAcesso(carta)}
     </div>
   </a>`;
 

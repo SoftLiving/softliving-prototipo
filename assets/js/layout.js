@@ -74,6 +74,8 @@ const ICONES = {
   voltar:'<path d="M15 18l-6-6 6-6"/>',
   mais:'<path d="M12 5v14M5 12h14"/>',
   seta:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  cadeado:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  cadeadoAberto:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/>',
   salvar:'<path d="M6 3h12v18l-6-4-6 4V3z"/>',
   colunas:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
   curtidas:'<path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/>',
@@ -812,6 +814,16 @@ function tituloDoFav(fav){
 function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
 // Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada
 // carregamento da página (a ordem se mantém enquanto a pessoa troca abas e filtros)
+// Selo de acesso dos conteúdos (todos os cartões do site): Grátis, o preço em créditos com cadeado (pago, ainda
+// fechado) ou Desbloqueado (pago e já destravado pela pessoa). O destravar acontece na tela do conteúdo (conteudo.js),
+// que guarda o título em v2Destravados; conteúdos com badge 'destravado' nos dados já vêm desbloqueados.
+function lerDestravados(){ try { const v = JSON.parse(localStorage.getItem('v2Destravados')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
+function seloAcesso(c){
+  if(c.badge === 'destravado' || (c.badge === 'premium' && lerDestravados().includes(c.t)))
+    return `<span class="selo-acesso liberado">${icone('cadeadoAberto')}Desbloqueado</span>`;
+  if(c.badge === 'premium') return `<span class="selo-acesso pago">${icone('cadeado')}${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`;
+  return '<span class="selo-acesso gratis">Grátis</span>';
+}
 function embaralhar(lista){
   const a = [...lista];
   for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }

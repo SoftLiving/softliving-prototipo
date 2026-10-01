@@ -363,6 +363,22 @@ body{ overflow-x:hidden; overflow-x:clip; }
 .vc-cat{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.85; }
 .vc-info h3{ color:#fff; font-size:19px; line-height:1.25; font-weight:600; margin:6px 0 14px; text-shadow:0 1px 10px rgba(0,0,0,.18); }
 .vc-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+/* Selo de acesso dos conteúdos (seloAcesso no layout.js): Grátis (verde), pago com cadeado e créditos (dourado),
+   Desbloqueado com cadeado aberto (azul). O mesmo selo em todos os cartões; sobre foto, fica um pouco mais opaco. */
+.selo-acesso{ display:inline-flex; align-items:center; gap:5px; flex:none; font-size:11.5px; font-weight:700; letter-spacing:.01em; line-height:1.2;
+  padding:4px 10px; border-radius:999px; white-space:nowrap; vertical-align:middle; text-transform:none; }
+.selo-acesso .ic{ width:12px; height:12px; flex:none; }
+.selo-acesso.gratis{ background:#e3f2ea; color:#1f5c3d; }
+.selo-acesso.pago{ background:#fdf0d3; color:#8a5a12; }
+.selo-acesso.liberado{ background:#dceaf8; color:#0b4a85; }
+:is(.vc-info, .ct-tile-txt, .ct-faixa-txt, .vt-col-capa) .selo-acesso{ box-shadow:0 2px 8px rgba(0,0,0,.18); }
+.gratis.selo-acesso:is(.vc-info *, .ct-tile-txt *, .ct-faixa-txt *, .vt-col-capa *){ background:rgba(227,242,234,.95); }
+.meta .selo-acesso{ margin-left:2px; }
+.cl-ultima-selos{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.cl-ultima-selos .cat{ margin:0; }
+.ct-tile-txt > .selo-acesso, .ct-faixa-txt > .selo-acesso{ margin-bottom:8px; }
+.vt-col-capa .kicker + .selo-acesso{ margin-left:6px; }
+.ct-mini-autor .selo-acesso{ margin-left:8px; }
 .vc-chip{ display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#fff; white-space:nowrap; }
 .vc-chip .ic{ width:16px; height:16px; }
 .vc-chip.premium{ color:#ffe3a3; }

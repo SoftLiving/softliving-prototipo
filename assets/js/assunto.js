@@ -27,7 +27,8 @@ document.getElementById('asDestaque').innerHTML = `
   <a href="${urlConteudo(asPrimeiro.t)}" class="ct-faixa" style="background-image:url('${fotoUrl(asPrimeiro.foto, 1400)}')">
     ${ctSalvar}
     <div class="ct-faixa-txt">
-      <span class="vc-cat">Em destaque · ${ctPrecoTexto(asPrimeiro)}</span>
+      ${seloAcesso(asPrimeiro)}
+      <span class="vc-cat">Em destaque</span>
       <h3>${asPrimeiro.t}</h3>
       <p>${asPrimeiro.e}</p>
     </div>

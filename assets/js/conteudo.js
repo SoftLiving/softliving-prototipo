@@ -161,7 +161,7 @@ function render(){
           <div class="vc-info">
             <span class="vc-cat">${r.cat ? (ASSUNTO_CURTO[r.cat] || r.cat) : (COLUNISTAS.find(k => r.a.startsWith(k.nome)) || {}).aba || ''}</span>
             <h3>${comLogoLd(r.t)}</h3>
-            <div class="vc-row">${r.badge === 'premium' ? `<span class="vc-chip premium">${r.credits} ${r.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}</div>
+            <div class="vc-row">${seloAcesso(r)}</div>
           </div>
         </a>`).join('')}
       </div>

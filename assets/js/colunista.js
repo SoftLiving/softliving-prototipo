@@ -54,11 +54,9 @@ function render(){
       <a href="${urlConteudo(ultima.t)}" class="destaque-largo cl-ultima">
         <div class="dl-foto foto"><img src="${fotoUrl(ultima.foto, 1000)}" alt=""></div>
         <div class="dl-texto">
-          <span class="kicker">Grátis</span>
-          <span class="cat">${rotuloColuna(ultima)}</span>
+          <span class="cl-ultima-selos"><span class="cat">${rotuloColuna(ultima)}</span>${seloAcesso(ultima)}</span>
           <h2>${comLogoCl(ultima.t)}</h2>
           ${ultima.e ? `<p>${comLogoCl(ultima.e)}</p>` : ''}
-          <span class="btn">Ler agora ${icone('seta')}</span>
         </div>
       </a>
     </section>` : ''}
@@ -75,7 +73,7 @@ function render(){
           <div class="vc-info">
             <span class="vc-cat">${rotuloColuna(x)}</span>
             <h3>${comLogoCl(x.t)}</h3>
-            <div class="vc-row">${x.badge === 'premium' ? `<span class="vc-chip premium">${x.credits} ${x.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}</div>
+            <div class="vc-row">${seloAcesso(x)}</div>
           </div>
         </a>`).join('')}
       </div>

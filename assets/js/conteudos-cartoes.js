@@ -20,10 +20,6 @@ const CT_SORTEIO = embaralhar(CONTEUDOS);
 const ctDoAssunto = cat => CT_SORTEIO.filter(c => c.cat === cat);
 const ctPorTitulo = t => CONTEUDOS.find(c => c.t === t);
 
-const ctPreco = c => c.badge === 'premium'
-  ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
-  : c.badge === 'destravado' ? '<span class="vc-chip">Destravado</span>' : '<span class="vc-chip">Grátis</span>';
-const ctPrecoTexto = c => c.badge === 'premium' ? `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}` : c.badge === 'destravado' ? 'Destravado' : 'Grátis';
 const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
 const ctTitulo = (t, sub) => `<div class="vt-titulo"><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>`;
 
@@ -36,7 +32,7 @@ const ctVertical = c => `
       <span class="vc-cat">${ctRotulo(c.cat)}</span>
       <h3>${c.t}</h3>
       <span class="vc-autor">${c.a}</span>
-      <div class="vc-row">${ctPreco(c)}</div>
+      <div class="vc-row">${seloAcesso(c)}</div>
     </div>
   </a>`;
 // Foto com o texto por cima; a versão grande mostra também o resumo
@@ -44,7 +40,8 @@ const ctTile = (c, grande) => `
   <a href="${urlConteudo(c.t)}" class="ct-tile${grande ? ' grande' : ''}" style="background-image:url('${fotoUrl(c.foto, grande ? 1000 : 600)}')">
     ${ctSalvar}
     <div class="ct-tile-txt">
-      <span class="vc-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span>
+      ${seloAcesso(c)}
+      <span class="vc-cat">${ctRotulo(c.cat)}</span>
       <h3>${c.t}</h3>
       ${grande ? `<p>${c.e}</p>` : ''}
       <span class="vc-autor">${c.a}</span>
@@ -54,13 +51,13 @@ const ctTile = (c, grande) => `
 const ctMini = c => `
   <a href="${urlConteudo(c.t)}" class="vt-mini">
     <img src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
-    <div><span class="vt-mini-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span><h3>${c.t}</h3><p>${c.e}</p><span class="ct-mini-autor">${c.a}</span></div>
+    <div><span class="vt-mini-cat">${ctRotulo(c.cat)}</span><h3>${c.t}</h3><p>${c.e}</p><span class="ct-mini-autor">${c.a}${seloAcesso(c)}</span></div>
   </a>`;
 // Item de lista (o mesmo da Início e da Busca): miniatura, assunto, título, autor e preço
 const ctItem = c => `
   <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${ctSalvar}
     <div><span class="cat">${ctRotulo(c.cat)}</span><h3>${c.t}</h3>
-    <div class="meta"><span>${c.a}</span><span class="ct-item-preco${c.badge === 'premium' ? ' premium' : ''}">${ctPrecoTexto(c)}</span></div></div></a>`;
+    <div class="meta"><span>${c.a}</span>${seloAcesso(c)}</div></div></a>`;
 // Quantas colunas o cartão "Ver todos" ocupa para fechar a grade do mosaico (em 3 e em 2 colunas), sem buraco no fim.
 // n: quantos cartões vêm antes dele; grande: o primeiro deles ocupa 2 colunas e 2 linhas (4 casas)
 function ctVerSpan(n, grande){
