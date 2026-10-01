@@ -700,15 +700,14 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 });
 marcarLogado(lerLogado());
 
-// Janela "Saiba mais" (só no celular): as páginas institucionais, que no computador ficam no menu do topo (a partir de 1360px) e no rodapé
-// (celular e telas menores). No computador largo o botão fica escondido e o menu aparece inteiro.
+// Janela "Saiba mais" (celular e telas menores): as mesmas páginas, na mesma ordem, do menu institucional do topo do computador
+// (a partir de 1360px); manter as duas listas iguais. No computador largo o botão fica escondido e o menu aparece inteiro.
 const SAIBA_MAIS = [
   ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
   ['quem-somos', 'Quem somos', 'Propósito, missão, visão e valores'],
   ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
   ['beneficios', 'Benefícios', 'O que você ganha como membro'],
   ['empresas-e-grupos', 'Empresas e grupos', 'Para empresas e todo tipo de grupo, e a NR-1'],
-  ['seguranca', 'Segurança', 'Privacidade e cuidado com seus dados'],
   ['patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
 ];
 criarJanelaTopo(document.querySelector('.top .saiba-mais'), 'sm-janela', 'smJanela', 'Saiba mais sobre a SoftLiving', j => {
