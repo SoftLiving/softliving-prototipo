@@ -41,6 +41,16 @@ function urlPagina(nome){
 }
 // Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre o Suporte (Conta e privacidade).
 const SITES = ['conhecer', 'quem-somos', 'como-funciona', 'beneficios', 'empresas-e-grupos', 'patrocinadores'];
+// Lista única das páginas institucionais: monta o menu do topo (computador), o rodapé e a janela "Saiba mais" (tablet e
+// celular), para os três terem sempre os mesmos itens, na mesma ordem. [página, nome, nome curto no menu do topo, descrição]
+const INSTITUCIONAL = [
+  ['conhecer', 'Conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
+  ['quem-somos', 'Quem somos', 'Quem somos', 'Propósito, missão, visão e valores'],
+  ['como-funciona', 'Como funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
+  ['beneficios', 'Benefícios', 'Benefícios', 'O que você ganha como membro'],
+  ['empresas-e-grupos', 'Empresas e grupos', 'Empresas', 'Para empresas e todo tipo de grupo, e a NR-1'],
+  ['patrocinadores', 'Patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
+];
 const urlSite = site => SITES.includes(site) ? `${LAYOUT_ROOT}institucional/${site}.html` : urlPagina('ajuda');
 
 // Fotos de exemplo (Unsplash) usadas nos dados: foto:"<id>"
@@ -171,12 +181,7 @@ const LAYOUT_CABECALHO = `
   <button class="round menu-btn" id="menuBtn" aria-label="Abrir menu">${icone('menu')}</button>
   <a href="${urlPagina('inicio')}" class="sig brand" aria-label="SoftLiving, voltar ao início"><span class="soft">Soft</span><span class="living">Living</span></a>
   <nav class="site-nav" aria-label="Sobre a SoftLiving">
-    <a href="${urlSite('conhecer')}" data-site="conhecer">Conhecer</a>
-    <a href="${urlSite('quem-somos')}" data-site="quem-somos">Quem somos</a>
-    <a href="${urlSite('como-funciona')}" data-site="como-funciona">Como funciona</a>
-    <a href="${urlSite('beneficios')}" data-site="beneficios">Benefícios</a>
-    <a href="${urlSite('empresas-e-grupos')}" data-site="empresas-e-grupos" title="Empresas e grupos">Empresas</a>
-    <a href="${urlSite('patrocinadores')}" data-site="patrocinadores">Patrocinadores</a>
+    ${INSTITUCIONAL.map(([k, n, curto]) => `<a href="${urlSite(k)}" data-site="${k}"${curto !== n ? ` title="${n}"` : ''}>${curto}</a>`).join('')}
   </nav>
   <div class="tools">
     <button type="button" class="saiba-mais" aria-label="Saiba mais sobre a SoftLiving">Saiba mais${icone('abrir', 'chev')}</button>
@@ -197,7 +202,7 @@ const LAYOUT_RODAPE = `
         <p>Portal de conteúdo e comunidades, sem anúncios, com patrocinadores apoiadores.</p>
       </div>
       <div><h4>A ${LOGO}</h4>
-        <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('quem-somos')}">Quem somos</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('empresas-e-grupos')}">Empresas e grupos</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
+        ${INSTITUCIONAL.map(([k, n]) => `<a href="${urlSite(k)}">${n}</a>`).join('')}</div>
       <div><h4>Conteúdos</h4>
         <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="${urlPagina('colunas')}">Colunistas</a></div>
       <div><h4>Comunidade</h4>
@@ -700,19 +705,11 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 });
 marcarLogado(lerLogado());
 
-// Janela "Saiba mais" (celular e telas menores): as mesmas páginas, na mesma ordem, do menu institucional do topo do computador
-// (a partir de 1360px); manter as duas listas iguais. No computador largo o botão fica escondido e o menu aparece inteiro.
-const SAIBA_MAIS = [
-  ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
-  ['quem-somos', 'Quem somos', 'Propósito, missão, visão e valores'],
-  ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
-  ['beneficios', 'Benefícios', 'O que você ganha como membro'],
-  ['empresas-e-grupos', 'Empresas e grupos', 'Para empresas e todo tipo de grupo, e a NR-1'],
-  ['patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
-];
+// Janela "Saiba mais" (celular e telas menores): as páginas de INSTITUCIONAL, as mesmas do menu do topo do computador
+// (a partir de 1360px). No computador largo o botão fica escondido e o menu aparece inteiro.
 criarJanelaTopo(document.querySelector('.top .saiba-mais'), 'sm-janela', 'smJanela', 'Saiba mais sobre a SoftLiving', j => {
   j.innerHTML = `<div class="smj-topo"><b>Conheça a ${LOGO}</b></div>
-    <nav class="smj-links">${SAIBA_MAIS.map(([k, n, d]) => `<a href="${urlSite(k)}"${k === LAYOUT_SITE ? ' aria-current="page" class="on"' : ''}><b>${n}</b><small>${d.replace('SoftLiving', LOGO)}</small></a>`).join('')}</nav>`;
+    <nav class="smj-links">${INSTITUCIONAL.map(([k, n, , d]) => `<a href="${urlSite(k)}"${k === LAYOUT_SITE ? ' aria-current="page" class="on"' : ''}><b>${n}</b><small>${d.replace('SoftLiving', LOGO)}</small></a>`).join('')}</nav>`;
 });
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista

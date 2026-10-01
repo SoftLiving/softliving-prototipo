@@ -105,6 +105,9 @@ menos de 1000px (container query).
 
 ## Regras de visual
 
+- **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
+  (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.
+
 - **Largura única do conteúdo:** todas as páginas têm a mesma largura de conteúdo, com ou sem a coluna lateral da direita.
   Nas páginas sem a coluna, o espaço dela fica vazio (`.app:not(.com-lateral) .corpo::after` no `estilos.css`), com as
   mesmas medidas: 340px, ou 300px entre 1200 e 1439px; abaixo de 1200px o espaço some, como a coluna. Página nova não
