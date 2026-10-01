@@ -1732,6 +1732,33 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
 .pla-box .enj-form input[type="text"], .pla-box .enj-form input[type="password"]{ height:48px; }
 .pla-box .enj-entrar{ height:50px; font-size:16px; }
 .pla-box .enj-cadastro{ margin-top:18px; padding:16px 28px 24px; }
+/* O box acompanha a orientação da tela: deitada (paisagem) = box horizontal, em duas colunas (título, redes sociais e
+   cadastro à esquerda; e-mail e senha à direita); em pé (retrato) = box vertical. Se a tela está deitada mas não há
+   largura para as duas colunas (menos de 660px de conteúdo), fica vertical. Na tela de login deitada, o conteúdo usa
+   a largura toda (sem o espaço da coluna da direita), para o box horizontal caber em notebooks. */
+.pede-login-aviso{ container-type:inline-size; }
+@media (orientation:landscape){
+  body.pede-login:not(.logado) .corpo::after{ content:none !important; }
+  body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; max-width:none; }
+  @container (min-width:660px){
+    .pla-box{ max-width:880px; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto 1fr;
+      grid-template-areas:"topo form" "social form" "cadastro form"; }
+    .pla-box .enj-topo{ grid-area:topo; }
+    .pla-box .enj-social{ grid-area:social; padding-bottom:0; }
+    .pla-box .enj-ou{ display:none; }
+    .pla-box .enj-form{ grid-area:form; align-self:stretch; justify-content:center; padding:30px 28px; border-left:1px solid var(--line); }
+    .pla-box .enj-cadastro{ grid-area:cadastro; align-self:end; margin-top:20px; text-align:left; }
+  }
+}
+@media (orientation:landscape) and (max-height:520px){            /* celular deitado: pouca altura, tudo mais compacto */
+  .pede-login-aviso{ min-height:0; padding:16px 0; margin-bottom:24px; }
+  .pla-box .enj-topo{ padding-top:20px; } .pla-box .enj-topo b{ font-size:24px; } .pla-box .enj-topo p{ font-size:14px; }
+  .pla-box .enj-social{ gap:6px; padding-top:12px; } .pla-box .enj-social-bt{ height:40px; }
+  .pla-box .enj-form{ gap:8px; padding-top:18px; padding-bottom:18px; }
+  .pla-box .enj-form input[type="text"], .pla-box .enj-form input[type="password"]{ height:42px; }
+  .pla-box .enj-entrar{ height:44px; }
+  .pla-box .enj-cadastro{ padding-top:12px; padding-bottom:16px; }
+}
 @media (max-width:640px){
   .pede-login-aviso{ min-height:calc(100vh - 190px); margin:0 0 32px; padding:24px 0; }
   .pla-box .enj-topo{ padding:24px 20px 4px; } .pla-box .enj-topo b{ font-size:25px; }

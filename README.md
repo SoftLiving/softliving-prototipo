@@ -109,7 +109,10 @@ menos de 1000px (container query).
 - **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
   Amigos e Minhas Comunidades mostram, para quem não entrou, só o box de entrada no centro, sobre o fundo de sempre do
   site (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo e visual da janela Entrar do topo:
-  os dois saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Na tela de login o
+  os dois saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. O box acompanha a
+  orientação da tela: deitada (computador, tablet ou celular deitado) = horizontal, em duas colunas (título, redes
+  sociais e cadastro à esquerda; e-mail e senha à direita); em pé = vertical. Sem largura para as duas colunas
+  (menos de 660px), fica vertical. Na tela de login o
   menu lateral fica recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral
   leva à página `entrar.html` (mesma tela), que depois de entrar volta para a página de onde a pessoa veio. Sem login
   também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e os números de não lidas do menu, e o
