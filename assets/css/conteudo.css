@@ -70,9 +70,8 @@
 .ld-trava-compra{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 20px 20px; border-radius:22px;
   background:linear-gradient(160deg, #fbe2a4, #f0bf5a); border:1px solid rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.6); color:#4a3106; }
 .ld-trava-para{ font-size:13px; font-weight:600; color:#6b4a10; }
-.ld-trava-box .ld-trava-valor{ margin:4px 0 0 !important; font-size:17px !important; color:#3d2a05 !important; font-weight:600; line-height:1 !important; }
+.ld-trava-box .ld-trava-valor{ margin:4px 0 18px !important; font-size:17px !important; color:#3d2a05 !important; font-weight:600; line-height:1 !important; }
 .ld-trava-valor b{ display:block; font-family:'Fraunces',serif; font-size:56px; line-height:1; margin-bottom:2px; }
-.ld-trava-reais{ margin:6px 0 18px; font-size:13.5px; color:#6b4a10; }
 .ld-trava-compra .btn.lg{ width:100%; justify-content:center; }
 :root .ld-trava-compra .btn.lg{ background:var(--navy) !important; color:#fff; box-shadow:0 8px 18px rgba(1,53,101,.3); }   /* azul sobre o dourado */
 :root .ld-trava-compra .btn.lg:hover{ background:#0b4a85 !important; }

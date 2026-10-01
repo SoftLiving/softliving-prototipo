@@ -124,12 +124,11 @@ function htmlTrava(){
         <div class="ld-trava-compra">
           <span class="ld-trava-para">Para continuar lendo</span>
           <p class="ld-trava-valor"><b>${c.credits}</b> ${c.credits === 1 ? 'crédito' : 'créditos'}</p>
-          <span class="ld-trava-reais">R$ ${c.credits},00</span>
           ${botao}
           <p class="ld-trava-saldo${falta ? ' falta' : ''}">${!logado ? 'Entre na sua conta para usar seus créditos.'
             : falta ? `Seu saldo: <b>${saldo} ${saldo === 1 ? 'crédito' : 'créditos'}</b>. ${faltam === 1 ? 'Falta 1' : `Faltam ${faltam}`}.`
             : `Seu saldo: <b>${saldo} créditos</b>`}</p>
-          ${falta ? '<p class="ld-trava-nota">Na primeira recarga, R$50 viram 100 créditos.</p>' : ''}
+          ${falta ? '<p class="ld-trava-nota">Na primeira recarga, você ganha o dobro de créditos.</p>' : ''}
           <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
         </div>
       </div>
