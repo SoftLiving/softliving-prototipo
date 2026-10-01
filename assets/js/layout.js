@@ -720,9 +720,9 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
-  // Foto de paisagem ao fundo e o box de vidro com o mesmo conteúdo da janela Entrar
+  // Fundo verde abstrato na tela toda (CSS) e o box de vidro com o mesmo conteúdo da janela Entrar
   document.querySelector('main').insertAdjacentHTML('afterbegin', `
-    <section class="pede-login-aviso" style="--pla-foto:url('${fotoUrl('1500530855697-b586d89ba3ee', 1800)}')">
+    <section class="pede-login-aviso">
       <div class="pla-box" role="region" aria-label="Entrar na SoftLiving">${htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Entre para ver seu perfil, seus créditos, suas atividades e suas comunidades.')}</div>
     </section>`);
   const boxEntrar = document.querySelector('.pla-box');

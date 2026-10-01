@@ -106,7 +106,8 @@ menos de 1000px (container query).
 ## Regras de visual
 
 - **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
-  Amigos e Minhas Comunidades mostram, para quem não entrou, uma foto de paisagem ao fundo com o box de entrada em
+  Amigos e Minhas Comunidades mostram, para quem não entrou, um fundo verde abstrato na tela toda
+  (`assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
   vidro (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo da janela Entrar do topo: os dois
   saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Sem login também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e
   os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Login de teste: e-mail `123`, senha `123`.

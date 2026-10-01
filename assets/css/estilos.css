@@ -1712,20 +1712,25 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
 .me-visitante .avatar{ display:grid; place-items:center; }
 .me-visitante .avatar .ic{ width:20px; height:20px; }
 .me-visitante strong{ color:var(--green); }
-.pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:24px 0 56px; padding:48px 24px; border-radius:30px;
-  background:#5d7d3e var(--pla-foto) center / cover no-repeat; box-shadow:0 18px 40px rgba(1,53,101,.14); }
+/* Fundo verde abstrato cobrindo 100% da tela, fixo atrás de tudo (topo, menu e conteúdo) */
+body.pede-login:not(.logado)::before{ content:''; position:fixed; inset:0; z-index:-1;
+  background:#3f7a33 url('../img/fundo-verde-abstrato.svg') center / cover no-repeat; }
+body.pede-login:not(.logado) .side{ background:rgba(255,255,255,.86); }   /* menu legível sobre o verde escuro */
+body.pede-login:not(.logado) .top{ background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom-color:rgba(255,255,255,.6); }
+.pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 24px; }
 /* Página sem login: o conteúdo ocupa a largura toda (sem o espaço da coluna da direita), para a foto ir de ponta a ponta */
 body.pede-login:not(.logado) .corpo::after{ content:none !important; }
 body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; }
 /* Box de vidro: mesmo conteúdo da janela Entrar, em branco sobre a foto */
-.pla-box{ width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden;
-  background:linear-gradient(160deg, rgba(255,255,255,.30), rgba(255,255,255,.10)); border:1.5px solid rgba(255,255,255,.75);
+.pla-box{ width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden; text-shadow:0 1px 2px rgba(10,40,10,.35);
+  background:linear-gradient(160deg, rgba(255,255,255,.22), rgba(20,60,20,.22)); border:1.5px solid rgba(255,255,255,.75);
   -webkit-backdrop-filter:blur(18px) saturate(1.3); backdrop-filter:blur(18px) saturate(1.3); box-shadow:0 24px 60px rgba(0,0,0,.25); }
 .pla-box .enj-topo{ padding:30px 28px 6px; }
 .pla-box .enj-topo b, .pla-box .enj-topo b .sig .soft, .pla-box .enj-topo b .sig .living{ color:#fff; font-size:30px; }
 .pla-box .enj-topo p{ color:rgba(255,255,255,.92); font-size:15px; line-height:1.5; margin-top:8px; }
 .pla-box .enj-social{ padding:18px 28px 4px; }
-.pla-box .enj-social-bt{ background:rgba(255,255,255,.88); border-color:rgba(255,255,255,.9); }
+.pla-box .enj-social-bt{ background:rgba(255,255,255,.88); border-color:rgba(255,255,255,.9); text-shadow:none; }
+.pla-box .enj-dica{ text-shadow:none; }
 .pla-box .enj-ou{ margin:16px 28px 12px; color:rgba(255,255,255,.9); }
 .pla-box .enj-ou::before, .pla-box .enj-ou::after{ background:rgba(255,255,255,.55); }
 .pla-box .enj-form{ padding:0 28px; }
@@ -1743,7 +1748,7 @@ body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; }
 .pla-box .enj-entrar:hover{ background:linear-gradient(90deg, #b6cb80, #345a18) !important; }
 .pla-box .enj-cadastro{ margin-top:18px; padding:16px 28px 24px; border-top-color:rgba(255,255,255,.35); color:#fff; }
 @media (max-width:640px){
-  .pede-login-aviso{ min-height:calc(100vh - 190px); margin:12px 0 40px; padding:28px 14px; border-radius:24px; }
+  .pede-login-aviso{ min-height:calc(100vh - 190px); margin:0 0 32px; padding:24px 0; }
   .pla-box .enj-topo{ padding:24px 20px 4px; } .pla-box .enj-topo b{ font-size:26px; }
   .pla-box .enj-social, .pla-box .enj-form{ padding-left:20px; padding-right:20px; } .pla-box .enj-ou{ margin-left:20px; margin-right:20px; }
   .pla-box .enj-cadastro{ padding:14px 20px 20px; }
