@@ -31,14 +31,14 @@
 .ld-corpo{ display:grid; grid-template-columns:160px minmax(0, 720px); gap:36px; justify-content:center; margin-bottom:56px; }
 .ld-acoes{ position:sticky; top:96px; align-self:start; display:flex; flex-direction:column; gap:8px; }
 .ld-acao{ display:flex; align-items:center; gap:9px; width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.9); background:rgba(255,255,255,.62);
-  box-shadow:var(--vidro-brilho); font:inherit; font-size:13.5px; font-weight:600; color:var(--navy); white-space:nowrap; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+  box-shadow:var(--vidro-brilho); font:inherit; font-size:13.5px; font-weight:600; color:var(--navy); white-space:nowrap; cursor:pointer; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .ld-acao .ic{ width:18px; height:18px; flex:none; }
 .ld-acao:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:#fff; }
 .ld-acao.on{ background:var(--mint); color:var(--green); }
 .ld-acao.on .ic{ fill:currentColor; }
 .ld-acao.ouvindo{ color:#c0392b; background:#fdecea; border-color:#f3c4bd; } /* Curtir e Salvar ativados ficam verdes; Ouvir, enquanto lê, fica vermelho */
 .ld-letra{ display:flex; gap:6px; margin-top:4px; }
-.ld-letra button{ flex:1; padding:8px 0; border-radius:12px; border:1px solid var(--line); background:#fff; font:inherit; font-weight:700; color:var(--navy); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ld-letra button{ flex:1; padding:8px 0; border-radius:12px; border:1px solid var(--line); background:#fff; font:inherit; font-weight:700; color:var(--navy); cursor:pointer; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .ld-letra button:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 
 .ld-texto{ --ld-escala:1; font-size:calc(18.5px * var(--ld-escala)); }
@@ -70,7 +70,7 @@
 .ld-comentarios > h2 small{ font-family:'Inter',sans-serif; font-size:15px; color:var(--muted); font-weight:600; }
 .ld-comentar{ display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; }
 .ld-comentar textarea{ flex:1; min-width:0; min-height:48px; padding:12px 14px; border-radius:16px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:15px; resize:vertical; }
-.ld-enviar{ width:48px; height:48px; flex:none; border-radius:50%; border:none; background:var(--green); color:#fff; display:grid; place-items:center; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+.ld-enviar{ width:48px; height:48px; flex:none; border-radius:50%; border:none; background:var(--green); color:#fff; display:grid; place-items:center; cursor:pointer; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .ld-enviar .ic{ width:19px; height:19px; }
 .ld-enviar:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 .ld-comentario{ display:flex; gap:12px; padding:16px 0; }
@@ -80,7 +80,7 @@
 .ld-comentario b small{ color:var(--muted); font-weight:500; }
 .ld-comentario p{ margin:3px 0 0; font-size:15px; line-height:1.6; color:var(--text); }
 .ld-curtir-com{ display:inline-flex; align-items:center; gap:5px; margin-top:6px; padding:4px 10px; border-radius:999px; border:1px solid var(--line); background:#fff; color:var(--muted);
-  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, color .15s ease; }
+  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), color var(--hover-t) var(--hover-curva); }
 .ld-curtir-com .ic{ width:14px; height:14px; }
 .ld-curtir-com:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); color:#c0392b; }
 .ld-curtir-com.on{ color:#c0392b; border-color:#f3c4bd; }

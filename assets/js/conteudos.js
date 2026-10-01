@@ -81,11 +81,11 @@ ativarCarrossel(document.getElementById('ctDestaques'), 'h');
 // 3) Coleção com curadoria: foto grande e três conteúdos ao lado; a coleção e a ordem dos itens são sorteadas
 const CT_COLECOES = [
   { t:'Viver mais e melhor', d:'Longevidade, hábitos e pequenas escolhas que fazem diferença em qualquer idade.', foto:'1529156069898-49953e39b3ac',
-    itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?'] },
+    itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?', 'Caminhar: o exercício mais subestimado', 'Check-up sem medo'] },
   { t:'Pequenos prazeres', d:'Encontros, viagens sem pressa e o que realmente vale o nosso tempo.', foto:'1470252649378-9c29740c9fa8',
-    itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu'] },
+    itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu', 'A Coragem de Mudar de Direção', 'O luxo de hoje é outra coisa'] },
   { t:'Tecnologia sem medo', d:'Inteligência artificial, segurança e conexão: a tecnologia a favor da vida madura.', foto:'1677442136019-21780ecad995',
-    itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão'] },
+    itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão', 'WhatsApp sem segredos', 'Senhas fortes sem dor de cabeça'] },
 ];
 const col = embaralhar(CT_COLECOES)[0];
 document.getElementById('ctColecao1').innerHTML = `
@@ -93,8 +93,9 @@ document.getElementById('ctColecao1').innerHTML = `
     <div class="vt-col-capa" style="background-image:url('${fotoUrl(col.foto, 900)}')">
       <div><p class="kicker">Coleção</p><h2>${col.t}</h2><p>${col.d}</p></div>
     </div>
-    <div class="vt-col-lista">${embaralhar(col.itens).map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
+    <div class="vt-col-lista" id="ctColLista">${embaralhar(col.itens).map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
   </article>`;
+ativarCarrossel(document.getElementById('ctColLista'), 'v', 3);   // 3 por vez, com setas (como as listas da Início)
 
 // 4) Um bloco por assunto, cada um com um layout
 const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).innerHTML = ctTitulo(CT_ASSUNTOS[i][0], sub) + corpo; };
@@ -109,12 +110,14 @@ ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
     <a href="${urlConteudo(moda.t)}" class="vt-col-capa" style="background-image:url('${fotoUrl(moda.foto, 900)}')">
       <div><p class="kicker">Estilo e casa · ${ctPrecoTexto(moda)}</p><h2>${moda.t}</h2><p>${moda.e}</p></div>
     </a>
-    <div class="vt-col-lista">${estilo.filter(c => c !== moda).map(ctMini).join('')}</div>
+    <div class="vt-col-lista" id="ctEstiloLista">${estilo.filter(c => c !== moda).map(ctMini).join('')}</div>
   </article>`);
-// Saúde e Tecnologia: lado a lado, um cartão de foto e uma linha com miniatura em cada
+ativarCarrossel(document.getElementById('ctEstiloLista'), 'v', 3);
+// Saúde e Tecnologia: lado a lado, um cartão de foto e a lista dos outros (3 por vez, em carrossel) em cada
 [[2, 'Corpo em movimento e bons hábitos.'], [5, 'Tecnologia a seu favor, sem medo.']].forEach(([i, sub]) => {
   const [a, ...resto] = ctDoAssunto(CT_ASSUNTOS[i][1]);
-  ctBloco(i, sub, `<div class="ct-coluna">${ctTile(a, true)}${resto.map(ctMini).join('')}</div>`);
+  ctBloco(i, sub, `<div class="ct-coluna">${ctTile(a, true)}<div class="ct-coluna-lista" id="ctLista${i}">${resto.map(ctItem).join('')}</div></div>`);
+  ativarCarrossel(document.getElementById('ctLista' + i), 'v', 3);
 });
 // Viagem: faixa larga com o conteúdo do assunto
 const viagem = ctDoAssunto(CT_ASSUNTOS[4][1])[0];

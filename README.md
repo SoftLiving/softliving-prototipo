@@ -139,10 +139,16 @@ menos de 1000px (container query).
   o mouse. A regra fica no fim do `estilos.css` ("REGRA DE HOVER"): ao criar um botão ou caixa clicável novo,
   acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.
   Conteúdos com foto (cartões, matéria em destaque, itens de lista) ganham também uma caixa branca em volta no hover.
+  Entrar no hover é rápido (0,15s) e sair é lento (0,6s, desacelerando): as transições de hover usam `var(--hover-t)`
+  e `var(--hover-curva)` (seção "SAÍDA LENTA DO HOVER" do `estilos.css`); transição nova de hover deve usar as duas.
+  O botão salvar dos cartões só aparece ao passar o mouse no cartão (ou se já foi salvo); no celular, sempre à vista.
 
 - **Patrocinador apoiador:** uma faixa `<div class="apoio"></div>` por página recebe uma marca sorteada a cada visita
   (Rede D'Or, Claro, Bradesco Saúde), com logo em tom sobre tom. Lista em `PATROCINADORES` no layout.js; os logos ficam em
   `assets/img/logo-*.png` com fundo transparente. `?apoio=1|2|3` no endereço mostra uma marca específica.
+
+- **Carrosséis em Conteúdos e Vitrine:** as listas dentro dos blocos (coleções, Estilo e casa, Saúde, Tecnologia)
+  usam o carrossel vertical, 3 por vez; as setas só aparecem quando há mais itens do que cabem.
 
 - **Carrosséis:** blocos de conteúdos menores relacionados só se movem pelas setas: cada clique desliza um item, suave,
   em loop (`ativarCarrossel(elemento, 'h' | 'v')` no layout.js). Sem rolagem automática, sem efeito ao passar o mouse e sem

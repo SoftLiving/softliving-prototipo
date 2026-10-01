@@ -16,5 +16,10 @@ const CONTEUDOS = [
   {foto:"1551836022-d5d88e9218df", cat:"SoftLiving", t:"Aos patrocinadores do SoftLiving", e:"Quem assina o começo?", a:"Rafael Barros · CEO SoftLiving", icon:"handshake", badge:"gratis"},
   {foto:"1563986768609-322da13575f3", cat:"Tecnologia e serviços digitais", t:"Agente de IA anti-golpe", e:"Como se proteger melhor no WhatsApp, Pix e links suspeitos.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1677442136019-21780ecad995", cat:"Tecnologia e serviços digitais", t:"Meu primeiro agente de IA", e:"Como começar a usar inteligência artificial sem medo.", a:"Bernardo Leitão", icon:"robot", badge:"gratis"},
+  {foto:"1447752875215-b2761acb3c5d", cat:"Saúde e bem-estar físico", t:"Caminhar: o exercício mais subestimado", e:"Trinta minutos por dia, no seu ritmo, fazem bem ao coração, ao sono e ao humor.", a:"Redação SoftLiving", icon:"activity", badge:"gratis"},
+  {foto:"1519494026892-80bbd2d6fd0d", cat:"Saúde e bem-estar físico", t:"Check-up sem medo", e:"O que vale a pena pedir ao médico depois dos 50, e o que pode esperar.", a:"Redação SoftLiving", icon:"activity", badge:"premium", credits:1},
+  {foto:"1544367567-0f2fcb009e0b", cat:"Saúde e bem-estar físico", t:"Respirar melhor muda o dia", e:"Exercícios simples de respiração para fazer em casa, em poucos minutos.", a:"Redação SoftLiving", icon:"activity", badge:"gratis"},
+  {foto:"1512941937669-90a1b58e7e9c", cat:"Tecnologia e serviços digitais", t:"WhatsApp sem segredos", e:"Grupos, áudios, chamadas de vídeo e privacidade: o essencial, passo a passo.", a:"Bernardo Leitão", icon:"phone", badge:"gratis"},
+  {foto:"1498050108023-c5249f4df085", cat:"Tecnologia e serviços digitais", t:"Senhas fortes sem dor de cabeça", e:"Como criar e guardar senhas seguras sem precisar decorar todas.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1543269865-cbf427effbad", cat:"Saúde mental e qualidade de vida", t:"Mais conexão, menos solidão", e:"O papel da tecnologia na vida madura: usada com propósito, ela aproxima pessoas.", a:"Redação SoftLiving", icon:"chat", badge:"destravado"},
 ];

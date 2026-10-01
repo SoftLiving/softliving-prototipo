@@ -7,8 +7,8 @@ const CATEGORIAS = [
   ['Pets', '1543466835-00a7907e9de1'], ['Presentes', '1487070183336-b863922373d4'],
 ];
 const COLECOES = [
-  { t:'Para um jantar a dois', d:'Mesas tranquilas, boa comida e uma carta de vinhos para conversar sem pressa.', foto:'1414235077428-338989a2e8c0', itens:['Bistrô Alecrim', 'Vinhos da Serra', 'Casa Tereza Empório'] },
-  { t:'Cuidar da saúde perto de casa', d:'Clínicas, estúdios e profissionais recomendados por quem já foi.', foto:'1571902943202-507ec2618e8f', itens:['Clínica Vitalis', 'Estúdio Respira', 'Ótica Nitidez'] },
+  { t:'Para um jantar a dois', d:'Mesas tranquilas, boa comida e uma carta de vinhos para conversar sem pressa.', foto:'1414235077428-338989a2e8c0', itens:['Bistrô Alecrim', 'Vinhos da Serra', 'Casa Tereza Empório', 'Restaurante Sabor & Arte', 'Floricultura Ramo'] },
+  { t:'Cuidar da saúde perto de casa', d:'Clínicas, estúdios e profissionais recomendados por quem já foi.', foto:'1571902943202-507ec2618e8f', itens:['Clínica Vitalis', 'Estúdio Respira', 'Ótica Nitidez', 'Clínica SorrisoTotal', 'Zen Wellness Spa'] },
 ];
 const RECOMENDAS = [
   { e:'Vinhos da Serra', q:'A degustação de quinta virou nosso programa fixo. Explicam tudo sem pose nenhuma.', quem:'Helena M.', grupo:'Clube do Vinho', cor:'#7a3b52' },
@@ -48,14 +48,17 @@ document.getElementById('vtColecoes').innerHTML = embaralhar(COLECOES).map((c, i
     <div class="vt-col-capa" style="background-image:url('${fotoUrl(c.foto, 900)}')">
       <div><p class="kicker">Coleção</p><h2>${c.t}</h2><p>${c.d}</p></div>
     </div>
-    <div class="vt-col-lista">
-      ${embaralhar(c.itens).map(est).map(e => `
+    <div class="vt-col-lista" id="vtColLista${i}">
+      ${embaralhar(c.itens).map(est).filter(Boolean).map(e => `
         <a href="${urlEstabelecimento(e)}" class="vt-mini">
           <img src="${fotoUrl(e.foto, 300)}" alt="" loading="lazy">
           <div><span class="vt-mini-cat">${e.cat} · ${e.bairro}</span><h3>${e.n}</h3><p>${e.d}</p></div>
         </a>`).join('')}
     </div>
   </article>`).join('');
+
+// Lista de cada coleção: 3 por vez, em carrossel com setas (como as listas da Início)
+COLECOES.forEach((_, i) => ativarCarrossel(document.getElementById('vtColLista' + i), 'v', 3));
 
 document.getElementById('vtRecomendas').innerHTML = embaralhar(RECOMENDAS).map(r => { const e = est(r.e); return `
   <a href="${urlEstabelecimento(e)}" class="vt-reco">

@@ -31,6 +31,9 @@
 .ct-coluna .ct-tile.grande h3{ font-size:23px; }
 .ct-coluna .ct-tile p{ font-size:14px; }
 
+/* Lista em carrossel logo abaixo de uma foto: espaço para a seta de cima não cobrir a foto */
+.ct-coluna .carrossel-v:not(.sem-rolagem){ margin-top:30px; }
+
 /* Faixa larga (Viagem) */
 .ct-faixa{ position:relative; display:flex; align-items:center; min-height:320px; border-radius:30px; overflow:hidden; isolation:isolate;
   background:var(--mint) center / cover no-repeat; box-shadow:0 14px 34px rgba(1,53,101,.14); }
@@ -52,12 +55,13 @@
 
 /* Todos os conteúdos: lista em 3 colunas com o item de lista do site (.item, igual ao da Início), em tamanho menor */
 .ct-itens{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:4px 20px; }
-.ct-itens .item{ grid-template-columns:64px 1fr; gap:10px; align-items:start; padding:10px 30px 10px 10px; margin:0 -10px; border-radius:18px; }
-.ct-itens .item img{ width:64px; height:64px; border-radius:12px; }
-.ct-itens .item .cat{ font-size:11px; }
-.ct-itens .item h3{ font-size:14.5px; line-height:1.28; margin:2px 0 4px; }
-.ct-itens .item .meta{ display:flex; flex-wrap:wrap; gap:2px 8px; font-size:12px; }
-.ct-itens .fav{ top:8px; right:4px; width:28px; height:28px; }
+.ct-coluna-lista{ display:flex; flex-direction:column; gap:4px; }   /* Saúde e Tecnologia: lista em carrossel, 3 por vez */
+:is(.ct-itens, .ct-coluna-lista) .item{ grid-template-columns:64px 1fr; gap:10px; align-items:start; padding:10px 30px 10px 10px; margin:0 -10px; border-radius:18px; }
+:is(.ct-itens, .ct-coluna-lista) .item img{ width:64px; height:64px; border-radius:12px; }
+:is(.ct-itens, .ct-coluna-lista) .item .cat{ font-size:11px; }
+:is(.ct-itens, .ct-coluna-lista) .item h3{ font-size:14.5px; line-height:1.28; margin:2px 0 4px; }
+:is(.ct-itens, .ct-coluna-lista) .item .meta{ display:flex; flex-wrap:wrap; gap:2px 8px; font-size:12px; }
+:is(.ct-itens, .ct-coluna-lista) .fav{ top:8px; right:4px; width:28px; height:28px; }
 .ct-item-preco{ font-weight:600; color:var(--green); }
 .ct-item-preco.premium{ color:#8a5a0e; }
 
@@ -67,7 +71,7 @@
 
 /* Regra de hover da v2 */
 .vt-col-capa{ color:inherit; }   /* capa de coleção que é link (Estilo e casa) */
-.ct-tile, .ct-faixa, .ct-carta, .ct-ver-todos{ transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.ct-tile, .ct-faixa, .ct-carta, .ct-ver-todos{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .ct-tile:hover, .ct-faixa:hover, .ct-carta:hover, .ct-ver-todos:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 .ct-carta:hover, .ct-ver-todos:hover{ background:#fff; }
 
