@@ -85,7 +85,7 @@ const CT_COLECOES = [
   { t:'Pequenos prazeres', d:'Encontros, viagens sem pressa e o que realmente vale o nosso tempo.', foto:'1470252649378-9c29740c9fa8',
     itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu', 'A Coragem de Mudar de Direção', 'O luxo de hoje é outra coisa'] },
   { t:'Tecnologia sem medo', d:'Inteligência artificial, segurança e conexão: a tecnologia a favor da vida madura.', foto:'1677442136019-21780ecad995',
-    itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão', 'WhatsApp sem segredos', 'Senhas fortes sem dor de cabeça'] },
+    itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão', 'WhatsApp sem segredos', 'Senhas fortes sem dor de cabeça', 'Banco pelo celular, com segurança'] },
 ];
 const col = embaralhar(CT_COLECOES)[0];
 document.getElementById('ctColecao1').innerHTML = `

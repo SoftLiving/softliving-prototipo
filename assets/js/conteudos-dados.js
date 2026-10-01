@@ -21,5 +21,6 @@ const CONTEUDOS = [
   {foto:"1544367567-0f2fcb009e0b", cat:"Saúde e bem-estar físico", t:"Respirar melhor muda o dia", e:"Exercícios simples de respiração para fazer em casa, em poucos minutos.", a:"Redação SoftLiving", icon:"activity", badge:"gratis"},
   {foto:"1512941937669-90a1b58e7e9c", cat:"Tecnologia e serviços digitais", t:"WhatsApp sem segredos", e:"Grupos, áudios, chamadas de vídeo e privacidade: o essencial, passo a passo.", a:"Bernardo Leitão", icon:"phone", badge:"gratis"},
   {foto:"1498050108023-c5249f4df085", cat:"Tecnologia e serviços digitais", t:"Senhas fortes sem dor de cabeça", e:"Como criar e guardar senhas seguras sem precisar decorar todas.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
+  {foto:"1460925895917-afdab827c52f", cat:"Tecnologia e serviços digitais", t:"Banco pelo celular, com segurança", e:"Pix, boletos e extratos no aplicativo do banco, sem cair em golpes.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1543269865-cbf427effbad", cat:"Saúde mental e qualidade de vida", t:"Mais conexão, menos solidão", e:"O papel da tecnologia na vida madura: usada com propósito, ela aproxima pessoas.", a:"Redação SoftLiving", icon:"chat", badge:"destravado"},
 ];
