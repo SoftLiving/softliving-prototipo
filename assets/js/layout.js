@@ -34,6 +34,7 @@ const PAGINAS = {
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html' },
+  entrar:       { url:'entrar.html' },              // tela de login (Entrar do menu lateral)
 };
 function urlPagina(nome){
   const p = PAGINAS[nome];
@@ -160,7 +161,7 @@ const LAYOUT_MENU = `
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
   </a>
-  <a href="#" class="me me-visitante" title="Entrar na sua conta">
+  <a href="${urlPagina('entrar')}?volta=${encodeURIComponent(location.href)}" class="me me-visitante" title="Entrar na sua conta">
     <span class="avatar">${icone('perfil')}</span>
     <div><small>${saudacao().replace(',', '!')}</small><strong>Entrar</strong></div>
   </a>
@@ -327,11 +328,13 @@ const fecharMenu = () => app.classList.remove('open');
 document.getElementById('menuBtn').addEventListener('click', abrirMenu);
 document.getElementById('tabVoce').addEventListener('click', e => { e.preventDefault(); abrirMenu(); });
 document.getElementById('scrim').addEventListener('click', fecharMenu);
-// Topo do menu sem login: "Entrar" no lugar do nome abre a janela de entrada
+// Topo do menu sem login: "Entrar" no lugar do nome leva à tela de login (entrar.html); nas páginas que já mostram o
+// box de entrada, só leva ao campo de e-mail
 document.querySelector('.me-visitante').addEventListener('click', e => {
-  e.preventDefault(); e.stopPropagation(); fecharMenu(); scrollTo(0, 0);
-  const box = document.querySelector('.pla-box');                 // nas páginas que pedem login, o box já está na tela
-  if(box) box.querySelector('input[name="email"]').focus(); else janelaEntrar.abrir(true);
+  const box = document.querySelector('.pla-box');
+  if(!box) return;
+  e.preventDefault(); fecharMenu(); scrollTo(0, 0);
+  box.querySelector('input[name="email"]').focus();
 });
 
 // Submenu (Atividades): abre e fecha pelo botão; já vem aberto se a página atual for um dos itens dele.
@@ -686,6 +689,17 @@ function marcarLogado(logado){
   botaoEntrar.hidden = logado;
   botaoAvatar.hidden = !logado;
   document.body.classList.toggle('logado', logado);          // o CSS usa para decidir o que cabe no topo do celular
+  // Na tela de login o menu lateral fica sempre recolhido; depois de entrar, volta como a pessoa deixou
+  if(document.body.classList.contains('pede-login')) marcarRecolhido(!logado || lerPreferencia('v2MenuRecolhido') === '1');
+  // Na página Entrar, depois de entrar (ou se já estava logado), volta para a página de onde veio (?volta=), ou a Início
+  if(logado && LAYOUT_PAGE === 'entrar') location.replace(paginaDeVolta());
+}
+function paginaDeVolta(){
+  try {
+    const u = new URL(new URLSearchParams(location.search).get('volta') || '', location.href);
+    if(u.protocol === location.protocol && u.host === location.host && !/\/entrar\.html$/.test(u.pathname)) return u.href;
+  } catch(e){}
+  return urlPagina('inicio');
 }
 document.addEventListener('submit', e => {
   if(!e.target.classList.contains('enj-form')) return;
@@ -719,7 +733,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 });
 // Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
 // aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
-const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
+const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
   // Fundo verde abstrato na tela toda (CSS) e o box de vidro com o mesmo conteúdo da janela Entrar
