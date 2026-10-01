@@ -1698,3 +1698,19 @@ body.comp-aberta{ overflow:hidden; }
   .comp-opcoes{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
 }
 .comp-caixa:focus{ outline:none; }
+
+/* ===== Só com login: páginas pessoais (perfil, carteira, Atividades) e créditos =====
+   Sem login, o conteúdo dessas páginas some e fica o aviso para entrar (montado pelo layout.js); o saldo de créditos
+   do topo e a carteira do menu lateral também só aparecem com a pessoa logada. */
+body.pede-login:not(.logado) main > :not(.pede-login-aviso){ display:none !important; }
+body.logado .pede-login-aviso{ display:none; }
+body:not(.logado) .tools .creditos, body:not(.logado) .side .wallet{ display:none !important; }
+.pede-login-aviso{ max-width:520px; margin:56px auto 72px; padding:40px 32px; text-align:center; border-radius:26px;
+  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.pede-login-aviso h1{ font-size:30px; margin:16px 0 10px; }
+.pede-login-aviso p{ margin:0; font-size:16px; line-height:1.6; color:var(--text-2); }
+.pede-login-aviso .pla-ic{ display:inline-grid; place-items:center; width:64px; height:64px; border-radius:50%; background:var(--mint); color:var(--green); }
+.pede-login-aviso .pla-ic .ic{ width:28px; height:28px; }
+.pede-login-aviso .pla-entrar{ margin:24px auto 14px; min-width:200px; justify-content:center; }
+.pede-login-aviso .pla-cadastro{ font-size:14px; color:var(--muted); }
+@media (max-width:640px){ .pede-login-aviso{ margin:28px 0 48px; padding:30px 20px; } .pede-login-aviso h1{ font-size:25px; } }

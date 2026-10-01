@@ -703,6 +703,21 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   marcarLogado(false);
   mostrarAviso('Você saiu da conta');
 });
+// Páginas com informações pessoais (perfil, carteira e Atividades): sem login, o conteúdo fica escondido pelo CSS e
+// aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
+const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos'];
+if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
+  document.body.classList.add('pede-login');
+  document.querySelector('main').insertAdjacentHTML('afterbegin', `
+    <section class="pede-login-aviso">
+      <span class="pla-ic">${icone('perfil')}</span>
+      <h1>Entre para ver esta página</h1>
+      <p>Seu perfil, seus créditos e suas atividades ficam guardados na sua conta. Entre para continuar.</p>
+      <button type="button" class="btn pla-entrar">Entrar</button>
+      <p class="pla-cadastro">Ainda não tem conta? Cadastre-se e ganhe 20 créditos de bônus.</p>
+    </section>`);
+  document.querySelector('.pla-entrar').addEventListener('click', e => { e.stopPropagation(); scrollTo(0, 0); janelaEntrar.abrir(true); });
+}
 marcarLogado(lerLogado());
 
 // Janela "Saiba mais" (celular e telas menores): as páginas de INSTITUCIONAL, as mesmas do menu do topo do computador
