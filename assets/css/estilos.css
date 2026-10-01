@@ -1717,6 +1717,9 @@ body.pede-login:not(.logado)::before{ content:''; position:fixed; inset:0; z-ind
   background:#3f7a33 url('../img/fundo-verde-abstrato.svg') center / cover no-repeat; }
 /* Rodapé na cor de sempre: o vidro claro dele fica sobre o papel, não sobre o verde do fundo */
 :root body.pede-login:not(.logado) .rodape{ background:linear-gradient(var(--vidro-claro), var(--vidro-claro)), var(--paper); }
+/* Fundo vivo (canvas do layout.js) por cima da imagem parada, que fica de reserva */
+.pla-fundo-vivo{ position:fixed; inset:0; width:100%; height:100%; z-index:-1; display:block; pointer-events:none; }
+body.logado .pla-fundo-vivo{ display:none; }
 body.pede-login:not(.logado) .side{ background:rgba(255,255,255,.86); }   /* menu legível sobre o verde escuro */
 /* Menu recolhido na tela de login (computador): 30% visível, para o box ser o foco; volta a 100% ao passar o mouse ou
    navegar pelo teclado. No celular o menu é a gaveta e não muda. */

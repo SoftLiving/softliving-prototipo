@@ -107,8 +107,9 @@ menos de 1000px (container query).
 ## Regras de visual
 
 - **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
-  Amigos e Minhas Comunidades mostram, para quem não entrou, um fundo verde abstrato na tela toda
-  (`assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
+  Amigos e Minhas Comunidades mostram, para quem não entrou, um fundo verde vivo na tela toda (manchas
+  que flutuam devagar e trocam de tom, desenhadas num canvas pelo `layout.js`; quem pede menos movimento no aparelho vê
+  a imagem parada `assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
   vidro (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo da janela Entrar do topo: os dois
   saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Na tela de login o menu lateral fica sempre
   recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral leva à página `entrar.html` (mesma tela), que depois de entrar volta

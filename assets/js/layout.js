@@ -744,6 +744,64 @@ if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   const boxEntrar = document.querySelector('.pla-box');
   boxEntrar.addEventListener('click', e => cliqueEntrar(e, boxEntrar));
 }
+
+// Fundo vivo da tela de login: manchas de verde que flutuam devagar, respiram e trocam de tom, misturando-se umas às
+// outras. Cada mancha soma ondas com frequências diferentes, então o caminho nunca se repete. Desenhado num canvas de
+// resolução baixa (ampliado pelo navegador, o que deixa tudo desfocado e leve). Só roda sem login e com a aba visível;
+// quem pediu menos movimento no aparelho fica com a imagem parada (assets/img/fundo-verde-abstrato.svg).
+if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const tela = document.createElement('canvas');
+  tela.className = 'pla-fundo-vivo';
+  tela.setAttribute('aria-hidden', 'true');
+  document.body.prepend(tela);
+  const ctx = tela.getContext('2d');
+  const ESCALA = 0.12;                                           // desenha a 12% do tamanho da tela
+  const sorteio = (a, b) => a + Math.random() * (b - a);
+  // Cada mancha: centro, duas ondas por eixo, raio que respira e tom de verde que passeia (matiz 75 a 150)
+  const manchas = Array.from({ length: 9 }, (_, i) => ({
+    cx: sorteio(.1, .9), cy: sorteio(.1, .9),
+    ax: sorteio(.18, .38), ay: sorteio(.16, .34), bx: sorteio(.06, .16), by: sorteio(.06, .16),
+    fx: sorteio(.018, .045), fy: sorteio(.015, .04), gx: sorteio(.05, .09), gy: sorteio(.045, .085),
+    px: sorteio(0, 6.3), py: sorteio(0, 6.3), qx: sorteio(0, 6.3), qy: sorteio(0, 6.3),
+    r: sorteio(.32, .58), fr: sorteio(.03, .07), pr: sorteio(0, 6.3),
+    h: sorteio(85, 140), fh: sorteio(.01, .03), ph: sorteio(0, 6.3),
+    l: i < 3 ? sorteio(68, 80) : i < 6 ? sorteio(42, 55) : sorteio(18, 30),   // claras, médias e escuras
+    a: sorteio(.55, .85),
+  }));
+  function ajustarTamanho(){
+    tela.width = Math.max(64, Math.round(innerWidth * ESCALA));
+    tela.height = Math.max(64, Math.round(innerHeight * ESCALA));
+  }
+  ajustarTamanho();
+  addEventListener('resize', ajustarTamanho);
+  const inicio = performance.now() - sorteio(0, 600000);          // começa num ponto qualquer do caminho
+  let ultimo = 0;
+  function quadro(agora){
+    requestAnimationFrame(quadro);
+    if(document.body.classList.contains('logado') || agora - ultimo < 40) return;   // ~25 quadros por segundo
+    ultimo = agora;
+    const t = (agora - inicio) / 1000, w = tela.width, h = tela.height, m = Math.max(w, h);
+    ctx.globalCompositeOperation = 'source-over';
+    const base = ctx.createLinearGradient(0, 0, w, h);
+    base.addColorStop(0, `hsl(${100 + 12 * Math.sin(t * .02)}, 38%, 62%)`);
+    base.addColorStop(1, `hsl(${118 + 10 * Math.sin(t * .017 + 2)}, 45%, 18%)`);
+    ctx.fillStyle = base;
+    ctx.fillRect(0, 0, w, h);
+    manchas.forEach(b => {
+      const x = (b.cx + b.ax * Math.sin(t * b.fx + b.px) + b.bx * Math.sin(t * b.gx + b.qx)) * w;
+      const y = (b.cy + b.ay * Math.sin(t * b.fy + b.py) + b.by * Math.sin(t * b.gy + b.qy)) * h;
+      const r = b.r * (1 + .22 * Math.sin(t * b.fr + b.pr)) * m;
+      const tom = b.h + 22 * Math.sin(t * b.fh + b.ph);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, `hsla(${tom}, 48%, ${b.l}%, ${b.a})`);
+      g.addColorStop(.55, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .45})`);
+      g.addColorStop(1, `hsla(${tom}, 48%, ${b.l}%, 0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+    });
+  }
+  requestAnimationFrame(quadro);
+}
 marcarLogado(lerLogado());
 
 // Janela "Saiba mais" (celular e telas menores): as páginas de INSTITUCIONAL, as mesmas do menu do topo do computador
