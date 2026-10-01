@@ -23,7 +23,8 @@ const BAIRROS = [
 const siglaDe = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2 || /^[A-ZÀ-Ú]/.test(p)).slice(0, 2).map(p => p[0]).join('');
 const monograma = e => `<span class="vt-logo" style="color:${e.cor}">${siglaDe(e.n)}</span>`;
 
-document.getElementById('vtCategorias').innerHTML = CATEGORIAS.map(([c, f]) => `
+// Categorias e bairros também em ordem sorteada a cada carregamento
+document.getElementById('vtCategorias').innerHTML = embaralhar(CATEGORIAS).map(([c, f]) => `
   <a href="#" class="vt-cat"><img src="${fotoUrl(f, 200)}" alt=""><span>${c}</span></a>`).join('');
 
 // Em destaque: cartão vertical com foto, logo, bairro e benefício
@@ -66,7 +67,7 @@ document.getElementById('vtRecomendas').innerHTML = embaralhar(RECOMENDAS).map(r
     </div>
   </a>`; }).join('');
 
-document.getElementById('vtBairros').innerHTML = BAIRROS.map(([b, f]) => {
+document.getElementById('vtBairros').innerHTML = embaralhar(BAIRROS).map(([b, f]) => {
   const n = ESTABELECIMENTOS.filter(e => e.bairro === b).length || 3;
   return `<a href="#" class="vt-bairro" style="background-image:url('${fotoUrl(f, 600)}')"><span><b>${b}</b>${n} ${n === 1 ? 'lugar' : 'lugares'}</span></a>`;
 }).join('');

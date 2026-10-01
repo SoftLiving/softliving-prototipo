@@ -14,7 +14,10 @@ const CT_ASSUNTOS = [
   [LOGO, 'SoftLiving', 'ct-softliving'],
 ];
 const ctRotulo = cat => { const a = CT_ASSUNTOS.find(x => x[1] === cat); return a ? a[0] : cat; };
-const ctDoAssunto = cat => CONTEUDOS.filter(c => c.cat === cat);
+// Sorteio a cada visita (como na Início): a ordem dentro de cada bloco, quem vai no cartão grande, a coleção e a
+// posição dos blocos de assunto mudam sempre que a página abre
+const CT_SORTEIO = embaralhar(CONTEUDOS);
+const ctDoAssunto = cat => CT_SORTEIO.filter(c => c.cat === cat);
 const ctPorTitulo = t => CONTEUDOS.find(c => c.t === t);
 const ctEstado = { assunto:0, tipo:'todos', busca:'' };
 
@@ -67,7 +70,7 @@ const ctVerTodos = i => `<button type="button" class="ct-ver-todos" data-ver="${
 
 // 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto
 document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id]) => {
-  const c = cat ? ctDoAssunto(cat)[0] : CONTEUDOS[0];
+  const c = cat ? ctDoAssunto(cat)[0] : CT_SORTEIO[0];
   return `<a href="#${id}" class="vt-cat"><img src="${fotoUrl(c.foto, 200)}" alt=""><span>${r}</span></a>`;
 }).join('');
 
@@ -75,20 +78,23 @@ document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id])
 document.getElementById('ctDestaques').innerHTML = embaralhar(CONTEUDOS).slice(0, 8).map(ctVertical).join('');
 ativarCarrossel(document.getElementById('ctDestaques'), 'h');
 
-// 3) Coleção com curadoria: foto grande e três conteúdos ao lado
+// 3) Coleção com curadoria: foto grande e três conteúdos ao lado; a coleção e a ordem dos itens são sorteadas
 const CT_COLECOES = [
-  { id:'ctColecao1', t:'Viver mais e melhor', d:'Longevidade, hábitos e pequenas escolhas que fazem diferença em qualquer idade.', foto:'1529156069898-49953e39b3ac',
+  { t:'Viver mais e melhor', d:'Longevidade, hábitos e pequenas escolhas que fazem diferença em qualquer idade.', foto:'1529156069898-49953e39b3ac',
     itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?'] },
+  { t:'Pequenos prazeres', d:'Encontros, viagens sem pressa e o que realmente vale o nosso tempo.', foto:'1470252649378-9c29740c9fa8',
+    itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu'] },
+  { t:'Tecnologia sem medo', d:'Inteligência artificial, segurança e conexão: a tecnologia a favor da vida madura.', foto:'1677442136019-21780ecad995',
+    itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão'] },
 ];
-CT_COLECOES.forEach(col => {
-  document.getElementById(col.id).innerHTML = `
-    <article class="vt-colecao${col.invertida ? ' invertida' : ''}">
-      <div class="vt-col-capa" style="background-image:url('${fotoUrl(col.foto, 900)}')">
-        <div><p class="kicker">Coleção</p><h2>${col.t}</h2><p>${col.d}</p></div>
-      </div>
-      <div class="vt-col-lista">${col.itens.map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
-    </article>`;
-});
+const col = embaralhar(CT_COLECOES)[0];
+document.getElementById('ctColecao1').innerHTML = `
+  <article class="vt-colecao">
+    <div class="vt-col-capa" style="background-image:url('${fotoUrl(col.foto, 900)}')">
+      <div><p class="kicker">Coleção</p><h2>${col.t}</h2><p>${col.d}</p></div>
+    </div>
+    <div class="vt-col-lista">${embaralhar(col.itens).map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
+  </article>`;
 
 // 4) Um bloco por assunto, cada um com um layout
 const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).innerHTML = ctTitulo(CT_ASSUNTOS[i][0], sub) + corpo; };
@@ -96,8 +102,8 @@ const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).
 const bemEstar = ctDoAssunto(CT_ASSUNTOS[1][1]);
 ctBloco(1, 'Saúde mental, conexões e qualidade de vida.', `
   <div class="ct-mosaico">${bemEstar.map((c, i) => ctTile(c, i === 0)).join('')}${ctVerTodos(1)}</div>`);
-// Estilo e casa: formato de coleção invertida, o conteúdo de moda na foto grande e os de casa ao lado
-const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo.find(c => /Moda/.test(c.t)) || estilo[0];
+// Estilo e casa: formato de coleção invertida, um conteúdo na foto grande e os outros ao lado
+const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo[0];   // o primeiro sorteado vai na foto grande
 ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
   <article class="vt-colecao invertida">
     <a href="${urlConteudo(moda.t)}" class="vt-col-capa" style="background-image:url('${fotoUrl(moda.foto, 900)}')">
@@ -134,6 +140,15 @@ document.getElementById('ct-softliving').innerHTML = `
       <span class="ct-carta-autor">${carta.a}</span>
     </div>
   </a>`;
+
+// Posição dos blocos de assunto sorteada a cada visita (o patrocinador continua entre a coleção e eles); Saúde e
+// Tecnologia também trocam de lado
+const ctAncora = document.querySelector('main .apoio');
+embaralhar(['ct-bem-estar', 'ct-estilo-e-casa', 'ct-dupla', 'ct-viagem']).forEach((id, i) => {
+  const el = id === 'ct-dupla' ? document.querySelector('.ct-dupla') : document.getElementById(id);
+  if(i === 0) ctAncora.before(el); else document.getElementById('ct-softliving').before(el);
+});
+if(Math.random() < .5) document.querySelector('.ct-dupla').append(document.getElementById('ct-saude'));
 
 // 5) Todos os conteúdos: fichário de assuntos, Todos/Grátis/Premium e lista em 3 colunas (ordem sorteada a cada visita)
 const CT_ORDEM = embaralhar(CONTEUDOS);
