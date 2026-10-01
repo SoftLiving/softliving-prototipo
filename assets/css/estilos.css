@@ -1715,6 +1715,8 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
 /* Fundo verde abstrato cobrindo 100% da tela, fixo atrás de tudo (topo, menu e conteúdo) */
 body.pede-login:not(.logado)::before{ content:''; position:fixed; inset:0; z-index:-1;
   background:#3f7a33 url('../img/fundo-verde-abstrato.svg') center / cover no-repeat; }
+/* Rodapé na cor de sempre: o vidro claro dele fica sobre o papel, não sobre o verde do fundo */
+:root body.pede-login:not(.logado) .rodape{ background:linear-gradient(var(--vidro-claro), var(--vidro-claro)), var(--paper); }
 body.pede-login:not(.logado) .side{ background:rgba(255,255,255,.86); }   /* menu legível sobre o verde escuro */
 body.pede-login:not(.logado) .top{ background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom-color:rgba(255,255,255,.6); }
 .pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 24px; }
