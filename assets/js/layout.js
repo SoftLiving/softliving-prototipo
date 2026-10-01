@@ -731,146 +731,18 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   marcarLogado(false);
   mostrarAviso('Você saiu da conta');
 });
-// Telas de vidro em volta do box de login: ilustram o que o portal tem depois de entrar. Só linhas finas num verde claro
-// e transparente, sem cor chapada; decorativas (aria-hidden, sem clique). Cada uma: [classe de posição, título, desenho].
-const TELAS_LOGIN_LISTA = [
-  ['t1', 'Conteúdos', `
-    <rect x="8" y="10" width="68" height="44" rx="6"/><path d="M14 46l14-14 10 9 8-6 14 11"/><circle cx="62" cy="22" r="4"/>
-    <rect x="86" y="10" width="68" height="44" rx="6"/><path d="M92 46l18-16 12 10 8-5 18 11"/>
-    <rect x="164" y="10" width="68" height="44" rx="6"/><path d="M170 46l12-10 10 6 14-12 20 16"/><circle cx="182" cy="22" r="3.5"/>
-    <path d="M8 64h56M8 72h40M86 64h60M86 72h36M164 64h52M164 72h44"/>
-    <rect x="8" y="86" width="224" height="44" rx="8"/><rect x="16" y="94" width="40" height="28" rx="5"/><path d="M66 100h100M66 110h130M66 118h70"/><path d="M208 102l6 6-6 6"/>`],
-  ['t2', 'Grupos', `
-    <circle cx="22" cy="22" r="10"/><circle cx="22" cy="19" r="3.5"/><path d="M15 29a8 8 0 0 1 14 0"/>
-    <rect x="40" y="10" width="120" height="26" rx="13"/><path d="M52 20h80M52 27h50"/>
-    <circle cx="218" cy="62" r="10"/><circle cx="218" cy="59" r="3.5"/><path d="M211 69a8 8 0 0 1 14 0"/>
-    <rect x="80" y="48" width="126" height="26" rx="13"/><path d="M92 58h90M92 65h60"/>
-    <circle cx="22" cy="102" r="10"/><circle cx="22" cy="99" r="3.5"/><path d="M15 109a8 8 0 0 1 14 0"/>
-    <rect x="40" y="88" width="150" height="34" rx="14"/><path d="M52 100h110M52 108h80M52 115h40"/>
-    <rect x="10" y="132" width="220" height="14" rx="7"/><path d="M218 139h-6"/>`],
-  ['t3', 'Minhas Comunidades', `
-    <rect x="8" y="8" width="62" height="20" rx="10"/><rect x="76" y="8" width="62" height="20" rx="10"/><rect x="144" y="8" width="62" height="20" rx="10"/>
-    <path d="M22 18h34M90 18h34M158 18h34"/>
-    <rect x="8" y="40" width="224" height="28" rx="9"/><rect x="16" y="46" width="16" height="16" rx="4"/><path d="M42 50h90M42 58h60"/><path d="M214 50l5 4-5 4"/>
-    <rect x="8" y="76" width="224" height="28" rx="9"/><circle cx="24" cy="90" r="8"/><path d="M42 86h110M42 94h70"/><path d="M214 86l5 4-5 4"/>
-    <rect x="8" y="112" width="224" height="28" rx="9"/><path d="M18 132v-12l6-4 6 4v12M22 132v-6h4v6"/><path d="M42 122h80M42 130h100"/><path d="M214 122l5 4-5 4"/>`],
-  ['t4', 'Carteira', `
-    <rect x="10" y="8" width="132" height="82" rx="12"/><path d="M10 30h132"/><rect x="22" y="44" width="22" height="16" rx="3"/><path d="M22 76h60M100 76h28"/>
-    <path d="M160 90V60M178 90V44M196 90V52M214 90V28M232 90V38" stroke-width="5" stroke-linecap="round"/>
-    <path d="M10 104h222"/><path d="M10 118h80M10 128h120"/><circle cx="214" cy="122" r="11"/><path d="M214 116v12M208 122h12"/>`],
-  ['t5', 'Vitrine', `
-    <circle cx="28" cy="28" r="18"/><circle cx="76" cy="28" r="18"/><circle cx="124" cy="28" r="18"/><circle cx="172" cy="28" r="18"/><circle cx="220" cy="28" r="18" stroke-dasharray="3 4"/>
-    <path d="M20 32c4-8 12-8 16 0M70 22h12v12H70zM118 34l6-12 6 12zM166 30a6 6 0 1 0 12 0a6 6 0 1 0-12 0"/>
-    <path d="M12 56h32M60 56h32M108 56h32M156 56h32"/>
-    <rect x="8" y="70" width="108" height="72" rx="10"/><path d="M8 100h108M18 112h60M18 122h80M18 132h40"/><path d="M30 92l14-12 12 8 14-10 18 14"/>
-    <rect x="126" y="70" width="108" height="72" rx="10"/><path d="M126 100h108M136 112h70M136 122h50M136 132h76"/><path d="M146 92l18-14 14 10 10-6 18 10"/>`],
-  ['t6', 'Colunas', `
-    <circle cx="30" cy="30" r="20"/><circle cx="30" cy="25" r="7"/><path d="M17 44a15 15 0 0 1 26 0"/>
-    <path d="M62 22h110M62 32h70"/>
-    <path d="M14 70c0-8 6-12 12-12M30 70c0-8 6-12 12-12" stroke-width="2"/>
-    <path d="M14 82h214M14 94h200M14 106h214M14 118h160M14 130h190"/>`],
-];
-const TELAS_LOGIN = `<div class="pla-telas" aria-hidden="true">${TELAS_LOGIN_LISTA.map(([c, t, d]) => `
-  <div class="pla-tela ${c}"><div class="pla-tela-topo"><b>${t}</b><span></span><span></span><span></span></div>
-    <svg viewBox="0 0 240 150" fill="none">${d}</svg></div>`).join('')}</div>`;
-
 // Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
 // aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
 const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
-  // Fundo verde abstrato na tela toda (CSS) e o box de vidro com o mesmo conteúdo da janela Entrar
+  // Box de entrada no centro, com o mesmo conteúdo da janela Entrar
   document.querySelector('main').insertAdjacentHTML('afterbegin', `
     <section class="pede-login-aviso">
-      ${TELAS_LOGIN}
       <div class="pla-box" role="region" aria-label="Entrar na SoftLiving">${htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Entre para ver seu perfil, seus créditos, suas atividades e suas comunidades.')}</div>
     </section>`);
   const boxEntrar = document.querySelector('.pla-box');
   boxEntrar.addEventListener('click', e => cliqueEntrar(e, boxEntrar));
-}
-
-// Fundo vivo da tela de login: manchas de verde que flutuam devagar, respiram e trocam de tom, misturando-se umas às
-// outras. Cada mancha soma ondas com frequências diferentes, então o caminho nunca se repete. Desenhado num canvas de
-// resolução baixa (ampliado pelo navegador, o que deixa tudo desfocado e leve). Só roda sem login e com a aba visível;
-// quem pediu menos movimento no aparelho fica com a imagem parada (assets/img/fundo-verde-abstrato.svg).
-if(document.body.classList.contains('pede-login') && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const tela = document.createElement('canvas');
-  tela.className = 'pla-fundo-vivo';
-  tela.setAttribute('aria-hidden', 'true');
-  document.body.prepend(tela);
-  const ctx = tela.getContext('2d');
-  const ESCALA = 0.25;                                           // desenha a 25% do tamanho da tela (bordas mais definidas)
-  const VELOCIDADE = 7;                                          // multiplica a velocidade de todas as ondas
-  const sorteio = (a, b) => a + Math.random() * (b - a);
-  // Cada mancha: centro, duas ondas por eixo, raio que respira e tom de verde que passeia (matiz 75 a 150)
-  // Movimento extra de cada mancha: terceira onda no caminho (muda de direção mais vezes), giro e esticar/achatar
-  const extras = () => ({
-    cx3: sorteio(.04, .1), cy3: sorteio(.04, .1), f3: sorteio(.09, .16), p3: sorteio(0, 6.3), p4: sorteio(0, 6.3),
-    giro: sorteio(0, 6.3), fgiro: sorteio(-.08, .08), estica: sorteio(.25, .55), festica: sorteio(.04, .09), pestica: sorteio(0, 6.3),
-  });
-  const manchas = Array.from({ length: 9 }, (_, i) => ({ ...extras(),
-    cx: sorteio(.1, .9), cy: sorteio(.1, .9),
-    ax: sorteio(.18, .38), ay: sorteio(.16, .34), bx: sorteio(.06, .16), by: sorteio(.06, .16),
-    fx: sorteio(.018, .045), fy: sorteio(.015, .04), gx: sorteio(.05, .09), gy: sorteio(.045, .085),
-    px: sorteio(0, 6.3), py: sorteio(0, 6.3), qx: sorteio(0, 6.3), qy: sorteio(0, 6.3),
-    r: sorteio(.32, .58), fr: sorteio(.03, .07), pr: sorteio(0, 6.3),
-    h: sorteio(85, 140), fh: sorteio(.01, .03), ph: sorteio(0, 6.3),
-    l: i < 3 ? sorteio(68, 80) : i < 6 ? sorteio(42, 55) : sorteio(18, 30),   // claras, médias e escuras
-    a: sorteio(.55, .85), nitida: false,
-  }));
-  // Quatro manchas menores e de borda firme: pontos menos embaçados no meio do desfoque
-  for(let i = 0; i < 4; i++) manchas.push({ ...extras(),
-    cx: sorteio(.15, .85), cy: sorteio(.15, .85),
-    ax: sorteio(.2, .35), ay: sorteio(.18, .3), bx: sorteio(.05, .12), by: sorteio(.05, .12),
-    fx: sorteio(.025, .05), fy: sorteio(.02, .045), gx: sorteio(.06, .1), gy: sorteio(.05, .09),
-    px: sorteio(0, 6.3), py: sorteio(0, 6.3), qx: sorteio(0, 6.3), qy: sorteio(0, 6.3),
-    r: sorteio(.07, .13), fr: sorteio(.05, .1), pr: sorteio(0, 6.3),
-    h: sorteio(80, 140), fh: sorteio(.02, .04), ph: sorteio(0, 6.3),
-    l: i % 2 ? sorteio(72, 84) : sorteio(22, 34),
-    a: sorteio(.55, .75), nitida: true,
-  });
-  function ajustarTamanho(){
-    tela.width = Math.max(64, Math.round(innerWidth * ESCALA));
-    tela.height = Math.max(64, Math.round(innerHeight * ESCALA));
-  }
-  ajustarTamanho();
-  addEventListener('resize', ajustarTamanho);
-  const inicio = performance.now() - sorteio(0, 600000);          // começa num ponto qualquer do caminho
-  let ultimo = 0;
-  function quadro(agora){
-    requestAnimationFrame(quadro);
-    if(document.body.classList.contains('logado') || agora - ultimo < 33) return;   // ~30 quadros por segundo
-    ultimo = agora;
-    const t = (agora - inicio) / 1000 * VELOCIDADE, w = tela.width, h = tela.height, m = Math.max(w, h);
-    ctx.globalCompositeOperation = 'source-over';
-    const base = ctx.createLinearGradient(0, 0, w, h);
-    base.addColorStop(0, `hsl(${100 + 12 * Math.sin(t * .02)}, 38%, 62%)`);
-    base.addColorStop(1, `hsl(${118 + 10 * Math.sin(t * .017 + 2)}, 45%, 18%)`);
-    ctx.fillStyle = base;
-    ctx.fillRect(0, 0, w, h);
-    manchas.forEach(b => {
-      const x = (b.cx + b.ax * Math.sin(t * b.fx + b.px) + b.bx * Math.sin(t * b.gx + b.qx) + b.cx3 * Math.sin(t * b.f3 + b.p3)) * w;
-      const y = (b.cy + b.ay * Math.sin(t * b.fy + b.py) + b.by * Math.sin(t * b.gy + b.qy) + b.cy3 * Math.cos(t * b.f3 * 1.3 + b.p4)) * h;
-      const r = b.r * (1 + .22 * Math.sin(t * b.fr + b.pr)) * m;
-      const tom = b.h + 22 * Math.sin(t * b.fh + b.ph);
-      // forma oval que gira e estica/achata: desenha o círculo num espaço girado e esticado
-      const e = 1 + b.estica * Math.sin(t * b.festica + b.pestica);
-      ctx.setTransform(1, 0, 0, 1, x, y);
-      ctx.rotate(b.giro + t * b.fgiro);
-      ctx.scale(e, 1 / e);
-      const g = ctx.createRadialGradient(0, 0, 0, 0, 0, r);
-      g.addColorStop(0, `hsla(${tom}, 48%, ${b.l}%, ${b.a})`);
-      if(b.nitida){                                               // cor firme até perto da borda, que some rápido
-        g.addColorStop(.72, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .9})`);
-        g.addColorStop(.9, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .25})`);
-      } else g.addColorStop(.55, `hsla(${tom}, 48%, ${b.l}%, ${b.a * .45})`);
-      g.addColorStop(1, `hsla(${tom}, 48%, ${b.l}%, 0)`);
-      ctx.fillStyle = g;
-      ctx.fillRect(-r, -r, r * 2, r * 2);
-    });
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-  }
-  requestAnimationFrame(quadro);
 }
 marcarLogado(lerLogado());
 

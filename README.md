@@ -31,7 +31,7 @@ indicacoes.html             Tela Indicações: link de convite, convite por e-ma
 perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
 ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
 simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável
-entrar.html                 Tela de login (fundo verde e box de vidro); depois de entrar, volta para a página de origem (?volta=)
+entrar.html                 Tela de login (box de entrada no centro); depois de entrar, volta para a página de origem (?volta=)
 curtidas/comentarios/acompanhar/salvos.html  Atividades (atividades.js); Salvos lê a bandeirinha dos cartões (lerSalvos no layout.js)
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, produtos e serviços
@@ -107,15 +107,14 @@ menos de 1000px (container query).
 ## Regras de visual
 
 - **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
-  Amigos e Minhas Comunidades mostram, para quem não entrou, um fundo verde vivo na tela toda (manchas
-  que flutuam devagar e trocam de tom, desenhadas num canvas pelo `layout.js`; quem pede menos movimento no aparelho vê
-  a imagem parada `assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
-  vidro no centro e, em volta (a partir de 1200px), seis telas de vidro desenhadas em linhas finas que ilustram o portal
-  (Conteúdos, Grupos, Minhas Comunidades, Carteira, Vitrine, Colunas; `TELAS_LOGIN_LISTA` no `layout.js`), com o box (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo da janela Entrar do topo: os dois
-  saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Na tela de login o menu lateral fica sempre
-  recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral leva à página `entrar.html` (mesma tela), que depois de entrar volta
-  para a página de onde a pessoa veio. Sem login também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e
-  os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em Entrar com os campos vazios, ou e-mail `123` e senha `123`.
+  Amigos e Minhas Comunidades mostram, para quem não entrou, só o box de entrada no centro, sobre o fundo de sempre do
+  site (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo e visual da janela Entrar do topo:
+  os dois saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Na tela de login o
+  menu lateral fica recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral
+  leva à página `entrar.html` (mesma tela), que depois de entrar volta para a página de onde a pessoa veio. Sem login
+  também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e os números de não lidas do menu, e o
+  topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em
+  Entrar com os campos vazios, ou e-mail `123` e senha `123`.
 
 - **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
   (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.

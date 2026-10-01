@@ -1705,85 +1705,36 @@ body.comp-aberta{ overflow:hidden; }
 body.pede-login:not(.logado) main > :not(.pede-login-aviso){ display:none !important; }
 body.logado .pede-login-aviso{ display:none; }
 body:not(.logado) .tools .creditos, body:not(.logado) .side .wallet, body:not(.logado) .tools .sino{ display:none !important; }
-body.pede-login:not(.logado) .corpo > .lateral{ display:none !important; }
-body:not(.logado) .nav .tag{ display:none !important; }   /* números de não lidas (notificações, grupos, amigos) também são pessoais */   /* a coluna da direita dessas páginas também é pessoal */
+body.pede-login:not(.logado) .corpo > .lateral{ display:none !important; }   /* a coluna da direita dessas páginas também é pessoal */
+body:not(.logado) .nav .tag{ display:none !important; }   /* números de não lidas (notificações, grupos, amigos) também são pessoais */
 /* Topo do menu lateral: com login, nome e avatar (leva ao perfil); sem login, saudação e "Entrar" (abre a janela de entrada) */
 body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:none; }
 .me-visitante .avatar{ display:grid; place-items:center; }
 .me-visitante .avatar .ic{ width:20px; height:20px; }
 .me-visitante strong{ color:var(--green); }
-/* Fundo verde abstrato cobrindo 100% da tela, fixo atrás de tudo (topo, menu e conteúdo) */
-body.pede-login:not(.logado)::before{ content:''; position:fixed; inset:0; z-index:-1;
-  background:#3f7a33 url('../img/fundo-verde-abstrato.svg') center / cover no-repeat; }
-/* Rodapé na cor de sempre: o vidro claro dele fica sobre o papel, não sobre o verde do fundo */
-:root body.pede-login:not(.logado) .rodape{ background:linear-gradient(var(--vidro-claro), var(--vidro-claro)), var(--paper); }
-/* Fundo vivo (canvas do layout.js) por cima da imagem parada, que fica de reserva */
-.pla-fundo-vivo{ position:fixed; inset:0; width:100%; height:100%; z-index:-1; display:block; pointer-events:none; }
-body.logado .pla-fundo-vivo{ display:none; }
-body.pede-login:not(.logado) .side{ background:rgba(255,255,255,.86); }   /* menu legível sobre o verde escuro */
 /* Menu recolhido na tela de login (computador): 30% visível, para o box ser o foco; volta a 100% ao passar o mouse ou
    navegar pelo teclado. No celular o menu é a gaveta e não muda. */
 @media (min-width:981px){
   body.pede-login:not(.logado) .app.mini .side-wrap{ opacity:.3; transition:opacity .2s ease; }
   body.pede-login:not(.logado) .app.mini .side-wrap:hover, body.pede-login:not(.logado) .app.mini .side-wrap:focus-within{ opacity:1; }
 }
-body.pede-login:not(.logado) .top{ background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border-bottom-color:rgba(255,255,255,.6); }
-.pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 24px; }
-/* Página sem login: o conteúdo ocupa a largura toda (sem o espaço da coluna da direita), para a foto ir de ponta a ponta */
-body.pede-login:not(.logado) .corpo::after{ content:none !important; }
-body.pede-login:not(.logado) .corpo > .wrap{ flex:1 1 auto; max-width:none; }   /* box e telas centralizados também em telas largas */
-/* Box de vidro: mesmo conteúdo da janela Entrar, em branco sobre a foto */
-/* Telas de vidro em volta do box (computador): linhas finas em verde claro e transparente, levemente inclinadas, em
-   profundidades diferentes, flutuando devagar. Abaixo de 1200px somem (não há espaço ao lado do box). */
-.pede-login-aviso{ position:relative; perspective:1400px; }
-.pla-telas{ position:absolute; inset:0; max-width:1500px; margin:0 auto; pointer-events:none; }
-.pla-tela{ position:absolute; width:270px; padding:12px 14px 14px; border-radius:20px; color:rgba(232,246,222,.85);
-  background:linear-gradient(150deg, rgba(255,255,255,.16), rgba(255,255,255,.04)); border:1px solid rgba(235,248,225,.45);
-  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); box-shadow:0 18px 40px rgba(10,40,10,.12);
-  animation:plaFlutua 11s ease-in-out infinite alternate; }
-.pla-tela svg{ display:block; width:100%; height:auto; stroke:rgba(232,246,222,.72); stroke-width:1.1; stroke-linecap:round; stroke-linejoin:round; }
-.pla-tela-topo{ display:flex; align-items:center; gap:5px; margin-bottom:10px; }
-.pla-tela-topo b{ flex:1; font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:rgba(240,250,232,.85); }
-.pla-tela-topo span{ width:6px; height:6px; border-radius:50%; border:1px solid rgba(232,246,222,.6); }
-/* posição, inclinação e profundidade de cada tela (as mais distantes, menores e mais apagadas) */
-.pla-tela.t1{ left:1%;  top:4%;  --rot:rotateY(14deg) rotateZ(-2deg); width:300px; }
-.pla-tela.t2{ left:4%;  top:40%; --rot:rotateY(18deg) translateZ(-60px); opacity:.8; animation-delay:-3s; }
-.pla-tela.t3{ left:0%;  top:70%; --rot:rotateY(12deg) rotateZ(1.5deg); width:290px; animation-delay:-6s; }
-.pla-tela.t4{ right:1%; top:3%;  --rot:rotateY(-14deg) rotateZ(2deg); width:250px; animation-delay:-2s; }
-.pla-tela.t5{ right:3%; top:35%; --rot:rotateY(-18deg); width:300px; animation-delay:-8s; }
-.pla-tela.t6{ right:0%; top:70%; --rot:rotateY(-12deg) rotateZ(-1.5deg) translateZ(-50px); opacity:.8; animation-delay:-5s; }
-@keyframes plaFlutua{ from{ transform:var(--rot) translateY(0); } to{ transform:var(--rot) translateY(-14px); } }
-@media (prefers-reduced-motion: reduce){ .pla-tela{ animation:none; transform:var(--rot); } }
-@media (max-width:1439px){ .pla-tela{ width:230px !important; } }
-@media (max-width:1199px){ .pla-telas{ display:none; } }
-.pla-box{ position:relative; z-index:1; width:100%; max-width:420px; border-radius:26px; color:#fff; overflow:hidden; text-shadow:0 1px 2px rgba(10,40,10,.35);
-  background:linear-gradient(160deg, rgba(255,255,255,.22), rgba(20,60,20,.22)); border:1.5px solid rgba(255,255,255,.75);
-  -webkit-backdrop-filter:blur(18px) saturate(1.3); backdrop-filter:blur(18px) saturate(1.3); box-shadow:0 24px 60px rgba(0,0,0,.25); }
+/* Tela de login: o box de entrada no centro, sobre o fundo de sempre do site; mesmo conteúdo e visual da janela Entrar */
+.pede-login-aviso{ display:grid; place-items:center; min-height:calc(100vh - 150px); margin:0 0 40px; padding:40px 0; }
+.pla-box{ width:100%; max-width:420px; border-radius:26px; overflow:hidden;
+  background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.95); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque);
+  box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
 .pla-box .enj-topo{ padding:30px 28px 6px; }
-.pla-box .enj-topo b, .pla-box .enj-topo b .sig .soft, .pla-box .enj-topo b .sig .living{ color:#fff; font-size:30px; }
-.pla-box .enj-topo p{ color:rgba(255,255,255,.92); font-size:15px; line-height:1.5; margin-top:8px; }
+.pla-box .enj-topo b{ font-size:28px; }
+.pla-box .enj-topo p{ font-size:15px; line-height:1.5; margin-top:8px; }
 .pla-box .enj-social{ padding:18px 28px 4px; }
-.pla-box .enj-social-bt{ background:rgba(255,255,255,.88); border-color:rgba(255,255,255,.9); text-shadow:none; }
-.pla-box .enj-dica{ text-shadow:none; }
-.pla-box .enj-ou{ margin:16px 28px 12px; color:rgba(255,255,255,.9); }
-.pla-box .enj-ou::before, .pla-box .enj-ou::after{ background:rgba(255,255,255,.55); }
+.pla-box .enj-ou{ margin:16px 28px 12px; }
 .pla-box .enj-form{ padding:0 28px; }
-.pla-box .enj-form > label, .pla-box .enj-lembrar{ color:#fff; }
-.pla-box .enj-form input[type="text"], .pla-box .enj-form input[type="password"]{ height:50px; border-radius:14px; color:#fff;
-  background:rgba(255,255,255,.14); border:1.5px solid rgba(255,255,255,.7); }
-.pla-box .enj-form input::placeholder{ color:rgba(255,255,255,.75); }
-.pla-box .enj-form input:focus{ outline:none; border-color:#fff; background:rgba(255,255,255,.22); }
-.pla-box .enj-lembrar input{ accent-color:#7fa65a; }
-.pla-box .enj-ver, .pla-box .enj-esqueci, .pla-box .enj-criar{ color:#fff; }
-.pla-box .enj-esqueci, .pla-box .enj-criar{ text-decoration:underline; text-underline-offset:3px; }
-.pla-box .enj-dica{ background:rgba(253,246,227,.92); }
-.pla-box .enj-erro{ color:#fff; background:rgba(179,38,30,.85); padding:8px 12px; border-radius:12px; }
-.pla-box .enj-entrar{ height:52px; font-size:16px; border:1.5px solid rgba(255,255,255,.6) !important; background:linear-gradient(90deg, #a9bf72, #3f6b1e) !important; } /* !important: vence o verde padrão do efeito vidro */
-.pla-box .enj-entrar:hover{ background:linear-gradient(90deg, #b6cb80, #345a18) !important; }
-.pla-box .enj-cadastro{ margin-top:18px; padding:16px 28px 24px; border-top-color:rgba(255,255,255,.35); color:#fff; }
+.pla-box .enj-form input[type="text"], .pla-box .enj-form input[type="password"]{ height:48px; }
+.pla-box .enj-entrar{ height:50px; font-size:16px; }
+.pla-box .enj-cadastro{ margin-top:18px; padding:16px 28px 24px; }
 @media (max-width:640px){
   .pede-login-aviso{ min-height:calc(100vh - 190px); margin:0 0 32px; padding:24px 0; }
-  .pla-box .enj-topo{ padding:24px 20px 4px; } .pla-box .enj-topo b{ font-size:26px; }
+  .pla-box .enj-topo{ padding:24px 20px 4px; } .pla-box .enj-topo b{ font-size:25px; }
   .pla-box .enj-social, .pla-box .enj-form{ padding-left:20px; padding-right:20px; } .pla-box .enj-ou{ margin-left:20px; margin-right:20px; }
   .pla-box .enj-cadastro{ padding:14px 20px 20px; }
 }
