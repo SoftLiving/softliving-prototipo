@@ -105,9 +105,10 @@ menos de 1000px (container query).
 
 ## Regras de visual
 
-- **Só com login:** perfil, carteira e as páginas de Atividades (Curtidas, Comentários, Acompanhar, Salvos) mostram
-  o aviso "Entre para ver esta página" para quem não entrou; o saldo de créditos do topo e a carteira do menu lateral
-  também só aparecem logado. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Login de teste: e-mail `123`, senha `123`.
+- **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
+  Amigos e Minhas Comunidades mostram o aviso "Entre para ver esta página" para quem não entrou (a coluna da direita
+  dessas páginas também some). Sem login também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e
+  os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Login de teste: e-mail `123`, senha `123`.
 
 - **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
   (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.

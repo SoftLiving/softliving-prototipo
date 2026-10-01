@@ -66,7 +66,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 .lateral > *{ max-width:440px; width:100%; }
 /* Regra de largura única: o conteúdo tem a mesma largura em todas as páginas. Nas páginas sem a coluna da direita,
    um espaço vazio ocupa o lugar dela (mesma largura e mesmas regras de tamanho de tela), para o conteúdo não esticar. */
-.app:not(.com-lateral) .corpo::after{ content:''; flex:1 0 340px; }
+.app:not(.com-lateral) .corpo::after, body.pede-login:not(.logado) .corpo::after{ content:''; flex:1 0 340px; }
 
 /* Menu lateral */
 .side-wrap{ position:relative; margin:8px 0 8px 16px; width:264px; flex:none; } /* reserva o espaço da barra; a barra fica fixa na tela */
@@ -254,7 +254,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 @keyframes esToast{ 0%{ opacity:0; transform:translateY(6px); } 15%,75%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateY(-6px); } }
 
 /* Notebooks (1200 a 1439px, como 1280 e 1366): as três colunas continuam (menu, conteúdo e lateral), com a lateral mais estreita */
-@media (min-width:1200px) and (max-width:1439px){ .lateral, .app:not(.com-lateral) .corpo::after{ flex-basis:300px; } .lateral{ padding:20px 20px 32px 20px; } }
+@media (min-width:1200px) and (max-width:1439px){ .lateral, .app:not(.com-lateral) .corpo::after, body.pede-login:not(.logado) .corpo::after{ flex-basis:300px; } .lateral{ padding:20px 20px 32px 20px; } }
 /* Sem espaço ao lado do conteúdo: a lateral desce para depois dele, em grade */
 /* (abaixo de 1200px: tablets, tablets deitados e telas pequenas) */
 @media (max-width:1199px){
@@ -262,7 +262,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .corpo > .wrap{ flex:none; }
   .lateral{ flex:none; margin:0 24px 56px; border-radius:26px; padding:24px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); align-items:start; }
   .lateral > *{ max-width:none; }
-  .app:not(.com-lateral) .corpo::after{ content:none; }   /* a coluna desce para baixo do conteúdo: o espaço vazio some */
+  .app:not(.com-lateral) .corpo::after, body.pede-login:not(.logado) .corpo::after{ content:none; }   /* a coluna desce para baixo do conteúdo: o espaço vazio some */
 }
 @media (max-width:640px){ .lateral{ margin:0 16px 40px; padding:16px; } }
 
@@ -1704,7 +1704,14 @@ body.comp-aberta{ overflow:hidden; }
    do topo e a carteira do menu lateral também só aparecem com a pessoa logada. */
 body.pede-login:not(.logado) main > :not(.pede-login-aviso){ display:none !important; }
 body.logado .pede-login-aviso{ display:none; }
-body:not(.logado) .tools .creditos, body:not(.logado) .side .wallet{ display:none !important; }
+body:not(.logado) .tools .creditos, body:not(.logado) .side .wallet, body:not(.logado) .tools .sino{ display:none !important; }
+body.pede-login:not(.logado) .corpo > .lateral{ display:none !important; }
+body:not(.logado) .nav .tag{ display:none !important; }   /* números de não lidas (notificações, grupos, amigos) também são pessoais */   /* a coluna da direita dessas páginas também é pessoal */
+/* Topo do menu lateral: com login, nome e avatar (leva ao perfil); sem login, saudação e "Entrar" (abre a janela de entrada) */
+body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:none; }
+.me-visitante .avatar{ display:grid; place-items:center; }
+.me-visitante .avatar .ic{ width:20px; height:20px; }
+.me-visitante strong{ color:var(--green); }
 .pede-login-aviso{ max-width:520px; margin:56px auto 72px; padding:40px 32px; text-align:center; border-radius:26px;
   background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
 .pede-login-aviso h1{ font-size:30px; margin:16px 0 10px; }

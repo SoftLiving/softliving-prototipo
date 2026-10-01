@@ -160,6 +160,10 @@ const LAYOUT_MENU = `
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
   </a>
+  <a href="#" class="me me-visitante" title="Entrar na sua conta">
+    <span class="avatar">${icone('perfil')}</span>
+    <div><small>${saudacao().replace(',', '!')}</small><strong>Entrar</strong></div>
+  </a>
 
   ${MENU_SECOES.map(sec => `
   <div>
@@ -323,6 +327,8 @@ const fecharMenu = () => app.classList.remove('open');
 document.getElementById('menuBtn').addEventListener('click', abrirMenu);
 document.getElementById('tabVoce').addEventListener('click', e => { e.preventDefault(); abrirMenu(); });
 document.getElementById('scrim').addEventListener('click', fecharMenu);
+// Topo do menu sem login: "Entrar" no lugar do nome abre a janela de entrada
+document.querySelector('.me-visitante').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); fecharMenu(); scrollTo(0, 0); janelaEntrar.abrir(true); });
 
 // Submenu (Atividades): abre e fecha pelo botão; já vem aberto se a página atual for um dos itens dele.
 // Com o menu recolhido (só ícones), clicar em Atividades abre o menu para mostrar o submenu.
@@ -703,16 +709,16 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   marcarLogado(false);
   mostrarAviso('Você saiu da conta');
 });
-// Páginas com informações pessoais (perfil, carteira e Atividades): sem login, o conteúdo fica escondido pelo CSS e
+// Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
 // aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
-const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos'];
+const PAGINAS_COM_LOGIN = ['perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
   document.querySelector('main').insertAdjacentHTML('afterbegin', `
     <section class="pede-login-aviso">
       <span class="pla-ic">${icone('perfil')}</span>
       <h1>Entre para ver esta página</h1>
-      <p>Seu perfil, seus créditos e suas atividades ficam guardados na sua conta. Entre para continuar.</p>
+      <p>Seu perfil, seus créditos, suas atividades e suas comunidades ficam guardados na sua conta. Entre para continuar.</p>
       <button type="button" class="btn pla-entrar">Entrar</button>
       <p class="pla-cadastro">Ainda não tem conta? Cadastre-se e ganhe 20 créditos de bônus.</p>
     </section>`);
