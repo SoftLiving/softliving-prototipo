@@ -84,9 +84,9 @@ function corpoTexto(){
 // curadoria com especialistas é paga pelos créditos de quem lê.
 const travaPreco = `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}`;
 const TRAVA_TITULOS = [
-  `Continue lendo por ${travaPreco}`, 'A melhor parte vem agora', 'Quer saber como termina?', 'Destrave e leia até o fim',
-  'O restante deste texto está a um clique', `Leia o texto completo por ${travaPreco}`, 'Ainda tem muito para descobrir aqui',
-  'Siga lendo, sem anúncios no caminho', `Termine esta leitura por ${travaPreco}`, 'Esta leitura continua para quem apoia a curadoria',
+  'Continue lendo daqui', 'A melhor parte vem agora', 'Quer saber como termina?', 'Destrave e leia até o fim',
+  'O restante deste texto está a um clique', 'Leia o texto completo', 'Ainda tem muito para descobrir aqui',
+  'Siga lendo, sem anúncios no caminho', 'Termine esta leitura', 'Esta leitura continua para quem apoia a curadoria',
 ];
 const TRAVA_MENSAGENS = [
   'A SoftLiving não vende anúncios nem os seus dados. Quem sustenta a curadoria é você, com créditos, e é isso que nos permite convidar especialistas de verdade.',
@@ -106,25 +106,32 @@ const trava = { titulo:embaralhar(TRAVA_TITULOS)[0], mensagem:embaralhar(TRAVA_M
 function htmlTrava(){
   const resto = paragrafos.slice(3);
   const borrado = resto.find(p => !p.startsWith('## '));
-  const saldo = saldoCreditos(), logado = lerLogado(), falta = saldo < c.credits;
+  const saldo = saldoCreditos(), logado = lerLogado(), falta = logado && saldo < c.credits;
   const botao = !logado ? `<button type="button" class="btn lg" data-entrar-destravar>Entrar para destravar</button>`
     : falta ? `<a href="${urlPagina('carteira')}#recarga" class="btn lg">Recarregar créditos</a>`
-    : `<button type="button" class="btn lg" data-destravar>${ldIcone('cadeado')}Destravar por ${travaPreco}</button>`;
+    : `<button type="button" class="btn lg" data-destravar>Destravar agora</button>`;
+  const faltam = c.credits - saldo;
   return `
     ${borrado ? `<p class="ld-previa" aria-hidden="true">${comLogoLd(escLd(borrado))}</p>` : ''}
     <div class="ld-trava">
       <div class="ld-trava-box">
-        <span class="ld-trava-ic">${ldIcone('cadeado')}</span>
-        <h2>${trava.titulo}</h2>
-        <p class="ld-trava-msg">${comLogoLd(trava.mensagem)}</p>
-        <ul class="ld-motivos">${trava.motivos.map(m => `<li>${ldIcone('ok')}${m}</li>`).join('')}</ul>
-        <div class="ld-trava-preco">
-          <span><b>${travaPreco}</b> · 1 crédito = R$ 1,00</span>
-          ${logado ? `<span class="${falta ? 'falta' : ''}">Seu saldo: <b>${saldo} créditos</b></span>` : ''}
+        <div class="ld-trava-porque">
+          <span class="ld-trava-rotulo">${ldIcone('cadeado')}Conteúdo exclusivo</span>
+          <h2>${trava.titulo}</h2>
+          <p class="ld-trava-msg">${comLogoLd(trava.mensagem)}</p>
+          <ul class="ld-motivos">${trava.motivos.map(m => `<li>${ldIcone('ok')}<span>${m}</span></li>`).join('')}</ul>
         </div>
-        ${botao}
-        <p class="ld-trava-nota">${falta && logado ? `${c.credits - saldo === 1 ? 'Falta 1 crédito' : `Faltam ${c.credits - saldo} créditos`}. Na primeira recarga, R$50 viram 100 créditos.` : `Ao destravar, ${travaPreco} ${c.credits === 1 ? 'sai' : 'saem'} da sua carteira. Destravado uma vez, fica na sua conta para sempre.`}</p>
-        <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
+        <div class="ld-trava-compra">
+          <span class="ld-trava-para">Para continuar lendo</span>
+          <p class="ld-trava-valor"><b>${c.credits}</b> ${c.credits === 1 ? 'crédito' : 'créditos'}</p>
+          <span class="ld-trava-reais">R$ ${c.credits},00</span>
+          ${botao}
+          <p class="ld-trava-saldo${falta ? ' falta' : ''}">${!logado ? 'Entre na sua conta para usar seus créditos.'
+            : falta ? `Seu saldo: <b>${saldo} ${saldo === 1 ? 'crédito' : 'créditos'}</b>. ${faltam === 1 ? 'Falta 1' : `Faltam ${faltam}`}.`
+            : `Seu saldo: <b>${saldo} créditos</b>`}</p>
+          ${falta ? '<p class="ld-trava-nota">Na primeira recarga, R$50 viram 100 créditos.</p>' : ''}
+          <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
+        </div>
       </div>
     </div>`;
 }

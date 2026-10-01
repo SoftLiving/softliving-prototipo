@@ -53,22 +53,35 @@
 /* Prévia: o parágrafo seguinte, desfocado e sumindo aos poucos, por baixo do convite */
 .ld-texto .ld-previa{ filter:blur(4px); opacity:.75; user-select:none; pointer-events:none;
   -webkit-mask-image:linear-gradient(to bottom, #000 20%, transparent); mask-image:linear-gradient(to bottom, #000 20%, transparent); }
-/* Box do convite */
-.ld-trava-box{ text-align:center; padding:30px 30px 24px; border-radius:28px; background:linear-gradient(180deg, #fffaf0, #fff); border:1px solid #f0ddac;
-  box-shadow:0 18px 40px rgba(138,90,14,.12), var(--vidro-brilho); }
-.ld-trava-ic{ display:inline-grid; place-items:center; width:54px; height:54px; border-radius:50%; background:#fdf1dc; color:#8a5a0e; margin-bottom:10px; }
-.ld-trava-ic .ic{ width:24px; height:24px; }
-.ld-trava-box h2{ margin:0 0 .45em !important; }
-.ld-trava-box .ld-trava-msg{ max-width:540px; margin:0 auto 18px !important; color:var(--text-2) !important; font-size:16.5px !important; line-height:1.6 !important; }
-.ld-motivos{ list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:0 0 20px; padding:0; }
-.ld-motivos li{ display:inline-flex; align-items:center; gap:7px; padding:7px 13px; border-radius:999px; background:#e3f2ea; color:#1f5c3d; font-size:13.5px !important; font-weight:600; line-height:1.2; margin:0 !important; }
-.ld-motivos li .ic{ width:15px; height:15px; flex:none; }
-.ld-trava-preco{ display:flex; justify-content:center; flex-wrap:wrap; gap:6px 18px; margin:0 0 16px; font-size:14px; color:var(--text-2); }
-.ld-trava-preco b{ color:var(--navy); }
-.ld-trava-preco .falta b{ color:#b3261e; }
-.ld-trava-box .btn.lg .ic{ width:17px; height:17px; }
-.ld-trava-box .ld-trava-nota{ margin:12px auto 0 !important; max-width:460px; font-size:13px !important; color:var(--muted) !important; line-height:1.5 !important; }
-.ld-trava-link{ display:inline-block; margin-top:10px; font-size:14px; font-weight:600; color:var(--green); text-decoration:underline; }
+/* Box do convite: à esquerda, o porquê (texto alinhado à esquerda, fácil de ler); à direita, o preço e o botão num cartão
+   branco. No celular, um embaixo do outro. */
+.ld-trava-box{ display:grid; grid-template-columns:minmax(0, 1fr) 250px; gap:28px; align-items:center; padding:28px; border-radius:28px;
+  background:linear-gradient(180deg, #fffaf0, #fff8ea); border:1px solid #f0ddac; box-shadow:0 18px 40px rgba(138,90,14,.10), var(--vidro-brilho); }
+.ld-trava-rotulo{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8a5a0e; }
+.ld-trava-rotulo .ic{ width:15px; height:15px; }
+.ld-trava-box h2{ margin:10px 0 12px !important; font-size:28px !important; line-height:1.15 !important; }
+.ld-trava-box .ld-trava-msg{ margin:0 0 18px !important; color:var(--text-2) !important; font-size:16.5px !important; line-height:1.65 !important; }
+.ld-motivos{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+.ld-motivos li{ display:flex; align-items:center; gap:10px; margin:0 !important; font-size:15.5px !important; line-height:1.4 !important; color:var(--text); }
+.ld-motivos li .ic{ width:20px; height:20px; flex:none; color:var(--green); }
+/* Cartão do preço */
+.ld-trava-compra{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 20px 20px; border-radius:22px; background:#fff;
+  border:1px solid var(--line); box-shadow:0 10px 26px rgba(1,53,101,.08); }
+.ld-trava-para{ font-size:13px; font-weight:600; color:var(--muted); }
+.ld-trava-box .ld-trava-valor{ margin:4px 0 0 !important; font-size:17px !important; color:var(--navy) !important; font-weight:600; line-height:1 !important; }
+.ld-trava-valor b{ display:block; font-family:'Fraunces',serif; font-size:56px; line-height:1; margin-bottom:2px; }
+.ld-trava-reais{ margin:6px 0 18px; font-size:13.5px; color:var(--muted); }
+.ld-trava-compra .btn.lg{ width:100%; justify-content:center; }
+.ld-trava-box .ld-trava-saldo{ margin:14px 0 0 !important; font-size:14px !important; line-height:1.45 !important; color:var(--text-2) !important; }
+.ld-trava-saldo b{ color:var(--navy); }
+.ld-trava-saldo.falta b{ color:#b3261e; }
+.ld-trava-box .ld-trava-nota{ margin:6px 0 0 !important; font-size:12.5px !important; line-height:1.45 !important; color:var(--muted) !important; }
+.ld-trava-link{ display:inline-block; margin-top:12px; font-size:13.5px; font-weight:600; color:var(--green); text-decoration:underline; }
+.ld-trava{ container-type:inline-size; }
+@container (max-width:600px){
+  .ld-trava-box{ grid-template-columns:1fr; gap:20px; padding:22px 18px; }
+  .ld-trava-box h2{ font-size:24px !important; }
+}
 
 /* Quem escreveu */
 .ld-quem{ display:flex; gap:20px; align-items:flex-start; max-width:886px; margin:0 auto 48px; padding:26px 28px; border-radius:26px;
@@ -113,8 +126,6 @@
   .ld-letra button{ width:44px; }
 }
 @media (max-width:640px){
-  .ld-trava-box{ padding:24px 18px 20px; border-radius:22px; }
-  .ld-motivos li{ font-size:12.5px !important; }
   .ld-topo h1{ font-size:34px; }
   .ld-resumo{ font-size:18px; }
   .ld-capa{ aspect-ratio:16 / 10; border-radius:22px; margin-bottom:26px; }
