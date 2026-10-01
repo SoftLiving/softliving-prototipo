@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assunto · Conteúdos · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+<link rel="stylesheet" href="assets/css/vitrine.css">
+<link rel="stylesheet" href="assets/css/conteudos.css">
+</head>
+<body data-page="conteudos" data-root="">
+
+<!-- Página de um assunto (Bem-estar, Saúde, Estilo e casa, Viagem, Tecnologia, SoftLiving): assunto.html?a=<endereço>.
+     Mesmo visual de revista da Conteúdos e da Vitrine: destaque em faixa larga, mosaico, lista com Todos/Grátis/Premium e
+     "Leia também" com outros assuntos. Tudo é montado por assunto.js; a ordem é sorteada a cada visita. -->
+<div class="page-head">
+  <p class="kicker" id="asKicker">Assunto</p>
+  <h1 id="asTitulo"></h1>
+  <p id="asFrase"></p>
+</div>
+
+<!-- Todos os assuntos em círculos (o atual marcado), para trocar de assunto -->
+<nav class="vt-categorias" id="asCirculos" aria-label="Assuntos" data-lateral-topo></nav>
+
+<!-- Destaque do assunto: faixa larga -->
+<section class="vt-bloco" id="asDestaque"></section>
+
+<!-- Mais do assunto: mosaico -->
+<section class="vt-bloco" id="asMosaico"></section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Todos do assunto: Todos/Grátis/Premium e lista em 3 colunas -->
+<section class="vt-bloco" id="asLista">
+  <div class="vt-titulo"><h2 id="asListaTitulo"></h2><p>Escolha entre grátis e premium.</p></div>
+  <div class="seg" id="asTipos" role="tablist"></div>
+  <div class="ct-itens" id="asItens"></div>
+  <p class="vazio" id="asVazio" hidden>Nenhum conteúdo com esse filtro.</p>
+</section>
+
+<!-- Leia também: conteúdos de outros assuntos, em carrossel -->
+<section class="vt-bloco">
+  <div class="vt-titulo"><h2>Leia também</h2><p>De outros assuntos, escolhidos para você.</p></div>
+  <div class="vt-destaques" id="asTambem"></div>
+</section>
+
+<!-- Coluna lateral da direita (montada por lateral.js) -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/texto.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/conteudos-dados.js"></script>
+<script src="assets/js/grupos-dados.js"></script>
+<script src="assets/js/lateral.js"></script>
+<script src="assets/js/escuta-dados.js"></script>
+<script src="assets/js/escuta.js"></script>
+<script src="assets/js/conteudos-cartoes.js"></script>
+<script src="assets/js/assunto.js"></script>
+</body>
+</html>

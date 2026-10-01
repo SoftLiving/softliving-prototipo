@@ -58,7 +58,7 @@ let respondendo = null;   // número do comentário com o campo de resposta aber
 // Voltar: para a página de onde a pessoa veio (Início, Conteúdos, Colunas, Busca...); sem origem, Conteúdos ou Colunas
 const voltarPara = (() => {
   const ROTULOS = { 'index.html':'Início', '':'Início', 'conteudos.html':'Conteúdos', 'colunas.html':'Colunas', 'busca.html':'Busca', 'curtidas.html':'Curtidas',
-    'salvos.html':'Salvos', 'comentarios.html':'Comentários', 'acompanhar.html':'Acompanhar', 'notificacoes.html':'Notificações', 'conteudo.html':'Voltar' };
+    'salvos.html':'Salvos', 'comentarios.html':'Comentários', 'acompanhar.html':'Acompanhar', 'notificacoes.html':'Notificações', 'conteudo.html':'Voltar', 'assunto.html':'Voltar' };
   try {
     const r = new URL(document.referrer);
     const arq = r.pathname.split('/').pop();

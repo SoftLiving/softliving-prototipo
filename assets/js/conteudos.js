@@ -3,75 +3,16 @@
 // (mosaico, lista em duas colunas, dupla lado a lado, faixa larga, carta) e, no fim, a lista completa com o fichário de
 // assuntos e Todos/Grátis/Premium. Usa CONTEUDOS (conteudos-dados.js) e fotoUrl/icone/mostrarAviso (layout.js).
 
-// Assuntos: rótulo curto → categoria dos dados (mesma ordem de assuntos da Início, mais SoftLiving); id do bloco na página
-const CT_ASSUNTOS = [
-  ['Todos', null, 'ctLista'],
-  ['Bem-estar', 'Saúde mental e qualidade de vida', 'ct-bem-estar'],
-  ['Saúde', 'Saúde e bem-estar físico', 'ct-saude'],
-  ['Estilo e casa', 'Estilo de vida e consumo', 'ct-estilo-e-casa'],
-  ['Viagem', 'Turismo e viagem', 'ct-viagem'],
-  ['Tecnologia', 'Tecnologia e serviços digitais', 'ct-tecnologia'],
-  [LOGO, 'SoftLiving', 'ct-softliving'],
-];
-const ctRotulo = cat => { const a = CT_ASSUNTOS.find(x => x[1] === cat); return a ? a[0] : cat; };
-// Sorteio a cada visita (como na Início): a ordem dentro de cada bloco, quem vai no cartão grande, a coleção e a
-// posição dos blocos de assunto mudam sempre que a página abre
-const CT_SORTEIO = embaralhar(CONTEUDOS);
-const ctDoAssunto = cat => CT_SORTEIO.filter(c => c.cat === cat);
-const ctPorTitulo = t => CONTEUDOS.find(c => c.t === t);
 const ctEstado = { assunto:0, tipo:'todos', busca:'' };
 
-const ctPreco = c => c.badge === 'premium'
-  ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
-  : c.badge === 'destravado' ? '<span class="vc-chip">Destravado</span>' : '<span class="vc-chip">Grátis</span>';
-const ctPrecoTexto = c => c.badge === 'premium' ? `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}` : c.badge === 'destravado' ? 'Destravado' : 'Grátis';
-const ctBotao = c => c.badge === 'premium'
-  ? `<span class="vc-btn" data-destravar="${c.credits}">Destravar ${icone('seta')}</span>`
-  : `<span class="vc-btn">Ler ${icone('seta')}</span>`;
-const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
-const ctTitulo = (t, sub) => `<div class="vt-titulo"><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>`;
+// "Ver todos" de um assunto: leva à página do assunto
+const ctVerTodos = (i, n) => `<a href="${urlAssunto(CT_ASSUNTOS[i][3])}" class="ct-ver-todos" style="${ctVerSpan(n, true)}"><b>Ver todos de ${CT_ASSUNTOS[i][0]}</b><span>${ctDoAssunto(CT_ASSUNTOS[i][1]).length} conteúdos ${icone('seta')}</span></a>`;
 
-// Cartões (cada bloco usa um ou mais destes, em tamanhos diferentes)
-const ctVertical = c => `
-  <a href="${urlConteudo(c.t)}" class="vcard">
-    <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
-    ${ctSalvar}
-    <div class="vc-info">
-      <span class="vc-cat">${ctRotulo(c.cat)}</span>
-      <h3>${c.t}</h3>
-      <span class="vc-autor">${c.a}</span>
-      <div class="vc-row">${ctPreco(c)}${ctBotao(c)}</div>
-    </div>
-  </a>`;
-// Foto com o texto por cima; a versão grande mostra também o resumo
-const ctTile = (c, grande) => `
-  <a href="${urlConteudo(c.t)}" class="ct-tile${grande ? ' grande' : ''}" style="background-image:url('${fotoUrl(c.foto, grande ? 1000 : 600)}')">
-    ${ctSalvar}
-    <div class="ct-tile-txt">
-      <span class="vc-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span>
-      <h3>${c.t}</h3>
-      ${grande ? `<p>${c.e}</p>` : ''}
-      <span class="vc-autor">${c.a}</span>
-    </div>
-  </a>`;
-// Linha com miniatura (coleções e listas)
-const ctMini = c => `
-  <a href="${urlConteudo(c.t)}" class="vt-mini">
-    <img src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
-    <div><span class="vt-mini-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span><h3>${c.t}</h3><p>${c.e}</p><span class="ct-mini-autor">${c.a}</span></div>
-  </a>`;
-// Item de lista (o mesmo da Início e da Busca): miniatura, assunto, título, autor e preço
-const ctItem = c => `
-  <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${ctSalvar}
-    <div><span class="cat">${ctRotulo(c.cat)}</span><h3>${c.t}</h3>
-    <div class="meta"><span>${c.a}</span><span class="ct-item-preco${c.badge === 'premium' ? ' premium' : ''}">${ctPrecoTexto(c)}</span></div></div></a>`;
-// "Ver todos" de um assunto: leva à lista completa já filtrada
-const ctVerTodos = i => `<button type="button" class="ct-ver-todos" data-ver="${i}"><b>Ver todos de ${CT_ASSUNTOS[i][0]}</b><span>${ctDoAssunto(CT_ASSUNTOS[i][1]).length} conteúdos ${icone('seta')}</span></button>`;
-
-// 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto
-document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id]) => {
+// 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto: cada um leva à página própria do assunto
+// ("Todos" leva à lista completa, no fim desta página)
+document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id, slug]) => {
   const c = cat ? ctDoAssunto(cat)[0] : CT_SORTEIO[0];
-  return `<a href="#${id}" class="vt-cat"><img src="${fotoUrl(c.foto, 200)}" alt=""><span>${r}</span></a>`;
+  return `<a href="${slug ? urlAssunto(slug) : '#' + id}" class="vt-cat"><img src="${fotoUrl(c.foto, 200)}" alt=""><span>${r}</span></a>`;
 }).join('');
 
 // 2) Em destaque: 8 sorteados a cada visita, em carrossel
@@ -102,7 +43,7 @@ const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).
 // Bem-estar: mosaico (um grande e os outros menores) e o "ver todos" fechando a grade
 const bemEstar = ctDoAssunto(CT_ASSUNTOS[1][1]);
 ctBloco(1, 'Saúde mental, conexões e qualidade de vida.', `
-  <div class="ct-mosaico">${bemEstar.map((c, i) => ctTile(c, i === 0)).join('')}${ctVerTodos(1)}</div>`);
+  <div class="ct-mosaico">${bemEstar.map((c, i) => ctTile(c, i === 0)).join('')}${ctVerTodos(1, bemEstar.length)}</div>`);
 // Estilo e casa: formato de coleção invertida, um conteúdo na foto grande e os outros ao lado
 const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo[0];   // o primeiro sorteado vai na foto grande
 ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
@@ -180,12 +121,6 @@ document.querySelector('main').addEventListener('click', e => {
     e.preventDefault();
     const salvo = alternarSalvo(fav);
     mostrarAviso(salvo ? 'Salvo para ler depois' : 'Removido dos salvos');
-    return;
-  }
-  const ver = e.target.closest('[data-ver]');
-  if(ver){                                                         // "Ver todos de X": lista completa já filtrada
-    ctEstado.assunto = +ver.dataset.ver; ctEstado.tipo = 'todos'; renderConteudos();
-    document.getElementById('ctLista').scrollIntoView({ behavior:'smooth', block:'start' });
     return;
   }
   if(e.target.closest('.ct-quero')){ e.preventDefault(); mostrarAviso('Cadastro de especialistas: fora deste protótipo'); }

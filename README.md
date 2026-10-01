@@ -23,6 +23,7 @@ assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · 
 assets/js/layout.js         Moldura comum: faixa de protótipo, aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
 conteudos.html              Tela Conteúdos (estrutura da Vitrine): assuntos em círculos, destaque, coleções, um bloco por assunto, lista completa
+assunto.html                Página de cada assunto (?a=bem-estar|saude|estilo-e-casa|viagem|tecnologia|softliving): destaque, mosaico, lista, Leia também
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
@@ -78,6 +79,7 @@ assets/img/                 Logos da FSB e da RB2
 |---|---|
 | Início | pronta para revisão |
 | Conteúdos (`conteudos.html`) | pronta para revisão (estrutura de revista, como a Vitrine) |
+| Assuntos (`assunto.html?a=...`) | pronta para revisão (uma página por assunto, aberta pelos círculos da Conteúdos) |
 | Colunas (`colunas.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Busca (`busca.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Leitura do artigo (`conteudo.html`) | pronta para revisão |

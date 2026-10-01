@@ -15,7 +15,7 @@
 .ct-mosaico{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); grid-auto-rows:210px; gap:16px; }
 .ct-mosaico .ct-tile{ min-height:0; }
 .ct-mosaico .ct-tile.grande{ grid-column:span 2; grid-row:span 2; }
-.ct-ver-todos{ display:flex; flex-direction:column; justify-content:center; gap:8px; padding:22px; border-radius:24px; text-align:left; font:inherit; cursor:pointer;
+.ct-ver-todos{ grid-column:span var(--span3, 1); display:flex; flex-direction:column; justify-content:center; gap:8px; padding:22px; border-radius:24px; text-align:left; font:inherit; cursor:pointer;
   background:var(--mint); border:1px dashed var(--mint-line); color:var(--green); }
 .ct-ver-todos b{ font-family:'Fraunces',serif; font-size:22px; line-height:1.2; color:var(--navy); }
 .ct-ver-todos span{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; }
@@ -65,6 +65,11 @@
 .ct-item-preco{ font-weight:600; color:var(--green); }
 .ct-item-preco.premium{ color:#8a5a0e; }
 
+/* Página de um assunto: o assunto atual marcado nos círculos */
+.vt-cat.on img{ box-shadow:0 0 0 3px var(--green), 0 8px 20px rgba(1,53,101,.16); }
+.vt-cat.on{ color:var(--green); }
+#asKicker a{ color:inherit; text-decoration:underline; text-underline-offset:3px; }
+
 /* Botão de salvar sobre as fotos */
 .ct-tile .fav, .ct-faixa .fav{ position:absolute; top:14px; right:14px; z-index:2; }
 #ctLista .vt-titulo{ margin-bottom:22px; }
@@ -79,7 +84,7 @@
 @container (max-width:700px){ .ct-itens{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
 @container (max-width:1000px){
   .ct-mosaico{ grid-template-columns:repeat(2, minmax(0, 1fr)); grid-auto-rows:190px; }
-  .ct-ver-todos{ grid-column:1 / -1; flex-direction:row; align-items:center; justify-content:space-between; }   /* em 2 colunas, faixa na linha toda */
+  .ct-ver-todos{ grid-column:span var(--span2, 2); flex-direction:row; align-items:center; justify-content:space-between; flex-wrap:wrap; }   /* em 2 colunas, ocupa o que falta para fechar a linha */
 }
 @container (max-width:760px){
   .ct-dupla{ grid-template-columns:1fr; gap:0; }
@@ -90,7 +95,7 @@
   .ct-itens{ grid-template-columns:1fr; }
   .ct-mosaico{ grid-template-columns:1fr; grid-auto-rows:auto; }
   .ct-mosaico .ct-tile{ min-height:220px; }
-  .ct-ver-todos{ flex-direction:column; align-items:flex-start; }
+  .ct-ver-todos{ grid-column:auto; flex-direction:column; align-items:flex-start; }
   .ct-mosaico .ct-tile.grande{ grid-column:auto; grid-row:auto; min-height:320px; }
   .ct-tile.grande h3{ font-size:23px; }
   .ct-faixa{ min-height:360px; align-items:flex-end; }
