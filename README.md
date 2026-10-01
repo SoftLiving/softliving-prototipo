@@ -110,7 +110,7 @@ menos de 1000px (container query).
   (`assets/img/fundo-verde-abstrato.svg`) com o box de entrada em
   vidro (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo da janela Entrar do topo: os dois
   saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. Sem login também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e
-  os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Login de teste: e-mail `123`, senha `123`.
+  os números de não lidas do menu, e o topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em Entrar com os campos vazios, ou e-mail `123` e senha `123`.
 
 - **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
   (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.

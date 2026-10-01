@@ -659,11 +659,11 @@ const htmlEntrar = (titulo, texto) => `
     <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
     <p class="enj-ou"><span>ou com seu e-mail</span></p>
     <form class="enj-form" novalidate>
-      <p class="enj-dica">Protótipo: entre com login <b>123</b> e senha <b>123</b>.</p>
+      <p class="enj-dica">Protótipo: clique em <b>Entrar</b> direto, sem digitar nada, ou use login <b>123</b> e senha <b>123</b>.</p>
       <label>E-mail ou login<input type="text" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
       <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
-      <p class="enj-erro" role="alert" hidden>Login ou senha incorretos. No protótipo, use 123 e 123.</p>
+      <p class="enj-erro" role="alert" hidden>Login ou senha incorretos. No protótipo, deixe os campos vazios ou use 123 e 123.</p>
       <button type="submit" class="btn enj-entrar">Entrar</button>
     </form>
     <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
@@ -678,7 +678,7 @@ function cliqueEntrar(e, j){
 const botaoEntrar = document.querySelector('.top .entrar');
 const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving',
   j => { j.innerHTML = htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Escolha como quer entrar.'); }, cliqueEntrar);
-// Simulação de entrada (protótipo): login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
+// Simulação de entrada (protótipo): Entrar com os campos vazios, ou login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
 // Com a pessoa logada, o botão Entrar dá lugar ao avatar, que abre a janela da conta com a opção Sair.
 const lerLogado = () => { try { return localStorage.getItem('v2Logado') === '1'; } catch(e){ return false; } };
 function marcarLogado(logado){
@@ -690,7 +690,9 @@ function marcarLogado(logado){
 document.addEventListener('submit', e => {
   if(!e.target.classList.contains('enj-form')) return;
   e.preventDefault();
-  const f = e.target, ok = f.email.value.trim() === '123' && f.senha.value === '123';
+  // Entra com os dois campos vazios (atalho do protótipo) ou com login 123 e senha 123
+  const f = e.target, email = f.email.value.trim(), senha = f.senha.value;
+  const ok = (!email && !senha) || (email === '123' && senha === '123');
   f.querySelector('.enj-erro').hidden = ok;
   if(!ok){ f.senha.value = ''; f.senha.focus(); return; }
   janelaEntrar.abrir(false);
