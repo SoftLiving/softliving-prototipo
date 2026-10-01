@@ -12,7 +12,7 @@ const grupos = GRUPOS.filter(g => g.participando);
 // (estabelecimentos salvos na página de cada um: estFavoritos(), em estabelecimentos-dados.js)
 const PF_FORA = ['hotel', 'restaurante', 'turismo', 'clinica', 'spa', 'petshop'];   // estes são estabelecimentos, não comunidades
 const PF_COMUNIDADES = typeof DATA === 'undefined' ? [] : Object.keys(DATA).filter(k => !PF_FORA.includes(k));
-const saldo = SALDO_BASE + lerBonusCreditos();
+const saldo = saldoCreditos();
 
 document.getElementById('pfTopo').innerHTML = `
   <div class="pf-capa"></div>

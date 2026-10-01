@@ -124,8 +124,9 @@ menos de 1000px (container query).
 
 - **Selo de acesso nos cartões de conteúdo:** todo cartão de conteúdo mostra um selo (`seloAcesso(c)` no `layout.js`):
   "Grátis" (verde), o preço com cadeado, ex. "2 créditos" (dourado), ou "Desbloqueado" com cadeado aberto (azul) para
-  conteúdo pago que a pessoa já destravou. O destravar é feito na tela do conteúdo, depois de clicar no cartão, e fica
-  guardado em `v2Destravados`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
+  conteúdo pago que a pessoa já destravou. O destravar é feito na tela do conteúdo, depois de clicar no cartão: debita os
+  créditos da carteira (`comprarConteudo` no `layout.js`, compras em `v2Compras`, que entram no extrato da Carteira) e
+  fica guardado em `v2Destravados`. O saldo de todo o site vem de `saldoCreditos()`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
 
 - **Minhas Comunidades sem conteúdo pago:** tudo é gratuito (inclusive o acervo SoftLiving), então os cartões não
   mostram etiqueta de Grátis nem de créditos e não há filtro Grátis/Premium (`normalizeCard` no `comunidades.js`).

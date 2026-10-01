@@ -656,7 +656,7 @@ const janelaNotif = criarJanelaTopo(sino, 'nt-janela', 'ntJanela', 'Notificaçõ
 // Janela dos créditos: saldo (comprados e bônus), oferta da primeira recarga e atalhos da carteira
 const botaoCreditos = document.querySelector('.top .creditos');
 criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
-  const bonus = SALDO_BASE + lerBonusCreditos();           // no protótipo, todo o saldo é bônus (ainda sem recarga)
+  const bonus = saldoCreditos();                           // no protótipo, todo o saldo é bônus (ainda sem recarga)
   j.innerHTML = `
     <div class="crj-saldo">
       <small>Saldo disponível</small>
@@ -746,7 +746,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
     <div class="cnj-topo"><span class="cnj-av">RB</span><div><b>Rafael Barros</b><small>ra•••••@exemplo.com</small></div></div>
     <nav class="crj-links">
       <a href="${urlPagina('perfil')}">${icone('perfil')}Meu perfil</a>
-      <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${SALDO_BASE + lerBonusCreditos()} créditos</span></a>
+      <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${saldoCreditos()} créditos</span></a>
       <a href="${urlPagina('ajuda')}">${icone('ajuda')}Suporte</a>
     </nav>
     <button type="button" class="cnj-sair">Sair da conta</button>`;
@@ -986,13 +986,29 @@ function agendarAjusteLogos(){
 agendarAjusteLogos();
 new MutationObserver(agendarAjusteLogos).observe(document.body, { childList:true, subtree:true });   // a página inteira (o chat da Ajuda fica fora do main)
 
-// Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta), guardados na sessão
+// Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta, guardados na sessão) − créditos
+// gastos destravando conteúdos (compras guardadas no navegador em v2Compras, o mesmo lugar para todas as páginas).
 const SALDO_BASE = 41;
 function lerBonusCreditos(){
   try { return +sessionStorage.getItem('bonusCreditos') || 0; } catch(e){ return 0; }
 }
+function lerCompras(){ try { const v = JSON.parse(localStorage.getItem('v2Compras')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
+const creditosGastos = () => lerCompras().reduce((s, x) => s + x.v, 0);
+const saldoCreditos = () => SALDO_BASE + lerBonusCreditos() - creditosGastos();
+// Destravar um conteúdo pago: debita os créditos da carteira, registra a compra (aparece no extrato da Carteira) e
+// marca o conteúdo como destravado (v2Destravados). Sem saldo suficiente, não destrava e devolve false.
+function comprarConteudo(c){
+  if(lerDestravados().includes(c.t)) return true;
+  if(saldoCreditos() < c.credits) return false;
+  try {
+    localStorage.setItem('v2Compras', JSON.stringify([{ t:c.t, v:c.credits }, ...lerCompras()]));
+    localStorage.setItem('v2Destravados', JSON.stringify([...lerDestravados(), c.t]));
+  } catch(e){ return false; }
+  atualizarSaldo();
+  return true;
+}
 function atualizarSaldo(){
-  const saldo = SALDO_BASE + lerBonusCreditos();
+  const saldo = saldoCreditos();
   document.querySelectorAll('.saldo-creditos').forEach(el => { el.textContent = `${saldo} créditos`; el.dataset.n = saldo; });
 }
 atualizarSaldo();

@@ -2,7 +2,7 @@
 // Cabeçalho (assunto, título, resumo, autor e ações), foto de capa, texto completo (TEXTOS_COMPLETOS, de demonstração),
 // convite para destravar nos conteúdos premium, quem escreveu, comentários e "Continue lendo".
 // Regras da v2: sem tempo de leitura e sem data de publicação. Curtir e salvar ficam guardados no navegador
-// (v2Curtidas e v2Salvos, os mesmos das Atividades). Destravar é só demonstração (nenhum crédito é descontado).
+// (v2Curtidas e v2Salvos, os mesmos das Atividades). Destravar debita os créditos da carteira (comprarConteudo, no layout.js).
 const LD_ICONES = {
   curtir:'<path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/>',
   compartilhar:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.5M8.2 13.2l7.6 4.5"/>',
@@ -108,7 +108,7 @@ function htmlTrava(){
   const resto = paragrafos.slice(3);
   const borrado = resto.find(p => !p.startsWith('## '));
   const partes = resto.filter(p => p.startsWith('## ')).map(p => p.slice(3)).slice(0, 4);
-  const saldo = SALDO_BASE + lerBonusCreditos(), logado = lerLogado(), falta = saldo < c.credits;
+  const saldo = saldoCreditos(), logado = lerLogado(), falta = saldo < c.credits;
   const botao = !logado ? `<button type="button" class="btn lg" data-entrar-destravar>Entrar para destravar</button>`
     : falta ? `<a href="${urlPagina('carteira')}#recarga" class="btn lg">Recarregar créditos</a>`
     : `<button type="button" class="btn lg" data-destravar>${ldIcone('cadeado')}Destravar por ${travaPreco}</button>`;
@@ -130,7 +130,7 @@ function htmlTrava(){
           ${logado ? `<span class="${falta ? 'falta' : ''}">Seu saldo: <b>${saldo} créditos</b></span>` : ''}
         </div>
         ${botao}
-        <p class="ld-trava-nota">${falta && logado ? `Faltam ${c.credits - saldo} créditos. Na primeira recarga, R$50 viram 100 créditos.` : 'Destravado uma vez, fica na sua conta para sempre. No protótipo, nenhum crédito é descontado.'}</p>
+        <p class="ld-trava-nota">${falta && logado ? `${c.credits - saldo === 1 ? 'Falta 1 crédito' : `Faltam ${c.credits - saldo} créditos`}. Na primeira recarga, R$50 viram 100 créditos.` : `Ao destravar, ${travaPreco} saem da sua carteira. Destravado uma vez, fica na sua conta para sempre.`}</p>
         <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
       </div>
     </div>`;
@@ -258,8 +258,9 @@ pagina.addEventListener('click', ev => {
     scrollTo(0, 0); janelaEntrar.abrir(true);                          // depois de entrar, o box troca para Destravar
     return;
   } else if(d.destravar !== undefined){
-    destravados = [...destravados, c.t]; ldGravar('v2Destravados', destravados);
-    mostrarAviso('Conteúdo destravado. No protótipo, nenhum crédito é descontado');
+    if(!comprarConteudo(c)){ mostrarAviso('Saldo insuficiente. Recarregue a carteira para destravar'); return; }
+    destravados = lerDestravados();
+    mostrarAviso(`Conteúdo destravado. ${travaPreco} ${c.credits === 1 ? 'debitado' : 'debitados'} da carteira; saldo de ${saldoCreditos()} créditos`);
   } else if(d.curtirCom){
     const m = comentarios[+d.curtirCom]; m.curti = !m.curti;
   } else if(d.acompanhar !== undefined){

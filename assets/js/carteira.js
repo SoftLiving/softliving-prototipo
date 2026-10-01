@@ -19,10 +19,12 @@ const PRIMEIRA_RECARGA = true;                 // ainda não houve recarga
 const bonusDe = v => BONUS_RECARGA[v];
 let valor = 50, forma = 'Pix', filtro = 'tudo';
 
+// Conteúdos destravados nesta conta (comprarConteudo, no layout.js): entram no extrato como saídas, do mais recente
+const comprasNoExtrato = () => lerCompras().map(x => ({ t:`Conteúdo destravado: ${x.t}`, d:'Destravado na leitura', v:-x.v, b:true }));
 function renderSaldo(){
   const extra = lerBonusCreditos();            // bônus das pesquisas respondidas nesta sessão
   const comprados = EXTRATO.filter(x => !x.b).reduce((s, x) => s + x.v, 0);
-  const bonus = EXTRATO.filter(x => x.b).reduce((s, x) => s + x.v, 0) + extra;
+  const bonus = EXTRATO.filter(x => x.b).reduce((s, x) => s + x.v, 0) + extra - creditosGastos();   // no protótipo, os gastos saem do bônus
   document.getElementById('ctSaldo').innerHTML = `
     <div class="ct-total">
       <small>Saldo disponível</small>
@@ -68,7 +70,7 @@ document.getElementById('ctGanhe').innerHTML = [
 
 function renderExtrato(){
   const extra = lerBonusCreditos();
-  const linhas = extra ? [{ t:'Respostas às pesquisas nesta visita', d:'1 crédito de bônus por pergunta', v:extra, b:true }, ...EXTRATO] : EXTRATO;
+  const linhas = [...comprasNoExtrato(), ...(extra ? [{ t:'Respostas às pesquisas nesta visita', d:'1 crédito de bônus por pergunta', v:extra, b:true }] : []), ...EXTRATO];
   document.getElementById('ctFiltro').innerHTML = [['tudo', 'Tudo'], ['entradas', 'Entradas'], ['saidas', 'Saídas']].map(([k, l]) =>
     `<button type="button" role="tab" class="${k === filtro ? 'on' : ''}" aria-selected="${k === filtro}" data-filtro="${k}">${l}</button>`).join('');
   document.getElementById('ctExtrato').innerHTML = linhas
