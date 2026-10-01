@@ -595,11 +595,17 @@ function criarJanelaTopo(botao, classe, id, rotulo, render, aoClicar){
   const janela = { j, botao, render };
   janela.abrir = abrir => {
     if(abrir){ JANELAS_TOPO.forEach(o => o !== janela && !o.j.hidden && o.abrir(false)); render(j); }
-    // alinhada à direita do botão; no celular ocupa a largura da tela, logo abaixo do topo
+    // alinhada à direita do botão; no celular ocupa a largura da tela (16px de cada lado), logo abaixo do topo. Fica presa
+    // ao topo (não à tela): ao rolar a página, sobe e some junto com ele.
     const celular = matchMedia('(max-width:640px)').matches;
-    j.style.top = abrir && celular ? (botao.getBoundingClientRect().bottom + 10) + 'px' : '';
-    j.style.right = abrir && !celular ? (botao.parentElement.getBoundingClientRect().right - botao.getBoundingClientRect().right) + 'px' : '';
+    j.style.top = j.style.left = j.style.right = '';
     j.hidden = !abrir;
+    if(abrir && celular){
+      const ref = j.offsetParent.getBoundingClientRect();
+      j.style.top = (botao.getBoundingClientRect().bottom - ref.top + 10) + 'px';
+      j.style.left = (16 - ref.left) + 'px';
+      j.style.right = (ref.right - (document.documentElement.clientWidth - 16)) + 'px';
+    } else if(abrir) j.style.right = (botao.parentElement.getBoundingClientRect().right - botao.getBoundingClientRect().right) + 'px';
     botao.setAttribute('aria-expanded', abrir);
   };
   botao.addEventListener('click', e => { e.preventDefault(); janela.abrir(j.hidden); });

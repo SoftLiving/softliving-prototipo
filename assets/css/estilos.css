@@ -1477,7 +1477,7 @@ body{ background:
 .ntj-todas{ display:block; text-align:center; padding:13px; border-top:1px solid var(--line); font-size:14px; font-weight:600; color:var(--green); }
 .ntj-todas:hover{ background:rgba(255,255,255,.7); }
 .sino[aria-expanded="true"]{ background:#fff; border-color:var(--mint-line); }
-@media (max-width:640px){ .janela-topo, .nt-janela{ position:fixed; top:64px; left:16px; right:16px !important; width:auto; max-width:none; } }
+@media (max-width:640px){ .janela-topo, .nt-janela{ position:absolute; width:auto; max-width:none; } } /* presa ao topo: some junto com ele ao rolar; posição e largura da tela vêm do layout.js */
 /* Janela de entrada (botão Entrar) */
 .en-janela{ width:360px; max-height:calc(100vh - 110px); overflow-y:auto; }
 .enj-topo{ padding:20px 22px 6px; }
