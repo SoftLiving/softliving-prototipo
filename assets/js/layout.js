@@ -788,7 +788,7 @@ const SALVOS_INICIAIS = ['Na Suíça, um vinho para chamar de seu', 'A casa não
 function lerSalvos(){ try { const v = JSON.parse(localStorage.getItem('v2Salvos')); return Array.isArray(v) ? v : [...SALVOS_INICIAIS]; } catch(e){ return [...SALVOS_INICIAIS]; } }
 function gravarSalvos(lista){ try { localStorage.setItem('v2Salvos', JSON.stringify(lista)); } catch(e){} }
 function tituloDoFav(fav){
-  const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, article') || fav.parentElement;
+  const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, .ct-tile, .ct-faixa, article') || fav.parentElement;
   const h = cartao && cartao.querySelector('h1, h2, h3');
   return h ? h.textContent.replace(/‑/g, '-').trim() : '';   // o texto.js troca o hífen por um que não quebra; aqui volta ao normal
 }

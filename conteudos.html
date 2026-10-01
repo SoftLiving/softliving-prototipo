@@ -7,19 +7,55 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/estilos.css">
+<link rel="stylesheet" href="assets/css/vitrine.css">
+<link rel="stylesheet" href="assets/css/conteudos.css">
 </head>
 <body data-page="conteudos" data-root="">
 
-<!-- Tela Conteúdos (referência: conteudos.html da versão 1): busca, destaque, assuntos, Todos/Grátis/Premium e grade -->
+<!-- Tela Conteúdos: visual de revista, na mesma estrutura da Vitrine (blocos variados, cartões de tamanhos diferentes,
+     coleções e um bloco por assunto). No fim, a lista completa com o fichário de assuntos e Todos/Grátis/Premium.
+     Tudo é montado por conteudos.js a partir de CONTEUDOS (conteudos-dados.js). -->
 <div class="page-head">
   <h1>Conteúdos e <span class="hl">Curadoria</span></h1>
   <p>Artigos, guias e dicas sobre saúde, longevidade, tecnologia e muito mais.</p>
 </div>
 
-<a href="#" class="destaque-largo" id="ctDestaque" data-lateral-topo></a>
+<!-- Assuntos em círculos com foto: levam ao bloco de cada um -->
+<nav class="vt-categorias" id="ctCirculos" aria-label="Assuntos" data-lateral-topo></nav>
 
-<section class="secao" id="ctLista">
-  <!-- Fichário: um assunto por aba -->
+<!-- Em destaque: carrossel de cartões verticais -->
+<section class="vt-bloco">
+  <div class="vt-titulo"><h2>Em destaque</h2><p>Escolhidos pela curadoria esta semana.</p></div>
+  <div class="vt-destaques" id="ctDestaques"></div>
+</section>
+
+<!-- Coleção: uma foto grande e três conteúdos ao lado -->
+<section class="vt-bloco" id="ctColecao1"></section>
+
+<!-- Bem-estar: mosaico com um cartão grande e vários menores -->
+<section class="vt-bloco" id="ct-bem-estar"></section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Estilo e casa: no formato de coleção, com a foto do outro lado -->
+<section class="vt-bloco" id="ct-estilo-e-casa"></section>
+
+<!-- Saúde e Tecnologia lado a lado -->
+<div class="ct-dupla">
+  <section class="vt-bloco" id="ct-saude"></section>
+  <section class="vt-bloco" id="ct-tecnologia"></section>
+</div>
+
+<!-- Viagem: faixa larga -->
+<section class="vt-bloco" id="ct-viagem"></section>
+
+<!-- Palavra da SoftLiving -->
+<section class="vt-bloco" id="ct-softliving"></section>
+
+<!-- Todos os conteúdos: fichário de assuntos, Todos/Grátis/Premium e grade -->
+<section class="secao vt-bloco" id="ctLista">
+  <div class="vt-titulo"><h2>Todos os conteúdos</h2><p>Filtre por assunto e escolha entre grátis e premium.</p></div>
   <div class="tabs folder" id="ctAssuntos" role="tablist"></div>
   <div class="folder-panel">
     <div class="seg" id="ctTipos" role="tablist"></div>
@@ -28,8 +64,15 @@
   </div>
 </section>
 
-<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
-<div class="apoio"></div>
+<!-- Chamada para quem quer escrever -->
+<section class="vt-marca ct-escreva">
+  <div>
+    <p class="kicker">Para especialistas</p>
+    <h2>Tem algo a ensinar? Escreva para a <span class="sig sig-light"><span class="soft">Soft</span><span class="living">Living</span></span></h2>
+    <p>Médicos, educadores, viajantes e apaixonados pelo que fazem: publique para um público que lê com calma e valoriza quem escreve.</p>
+    <a href="#" class="btn white ct-quero">Quero escrever</a>
+  </div>
+</section>
 
 <!-- Coluna lateral da direita (montada por lateral.js) -->
 <aside class="lateral" aria-label="Coluna lateral"></aside>

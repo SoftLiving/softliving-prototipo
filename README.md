@@ -22,7 +22,7 @@ institucional/              conhecer, quem-somos, como-funciona, beneficios, emp
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
 assets/js/layout.js         Moldura comum: faixa de protótipo, aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
-conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
+conteudos.html              Tela Conteúdos (estrutura da Vitrine): assuntos em círculos, destaque, coleções, um bloco por assunto, lista completa
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
@@ -77,7 +77,7 @@ assets/img/                 Logos da FSB e da RB2
 | Página | Versão 2 |
 |---|---|
 | Início | pronta para revisão |
-| Conteúdos (`conteudos.html`) | pronta para revisão |
+| Conteúdos (`conteudos.html`) | pronta para revisão (estrutura de revista, como a Vitrine) |
 | Colunas (`colunas.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Busca (`busca.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Leitura do artigo (`conteudo.html`) | pronta para revisão |

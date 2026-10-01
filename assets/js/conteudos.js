@@ -1,42 +1,137 @@
-// VERSÃO 2 · Tela Conteúdos (referência: conteudos.js da versão 1): busca, destaque, assuntos (fichário),
-// Todos/Grátis/Premium e grade de cartões verticais. Usa CONTEUDOS (conteudos-dados.js) e fotoUrl/icone/mostrarAviso (layout.js).
+// VERSÃO 2 · Tela Conteúdos: visual de revista, na mesma estrutura da Vitrine. Assuntos em círculos, carrossel em
+// destaque, coleções (foto grande e três conteúdos ao lado), um bloco por assunto com um layout diferente para cada
+// (mosaico, lista em duas colunas, dupla lado a lado, faixa larga, carta) e, no fim, a lista completa com o fichário de
+// assuntos e Todos/Grátis/Premium. Usa CONTEUDOS (conteudos-dados.js) e fotoUrl/icone/mostrarAviso (layout.js).
 
-// Assuntos: rótulo curto da aba → categoria dos dados (mesma ordem de assuntos da Início, mais SoftLiving)
+// Assuntos: rótulo curto → categoria dos dados (mesma ordem de assuntos da Início, mais SoftLiving); id do bloco na página
 const CT_ASSUNTOS = [
-  ['Todos', null],
-  ['Bem-estar', 'Saúde mental e qualidade de vida'],
-  ['Saúde', 'Saúde e bem-estar físico'],
-  ['Estilo e casa', 'Estilo de vida e consumo'],
-  ['Viagem', 'Turismo e viagem'],
-  ['Tecnologia', 'Tecnologia e serviços digitais'],
-  [LOGO, 'SoftLiving'],
+  ['Todos', null, 'ctLista'],
+  ['Bem-estar', 'Saúde mental e qualidade de vida', 'ct-bem-estar'],
+  ['Saúde', 'Saúde e bem-estar físico', 'ct-saude'],
+  ['Estilo e casa', 'Estilo de vida e consumo', 'ct-estilo-e-casa'],
+  ['Viagem', 'Turismo e viagem', 'ct-viagem'],
+  ['Tecnologia', 'Tecnologia e serviços digitais', 'ct-tecnologia'],
+  [LOGO, 'SoftLiving', 'ct-softliving'],
 ];
 const ctRotulo = cat => { const a = CT_ASSUNTOS.find(x => x[1] === cat); return a ? a[0] : cat; };
+const ctDoAssunto = cat => CONTEUDOS.filter(c => c.cat === cat);
+const ctPorTitulo = t => CONTEUDOS.find(c => c.t === t);
 const ctEstado = { assunto:0, tipo:'todos', busca:'' };
 
 const ctPreco = c => c.badge === 'premium'
   ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
   : c.badge === 'destravado' ? '<span class="vc-chip">Destravado</span>' : '<span class="vc-chip">Grátis</span>';
+const ctPrecoTexto = c => c.badge === 'premium' ? `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}` : c.badge === 'destravado' ? 'Destravado' : 'Grátis';
 const ctBotao = c => c.badge === 'premium'
   ? `<span class="vc-btn" data-destravar="${c.credits}">Destravar ${icone('seta')}</span>`
   : `<span class="vc-btn">Ler ${icone('seta')}</span>`;
 const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
+const ctTitulo = (t, sub) => `<div class="vt-titulo"><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>`;
 
-// Ordem aleatória a cada carregamento; o destaque é o primeiro da ordem sorteada
+// Cartões (cada bloco usa um ou mais destes, em tamanhos diferentes)
+const ctVertical = c => `
+  <a href="${urlConteudo(c.t)}" class="vcard">
+    <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+    ${ctSalvar}
+    <div class="vc-info">
+      <span class="vc-cat">${ctRotulo(c.cat)}</span>
+      <h3>${c.t}</h3>
+      <span class="vc-autor">${c.a}</span>
+      <div class="vc-row">${ctPreco(c)}${ctBotao(c)}</div>
+    </div>
+  </a>`;
+// Foto com o texto por cima; a versão grande mostra também o resumo
+const ctTile = (c, grande) => `
+  <a href="${urlConteudo(c.t)}" class="ct-tile${grande ? ' grande' : ''}" style="background-image:url('${fotoUrl(c.foto, grande ? 1000 : 600)}')">
+    ${ctSalvar}
+    <div class="ct-tile-txt">
+      <span class="vc-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span>
+      <h3>${c.t}</h3>
+      ${grande ? `<p>${c.e}</p>` : ''}
+      <span class="vc-autor">${c.a}</span>
+    </div>
+  </a>`;
+// Linha com miniatura (coleções e listas)
+const ctMini = c => `
+  <a href="${urlConteudo(c.t)}" class="vt-mini">
+    <img src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">
+    <div><span class="vt-mini-cat">${ctRotulo(c.cat)} · ${ctPrecoTexto(c)}</span><h3>${c.t}</h3><p>${c.e}</p><span class="ct-mini-autor">${c.a}</span></div>
+  </a>`;
+// "Ver todos" de um assunto: leva à lista completa já filtrada
+const ctVerTodos = i => `<button type="button" class="ct-ver-todos" data-ver="${i}"><b>Ver todos de ${CT_ASSUNTOS[i][0]}</b><span>${ctDoAssunto(CT_ASSUNTOS[i][1]).length} conteúdos ${icone('seta')}</span></button>`;
+
+// 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto
+document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id]) => {
+  const c = cat ? ctDoAssunto(cat)[0] : CONTEUDOS[0];
+  return `<a href="#${id}" class="vt-cat"><img src="${fotoUrl(c.foto, 200)}" alt=""><span>${r}</span></a>`;
+}).join('');
+
+// 2) Em destaque: 8 sorteados a cada visita, em carrossel
+document.getElementById('ctDestaques').innerHTML = embaralhar(CONTEUDOS).slice(0, 8).map(ctVertical).join('');
+ativarCarrossel(document.getElementById('ctDestaques'), 'h');
+
+// 3) Coleção com curadoria: foto grande e três conteúdos ao lado
+const CT_COLECOES = [
+  { id:'ctColecao1', t:'Viver mais e melhor', d:'Longevidade, hábitos e pequenas escolhas que fazem diferença em qualquer idade.', foto:'1529156069898-49953e39b3ac',
+    itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?'] },
+];
+CT_COLECOES.forEach(col => {
+  document.getElementById(col.id).innerHTML = `
+    <article class="vt-colecao${col.invertida ? ' invertida' : ''}">
+      <div class="vt-col-capa" style="background-image:url('${fotoUrl(col.foto, 900)}')">
+        <div><p class="kicker">Coleção</p><h2>${col.t}</h2><p>${col.d}</p></div>
+      </div>
+      <div class="vt-col-lista">${col.itens.map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
+    </article>`;
+});
+
+// 4) Um bloco por assunto, cada um com um layout
+const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).innerHTML = ctTitulo(CT_ASSUNTOS[i][0], sub) + corpo; };
+// Bem-estar: mosaico (um grande e os outros menores) e o "ver todos" fechando a grade
+const bemEstar = ctDoAssunto(CT_ASSUNTOS[1][1]);
+ctBloco(1, 'Saúde mental, conexões e qualidade de vida.', `
+  <div class="ct-mosaico">${bemEstar.map((c, i) => ctTile(c, i === 0)).join('')}${ctVerTodos(1)}</div>`);
+// Estilo e casa: formato de coleção invertida, o conteúdo de moda na foto grande e os de casa ao lado
+const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo.find(c => /Moda/.test(c.t)) || estilo[0];
+ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
+  <article class="vt-colecao invertida">
+    <a href="${urlConteudo(moda.t)}" class="vt-col-capa" style="background-image:url('${fotoUrl(moda.foto, 900)}')">
+      <div><p class="kicker">Estilo e casa · ${ctPrecoTexto(moda)}</p><h2>${moda.t}</h2><p>${moda.e}</p></div>
+    </a>
+    <div class="vt-col-lista">${estilo.filter(c => c !== moda).map(ctMini).join('')}</div>
+  </article>`);
+// Saúde e Tecnologia: lado a lado, um cartão de foto e uma linha com miniatura em cada
+[[2, 'Corpo em movimento e bons hábitos.'], [5, 'Tecnologia a seu favor, sem medo.']].forEach(([i, sub]) => {
+  const [a, ...resto] = ctDoAssunto(CT_ASSUNTOS[i][1]);
+  ctBloco(i, sub, `<div class="ct-coluna">${ctTile(a, true)}${resto.map(ctMini).join('')}</div>`);
+});
+// Viagem: faixa larga com o conteúdo do assunto
+const viagem = ctDoAssunto(CT_ASSUNTOS[4][1])[0];
+ctBloco(4, 'Destinos para ir com calma.', `
+  <a href="${urlConteudo(viagem.t)}" class="ct-faixa" style="background-image:url('${fotoUrl(viagem.foto, 1400)}')">
+    ${ctSalvar}
+    <div class="ct-faixa-txt">
+      <span class="vc-cat">Viagem · ${ctPrecoTexto(viagem)}</span>
+      <h3>${viagem.t}</h3>
+      <p>${viagem.e}</p>
+      <span class="vc-btn">Ler ${icone('seta')}</span>
+    </div>
+  </a>`);
+// SoftLiving: carta em destaque
+const carta = ctDoAssunto('SoftLiving')[0];
+document.getElementById('ct-softliving').innerHTML = `
+  <a href="${urlConteudo(carta.t)}" class="ct-carta">
+    <img src="${fotoUrl(carta.foto, 600)}" alt="" loading="lazy">
+    <div>
+      <p class="kicker">Palavra da ${LOGO}</p>
+      <h3>${carta.t}</h3>
+      <p>${carta.e}</p>
+      <span class="ct-carta-autor">${carta.a}</span>
+    </div>
+  </a>`;
+
+// 5) Todos os conteúdos: fichário de assuntos, Todos/Grátis/Premium e grade (ordem sorteada a cada visita)
 const CT_ORDEM = embaralhar(CONTEUDOS);
-const ctD = CT_ORDEM[0];
-document.getElementById('ctDestaque').href = urlConteudo(ctD.t);
-document.getElementById('ctDestaque').innerHTML = `
-  <div class="dl-foto foto"><img src="${fotoUrl(ctD.foto, 1000)}" alt=""></div>
-  <div class="dl-texto">
-    <span class="kicker">Em destaque</span>
-    <span class="cat">${ctRotulo(ctD.cat)}</span>
-    <h2>${ctD.t}</h2>
-    <p>${ctD.e}</p>
-    <div class="meta"><span>${ctD.a}</span></div>
-    <span class="btn">Ler agora ${icone('seta')}</span>
-  </div>`;
-
 function renderConteudos(){
   const abas = document.getElementById('ctAssuntos');
   abas.innerHTML = CT_ASSUNTOS.map((a, i) => `<button type="button" role="tab" class="${i === ctEstado.assunto ? 'on' : ''}" aria-selected="${i === ctEstado.assunto}" data-i="${i}">${a[0]}</button>`).join('');
@@ -49,23 +144,14 @@ function renderConteudos(){
   document.getElementById('ctTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === ctEstado.tipo ? 'on' : ''}" aria-selected="${k === ctEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
 
   const lista = porAssuntoEBusca.filter(c => ctEstado.tipo === 'todos' || (ctEstado.tipo === 'gratis' ? c.badge === 'gratis' : c.badge !== 'gratis'));
-  document.getElementById('ctGrade').innerHTML = lista.map(c => `
-    <a href="${urlConteudo(c.t)}" class="vcard">
-      <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
-      ${ctSalvar}
-      <div class="vc-info">
-        <span class="vc-cat">${ctRotulo(c.cat)}</span>
-        <h3>${c.t}</h3>
-        <span class="vc-autor">${c.a}</span>
-        <div class="vc-row">${ctPreco(c)}${ctBotao(c)}</div>
-      </div>
-    </a>`).join('');
+  document.getElementById('ctGrade').innerHTML = lista.map(ctVertical).join('');
   document.getElementById('ctVazio').hidden = lista.length > 0;
+  marcarSalvos();
 }
 
 document.getElementById('ctAssuntos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.assunto = +b.dataset.i; renderConteudos(); } });
 document.getElementById('ctTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.tipo = b.dataset.tipo; renderConteudos(); } });
-document.getElementById('ctGrade').addEventListener('click', e => {
+document.querySelector('main').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(fav){
     e.preventDefault();
@@ -73,6 +159,13 @@ document.getElementById('ctGrade').addEventListener('click', e => {
     mostrarAviso(salvo ? 'Salvo para ler depois' : 'Removido dos salvos');
     return;
   }
+  const ver = e.target.closest('[data-ver]');
+  if(ver){                                                         // "Ver todos de X": lista completa já filtrada
+    ctEstado.assunto = +ver.dataset.ver; ctEstado.tipo = 'todos'; renderConteudos();
+    document.getElementById('ctLista').scrollIntoView({ behavior:'smooth', block:'start' });
+    return;
+  }
+  if(e.target.closest('.ct-quero')){ e.preventDefault(); mostrarAviso('Cadastro de especialistas: fora deste protótipo'); }
   // "Destravar" abre a leitura, onde fica o convite para destravar com créditos
 });
 renderConteudos();
