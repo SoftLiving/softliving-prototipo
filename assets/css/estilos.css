@@ -1226,6 +1226,8 @@ main > .aj-lateral.aj-no-topo{ margin:0 0 32px; }
 .at-abas a small{ font-size:11.5px; color:var(--muted); margin-left:2px; }
 .at-abas a:hover{ color:var(--green); }
 .at-abas a.on{ background:#fff; color:var(--navy); font-weight:600; box-shadow:0 2px 8px rgba(1,53,101,.08); }
+/* Atividades: o cartão inteiro abre o conteúdo (link por baixo do botão de ação de cada aba) */
+.at-link{ position:absolute; inset:0; z-index:1; border-radius:inherit; }
 .at-acao{ position:absolute; top:12px; right:12px; z-index:2; width:38px; height:38px; border-radius:50%; border:none; display:grid; place-items:center; padding:0; background:rgba(255,255,255,.92); color:#c0392b; cursor:pointer; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .at-acao .ic{ width:18px; height:18px; fill:currentColor; }
 .at-acao:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }

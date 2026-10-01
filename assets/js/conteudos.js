@@ -69,7 +69,6 @@ ctBloco(4, 'Destinos para ir com calma.', `
       <span class="vc-cat">Viagem · ${ctPrecoTexto(viagem)}</span>
       <h3>${viagem.t}</h3>
       <p>${viagem.e}</p>
-      <span class="vc-btn">Ler ${icone('seta')}</span>
     </div>
   </a>`);
 // SoftLiving: carta em destaque

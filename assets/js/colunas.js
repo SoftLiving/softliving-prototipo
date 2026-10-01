@@ -81,7 +81,7 @@ function renderColunas(){
         <span class="vc-cat">${col.coluna ? comLogo(col.coluna, true) : col.categoria}</span>
         <h3>${comLogo(c.t, true)}</h3>
         <span class="vc-autor">${col.nome}</span>
-        <div class="vc-row">${c.badge === 'premium' ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}<span class="vc-btn">Ler ${icone('seta')}</span></div>
+        <div class="vc-row">${c.badge === 'premium' ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}</div>
       </div>
     </a>`;
   }).join('');

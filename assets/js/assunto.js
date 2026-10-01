@@ -30,7 +30,6 @@ document.getElementById('asDestaque').innerHTML = `
       <span class="vc-cat">Em destaque · ${ctPrecoTexto(asPrimeiro)}</span>
       <h3>${asPrimeiro.t}</h3>
       <p>${asPrimeiro.e}</p>
-      <span class="vc-btn">${asPrimeiro.badge === 'premium' ? 'Destravar' : 'Ler'} ${icone('seta')}</span>
     </div>
   </a>`;
 

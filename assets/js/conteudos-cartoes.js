@@ -24,9 +24,6 @@ const ctPreco = c => c.badge === 'premium'
   ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
   : c.badge === 'destravado' ? '<span class="vc-chip">Destravado</span>' : '<span class="vc-chip">Grátis</span>';
 const ctPrecoTexto = c => c.badge === 'premium' ? `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}` : c.badge === 'destravado' ? 'Destravado' : 'Grátis';
-const ctBotao = c => c.badge === 'premium'
-  ? `<span class="vc-btn" data-destravar="${c.credits}">Destravar ${icone('seta')}</span>`
-  : `<span class="vc-btn">Ler ${icone('seta')}</span>`;
 const ctSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
 const ctTitulo = (t, sub) => `<div class="vt-titulo"><h2>${t}</h2>${sub ? `<p>${sub}</p>` : ''}</div>`;
 
@@ -39,7 +36,7 @@ const ctVertical = c => `
       <span class="vc-cat">${ctRotulo(c.cat)}</span>
       <h3>${c.t}</h3>
       <span class="vc-autor">${c.a}</span>
-      <div class="vc-row">${ctPreco(c)}${ctBotao(c)}</div>
+      <div class="vc-row">${ctPreco(c)}</div>
     </div>
   </a>`;
 // Foto com o texto por cima; a versão grande mostra também o resumo

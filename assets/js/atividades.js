@@ -35,12 +35,13 @@ const selo = c => c.badge === 'premium' ? `<span class="vc-chip premium">${icone
 const cartao = (c, acao) => `
   <article class="vcard at-card">
     <img src="${fotoUrl(c.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+    <a href="${urlConteudo(c.t)}" class="at-link" aria-label="Ler ${c.t.replace(/"/g, '&quot;')}"></a>
     ${acao}
     <div class="vc-info">
       <span class="vc-cat">${AT_ASSUNTO[c.cat] || c.cat}</span>
       <h3>${c.t.replace('SoftLiving', LOGO)}</h3>
       <span class="vc-autor">${c.a.replace('SoftLiving', LOGO)}</span>
-      <div class="vc-row">${selo(c)}<a href="${urlConteudo(c.t)}" class="vc-btn">Ler ${icone('seta')}</a></div>
+      <div class="vc-row">${selo(c)}</div>
     </div>
   </article>`;
 const avatar = (nome, cor) => `<span class="av-col at-av" style="background:${cor || '#013565'}">${nome.split(' ').filter(p => p.length > 2).slice(0, 2).map(p => p[0]).join('')}</span>`;

@@ -34,7 +34,7 @@ function mostrarAssunto(i){
       <div class="vc-info">
         <span class="vc-cat">${assuntoCurto(c.cat)}</span>
         <h3>${c.t}</h3>
-        <div class="vc-row">${seloPreco(c)}<span class="vc-btn">Ler ${icone('seta')}</span></div>
+        <div class="vc-row">${seloPreco(c)}</div>
       </div>
     </a>`).join('');
   tabs.querySelectorAll('button').forEach(b => {

@@ -75,7 +75,7 @@ function render(){
           <div class="vc-info">
             <span class="vc-cat">${rotuloColuna(x)}</span>
             <h3>${comLogoCl(x.t)}</h3>
-            <div class="vc-row">${x.badge === 'premium' ? `<span class="vc-chip premium">${x.credits} ${x.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}<span class="vc-btn">Ler agora ${icone('seta')}</span></div>
+            <div class="vc-row">${x.badge === 'premium' ? `<span class="vc-chip premium">${x.credits} ${x.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}</div>
           </div>
         </a>`).join('')}
       </div>
