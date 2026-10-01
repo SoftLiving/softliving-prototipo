@@ -128,6 +128,10 @@ menos de 1000px (container query).
   créditos da carteira (`comprarConteudo` no `layout.js`, compras em `v2Compras`, que entram no extrato da Carteira) e
   fica guardado em `v2Destravados`. O saldo de todo o site vem de `saldoCreditos()`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
 
+- **Continue lendo no fim de todo artigo:** a tela de leitura (`conteudo.html`) sempre termina com 3 cartões de
+  conteúdos relacionados (mesmo assunto ou colunista primeiro), com o selo de acesso; aparecem também nos conteúdos
+  bloqueados e ficam fixos durante a visita.
+
 - **Teste de pagamentos (ligado):** `TESTE_PAGAMENTOS = true` no `conteudos-dados.js` deixa cerca de 90% dos conteúdos
   pagos (1, 2 ou 3 créditos); ficam grátis só a carta "Aos patrocinadores do SoftLiving" e a última coluna da coluna do
   dia. Para voltar ao normal, mudar para `false`.

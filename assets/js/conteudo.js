@@ -135,9 +135,12 @@ function htmlTrava(){
       </div>
     </div>`;
 }
+// Continue lendo (regra geral): o fim de todo artigo mostra 3 cartões de conteúdos relacionados, primeiro os do mesmo
+// assunto (ou do mesmo colunista) e, se faltar, outros quaisquer. Sorteados uma vez por visita: curtir, salvar ou mudar
+// a letra refaz a página, mas não troca as sugestões.
+const relacionados = embaralhar(LD_TODOS.filter(x => x !== c && (c.cat ? x.cat === c.cat : x.a === c.a))).concat(embaralhar(LD_TODOS.filter(x => x !== c))).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
 function render(){
   const curtido = ldLer('v2Curtidas', []).includes(c.t), salvo = lerSalvos().includes(c.t);
-  const relacionados = embaralhar(LD_TODOS.filter(x => x !== c && (c.cat ? x.cat === c.cat : x.a === c.a))).concat(embaralhar(LD_TODOS.filter(x => x !== c))).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
   document.getElementById('ldPagina').innerHTML = `
     <a href="${voltarPara.href}" class="es-voltar ld-voltar">${icone('voltar')}${voltarPara.rotulo}</a>
     <header class="ld-topo">
