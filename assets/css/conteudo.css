@@ -56,27 +56,31 @@
 /* Box do convite: à esquerda, o porquê (texto alinhado à esquerda, fácil de ler); à direita, o preço e o botão num cartão
    branco. No celular, um embaixo do outro. */
 .ld-trava-box{ display:grid; grid-template-columns:minmax(0, 1fr) 250px; gap:28px; align-items:center; padding:28px; border-radius:28px;
-  background:linear-gradient(180deg, #fffaf0, #fff8ea); border:1px solid #f0ddac; box-shadow:0 18px 40px rgba(138,90,14,.10), var(--vidro-brilho); }
-.ld-trava-rotulo{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#8a5a0e; }
+  background:linear-gradient(160deg, #0b4a85, var(--navy) 70%); border:1px solid rgba(255,255,255,.14); color:#fff;
+  box-shadow:0 18px 40px rgba(1,53,101,.22), inset 0 1px 0 rgba(255,255,255,.14); }   /* azul, como o box da pesquisa */
+.ld-trava-rotulo{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#f5c46b; }
 .ld-trava-rotulo .ic{ width:15px; height:15px; }
-.ld-trava-box h2{ margin:10px 0 12px !important; font-size:28px !important; line-height:1.15 !important; }
-.ld-trava-box .ld-trava-msg{ margin:0 0 18px !important; color:var(--text-2) !important; font-size:16.5px !important; line-height:1.65 !important; }
+.ld-trava-box h2{ margin:10px 0 12px !important; font-size:28px !important; line-height:1.15 !important; color:#fff !important; }
+.ld-trava-box .ld-trava-msg{ margin:0 0 18px !important; color:rgba(255,255,255,.85) !important; font-size:16.5px !important; line-height:1.65 !important; }
 .ld-motivos{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
-.ld-motivos li{ display:flex; align-items:center; gap:10px; margin:0 !important; font-size:15.5px !important; line-height:1.4 !important; color:var(--text); }
-.ld-motivos li .ic{ width:20px; height:20px; flex:none; color:var(--green); }
+.ld-motivos li{ display:flex; align-items:center; gap:10px; margin:0 !important; font-size:15.5px !important; line-height:1.4 !important; color:#fff; }
+.ld-motivos li .ic{ width:20px; height:20px; flex:none; color:#a8dcb4; }
 /* Cartão do preço */
-.ld-trava-compra{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 20px 20px; border-radius:22px; background:#fff;
-  border:1px solid var(--line); box-shadow:0 10px 26px rgba(1,53,101,.08); }
-.ld-trava-para{ font-size:13px; font-weight:600; color:var(--muted); }
-.ld-trava-box .ld-trava-valor{ margin:4px 0 0 !important; font-size:17px !important; color:var(--navy) !important; font-weight:600; line-height:1 !important; }
+/* Cartão do preço: dourado, com os textos em marrom escuro (contraste) */
+.ld-trava-compra{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:24px 20px 20px; border-radius:22px;
+  background:linear-gradient(160deg, #fbe2a4, #f0bf5a); border:1px solid rgba(255,255,255,.5); box-shadow:0 12px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.6); color:#4a3106; }
+.ld-trava-para{ font-size:13px; font-weight:600; color:#6b4a10; }
+.ld-trava-box .ld-trava-valor{ margin:4px 0 0 !important; font-size:17px !important; color:#3d2a05 !important; font-weight:600; line-height:1 !important; }
 .ld-trava-valor b{ display:block; font-family:'Fraunces',serif; font-size:56px; line-height:1; margin-bottom:2px; }
-.ld-trava-reais{ margin:6px 0 18px; font-size:13.5px; color:var(--muted); }
+.ld-trava-reais{ margin:6px 0 18px; font-size:13.5px; color:#6b4a10; }
 .ld-trava-compra .btn.lg{ width:100%; justify-content:center; }
-.ld-trava-box .ld-trava-saldo{ margin:14px 0 0 !important; font-size:14px !important; line-height:1.45 !important; color:var(--text-2) !important; }
-.ld-trava-saldo b{ color:var(--navy); }
-.ld-trava-saldo.falta b{ color:#b3261e; }
-.ld-trava-box .ld-trava-nota{ margin:6px 0 0 !important; font-size:12.5px !important; line-height:1.45 !important; color:var(--muted) !important; }
-.ld-trava-link{ display:inline-block; margin-top:12px; font-size:13.5px; font-weight:600; color:var(--green); text-decoration:underline; }
+:root .ld-trava-compra .btn.lg{ background:var(--navy) !important; color:#fff; box-shadow:0 8px 18px rgba(1,53,101,.3); }   /* azul sobre o dourado */
+:root .ld-trava-compra .btn.lg:hover{ background:#0b4a85 !important; }
+.ld-trava-box .ld-trava-saldo{ margin:14px 0 0 !important; font-size:14px !important; line-height:1.45 !important; color:#4a3106 !important; }
+.ld-trava-saldo b{ color:#3d2a05; }
+.ld-trava-saldo.falta b{ color:#9b1c14; }
+.ld-trava-box .ld-trava-nota{ margin:6px 0 0 !important; font-size:12.5px !important; line-height:1.45 !important; color:#5c3e0b !important; }
+.ld-trava-link{ display:inline-block; margin-top:12px; font-size:13.5px; font-weight:700; color:#3d2a05; text-decoration:underline; }
 .ld-trava{ container-type:inline-size; }
 @container (max-width:600px){
   .ld-trava-box{ grid-template-columns:1fr; gap:20px; padding:22px 18px; }
