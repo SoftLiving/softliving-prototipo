@@ -374,7 +374,7 @@
 .cm .org-card .icon-wrap svg.ic{ color:var(--green); }
 .cm .org-card .name{ font-size:15.5px; }
 .cm .org-card-chevron{ border-radius:0 20px 20px 0; }
-.cm .org-dropdown{ border-radius:18px; background:rgba(255,255,255,.92); border:1px solid rgba(255,255,255,.9); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), 0 18px 40px rgba(1,53,101,.16); }
+.cm .org-dropdown{ border-radius:18px; background:#fff; /* sólido: o box em volta já tem desfoque, e o desfoque da lista não alcança a página (o texto aparecia por trás) */ border:1px solid rgba(255,255,255,.9); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), 0 18px 40px rgba(1,53,101,.16); }
 
 /* Público (ex.: Paciente / Colaborador) */
 .cm .audience-toggle{ margin:0 0 22px; }
@@ -478,4 +478,12 @@
 /* Celular: cartões de serviços em uma coluna (em duas colunas ficavam estreitos demais para ler) */
 @container cm (max-width:460px){
   .cm .svc-grid{ grid-template-columns:1fr; }
+}
+
+/* Celular: só o box da comunidade aberta (as outras favoritas ficam em "Suas favoritas", no topo da lista da setinha).
+   No computador e no tablet, os três boxes aparecem e a lista não repete as favoritas. */
+.cm .org-dropdown-favs{ display:none; }
+@media (max-width:640px){
+  .cm .org-card-wrap:not(.active-navy){ display:none; }
+  .cm .org-dropdown-favs{ display:block; }
 }

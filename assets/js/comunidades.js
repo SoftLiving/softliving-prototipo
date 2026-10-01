@@ -55,6 +55,10 @@ function renderOrgSwitcher(){
         <button class="org-card-chevron" data-slot="${i}" title="Trocar o que aparece neste box">${ICON.chevron}</button>
         ${openDropdownSlot === i ? `
           <div class="org-dropdown">
+            <div class="org-dropdown-favs">
+              <p class="org-dropdown-label">Suas favoritas</p>
+              ${pinnedSlots.filter(k => k !== key).map(k => `<button class="org-dropdown-item" data-irorg="${k}">${icone(k)}<span>${nome(k)}<small>${tipo(k)}</small></span></button>`).join('')}
+            </div>
             <p class="org-dropdown-label">Comunidades</p>
             ${otherOrgs.map(item).join('') || '<p class="org-dropdown-vazio">Todas já estão nos boxes</p>'}
             <p class="org-dropdown-label">Estabelecimentos</p>
@@ -70,6 +74,11 @@ function renderOrgSwitcher(){
     const i = +btn.dataset.slot;
     openDropdownSlot = (openDropdownSlot === i) ? null : i;
     renderOrgSwitcher();
+  }));
+  // No celular só aparece o box da comunidade aberta; as outras favoritas ficam no topo da lista dele
+  el.querySelectorAll('.org-dropdown-item[data-irorg]').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentOrg = btn.dataset.irorg; openDropdownSlot = null; servicosView = { mode:'root', amenityKey:null }; currentAudience = defaultAudience(currentOrg); renderAll();
   }));
   el.querySelectorAll('.org-dropdown-item[data-neworg]').forEach(btn => btn.addEventListener('click', (e) => {
     e.stopPropagation();
