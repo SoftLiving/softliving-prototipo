@@ -64,6 +64,9 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   background:rgba(255,255,255,.55); box-shadow:inset 1px 1px 0 rgba(255,255,255,.9), -8px 0 24px rgba(1,53,101,.04);
   display:flex; flex-direction:column; gap:18px; }
 .lateral > *{ max-width:440px; width:100%; }
+/* Regra de largura única: o conteúdo tem a mesma largura em todas as páginas. Nas páginas sem a coluna da direita,
+   um espaço vazio ocupa o lugar dela (mesma largura e mesmas regras de tamanho de tela), para o conteúdo não esticar. */
+.app:not(.com-lateral) .corpo::after{ content:''; flex:1 0 340px; }
 
 /* Menu lateral */
 .side-wrap{ position:relative; margin:8px 0 8px 16px; width:264px; flex:none; } /* reserva o espaço da barra; a barra fica fixa na tela */
@@ -251,7 +254,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
 @keyframes esToast{ 0%{ opacity:0; transform:translateY(6px); } 15%,75%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateY(-6px); } }
 
 /* Notebooks (1200 a 1439px, como 1280 e 1366): as três colunas continuam (menu, conteúdo e lateral), com a lateral mais estreita */
-@media (min-width:1200px) and (max-width:1439px){ .lateral{ flex-basis:300px; padding:20px 20px 32px 20px; } }
+@media (min-width:1200px) and (max-width:1439px){ .lateral, .app:not(.com-lateral) .corpo::after{ flex-basis:300px; } .lateral{ padding:20px 20px 32px 20px; } }
 /* Sem espaço ao lado do conteúdo: a lateral desce para depois dele, em grade */
 /* (abaixo de 1200px: tablets, tablets deitados e telas pequenas) */
 @media (max-width:1199px){
@@ -259,6 +262,7 @@ h1,h2,h3,h4{ font-family:'Fraunces',Georgia,serif; color:var(--navy); margin:0; 
   .corpo > .wrap{ flex:none; }
   .lateral{ flex:none; margin:0 24px 56px; border-radius:26px; padding:24px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); align-items:start; }
   .lateral > *{ max-width:none; }
+  .app:not(.com-lateral) .corpo::after{ content:none; }   /* a coluna desce para baixo do conteúdo: o espaço vazio some */
 }
 @media (max-width:640px){ .lateral{ margin:0 16px 40px; padding:16px; } }
 

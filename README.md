@@ -105,6 +105,12 @@ menos de 1000px (container query).
 
 ## Regras de visual
 
+- **Largura única do conteúdo:** todas as páginas têm a mesma largura de conteúdo, com ou sem a coluna lateral da direita.
+  Nas páginas sem a coluna, o espaço dela fica vazio (`.app:not(.com-lateral) .corpo::after` no `estilos.css`), com as
+  mesmas medidas: 340px, ou 300px entre 1200 e 1439px; abaixo de 1200px o espaço some, como a coluna. Página nova não
+  precisa fazer nada para seguir a regra; não usar `max-width` próprio para alargar ou estreitar o conteúdo da página.
+  Exceções: Ajuda (conteúdo e chat do assistente com o mesmo tamanho) e Simples (versão simplificada, coluna própria).
+
 - **Efeito vidro (padrão):** botões e boxes translúcidos, com desfoque, brilho na borda e sombra suave; o fundo da página
   tem manchas suaves de cor para o vidro ter o que desfocar. Seção "EFEITO VIDRO" no fim do `estilos.css`: todo botão ou
   box novo entra numa das listas de lá (vidro claro, verde ou colorido).
