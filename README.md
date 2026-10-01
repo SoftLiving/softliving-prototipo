@@ -183,6 +183,12 @@ menos de 1000px (container query).
   rolagem pela roda do mouse. Horizontais: cartões de assunto, grupos da Início e sugestões da Coluna do dia (quantos por
   vez: `--vis` no CSS). Verticais: listas de Últimas matérias e de Colunas (4 por vez).
 
+## Publicação e cache
+
+O GitHub Pages deixa o navegador guardar os arquivos por até 10 minutos. Para a versão nova aparecer logo, os arquivos
+de estilo e script das páginas levam a versão no endereço (`?v=AAAAMMDDHHMM`). Antes de cada publicação, rodar
+`python3 ferramentas/versao.py`, que atualiza a versão em todas as páginas.
+
 ## Observações
 
 - Fotos de exemplo do Unsplash, carregadas pela internet (sem internet aparece um fundo verde claro no lugar).
