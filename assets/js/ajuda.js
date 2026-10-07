@@ -54,7 +54,7 @@ renderAjuda();
 // ===== Chat do assistente de IA (coluna da direita) =====
 // Protótipo: não há IA de verdade. O "assistente" procura o trecho mais parecido com o que a pessoa escreveu (palavras em
 // comum, sem acento) e responde com ele; sem nada parecido, sugere o contato por e-mail.
-// Fonte das respostas: a base de conhecimento em conhecimento/*.md (a lista de arquivos fica em conhecimento/arquivos.txt;
+// Fonte das respostas: a base de conhecimento em docs/conhecimento/*.md (a lista de arquivos fica em docs/conhecimento/arquivos.txt;
 // cada "## Assunto" de um arquivo vira uma resposta, com a linha opcional "Palavras: ..." para sinônimos). Se os arquivos
 // não carregarem (por exemplo, abrindo o HTML direto do disco, sem o servidor), o chat usa as perguntas frequentes acima.
 let AJ_BASE = AJ_PERGUNTAS.map(([, p, r]) => ({ titulo:p, palavras:'', texto:r, html:r, fonte:'Perguntas frequentes' }));
@@ -81,10 +81,10 @@ function ajLerMd(nome, md){
     return { titulo, palavras, texto, html:ajMd(texto), fonte:`${tema} (${nome})` };
   }).filter(x => x.texto);
 }
-const ajBaseCarregada = fetch('conhecimento/arquivos.txt', { cache:'no-store' })
+const ajBaseCarregada = fetch('docs/conhecimento/arquivos.txt', { cache:'no-store' })
   .then(r => r.ok ? r.text() : Promise.reject())
   .then(t => Promise.all(t.split(/\r?\n/).map(n => n.trim()).filter(n => n && !n.startsWith('#'))
-    .map(n => fetch('conhecimento/' + n, { cache:'no-store' }).then(r => r.ok ? r.text() : '').then(md => ajLerMd(n, md)).catch(() => []))))
+    .map(n => fetch('docs/conhecimento/' + n, { cache:'no-store' }).then(r => r.ok ? r.text() : '').then(md => ajLerMd(n, md)).catch(() => []))))
   .then(listas => { const base = listas.flat(); if(base.length){ AJ_BASE = base; document.querySelector('.ajc-nota').textContent = 'Assistente de demonstração: as respostas vêm da base de conhecimento do Suporte.'; } })
   .catch(() => {});
 

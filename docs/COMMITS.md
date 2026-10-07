@@ -12,7 +12,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 > apagada (continua neste histórico). Commits anteriores a essa data que citam "versão 1" ou "v2/" são dessa fase.
 
 > Em 07/10/2026 o trabalho de vários dias (handoff da V1 para a V2, catálogo de boxes, telas novas e decisões) entrou
-> em um commit só. O detalhe do que mudou está em [docs/HANDOFF.md](docs/HANDOFF.md).
+> em um commit só. O detalhe do que mudou está em [HANDOFF.md](HANDOFF.md).
 
 ## Resumo por dia
 

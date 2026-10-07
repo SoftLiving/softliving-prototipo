@@ -4,16 +4,17 @@ Documento para o desenvolvimento: o que muda do site em produção (V1, `softliv
 este protótipo), tela por tela, com as regras de negócio e os dados que o backend precisa fornecer.
 
 - **Protótipo (código):** https://github.com/SoftLiving/softliving-prototipo, branch `main`
-- **Histórico das mudanças:** [COMMITS.md](../COMMITS.md)
-- **Regras de visual detalhadas:** [README.md](../README.md)
+- **Regras de visual detalhadas:** [PROTOTIPO.md](PROTOTIPO.md)
+- **Base de conhecimento do Suporte:** pasta [conhecimento/](conhecimento/)
+- **Todos os documentos ficam nesta pasta `docs/`.**
 
-> **Sobre os nomes.** Neste documento, **V1 = o site em produção** e **V2 = este protótipo**. No README, no COMMITS e
-> nos comentários do código, "versão 1" quer dizer outra coisa: o *protótipo antigo*, apagado em 28/09/2026. Não confundir.
+> **Sobre os nomes.** Neste documento, **V1 = o site em produção** e **V2 = este protótipo**. No PROTOTIPO.md e nos comentários
+> do código, "versão 1" quer dizer outra coisa: o *protótipo antigo*, apagado em 28/09/2026. Não confundir.
 
 > **Como a V1 foi levantada.** Pela navegação no site em 06/10/2026, com uma conta de administrador, só lendo as
 > telas. Não houve acesso ao código da V1: o que este documento diz sobre ela é o que aparece na interface.
 
-> **Fora da V2 (decisão de 06/10/2026).** A V2 **não tem** as telas **Membros** (diretório e perfil público),
+> **Fora da V2.** A V2 **não tem** as telas **Membros** (diretório e perfil público),
 > **Oportunidades** e **Marketplace**. Elas existem na V1 e podem voltar em uma V3. Das pessoas, a V2 tem só a tela
 > **Amigos**. Não implementar essas três telas nem os blocos e links que levam a elas (seção 3.2).
 
@@ -31,7 +32,7 @@ comportamento e regra**, não como código a copiar: a V1 é React (Next.js) e o
 
 O que **não** aproveitar: tudo o que a seção 7 lista como simulação.
 
-**Decisões:** as dúvidas levantadas na comparação com a V1 foram respondidas em 06/10/2026 e estão registradas
+**Decisões:** as dúvidas levantadas na comparação com a V1 já foram respondidas e estão registradas
 neste documento (resumo na seção 8) e na página `decisoes.html` do protótipo, em "Já decidido". Se surgir uma dúvida
 nova, ela entra nessa página e a tela ganha um aviso tracejado no topo: **não implementar esse ponto antes da resposta.**
 
@@ -68,7 +69,7 @@ O protótipo usa `?t=<título>`, `?c=<slug>` e `?g=<número>` só por ser estát
 | Notificações | `notificacoes.html` + janela do sino | `/app/notificacoes` | Alterada |
 | Grupos | `grupos.html` | `/app/nao-estou-sozinho` | Alterada |
 | Grupo | `grupo.html?g=<id>#<aba>` | `/app/nao-estou-sozinho/<uuid>` | Alterada; grupos de desapego são novos |
-| Vitrines | `vitrine.html` | `/app/parceiros` (no menu já aparece como "Vitrines") | Alterada. **Implementar como está no protótipo** (decisão de 06/10/2026) |
+| Vitrines | `vitrine.html` | `/app/parceiros` (no menu já aparece como "Vitrines") | Alterada. **Implementar como está no protótipo** |
 | Segmento de vitrine | `vitrine-segmento.html?s=<segmento>` (ou `?b=<bairro>`) | não existe | Nova: uma página por segmento e uma por bairro, com a estrutura padrão de boxes (4.9) |
 | Estabelecimento | `estabelecimento.html?e=<id>` | não existe | Nova. Aprovada |
 | Minhas Comunidades | `comunidades/*.html` (8 abas) | `/app/minha-empresa` e subrotas (7 abas) | **Substitui a `/app/minha-empresa`.** Na V2 a rota é `/app/minhascomunidades`; a rota antiga é desligada |
@@ -97,7 +98,7 @@ As quatro telas de Atividades não foram abertas uma a uma na V1: as rotas respo
 
 ### 3.2 Telas da V1 que ficam fora da V2
 
-**Decisão (06/10/2026): estas telas não fazem parte da V2.** Podem voltar em uma V3. Não têm desenho no protótipo.
+**Decisão: estas telas não fazem parte da V2.** Podem voltar em uma V3. Não têm desenho no protótipo.
 
 | Tela na V1 | Rota na V1 | O que sai junto na V2 |
 |---|---|---|
@@ -106,7 +107,7 @@ As quatro telas de Atividades não foram abertas uma a uma na V1: as rotas respo
 | Oportunidades | `/app/oportunidades` | **Endereço desligado.** Saem o item do menu, o bloco "Oportunidades para você" da Início, as oportunidades nos resultados da Busca e o item no Painel Admin |
 | Marketplace | `/app/marketplace` | **Endereço desligado.** Saem o item do menu, o atalho "Use créditos e bônus nos parceiros" da Carteira e o item no Painel Admin |
 
-**Endereços (decisão de 06/10/2026).** São desligados, sem levar para outra página:
+**Endereços.** São desligados, sem levar para outra página:
 
 | Endereço da V1 | O que era |
 |---|---|
@@ -141,7 +142,7 @@ Mantêm a rota, as funções e o conteúdo de hoje, e recebem só os padrões gl
 | Menu | Início, Busca, Notificações, Conteúdos, Colunas, Atividades, Grupos, Conexões, Conversas, Membros, Parceiros, Oportunidades, Marketplace, Carteira, Indicações, Meu Perfil, Ajuda, Minha Empresa, Painel Admin | Quatro seções (4.5). **Saem: Membros, Oportunidades e Marketplace.** Conversas continua |
 | Início | Aviso de ativação da conta, "Oportunidades para você", filtros de categoria, Coluna do dia, Meus grupos, Hoje na SoftLiving, Conheça a comunidade | Abertura com colagem, Explore por assunto, Últimas matérias, Acontece nos grupos, Colunas, newsletter. **Sem o bloco de Oportunidades** |
 | Conteúdos | Lista única, com categorias, filtro Todos/Grátis/Premium e busca própria | Revista: assuntos em círculos, destaque, coleções, um bloco por assunto, lista completa |
-| Assuntos | Categorias: Entretenimento e cultura, Estilo de vida e consumo, Financeiro, Saúde mental e qualidade de vida, SoftLiving, Tecnologia e serviços digitais, Turismo e viagem | **Mantêm-se as sete categorias da V1** (decisão de 06/10/2026). O protótipo mostra seis assuntos só como exemplo |
+| Assuntos | Categorias: Entretenimento e cultura, Estilo de vida e consumo, Financeiro, Saúde mental e qualidade de vida, SoftLiving, Tecnologia e serviços digitais, Turismo e viagem | **Mantêm-se as sete categorias da V1**. O protótipo mostra seis assuntos só como exemplo |
 | Leitura | Curtir, Acompanhar, Salvar, Compartilhar, Ouvir, Encaminhar; Comentários; Continue lendo | As mesmas ações. Encaminhar abre uma janela com os 7 amigos com quem a pessoa mais interage, busca pelo nome e um recado; é só para amigos. Ganha A− / A+ (o mesmo ajuste de letra da Acessibilidade), "Quem escreveu", responder comentários e o novo box de compra |
 | Busca | Conteúdos, grupos e oportunidades | Conteúdos, colunas, colunistas e grupos; sugestões e buscas recentes. **Sem oportunidades** |
 | Notificações | Filtros Todas e Não lidas; com data | Mais filtros por tipo, preferências, janela do sino; **com data e hora** |
@@ -238,7 +239,7 @@ Fonte: `assets/js/layout.js`.
   Exceção: em Minhas Comunidades a coluna mostra só a pesquisa da própria comunidade, como já era.
   O backend precisa informar quem está online (presença). **Está online quem usou o portal nos últimos 5 minutos.**
   **A pessoa pode esconder o próprio estado**: no Meu perfil, em "Conta e privacidade", a chave "Mostrar quando estou
-  online" vem ligada; desligada, ela aparece como offline para os amigos (decisão de 07/10/2026).
+  online" vem ligada; desligada, ela aparece como offline para os amigos.
 - **Rodapé e janela "Saiba mais":** mesmos itens do menu institucional, na mesma ordem (uma lista única).
 - **Patrocinador apoiador:** uma faixa por página, com uma marca sorteada a cada visita, em tom sobre tom.
 
@@ -277,8 +278,8 @@ Fonte: `assets/js/layout.js`.
   **Conteúdos, Colunas, Grupos, Vitrines e Minhas Comunidades**. Cada seção fica dentro de um box de fundo claro,
   com o título e a quantidade. Coluna é o conteúdo escrito por um colunista;
   vitrine salva é o estabelecimento favoritado. **Em Minhas Comunidades entram os conteúdos e os serviços salvos
-  dentro das comunidades fechadas** (decisão de 07/10/2026).
-- **Listas completas abrem em prévia, com botão para ver mais** (07/10/2026): "Todos os conteúdos" (página Conteúdos) mostra **15 itens** e o botão "Mais conteúdos" abre **mais 15** a cada clique; "Todos os grupos" (página Grupos) mostra **8** e o "Ver mais" abre **mais 8**. O botão some quando a lista acaba, e trocar de aba ou de filtro volta à prévia.
+  dentro das comunidades fechadas**.
+- **Listas completas abrem em prévia, com botão para ver mais**: "Todos os conteúdos" (página Conteúdos) mostra **15 itens** e o botão "Mais conteúdos" abre **mais 15** a cada clique; "Todos os grupos" (página Grupos) mostra **8** e o "Ver mais" abre **mais 8**. O botão some quando a lista acaba, e trocar de aba ou de filtro volta à prévia.
 - Cartões de conteúdo não têm botão "Ler": o cartão inteiro é o link.
 - O botão salvar do cartão só aparece no hover (ou se já foi salvo); no celular, sempre à vista.
 
@@ -389,25 +390,25 @@ Os três cartões usados nos boxes (conteúdo, vitrine e grupo) estão descritos
 - **Boxes BDELD e BDDLE:** um conteúdo em destaque (foto grande, segmento, título, resumo, autor e selo) ao lado de uma lista de conteúdos sugeridos em carrossel vertical, 4 por vez. No BDELD o destaque fica à esquerda; no BDDLE, à direita. No celular, o destaque vem em cima e a lista embaixo.
 - **Boxes BSD e BDS:** mostram um item só, sem carrossel. O BSD é uma faixa larga com a foto de fundo e o texto por cima; o BDS é um box claro com foto quadrada à esquerda e, à direita, uma etiqueta, o título, o resumo e o autor.
 - **Boxes BEDHV, BDELDV e BDDLEV:** os mesmos formatos do BEDH, do BDELD e do BDDLE, com cartões de vitrine (iniciais, segmento e bairro, nome, resumo e "Ver vitrine", sem selo).
-- **Boxes BEDHG, BDELDG, BDDLEG e BDVG (página Grupos, 07/10/2026):** os mesmos formatos do BEDH, do BDELD, do BDDLE e do BDVC, com **cartões de grupo** (segmento, título, quantidade de participantes, botão de entrar e botão salvar). Nos cartões verticais o botão é "Participar" ou "Participando · Sair" e age ali mesmo, sem abrir o grupo; nos outros formatos o rótulo é "Participar" ou "Ver grupo" e o cartão inteiro abre o grupo. Grupo premium leva "Premium" junto do segmento (e o preço por mês no selo do cartão vertical). Ao entrar ou sair, o botão e a contagem daquele grupo mudam em todos os boxes da página.
+- **Boxes BEDHG, BDELDG, BDDLEG e BDVG (página Grupos):** os mesmos formatos do BEDH, do BDELD, do BDDLE e do BDVC, com **cartões de grupo** (segmento, título, quantidade de participantes, botão de entrar e botão salvar). Nos cartões verticais o botão é "Participar" ou "Participando · Sair" e age ali mesmo, sem abrir o grupo; nos outros formatos o rótulo é "Participar" ou "Ver grupo" e o cartão inteiro abre o grupo. Grupo premium leva "Premium" junto do segmento (e o preço por mês no selo do cartão vertical). Ao entrar ou sair, o botão e a contagem daquele grupo mudam em todos os boxes da página.
 - **MSG (Menu segmentos grupos):** igual ao MSC e ao MSV na aparência, mas **não abre outra página**: escolher um segmento filtra a lista "Todos os grupos", no fim da página, e leva a tela até ela; clicar de novo no mesmo segmento desfaz o filtro.
 - **Box BANGH ("Acontece nos grupos"):** o comentário de participante à esquerda muda a cada carregamento da página, sorteado entre os comentários disponíveis (5 de exemplo no protótipo). Mostra as iniciais, o nome abreviado, o grupo, uma frase de destaque, o comentário e um botão que leva ao grupo citado. Quem escolhe os comentários que entram no sorteio é a curadoria.
 - **Box BDRC (Box destaque resumo colunas), na página Colunas:** a parte de cima mostra sempre a **coluna do dia** (foto, nome da coluna, colunista, resumo e a última coluna publicada), e **a coluna do dia é sempre gratuita**. A parte de baixo, "Mais colunas para você", mostra as sugestões **em carrossel horizontal, 4 por vez**, **sorteadas a cada carregamento**, em cartões com as mesmas informações dos artigos (segmento, título, autor, selo e salvar).
 - **Box BNPA (Box navegue pelo autor), na página Colunas:** grade com todos os colunistas em cartões compactos (iniciais, nome, segmento e quantidade de colunas), 4 por linha no computador, com a contagem de colunistas e de colunas publicadas abaixo do título. Sem carrossel e sem abas. Clicar num colunista filtra as colunas da página por ele; clicar de novo desfaz.
 - **Box BRPCV (Box recomendado pela comunidade vitrine), na página Vitrines:** carrossel horizontal de depoimentos de membros sobre estabelecimentos, **3 por vez, com os botões de rolagem**. Cada cartão mostra a foto e o logo do estabelecimento, **o nome do estabelecimento, o bairro, o depoimento, o nome de quem escreveu e o grupo dessa pessoa**, mais o botão salvar (que salva a vitrine). O cartão abre a vitrine do estabelecimento.
-- **Box BPDVV (Box perto de você vitrine), na página Vitrines:** uma linha de cartões de bairro, 4 no computador. Cada cartão é a foto do bairro com o nome e a quantidade de lugares por cima ("2 lugares", "1 lugar"). Clicar num bairro abre a página com os estabelecimentos dele (`vitrine-segmento.html?b=<bairro>`). **Não é carrossel: mostra sempre 4 bairros. Quando houver mais de 4, os 4 são sorteados a cada visita** (decisão de 07/10/2026).
+- **Box BPDVV (Box perto de você vitrine), na página Vitrines:** uma linha de cartões de bairro, 4 no computador. Cada cartão é a foto do bairro com o nome e a quantidade de lugares por cima ("2 lugares", "1 lugar"). Clicar num bairro abre a página com os estabelecimentos dele (`vitrine-segmento.html?b=<bairro>`). **Não é carrossel: mostra sempre 4 bairros. Quando houver mais de 4, os 4 são sorteados a cada visita**.
 - **MSC (Menu segmentos conteúdo)** e **MSV (Menu segmento vitrine):** o submenu interno das páginas Conteúdos e Vitrines, uma linha de círculos com foto e o nome do segmento embaixo. Cada círculo abre a página daquele segmento: `assunto.html?a=<assunto>` nos conteúdos e `vitrine-segmento.html?s=<segmento>` nas vitrines. Na página do segmento o menu se repete, com o segmento aberto marcado em verde. Quando os círculos não cabem na linha, ela rola para o lado.
-- **Estrutura padrão das páginas de segmento** (decisão de 06/10/2026). Toda página de segmento começa com o título do segmento e o menu de segmentos, e depois traz sempre os mesmos boxes, nesta ordem:
+- **Estrutura padrão das páginas de segmento**. Toda página de segmento começa com o título do segmento e o menu de segmentos, e depois traz sempre os mesmos boxes, nesta ordem:
 
   | Página | Arquivo | Boxes, na ordem |
   |---|---|---|
   | Segmento de conteúdo | `assunto.html?a=<assunto>` | BEDH, BDELD, BSD, BDDLE, BDS |
   | Segmento de vitrine | `vitrine-segmento.html?s=<segmento>` | BEDHV, BDELDV, BSD, BDDLEV, BDS, BRPCV, BPDVV |
 
-  Cada box recebe só itens daquele segmento. Na página de vitrine, o BSD e o BDS mostram uma vitrine (cartão de vitrine, sem selo) e **mantêm o mesmo código** (decisão de 07/10/2026). Os títulos de cada box nessas páginas ainda são provisórios. A página de vitrine com `?b=<bairro>` usa a mesma estrutura para um bairro e é o destino do box BPDVV. No protótipo, quando o segmento tem poucos itens de exemplo, os boxes são completados com itens de outros segmentos, só para a estrutura aparecer cheia.
+  Cada box recebe só itens daquele segmento. Na página de vitrine, o BSD e o BDS mostram uma vitrine (cartão de vitrine, sem selo) e **mantêm o mesmo código**. Os títulos de cada box nessas páginas ainda são provisórios. A página de vitrine com `?b=<bairro>` usa a mesma estrutura para um bairro e é o destino do box BPDVV. No protótipo, quando o segmento tem poucos itens de exemplo, os boxes são completados com itens de outros segmentos, só para a estrutura aparecer cheia.
 - **Boxes BDVC (Box dois verticais conteúdos) e BDVV (Box dois verticais vitrine):** duas colunas lado a lado, cada uma com o seu título e subtítulo. Em cada coluna, uma **capa** (foto com o texto por cima) e, embaixo, uma **lista de itens compactos em carrossel vertical, 3 por vez**. No celular, as duas colunas ficam uma embaixo da outra. O BDVC usa cartões de conteúdo (selo, segmento, título, resumo e autor na capa; segmento, título, autor e selo nos itens); o BDVV usa cartões de vitrine (iniciais, segmento e bairro, nome, resumo e "Ver vitrine" na capa; segmento e bairro, nome e "Ver vitrine" nos itens). Todos com o botão salvar. O BDVC está em "Tecnologia" e "Saúde", na página Conteúdos; o BDVV, em "Gastronomia" e "Saúde", na página Vitrines.
-- **Formatos retirados (07/10/2026):** o **mosaico** (um cartão grande, vários menores e o cartão "Ver todos") não existe mais. Só se usam os boxes com nome e código; qualquer formato fora da lista não deve ser implementado.
-- **Box BTOC (Box todos os colunistas), na página Colunas:** abas de fichário, uma por segmento, mais a aba "Todos". Cartões de colunista em 4 colunas no computador. **Na aba "Todos" aparecem 2 linhas (8 colunistas)**; **nas abas de segmento não há limite de linhas**: aparecem todos os colunistas daquele segmento. **As abas ficam sempre em uma linha só**: quando não cabem, não quebram para uma segunda linha; aparecem os botões de rolagem das abas, um de cada lado, e **a rolagem é contínua (360 graus), como nos carrosséis**: depois da última aba vem de novo a primeira, e antes da primeira vem a última, sem voltar para trás. O movimento é o mesmo dos carrosséis de cartões: cada clique desliza uma aba, em 450ms, desacelerando no fim, e clicar de novo durante o deslize soma mais uma aba. A mesma regra vale para todo fichário do site. **As setas do fichário aparecem e somem como as dos carrosséis** (4.6): com mouse, acende só a do lado do cursor, aos poucos, e apaga devagar ao sair; pelo teclado, as duas; no celular e no tablet, sempre à vista. **Quando houver mais de 8 colunistas, os 8 da aba "Todos" são sorteados a cada visita** e não mudam ao trocar de aba (decisão de 07/10/2026).
+- **Formatos retirados:** o **mosaico** (um cartão grande, vários menores e o cartão "Ver todos") não existe mais. Só se usam os boxes com nome e código; qualquer formato fora da lista não deve ser implementado.
+- **Box BTOC (Box todos os colunistas), na página Colunas:** abas de fichário, uma por segmento, mais a aba "Todos". Cartões de colunista em 4 colunas no computador. **Na aba "Todos" aparecem 2 linhas (8 colunistas)**; **nas abas de segmento não há limite de linhas**: aparecem todos os colunistas daquele segmento. **As abas ficam sempre em uma linha só**: quando não cabem, não quebram para uma segunda linha; aparecem os botões de rolagem das abas, um de cada lado, e **a rolagem é contínua (360 graus), como nos carrosséis**: depois da última aba vem de novo a primeira, e antes da primeira vem a última, sem voltar para trás. O movimento é o mesmo dos carrosséis de cartões: cada clique desliza uma aba, em 450ms, desacelerando no fim, e clicar de novo durante o deslize soma mais uma aba. A mesma regra vale para todo fichário do site. **As setas do fichário aparecem e somem como as dos carrosséis** (4.6): com mouse, acende só a do lado do cursor, aos poucos, e apaga devagar ao sair; pelo teclado, as duas; no celular e no tablet, sempre à vista. **Quando houver mais de 8 colunistas, os 8 da aba "Todos" são sorteados a cada visita** e não mudam ao trocar de aba.
 
 ## 5. Regras de negócio
 
@@ -442,7 +443,7 @@ Os três cartões usados nos boxes (conteúdo, vitrine e grupo) estão descritos
 - **Extrato:** filtros Tudo, Entradas e Saídas; cada linha mostra data e hora e diz se é bônus.
 - **O bônus é usado primeiro** (regra que a V1 já aplica e mostra na Carteira) e não é sacável.
 - A V1 hoje só tem a "Ativação da conta" por Pix (R$ 50,00 → 50 créditos + 50 de bônus). A tabela acima, o cartão e os
-  outros valores são novidade da V2, **confirmada em 06/10/2026**.
+  outros valores são novidade da V2, **já confirmada**.
 - **O bônus vale por 12 meses, contados do dia em que cada bônus foi recebido.** Os créditos comprados não têm prazo.
 
 ### 5.3 Acesso aos conteúdos
@@ -474,13 +475,13 @@ Ações: Curtir, Salvar, Acompanhar a conversa, Compartilhar, Encaminhar, Ouvir 
 
 - **Acompanhar** avisa sobre comentários novos e lista o conteúdo em Atividades › Acompanhar.
 - **Compartilhar** abre uma janela com as opções; no celular ela sobe de baixo.
-- **Encaminhar** manda o conteúdo, com um recado opcional, **sempre e só para amigos**. A janela abre com os **7 amigos com quem a pessoa mais interage** e tem uma **busca pelo nome** entre todos os amigos; dá para escolher mais de um. Quem recebe ganha uma notificação. Só para quem está logado. **"Mais interage"** é a soma das mensagens trocadas e dos conteúdos encaminhados entre os dois nos últimos 90 dias (decisão de 07/10/2026).
+- **Encaminhar** manda o conteúdo, com um recado opcional, **sempre e só para amigos**. A janela abre com os **7 amigos com quem a pessoa mais interage** e tem uma **busca pelo nome** entre todos os amigos; dá para escolher mais de um. Quem recebe ganha uma notificação. Só para quem está logado. **"Mais interage"** é a soma das mensagens trocadas e dos conteúdos encaminhados entre os dois nos últimos 90 dias.
 - **Tamanho da letra:** o A− / A+ muda o mesmo ajuste da tela Acessibilidade (3 níveis), que vale para o site todo.
 - **Comentários:** publicar, curtir e responder; a resposta do autor leva um selo.
 
 ### 5.5 Grupos
 
-- **Página Grupos na estrutura de revista** (07/10/2026), nesta ordem: capa; MSG; BEDHG ("Em destaque nos grupos", 8 grupos sorteados); duas coleções, em BDELDG e BDDLEG; faixa do apoiador; BDVG ("Grupos premium" e "Grupos gratuitos"); BANGH (comentário sorteado e os 6 grupos com mais participantes); e "Todos os grupos".
+- **Página Grupos na estrutura de revista**, nesta ordem: capa; MSG; BEDHG ("Em destaque nos grupos", 8 grupos sorteados); duas coleções, em BDELDG e BDDLEG; faixa do apoiador; BDVG ("Grupos premium" e "Grupos gratuitos"); BANGH (comentário sorteado e os 6 grupos com mais participantes); e "Todos os grupos".
 - "Todos os grupos": lista com filtros Todos, Participando e Disponíveis, mais o segmento escolhido no MSG; botão Participar ou Sair. **Mostra uma prévia de 8 grupos e, embaixo, o botão "Ver mais", que abre mais 8 a cada clique**, até acabar a lista (o botão some). Trocar de filtro ou de segmento volta à prévia de 8.
 - **Grupo comum:** abas Conversas, Mural, Encontros e Membros.
 - **Grupo de desapego:** abas Anúncios, Mural e Membros. Anúncio é de Venda, Doação ou Troca, com categoria e estado
@@ -507,7 +508,7 @@ Ações: Curtir, Salvar, Acompanhar a conversa, Compartilhar, Encaminhar, Ouvir 
 
 O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 
-- **As perguntas são contextuais à página em que a pessoa está** (decisão de 07/10/2026):
+- **As perguntas são contextuais à página em que a pessoa está**:
 
   | Página | Perguntas sobre |
   |---|---|
@@ -518,7 +519,7 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
   | Minhas Comunidades | A comunidade aberta (uma pesquisa por comunidade e por público) |
   | Demais páginas | O portal em geral e o propósito da SoftLiving |
 
-- **Banco de perguntas ilimitado por contexto** (decisão de 07/10/2026): cada página tem o seu banco de dados de
+- **Banco de perguntas ilimitado por contexto**: cada página tem o seu banco de dados de
   perguntas, cada uma com as suas respostas, sem limite de quantidade, atualizado e aprofundado sempre. O sistema
   não pode fixar a quantidade por contexto, e as rodadas são sorteadas desse banco.
 - O protótipo traz um exemplo inicial de cada contexto em `assets/js/escuta-dados.js` (`ESCUTA_POR_PAGINA`); as de
@@ -561,8 +562,8 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 - **Conversas:** mensagens diretas. Amigos podem escrever um para o outro. Quem liga, no Meu perfil, "Receber mensagens de quem não é amigo" também recebe mensagens de qualquer membro (conteúdo encaminhado é sempre só entre amigos). O padrão é desligado.
 - **Meu perfil:** números, sobre mim, habilidades e ofertas, interesses editáveis, comunidades, vitrines favoritas, amigos e conta. O botão "Ver perfil público" mostra a página como os outros a veem.
 - **Perfil público (`/app/@nome`):** respeita "Quem pode ver meu perfil" (só amigos ou todos os membros) e "Aparecer na comunidade". Só para quem está logado. Para quem visita tem Adicionar aos amigos, Seguir e Mensagem; **Mensagem aparece só para amigos**, ou para todos se a pessoa aceita mensagens de quem não é amigo.
-- **Endereço público (`@nome`):** opcional. A pessoa pode trocar no Meu perfil, em "Conta e privacidade". Regras: de 3 a 30 caracteres, só letras minúsculas, números, ponto e sublinhado; não pode repetir o de outra pessoa nem coincidir com uma rota de `/app/`. **Depois de cada troca, a pessoa espera 14 dias para trocar de novo**; nesse período o botão Editar fica desligado e a tela mostra a data em que a troca volta a ser possível. **Depois da troca, o endereço antigo fica reservado por 90 dias**: ninguém pode usá-lo e ele leva ao endereço novo; passados os 90 dias, fica livre (decisão de 07/10/2026).
-- **Suporte:** busca, temas, perguntas frequentes, contato por e-mail e assistente com inteligência artificial, que responde só com o que está na base de conhecimento (`conhecimento/*.md`). Sem WhatsApp.
+- **Endereço público (`@nome`):** opcional. A pessoa pode trocar no Meu perfil, em "Conta e privacidade". Regras: de 3 a 30 caracteres, só letras minúsculas, números, ponto e sublinhado; não pode repetir o de outra pessoa nem coincidir com uma rota de `/app/`. **Depois de cada troca, a pessoa espera 14 dias para trocar de novo**; nesse período o botão Editar fica desligado e a tela mostra a data em que a troca volta a ser possível. **Depois da troca, o endereço antigo fica reservado por 90 dias**: ninguém pode usá-lo e ele leva ao endereço novo; passados os 90 dias, fica livre.
+- **Suporte:** busca, temas, perguntas frequentes, contato por e-mail e assistente com inteligência artificial, que responde só com o que está na base de conhecimento (`docs/conhecimento/*.md`). Sem WhatsApp.
 - **Modo simples:** 8 opções grandes, uma tarefa por tela, letra ajustável em 4 tamanhos. Não usa a moldura comum.
 
 ## 6. Dados que o backend precisa fornecer
@@ -615,7 +616,7 @@ Campos que o protótipo usa. Os nomes curtos (`t`, `e`, `a`) são do protótipo;
 | `TESTE_PAGAMENTOS = true`: cerca de 90% dos conteúdos ficam pagos | Preço real de cada conteúdo |
 | Pagamento, entrada com rede social, cadastro e recuperar senha só mostram um aviso | Fluxos reais |
 | Conteúdo identificado pelo título na URL | UUID ou slug da V1 |
-| Assistente do Suporte casa palavras da pergunta com os arquivos `conhecimento/*.md` | Inteligência artificial respondendo só com o que está nessa base |
+| Assistente do Suporte casa palavras da pergunta com os arquivos `docs/conhecimento/*.md` | Inteligência artificial respondendo só com o que está nessa base |
 | Fotos de exemplo carregadas pela internet | Banco de imagens escolhido pela curadoria, com as imagens hospedadas |
 | Textos dos artigos de demonstração | Textos reais |
 | Números da abertura e depoimento de "Marta T." fictícios | Dados reais ou retirar |
@@ -626,7 +627,7 @@ Campos que o protótipo usa. Os nomes curtos (`t`, `e`, `a`) são do protótipo;
 
 ## 8. Decisões e pendências
 
-### 8.1 Decisões de 06/10/2026
+### 8.1 Decisões gerais
 
 Respondidas pelo produto no questionário do protótipo. Já estão aplicadas nas seções acima e no protótipo.
 
@@ -651,7 +652,7 @@ Respondidas pelo produto no questionário do protótipo. Já estão aplicadas na
 | Vitrines | Implementar como está no protótipo |
 | Coluna da direita | Contextual à página (opções por página numa próxima atualização); por enquanto, pesquisa, Meus grupos, Hoje na SoftLiving e Meus amigos com online e offline |
 
-### 8.1.1 Decisões de 06 e 07/10/2026 sobre boxes, cartões e pesquisa
+### 8.1.1 Decisões sobre boxes, cartões e pesquisa
 
 Tomadas na montagem das páginas. Já estão aplicadas nas seções acima e no protótipo.
 
@@ -697,3 +698,105 @@ só como ponto de partida.
 5. **Comunidade:** Grupos, Grupo, Minhas Comunidades, Estabelecimento, Conversas.
 6. **Institucionais, Suporte, Acessibilidade e Modo simples.**
 7. **Vitrines e páginas de segmento de vitrine.**
+
+## 10. Mapa do código
+
+Para achar depressa, no protótipo, o código de cada tela, de cada box e de cada comportamento. Os caminhos são a partir
+da raiz do repositório; os scripts ficam em `assets/js/` e os estilos em `assets/css/`. **O código é referência de
+visual e de comportamento, para ser reescrito em React**, não para ser copiado como está (seção 1).
+
+### 10.1 Arquivos de cada tela
+
+Toda tela carrega `estilos.css`, `texto.js` e `layout.js` (a moldura). As telas com coluna da direita carregam também
+`lateral.js`, `escuta.js` e `escuta-dados.js`.
+
+| Tela | Página | Script da tela | Dados de exemplo | Estilos além do `estilos.css` | Coluna da direita |
+|---|---|---|---|---|---|
+| Início | `index.html` | `inicio.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js` | só o `estilos.css` | Sim |
+| Conteúdos | `conteudos.html` | `conteudos-cartoes.js`, `conteudos.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js` | `vitrine.css`, `conteudos.css` | Sim |
+| Assunto (segmento de conteúdo) | `assunto.html` | `conteudos-cartoes.js`, `assunto.js` | `conteudos-dados.js`, `grupos-dados.js` | `vitrine.css`, `conteudos.css` | Sim |
+| Leitura | `conteudo.html` | `conteudo.js` | `conteudos-dados.js`, `conteudos-textos.js`, `colunas-dados.js` | `conteudo.css` | Não |
+| Colunas | `colunas.html` | `colunas.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js` | só o `estilos.css` | Sim |
+| Colunista | `colunista.html` | `colunista.js` | `conteudos-dados.js`, `colunas-dados.js` | `colunista.css` | Não |
+| Busca | `busca.html` | `busca.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js` | só o `estilos.css` | Não |
+| Notificações | `notificacoes.html` | `notificacoes.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js` | só o `estilos.css` | Não |
+| Grupos | `grupos.html` | `grupos.js` | `grupos-dados.js` | `vitrine.css`, `conteudos.css` | Sim |
+| Grupo | `grupo.html` | `grupo.js` | `grupos-dados.js`, `desapego-dados.js` | `vitrine.css`, `grupo.css` | Não |
+| Vitrines | `vitrine.html` | `vitrine-cartoes.js`, `vitrine.js` | `estabelecimentos-dados.js`, `grupos-dados.js` | `vitrine.css`, `conteudos.css` | Sim |
+| Segmento de vitrine | `vitrine-segmento.html` | `vitrine-cartoes.js`, `vitrine-segmento.js` | `estabelecimentos-dados.js`, `grupos-dados.js` | `vitrine.css`, `conteudos.css` | Sim |
+| Estabelecimento | `estabelecimento.html` | `estabelecimento.js` | `estabelecimentos-dados.js`, `estabelecimentos-catalogo.js`, `estabelecimentos-extras.js` | `vitrine.css` | Não |
+| Amigos | `amigos.html` | `amigos.js` | `grupos-dados.js`, `pessoas-dados.js` | só o `estilos.css` | Sim |
+| Conversas | `conversas.html` | `conversas.js` | `pessoas-dados.js` | só o `estilos.css` | Não |
+| Carteira | `carteira.html` | `carteira.js` | nenhum | só o `estilos.css` | Não |
+| Indicações | `indicacoes.html` | `indicacoes.js` | nenhum | só o `estilos.css` | Não |
+| Meu perfil e perfil público | `perfil.html` | `perfil.js` | `grupos-dados.js`, `comunidades-icones.js`, `comunidades-dados.js`, `estabelecimentos-dados.js` | só o `estilos.css` | Não |
+| Suporte | `ajuda.html` | `ajuda.js` | nenhum | só o `estilos.css` | Não |
+| Curtidas | `curtidas.html` | `atividades.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js`, `estabelecimentos-dados.js` | só o `estilos.css` | Sim |
+| Comentários | `comentarios.html` | `atividades.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js`, `estabelecimentos-dados.js` | só o `estilos.css` | Sim |
+| Acompanhar | `acompanhar.html` | `atividades.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js`, `estabelecimentos-dados.js` | só o `estilos.css` | Sim |
+| Salvos | `salvos.html` | `atividades.js` | `conteudos-dados.js`, `colunas-dados.js`, `grupos-dados.js`, `estabelecimentos-dados.js` | só o `estilos.css` | Sim |
+| Acessibilidade | `acessibilidade.html` | `acessibilidade.js` | nenhum | só o `estilos.css` | Não |
+| Modo simples | `simples.html` | `simples.js` | `comunidades-icones.js`, `conteudos-dados.js`, `conteudos-textos.js`, `grupos-dados.js`, `comunidades-dados.js`, `estabelecimentos-dados.js` | `simples.css` | Não |
+| Entrar | `entrar.html` | só o `layout.js` | nenhum | só o `estilos.css` | Não |
+| Decisões (material de trabalho, não implementar) | `decisoes.html` | `decisoes.js` | `decisoes-dados.js` | só o `estilos.css` | Não |
+| Minhas Comunidades (8 abas) | `comunidades/*.html` | `comunidades-escuta.js`, `comunidades.js` | `comunidades-icones.js`, `comunidades-dados.js`, `estabelecimentos-dados.js`, `estabelecimentos-catalogo.js` | `comunidades.css`, `vitrine.css` | pesquisa da comunidade |
+| Institucionais (6 páginas) | `institucional/*.html` | só o `layout.js` | nenhum | só o `estilos.css` | Não |
+
+### 10.2 Código comum (`assets/js/layout.js`)
+
+| O que | Onde olhar |
+|---|---|
+| Menu lateral, topo, rodapé e barra do celular | `MENU_SECOES`, `PAGINAS`, `INSTITUCIONAL` e a montagem da moldura |
+| Páginas que pedem login e o box de entrada | `PAGINAS_COM_LOGIN` e a simulação de entrada (`v2Logado`) |
+| Carrossel (setas, volta contínua, animação de 450ms) | `ativarCarrossel(trilho, 'h' ou 'v', itens por vez)`; estilos na seção "CARROSSEL" do `estilos.css` |
+| Abas de fichário com rolagem contínua | `prepararSetasAbas`, `prepararVoltaAbas`, `animarAbas`, `marcarRolagemAbas` |
+| Botão salvar (bandeirinha) | `alternarSalvo`, `avisoSalvo`, `marcarSalvos` |
+| Selo de acesso (Grátis, preço ou sem selo) | `seloAcesso` |
+| Compartilhar e Encaminhar | `abrirCompartilhar`, `abrirEncaminhar` |
+| Notificações e janela do sino | `NOTIFICACOES` e a janela do sino |
+| Acessibilidade (letra e contraste no site todo) | `lerAcessibilidade`, `gravarAcessibilidade`, `aplicarAcessibilidade` |
+| Aviso rápido (toast) | `mostrarAviso` |
+| Ícones (SVG) e fotos | `icone(nome)` e `fotoUrl(id, largura)` |
+| Sorteio da ordem | `embaralhar` |
+| Coluna da direita | `assets/js/lateral.js` (blocos) e `assets/js/escuta.js` (pesquisa, `montarEscuta`) |
+
+Estilos comuns, por seção do `estilos.css` (os títulos das seções estão em comentários `/* ===== ... ===== */`):
+"Base" (tokens de cor), "Moldura", "Coluna lateral da direita", "Componentes", "SAÍDA LENTA DO HOVER", "REGRA DE HOVER",
+"EFEITO VIDRO", "CARROSSEL", "Telas médias", "Celular" e "CELULAR (revisão geral de responsividade)".
+
+### 10.3 Código de cada box e menu
+
+| Código | Função que monta o box ou o cartão | Arquivo | Classes de estilo principais |
+|---|---|---|---|
+| BEAH | seção "Explore por assunto" | `inicio.js` | `.tabs.folder`, `.cards`, `.vcard` |
+| BEDH | `ctVertical` (cartão); `#asBEDH`, `#colGrade` | `conteudos-cartoes.js`, `assunto.js`, `colunas.js` | `.bedh`, `.vcard` |
+| BANGH | `htmlDepoimentoGrupo` e o carrossel de grupos | `grupos-dados.js`, `inicio.js`, `grupos.js` | `.community`, `.quote`, `.groups` |
+| BDELD, BDDLE | destaque e `ctItem` (item de lista) | `conteudos-cartoes.js`, `conteudos.js`, `assunto.js` | `.stories` (`.invertida` no BDDLE), `.destaque`, `.list`, `.item` |
+| BSD | faixa larga | `conteudos.js`, `assunto.js` | `.ct-faixa` |
+| BDS | carta | `conteudos.js`, `assunto.js` | `.ct-carta` |
+| BDVC | `ctTile` (capa) e `ctItem` | `conteudos-cartoes.js`, `conteudos.js` | `.ct-dupla`, `.ct-coluna`, `.ct-coluna-lista`, `.ct-tile` |
+| BDRC | coluna do dia e sugestões | `colunas.js` | seção "Tela Colunas" do `estilos.css` |
+| BNPA | `#colAutores` | `colunas.js` | seção "Tela Colunas" |
+| BTOC | `#colCategorias` (abas) e `#colunistas`; `BTOC_TODOS`, `BTOC_SORTEADOS` | `colunas.js` | `.tabs.folder`, `.colunista` |
+| BEDHV | `vtCartao` | `vitrine-cartoes.js` | `.vt-destaques`, `.vt-card` |
+| BDELDV, BDDLEV | `vtBoxDestaqueLista`, `vtDestaque`, `vtItem` | `vitrine-cartoes.js` | `.stories`, `.vt-destaque`, `.vt-item` |
+| BSD e BDS com vitrine | `vtSuperDestaque`, `vtDestaqueSimples` | `vitrine-cartoes.js` | `.vt-faixa`, `.vt-carta` |
+| BDVV | `vtBoxDoisVerticais`, `vtCapa`, `vtItemCompacto` | `vitrine-cartoes.js` | `.ct-dupla`, `.vt-capa-card`, `.vt-item-compacto` |
+| BRPCV | `vtReco`; dados em `VT_RECOMENDAS` | `vitrine-cartoes.js` | `.vt-recomendas`, `.vt-reco` |
+| BPDVV | `vtBairro`; dados em `VT_BAIRROS` | `vitrine-cartoes.js` | `.vt-bairros`, `.vt-bairro` |
+| BEDHG | `grCartao` | `grupos.js` | `.vcard-grupo` |
+| BDELDG, BDDLEG | `grDestaque`, `grItem` | `grupos.js` | `.stories`, `.vt-destaque`, `.vt-item` |
+| BDVG | `grCapa`, `grItemCompacto` | `grupos.js` | `.ct-dupla`, `.vt-capa-card`, `.vt-item-compacto` |
+| MSC | círculos de assunto | `conteudos.js`, `assunto.js` | `.vt-categorias`, `.vt-cat` |
+| MSV | `htmlMenuSegmentosVitrine` | `estabelecimentos-dados.js` | `.vt-categorias`, `.vt-cat` |
+| MSG | `renderSegmentos` | `grupos.js` | `.vt-categorias`, `.vt-cat` |
+
+Os estilos dos boxes de conteúdo ficam em `conteudos.css`; os de vitrine, em `vitrine.css`; os cartões verticais
+(`.vcard`), os itens de lista (`.item`) e o destaque (`.destaque`), no `estilos.css`.
+
+### 10.4 Como usar este mapa
+
+1. Abrir a tela publicada e a mesma tela na V1, lado a lado.
+2. Pela tabela 10.1, abrir a página, o script e os estilos da tela.
+3. Para cada box da tela, usar a tabela 10.3 para achar a marcação (HTML gerado pela função) e as classes.
+4. Conferir as regras da tela nas seções 4 e 5 e as pendências na 8.2 antes de implementar.
