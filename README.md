@@ -23,7 +23,8 @@ assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · 
 assets/js/layout.js         Moldura comum: faixa de protótipo, aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
 conteudos.html              Tela Conteúdos (estrutura da Vitrine): assuntos em círculos, destaque, coleções, um bloco por assunto, lista completa
-assunto.html                Página de cada assunto (?a=bem-estar|saude|estilo-e-casa|viagem|tecnologia|softliving): destaque, mosaico, lista, Leia também
+assunto.html                Página de cada assunto (?a=bem-estar|saude|estilo-e-casa|viagem|tecnologia|softliving), na estrutura padrão
+                            das páginas de segmento de conteúdo: boxes BEDH, BDELD, BSD, BDDLE e BDS
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
@@ -34,7 +35,17 @@ ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e con
 simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável
 entrar.html                 Tela de login (box de entrada no centro); depois de entrar, volta para a página de origem (?volta=)
 curtidas/comentarios/acompanhar/salvos.html  Atividades (atividades.js); Salvos lê a bandeirinha dos cartões (lerSalvos no layout.js)
-vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
+conversas.html              Conversas (da V1): mensagens diretas com os amigos; lista e conversa (?c=<id>); conversas.js.
+                            Pessoas em pessoas-dados.js (também usadas pela aba Seguindo da tela Amigos)
+acessibilidade.html         Acessibilidade (da V1): letra em 3 tamanhos, alto contraste e navegação simplificada; vale para o site
+                            todo (lerAcessibilidade / aplicarAcessibilidade no layout.js, classes ac-* no <html>)
+decisoes.html               Decisões em aberto (página de trabalho, fora do produto): perguntas em decisoes-dados.js; o layout.js
+                            carrega esse arquivo em todas as páginas e mostra o aviso tracejado nas telas citadas em `telas`
+docs/HANDOFF.md             Documento técnico para o desenvolvimento: o que muda do site em produção para este protótipo
+vitrine.html                Vitrines (menu, acima de Minhas Comunidades): os estabelecimentos
+vitrine-segmento.html       Página de um segmento das Vitrines (?s=gastronomia) ou de um bairro (?b=Leblon): aberta pelo menu de
+                            segmentos (MSV) e pelo box Perto de você. Estrutura padrão: BEDHV, BDELDV, BSD, BDDLEV, BDS, BRPCV e BPDVV.
+                            Cartões e depoimentos em vitrine-cartoes.js (usados também pela Vitrine)
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, produtos e serviços
                             (estabelecimentos-catalogo.js), comodidades, o que a comunidade diz, galeria.
                             Em abas (estabelecimentos-extras.js): visão geral (quem atende, clube, horário, acessibilidade),
@@ -92,19 +103,41 @@ assets/img/                 Logos da FSB e da RB2
 | Indicações, Meu perfil, Suporte (ajuda.html) | prontas para revisão |
 | Modo simples (`simples.html`) | pronto para revisão |
 | Atividades (Curtidas, Comentários, Acompanhar, Salvos) | prontas para revisão |
-| Vitrines (`vitrine.html`) | esboço (achado poluído; a revisar) |
+| Vitrines (`vitrine.html`) | aprovada para implementação como está (decisão de 2026-10-06) |
 | Estabelecimento (`estabelecimento.html`) | aprovada |
 | Institucionais: Conhecer, Quem somos, Como funciona, Benefícios, Empresas e grupos, Patrocinadores (`institucional/`) | prontas para revisão |
 | Institucional: Segurança | a fazer (por enquanto o link abre o Suporte) |
+| Conversas e Acessibilidade (trazidas do site em produção em 2026-10-06) | prontas para revisão |
+| Membros (diretório e perfil público), Oportunidades e Marketplace | **fora da versão 2** (decisão de 2026-10-06; talvez numa versão 3). Não criar no protótipo |
+| Decisões em aberto (`decisoes.html`) | página de trabalho: responder e enviar ao desenvolvimento |
 
 ## Coluna lateral da direita
 
-Páginas com `<aside class="lateral">` no HTML (por enquanto só a Início) ganham uma coluna à direita, numa faixa clara
-que vai até a borda da janela, a 24px do conteúdo. O `layout.js` a coloca ao lado do conteúdo (`.corpo`); abaixo de
-1200px ela desce para depois do conteúdo, em grade (entre 1200 e 1439px, notebooks, ela fica mais estreita: 300px). Na Início ela tem os mesmos blocos da coluna da direita da versão 1:
-pesquisa de escuta (`escuta.js`, +1 crédito por resposta), Meus grupos, Hoje na SoftLiving, Conheça a comunidade e o
-box Clube de Saúde (parceria em aberto). Os cartões de assunto passam a 2 colunas quando a coluna do conteúdo fica com
-menos de 1000px (container query).
+Páginas com `<aside class="lateral">` no HTML ganham uma coluna à direita, numa faixa clara que vai até a borda da
+janela, a 24px do conteúdo. O `layout.js` a coloca ao lado do conteúdo (`.corpo`); abaixo de 1200px ela desce para
+depois do conteúdo, em grade (entre 1200 e 1439px, notebooks, ela fica mais estreita: 300px).
+
+A coluna será **sempre contextual ao conteúdo da página**, mas as opções de cada página ainda não foram definidas
+(próxima atualização). Por enquanto (decisão de 2026-10-06) todas as páginas mostram os mesmos quatro blocos, montados
+por `lateral.js`: pesquisa de escuta "Sua opinião vale créditos" (`escuta.js`, +1 crédito por resposta; as perguntas
+acompanham a página, dez por contexto, em `ESCUTA_POR_PAGINA` no `escuta-dados.js`), Meus grupos,
+Hoje na SoftLiving e **Meus amigos**, com quem está online e offline (entrou no lugar de "Conheça a comunidade"). Meus grupos
+e Meus amigos são pessoais e só aparecem com login. Exceção: as páginas de Minhas Comunidades têm coluna própria, só com a pesquisa da comunidade. Os cartões de assunto passam a 2 colunas quando a coluna do conteúdo fica com menos de 1000px
+(container query).
+
+## Fora da versão 2
+
+As telas **Membros** (diretório e perfil público de cada membro), **Oportunidades** e **Marketplace** existem no site
+em produção, mas **não fazem parte da versão 2** (decisão de 2026-10-06). Podem voltar numa versão 3. Chegaram a ser
+desenhadas aqui e foram retiradas: não há página, item de menu, bloco na Início nem resultado na Busca para elas.
+Das pessoas, a versão 2 tem só a tela **Amigos** (com a aba Seguindo) e as **Conversas**.
+
+## Decisões em aberto
+
+As dúvidas que dependem de decisão ficam em `assets/js/decisoes-dados.js` (pergunta, como é no site em produção, como
+está no protótipo, opções e as telas onde o aviso aparece). Para acrescentar uma, basta um item novo na lista
+`DECISOES`; decisão tomada sai dessa lista e entra em `DECISOES_TOMADAS`. As respostas ficam no navegador de quem
+responde (`v2Decisoes`); "Copiar respostas" gera o texto para enviar.
 
 ## Regras de visual
 
@@ -121,6 +154,16 @@ menos de 1000px (container query).
   também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e os números de não lidas do menu, e o
   topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em
   Entrar com os campos vazios, ou e-mail `123` e senha `123`.
+
+- **Datas (decisão de 2026-10-06):** notificações (página e janela do sino) e extrato da Carteira mostram data e hora
+  (`06/10/2026 às 14:32`; `agoraTexto()` no `layout.js`). Conteúdos continuam sem data de publicação e sem tempo de
+  leitura, e as mensagens das Conversas não mostram dia nem hora.
+
+- **Tamanho da letra:** um ajuste só, em 3 níveis, para o site todo (`lerAcessibilidade` / `gravarAcessibilidade` no
+  `layout.js`). Muda pela tela Acessibilidade e pelo A− / A+ da tela de leitura.
+
+- **Perfil público:** `perfil.html?publico=1` mostra o Meu perfil como os outros o veem no endereço `/app/@nome`
+  (some tudo o que tem a classe `pf-privado`; entram os botões Adicionar aos amigos, Seguir e Mensagem).
 
 - **Selo de acesso nos cartões de conteúdo:** todo cartão de conteúdo mostra um selo (`seloAcesso(c)` no `layout.js`):
   "Grátis" (verde) ou o preço com cadeado, ex. "2 créditos" (dourado); conteúdo pago que a pessoa já destravou fica

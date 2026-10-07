@@ -1,7 +1,7 @@
 /* VERSÃO 2 · Tela Conteúdos (conteudos.html), na estrutura de revista da Vitrine: usa as classes vt-* do vitrine.css
    (círculos, blocos, carrossel, coleções, chamada final) e os blocos próprios abaixo, cada um com um tamanho de cartão. */
 
-/* Cartão de foto com o texto por cima (mosaico, dupla) */
+/* Cartão de foto com o texto por cima (capa dos boxes de duas colunas) */
 .ct-tile{ position:relative; display:flex; align-items:flex-end; min-height:200px; border-radius:24px; overflow:hidden; isolation:isolate;
   background:var(--mint) center / cover no-repeat; border:1px solid rgba(255,255,255,.6); box-shadow:0 10px 28px rgba(1,53,101,.10); }
 .ct-tile::before{ content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(1,30,50,0) 30%, rgba(1,30,50,.78)); }
@@ -12,14 +12,7 @@
 .ct-tile .vc-autor, .ct-faixa .vc-autor{ font-size:13px; opacity:.85; margin:0; }
 
 /* Mosaico (Bem-estar): o primeiro ocupa 2 colunas e 2 linhas; o "ver todos" fecha a grade */
-.ct-mosaico{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); grid-auto-rows:210px; gap:16px; }
-.ct-mosaico .ct-tile{ min-height:0; }
-.ct-mosaico .ct-tile.grande{ grid-column:span 2; grid-row:span 2; }
-.ct-ver-todos{ grid-column:span var(--span3, 1); display:flex; flex-direction:column; justify-content:center; gap:8px; padding:22px; border-radius:24px; text-align:left; font:inherit; cursor:pointer;
   background:var(--mint); border:1px dashed var(--mint-line); color:var(--green); }
-.ct-ver-todos b{ font-family:'Fraunces',serif; font-size:22px; line-height:1.2; color:var(--navy); }
-.ct-ver-todos span{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; }
-.ct-ver-todos .ic{ width:16px; height:16px; }
 
 .ct-mini-autor{ font-size:12.5px; color:var(--muted); }
 
@@ -76,15 +69,13 @@
 
 /* Regra de hover da v2 */
 .vt-col-capa{ color:inherit; }   /* capa de coleção que é link (Estilo e casa) */
-.ct-tile, .ct-faixa, .ct-carta, .ct-ver-todos{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
-.ct-tile:hover, .ct-faixa:hover, .ct-carta:hover, .ct-ver-todos:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
-.ct-carta:hover, .ct-ver-todos:hover{ background:#fff; }
+.ct-tile, .ct-faixa, .ct-carta{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
+.ct-tile:hover, .ct-faixa:hover, .ct-carta:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.ct-carta:hover{ background:#fff; }
 
 /* Larguras menores (o conteúdo divide a tela com o menu e a coluna da direita) */
 @container (max-width:700px){ .ct-itens{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
 @container (max-width:1000px){
-  .ct-mosaico{ grid-template-columns:repeat(2, minmax(0, 1fr)); grid-auto-rows:190px; }
-  .ct-ver-todos{ grid-column:span var(--span2, 2); flex-direction:row; align-items:center; justify-content:space-between; flex-wrap:wrap; }   /* em 2 colunas, ocupa o que falta para fechar a linha */
 }
 @container (max-width:760px){
   .ct-dupla{ grid-template-columns:1fr; gap:0; }
@@ -93,10 +84,6 @@
 }
 @container (max-width:600px){
   .ct-itens{ grid-template-columns:1fr; }
-  .ct-mosaico{ grid-template-columns:1fr; grid-auto-rows:auto; }
-  .ct-mosaico .ct-tile{ min-height:220px; }
-  .ct-ver-todos{ grid-column:auto; flex-direction:column; align-items:flex-start; }
-  .ct-mosaico .ct-tile.grande{ grid-column:auto; grid-row:auto; min-height:320px; }
   .ct-tile.grande h3{ font-size:23px; }
   .ct-faixa{ min-height:360px; align-items:flex-end; }
   .ct-faixa::before{ background:linear-gradient(180deg, rgba(1,30,50,0) 25%, rgba(1,30,50,.8)); }

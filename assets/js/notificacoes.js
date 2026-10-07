@@ -15,7 +15,7 @@ function ntItem(n){
   const nova = ehNova(n);
   return `<div class="nt-item${nova ? ' nova' : ''}" data-id="${n.id}">
     ${ntAvatar(n)}
-    <div class="nt-txt"><p>${n.txt.replace('SoftLiving', LOGO)}</p>
+    <div class="nt-txt"><p>${n.txt.replace('SoftLiving', LOGO)}</p><small class="nt-quando">${n.q}</small>
       <a href="${n.acao[1]}" class="btn ghost nt-acao">${n.acao[0]}</a></div>
     ${nova ? '<button type="button" class="nt-marcar" title="Marcar como lida" aria-label="Marcar como lida"><i></i></button>' : ''}
   </div>`;

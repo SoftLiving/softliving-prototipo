@@ -6,12 +6,15 @@
 <title>Meu perfil · SoftLiving (Protótipo · versão 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/estilos.css?v=202610011629">
+<link rel="stylesheet" href="assets/css/estilos.css?v=202610070236">
 </head>
 <body data-page="perfil" data-root="">
 
-<!-- Tela Meu perfil: cabeçalho com foto (iniciais), números, sobre mim, interesses, grupos, amigos e conta.
-     Sobre e interesses podem ser editados (guardados no navegador). Sem datas. Montada por perfil.js. -->
+<!-- Tela Meu perfil: cabeçalho com foto (iniciais), números, sobre mim, habilidades e ofertas, interesses, grupos,
+     amigos e conta. Sobre, habilidades e interesses podem ser editados (guardados no navegador). Sem datas.
+     A mesma página serve de perfil público (perfil.html?publico=1, o que o endereço /app/@nome mostra aos outros):
+     nesse modo somem os botões de editar e tudo o que tem a classe pf-privado. Montada por perfil.js. -->
+<div class="pf-publico-aviso" id="pfPublicoAviso" hidden></div>
 <section class="pf-topo" id="pfTopo"></section>
 
 <div class="pf-corpo">
@@ -21,42 +24,47 @@
   </section>
 
   <section class="pf-bloco">
+    <div class="pf-bloco-topo"><h2>Habilidades e ofertas</h2><button type="button" class="bs-link" id="pfEditarOferta">Editar</button></div>
+    <div id="pfOferta"></div>
+  </section>
+
+  <section class="pf-bloco">
     <div class="pf-bloco-topo"><h2>Interesses</h2><span class="pf-dica">Toque para marcar ou desmarcar</span></div>
     <div class="pf-interesses" id="pfInteresses"></div>
   </section>
 
   <section class="pf-bloco">
-    <div class="pf-bloco-topo"><h2>Meus grupos</h2><a href="grupos.html" class="bs-link">Ver todos</a></div>
+    <div class="pf-bloco-topo"><h2 id="pfGruposTitulo">Meus grupos</h2><a href="grupos.html" class="bs-link">Ver todos</a></div>
     <div class="pf-grupos" id="pfGrupos"></div>
   </section>
 
-  <section class="pf-bloco">
+  <section class="pf-bloco pf-privado">
     <div class="pf-bloco-topo"><h2>Minhas comunidades</h2><a href="comunidades/inicio.html" class="bs-link">Ver todas</a></div>
     <div class="pf-grupos" id="pfComunidades"></div>
   </section>
 
-  <section class="pf-bloco">
+  <section class="pf-bloco pf-privado">
     <div class="pf-bloco-topo"><h2>Minhas vitrines favoritas</h2><a href="vitrine.html" class="bs-link">Ver a Vitrine</a></div>
     <div class="pf-grupos pf-vitrines" id="pfVitrines"></div>
   </section>
 
-  <section class="pf-bloco">
+  <section class="pf-bloco pf-privado">
     <div class="pf-bloco-topo"><h2>Amigos</h2><a href="amigos.html" class="bs-link">Ver todos</a></div>
     <div class="pf-amigos" id="pfAmigos"></div>
   </section>
 
-  <section class="pf-bloco">
+  <section class="pf-bloco pf-privado">
     <h2>Conta e privacidade</h2>
     <div class="pf-conta" id="pfConta"></div>
   </section>
 </div>
 
-<script src="assets/js/texto.js?v=202610011629"></script>
-<script src="assets/js/layout.js?v=202610011629"></script>
-<script src="assets/js/grupos-dados.js?v=202610011629"></script>
-<script src="assets/js/comunidades-icones.js?v=202610011629"></script>
-<script src="assets/js/comunidades-dados.js?v=202610011629"></script>
-<script src="assets/js/estabelecimentos-dados.js?v=202610011629"></script>
-<script src="assets/js/perfil.js?v=202610011629"></script>
+<script src="assets/js/texto.js?v=202610070236"></script>
+<script src="assets/js/layout.js?v=202610070236"></script>
+<script src="assets/js/grupos-dados.js?v=202610070236"></script>
+<script src="assets/js/comunidades-icones.js?v=202610070236"></script>
+<script src="assets/js/comunidades-dados.js?v=202610070236"></script>
+<script src="assets/js/estabelecimentos-dados.js?v=202610070236"></script>
+<script src="assets/js/perfil.js?v=202610070236"></script>
 </body>
 </html>

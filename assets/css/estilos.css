@@ -303,7 +303,7 @@ body{ overflow-x:hidden; overflow-x:clip; }
 .tabs.folder.mais-abas{ -webkit-mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to right, #000 calc(100% - 64px), transparent); } /* há mais abas à direita */
 .tabs.folder.abas-antes{ -webkit-mask-image:linear-gradient(to left, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to left, #000 calc(100% - 64px), transparent); }
 .tabs.folder.mais-abas.abas-antes{ -webkit-mask-image:linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent); mask-image:linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent); }
-/* Setas do fichário (layout.js): aparecem só quando há abas escondidas daquele lado; a da direita pisca até a primeira rolagem */
+/* Setas do fichário (layout.js): as duas existem sempre que as abas não cabem na linha; a rolagem dá a volta */
 .abas-rolar{ position:relative; }
 .abas-seta{ position:absolute; top:4px; z-index:3; width:34px; height:34px; border-radius:50%; display:none; place-items:center; padding:0; cursor:pointer; color:var(--navy);
   background:rgba(255,255,255,.92); border:1px solid rgba(255,255,255,.95); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16);
@@ -314,32 +314,15 @@ body{ overflow-x:hidden; overflow-x:clip; }
 .abas-prox{ right:-4px; }
 .abas-rolar.tem-mais .abas-prox, .abas-rolar.tem-antes .abas-ant{ display:grid; }
 .abas-seta:hover{ background:#fff; transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); animation:none; }
-.abas-prox.piscando{ animation:abas-piscar 1.6s ease-in-out infinite; }
-@keyframes abas-piscar{
-  0%, 100%{ transform:translateX(0); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16), 0 0 0 0 rgba(31,85,25,.35); }
-  50%{ transform:translateX(4px); box-shadow:var(--vidro-brilho), 0 4px 14px rgba(1,53,101,.16), 0 0 0 7px rgba(31,85,25,0); }
+/* As setas do fichário seguem a mesma regra das setas dos carrosséis (decisão de 2026-10-06): com mouse, só a seta do
+   lado de onde o mouse está acende, aos poucos, conforme ele se aproxima dela (--perto, de 0 a 1, calculado no
+   prepararSetasAbas do layout.js), e apaga devagar ao sair; pelo teclado, as duas aparecem; no celular e no tablet,
+   sem mouse, ficam sempre à vista e podem ser tocadas. Sem piscar. */
+@media (hover:hover){
+  .abas-rolar .abas-seta{ opacity:0; pointer-events:none; transition:opacity .6s cubic-bezier(.22, .61, .36, 1), background-color .15s ease, box-shadow .15s ease, transform var(--hover-t) var(--hover-curva); }
+  .abas-rolar:hover .abas-seta{ opacity:var(--perto, 0); pointer-events:auto; transition:opacity .2s linear, background-color .15s ease, box-shadow .15s ease, transform var(--hover-t) var(--hover-curva); }
+  .abas-rolar:hover .abas-seta:hover, .abas-rolar:has(:focus-visible) .abas-seta{ opacity:1; pointer-events:auto; }
 }
-@media (prefers-reduced-motion:reduce){ .abas-prox.piscando{ animation:none; } }
-/* Celular e telas de toque: a seta não fica fixa sobre as abas. Ela aparece translúcida, pisca três vezes para mostrar
-   que as abas rolam para o lado e some sozinha (sem receber toque); a pessoa arrasta as abas com o dedo.
-   A seta da esquerda não aparece. Volta a piscar se as abas voltarem ao começo e ainda houver mais para ver. */
-@media (max-width:640px), (hover:none) and (pointer:coarse){
-  .abas-rolar .abas-ant{ display:none !important; }
-  .abas-rolar .abas-prox, .abas-rolar .abas-prox.piscando{ pointer-events:none; animation:abas-dica 3.6s ease-in-out forwards; }
-}
-/* Pisca forte (quase some e volta cheia) enquanto desliza para a direita, como quem aponta "tem mais para lá" */
-@keyframes abas-dica{
-  0%{ opacity:0; transform:translateX(-14px); }
-  10%{ opacity:1; transform:translateX(0); }
-  20%{ opacity:.1; transform:translateX(12px); }
-  30%{ opacity:1; transform:translateX(-4px); }
-  40%{ opacity:.1; transform:translateX(12px); }
-  50%{ opacity:1; transform:translateX(-4px); }
-  60%{ opacity:.1; transform:translateX(12px); }
-  72%{ opacity:1; transform:translateX(0); }
-  100%{ opacity:0; transform:translateX(14px); visibility:hidden; }
-}
-/* Esta dica roda uma vez só e dura 3,6s, então vale também com "reduzir animações" ligado no aparelho (pedido do usuário) */
 .tabs.folder button{ background:var(--paper-dark); border:none; border-radius:16px 16px 0 0; padding:11px 16px; color:#6b6558; font-weight:500; box-shadow:none; }
 .tabs.folder button:hover{ color:var(--green); background:#ebe6dc; }
 .tabs.folder button.on{ background:var(--paper-light); color:var(--navy); font-weight:600; padding-top:14px; }
@@ -1100,6 +1083,20 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-sobre{ font-size:16.5px; line-height:1.7; color:var(--text-2); margin:0; max-width:720px; }
 #pfSobreCampo{ width:100%; padding:14px 16px; border-radius:18px; border:1px solid var(--line-2); font:inherit; font-size:15.5px; line-height:1.6; background:#fff; }
 .pf-editar-acoes{ display:flex; gap:10px; margin-top:10px; }
+.pf-campo{ width:100%; padding:14px 16px; border-radius:18px; border:1px solid var(--line-2); font:inherit; font-size:15.5px; line-height:1.6; background:#fff; }
+.pf-linha > .pf-linha-acoes{ flex:none; min-width:0; display:flex; gap:8px; }
+/* Perfil público (perfil.html?publico=1): a mesma página, como os outros a veem em /app/@nome */
+body.pf-publico .pf-privado{ display:none; }
+.pf-publico-aviso{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px; margin-top:24px; padding:12px 12px 12px 18px; border-radius:18px; font-size:14.5px; line-height:1.45; color:var(--text-2);
+  background:rgba(230,242,234,.7); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); }
+.pf-publico-aviso[hidden]{ display:none; }
+.pf-publico-aviso b{ color:var(--navy); overflow-wrap:anywhere; }
+.pf-publico-aviso + .pf-topo{ margin-top:16px; }
+.pf-numeros.pf-numeros-2{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+.pf-numeros > span{ display:flex; flex-direction:column; align-items:center; padding:16px 8px; }
+.pf-numeros > span + span{ border-left:1px solid var(--line); }
+.pf-interesses-publico{ justify-content:flex-start; margin:0; }
+.pf-interesses-publico span{ font-size:13.5px; padding:6px 12px; }
 /* Interesses: um bloco só, como a faixa de números do perfil; células coladas, separadas por linhas finas (sem pílulas).
    As linhas são desenhadas em cada célula (à direita e embaixo; as da borda somem no recorte do bloco), então o espaço
    que sobrar na última linha fica da cor do bloco. Marcado: azul-claro com ✓ */
@@ -1131,6 +1128,9 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .pf-linha b{ display:block; font-size:15px; color:var(--text); }
 .pf-linha small{ font-size:13px; color:var(--muted); }
 .pf-linha .seg{ margin:0; }
+.pf-linha b:has(+ .pf-opcional){ display:inline; }
+.pf-opcional{ font-style:normal; font-size:11.5px; font-weight:700; color:var(--muted); background:var(--paper-dark); border-radius:999px; padding:2px 8px; margin-left:4px; }
+.pf-linha .pf-opcional + small{ display:block; }
 .pf-sair{ color:#b3261e !important; }
 /* Saudação do menu (leva ao Meu perfil): no hover, um fundo de vidro que vai de lado a lado do bloco do menu (passa por
    baixo da seta de recolher) e aparece da esquerda para a direita, com a borda da frente em degradê.
@@ -1281,6 +1281,132 @@ main > .aj-lateral.aj-no-topo{ margin:0 0 32px; }
 
 /* Celular: nenhum botão passa da largura da tela; textos longos quebram em duas linhas */
 @media (max-width:640px){ .btn{ max-width:100%; white-space:normal; text-align:center; line-height:1.3; } }
+
+/* ===== Telas trazidas da V1 em 2026-10-06 (Conversas e Acessibilidade) =====
+   Cartões e botões seguem o efeito vidro e a regra de hover (sobem 2px, com sombra). */
+.es-voltar{ display:inline-flex; align-items:center; gap:6px; font-size:14px; font-weight:600; color:var(--muted); margin-top:20px; }
+.es-voltar .ic{ width:16px; height:16px; }
+.es-voltar:hover{ color:var(--green); }
+.alvo{ outline:2px solid var(--mint-line); outline-offset:4px; }
+
+.am-seguir{ margin-top:10px; }
+
+/* ----- Conversas ----- */
+.cv{ display:grid; grid-template-columns:320px minmax(0, 1fr); gap:16px; margin-bottom:72px; height:min(640px, calc(100vh - 200px)); min-height:420px; }
+.cv-lista, .cv-conversa{ border-radius:24px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); min-height:0; }
+.cv-lista{ padding:10px; overflow-y:auto; display:flex; flex-direction:column; gap:4px; }
+.cv-item{ display:flex; align-items:center; gap:12px; width:100%; padding:10px; border:1px solid transparent; border-radius:18px; background:none; text-align:left; font:inherit; cursor:pointer;
+  transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
+.cv-item:hover{ transform:translateY(-2px); background:rgba(255,255,255,.85); box-shadow:var(--sombra-hover); }
+.cv-item.on{ background:var(--mint); border-color:rgba(255,255,255,.9); }
+.cv-item .av-col, .cv-topo .av-col{ width:46px; height:46px; font-size:15px; }
+.cv-item-txt{ flex:1; min-width:0; }
+.cv-item-txt b{ display:block; font-size:15px; color:var(--navy); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-item-txt small{ display:block; font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cv-novas{ flex:none; min-width:22px; height:22px; padding:0 6px; border-radius:999px; background:var(--red); color:#fff; font-size:12px; font-weight:700; font-style:normal; display:grid; place-items:center; }
+.cv-conversa{ display:flex; flex-direction:column; overflow:hidden; }
+.cv-topo{ display:flex; align-items:center; gap:12px; padding:14px 16px; border-bottom:1px solid var(--line); }
+.cv-voltar{ display:none; }
+.cv-msgs{ flex:1; overflow-y:auto; padding:18px 16px; display:flex; flex-direction:column; gap:8px; }
+.cv-msg{ max-width:min(78%, 520px); margin:0; padding:10px 14px; border-radius:18px 18px 18px 6px; background:#fff; border:1px solid var(--line); font-size:15px; line-height:1.5; color:var(--text); align-self:flex-start; overflow-wrap:anywhere; }
+.cv-msg.eu{ align-self:flex-end; border-radius:18px 18px 6px 18px; background:var(--mint); border-color:#d3e8da; }
+.cv-escrever{ display:flex; gap:10px; align-items:flex-end; padding:12px 16px 16px; border-top:1px solid var(--line); }
+.cv-escrever textarea{ flex:1; min-width:0; min-height:46px; max-height:140px; resize:none; padding:12px 14px; border-radius:16px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:15px; color:var(--text); }
+.cv-escrever textarea:focus{ outline:none; border-color:var(--gold); }
+.cv-escolha{ margin:auto; }
+@media (max-width:760px){
+  .cv{ grid-template-columns:minmax(0, 1fr); height:auto; min-height:0; }
+  .cv .cv-conversa{ display:none; }
+  .cv.aberta .cv-lista{ display:none; }
+  .cv.aberta .cv-conversa{ display:flex; height:calc(100vh - 230px); min-height:380px; }
+  .cv-voltar{ display:grid; flex:none; }
+  .cv-topo .btn{ padding:9px 14px; font-size:13px; }
+}
+
+/* ----- Acessibilidade: tela e o que as escolhas mudam no site (classes postas no <html> pelo layout.js) ----- */
+.ac{ max-width:720px; }
+.ac-bloco{ margin-bottom:26px; }
+.ac-bloco h2{ font-size:24px; }
+.ac-bloco p{ margin:6px 0 16px; font-size:15px; color:var(--text-2); }
+.ac-letras{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; }
+.ac-letra{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px; min-height:104px; padding:16px 10px; border-radius:20px; font:inherit; cursor:pointer; color:var(--navy);
+  background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra);
+  transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
+.ac-letra:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
+.ac-letra b{ font-family:'Fraunces',serif; line-height:1; }
+.ac-letra span{ font-size:14px; font-weight:600; }
+.ac-letra.on{ background:var(--mint); border-color:var(--mint-line); color:var(--green); }
+.ac-opcoes{ margin-bottom:22px; }
+.ac-chave{ position:relative; flex:none; width:54px; height:32px; border-radius:999px; border:1px solid var(--line-2); background:#e4e0d8; cursor:pointer; padding:0; transition:background-color .2s ease; }
+.ac-chave i{ position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.2); transition:transform .2s ease; }
+.ac-chave.on{ background:var(--green); border-color:var(--green); }
+.ac-chave.on i{ transform:translateX(22px); }
+html.ac-letra-1 .corpo{ zoom:1.1; }
+html.ac-letra-2 .corpo{ zoom:1.22; }
+html.ac-contraste{ --text:#0b0f14; --text-2:#262d36; --muted:#414a55; --line:#b9b2a5; --line-2:#8f887b; --green:#143d10; --navy:#01264a; }
+html.ac-contraste .cat{ color:#143d10; }
+
+/* ----- Encaminhar conteúdo (abrirEncaminhar no layout.js): usa a mesma janela do Compartilhar ----- */
+.enc-lista{ display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto; margin-bottom:14px; }
+.enc-amigo{ display:flex; align-items:center; gap:12px; padding:8px 10px; border-radius:16px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:15px; color:var(--navy); font-weight:600; }
+.enc-amigo:has(input:checked){ background:var(--mint); border-color:var(--mint-line); }
+.enc-amigo input{ width:18px; height:18px; accent-color:var(--green); flex:none; }
+.enc-amigo .av-col{ width:38px; height:38px; font-size:13px; border-width:2px; }
+.enc-msg{ width:100%; min-height:64px; resize:vertical; padding:10px 14px; margin-bottom:14px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; color:var(--text); }
+.enc-msg:focus{ outline:none; border-color:var(--gold); }
+.enc-fim{ display:flex; justify-content:flex-end; gap:8px; }
+
+/* ----- Decisões em aberto: aviso no topo das telas e a página decisoes.html (material de trabalho do protótipo) ----- */
+.proto a.proto-decisoes{ margin-left:4px; }
+.dc-aviso{ margin:0 0 24px; border-radius:16px; border:1px dashed #d9b866; background:rgba(253,246,227,.8); color:#6b4f0f; font-size:14px; }
+.page-head + .dc-aviso{ margin-top:-6px; }
+.dc-aviso summary{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 16px; cursor:pointer; list-style:none; }
+.dc-aviso summary::-webkit-details-marker{ display:none; }
+.dc-aviso summary span{ font-size:13px; font-weight:600; text-decoration:underline; }
+.dc-aviso[open] summary span{ visibility:hidden; }
+.dc-aviso ul{ margin:0; padding:0 16px 4px 34px; }
+.dc-aviso li{ margin-bottom:8px; line-height:1.45; }
+.dc-aviso li a{ color:#6b4f0f; font-weight:600; text-decoration:underline; }
+.dc-aviso li small{ display:block; font-size:13px; color:#1f5c3d; }
+.dc-aviso li.feita a{ font-weight:500; }
+.dc-aviso-todas{ display:inline-block; margin:0 16px 12px; font-size:13px; font-weight:600; color:#6b4f0f; text-decoration:underline; }
+.dc-resumo{ display:flex; align-items:center; flex-wrap:wrap; gap:16px 24px; padding:20px 24px; margin-bottom:26px; border-radius:24px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+.dc-conta b{ font-family:'Fraunces',serif; font-size:40px; line-height:1; color:var(--navy); margin-right:8px; }
+.dc-conta span{ font-size:15px; color:var(--text-2); }
+.dc-barra{ flex:1; min-width:160px; height:10px; border-radius:999px; background:var(--paper-dark); overflow:hidden; }
+.dc-barra i{ display:block; height:100%; border-radius:999px; background:var(--green-2); transition:width .3s ease; }
+.dc-acoes{ display:flex; flex-wrap:wrap; gap:8px; }
+.dc-tema{ margin-bottom:34px; }
+.dc-tema > h2{ font-size:26px; margin-bottom:14px; }
+.dc-card{ padding:22px 24px; margin-bottom:14px; border-radius:24px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho), var(--vidro-sombra); scroll-margin-top:90px; }
+.dc-card.feita{ background:rgba(241,248,243,.8); }
+.dc-card-topo{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px; }
+.dc-estado{ font-size:12px; font-weight:700; border-radius:999px; padding:4px 10px; background:var(--gold-bg); color:var(--gold); }
+.dc-card.feita .dc-estado{ background:#e3f2ea; color:#1f5c3d; }
+.dc-card h3{ font-size:21px; line-height:1.3; margin-bottom:14px; }
+.dc-como{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 16px; }
+.dc-como div{ padding:12px 14px; border-radius:16px; background:rgba(255,255,255,.7); border:1px solid var(--line); }
+.dc-como dt{ font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+.dc-como dd{ margin:0; font-size:14.5px; line-height:1.5; color:var(--text-2); }
+.dc-opcoes{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+.dc-opcao{ display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border-radius:16px; border:1px solid var(--line-2); background:#fff; cursor:pointer; font-size:15px; line-height:1.45; color:var(--text);
+  transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), border-color var(--hover-t) var(--hover-curva); }
+.dc-opcao:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); border-color:var(--navy); }
+.dc-opcao.on{ background:var(--mint); border-color:var(--green-2); font-weight:600; }
+.dc-opcao input{ width:18px; height:18px; margin-top:2px; accent-color:var(--green); flex:none; }
+.dc-opcao em{ font-style:normal; font-size:11.5px; font-weight:700; color:var(--gold); background:var(--gold-bg); border-radius:999px; padding:2px 8px; margin-left:4px; white-space:nowrap; }
+.dc-obs{ width:100%; resize:vertical; padding:10px 14px; border-radius:14px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:14.5px; color:var(--text); }
+.dc-obs:focus{ outline:none; border-color:var(--gold); }
+.dc-card-fim{ display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:10px; }
+.dc-tomadas h2{ font-size:26px; margin-bottom:12px; }
+.dc-tomadas ul{ margin:0; padding-left:20px; }
+.dc-tomadas li{ margin-bottom:8px; font-size:15.5px; line-height:1.55; color:var(--text-2); }
+@media (max-width:640px){
+  .dc-como{ grid-template-columns:1fr; }
+  .dc-card{ padding:18px 16px; }
+  .dc-card h3{ font-size:19px; }
+  .dc-acoes{ width:100%; } .dc-acoes .btn{ flex:1; justify-content:center; }
+}
 
 /* ===== SAÍDA LENTA DO HOVER =====
    Entrar no hover é rápido (0,15s); sair é lento (0,6s, desacelerando): o cartão continua descendo devagar mesmo com o
@@ -1817,3 +1943,136 @@ body:not(.logado) .me:not(.me-visitante), body.logado .me-visitante{ display:non
   .pla-box .enj-social, .pla-box .enj-form{ padding-left:20px; padding-right:20px; } .pla-box .enj-ou{ margin-left:20px; margin-right:20px; }
   .pla-box .enj-cadastro{ padding:14px 20px 20px; }
 }
+/* O aviso de decisões em aberto aparece também nas telas que pedem login (é material de trabalho do protótipo) */
+body.pede-login:not(.logado) main > .dc-aviso{ display:block !important; }
+/* Decisões de 2026-10-06: data e hora nas notificações e no extrato, validade do bônus, link de acesso por e-mail,
+   botões do perfil público e rótulos da janela Encaminhar */
+.nt-quando{ display:block; font-size:12.5px; color:var(--muted); margin:-4px 0 10px; }
+.ntj-quando{ display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+.ct-validade{ margin:12px 0 0; font-size:13px; line-height:1.45; color:var(--muted); }
+.enj-link-email{ border:none; background:none; padding:6px 0 0; font:inherit; font-size:13.5px; font-weight:600; color:var(--green); text-align:center; cursor:pointer; }
+.enj-link-email:hover{ text-decoration:underline; }
+.pf-visitante{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px; }
+.pf-visitante .btn{ margin:0; }
+.pf-visitante small{ flex-basis:100%; font-size:12.5px; color:var(--muted); }
+.enc-rotulo{ font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:8px 2px 2px; }
+.enc-rotulo{ display:block; }
+.enc-busca{ height:46px; margin-bottom:12px; padding:0 16px; }
+.enc-busca .ic{ width:18px; height:18px; flex:none; }
+.enc-vazio{ margin:8px 2px; font-size:14px; color:var(--muted); }
+.enc-fim{ align-items:center; }
+.enc-conta{ margin-right:auto; font-size:13px; color:var(--muted); }
+@media (max-width:640px){ .pf-visitante{ width:100%; } .pf-visitante .btn{ flex:1; justify-content:center; } }
+.pf-endereco-campo{ display:flex; align-items:center; flex-wrap:wrap; margin:8px 0 6px; font-size:14.5px; color:var(--text-2); }
+.pf-endereco-campo input{ flex:1; min-width:140px; max-width:260px; height:42px; margin-left:4px; padding:0 12px; border-radius:12px; border:1px solid var(--line-2); background:#fff; font:inherit; font-size:15px; color:var(--text); }
+.pf-endereco-campo input:focus{ outline:none; border-color:var(--gold); }
+.pf-linha small.pf-endereco-erro{ display:block; color:var(--red); font-weight:600; margin-top:4px; }
+.pf-linha small.pf-endereco-erro[hidden]{ display:none; }
+.pf-linha small.pf-endereco-espera{ display:block; color:var(--gold); margin-top:2px; }
+.pf-linha-acoes .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+/* Coluna da direita: Meus amigos, com quem está online (ponto verde) e offline (ponto cinza, nome mais apagado).
+   É pessoal: sem login o bloco não aparece. */
+.lat-ponto{ display:inline-block; width:10px; height:10px; border-radius:50%; background:#b9bfc7; flex:none; }
+.lat-ponto.on{ background:#2e9e5b; }
+.lat-online-conta{ display:flex; align-items:center; gap:8px; margin:0 0 6px; font-size:13px; font-weight:600; color:var(--green); }
+.lat-amigo .av{ position:relative; }
+.lat-amigo .av .lat-ponto{ position:absolute; right:-2px; bottom:-2px; width:12px; height:12px; border:2px solid #fff; }
+.lat-amigo-txt{ display:flex; flex-direction:column; min-width:0; line-height:1.3; }
+.lat-amigo-txt small{ font-size:12px; font-weight:500; color:var(--green); }
+.lat-amigo.off{ color:var(--text-2); }
+.lat-amigo.off .av{ opacity:.6; }
+.lat-amigo.off .lat-amigo-txt small{ color:var(--muted); }
+body:not(.logado) .lat-amigos, body:not(.logado) .lat-meus-grupos{ display:none; }   /* Meus amigos e Meus grupos são pessoais */
+/* Regra dos cartões de conteúdo (2026-10-06): sempre segmento, título, autor, selo e o botão salvar */
+.ct-faixa-txt .vc-autor{ margin:10px 0 0; }
+.cd-sug, .cd-topo{ position:relative; }
+.cd-sug .cat{ display:block; font-size:11px; margin-top:10px; }
+.cd-sug .cat + b{ margin-top:2px; }
+.cd-sug .selo-acesso{ display:inline-flex; margin-top:8px; }
+.cd-sug small{ display:block; }
+.cd-sug .fav{ top:16px; right:16px; width:32px; height:32px; }
+.cd-topo .fav{ top:14px; left:14px; right:auto; }
+/* Salvos: filtro por tipo (conteúdos, colunas, grupos, vitrines, Minhas Comunidades) e uma seção para cada um */
+.sv-filtro{ margin-bottom:22px; }
+.sv-bloco{ margin-bottom:20px; padding:22px 24px 24px; border-radius:26px; background:rgba(255,254,251,.5); border:1px solid rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); } /* fundo claro com 50% de transparência (vidro) */
+.sv-bloco .at-sec{ margin:0 0 16px; }
+.sv-bloco .at-sec small{ font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:var(--muted); margin-left:4px; }
+.sv-bloco .at-item{ background:#fff; border-color:var(--line); box-shadow:none; }
+.sv-bloco .at-item:hover{ background:#fff; box-shadow:var(--sombra-hover); }
+.sv-vazio{ text-align:left; padding:0; }
+@media (max-width:640px){ .sv-bloco{ padding:18px 14px; border-radius:22px; } }
+/* Curtidas e Salvos em modo lista: linhas com foto pequena; duas colunas quando cabe, uma no celular */
+.at-lista{ display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap:10px 18px; }
+.at-item{ position:relative; display:flex; align-items:center; gap:8px; padding:10px; border-radius:20px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho);
+  transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
+.at-item:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:rgba(255,255,255,.85); }
+.at-item-link{ flex:1; min-width:0; display:flex; align-items:center; gap:14px; color:inherit; }
+.at-item-link img{ width:84px; height:68px; flex:none; border-radius:14px; object-fit:cover; }
+.at-item-txt{ min-width:0; display:flex; flex-direction:column; gap:3px; }
+.at-item-txt .cat{ font-size:11.5px; }
+.at-item-txt h3{ font-size:16px; line-height:1.3; font-weight:600; }
+.at-item-txt .meta{ font-size:12.5px; }
+.at-item-bt{ flex:none; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; padding:0; cursor:pointer; color:var(--text); background:#fff; border:1px solid var(--line);
+  transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), color var(--hover-t) var(--hover-curva); }
+.at-item-bt .ic{ width:15px; height:15px; fill:currentColor; }
+.at-item-bt.curtida{ color:var(--red); }
+.at-item-bt:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
+/* Box BDELD dentro da página Conteúdos: o título já dá o respiro, então a grade não precisa dos 40px de cima */
+#ctColecao1 .stories, #ct-estilo-e-casa .stories{ margin-top:28px; }
+/* Box destaque simples (BDS): botão salvar no canto, como nos outros cartões de conteúdo */
+.ct-carta{ position:relative; }
+.ct-carta .fav{ top:18px; right:18px; }
+/* Boxes de destaque com lista na versão vitrine (BDELDV e BDDLEV) */
+.vt-colecao-box + .vt-colecao-box{ margin-top:52px; }
+.vt-colecao-box .stories{ margin-top:28px; }
+.vt-destaque .imgw{ position:relative; }
+.vt-destaque .imgw .vt-logo{ position:absolute; left:16px; bottom:16px; margin:0; }
+.vt-destaque .vt-ver{ margin-top:2px; }
+.vt-item p{ margin:0 0 6px; font-size:13.5px; line-height:1.5; color:var(--text-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.vt-ver-link{ display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:var(--green); }
+.vt-ver-link .ic{ width:14px; height:14px; }
+/* Itens de lista com o botão salvar: o texto reserva o espaço da bandeirinha, para ela nunca ficar por cima do segmento
+   ou do título (a regra antiga de padding-right era anulada pelo padding geral do .item, definido depois dela) */
+main .item:has(> .fav){ padding-right:58px; }
+@media (max-width:640px){ main .item:has(> .fav){ padding-right:52px; } }
+main .item > div{ min-width:0; }   /* o texto do item respeita a largura da coluna (segmentos longos quebram ou cortam, sem passar por baixo da bandeirinha) */
+/* Box BEDH fora das páginas Conteúdos e Vitrines (ex.: "Colunas em destaque", na página Colunas): carrossel horizontal
+   de cartões com foto, 4 por vez; 3 quando a coluna do conteúdo fica estreita; no celular, pouco mais de 1 */
+.bedh.trilho-h{ --vis:4; --gap:20px; }
+@container (max-width:1000px){ .bedh.trilho-h{ --vis:3; } }
+@media (min-width:481px) and (max-width:640px){ .bedh.trilho-h{ --vis:2.2; --gap:14px; } }
+@media (max-width:480px){ .bedh.trilho-h{ --vis:1.25; --gap:14px; } }
+/* Box BRPCV (recomendado pela comunidade vitrine): carrossel horizontal de depoimentos, 3 por vez (também nos notebooks); 2 em telas
+   de tablet; no celular, pouco mais de 1. Os cartões ficam sempre em pé (foto em cima), em qualquer largura. */
+.vt-recomendas.trilho-h{ --vis:3; --gap:18px; }
+.vt-recomendas.trilho-h .vt-reco{ position:relative; flex-direction:column; height:100%; }
+.vt-recomendas.trilho-h .vt-reco-foto{ width:auto; height:170px; flex:none; }
+.vt-recomendas.trilho-h .vt-reco-foto .vt-logo{ right:auto; left:18px; top:auto; bottom:-24px; }
+.vt-recomendas.trilho-h .vt-reco-txt{ padding:34px 20px 20px; }
+/* 3 colunas também nos notebooks (coluna do conteúdo com cerca de 720px): o texto fica um pouco menor para caber */
+@container (max-width:1000px){
+  .vt-recomendas.trilho-h{ --gap:14px; }
+  .vt-recomendas.trilho-h .vt-reco-foto{ height:140px; }
+  .vt-recomendas.trilho-h .vt-reco-txt{ padding:32px 16px 16px; }
+  .vt-recomendas.trilho-h .vt-reco blockquote{ font-size:16px; }
+}
+@container (max-width:680px){ .vt-recomendas.trilho-h{ --vis:2; } }
+@media (max-width:640px){ .vt-recomendas.trilho-h{ --vis:1.15; --gap:14px; } }
+/* MSC e MSV · menus de segmentos em círculos (Conteúdos e Vitrines): o segmento aberto fica marcado em verde */
+.vt-cat.on img{ box-shadow:0 0 0 3px var(--green), 0 8px 20px rgba(1,53,101,.16); }
+.vt-cat.on{ color:var(--green); }
+.vs-grade{ grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); }
+/* Páginas de segmento (assunto.html e vitrine-segmento.html): estrutura padrão de boxes */
+.seg-box .stories{ margin-top:28px; }
+.vt-faixa .vt-logo{ margin:0 0 12px; }
+.vt-faixa .vc-btn{ margin-top:14px; }
+.vt-carta .ct-carta-autor{ display:block; margin-bottom:14px; }
+/* Box BDVV (dois verticais vitrine): capa e itens compactos com os dados da vitrine */
+.vt-capa-card .vt-logo{ margin:0 0 10px; }
+.vt-capa-card .vc-btn{ margin-top:4px; }
+.vt-item-compacto .vt-ver-link{ font-size:12px; }
+#vtDoisVerticais{ margin:26px 0 12px; }
+/* Boxes BDVC e BDVV (duas colunas lado a lado): a lista em carrossel de uma coluna não pode avançar sobre a outra.
+   A folga lateral do carrossel vertical (feita para a sombra do hover) cobria a bandeirinha dos itens da coluna
+   vizinha e o mouse não conseguia clicar nela. Aqui a folga fica menor que a metade do espaço entre as colunas. */
+.ct-dupla .trilho-v{ padding:8px 10px; margin:-8px -10px; }

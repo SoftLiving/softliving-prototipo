@@ -138,7 +138,7 @@ function renderTopo(){
       <h1>${grupo.t}</h1>
       <p>${grupo.cat} · ${nMembros}${ehDesapego ? ' · venda, doação e troca' : ''}</p>
       <div class="es-selos">
-        ${grupo.premium ? '<span class="gd-selo-premium">Premium · usa créditos</span>' : '<span>Grátis</span>'}
+        ${grupo.premium ? `<span class="gd-selo-premium">Premium · ${grupo.preco} créditos por mês</span>` : '<span>Grátis</span>'}
         <span>${gdIcone('escudo')}Moderado por ${moderador}</span>
         ${ehDesapego ? '' : `<span>${gdIcone('agenda')}${encontros.length} encontros marcados</span>`}
       </div>
@@ -147,7 +147,7 @@ function renderTopo(){
       <div class="es-acoes">
         ${grupo.participando
           ? `<span class="btn gd-membro">${gdIcone('check')}Você participa</span>`
-          : `<button type="button" class="btn" id="gdEntrar">${icone('mais')}Participar${grupo.premium ? ' · 10 créditos por mês' : ''}</button>`}
+          : `<button type="button" class="btn" id="gdEntrar">${icone('mais')}Participar${grupo.premium ? ` · ${grupo.preco} créditos por mês` : ''}</button>`}
         <button type="button" class="btn ghost" id="gdConvidar">${gdIcone('convidar')}Convidar amigos</button>
         ${grupo.participando ? `<button type="button" class="btn ghost" id="gdSair">${gdIcone('sair')}Sair do grupo</button>` : ''}
       </div>
@@ -302,7 +302,7 @@ renderTudo();
 document.getElementById('gdTopo').addEventListener('click', ev => {
   if(ev.target.closest('#gdEntrar')){
     alternarParticipacao(grupo, true);
-    mostrarAviso(grupo.premium ? `Você agora participa do ${grupo.t}. No protótipo, nenhum crédito é descontado` : `Você agora participa do ${grupo.t}`);
+    mostrarAviso(grupo.premium ? `Você agora participa do ${grupo.t}: ${grupo.preco} créditos por mês, com débito automático. No protótipo, nenhum crédito é descontado` : `Você agora participa do ${grupo.t}`);
   } else if(ev.target.closest('#gdSair')){
     alternarParticipacao(grupo, false);
     mostrarAviso(`Você saiu do ${grupo.t}`);

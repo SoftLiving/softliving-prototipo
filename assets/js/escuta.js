@@ -14,7 +14,7 @@
 //                          (para ações internas com colaboradores)
 //     { tipo:'nenhuma' } → só a pesquisa, sem créditos
 //
-// Início, Conteúdos e Grupos usam a pesquisa geral (escuta-dados.js), montada automaticamente no fim deste arquivo.
+// Cada página usa as perguntas do seu contexto (ESCUTA_POR_PAGINA, em escuta-dados.js), montadas no fim deste arquivo.
 // Minhas Comunidades usa uma pesquisa por comunidade (comunidades-escuta.js), montada por comunidades.js.
 
 const ESCUTA_MIN_TEXTO = 10;   // mínimo de caracteres para a resposta de texto ser aceita
@@ -135,7 +135,10 @@ function montarEscuta({ lado, perguntas, chave, descricao, recompensa = { tipo:'
   render();
 }
 
-// Pesquisa geral: Início, Conteúdos e Grupos (quem começa numa continua na outra), valendo créditos do portal
-if(typeof ESCUTA_PERGUNTAS !== 'undefined'){
-  montarEscuta({ lado: document.querySelector('.lateral'), perguntas: ESCUTA_PERGUNTAS, chave: 'escutaEstado' });
+// Pesquisa contextual: as perguntas acompanham a página (ESCUTA_POR_PAGINA, em escuta-dados.js). Conteúdos, Colunas,
+// Grupos e Vitrines têm as suas; as demais páginas usam as perguntas gerais. Cada contexto guarda o seu andamento.
+// Valem créditos do portal. Minhas Comunidades monta a pesquisa de cada comunidade pelo comunidades.js.
+if(typeof ESCUTA_POR_PAGINA !== 'undefined' && LAYOUT_PAGE !== 'comunidades'){
+  const contexto = ESCUTA_CONTEXTO[LAYOUT_PAGE] || 'geral';
+  montarEscuta({ lado: document.querySelector('.lateral'), perguntas: ESCUTA_POR_PAGINA[contexto], chave: 'escutaEstado:' + contexto });
 }

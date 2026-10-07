@@ -1,12 +1,9 @@
 // VERSÃO 2 · Tela Conteúdos: visual de revista, na mesma estrutura da Vitrine. Assuntos em círculos, carrossel em
 // destaque, coleções (foto grande e três conteúdos ao lado), um bloco por assunto com um layout diferente para cada
-// (mosaico, lista em duas colunas, dupla lado a lado, faixa larga, carta) e, no fim, a lista completa com o fichário de
+// (boxes BDDLE, BDVC, BSD e BDS; o formato de mosaico foi retirado em 2026-10-07) e, no fim, a lista completa com o fichário de
 // assuntos e Todos/Grátis/Premium. Usa CONTEUDOS (conteudos-dados.js) e fotoUrl/icone/mostrarAviso (layout.js).
 
 const ctEstado = { assunto:0, tipo:'todos', busca:'' };
-
-// "Ver todos" de um assunto: leva à página do assunto
-const ctVerTodos = (i, n) => `<a href="${urlAssunto(CT_ASSUNTOS[i][3])}" class="ct-ver-todos" style="${ctVerSpan(n, true)}"><b>Ver todos de ${CT_ASSUNTOS[i][0]}</b><span>${ctDoAssunto(CT_ASSUNTOS[i][1]).length} conteúdos ${icone('seta')}</span></a>`;
 
 // 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto: cada um leva à página própria do assunto
 // ("Todos" leva à lista completa, no fim desta página)
@@ -19,42 +16,52 @@ document.getElementById('ctCirculos').innerHTML = CT_ASSUNTOS.map(([r, cat, id, 
 document.getElementById('ctDestaques').innerHTML = embaralhar(CONTEUDOS).slice(0, 8).map(ctVertical).join('');
 ativarCarrossel(document.getElementById('ctDestaques'), 'h');
 
-// 3) Coleção com curadoria: foto grande e três conteúdos ao lado; a coleção e a ordem dos itens são sorteadas
+// 3) Coleção com curadoria, no box BDELD (destaque à esquerda e lista à direita, o mesmo de "Últimas matérias" da
+// Início): o título e o subtítulo são os da coleção; um conteúdo dela vai no destaque e os outros na lista, em carrossel
+// vertical. A coleção e a ordem dos itens são sorteadas. Cada coleção tem mais conteúdos do que cabem na lista (4),
+// para o carrossel ter os botões de rolagem.
 const CT_COLECOES = [
   { t:'Viver mais e melhor', d:'Longevidade, hábitos e pequenas escolhas que fazem diferença em qualquer idade.', foto:'1529156069898-49953e39b3ac',
-    itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?', 'Caminhar: o exercício mais subestimado', 'Check-up sem medo'] },
+    itens:['A Revolução da Longevidade: Estamos Preparados para Viver Tanto?', 'Longevidade', 'Você faz isso pela manhã?', 'Caminhar: o exercício mais subestimado', 'Check-up sem medo', 'Respirar melhor muda o dia', 'Mais conexão, menos solidão'] },
   { t:'Pequenos prazeres', d:'Encontros, viagens sem pressa e o que realmente vale o nosso tempo.', foto:'1470252649378-9c29740c9fa8',
-    itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu', 'A Coragem de Mudar de Direção', 'O luxo de hoje é outra coisa'] },
+    itens:['Descubra novos pequenos prazeres da vida!', 'O bem-estar do encontro presencial', 'Na Suíça, um vinho para chamar de seu', 'A Coragem de Mudar de Direção', 'O luxo de hoje é outra coisa', 'A casa não precisa parecer decorada', 'Menos coisas, mais espaço'] },
   { t:'Tecnologia sem medo', d:'Inteligência artificial, segurança e conexão: a tecnologia a favor da vida madura.', foto:'1677442136019-21780ecad995',
     itens:['Meu primeiro agente de IA', 'Agente de IA anti-golpe', 'Mais conexão, menos solidão', 'WhatsApp sem segredos', 'Senhas fortes sem dor de cabeça', 'Banco pelo celular, com segurança'] },
 ];
 const col = embaralhar(CT_COLECOES)[0];
-document.getElementById('ctColecao1').innerHTML = `
-  <article class="vt-colecao">
-    <div class="vt-col-capa" style="background-image:url('${fotoUrl(col.foto, 900)}')">
-      <div><p class="kicker">Coleção</p><h2>${col.t}</h2><p>${col.d}</p></div>
-    </div>
-    <div class="vt-col-lista" id="ctColLista">${embaralhar(col.itens).map(ctPorTitulo).filter(Boolean).map(ctMini).join('')}</div>
-  </article>`;
-ativarCarrossel(document.getElementById('ctColLista'), 'v', 3);   // 3 por vez, com setas (como as listas da Início)
+const [colDestaque, ...colResto] = embaralhar(col.itens).map(ctPorTitulo).filter(Boolean);
+document.getElementById('ctColecao1').innerHTML = ctTitulo(col.t, col.d) + `
+  <div class="stories">
+    <a href="${urlConteudo(colDestaque.t)}" class="destaque">
+      <div class="imgw foto"><img src="${fotoUrl(colDestaque.foto, 1100)}" alt=""></div>${ctSalvar}
+      <span class="cat">${ctRotulo(colDestaque.cat)}</span>
+      <h3>${colDestaque.t}</h3><p>${colDestaque.e}</p>
+      <div class="meta"><span>${colDestaque.a}</span>${seloAcesso(colDestaque)}</div>
+    </a>
+    <div class="list" id="ctColLista">${colResto.map(ctItem).join('')}</div>
+  </div>`;
+ativarCarrossel(document.getElementById('ctColLista'), 'v');   // 4 por vez, com setas (como as listas da Início)
 
 // 4) Um bloco por assunto, cada um com um layout
 const ctBloco = (i, sub, corpo) => { document.getElementById(CT_ASSUNTOS[i][2]).innerHTML = ctTitulo(CT_ASSUNTOS[i][0], sub) + corpo; };
-// Bem-estar: mosaico (um grande e os outros menores) e o "ver todos" fechando a grade
-const bemEstar = ctDoAssunto(CT_ASSUNTOS[1][1]);
-ctBloco(1, 'Saúde mental, conexões e qualidade de vida.', `
-  <div class="ct-mosaico">${bemEstar.map((c, i) => ctTile(c, i === 0)).join('')}${ctVerTodos(1, bemEstar.length)}</div>`);
-// Estilo e casa: formato de coleção invertida, um conteúdo na foto grande e os outros ao lado
-const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo[0];   // o primeiro sorteado vai na foto grande
+// Estilo e casa, no box BDDLE (o espelho do BDELD): lista em carrossel vertical à esquerda e destaque à direita.
+// O primeiro sorteado vai no destaque. A lista leva também as colunas de casa e interiores que não estão em CONTEUDOS
+// (COLUNAS_EXTRAS), para ter mais itens do que cabem (4) e o carrossel mostrar os botões de rolagem.
+const estilo = ctDoAssunto(CT_ASSUNTOS[3][1]), moda = estilo[0];
+const estiloExtras = (typeof COLUNAS_EXTRAS === 'undefined' ? [] : COLUNAS_EXTRAS).filter(c => c.a.startsWith('Erick Figueira de Mello')).map(c => ({ ...c, cat:CT_ASSUNTOS[3][1] }));
 ctBloco(3, 'Moda, casa e consumo com mais sentido.', `
-  <article class="vt-colecao invertida">
-    <a href="${urlConteudo(moda.t)}" class="vt-col-capa" style="background-image:url('${fotoUrl(moda.foto, 900)}')">
-      <div><p class="kicker">Estilo e casa</p> ${seloAcesso(moda)}<h2>${moda.t}</h2><p>${moda.e}</p></div>
+  <div class="stories invertida">
+    <div class="list" id="ctEstiloLista">${[...estilo.filter(c => c !== moda), ...estiloExtras].map(ctItem).join('')}</div>
+    <a href="${urlConteudo(moda.t)}" class="destaque">
+      <div class="imgw foto"><img src="${fotoUrl(moda.foto, 1100)}" alt=""></div>${ctSalvar}
+      <span class="cat">${ctRotulo(moda.cat)}</span>
+      <h3>${moda.t}</h3><p>${moda.e}</p>
+      <div class="meta"><span>${moda.a}</span>${seloAcesso(moda)}</div>
     </a>
-    <div class="vt-col-lista" id="ctEstiloLista">${estilo.filter(c => c !== moda).map(ctMini).join('')}</div>
-  </article>`);
-ativarCarrossel(document.getElementById('ctEstiloLista'), 'v', 3);
-// Saúde e Tecnologia: lado a lado, um cartão de foto e a lista dos outros (3 por vez, em carrossel) em cada
+  </div>`);
+ativarCarrossel(document.getElementById('ctEstiloLista'), 'v');   // 4 por vez
+// Saúde e Tecnologia, no box BDVC (Box dois verticais conteúdos): lado a lado, uma capa e a lista dos outros (3 por
+// vez, em carrossel vertical) em cada
 [[2, 'Corpo em movimento e bons hábitos.'], [5, 'Tecnologia a seu favor, sem medo.']].forEach(([i, sub]) => {
   const [a, ...resto] = ctDoAssunto(CT_ASSUNTOS[i][1]);
   ctBloco(i, sub, `<div class="ct-coluna">${ctTile(a, true)}<div class="ct-coluna-lista" id="ctLista${i}">${resto.map(ctItem).join('')}</div></div>`);
@@ -70,25 +77,27 @@ ctBloco(4, 'Destinos para ir com calma.', `
       <span class="vc-cat">Viagem</span>
       <h3>${viagem.t}</h3>
       <p>${viagem.e}</p>
+      <span class="vc-autor">${viagem.a}</span>
     </div>
   </a>`);
-// SoftLiving: carta em destaque
+// SoftLiving: carta em destaque (box BDS, destaque simples)
 const carta = ctDoAssunto('SoftLiving')[0];
 document.getElementById('ct-softliving').innerHTML = `
   <a href="${urlConteudo(carta.t)}" class="ct-carta">
     <img src="${fotoUrl(carta.foto, 600)}" alt="" loading="lazy">
+    ${ctSalvar}
     <div>
       <p class="kicker">Palavra da ${LOGO}</p>
-      <h3>${carta.t}</h3>
+      <h3>${carta.t.replace('SoftLiving', LOGO)}</h3>
       <p>${carta.e}</p>
-      <span class="ct-carta-autor">${carta.a}</span> ${seloAcesso(carta)}
+      <span class="ct-carta-autor">${carta.a.replace('SoftLiving', LOGO)}</span> ${seloAcesso(carta)}
     </div>
   </a>`;
 
 // Posição dos blocos de assunto sorteada a cada visita (o patrocinador continua entre a coleção e eles); Saúde e
 // Tecnologia também trocam de lado
 const ctAncora = document.querySelector('main .apoio');
-embaralhar(['ct-bem-estar', 'ct-estilo-e-casa', 'ct-dupla', 'ct-viagem']).forEach((id, i) => {
+embaralhar(['ct-estilo-e-casa', 'ct-dupla', 'ct-viagem']).forEach((id, i) => {
   const el = id === 'ct-dupla' ? document.querySelector('.ct-dupla') : document.getElementById(id);
   if(i === 0) ctAncora.before(el); else document.getElementById('ct-softliving').before(el);
 });

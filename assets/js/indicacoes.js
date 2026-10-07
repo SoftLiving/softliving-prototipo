@@ -30,7 +30,7 @@ function renderIndicacoes(){
 // Formas de indicar: copiar o código ou o link, WhatsApp (mensagem pronta) e o compartilhar do próprio aparelho
 const IN_CODIGO = document.getElementById('inCodigo').textContent.trim();
 const IN_LINK = document.getElementById('inLink').textContent.trim();
-const IN_MENSAGEM = `Estou na SoftLiving, um portal sem anúncios com conteúdos e grupos para uma vida melhor. Entre com meu convite e ganhe 20 créditos de bônus: ${IN_LINK}`;
+const IN_MENSAGEM = `Estou na SoftLiving, um portal sem anúncios com conteúdos e grupos para uma vida melhor. Cadastre-se pelo meu convite. Todo novo membro ganha 20 créditos de bônus: ${IN_LINK}`;
 function copiar(texto, aviso){
   if(navigator.clipboard) navigator.clipboard.writeText(texto).catch(() => {});
   mostrarAviso(aviso);

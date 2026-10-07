@@ -1,14 +1,15 @@
 // VERSÃO 2 · Tela Carteira. Saldo fictício: ainda sem recarga, 41 de bônus (o mesmo total do topo, SALDO_BASE no
 // layout.js), mais o bônus ganho respondendo pesquisas no protótipo. Nenhum pagamento acontece.
-// Extrato sem datas (regra da v2): do mais recente para o mais antigo. v: valor; b: é bônus?
+// Extrato com data e hora (decisão de 2026-10-06), do mais recente para o mais antigo. q: quando; v: valor; b: é bônus?
+// O bônus é usado primeiro e vale por 12 meses; os créditos comprados não têm prazo.
 const EXTRATO = [
-  { t:'Conteúdo destravado: Celular para os pais', d:'Acervo SoftLiving', v:-2, b:true },
-  { t:'Conteúdo destravado: Casa conectada, primeiros passos', d:'Acervo SoftLiving', v:-2, b:true },
-  { t:'Respostas às pesquisas de opinião', d:'1 crédito de bônus por pergunta', v:10, b:true },
-  { t:'Pesquisa da semana', d:'Bônus por participar', v:5, b:true },
-  { t:'Indicação aprovada: Marcos Teixeira', d:'Bônus de indicação', v:5, b:true },
-  { t:'Indicação aprovada: Helena Martins', d:'Bônus de indicação', v:5, b:true },
-  { t:'Boas-vindas à SoftLiving', d:'Bônus de cadastro', v:20, b:true },
+  { q:'04/10/2026 às 20:15', t:'Conteúdo destravado: Celular para os pais', d:'Acervo SoftLiving', v:-2, b:true },
+  { q:'04/10/2026 às 19:48', t:'Conteúdo destravado: Casa conectada, primeiros passos', d:'Acervo SoftLiving', v:-2, b:true },
+  { q:'02/10/2026 às 10:30', t:'Respostas às pesquisas de opinião', d:'1 crédito de bônus por pergunta', v:10, b:true },
+  { q:'29/09/2026 às 09:05', t:'Pesquisa da semana', d:'Bônus por participar', v:5, b:true },
+  { q:'27/09/2026 às 17:22', t:'Indicação aprovada: Marcos Teixeira', d:'Bônus de indicação', v:5, b:true },
+  { q:'25/09/2026 às 11:40', t:'Indicação aprovada: Helena Martins', d:'Bônus de indicação', v:5, b:true },
+  { q:'23/09/2026 às 14:45', t:'Boas-vindas à SoftLiving', d:'Bônus de cadastro', v:20, b:true },
 ];
 const VALORES = [20, 50, 100, 200];
 // Bônus das recargas: na primeira, R$50 ganha +50 (100%); nas demais (e nos outros valores), a tabela progressiva abaixo
@@ -20,7 +21,7 @@ const bonusDe = v => BONUS_RECARGA[v];
 let valor = 50, forma = 'Pix', filtro = 'tudo';
 
 // Conteúdos destravados nesta conta (comprarConteudo, no layout.js): entram no extrato como saídas, do mais recente
-const comprasNoExtrato = () => lerCompras().map(x => ({ t:`Conteúdo destravado: ${x.t}`, d:'Destravado na leitura', v:-x.v, b:true }));
+const comprasNoExtrato = () => lerCompras().map(x => ({ q:x.q || agoraTexto(), t:`Conteúdo destravado: ${x.t}`, d:'Destravado na leitura', v:-x.v, b:true }));
 function renderSaldo(){
   const extra = lerBonusCreditos();            // bônus das pesquisas respondidas nesta sessão
   const comprados = EXTRATO.filter(x => !x.b).reduce((s, x) => s + x.v, 0);
@@ -33,6 +34,7 @@ function renderSaldo(){
         <span><i class="ct-ponto comprados"></i>${comprados} comprados</span>
         <span><i class="ct-ponto bonus"></i>${bonus} de bônus</span>
       </div>
+      <p class="ct-validade">O bônus é usado primeiro e vale por 12 meses. Os créditos comprados não têm prazo.</p>
     </div>
     ${PRIMEIRA_RECARGA ? `
     <div class="ct-oferta">
@@ -70,7 +72,7 @@ document.getElementById('ctGanhe').innerHTML = [
 
 function renderExtrato(){
   const extra = lerBonusCreditos();
-  const linhas = [...comprasNoExtrato(), ...(extra ? [{ t:'Respostas às pesquisas nesta visita', d:'1 crédito de bônus por pergunta', v:extra, b:true }] : []), ...EXTRATO];
+  const linhas = [...comprasNoExtrato(), ...(extra ? [{ q:agoraTexto(), t:'Respostas às pesquisas nesta visita', d:'1 crédito de bônus por pergunta', v:extra, b:true }] : []), ...EXTRATO];
   document.getElementById('ctFiltro').innerHTML = [['tudo', 'Tudo'], ['entradas', 'Entradas'], ['saidas', 'Saídas']].map(([k, l]) =>
     `<button type="button" role="tab" class="${k === filtro ? 'on' : ''}" aria-selected="${k === filtro}" data-filtro="${k}">${l}</button>`).join('');
   document.getElementById('ctExtrato').innerHTML = linhas
@@ -78,7 +80,7 @@ function renderExtrato(){
     .map(x => `
       <div class="ct-linha">
         <span class="ct-linha-ic ${x.v > 0 ? 'entra' : 'sai'}">${icone(x.v > 0 ? 'mais' : 'conteudos')}</span>
-        <div><b>${x.t.replace('SoftLiving', LOGO)}</b><small>${x.d.replace('SoftLiving', LOGO)}</small></div>
+        <div><b>${x.t.replace('SoftLiving', LOGO)}</b><small>${x.q} · ${x.d.replace('SoftLiving', LOGO)}</small></div>
         <span class="ct-valor-linha ${x.v > 0 ? 'entra' : 'sai'}">${x.v > 0 ? '+' : '−'}${Math.abs(x.v)}${x.b ? ' <small>bônus</small>' : ''}</span>
       </div>`).join('');
 }

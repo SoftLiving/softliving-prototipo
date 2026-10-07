@@ -32,6 +32,12 @@ Palavras: ganhar crédito, crédito grátis, bônus, cadastro, indicar, pesquisa
 - **5 de bônus** por amigo indicado que se cadastrar;
 - **+1 crédito de bônus** por pergunta respondida na pesquisa "Sua opinião vale créditos".
 
+## O bônus tem prazo de validade?
+Palavras: validade, prazo, expira, vence, vencimento, perder bônus, quanto tempo
+
+O **bônus vale por 12 meses**. Ele é sempre usado antes dos créditos comprados, então dificilmente fica parado.
+Os **créditos comprados não têm prazo**: ficam na sua carteira até você usar.
+
 ## Posso sacar meus créditos?
 Palavras: sacar, saque, resgatar, dinheiro de volta, reembolso, transferir
 

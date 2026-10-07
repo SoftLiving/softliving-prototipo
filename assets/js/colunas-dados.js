@@ -19,10 +19,29 @@ const COLUNISTAS = [
     bio:'Com 13 anos de experiência na WGSN, Sofia Martellini é líder de conteúdo de passarelas na plataforma de tendências. Formada em Negócios da Moda e pós-graduada em Foresight Estratégico, combina análise de tendências em tempo real com conhecimento regional.' },
   { nome:'Zé Roberto', curto:'Zé R.', sigla:'ZR', cor:'#2f8578', coluna:'Toque do Barão', categoria:'Lugares & Pessoas', aba:'Lugares e pessoas', publicadas:5,
     bio:'Jornalista, escritor e cronista de experiências. Entre viagens, restaurantes, espetáculos, exposições e encontros marcantes, constrói narrativas que unem informação, sensibilidade e olhar humano, com o Rio de Janeiro como principal fonte de inspiração.' },
+  // Colunistas fictícios, só para a simulação do protótipo: com eles o box "Todos os colunistas" (BTOC) tem mais
+  // segmentos do que cabem numa linha (aparece o botão de rolagem das abas) e mais de 8 colunistas (limite da aba Todos).
+  // Cada um tem uma coluna de exemplo em COLUNAS_EXTRAS.
+  { nome:'Dra. Marina Lobo', curto:'Marina L.', sigla:'ML', cor:'#2f8578', coluna:'Corpo em dia', categoria:'Saúde e Longevidade', aba:'Saúde', publicadas:1,
+    bio:'Marina Lobo é geriatra e escreve sobre envelhecer com saúde, sem promessas milagrosas: sono, movimento, exames na hora certa e bons hábitos.' },
+  { nome:'Otávio Ramalho', curto:'Otávio R.', sigla:'OR', cor:'#8a6414', coluna:'Dinheiro sem susto', categoria:'Finanças Pessoais', aba:'Finanças', publicadas:1,
+    bio:'Otávio Ramalho é planejador financeiro e explica investimentos, aposentadoria e orçamento em linguagem simples, para quem quer tranquilidade.' },
+  { nome:'Clara Viana', curto:'Clara V.', sigla:'CV', cor:'#5b4b8a', coluna:'Sessão das oito', categoria:'Cinema e Séries', aba:'Cinema', publicadas:1,
+    bio:'Clara Viana é crítica de cinema e indica filmes e séries para ver sem pressa, com contexto e boas histórias de bastidores.' },
+  { nome:'Heitor Paranhos', curto:'Heitor P.', sigla:'HP', cor:'#b0513a', coluna:'Mesa posta', categoria:'Gastronomia', aba:'Gastronomia', publicadas:1,
+    bio:'Heitor Paranhos é cozinheiro e escreve sobre comida de verdade: feiras, receitas de família e os lugares onde vale sentar e demorar.' },
+  { nome:'Inês Carvalho', curto:'Inês C.', sigla:'IC', cor:'#2f5d3a', coluna:'Mãos na terra', categoria:'Jardim e Natureza', aba:'Jardim', publicadas:1,
+    bio:'Inês Carvalho é paisagista e ensina a cuidar de plantas em casa, da varanda ao quintal, respeitando o tempo de cada estação.' },
 ];
 
 // Títulos de colunas do site que não estão em conteudos-dados.js
 const COLUNAS_EXTRAS = [
+  // colunas de exemplo dos colunistas fictícios
+  { t:'O sono muda com a idade, e tudo bem', a:'Dra. Marina Lobo', foto:'1506126613408-eca07ce68773', badge:'gratis', e:'O que é normal, o que pede atenção e pequenos ajustes que melhoram a noite.' },
+  { t:'Reserva de emergência: por onde começar', a:'Otávio Ramalho', foto:'1460925895917-afdab827c52f', badge:'gratis', e:'Quanto guardar, onde deixar e como não mexer nela à toa.' },
+  { t:'Cinco filmes para ver numa tarde de chuva', a:'Clara Viana', foto:'1489599849927-2ee91cede3ba', badge:'gratis', e:'Histórias que acolhem, para assistir sem olhar o relógio.' },
+  { t:'A feira ensina mais do que a receita', a:'Heitor Paranhos', foto:'1512621776951-a57141f2eefd', badge:'gratis', e:'Como escolher o que está na época e cozinhar a partir do que há de melhor.' },
+  { t:'Uma horta que cabe na janela', a:'Inês Carvalho', foto:'1447752875215-b2761acb3c5d', badge:'gratis', e:'Temperos, luz e rega: o básico para começar sem medo de errar.' },
   { t:'Como o boom das canetas emagrecedoras está impactando a moda?', a:'Sofia Martellini', foto:'1483985988355-763728e1935b', badge:'gratis' },
   { t:'Quando morar virou performance?', a:'Erick Figueira de Mello', foto:'1505691938895-1758d7feb511', badge:'gratis' },
   { t:'O problema do “bom gosto”', a:'Erick Figueira de Mello', foto:'1513694203232-719a280e022f', badge:'gratis' },

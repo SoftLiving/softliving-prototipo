@@ -1,5 +1,7 @@
 // Dados fictícios dos grupos, usados pela lista (grupos.html) e pela página interna (grupo.html?g=<número>).
-// tipo:'desapego': grupo de venda, doação e troca (aba Anúncios). premium: grupo pago com créditos. novos: mensagens novas desde a última visita. participando: se o usuário já está no grupo.
+// tipo:'desapego': grupo de venda, doação e troca (aba Anúncios). premium: grupo pago com créditos, com débito automático todo mês
+// enquanto houver saldo. O preço é definido grupo a grupo, entre as opções de PRECOS_PREMIUM (decisão de 2026-10-06);
+// nos exemplos ele é sorteado (ver o fim do arquivo). novos: mensagens novas desde a última visita. participando: se o usuário já está no grupo.
 const GRUPOS = [
   {cat:"Gastronomia", icon:"pin", t:"Clube do Vinho", foto:"1510812431401-41d2bd2722f3", d:"Clube gratuito a partir da coluna de vinhos. Cada rodada reúne onde comprar no Rio, o que harmonizar e um encontro para provar juntos.", membros:1, participando:false},
   {cat:"Social", icon:"users", t:"Amigos", foto:"1511632765486-a01980e01a18", d:"Grupo de amigos, gratuito. O Alexandre conduz. O aviso do encontro fica no mural.", membros:3, participando:true, novos:2},
@@ -17,7 +19,31 @@ const GRUPOS = [
   {cat:"Desapego", icon:"store", t:"Desapego da Comunidade", foto:"1505691938895-1758d7feb511", d:"Venda, doação e troca entre membros: móveis, roupas, eletrônicos, livros e tudo o que merece um novo lar.", membros:86, participando:true, novos:3, tipo:"desapego"},
   {cat:"Desapego", icon:"pin", t:"Desapego Rio · Zona Sul", foto:"1483985988355-763728e1935b", d:"Desapego entre vizinhos de Copacabana, Ipanema, Leblon, Botafogo e Flamengo, com retirada combinada perto de casa.", membros:41, participando:false, tipo:"desapego"},
   {cat:"Desapego", icon:"book", t:"Troca de Livros", foto:"1481627834876-b7833e8f5570", d:"Leu e quer passar adiante? Troque ou doe livros com outros leitores da comunidade.", membros:33, participando:false, tipo:"desapego"},
+  // Mais dois grupos premium de exemplo (no fim da lista, para não mudar o número dos outros grupos)
+  {cat:"Saúde", icon:"activity", t:"Pilates e Postura", foto:"1506126613408-eca07ce68773", d:"Aulas guiadas de pilates, com atenção à postura e ao ritmo de cada pessoa.", membros:14, participando:false, premium:true},
+  {cat:"Carreira", icon:"briefcase", t:"Empreendedorismo Maduro", foto:"1460925895917-afdab827c52f", d:"Para quem quer abrir ou tocar um negócio depois dos 50, com troca de experiências e mentores convidados.", membros:11, participando:false, premium:true},
 ];
+
+// Preço dos grupos premium: opções de mensalidade, em créditos por mês (R$1 = 1 crédito). Nos exemplos, cada grupo
+// premium recebe uma das opções por sorteio, sem repetir enquanto houver opções; o sorteio vale enquanto a aba do
+// navegador estiver aberta, para o preço ser o mesmo na lista e na página do grupo.
+const PRECOS_PREMIUM = [5, 10, 15, 20];
+(function sortearPrecos(){
+  const premium = GRUPOS.filter(g => g.premium);
+  let precos = null;
+  try { precos = JSON.parse(sessionStorage.getItem('gruposPrecos') || 'null'); } catch(e){}
+  if(!Array.isArray(precos) || precos.length !== premium.length || precos.some(p => !PRECOS_PREMIUM.includes(p))){
+    precos = [];
+    while(precos.length < premium.length){
+      const rodada = [...PRECOS_PREMIUM];
+      for(let i = rodada.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [rodada[i], rodada[j]] = [rodada[j], rodada[i]]; }
+      precos.push(...rodada);
+    }
+    precos = precos.slice(0, premium.length);
+    try { sessionStorage.setItem('gruposPrecos', JSON.stringify(precos)); } catch(e){}
+  }
+  premium.forEach((g, i) => g.preco = precos[i]);
+})();
 
 // Participar/Sair vale entre as páginas enquanto a aba do navegador estiver aberta (sessão); recarregar mantém.
 (function restaurarParticipacao(){

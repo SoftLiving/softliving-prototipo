@@ -59,6 +59,12 @@ ESTABELECIMENTOS.push(
     endereco:'Rua das Laranjeiras, 000 · Rio de Janeiro', horario:'Segunda a sábado, 8h às 19h', telefone:'(21) 0000-0000',
     novidades:[['Campanha de vacinação', 'Vacinas com desconto para cães e gatos neste mês.'], ['Entrega grátis', 'Pedidos acima de R$100 no bairro não pagam entrega.']] },
 );
+// Mais dois de Saúde (no fim da lista, para não mudar o número dos outros): com eles o segmento tem itens suficientes
+// para o box de dois verticais (BDVV) mostrar os botões de rolagem
+ESTABELECIMENTOS.push(
+  { n:'Farmácia Bem Viver', cat:'Saúde', bairro:'Laranjeiras', foto:'1519494026892-80bbd2d6fd0d', cor:'#2f8578', d:'Medicamentos, manipulados e orientação farmacêutica sem pressa.', b:'10% em manipulados' },
+  { n:'Laboratório Exato', cat:'Saúde', bairro:'Copacabana', foto:'1574258495973-f010dfbb5371', cor:'#3f6b8f', d:'Exames com hora marcada e resultado explicado em linguagem simples.', b:'Coleta em casa sem custo' },
+);
 ESTABELECIMENTOS.forEach((e, i) => e.id = e.id || i);
 const urlEstabelecimento = e => `${LAYOUT_ROOT}estabelecimento.html?e=${e.id}`;
 
@@ -87,3 +93,24 @@ function definirEstFavorito(id, favorito){
   try { localStorage.setItem('v2EstFavoritos', JSON.stringify(lista)); } catch(e){}
 }
 const siglaEstab = n => n.replace(/&/g, '').split(/\s+/).filter(p => p.length > 2).slice(0, 2).map(p => p[0]).join('');
+
+// MSV · Menu segmento vitrine: os segmentos das Vitrines (círculos com foto no topo da Vitrine e da página de cada
+// segmento). [nome, foto, categorias dos estabelecimentos que entram nele]. Cada segmento tem a sua página:
+// vitrine-segmento.html?s=<endereço>. A mesma página lista os estabelecimentos de um bairro: ?b=<bairro>.
+const VT_SEGMENTOS = [
+  ['Gastronomia', '1414235077428-338989a2e8c0', ['Gastronomia', 'Restaurante']],
+  ['Saúde', '1519494026892-80bbd2d6fd0d', ['Saúde', 'Clínica odontológica']],
+  ['Bem-estar', '1544367567-0f2fcb009e0b', ['Bem-estar', 'Spa e bem-estar']],
+  ['Casa', '1586023492125-27b2c045efd7', ['Casa']],
+  ['Beleza', '1560066984-138dadb4c035', ['Beleza']],
+  ['Viagem', '1566073771259-6a8506099945', ['Viagem', 'Hotel', 'Agência de turismo']],
+  ['Pets', '1543466835-00a7907e9de1', ['Pets', 'Pet shop']],
+  ['Presentes', '1487070183336-b863922373d4', ['Presentes']],
+];
+const vtSlug = n => n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const urlSegmentoVitrine = nome => `${LAYOUT_ROOT}vitrine-segmento.html?s=${vtSlug(nome)}`;
+const urlBairroVitrine = bairro => `${LAYOUT_ROOT}vitrine-segmento.html?b=${encodeURIComponent(bairro)}`;
+const estDoSegmento = nome => { const seg = VT_SEGMENTOS.find(x => x[0] === nome); return seg ? ESTABELECIMENTOS.filter(e => seg[2].includes(e.cat)) : []; };
+// Menu de segmentos (MSV): atual = nome do segmento aberto (fica marcado), ou vazio na Vitrine
+const htmlMenuSegmentosVitrine = (lista, atual) => lista.map(([nome, foto]) =>
+  `<a href="${urlSegmentoVitrine(nome)}" class="vt-cat${nome === atual ? ' on' : ''}"${nome === atual ? ' aria-current="page"' : ''}><img src="${fotoUrl(foto, 200)}" alt=""><span>${nome}</span></a>`).join('');

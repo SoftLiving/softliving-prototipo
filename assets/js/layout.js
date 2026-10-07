@@ -35,6 +35,10 @@ const PAGINAS = {
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html' },
   entrar:       { url:'entrar.html' },              // tela de login (Entrar do menu lateral)
+  // Telas trazidas da V1 (2026-10-06). Membros, Oportunidades e Marketplace ficaram fora da V2 (possível V3).
+  conversas:    { url:'conversas.html' },           // mensagens diretas com os amigos
+  acessibilidade:{ url:'acessibilidade.html' },     // aberta pelo Meu perfil e pela janela da conta
+  decisoes:     { url:'decisoes.html' },            // página de trabalho do protótipo: decisões em aberto
 };
 function urlPagina(nome){
   const p = PAGINAS[nome];
@@ -86,6 +90,8 @@ const ICONES = {
   membros:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/>',
   parceiros:'<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>',
   abrir:'<path d="M6 9l6 6 6-6"/>',
+  encaminhar:'<path d="M14 5l6 6-6 6"/><path d="M20 11H9a5 5 0 0 0-5 5v3"/>',
+  acessibilidade:'<circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5h14M12 8.5V14M12 14l-3.5 6M12 14l3.5 6"/>',
 };
 const icone = (nome, extra) => `<svg class="ic${extra ? ' ' + extra : ''}" viewBox="0 0 24 24" aria-hidden="true">${ICONES[nome]}</svg>`;
 const LOGO = '<span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span>';
@@ -112,6 +118,7 @@ const MENU_SECOES = [
     { nome:'comunidades', rotulo:'Minhas Comunidades', icone:'comunidades' },
     { nome:'grupos', rotulo:'Grupos', icone:'grupos', aviso:9 },
     { nome:'amigos', rotulo:'Amigos', icone:'amigos', aviso:2 },
+    { nome:'conversas', rotulo:'Conversas', icone:'comentarios', aviso:1 },
   ]},
   { titulo:'Minha conta', itens:[
     { nome:'carteira', rotulo:'Carteira', icone:'carteira' },
@@ -138,6 +145,7 @@ const LAYOUT_TOPO = `
   <span class="proto-long">Em construção · conteúdos, números, pessoas e fotos são fictícios. Marcas apenas ilustram a proposta, sem vínculo ou endosso.</span>
   <span class="proto-short">Em construção · dados fictícios</span>
   <button type="button" onclick="openProtoModal()">Saiba mais</button>
+  <a href="${urlPagina('decisoes')}" class="proto-decisoes">Decisões em aberto</a>
 </div>
 
 <div class="modal-bg" id="protoModal" onclick="if(event.target===this)closeProtoModal()">
@@ -213,9 +221,9 @@ const LAYOUT_RODAPE = `
       <div><h4>Conteúdos</h4>
         <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="${urlPagina('colunas')}">Colunistas</a></div>
       <div><h4>Comunidade</h4>
-        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${urlGrupo(12)}">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="${urlPagina('vitrine')}">Vitrines</a></div>
+        <a href="${urlPagina('grupos')}">Grupos</a><a href="${urlPagina('comunidades')}">Minhas comunidades</a><a href="${urlGrupo(12)}">Desapego</a><a href="${urlPagina('amigos')}">Amigos</a><a href="${urlPagina('conversas')}">Conversas</a><a href="${urlPagina('vitrine')}">Vitrines</a></div>
       <div><h4>Sua conta</h4>
-        <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('ajuda')}">Suporte</a></div>
+        <a href="${urlPagina('carteira')}">Carteira</a><a href="${urlPagina('indicacoes')}">Indicações</a><a href="${urlPagina('perfil')}">Meu perfil</a><a href="${urlPagina('simples')}">Modo simples</a><a href="${urlPagina('acessibilidade')}">Acessibilidade</a><a href="${urlPagina('ajuda')}">Suporte</a></div>
     </div>
     <!-- Linha própria para os logos dos parceiros, cada um com um título pequeno em cima -->
     <div class="flogos">
@@ -561,24 +569,24 @@ function animarCarrossel(car, agora){
 }
 
 // Notificações (fictícias): usadas pela janela do sino no topo (todas as páginas) e pela página Notificações.
-// Sem datas nem horários (regra da v2). curto: texto resumido da janela do sino. av: sigla e cor do colunista, ou foto.
+// q: data e hora do aviso (decisão de 2026-10-06: notificações e extrato mostram data e hora). curto: texto resumido da janela do sino. av: sigla e cor do colunista, ou foto.
 // O que foi lido fica guardado no navegador (v2NotifLidas); o número do menu e a bolinha do sino acompanham.
 const NOTIFICACOES = [
-  { id:1, tipo:'colunas', av:{ sigla:'SM', cor:'#b0513a' }, curto:'<b>Sofia Martellini</b> publicou uma nova coluna',
+  { id:1, q:'06/10/2026 às 09:12', tipo:'colunas', av:{ sigla:'SM', cor:'#b0513a' }, curto:'<b>Sofia Martellini</b> publicou uma nova coluna',
     txt:'<b>Sofia Martellini</b> publicou uma nova coluna: “Como o boom das canetas emagrecedoras está impactando a moda?”', acao:['Ler coluna', urlConteudo('Como o boom das canetas emagrecedoras está impactando a moda?')] },
-  { id:2, tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
+  { id:2, q:'05/10/2026 às 18:40', tipo:'grupos', foto:'1511632765486-a01980e01a18', curto:'<b>2 mensagens novas</b> no grupo Amigos',
     txt:'<b>2 mensagens novas</b> no grupo <b>Amigos</b>. O Alexandre deixou o aviso do encontro no mural.', acao:['Ver grupo', urlGrupo(1)] },
-  { id:3, tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
+  { id:3, q:'05/10/2026 às 11:05', tipo:'creditos', curto:'Você ganhou <b>5 créditos de bônus</b>',
     txt:'Você ganhou <b>5 créditos de bônus</b> por responder à pesquisa da semana.', acao:['Ver carteira', urlPagina('carteira')] },
-  { id:4, tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
+  { id:4, q:'03/10/2026 às 16:20', tipo:'grupos', foto:'1544367567-0f2fcb009e0b', curto:'Nova prática guiada no <b>Yoga & Meditação</b>',
     txt:'Nova prática guiada marcada no grupo <b>Yoga & Meditação</b>. Confirme sua presença.', acao:['Ver grupo', urlGrupo(4)], lida:true },
-  { id:5, tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
+  { id:5, q:'02/10/2026 às 08:30', tipo:'conteudos', foto:'1506377247377-2a5b3b417ebb', curto:'Novo conteúdo: <b>Na Suíça, um vinho para chamar de seu</b>',
     txt:'Novo conteúdo sobre um assunto que você segue: <b>“Na Suíça, um vinho para chamar de seu”</b>.', acao:['Ler', urlConteudo('Na Suíça, um vinho para chamar de seu')], lida:true },
-  { id:6, tipo:'colunas', av:{ sigla:'ZR', cor:'#2f8578' }, curto:'<b>Zé Roberto</b> respondeu ao seu comentário',
+  { id:6, q:'30/09/2026 às 21:14', tipo:'colunas', av:{ sigla:'ZR', cor:'#2f8578' }, curto:'<b>Zé Roberto</b> respondeu ao seu comentário',
     txt:'<b>Zé Roberto</b> respondeu ao seu comentário na coluna <b>Toque do Barão</b>.', acao:['Ver resposta', urlPagina('colunas')], lida:true },
-  { id:7, tipo:'grupos', foto:'1510812431401-41d2bd2722f3', curto:'Convite para o <b>Clube do Vinho</b>',
+  { id:7, q:'28/09/2026 às 10:02', tipo:'grupos', foto:'1510812431401-41d2bd2722f3', curto:'Convite para o <b>Clube do Vinho</b>',
     txt:'Você foi convidado para o <b>Clube do Vinho</b>, grupo gratuito da coluna de vinhos.', acao:['Participar', urlPagina('grupos')], lida:true },
-  { id:8, tipo:'softliving', curto:'Boas-vindas! Complete seu perfil',
+  { id:8, q:'23/09/2026 às 14:45', tipo:'softliving', curto:'Boas-vindas! Complete seu perfil',
     txt:'Boas-vindas à SoftLiving! Complete seu perfil para receber conteúdos do seu jeito.', acao:['Completar perfil', '#'], lida:true },
 ];
 const NT_ICONES = { grupos:'grupos', colunas:'colunas', conteudos:'conteudos', creditos:'carteira', softliving:'sino' };
@@ -643,7 +651,7 @@ function renderJanelaNotif(j){
     <div class="ntj-topo"><b>Notificações</b>${novas ? `<span class="ntj-conta">${novas} ${novas === 1 ? 'nova' : 'novas'}</span>` : ''}
       <button type="button" class="ntj-ler" ${novas ? '' : 'disabled'}>Marcar como lidas</button></div>
     <div class="ntj-lista">${NOTIFICACOES.map(n => `
-      <a href="${n.acao[1]}" class="ntj-item${ehNova(n) ? ' nova' : ''}" data-id="${n.id}">${ntAvatar(n)}<span>${n.curto.replace('SoftLiving', LOGO)}</span>${ehNova(n) ? '<i aria-label="Não lida"></i>' : ''}</a>`).join('')}
+      <a href="${n.acao[1]}" class="ntj-item${ehNova(n) ? ' nova' : ''}" data-id="${n.id}">${ntAvatar(n)}<span>${n.curto.replace('SoftLiving', LOGO)}<small class="ntj-quando">${n.q}</small></span>${ehNova(n) ? '<i aria-label="Não lida"></i>' : ''}</a>`).join('')}
     </div>
     <a href="${urlPagina('notificacoes')}" class="ntj-todas">Ver todas as notificações</a>`;
 }
@@ -675,7 +683,7 @@ criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
     </nav>`;
 });
 
-// Janela de entrada (botão Entrar): Google, Apple ou Facebook, ou e-mail e senha. Protótipo: nada é enviado nem guardado.
+// Janela de entrada (botão Entrar): Google, Apple ou Facebook, e-mail e senha, ou um link de acesso enviado por e-mail. Protótipo: nada é enviado nem guardado.
 const ENTRAR_SOCIAL = [
   ['Google', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1.1-3.7 1.1-2.9 0-5.3-1.9-6.2-4.5H2.2v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.8 14.2a6.6 6.6 0 0 1 0-4.3V7.1H2.2a11 11 0 0 0 0 9.9l3.6-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3.1.6 4.2 1.7l3.1-3.1A11 11 0 0 0 2.2 7.1l3.6 2.8C6.7 7.3 9.1 5.4 12 5.4z"/></svg>'],
   ['Apple', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M16.4 12.6c0-2.4 2-3.5 2-3.6a4.4 4.4 0 0 0-3.4-1.9c-1.5-.1-2.8.9-3.5.9s-1.8-.8-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3a10 10 0 0 0 1.3-2.6 3.9 3.9 0 0 1-2.5-3.6zM14.1 5.5A4 4 0 0 0 15 2.6a4.1 4.1 0 0 0-2.7 1.4 3.8 3.8 0 0 0-1 2.8 3.4 3.4 0 0 0 2.8-1.3z"/></svg>'],
@@ -693,6 +701,7 @@ const htmlEntrar = (titulo, texto) => `
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
       <p class="enj-erro" role="alert" hidden>Login ou senha incorretos. No protótipo, deixe os campos vazios ou use 123 e 123.</p>
       <button type="submit" class="btn enj-entrar">Entrar</button>
+      <button type="button" class="enj-link-email">Receber um link de acesso por e-mail</button>
     </form>
     <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
 function cliqueEntrar(e, j){
@@ -700,6 +709,7 @@ function cliqueEntrar(e, j){
   if(ver){ const c = j.querySelector('input[name="senha"]'); const mostrar = c.type === 'password'; c.type = mostrar ? 'text' : 'password'; ver.textContent = mostrar ? 'Ocultar' : 'Mostrar'; ver.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha'); return; }
   const social = e.target.closest('[data-social]');
   if(social){ mostrarAviso(`Entrar com ${social.dataset.social}: fora deste protótipo`); return; }
+  if(e.target.closest('.enj-link-email')){ mostrarAviso('Link de acesso por e-mail: fora deste protótipo'); return; }
   if(e.target.closest('.enj-esqueci')){ e.preventDefault(); mostrarAviso('Recuperar senha: fora deste protótipo'); return; }
   if(e.target.closest('.enj-criar')){ e.preventDefault(); mostrarAviso('Cadastro: fora deste protótipo'); }
 }
@@ -747,6 +757,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
     <nav class="crj-links">
       <a href="${urlPagina('perfil')}">${icone('perfil')}Meu perfil</a>
       <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${saldoCreditos()} créditos</span></a>
+      <a href="${urlPagina('acessibilidade')}">${icone('acessibilidade')}Acessibilidade</a>
       <a href="${urlPagina('ajuda')}">${icone('ajuda')}Suporte</a>
     </nav>
     <button type="button" class="cnj-sair">Sair da conta</button>`;
@@ -758,7 +769,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
 });
 // Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
 // aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
-const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
+const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades', 'conversas'];
 if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
   document.body.classList.add('pede-login');
   // Box de entrada no centro, com o mesmo conteúdo da janela Entrar
@@ -802,16 +813,27 @@ function atualizarNotificacoes(){
 atualizarNotificacoes();
 
 // Salvos (botão da bandeirinha nos cartões): guardados no navegador pelo título do conteúdo; a página Salvos lista.
+// Aviso depois de salvar ou tirar dos salvos (conteúdo ou grupo)
+const avisoSalvo = (fav, salvo) => mostrarAviso(fav.dataset.vitrine !== undefined ? (salvo ? 'Vitrine salva' : 'Vitrine removida dos salvos') : fav.dataset.grupo !== undefined ? (salvo ? 'Grupo salvo' : 'Grupo removido dos salvos') : (salvo ? 'Salvo para ler depois' : 'Removido dos salvos'));
 // marcarSalvos() acende a bandeirinha dos já salvos em qualquer lista (roda sempre que o conteúdo da página muda).
 const SALVOS_INICIAIS = ['Na Suíça, um vinho para chamar de seu', 'A casa não precisa parecer decorada', 'Agente de IA anti-golpe'];
 function lerSalvos(){ try { const v = JSON.parse(localStorage.getItem('v2Salvos')); return Array.isArray(v) ? v : [...SALVOS_INICIAIS]; } catch(e){ return [...SALVOS_INICIAIS]; } }
 function gravarSalvos(lista){ try { localStorage.setItem('v2Salvos', JSON.stringify(lista)); } catch(e){} }
 function tituloDoFav(fav){
+  if(fav.dataset.titulo) return fav.dataset.titulo;            // cartões em que o título não é o h1/h2/h3 (ex.: Coluna do dia)
   const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, .ct-tile, .ct-faixa, article') || fav.parentElement;
   const h = cartao && cartao.querySelector('h1, h2, h3');
   return h ? h.textContent.replace(/‑/g, '-').trim() : '';   // o texto.js troca o hífen por um que não quebra; aqui volta ao normal
 }
-function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
+// Grupos também podem ser salvos (bandeirinha dos cartões de grupo): guardados pelo nome do grupo, numa lista própria
+function lerGruposSalvos(){ try { const v = JSON.parse(localStorage.getItem('v2GruposSalvos')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
+function gravarGruposSalvos(lista){ try { localStorage.setItem('v2GruposSalvos', JSON.stringify(lista)); } catch(e){} }
+function marcarSalvos(){
+  const l = lerSalvos(), g = lerGruposSalvos();
+  const v = typeof estFavoritos === 'function' ? estFavoritos() : [];   // vitrines salvas (estabelecimentos-dados.js)
+  document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', f.dataset.vitrine !== undefined ? v.includes(+f.dataset.vitrine)
+    : f.dataset.grupo !== undefined ? g.includes(f.dataset.grupo) : l.includes(tituloDoFav(f))));
+}
 // Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada
 // carregamento da página (a ordem se mantém enquanto a pessoa troca abas e filtros)
 // Selo de acesso dos conteúdos (todos os cartões do site): Grátis ou o preço em créditos com cadeado (pago, ainda
@@ -829,6 +851,18 @@ function embaralhar(lista){
   return a;
 }
 function alternarSalvo(fav){
+  if(fav.dataset.vitrine !== undefined){                        // cartão de vitrine (estabelecimento)
+    const id = +fav.dataset.vitrine, salvar = !estFavoritos().includes(id);
+    definirEstFavorito(id, salvar);
+    marcarSalvos();
+    return salvar;
+  }
+  if(fav.dataset.grupo !== undefined){                          // cartão de grupo
+    const g = lerGruposSalvos(), salvar = !g.includes(fav.dataset.grupo);
+    gravarGruposSalvos(salvar ? [...g, fav.dataset.grupo] : g.filter(x => x !== fav.dataset.grupo));
+    marcarSalvos();
+    return salvar;
+  }
   const t = tituloDoFav(fav), l = lerSalvos(), salvo = !l.includes(t);
   gravarSalvos(salvo ? [...l, t] : l.filter(x => x !== t));
   marcarSalvos();
@@ -901,6 +935,49 @@ function fecharCompartilhar(){
   j.hidden = true; document.body.classList.remove('comp-aberta');
 }
 
+// Janela de encaminhar um conteúdo (função da V1): escolher um ou mais amigos e, se quiser, escrever um recado.
+// Encaminhar é sempre para amigos (decisão de 2026-10-06). A janela abre com os 7 amigos com quem a pessoa mais
+// interage (ENC_AMIGOS já vem nessa ordem) e tem uma busca pelo nome entre todos os amigos. Usa a mesma janela do
+// Compartilhar. Quem recebe é avisado por notificação. Amigos fictícios.
+const ENC_AMIGOS = [['Alexandre Duarte', '#013565'], ['Helena Martins', '#7a3b52'], ['Marcos Teixeira', '#2f8578'], ['Célia Ribeiro', '#b0513a'], ['Beatriz Nogueira', '#5b4b8a'],
+  ['Jorge Albuquerque', '#8a6414'], ['Lúcia Campos', '#2f5d3a'], ['Roberto Freitas', '#3f6b8f'], ['Luciana Russi', '#2f8578'], ['Maria Helena Sobral', '#d4a24c'], ['Claudio Brito', '#c1633f'],
+  ['Sônia Prado', '#7a3b52'], ['Paulo Regis', '#3d6b8c'], ['Tereza Lins', '#5b4b8a']];
+const ENC_PRIMEIROS = 7;
+function abrirEncaminhar({ titulo = document.title } = {}){
+  abrirCompartilhar({ titulo });
+  const caixa = document.querySelector('#compJanela .comp-caixa');
+  const sigla = n => n.split(' ').slice(0, 2).map(p => p[0]).join('');
+  const semAcento = t => t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const escolhidos = new Set();
+  caixa.querySelector('h2').textContent = 'Encaminhar para amigos';
+  caixa.querySelector('.comp-opcoes').remove();
+  caixa.querySelector('.comp-campo').outerHTML = `
+    <label class="busca enc-busca">${icone('busca')}<input type="search" placeholder="Buscar amigo pelo nome" aria-label="Buscar amigo pelo nome"></label>
+    <small class="enc-rotulo"></small>
+    <div class="enc-lista"></div>
+    <textarea class="enc-msg" placeholder="Escreva um recado (opcional)" aria-label="Recado"></textarea>
+    <div class="enc-fim"><span class="enc-conta"></span><button type="button" class="btn ghost" data-comp-fechar>Cancelar</button><button type="button" class="btn" data-enc-enviar>Encaminhar</button></div>`;
+  const campo = caixa.querySelector('.enc-busca input'), lista = caixa.querySelector('.enc-lista');
+  function mostrar(){
+    const termo = semAcento(campo.value.trim());
+    // sem busca: os 7 com quem mais interage (e os já escolhidos); com busca: todos os amigos com esse nome
+    const quem = ENC_AMIGOS.map((a, i) => i).filter(i => termo ? semAcento(ENC_AMIGOS[i][0]).includes(termo) : i < ENC_PRIMEIROS || escolhidos.has(i));
+    caixa.querySelector('.enc-rotulo').textContent = termo ? `${quem.length} ${quem.length === 1 ? 'amigo encontrado' : 'amigos encontrados'}` : 'Com quem você mais conversa';
+    lista.innerHTML = quem.map(i => `<label class="enc-amigo"><input type="checkbox" value="${i}" ${escolhidos.has(i) ? 'checked' : ''}><span class="av-col" style="background:${ENC_AMIGOS[i][1]}">${sigla(ENC_AMIGOS[i][0])}</span>${ENC_AMIGOS[i][0]}</label>`).join('')
+      || '<p class="enc-vazio">Nenhum amigo com esse nome.</p>';
+    caixa.querySelector('.enc-conta').textContent = escolhidos.size ? `${escolhidos.size} ${escolhidos.size === 1 ? 'escolhido' : 'escolhidos'}` : '';
+  }
+  campo.addEventListener('input', mostrar);
+  lista.addEventListener('change', ev => { const c = ev.target; if(c.checked) escolhidos.add(+c.value); else escolhidos.delete(+c.value); caixa.querySelector('.enc-conta').textContent = escolhidos.size ? `${escolhidos.size} ${escolhidos.size === 1 ? 'escolhido' : 'escolhidos'}` : ''; });
+  caixa.querySelector('[data-enc-enviar]').addEventListener('click', () => {
+    const n = escolhidos.size;
+    if(!n){ mostrarAviso('Escolha pelo menos um amigo'); return; }
+    fecharCompartilhar();
+    mostrarAviso(`Conteúdo encaminhado para ${n} ${n === 1 ? 'amigo' : 'amigos'}`);
+  });
+  mostrar();
+}
+
 function mostrarAviso(texto){
   const t = document.getElementById('toast');
   t.textContent = texto;
@@ -951,24 +1028,101 @@ function prepararSetasAbas(t){
   ['ant', 'prox'].forEach(lado => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = `abas-seta abas-${lado}` + (lado === 'prox' ? ' piscando' : '');
-    b.setAttribute('aria-label', lado === 'prox' ? 'Ver mais abas' : 'Voltar às primeiras abas');
+    b.className = `abas-seta abas-${lado}`;
+    b.setAttribute('aria-label', lado === 'prox' ? 'Próximas abas' : 'Abas anteriores');
     b.tabIndex = -1;
     b.innerHTML = icone('seta');
-    b.addEventListener('click', () => { t.scrollBy({ left:(lado === 'prox' ? 1 : -1) * t.clientWidth * .7, behavior:'smooth' }); setTimeout(marcarRolagemAbas, 450); });
+    // Mesmo movimento dos carrosséis de cartões: cada clique desliza uma aba, em 450ms, desacelerando no fim; clicar de
+    // novo durante o deslize soma mais uma aba. A rolagem é contínua (360 graus): depois da última aba vem de novo a
+    // primeira, sem voltar para trás (as abas têm uma cópia em seguida; ver prepararVoltaAbas).
+    b.addEventListener('click', () => {
+      const ciclo = t.abasCiclo;
+      if(!ciclo) return;
+      const d = t.abasDeslize;
+      const mover = dx => { t.scrollLeft += dx; if(d){ d.de += dx; d.para += dx; } };
+      let base = d ? d.para : t.scrollLeft;
+      if(lado === 'prox' && base >= ciclo - 1){ mover(-ciclo); base -= ciclo; }      // já na cópia: volta ao trecho original (mesma imagem)
+      if(lado === 'ant' && base <= 2){ mover(ciclo); base += ciclo; }                // no começo: passa para a cópia, para ter abas antes
+      const tl = t.getBoundingClientRect().left;
+      const pontos = [...t.children].map(x => Math.round(x.getBoundingClientRect().left - tl + t.scrollLeft));
+      const para = lado === 'prox' ? (pontos.find(p => p > base + 2) ?? base) : ([...pontos].reverse().find(p => p < base - 2) ?? base);
+      t.abasDeslize = { de:t.scrollLeft, para, inicio:performance.now() };
+      if(!t.abasAnimando){ t.abasAnimando = true; requestAnimationFrame(agora => animarAbas(t, agora)); }
+    });
     caixa.append(b);
   });
+  // Mesma regra das setas dos carrosséis: com mouse, só a seta do lado de onde o mouse está acende, aos poucos, conforme
+  // ele se aproxima dela (--perto, de 0 a 1); ao sair, apaga devagar. Só entram na conta as setas que existem no momento.
+  if(matchMedia('(hover:hover)').matches){
+    caixa.addEventListener('mousemove', e => {
+      const setas = [...caixa.querySelectorAll('.abas-seta')].filter(b => b.offsetWidth);
+      if(!setas.length) return;
+      const alcance = caixa.getBoundingClientRect().width * .6;
+      const dist = b => { const c = b.getBoundingClientRect(); return Math.hypot(e.clientX - (c.left + c.width / 2), e.clientY - (c.top + c.height / 2)); };
+      const dists = setas.map(dist), menor = Math.min(...dists);
+      const nivel = Math.max(0, Math.min(1, 1.15 - menor / alcance));
+      setas.forEach((b, i) => {
+        const v = dists[i] === menor ? nivel : 0;
+        b.style.setProperty('--perto', v.toFixed(3));
+        b.style.pointerEvents = v > .15 ? '' : 'none';
+      });
+    });
+    caixa.addEventListener('mouseleave', () => caixa.querySelectorAll('.abas-seta').forEach(b => { b.style.setProperty('--perto', 0); b.style.pointerEvents = ''; }));
+  }
+}
+// Animação do deslize das abas: a mesma dos carrosséis (450ms, desacelerando no fim)
+function animarAbas(t, agora){
+  const d = t.abasDeslize;
+  if(!d){ t.abasAnimando = false; return; }
+  const k = Math.min(1, Math.max(0, (agora - d.inicio) / 450));
+  t.style.scrollBehavior = 'auto';                                  // o navegador não anima por cima
+  t.scrollLeft = d.de + (d.para - d.de) * (1 - Math.pow(1 - k, 3));
+  if(k < 1) requestAnimationFrame(tt => animarAbas(t, tt));
+  else {
+    t.abasDeslize = null; t.abasAnimando = false;
+    if(t.abasCiclo && t.scrollLeft >= t.abasCiclo - 1) t.scrollLeft -= t.abasCiclo;   // deu a volta: continua do trecho original
+    t.style.scrollBehavior = ''; marcarRolagemAbas();
+  }
+}
+// Rolagem contínua das abas (360 graus): quando as abas não cabem na linha, elas ganham uma cópia em seguida (botões
+// com a classe aba-copia, fora da leitura de tela e do teclado). Assim, depois da última aba aparece de novo a primeira.
+// t.abasCiclo guarda a largura de uma volta; ao passar dela, a rolagem volta esse tanto, sem que se perceba.
+// As cópias funcionam como as abas (os cliques são tratados pelo container, pelos mesmos data-*). Quando a página refaz
+// as abas, as cópias são refeitas aqui. Devolve true se as abas rolam.
+function prepararVoltaAbas(t){
+  const copias = () => [...t.children].filter(x => x.classList.contains('aba-copia'));
+  const orig = [...t.children].filter(x => !x.classList.contains('aba-copia'));
+  const visivel = !t.hidden && t.clientWidth > 0;
+  const vistos = orig.filter(x => x.offsetWidth > 0);                // um botão escondido pelo CSS não entra na medida
+  if(!vistos.length || !visivel){ return false; }
+  const largura = vistos[vistos.length - 1].getBoundingClientRect().right - vistos[0].getBoundingClientRect().left;
+  if(largura <= t.clientWidth + 2){ copias().forEach(c => c.remove()); t.abasCiclo = 0; return false; }
+  let cs = copias();
+  if(cs.length !== orig.length || cs.some((c, i) => c.textContent !== orig[i].textContent)){
+    cs.forEach(c => c.remove());
+    orig.forEach(o => { const c = o.cloneNode(true); c.classList.add('aba-copia'); c.setAttribute('aria-hidden', 'true'); c.tabIndex = -1; c.removeAttribute('id'); t.append(c); });
+    cs = copias();
+    // a página refez as abas (ao escolher uma) e a rolagem encolheu: volta para onde estava
+    if(t.abasPos != null) t.scrollLeft = t.abasPos;
+  }
+  cs.forEach((c, i) => { const classe = orig[i].className + ' aba-copia'; if(c.className !== classe) c.className = classe; });   // acompanha a aba escolhida
+  t.abasCiclo = Math.round(cs[0].getBoundingClientRect().left - orig[0].getBoundingClientRect().left);
+  if(!t.abasAnimando) t.abasPos = t.scrollLeft;
+  return true;
 }
 function marcarRolagemAbas(){
   document.querySelectorAll('.tabs.folder').forEach(t => {
     prepararSetasAbas(t);
-    const caixa = t.parentElement, visivel = !t.hidden && t.clientWidth > 0;
-    const mais = visivel && t.scrollLeft + t.clientWidth < t.scrollWidth - 2, antes = visivel && t.scrollLeft > 2;
-    t.classList.toggle('mais-abas', mais);
-    t.classList.toggle('abas-antes', antes);
-    caixa.classList.toggle('tem-mais', mais);
-    caixa.classList.toggle('tem-antes', antes);
-    if(antes) caixa.querySelector('.abas-prox').classList.remove('piscando'); // já entendeu que rola: para de piscar
+    const caixa = t.parentElement;
+    const rola = prepararVoltaAbas(t);
+    // rolando com o dedo ou com a roda: ao passar de uma volta, continua do trecho original
+    if(rola && !t.abasAnimando && t.scrollLeft >= t.abasCiclo) t.scrollLeft -= t.abasCiclo;
+    // as abas não cabem: há abas dos dois lados (a rolagem é contínua), então as duas pontas ficam esfumaçadas e as
+    // duas setas existem
+    t.classList.toggle('mais-abas', rola);
+    t.classList.toggle('abas-antes', rola && t.scrollLeft > 2);
+    caixa.classList.toggle('tem-mais', rola);
+    caixa.classList.toggle('tem-antes', rola);
   });
 }
 document.addEventListener('scroll', e => { if(e.target.classList && e.target.classList.contains('folder')) marcarRolagemAbas(); }, true);
@@ -991,6 +1145,8 @@ const SALDO_BASE = 41;
 function lerBonusCreditos(){
   try { return +sessionStorage.getItem('bonusCreditos') || 0; } catch(e){ return 0; }
 }
+// Data e hora no formato do extrato e das notificações: 06/10/2026 às 14:32
+function agoraTexto(){ const d = new Date(), p = n => String(n).padStart(2, '0'); return `${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} às ${p(d.getHours())}:${p(d.getMinutes())}`; }
 function lerCompras(){ try { const v = JSON.parse(localStorage.getItem('v2Compras')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
 const creditosGastos = () => lerCompras().reduce((s, x) => s + x.v, 0);
 const saldoCreditos = () => SALDO_BASE + lerBonusCreditos() - creditosGastos();
@@ -1000,7 +1156,7 @@ function comprarConteudo(c){
   if(lerDestravados().includes(c.t)) return true;
   if(saldoCreditos() < c.credits) return false;
   try {
-    localStorage.setItem('v2Compras', JSON.stringify([{ t:c.t, v:c.credits }, ...lerCompras()]));
+    localStorage.setItem('v2Compras', JSON.stringify([{ t:c.t, v:c.credits, q:agoraTexto() }, ...lerCompras()]));
     localStorage.setItem('v2Destravados', JSON.stringify([...lerDestravados(), c.t]));
   } catch(e){ return false; }
   atualizarSaldo();
@@ -1011,6 +1167,28 @@ function atualizarSaldo(){
   document.querySelectorAll('.saldo-creditos').forEach(el => { el.textContent = `${saldo} créditos`; el.dataset.n = saldo; });
 }
 atualizarSaldo();
+
+// Acessibilidade (acessibilidade.html): tamanho da letra, alto contraste e navegação simplificada. As escolhas ficam
+// guardadas no navegador (v2Acessibilidade) e viram classes no <html>, que o estilos.css usa em todas as páginas.
+function lerAcessibilidade(){
+  let a = {};
+  try { a = JSON.parse(localStorage.getItem('v2Acessibilidade')) || {}; } catch(e){}
+  return { letra:[0, 1, 2].includes(a.letra) ? a.letra : 0, contraste:!!a.contraste, simples:!!a.simples };
+}
+function aplicarAcessibilidade(){
+  const a = lerAcessibilidade(), h = document.documentElement.classList;
+  h.toggle('ac-letra-1', a.letra === 1); h.toggle('ac-letra-2', a.letra === 2); h.toggle('ac-contraste', a.contraste);
+}
+function gravarAcessibilidade(a){ try { localStorage.setItem('v2Acessibilidade', JSON.stringify(a)); } catch(e){} aplicarAcessibilidade(); }
+aplicarAcessibilidade();
+
+// Decisões em aberto (decisoes-dados.js): carregado em todas as páginas, para mostrar o aviso no topo das telas que têm
+// alguma decisão pendente. A página Decisões já carrega o arquivo por conta própria.
+if(LAYOUT_PAGE !== 'decisoes'){
+  const dados = document.createElement('script');
+  dados.src = `${LAYOUT_ROOT}assets/js/decisoes-dados.js`;
+  document.body.appendChild(dados);
+}
 
 // Aviso de protótipo: abre na primeira visita da sessão (o mesmo aviso da versão 1)
 const protoModal = document.getElementById('protoModal');

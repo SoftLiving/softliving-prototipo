@@ -31,6 +31,7 @@ function mostrarAssunto(i){
       <div class="vc-info">
         <span class="vc-cat">${assuntoCurto(c.cat)}</span>
         <h3>${c.t}</h3>
+        <span class="vc-autor">${c.a.replace('SoftLiving', LOGO)}</span>
         <div class="vc-row">${seloAcesso(c)}</div>
       </div>
     </a>`).join('');
@@ -47,8 +48,7 @@ document.querySelector('main').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(!fav) return;
   e.preventDefault();
-  const salvo = alternarSalvo(fav);
-  mostrarAviso(salvo ? 'Salvo para ler depois' : 'Removido dos salvos');
+  avisoSalvo(fav, alternarSalvo(fav));
 });
 mostrarAssunto(0);
 
@@ -69,13 +69,37 @@ document.getElementById('list').innerHTML = ULTIMAS.slice(1).map(c => `
 ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
-// Acontece nos grupos: carrossel com todos os grupos (3 por vez), em ordem sorteada a cada carregamento
+// Acontece nos grupos (box BANGH): à esquerda, o comentário de um participante, sorteado a cada carregamento da página
+// entre os cinco abaixo (fictícios). g: nome do grupo, como em GRUPOS; o botão leva à página desse grupo.
+const DEPOIMENTOS = [
+  { sigla:'MT', nome:'Marta T.', g:'Clube do Livro', cores:['#fff4dc', '#8a5a0e'], titulo:'Voltei a ler um livro por mês',
+    txt:'Entrei no grupo sem conhecer ninguém. Hoje a gente escolhe o livro juntos e se encontra uma vez por mês para conversar. É o compromisso que mais espero.' },
+  { sigla:'JA', nome:'Jorge A.', g:'Tecnologia Sem Medo', cores:['#e4edf6', '#013565'], titulo:'Perdi o medo do celular',
+    txt:'Eu tinha vergonha de perguntar coisa simples. No grupo ninguém ri de ninguém. Já pago minhas contas pelo aplicativo e ensino os vizinhos.' },
+  { sigla:'CR', nome:'Célia R.', g:'Culinária Saudável', cores:['#fbe9e2', '#b0513a'], titulo:'Toda semana tem receita nova lá em casa',
+    txt:'O desafio da semana me tirou do arroz com feijão de sempre. Testo a receita, mando a foto e ainda ganho três dicas para melhorar.' },
+  { sigla:'AD', nome:'Alexandre D.', g:'Caminhadas no Parque', cores:['#e6f2ea', '#1F5519'], titulo:'Caminhar sozinho eu sempre adiava',
+    txt:'Com hora marcada e gente esperando, eu vou. Cada um anda no seu ritmo, e a conversa do fim é a melhor parte do sábado.' },
+  { sigla:'HM', nome:'Helena M.', g:'Yoga & Meditação', cores:['#f1e7ee', '#7a3b52'], titulo:'Durmo melhor desde que comecei',
+    txt:'Achava que yoga não era para mim. As práticas guiadas são curtas e respeitam o limite de cada um. Hoje faço todos os dias, antes de dormir.' },
+];
+(function mostrarDepoimento(){
+  const d = embaralhar(DEPOIMENTOS)[0], i = GRUPOS.findIndex(g => g.t === d.g);
+  document.getElementById('depoimento').innerHTML = `
+      <div class="who"><span class="avatar" style="background:${d.cores[0]};color:${d.cores[1]}">${d.sigla}</span><div><b>${d.nome}</b><small>${d.g}</small></div></div>
+      <h3>“${d.titulo}”</h3>
+      <p>${d.txt}</p>
+      <a href="${i >= 0 ? urlGrupo(i) : urlPagina('grupos')}" class="btn">Conhecer o grupo</a>`;
+})();
+
+// Carrossel com todos os grupos (3 por vez), em ordem sorteada a cada carregamento
 // (cada cartão abre a página do grupo, grupo.html?g=n)
 document.getElementById('groupList').innerHTML = embaralhar(GRUPOS).map(g => {
   const n = GRUPOS.indexOf(g);
   return `
   <a href="${urlGrupo(n)}" class="vcard">
     <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+    <button type="button" class="fav" data-grupo="${g.t}" title="Salvar o grupo" aria-label="Salvar o grupo">${icone('salvar')}</button>
     ${g.novos ? `<span class="new">${g.novos} novas</span>` : ''}
     <div class="vc-info">
       <span class="vc-cat">${g.cat}</span>

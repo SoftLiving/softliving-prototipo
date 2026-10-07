@@ -6,19 +6,18 @@
 <title>Salvos · Atividades · SoftLiving (Protótipo · versão 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/estilos.css?v=202610011629">
+<link rel="stylesheet" href="assets/css/estilos.css?v=202610070236">
 </head>
 <body data-page="salvos" data-root="">
 
 <!-- Atividades · Salvos. As quatro páginas (Curtidas, Comentários, Acompanhar, Salvos) usam o mesmo atividades.js,
-     que monta o título, as abas e a lista conforme data-page. -->
+     que monta o título e a lista conforme data-page. Para ir de uma a outra, o submenu Atividades do menu lateral. -->
 <div class="page-head">
   <h1 id="atTitulo"></h1>
   <p id="atSub"></p>
 </div>
 
-<nav class="seg at-abas" id="atAbas" role="tablist" aria-label="Atividades" data-lateral-topo></nav>
-<section class="secao" id="atConteudo"></section>
+<section class="secao" id="atConteudo" data-lateral-topo></section>
 
 <!-- Patrocinador apoiador (um só por página) -->
 <div class="apoio"></div>
@@ -26,14 +25,15 @@
 <!-- Coluna lateral da direita (montada por lateral.js) -->
 <aside class="lateral" aria-label="Coluna lateral"></aside>
 
-<script src="assets/js/texto.js?v=202610011629"></script>
-<script src="assets/js/layout.js?v=202610011629"></script>
-<script src="assets/js/conteudos-dados.js?v=202610011629"></script>
-<script src="assets/js/colunas-dados.js?v=202610011629"></script>
-<script src="assets/js/grupos-dados.js?v=202610011629"></script>
-<script src="assets/js/lateral.js?v=202610011629"></script>
-<script src="assets/js/escuta-dados.js?v=202610011629"></script>
-<script src="assets/js/escuta.js?v=202610011629"></script>
-<script src="assets/js/atividades.js?v=202610011629"></script>
+<script src="assets/js/texto.js?v=202610070236"></script>
+<script src="assets/js/layout.js?v=202610070236"></script>
+<script src="assets/js/conteudos-dados.js?v=202610070236"></script>
+<script src="assets/js/colunas-dados.js?v=202610070236"></script>
+<script src="assets/js/grupos-dados.js?v=202610070236"></script>
+<script src="assets/js/lateral.js?v=202610070236"></script>
+<script src="assets/js/escuta-dados.js?v=202610070236"></script>
+<script src="assets/js/escuta.js?v=202610070236"></script>
+<script src="assets/js/estabelecimentos-dados.js?v=202610070236"></script>
+<script src="assets/js/atividades.js?v=202610070236"></script>
 </body>
 </html>

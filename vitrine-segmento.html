@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vitrines · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css?v=202610070236">
+<link rel="stylesheet" href="assets/css/vitrine.css?v=202610070236">
+<link rel="stylesheet" href="assets/css/conteudos.css?v=202610070236">
+</head>
+<body data-page="vitrine" data-root="">
+
+<!-- Página de um segmento das Vitrines (vitrine-segmento.html?s=gastronomia) ou de um bairro (?b=Leblon): aberta pelo
+     MSV (Menu segmento vitrine) e pelo box "Perto de você" da Vitrine.
+     Estrutura padrão das páginas de segmento de vitrine, nesta ordem: BEDHV, BDELDV, BSD, BDDLEV, BDS, BRPCV e BPDVV.
+     Estabelecimentos fictícios. Montada por vitrine-segmento.js. -->
+<a href="vitrine.html" class="es-voltar" data-goto="vitrine"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Vitrines</a>
+<div class="page-head">
+  <p class="kicker" id="vsKicker">Vitrines</p>
+  <h1 id="vsTitulo"></h1>
+  <p id="vsFrase"></p>
+</div>
+
+<!-- MSV · Menu segmento vitrine: o segmento aberto fica marcado -->
+<nav class="vt-categorias" id="vsSegmentos" aria-label="Segmentos das vitrines" data-lateral-topo></nav>
+
+<!-- 1) BEDHV · Box em destaque horizontal vitrine -->
+<section class="vt-bloco" id="vsBEDHV" data-box="BEDHV"></section>
+
+<!-- 2) BDELDV · Box destaque esquerda lista direita vitrine -->
+<section class="vt-bloco seg-box" id="vsBDELDV" data-box="BDELDV"></section>
+
+<!-- 3) BSD · Box super destaque -->
+<section class="vt-bloco" id="vsBSD" data-box="BSD"></section>
+
+<!-- Patrocinador apoiador (um só por página) -->
+<div class="apoio"></div>
+
+<!-- 4) BDDLEV · Box destaque direita lista esquerda vitrine -->
+<section class="vt-bloco seg-box" id="vsBDDLEV" data-box="BDDLEV"></section>
+
+<!-- 5) BDS · Box destaque simples -->
+<section class="vt-bloco" id="vsBDS" data-box="BDS"></section>
+
+<!-- 6) BRPCV · Box recomendado pela comunidade vitrine -->
+<section class="vt-bloco" id="vsBRPCV" data-box="BRPCV"></section>
+
+<!-- 7) BPDVV · Box perto de você vitrine -->
+<section class="vt-bloco" id="vsBPDVV" data-box="BPDVV"></section>
+
+<!-- Coluna lateral da direita (montada por lateral.js); a pesquisa do topo é a das Vitrines -->
+<aside class="lateral" aria-label="Coluna lateral"></aside>
+
+<script src="assets/js/texto.js?v=202610070236"></script>
+<script src="assets/js/layout.js?v=202610070236"></script>
+<script src="assets/js/estabelecimentos-dados.js?v=202610070236"></script>
+<script src="assets/js/grupos-dados.js?v=202610070236"></script>
+<script src="assets/js/lateral.js?v=202610070236"></script>
+<script src="assets/js/escuta-dados.js?v=202610070236"></script>
+<script src="assets/js/escuta.js?v=202610070236"></script>
+<script src="assets/js/vitrine-cartoes.js?v=202610070236"></script>
+<script src="assets/js/vitrine-segmento.js?v=202610070236"></script>
+</body>
+</html>

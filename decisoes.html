@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisões em aberto · SoftLiving (Protótipo · versão 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css?v=202610070236">
+</head>
+<body data-page="decisoes" data-root="">
+
+<!-- Página de trabalho do protótipo (não faz parte do produto): dúvidas que apareceram ao comparar a V2 com o site em
+     produção. Cada pergunta mostra como é hoje, como está no protótipo e as opções. Montada por decisoes.js. -->
+<div class="page-head">
+  <h1>Decisões em <span class="hl">aberto</span></h1>
+  <p>Dúvidas que apareceram ao comparar este protótipo com o site que está no ar. Escolha uma opção em cada pergunta e, no fim, copie as respostas para enviar ao desenvolvimento. Esta página é só de trabalho: não faz parte do portal.</p>
+</div>
+
+<section class="dc-resumo" id="dcResumo"></section>
+
+<section class="secao">
+  <div class="lista-topo"><div class="seg" id="dcFiltro" role="tablist"></div></div>
+  <div id="dcLista"></div>
+</section>
+
+<section class="secao dc-tomadas">
+  <h2>Já decidido</h2>
+  <ul id="dcTomadas"></ul>
+</section>
+
+<script src="assets/js/texto.js?v=202610070236"></script>
+<script src="assets/js/layout.js?v=202610070236"></script>
+<script src="assets/js/decisoes-dados.js?v=202610070236"></script>
+<script src="assets/js/decisoes.js?v=202610070236"></script>
+</body>
+</html>

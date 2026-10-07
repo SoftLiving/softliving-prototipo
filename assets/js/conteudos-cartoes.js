@@ -5,7 +5,7 @@
 // (mesma ordem de assuntos da Início, mais SoftLiving). Cada assunto tem página própria: assunto.html?a=<endereço>.
 const CT_ASSUNTOS = [
   ['Todos', null, 'ctLista', null, ''],
-  ['Bem-estar', 'Saúde mental e qualidade de vida', 'ct-bem-estar', 'bem-estar', 'Saúde mental, conexões e qualidade de vida.'],
+  ['Bem-estar', 'Saúde mental e qualidade de vida', null, 'bem-estar', 'Saúde mental, conexões e qualidade de vida.'],
   ['Saúde', 'Saúde e bem-estar físico', 'ct-saude', 'saude', 'Corpo em movimento, prevenção e bons hábitos.'],
   ['Estilo e casa', 'Estilo de vida e consumo', 'ct-estilo-e-casa', 'estilo-e-casa', 'Moda, casa e consumo com mais sentido.'],
   ['Viagem', 'Turismo e viagem', 'ct-viagem', 'viagem', 'Destinos para ir com calma, roteiros e boas mesas pelo caminho.'],
@@ -58,9 +58,3 @@ const ctItem = c => `
   <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${ctSalvar}
     <div><span class="cat">${ctRotulo(c.cat)}</span><h3>${c.t}</h3>
     <div class="meta"><span>${c.a}</span>${seloAcesso(c)}</div></div></a>`;
-// Quantas colunas o cartão "Ver todos" ocupa para fechar a grade do mosaico (em 3 e em 2 colunas), sem buraco no fim.
-// n: quantos cartões vêm antes dele; grande: o primeiro deles ocupa 2 colunas e 2 linhas (4 casas)
-function ctVerSpan(n, grande){
-  const casas = n + (grande ? 3 : 0);
-  return `--span3:${3 - casas % 3};--span2:${2 - casas % 2}`;
-}

@@ -72,7 +72,8 @@ comentarios[0].respostas.push({ n:col ? col.nome : `Redação ${LOGO}`, cor:auto
 
 // ===== Montagem =====
 const siglaDe = n => n.split(' ').filter(p => /^[A-ZÀ-Ú]/.test(p)).slice(0, 2).map(p => p[0]).join('');
-const nivelLetra = () => +(ldLer('v2LeituraLetra', 0));
+// Tamanho da letra: o mesmo ajuste da tela Acessibilidade (3 níveis, vale para o site todo); o A− / A+ é um atalho
+const nivelLetra = () => lerAcessibilidade().letra;
 function corpoTexto(){
   const lista = liberado() ? paragrafos : paragrafos.slice(0, 3);
   return lista.map(p => p.startsWith('## ') ? `<h2>${comLogoLd(escLd(p.slice(3)))}</h2>` : `<p>${comLogoLd(escLd(p))}</p>`).join('');
@@ -158,10 +159,11 @@ function render(){
         <button type="button" class="ld-acao ${salvo ? 'on' : ''}" data-salvar title="Salvar para ler depois">${icone('salvar')}<span>Salvar</span></button>
         <button type="button" class="ld-acao ${acompanhando() ? 'on' : ''}" data-acompanhar title="Receber aviso de comentários novos">${ldIcone('acompanhar')}<span>${acompanhando() ? 'Acompanhando' : 'Acompanhar'}</span></button>
         <button type="button" class="ld-acao" data-compartilhar title="Compartilhar">${ldIcone('compartilhar')}<span>Compartilhar</span></button>
+        <button type="button" class="ld-acao" data-encaminhar title="Encaminhar para amigos">${icone('encaminhar')}<span>Encaminhar</span></button>
         <button type="button" class="ld-acao" data-ouvir title="Ouvir o texto">${ldIcone('ouvir')}<span>Ouvir</span></button>
         <span class="ld-letra" role="group" aria-label="Tamanho da letra"><button type="button" data-letra="-1" aria-label="Diminuir a letra">A−</button><button type="button" data-letra="1" aria-label="Aumentar a letra">A+</button></span>
       </aside>
-      <div class="ld-texto" style="--ld-escala:${[1, 1.1, 1.22][nivelLetra()]}">
+      <div class="ld-texto">
         <p class="ld-demo">Texto de demonstração do protótipo.</p>
         ${corpoTexto()}
         ${liberado() ? '' : htmlTrava()}
@@ -212,9 +214,11 @@ function render(){
       <div class="ld-mais-grade">${relacionados.map(r => `
         <a href="${urlConteudo(r.t)}" class="vcard">
           <img src="${fotoUrl(r.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+          <button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
           <div class="vc-info">
             <span class="vc-cat">${r.cat ? (ASSUNTO_CURTO[r.cat] || r.cat) : (COLUNISTAS.find(k => r.a.startsWith(k.nome)) || {}).aba || ''}</span>
             <h3>${comLogoLd(r.t)}</h3>
+            <span class="vc-autor">${comLogoLd(r.a)}</span>
             <div class="vc-row">${seloAcesso(r)}</div>
           </div>
         </a>`).join('')}
@@ -232,6 +236,8 @@ function pararLeitura(){ if('speechSynthesis' in window) speechSynthesis.cancel(
 pagina.addEventListener('click', ev => {
   const b = ev.target.closest('button'); if(!b) return;
   const d = b.dataset;
+  // bandeirinha dos cartões do Continue lendo: salva sem abrir o conteúdo
+  if(b.classList.contains('fav')){ ev.preventDefault(); mostrarAviso(alternarSalvo(b) ? 'Salvo para ler depois' : 'Removido dos salvos'); return; }
   if(d.curtir !== undefined){
     const l = ldLer('v2Curtidas', []), on = !l.includes(c.t);
     ldGravar('v2Curtidas', on ? [...l, c.t] : l.filter(x => x !== c.t));
@@ -243,6 +249,10 @@ pagina.addEventListener('click', ev => {
   } else if(d.compartilhar !== undefined){
     abrirCompartilhar({ titulo:c.t, texto:'Achei que você ia gostar deste conteúdo da SoftLiving:', url:location.href.split('#')[0] });
     return;
+  } else if(d.encaminhar !== undefined){
+    if(!lerLogado()){ ev.stopPropagation(); scrollTo(0, 0); janelaEntrar.abrir(true); return; }   // encaminhar é só para quem entrou
+    abrirEncaminhar({ titulo:c.t });
+    return;
   } else if(d.ouvir !== undefined){
     if(!('speechSynthesis' in window)){ mostrarAviso('Seu navegador não consegue ler o texto em voz alta'); return; }
     if(speechSynthesis.speaking){ pararLeitura(); b.querySelector('span').textContent = 'Ouvir'; b.classList.remove('ouvindo'); return; }
@@ -252,8 +262,10 @@ pagina.addEventListener('click', ev => {
     speechSynthesis.speak(fala); b.querySelector('span').textContent = 'Parar'; b.classList.add('ouvindo');
     return;
   } else if(d.letra){
-    ldGravar('v2LeituraLetra', Math.min(2, Math.max(0, nivelLetra() + +d.letra)));
-    pagina.querySelector('.ld-texto').style.setProperty('--ld-escala', [1, 1.1, 1.22][nivelLetra()]);
+    const a = lerAcessibilidade(), novo = Math.min(2, Math.max(0, a.letra + +d.letra));
+    if(novo === a.letra){ mostrarAviso(novo ? 'Esta já é a maior letra' : 'Esta já é a menor letra'); return; }
+    a.letra = novo; gravarAcessibilidade(a);
+    mostrarAviso(`Letra: ${['padrão', 'grande', 'extra grande'][novo]}`);
     return;
   } else if(d.entrarDestravar !== undefined){
     ev.stopPropagation();                                              // senão o mesmo clique conta como "fora" e fecha a janela

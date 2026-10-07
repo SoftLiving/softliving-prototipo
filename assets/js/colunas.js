@@ -11,11 +11,14 @@ const colunaPorTitulo = t => TODAS_COLUNAS().find(c => c.t === t);
 const colEstado = { autor:null, categoria:'Todos' };
 const totalPublicadas = COLUNISTAS.reduce((s, col) => s + col.publicadas, 0);
 
-// Coluna do dia (topo) e, no mesmo box, sugestões num carrossel horizontal (4 por vez)
+// Box BDRC (Box destaque resumo colunas): em cima, sempre a coluna do dia, que é sempre gratuita; embaixo, "Mais
+// colunas para você", com sugestões sorteadas a cada carregamento, num carrossel horizontal (4 por vez). As sugestões
+// usam o cartão de artigo: segmento, título, autor, selo e salvar.
 const autorDia = COLUNISTAS.find(col => col.nome === COLUNA_DO_DIA.colunista);
 const ultimaDia = colunaPorTitulo(COLUNA_DO_DIA.ultima);
 document.getElementById('colDia').innerHTML = `
   <a href="${urlConteudo(ultimaDia.t)}" class="cd-topo">
+    <button type="button" class="fav" data-titulo="${ultimaDia.t.replace(/"/g, '&quot;')}" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
     <div class="dl-foto foto"><img src="${fotoUrl(ultimaDia.foto, 1000)}" alt=""></div>
     <div class="dl-texto">
       <span class="cd-selos"><span class="kicker">Coluna do dia</span>${seloAcesso(ultimaDia)}</span>
@@ -30,7 +33,9 @@ document.getElementById('colDia').innerHTML = `
     <div class="cd-sug-lista">
       ${embaralhar(TODAS_COLUNAS().filter(c => c.t !== COLUNA_DO_DIA.ultima)).map(c => `
       <a href="${urlConteudo(c.t)}" class="cd-sug"><img class="foto" src="${fotoUrl(c.foto, 400)}" alt="" loading="lazy">
-        <b>${comLogo(c.t)}</b><small>${colunistaDe(c).nome}</small></a>`).join('')}
+        <button type="button" class="fav" data-titulo="${c.t.replace(/"/g, '&quot;')}" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>
+        <span class="cat">${colunistaDe(c).coluna ? comLogo(colunistaDe(c).coluna) : colunistaDe(c).aba}</span>
+        <b>${comLogo(c.t)}</b><small>${colunistaDe(c).nome}</small>${seloAcesso(c)}</a>`).join('')}
     </div>
   </div>`;
 
@@ -38,6 +43,11 @@ ativarCarrossel(document.querySelector('#colDia .cd-sug-lista'), 'h');   // 4 po
 
 document.getElementById('colConta').textContent = `${COLUNISTAS.length} colunistas · ${totalPublicadas} colunas publicadas`;
 
+// Box BTOC (Box todos os colunistas): abas de fichário por segmento. Na aba "Todos" aparecem no máximo 8 colunistas
+// (4 colunas e 2 linhas); nas abas de cada segmento, quantas linhas forem precisas para listar todos os colunistas dele.
+const BTOC_TODOS = 8;
+// Quais colunistas entram na aba "Todos": sorteados uma vez a cada visita (não mudam ao trocar de aba)
+const BTOC_SORTEADOS = new Set(embaralhar(COLUNISTAS.map((_, i) => i)).slice(0, BTOC_TODOS));
 function renderColunas(){
   // Navegue por autor
   document.getElementById('colAutores').innerHTML = COLUNISTAS.map((col, i) => `
@@ -53,7 +63,8 @@ function renderColunas(){
   const categorias = [['Todos', 'Todos'], ...unicas.filter(c => c[0] === 'SoftLiving'), ...unicas.filter(c => c[0] !== 'SoftLiving')];
   document.getElementById('colCategorias').innerHTML = categorias.map(([cat, aba]) => `<button type="button" role="tab" class="${cat === colEstado.categoria ? 'on' : ''}" aria-selected="${cat === colEstado.categoria}" data-cat="${cat}" title="${cat}">${aba === 'SoftLiving' ? LOGO : aba}</button>`).join('');
   document.getElementById('colunistas').innerHTML = COLUNISTAS.map((col, i) => ({ col, i }))
-    .filter(({ col }) => colEstado.categoria === 'Todos' || col.categoria === colEstado.categoria)
+    // "Todos": 2 linhas de 4, com os colunistas sorteados; nas abas de segmento, todos os colunistas dele
+    .filter(({ col, i }) => colEstado.categoria === 'Todos' ? BTOC_SORTEADOS.has(i) : col.categoria === colEstado.categoria)
     .map(({ col, i }) => `
     <a href="${urlColunista(col.nome)}" class="colunista">
       <span class="col-topo">${avatarDe(col)}</span>
@@ -64,7 +75,7 @@ function renderColunas(){
       <span class="col-rodape"><small>${col.publicadas} ${col.publicadas === 1 ? 'coluna' : 'colunas'}</small><span class="col-ler">Conhecer →</span></span>
     </a>`).join('');
 
-  // Colunas em destaque (ou as do autor escolhido)
+  // Colunas em destaque (ou as do autor escolhido), no box BEDH: carrossel horizontal de cartões
   const autor = colEstado.autor === null ? null : COLUNISTAS[colEstado.autor];
   const lista = autor ? colunasDe(autor.nome) : COL_ORDEM;
   document.getElementById('colTitulo').textContent = autor ? `Colunas de ${autor.nome}` : 'Colunas em destaque';
@@ -84,6 +95,7 @@ function renderColunas(){
       </div>
     </a>`;
   }).join('');
+  ativarCarrossel(document.getElementById('colGrade'), 'h');   // box BEDH: 4 por vez, com os botões de rolagem
 }
 
 // Escolher um autor (pelas fotos ou pelos cartões) mostra as colunas dele; clicar de novo volta a todas
@@ -99,6 +111,12 @@ function escolherAutor(i){
 document.getElementById('colCategorias').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ colEstado.categoria = b.dataset.cat; renderColunas(); } });
 document.getElementById('colTodas').addEventListener('click', () => { colEstado.autor = null; renderColunas(); });
 document.getElementById('colArquivo').addEventListener('click', () => mostrarAviso('O arquivo completo de colunas fica disponível com saldo na carteira (demonstração)'));
+document.getElementById('colDia').addEventListener('click', e => {
+  const fav = e.target.closest('.fav');
+  if(!fav) return;
+  e.preventDefault();
+  mostrarAviso(alternarSalvo(fav) ? 'Salvo para ler depois' : 'Removido dos salvos');
+});
 document.getElementById('colGrade').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(!fav) return;

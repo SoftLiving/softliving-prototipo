@@ -15,8 +15,9 @@ function renderGrupos(){
   document.getElementById('grGrade').innerHTML = lista.map(g => `
     <a href="${urlGrupo(g.i)}" class="vcard vcard-grupo">
       <img src="${fotoUrl(g.foto, 600)}" alt="" loading="lazy"><span class="vc-blur"></span>
+      <button type="button" class="fav" data-grupo="${g.t}" title="Salvar o grupo" aria-label="Salvar o grupo">${icone('salvar')}</button>
       <span class="vc-topo">
-        ${g.premium ? '<span class="selo-vc premium">Premium</span>' : '<span class="selo-vc">Grátis</span>'}
+        ${g.premium ? `<span class="selo-vc premium">Premium · ${g.preco} créditos/mês</span>` : '<span class="selo-vc">Grátis</span>'}
         ${g.novos ? `<span class="selo-vc novas">${g.novos} novas</span>` : ''}
       </span>
       <div class="vc-info">
@@ -38,6 +39,8 @@ function renderGrupos(){
 
 document.getElementById('grTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ grEstado.tipo = b.dataset.tipo; renderGrupos(); } });
 document.getElementById('grGrade').addEventListener('click', e => {
+  const fav = e.target.closest('.fav');
+  if(fav){ e.preventDefault(); avisoSalvo(fav, alternarSalvo(fav)); return; }
   const entrar = e.target.closest('[data-participar]'), sair = e.target.closest('[data-sair]');
   if(!entrar && !sair) return;          // resto do cartão: abre a página do grupo
   e.preventDefault();
