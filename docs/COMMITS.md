@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 7 de outubro de 2026 (quarta-feira)
-- **Total:** 286 commits
+- **Total:** 288 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 6 |
+| [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 8 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
 | [29 de setembro de 2026 (terça-feira)](#2026-09-29) | 12 |
@@ -30,10 +30,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-07"></a>
-## 7 de outubro de 2026 (quarta-feira) · 6 commits
+## 7 de outubro de 2026 (quarta-feira) · 8 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 13:58 | [`0f8f0b5`](https://github.com/SoftLiving/softliving-prototipo/commit/0f8f0b57f00a8820fd661787db6df08e127bbb92) | Documentação toda na pasta docs; HANDOFF com mapa do código e sem histórico por data |
+| 02:53 | [`72dd065`](https://github.com/SoftLiving/softliving-prototipo/commit/72dd065277aea74743f2879e2929062ae970eae0) | COMMITS.md: histórico atualizado |
 | 02:53 | [`566a401`](https://github.com/SoftLiving/softliving-prototipo/commit/566a4015e185a6298b05edb2d3690a849c4f4179) | Conteúdos: Todos os conteúdos em prévia de 15 com o botão Mais conteúdos; login sem o aviso do protótipo |
 | 02:47 | [`862afa9`](https://github.com/SoftLiving/softliving-prototipo/commit/862afa9d6e1d6e150f7577d606cf172eec948438) | COMMITS.md: histórico atualizado com a nova página Grupos |
 | 02:47 | [`4227bec`](https://github.com/SoftLiving/softliving-prototipo/commit/4227bec63982d29bbedc7c4dbbd3d45cd3496516) | Grupos na estrutura de revista de Conteúdos e Vitrines, com cartões de grupo |
