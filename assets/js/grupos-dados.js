@@ -22,6 +22,9 @@ const GRUPOS = [
   // Mais dois grupos premium de exemplo (no fim da lista, para não mudar o número dos outros grupos)
   {cat:"Saúde", icon:"activity", t:"Pilates e Postura", foto:"1506126613408-eca07ce68773", d:"Aulas guiadas de pilates, com atenção à postura e ao ritmo de cada pessoa.", membros:14, participando:false, premium:true},
   {cat:"Carreira", icon:"briefcase", t:"Empreendedorismo Maduro", foto:"1460925895917-afdab827c52f", d:"Para quem quer abrir ou tocar um negócio depois dos 50, com troca de experiências e mentores convidados.", membros:11, participando:false, premium:true},
+  // Mais dois premium, para a lista de premium da página Grupos (box BDVG) ter rolagem
+  {cat:"Gastronomia", icon:"restaurant", t:"Mesa de Degustação", foto:"1414235077428-338989a2e8c0", d:"Jantares temáticos com um chef convidado, em mesas pequenas, uma vez por mês.", membros:8, participando:false, premium:true},
+  {cat:"Cultura", icon:"map", t:"Passeios Culturais no Rio", foto:"1483729558449-99ef09a8c325", d:"Visitas guiadas a museus, centros culturais e bairros históricos, com um guia da comunidade.", membros:16, participando:false, premium:true},
 ];
 
 // Preço dos grupos premium: opções de mensalidade, em créditos por mês (R$1 = 1 crédito). Nos exemplos, cada grupo
@@ -60,4 +63,26 @@ function alternarParticipacao(g, entrar){
   g.membros += entrar ? 1 : -1;
   if(!entrar) g.novos = 0;
   salvarParticipacao();
+}
+// Comentários de participantes (box BANGH, "Acontece nos grupos", na Início e na página Grupos): um é sorteado a cada
+// carregamento. Fictícios. g: nome do grupo, como em GRUPOS; o botão leva à página desse grupo.
+const DEPOIMENTOS = [
+  { sigla:'MT', nome:'Marta T.', g:'Clube do Livro', cores:['#fff4dc', '#8a5a0e'], titulo:'Voltei a ler um livro por mês',
+    txt:'Entrei no grupo sem conhecer ninguém. Hoje a gente escolhe o livro juntos e se encontra uma vez por mês para conversar. É o compromisso que mais espero.' },
+  { sigla:'JA', nome:'Jorge A.', g:'Tecnologia Sem Medo', cores:['#e4edf6', '#013565'], titulo:'Perdi o medo do celular',
+    txt:'Eu tinha vergonha de perguntar coisa simples. No grupo ninguém ri de ninguém. Já pago minhas contas pelo aplicativo e ensino os vizinhos.' },
+  { sigla:'CR', nome:'Célia R.', g:'Culinária Saudável', cores:['#fbe9e2', '#b0513a'], titulo:'Toda semana tem receita nova lá em casa',
+    txt:'O desafio da semana me tirou do arroz com feijão de sempre. Testo a receita, mando a foto e ainda ganho três dicas para melhorar.' },
+  { sigla:'AD', nome:'Alexandre D.', g:'Caminhadas no Parque', cores:['#e6f2ea', '#1F5519'], titulo:'Caminhar sozinho eu sempre adiava',
+    txt:'Com hora marcada e gente esperando, eu vou. Cada um anda no seu ritmo, e a conversa do fim é a melhor parte do sábado.' },
+  { sigla:'HM', nome:'Helena M.', g:'Yoga & Meditação', cores:['#f1e7ee', '#7a3b52'], titulo:'Durmo melhor desde que comecei',
+    txt:'Achava que yoga não era para mim. As práticas guiadas são curtas e respeitam o limite de cada um. Hoje faço todos os dias, antes de dormir.' },
+];
+function htmlDepoimentoGrupo(){
+  const d = embaralhar(DEPOIMENTOS)[0], i = GRUPOS.findIndex(g => g.t === d.g);
+  return `
+      <div class="who"><span class="avatar" style="background:${d.cores[0]};color:${d.cores[1]}">${d.sigla}</span><div><b>${d.nome}</b><small>${d.g}</small></div></div>
+      <h3>“${d.titulo}”</h3>
+      <p>${d.txt}</p>
+      <a href="${i >= 0 ? urlGrupo(i) : urlPagina('grupos')}" class="btn">Conhecer o grupo</a>`;
 }

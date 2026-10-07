@@ -145,7 +145,7 @@ Mantêm a rota, as funções e o conteúdo de hoje, e recebem só os padrões gl
 | Leitura | Curtir, Acompanhar, Salvar, Compartilhar, Ouvir, Encaminhar; Comentários; Continue lendo | As mesmas ações. Encaminhar abre uma janela com os 7 amigos com quem a pessoa mais interage, busca pelo nome e um recado; é só para amigos. Ganha A− / A+ (o mesmo ajuste de letra da Acessibilidade), "Quem escreveu", responder comentários e o novo box de compra |
 | Busca | Conteúdos, grupos e oportunidades | Conteúdos, colunas, colunistas e grupos; sugestões e buscas recentes. **Sem oportunidades** |
 | Notificações | Filtros Todas e Não lidas; com data | Mais filtros por tipo, preferências, janela do sino; **com data e hora** |
-| Grupos | Filtro por categoria e busca; premium com preço por grupo (ex.: "50 créditos/mês") | Filtros Todos, Participando e Disponíveis |
+| Grupos | Filtro por categoria e busca; premium com preço por grupo (ex.: "50 créditos/mês") | Estrutura de revista, como Conteúdos e Vitrines: capa, segmentos em círculos (MSG), destaques (BEDHG), coleções (BDELDG e BDDLEG), premium e gratuitos lado a lado (BDVG), Acontece nos grupos (BANGH) e, no fim, todos os grupos com os filtros Todos, Participando e Disponíveis |
 | Grupo | "Quem participa" (Conectar, Conversar), abas Tópicos e Mural, "Rodadas" | Abas Conversas, Mural, Encontros e Membros; grupos de desapego com Anúncios |
 | Amigos | "Conexões": Recebidos, Enviados, Conectados e Seguindo | Pedidos de amizade e três abas: Seus amigos, Sugestões e Seguindo. "Mensagem" abre a Conversa; nas sugestões dá para Adicionar ou Seguir. É a única tela de pessoas da V2 |
 | Carteira | Saldo em Créditos e Bônus; "Ativação da conta" só por Pix (R$ 50,00 → 50 + 50); histórico com data e saldo após | Recarga de R$20 a R$200 por Pix ou cartão, com bônus progressivo; aviso de que o bônus vale 12 meses; extrato **com data e hora**, com filtros |
@@ -347,7 +347,7 @@ divergirem, **vale o protótipo**: abrir a tela em `localhost` e conferir com o 
 ### 4.9 Boxes e menus (catálogo)
 
 Cada tipo de box e de menu tem **nome e código**. O código é a sigla do nome (a inicial de cada palavra); os de
-vitrine terminam em V. **As páginas são montadas só com os boxes deste catálogo**: formato fora da lista não deve ser
+vitrine terminam em V e os de grupo, em G. **As páginas são montadas só com os boxes deste catálogo**: formato fora da lista não deve ser
 implementado. O box não tem título fixo: **título, subtítulo e botão são definidos na montagem de cada página.**
 
 A mesma lista, mantida em dia pelo produto, está na planilha "SoftLiving · Boxes e menus (nomenclatura)":
@@ -359,7 +359,7 @@ Os três cartões usados nos boxes (conteúdo, vitrine e grupo) estão descritos
 |---|---|---|---|---|---|
 | BEAH | Box explore por assunto horizontal | Carrossel de cartões com abas de fichário para trocar de assunto | Conteúdo | Horizontal (4) | Início |
 | BEDH | Box em destaque horizontal | Carrossel de cartões, sem abas | Conteúdo | Horizontal (4) | Colunas ("Colunas em destaque"); segmento de conteúdo |
-| BANGH | Box acontece nos grupos horizontal | Comentário de participante em destaque à esquerda e grupos em carrossel ao lado | Grupo | Horizontal (3) | Início |
+| BANGH | Box acontece nos grupos horizontal | Comentário de participante em destaque à esquerda e grupos em carrossel ao lado | Grupo | Horizontal (3) | Início; Grupos |
 | BDELD | Box destaque esquerda lista direita | Destaque grande à esquerda e lista à direita | Conteúdo | Vertical (4) | Conteúdos (coleção); segmento de conteúdo |
 | BDDLE | Box destaque direita lista esquerda | Espelho do BDELD | Conteúdo | Vertical (4) | Conteúdos ("Estilo e casa"); segmento de conteúdo |
 | BSD | Box super destaque | Faixa larga com a foto de fundo e o texto por cima; um item | Conteúdo (ou vitrine, nas páginas de vitrine) | Não | Conteúdos ("Viagem"); segmentos de conteúdo e de vitrine |
@@ -374,8 +374,13 @@ Os três cartões usados nos boxes (conteúdo, vitrine e grupo) estão descritos
 | BDVV | Box dois verticais vitrine | Versão de vitrine do BDVC | Vitrine | Vertical (3) | Vitrines ("Gastronomia" e "Saúde") |
 | BRPCV | Box recomendado pela comunidade vitrine | Carrossel de depoimentos de membros, 3 colunas | Depoimento | Horizontal (3) | Vitrines; segmento de vitrine |
 | BPDVV | Box perto de você vitrine | Linha de 4 cartões de bairro, sorteados | Bairro | Não | Vitrines; segmento de vitrine |
+| BEDHG | Box em destaque horizontal grupos | Carrossel de cartões de grupo, sem abas | Grupo | Horizontal (4) | Grupos |
+| BDELDG | Box destaque esquerda lista direita grupos | Versão de grupo do BDELD | Grupo | Vertical (4) | Grupos (coleção) |
+| BDDLEG | Box destaque direita lista esquerda grupos | Versão de grupo do BDDLE | Grupo | Vertical (4) | Grupos (coleção) |
+| BDVG | Box dois verticais grupos | Versão de grupo do BDVC | Grupo | Vertical (3) | Grupos ("Grupos premium" e "Grupos gratuitos") |
 | MSC | Menu segmentos conteúdo | Linha de círculos com foto e nome do segmento | Não usa | Não | Conteúdos; segmento de conteúdo |
 | MSV | Menu segmento vitrine | Linha de círculos com foto e nome do segmento | Não usa | Não | Vitrines; segmento de vitrine |
+| MSG | Menu segmentos grupos | Linha de círculos com foto e nome do segmento | Não usa | Não | Grupos |
 
 **Detalhes de cada box**
 
@@ -383,6 +388,8 @@ Os três cartões usados nos boxes (conteúdo, vitrine e grupo) estão descritos
 - **Boxes BDELD e BDDLE:** um conteúdo em destaque (foto grande, segmento, título, resumo, autor e selo) ao lado de uma lista de conteúdos sugeridos em carrossel vertical, 4 por vez. No BDELD o destaque fica à esquerda; no BDDLE, à direita. No celular, o destaque vem em cima e a lista embaixo.
 - **Boxes BSD e BDS:** mostram um item só, sem carrossel. O BSD é uma faixa larga com a foto de fundo e o texto por cima; o BDS é um box claro com foto quadrada à esquerda e, à direita, uma etiqueta, o título, o resumo e o autor.
 - **Boxes BEDHV, BDELDV e BDDLEV:** os mesmos formatos do BEDH, do BDELD e do BDDLE, com cartões de vitrine (iniciais, segmento e bairro, nome, resumo e "Ver vitrine", sem selo).
+- **Boxes BEDHG, BDELDG, BDDLEG e BDVG (página Grupos, 07/10/2026):** os mesmos formatos do BEDH, do BDELD, do BDDLE e do BDVC, com **cartões de grupo** (segmento, título, quantidade de participantes, botão de entrar e botão salvar). Nos cartões verticais o botão é "Participar" ou "Participando · Sair" e age ali mesmo, sem abrir o grupo; nos outros formatos o rótulo é "Participar" ou "Ver grupo" e o cartão inteiro abre o grupo. Grupo premium leva "Premium" junto do segmento (e o preço por mês no selo do cartão vertical). Ao entrar ou sair, o botão e a contagem daquele grupo mudam em todos os boxes da página.
+- **MSG (Menu segmentos grupos):** igual ao MSC e ao MSV na aparência, mas **não abre outra página**: escolher um segmento filtra a lista "Todos os grupos", no fim da página, e leva a tela até ela; clicar de novo no mesmo segmento desfaz o filtro.
 - **Box BANGH ("Acontece nos grupos"):** o comentário de participante à esquerda muda a cada carregamento da página, sorteado entre os comentários disponíveis (5 de exemplo no protótipo). Mostra as iniciais, o nome abreviado, o grupo, uma frase de destaque, o comentário e um botão que leva ao grupo citado. Quem escolhe os comentários que entram no sorteio é a curadoria.
 - **Box BDRC (Box destaque resumo colunas), na página Colunas:** a parte de cima mostra sempre a **coluna do dia** (foto, nome da coluna, colunista, resumo e a última coluna publicada), e **a coluna do dia é sempre gratuita**. A parte de baixo, "Mais colunas para você", mostra as sugestões **em carrossel horizontal, 4 por vez**, **sorteadas a cada carregamento**, em cartões com as mesmas informações dos artigos (segmento, título, autor, selo e salvar).
 - **Box BNPA (Box navegue pelo autor), na página Colunas:** grade com todos os colunistas em cartões compactos (iniciais, nome, segmento e quantidade de colunas), 4 por linha no computador, com a contagem de colunistas e de colunas publicadas abaixo do título. Sem carrossel e sem abas. Clicar num colunista filtra as colunas da página por ele; clicar de novo desfaz.
@@ -472,7 +479,8 @@ Ações: Curtir, Salvar, Acompanhar a conversa, Compartilhar, Encaminhar, Ouvir 
 
 ### 5.5 Grupos
 
-- Lista com filtros Todos, Participando e Disponíveis; botão Participar ou Sair.
+- **Página Grupos na estrutura de revista** (07/10/2026), nesta ordem: capa; MSG; BEDHG ("Em destaque nos grupos", 8 grupos sorteados); duas coleções, em BDELDG e BDDLEG; faixa do apoiador; BDVG ("Grupos premium" e "Grupos gratuitos"); BANGH (comentário sorteado e os 6 grupos com mais participantes); e "Todos os grupos".
+- "Todos os grupos": lista com filtros Todos, Participando e Disponíveis, mais o segmento escolhido no MSG; botão Participar ou Sair. **Mostra uma prévia de 8 grupos e, embaixo, o botão "Ver mais", que abre mais 8 a cada clique**, até acabar a lista (o botão some). Trocar de filtro ou de segmento volta à prévia de 8.
 - **Grupo comum:** abas Conversas, Mural, Encontros e Membros.
 - **Grupo de desapego:** abas Anúncios, Mural e Membros. Anúncio é de Venda, Doação ou Troca, com categoria e estado
   de conservação; concluído vira Vendido, Doado ou Trocado.
@@ -670,8 +678,9 @@ Tomadas na montagem das páginas. Já estão aplicadas nas seções acima e no p
 Pontos que ainda dependem de resposta do produto. **Não implementar antes da resposta**; onde há sugestão, ela vale
 só como ponto de partida.
 
+- **Códigos dos boxes de grupo:** BEDHG, BDELDG, BDDLEG, BDVG e MSG seguem a regra dos de vitrine (final G); falta a confirmação dos nomes pelo produto. Os títulos e as coleções da página Grupos são provisórios.
 - **Títulos dos boxes nas páginas de segmento:** os do protótipo são provisórios (4.9).
-- **Blocos ainda sem nome:** a lista "Todos os conteúdos" (fichário, filtro e lista em 3 colunas), a grade da página Grupos, o topo de página, a faixa de apoio, a newsletter e as faixas de chamada. Implementar como estão no protótipo; o nome vem depois.
+- **Blocos ainda sem nome:** a lista "Todos os conteúdos" (fichário, filtro e lista em 3 colunas), a lista "Todos os grupos" da página Grupos, o topo de página, a faixa de apoio, a newsletter e as faixas de chamada. Implementar como estão no protótipo; o nome vem depois.
 - **Coluna da direita por página:** a coluna será contextual, mas as opções de cada página ainda não foram definidas (4.5). Até lá, vale o conjunto único de quatro blocos.
 - **Pesquisa externa:** se dá créditos e para quem é enviada (5.7).
 - **Atividades (Curtidas, Comentários, Acompanhar, Salvos):** as rotas da V1 existem, mas o conteúdo delas não foi comparado com o protótipo.

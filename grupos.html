@@ -6,37 +6,73 @@
 <title>Grupos · SoftLiving (Protótipo · versão 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/estilos.css?v=202610070236">
+<link rel="stylesheet" href="assets/css/estilos.css?v=202610070247">
+<link rel="stylesheet" href="assets/css/vitrine.css?v=202610070247">
+<link rel="stylesheet" href="assets/css/conteudos.css?v=202610070247">
 </head>
 <body data-page="grupos" data-root="">
 
-<!-- Tela Grupos (referência: grupos.html da versão 1): Todos/Participando/Disponíveis e grade de grupos com Participar/Sair -->
-<div class="page-head">
-  <h1><span class="hl">Grupos</span></h1>
-  <p>Encontre pessoas com os mesmos interesses e participe das conversas e encontros.</p>
-</div>
+<!-- Tela Grupos, na mesma estrutura de revista das páginas Conteúdos e Vitrines, com cartões de grupo (segmento, título,
+     participantes, botão de entrar e salvar). Montada por grupos.js. Grupos, pessoas e comentários são fictícios. -->
 
-<section class="secao" id="grLista" data-lateral-topo>
+<!-- Capa editorial -->
+<section class="vt-capa">
+  <div class="vt-capa-texto">
+    <p class="kicker">Grupos <span class="sig"><span class="soft">Soft</span><span class="living">Living</span></span></p>
+    <h1>Pessoas, conversas e encontros em torno do que você <span class="hl">gosta</span></h1>
+    <p class="vt-lead">Encontre gente com os mesmos interesses e participe das conversas e dos encontros, no seu ritmo.</p>
+  </div>
+</section>
+
+<!-- MSG · Menu segmentos grupos: segmentos em círculos com foto; cada um filtra a lista de todos os grupos -->
+<nav class="vt-categorias" id="grSegmentos" data-lateral-topo aria-label="Segmentos dos grupos"></nav>
+
+<!-- Em destaque, no box BEDHG: carrossel horizontal de cartões de grupo -->
+<section class="vt-bloco" data-box="BEDHG">
+  <div class="vt-titulo"><h2>Em destaque nos grupos</h2><p>Para conhecer e entrar hoje.</p></div>
+  <div class="vt-destaques" id="grDestaques"></div>
+</section>
+
+<!-- Coleções, nos boxes BDELDG e BDDLEG: destaque de um lado e lista em carrossel vertical do outro -->
+<section class="vt-bloco" id="grColecoes"></section>
+
+<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
+<div class="apoio"></div>
+
+<!-- Premium e gratuitos lado a lado, no box BDVG: capa e lista em carrossel vertical em cada um -->
+<div id="grDoisVerticais" data-box="BDVG"></div>
+
+<!-- Acontece nos grupos, no box BANGH: comentário de um participante e os grupos mais movimentados -->
+<section class="vt-bloco" data-box="BANGH">
+  <div class="vt-titulo"><h2>Acontece nos grupos</h2><p>O que os participantes contam e onde a conversa está mais animada.</p></div>
+  <div class="community">
+    <div class="quote" id="grDepoimento"></div>
+    <div class="groups" id="grMovimento"></div>
+  </div>
+</section>
+
+<!-- Todos os grupos: prévia de 8, com "Ver mais" de 8 em 8; Todos/Participando/Disponíveis e o segmento escolhido no menu de círculos -->
+<section class="vt-bloco" id="grLista">
+  <div class="vt-titulo"><h2>Todos os grupos</h2><p>Escolha um segmento nos círculos do topo ou veja a lista completa.</p></div>
   <div class="lista-topo">
     <div class="seg" id="grTipos" role="tablist"></div>
     <span class="lista-conta" id="grConta"></span>
   </div>
   <div class="grade" id="grGrade"></div>
+  <!-- Prévia de 8 grupos; cada clique em "Ver mais" abre mais 8 -->
+  <div class="gr-mais" id="grMaisBox" hidden><button type="button" class="btn ghost" id="grMais"></button></div>
   <p class="vazio" id="grVazio" hidden></p>
 </section>
-
-<!-- Patrocinador apoiador (um só por página): sorteado a cada visita (layout.js) -->
-<div class="apoio"></div>
 
 <!-- Coluna lateral da direita (montada por lateral.js) -->
 <aside class="lateral" aria-label="Coluna lateral"></aside>
 
-<script src="assets/js/texto.js?v=202610070236"></script>
-<script src="assets/js/layout.js?v=202610070236"></script>
-<script src="assets/js/grupos-dados.js?v=202610070236"></script>
-<script src="assets/js/lateral.js?v=202610070236"></script>
-<script src="assets/js/escuta-dados.js?v=202610070236"></script>
-<script src="assets/js/escuta.js?v=202610070236"></script>
-<script src="assets/js/grupos.js?v=202610070236"></script>
+<script src="assets/js/texto.js?v=202610070247"></script>
+<script src="assets/js/layout.js?v=202610070247"></script>
+<script src="assets/js/grupos-dados.js?v=202610070247"></script>
+<script src="assets/js/lateral.js?v=202610070247"></script>
+<script src="assets/js/escuta-dados.js?v=202610070247"></script>
+<script src="assets/js/escuta.js?v=202610070247"></script>
+<script src="assets/js/grupos.js?v=202610070247"></script>
 </body>
 </html>

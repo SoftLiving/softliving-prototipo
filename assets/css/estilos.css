@@ -2076,3 +2076,11 @@ main .item > div{ min-width:0; }   /* o texto do item respeita a largura da colu
    A folga lateral do carrossel vertical (feita para a sombra do hover) cobria a bandeirinha dos itens da coluna
    vizinha e o mouse não conseguia clicar nela. Aqui a folga fica menor que a metade do espaço entre as colunas. */
 .ct-dupla .trilho-v{ padding:8px 10px; margin:-8px -10px; }
+/* Página Grupos em estrutura de revista: o botão de entrar fica num invólucro que não muda o alinhamento da linha */
+.gr-acao{ display:contents; }
+#grDoisVerticais{ margin:26px 0 12px; }
+#grLista .lista-topo{ margin-top:4px; }
+.lista-conta .link{ background:none; border:0; padding:0; font:inherit; color:var(--navy); text-decoration:underline; cursor:pointer; }
+#grSegmentos .vt-cat{ cursor:pointer; }
+.gr-mais{ display:flex; justify-content:center; margin-top:22px; }
+.gr-mais[hidden]{ display:none; }
