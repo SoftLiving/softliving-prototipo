@@ -3,31 +3,99 @@
 Registro de todas as mudanças do protótipo, desde o primeiro commit, para acompanhamento do desenvolvimento.
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
-- **Período:** 23 de setembro de 2026 (quarta-feira) a 30 de setembro de 2026 (quarta-feira)
-- **Total:** 232 commits
+- **Período:** 23 de setembro de 2026 (quarta-feira) a 7 de outubro de 2026 (quarta-feira)
+- **Total:** 282 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
+- **Horários:** de Brasília.
 
 > Contexto: em 28/09/2026 a versão 2 (antes na pasta `v2/`) passou a ser o protótipo na raiz e a versão 1 foi
 > apagada (continua neste histórico). Commits anteriores a essa data que citam "versão 1" ou "v2/" são dessa fase.
+
+> Em 07/10/2026 o trabalho de vários dias (handoff da V1 para a V2, catálogo de boxes, telas novas e decisões) entrou
+> em um commit só. O detalhe do que mudou está em [docs/HANDOFF.md](docs/HANDOFF.md).
 
 ## Resumo por dia
 
 | Dia | Commits |
 |---|---|
-| [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 44 |
+| [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 2 |
+| [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
+| [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
 | [29 de setembro de 2026 (terça-feira)](#2026-09-29) | 12 |
 | [28 de setembro de 2026 (segunda-feira)](#2026-09-28) | 17 |
 | [27 de setembro de 2026 (domingo)](#2026-09-27) | 36 |
 | [26 de setembro de 2026 (sábado)](#2026-09-26) | 61 |
 | [25 de setembro de 2026 (sexta-feira)](#2026-09-25) | 42 |
-| [24 de setembro de 2026 (quinta-feira)](#2026-09-24) | 10 |
-| [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 10 |
+| [24 de setembro de 2026 (quinta-feira)](#2026-09-24) | 9 |
+| [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
-<a id="2026-09-30"></a>
-## 30 de setembro de 2026 (quarta-feira) · 44 commits
+<a id="2026-10-07"></a>
+## 7 de outubro de 2026 (quarta-feira) · 2 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:37 | [`6a746ab`](https://github.com/SoftLiving/softliving-prototipo/commit/6a746ab47d286567a6bda22280baa46da84cbb08) | Handoff da V1 para a V2 e catálogo de boxes: documento do desenvolvedor, telas novas e decisões aplicadas |
+| 02:37 | [`7e56f9f`](https://github.com/SoftLiving/softliving-prototipo/commit/7e56f9f7c7eb431c8357a4e4f473716e9fd9cbe6) | Junta o histórico local (COMMITS.md) com os 47 commits de 01/10/2026 que já estavam no GitHub |
+
+<a id="2026-10-01"></a>
+## 1 de outubro de 2026 (quinta-feira) · 36 commits
+
+| Hora | Commit | Descrição |
+|---|---|---|
+| 13:29 | [`f46220b`](https://github.com/SoftLiving/softliving-prototipo/commit/f46220bf2bbb91121d0476dfce89dc533375ac99) | Cartões de conteúdo já destravado ficam sem etiqueta (só Grátis ou o preço nos fechados) |
+| 13:26 | [`a3160ea`](https://github.com/SoftLiving/softliving-prototipo/commit/a3160ea6fea73907e721a1b32292bc6199146876) | Versão nos endereços de estilos e scripts (ferramentas/versao.py) para o navegador baixar a versão nova a cada publicação |
+| 13:23 | [`efc7518`](https://github.com/SoftLiving/softliving-prototipo/commit/efc75181ad7b8f7a5a96502bb5ec05123911b36f) | Convite para destravar sem valores em reais (só créditos) |
+| 13:19 | [`b8df8d8`](https://github.com/SoftLiving/softliving-prototipo/commit/b8df8d835e54ae14cedbb22b86814d4a2c4b3f34) | Convite para destravar: box azul (como a pesquisa) e cartão do preço dourado, com textos e botão ajustados às novas cores |
+| 13:14 | [`b47d1f0`](https://github.com/SoftLiving/softliving-prototipo/commit/b47d1f0600b644f9bf5c2d8859760a9cf9798c8c) | Convite para destravar refeito: o porquê à esquerda (rótulo, título, mensagem e 3 motivos em lista) e o preço num cartão à direita (valor grande, botão, saldo); empilha no celular |
+| 13:10 | [`6369b47`](https://github.com/SoftLiving/softliving-prototipo/commit/6369b4742f7971cc2338b8f98b60bccd579d522f) | Convite para destravar: sem o bloco A seguir neste conteúdo; concordância na nota do débito |
+| 02:28 | [`bcd2e01`](https://github.com/SoftLiving/softliving-prototipo/commit/bcd2e015c32ca059d0f0c62675a4b91874297b12) | Continue lendo como regra geral no fim de todo artigo: 3 relacionados, fixos durante a visita (não trocam ao curtir ou salvar) |
+| 02:23 | [`af86cfb`](https://github.com/SoftLiving/softliving-prototipo/commit/af86cfb1c2d8e9a4d9b6cf90cb3fb6f999ea5d11) | Teste de pagamentos: cerca de 90% dos conteúdos pagos (1, 2 ou 3 créditos), com chave para desligar (TESTE_PAGAMENTOS) |
+| 02:21 | [`8075b7a`](https://github.com/SoftLiving/softliving-prototipo/commit/8075b7a9eadd3917db95d80cc670c4107a4b581b) | Destravar debita os créditos da carteira: saldo único (saldoCreditos) no topo, menu, Carteira e Perfil; compra entra no extrato; sem saldo, pede recarga |
+| 02:18 | [`e7ff374`](https://github.com/SoftLiving/softliving-prototipo/commit/e7ff3742ad38c382e01f50363878c2d961e6316a) | Convite para destravar: prévia desfocada e partes a seguir; box com 10 títulos e 10 mensagens sorteados (sem anúncios, curadoria paga pelos créditos), motivos, preço, saldo e botão conforme login e saldo |
+| 02:09 | [`754f8de`](https://github.com/SoftLiving/softliving-prototipo/commit/754f8de39f0c55057398c7ca728e43815c3c4da6) | Selo de acesso em todos os cartões de conteúdo: Grátis, preço em créditos com cadeado ou Desbloqueado (conteúdos já destravados); tira os últimos botões de ler dos destaques |
+| 01:59 | [`9819933`](https://github.com/SoftLiving/softliving-prototipo/commit/98199331cc2ccd05d773b8ca9f9b45dc402c8382) | Cartões de conteúdo sem botão Ler/Destravar (o cartão inteiro abre o conteúdo); Atividades com o cartão clicável |
+| 01:50 | [`46d31b3`](https://github.com/SoftLiving/softliving-prototipo/commit/46d31b3c28f7af25abea79d759b44c23356402ef) | Carrosséis: só a seta do lado do mouse acende, aos poucos, conforme ele se aproxima; a outra fica apagada |
+| 01:46 | [`ac1daa8`](https://github.com/SoftLiving/softliving-prototipo/commit/ac1daa8bedffb5562cbaf6ba8c951486d03c8d18) | Pesquisa de escuta: subtítulo legível no box azul (conflito com o .es-sub da Vitrine) e botão Responder desativado mais legível |
+| 01:42 | [`1c56e90`](https://github.com/SoftLiving/softliving-prototipo/commit/1c56e90b19e453b0c63b74b0cc98a2dffd2913c0) | Chat da Ajuda: logo na sua pergunta (balão azul) sempre nas cores claras, direto no estilo |
+| 01:40 | [`0728d58`](https://github.com/SoftLiving/softliving-prototipo/commit/0728d58ed062f98e989d4ffb25cbd8f9965864ed) | Regra do logo em fundo escuro: cores claras da marca (mesma fonte), automática na página inteira (inclusive chat da Ajuda, degradês, fotos e cartões com foto) |
+| 01:30 | [`39a9f6c`](https://github.com/SoftLiving/softliving-prototipo/commit/39a9f6c60245fd55770d81a30630e5d2acf02f05) | Minhas Comunidades: sem conteúdo pago; cartões sem etiqueta de Grátis/créditos e sem filtro Grátis/Premium |
+| 01:24 | [`32a04f5`](https://github.com/SoftLiving/softliving-prototipo/commit/32a04f579899d5428e9f27e113dbdd9ec34e8cfa) | Página própria para cada assunto (assunto.html?a=...): os círculos da Conteúdos levam a ela; destaque, mosaico, lista com Todos/Grátis/Premium e Leia também; cartões comuns em conteudos-cartoes.js |
+| 01:17 | [`4edf640`](https://github.com/SoftLiving/softliving-prototipo/commit/4edf6406f0bf149ad8faf2112cbbd743cb5eeb8a) | Carrosséis: com mouse, as setas só aparecem ao passar o mouse no carrossel (entrada rápida, saída lenta); no celular continuam à vista |
+| 01:15 | [`655d4f1`](https://github.com/SoftLiving/softliving-prototipo/commit/655d4f1e5ceec1d1373e95354ecd4fb780387d84) | Listas em carrossel com itens da mesma altura (título e resumo em até 2 linhas); itens não encolhem mais e o carrossel rola; novo conteúdo de Estilo e casa |
+| 01:11 | [`7836a79`](https://github.com/SoftLiving/softliving-prototipo/commit/7836a798ff475abaadd99619a81a259eecfd4590) | Conteúdos: novo conteúdo de Tecnologia para os dois lados (Saúde e Tecnologia) terem carrossel; listas sempre alinhadas |
+| 01:06 | [`f16aab1`](https://github.com/SoftLiving/softliving-prototipo/commit/f16aab1a860db345813f312fc0a0e5ba1242fa09) | Hover com saída lenta; salvar só no hover nos cartões; Saúde e Tecnologia com lista de 3 em carrossel; carrossel vertical nas listas de Conteúdos e Vitrine; 5 conteúdos novos de Saúde e Tecnologia |
+| 00:58 | [`54b4bf2`](https://github.com/SoftLiving/softliving-prototipo/commit/54b4bf2e00b5ebf59d14b36a08701ac1798aa202) | Conteúdos e Vitrine sorteados a cada visita, como na Início: ordem dentro dos blocos, cartão grande, coleção, posição dos blocos, categorias e bairros |
+| 00:53 | [`b5782fa`](https://github.com/SoftLiving/softliving-prototipo/commit/b5782fa478eed7e8811603e6c80cef17f829665f) | Conteúdos: Todos os conteúdos em lista de 3 colunas, com o item de lista do site (miniatura, assunto, título, autor e preço) |
+| 00:53 | [`f219078`](https://github.com/SoftLiving/softliving-prototipo/commit/f219078b9b91b8a185a20155a9b3f8c96bccdf22) | Hover: sombras e caixas brancas perto da borda do conteúdo não são mais cortadas (corte para o lado passa para a janela; listas verticais com mais espaço lateral) |
+| 00:43 | [`7922a83`](https://github.com/SoftLiving/softliving-prototipo/commit/7922a83ea0d4cea346406c23d84155efab9cb8d4) | Conteúdos no formato de revista da Vitrine: assuntos em círculos, carrossel em destaque, coleção, um bloco por assunto com layouts diferentes (mosaico, coleção, dupla, faixa, carta) e a lista completa com filtros no fim |
+| 00:35 | [`31ca052`](https://github.com/SoftLiving/softliving-prototipo/commit/31ca05294154571b9e2121c233813b91fe792572) | Celular: janelas do topo (Saiba mais, Entrar, sino, conta, créditos) presas ao topo em vez da tela; somem junto com ele ao rolar |
+| 00:32 | [`b4b671e`](https://github.com/SoftLiving/softliving-prototipo/commit/b4b671ef2851e5f1cd97f7267309d269aa08a97c) | Tela de login: box centralizado na tela inteira, não só na área do conteúdo, sem passar por cima do menu lateral |
+| 00:29 | [`70fdf51`](https://github.com/SoftLiving/softliving-prototipo/commit/70fdf51462a33290743d73b6f464c180a0c9583c) | Tela de login: box horizontal (duas colunas) em telas deitadas e vertical em telas em pé; versão compacta para celular deitado |
+| 00:22 | [`92898c6`](https://github.com/SoftLiving/softliving-prototipo/commit/92898c6cf0c4d6b21a85c546872c43f3ae67b324) | Tela de login: volta ao fundo de sempre do site, sem o verde, a animação e as telas de vidro; box claro igual à janela Entrar |
+| 00:18 | [`e87dcec`](https://github.com/SoftLiving/softliving-prototipo/commit/e87dcec5ff499fb0e6481f4e761b9ea739172880) | Tela de login: seis telas de vidro em linhas finas em volta do box, ilustrando o portal (Conteúdos, Grupos, Comunidades, Carteira, Vitrine, Colunas), flutuando devagar |
+| 00:15 | [`e153e7a`](https://github.com/SoftLiving/softliving-prototipo/commit/e153e7a9a63b4d15ee726efee1b8426a4680817a) | Fundo vivo da tela de login: mais rápido e com formas ovais que giram, esticam e mudam de direção com mais frequência |
+| 00:11 | [`98671d9`](https://github.com/SoftLiving/softliving-prototipo/commit/98671d95df10f3577c6b9a0121a87fe6ca95a4a3) | Fundo vivo da tela de login: 4x mais rápido, resolução maior e quatro manchas de borda firme (menos embaçado em alguns pontos) |
+| 00:07 | [`cc6e016`](https://github.com/SoftLiving/softliving-prototipo/commit/cc6e0166ad8c45f0a4eae357e860104d45a6bd8e) | Tela de login: fundo verde vivo, com manchas que flutuam devagar, respiram e misturam os tons (canvas leve); imagem parada fica de reserva e para quem pede menos movimento |
+| 00:03 | [`8c858a2`](https://github.com/SoftLiving/softliving-prototipo/commit/8c858a2b4af56379b83ca1ca95f89be8e2b338c4) | Tela de login: menu lateral recolhido fica 30% visível no computador, volta a 100% ao passar o mouse |
+| 00:00 | [`110644d`](https://github.com/SoftLiving/softliving-prototipo/commit/110644db27063ce896020e3c8171c6d96edb819c) | Entrar do menu lateral leva à nova tela de login (entrar.html), que volta para a página de origem; menu lateral sempre recolhido na tela de login |
+
+<a id="2026-09-30"></a>
+## 30 de setembro de 2026 (quarta-feira) · 56 commits
+
+| Hora | Commit | Descrição |
+|---|---|---|
+| 23:57 | [`d2945e6`](https://github.com/SoftLiving/softliving-prototipo/commit/d2945e6078b15a235f5d155918fcb73abe728df5) | Páginas com login: rodapé volta à cor de sempre (sem o verde do fundo); aviso do login reescrito sem dois-pontos para não quebrar a linha |
+| 23:54 | [`108bfa0`](https://github.com/SoftLiving/softliving-prototipo/commit/108bfa0a7fe4208b2e5594dcf2dc8eb30da88771) | Entrar (protótipo): clicar em Entrar com os campos vazios já entra; login 123 e senha 123 continuam valendo |
+| 23:48 | [`5e7659a`](https://github.com/SoftLiving/softliving-prototipo/commit/5e7659a94637181d141305a95c68d64f09f068bd) | Páginas com login: fundo verde abstrato cobrindo a tela toda (imagem própria em SVG), no lugar da foto; topo e menu legíveis sobre o verde |
+| 23:44 | [`d27a0c4`](https://github.com/SoftLiving/softliving-prototipo/commit/d27a0c4f51d57fef9ddbd1bbd7401542f1e6e2c6) | Páginas com login: foto de paisagem ao fundo e box de entrada em vidro, com o mesmo conteúdo da janela Entrar (formulário único para os dois) |
+| 23:37 | [`5a0c4f9`](https://github.com/SoftLiving/softliving-prototipo/commit/5a0c4f9a15f1e5b15d884c17daff6a724889cc3b) | Só com login também: Notificações, Indicações, Amigos e Minhas Comunidades; sem login somem o sino, os números do menu e a coluna da direita dessas páginas, e o topo do menu mostra Entrar no lugar do nome |
+| 23:34 | [`ed0ef92`](https://github.com/SoftLiving/softliving-prototipo/commit/ed0ef9290e8cbe3f5479e1b59b6d6df900270c59) | Só com login: perfil, carteira e Atividades mostram o aviso para entrar; saldo de créditos do topo e carteira do menu só aparecem logado |
+| 23:30 | [`531eb75`](https://github.com/SoftLiving/softliving-prototipo/commit/531eb75cdc9fddac6e708e57a3dea7c052c8dd6b) | Menu institucional numa lista única (INSTITUCIONAL no layout.js) para topo, rodapé e Saiba mais; Segurança sai do rodapé |
+| 23:24 | [`8550168`](https://github.com/SoftLiving/softliving-prototipo/commit/855016817ecaee3558af193259ff6b369f9cdcf9) | Saiba mais (celular): mesmos itens do menu institucional do computador, sem Segurança |
+| 22:46 | [`9b00491`](https://github.com/SoftLiving/softliving-prototipo/commit/9b00491ac2c09de9638a7bc4a9d97d71da5c1735) | Minhas Comunidades no celular: só o box da comunidade aberta; as outras favoritas ficam em Suas favoritas, no topo da lista da setinha. Lista com fundo branco sólido (o texto da página aparecia por trás) |
+| 21:36 | [`f2bd7f4`](https://github.com/SoftLiving/softliving-prototipo/commit/f2bd7f495bf5cbafec4c5a31d123f77ca8b0b516) | Regra de largura única: conteúdo com a mesma largura em todas as páginas; sem a coluna da direita, o espaço dela fica vazio (Vitrine, Perfil, Conteúdo etc. deixam de esticar) |
+| 21:22 | [`1470aac`](https://github.com/SoftLiving/softliving-prototipo/commit/1470aacc6449c72461534c9564cfc3fc5b3f8cdc) | Conteúdo: coluna de ações mais larga (160px) para o Acompanhando caber no botão, sem quebrar o texto |
+| 17:18 | [`7921bfd`](https://github.com/SoftLiving/softliving-prototipo/commit/7921bfd28980827bc7dc5b753805d85ef6a7accc) | COMMITS.md: histórico de todos os commits do protótipo desde o início, por dia, com link para cada commit no GitHub (para acompanhamento do desenvolvimento) |
 | 17:14 | [`913e76b`](https://github.com/SoftLiving/softliving-prototipo/commit/913e76b7f7d12d29b03977423ed660091633193a) | Meu perfil: Editar, Ver todos e Ver a Vitrine logo ao lado do título de cada seção |
 | 17:13 | [`7381f9f`](https://github.com/SoftLiving/softliving-prototipo/commit/7381f9fcaf4e7cf4efb5598c22b14f6900064a8a) | Meu perfil: seções Minhas comunidades (as 7 comunidades, com link para cada uma) e Minhas vitrines favoritas; o Salvar do estabelecimento passa a guardar os favoritos; número de comunidades do topo vem da lista |
 | 17:10 | [`510ded8`](https://github.com/SoftLiving/softliving-prototipo/commit/510ded8b75e0a8beedf388068540d24b40508590) | Meu perfil: interesses marcados em azul (azul-claro com texto azul da marca) |
@@ -272,7 +340,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | 00:03 | [`2d1d02f`](https://github.com/SoftLiving/softliving-prototipo/commit/2d1d02f2328ae05174a6ed749895e29eb33a6428) | Página interna de grupo (grupo.html?g=n), aberta por todos os cards de Grupos |
 
 <a id="2026-09-24"></a>
-## 24 de setembro de 2026 (quinta-feira) · 10 commits
+## 24 de setembro de 2026 (quinta-feira) · 9 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
@@ -283,12 +351,11 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | 23:48 | [`3c1165d`](https://github.com/SoftLiving/softliving-prototipo/commit/3c1165d286d085300d789c23f8cf8f0e37fde3f6) | Separa o protótipo em páginas individuais |
 | 23:43 | [`4033894`](https://github.com/SoftLiving/softliving-prototipo/commit/4033894d324cb28cffa3157860d90056092f5ee8) | Ponto de restauração antes de separar o protótipo em várias páginas |
 | 23:19 | [`9b2df63`](https://github.com/SoftLiving/softliving-prototipo/commit/9b2df6353f2ef0a2f1ade5713c3cb12bf6c23c94) | Tela Início no menu lateral |
-| 05:04 | [`05e57dc`](https://github.com/SoftLiving/softliving-prototipo/commit/05e57dc2dd86106cb9858dad59048f504a7fca8a) | Menu horizontal institucional e logo na assinatura oficial |
-| 01:00 | [`ca1a479`](https://github.com/SoftLiving/softliving-prototipo/commit/ca1a479cf0a8681c21de8e1c8f5fa0894fc71635) | Protótipo inicial: Minhas Comunidades (12 clientes fictícios, agendamento, classificados, toggle Paciente/Colaborador) |
+| 02:04 | [`05e57dc`](https://github.com/SoftLiving/softliving-prototipo/commit/05e57dc2dd86106cb9858dad59048f504a7fca8a) | Menu horizontal institucional e logo na assinatura oficial |
 | 00:47 | [`5abf806`](https://github.com/SoftLiving/softliving-prototipo/commit/5abf806a06c64eac669add9e39319612a2d318ca) | Menu lateral: Conteúdos, Grupos e Conexões abrem página em branco |
 
 <a id="2026-09-23"></a>
-## 23 de setembro de 2026 (quarta-feira) · 10 commits
+## 23 de setembro de 2026 (quarta-feira) · 11 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
@@ -302,6 +369,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | 22:39 | [`8a9889d`](https://github.com/SoftLiving/softliving-prototipo/commit/8a9889d9e3f68b9f41dc0fd39f2250842b3d719a) | Adiciona selo de protótipo em aprovação e aviso de dados fictícios |
 | 22:19 | [`7b84ac0`](https://github.com/SoftLiving/softliving-prototipo/commit/7b84ac0a9be25d12ebf5ece722a68ba8246d3d43) | Traz o protótipo Minhas Comunidades |
 | 22:15 | [`13364a7`](https://github.com/SoftLiving/softliving-prototipo/commit/13364a7b1063b9d2321640e903e2fb0548eb5130) | Primeiro commit |
+| 22:00 | [`ca1a479`](https://github.com/SoftLiving/softliving-prototipo/commit/ca1a479cf0a8681c21de8e1c8f5fa0894fc71635) | Protótipo inicial: Minhas Comunidades (12 clientes fictícios, agendamento, classificados, toggle Paciente/Colaborador) |
 
 ---
 
