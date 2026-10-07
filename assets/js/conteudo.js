@@ -2,12 +2,13 @@
 // Cabeçalho (assunto, título, resumo, autor e ações), foto de capa, texto completo (TEXTOS_COMPLETOS, de demonstração),
 // convite para destravar nos conteúdos premium, quem escreveu, comentários e "Continue lendo".
 // Regras da v2: sem tempo de leitura e sem data de publicação. Curtir e salvar ficam guardados no navegador
-// (v2Curtidas e v2Salvos, os mesmos das Atividades). Destravar é só demonstração (nenhum crédito é descontado).
+// (v2Curtidas e v2Salvos, os mesmos das Atividades). Destravar debita os créditos da carteira (comprarConteudo, no layout.js).
 const LD_ICONES = {
   curtir:'<path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/>',
   compartilhar:'<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.5M8.2 13.2l7.6 4.5"/>',
   ouvir:'<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
   cadeado:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  ok:'<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/>',
   enviar:'<path d="M4 12l16-8-6 16-2.5-6.5z"/>',
   acompanhar:'<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
   responder:'<path d="M9 7 4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>',
@@ -58,7 +59,7 @@ let respondendo = null;   // número do comentário com o campo de resposta aber
 // Voltar: para a página de onde a pessoa veio (Início, Conteúdos, Colunas, Busca...); sem origem, Conteúdos ou Colunas
 const voltarPara = (() => {
   const ROTULOS = { 'index.html':'Início', '':'Início', 'conteudos.html':'Conteúdos', 'colunas.html':'Colunas', 'busca.html':'Busca', 'curtidas.html':'Curtidas',
-    'salvos.html':'Salvos', 'comentarios.html':'Comentários', 'acompanhar.html':'Acompanhar', 'notificacoes.html':'Notificações', 'conteudo.html':'Voltar' };
+    'salvos.html':'Salvos', 'comentarios.html':'Comentários', 'acompanhar.html':'Acompanhar', 'notificacoes.html':'Notificações', 'conteudo.html':'Voltar', 'assunto.html':'Voltar' };
   try {
     const r = new URL(document.referrer);
     const arq = r.pathname.split('/').pop();
@@ -76,9 +77,69 @@ function corpoTexto(){
   const lista = liberado() ? paragrafos : paragrafos.slice(0, 3);
   return lista.map(p => p.startsWith('## ') ? `<h2>${comLogoLd(escLd(p.slice(3)))}</h2>` : `<p>${comLogoLd(escLd(p))}</p>`).join('');
 }
+
+// ===== Convite para destravar (conteúdo pago) =====
+// Prévia: depois dos parágrafos abertos, o próximo aparece desfocado e some aos poucos. No box, o título, a mensagem e três motivos são sorteados a cada vez que o conteúdo
+// abre (10 títulos e 10 mensagens), sempre explicando por que pagar: a SoftLiving não vende anúncios nem dados, e a
+// curadoria com especialistas é paga pelos créditos de quem lê.
+const travaPreco = `${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}`;
+const TRAVA_TITULOS = [
+  'Continue lendo daqui', 'A melhor parte vem agora', 'Quer saber como termina?', 'Destrave e leia até o fim',
+  'O restante deste texto está a um clique', 'Leia o texto completo', 'Ainda tem muito para descobrir aqui',
+  'Siga lendo, sem anúncios no caminho', 'Termine esta leitura', 'Esta leitura continua para quem apoia a curadoria',
+];
+const TRAVA_MENSAGENS = [
+  'A SoftLiving não vende anúncios nem os seus dados. Quem sustenta a curadoria é você, com créditos, e é isso que nos permite convidar especialistas de verdade.',
+  'Aqui não há banner piscando nem vídeo que começa sozinho. Seus créditos pagam quem escreve e mantêm a leitura limpa, do jeito que você merece.',
+  'Este texto foi escolhido pela nossa curadoria e escrito por quem entende do assunto. Ao destravar, parte do valor vai direto para o especialista.',
+  'Portais gratuitos ganham dinheiro com a sua atenção e com os seus dados. Na SoftLiving o modelo é outro. Você paga só pelo que quer ler, e ninguém lucra com o seu perfil.',
+  'Conteúdo bom dá trabalho, com pesquisa, entrevista e revisão. Os créditos garantem que esse trabalho seja reconhecido, sem depender de anunciantes.',
+  'Sem anúncios, ninguém escolhe o que você lê pensando em cliques. A curadoria escolhe pelo que é útil para a sua vida.',
+  'Cada crédito vira apoio direto a médicos, educadores e especialistas que escrevem para a comunidade, com calma e cuidado.',
+  'Você não é o produto aqui. Por isso não mostramos propaganda nem usamos o que você lê para vender a terceiros.',
+  'Destravou, é seu. O conteúdo fica na sua conta para reler quando quiser, sem prazo e sem assinatura obrigatória.',
+  'Ao destravar, você ajuda a manter a SoftLiving independente, com curadoria séria e conteúdos pensados para quem vive com mais calma.',
+];
+const TRAVA_MOTIVOS = ['Sem anúncios, nunca', 'Especialistas escolhidos pela curadoria', 'Seus dados não são o produto',
+  'Parte do valor vai para quem escreve', 'Fica na sua conta para sempre', 'Leitura sem interrupções'];
+const trava = { titulo:embaralhar(TRAVA_TITULOS)[0], mensagem:embaralhar(TRAVA_MENSAGENS)[0], motivos:embaralhar(TRAVA_MOTIVOS).slice(0, 3) };
+function htmlTrava(){
+  const resto = paragrafos.slice(3);
+  const borrado = resto.find(p => !p.startsWith('## '));
+  const saldo = saldoCreditos(), logado = lerLogado(), falta = logado && saldo < c.credits;
+  const botao = !logado ? `<button type="button" class="btn lg" data-entrar-destravar>Entrar para destravar</button>`
+    : falta ? `<a href="${urlPagina('carteira')}#recarga" class="btn lg">Recarregar créditos</a>`
+    : `<button type="button" class="btn lg" data-destravar>Destravar agora</button>`;
+  const faltam = c.credits - saldo;
+  return `
+    ${borrado ? `<p class="ld-previa" aria-hidden="true">${comLogoLd(escLd(borrado))}</p>` : ''}
+    <div class="ld-trava">
+      <div class="ld-trava-box">
+        <div class="ld-trava-porque">
+          <span class="ld-trava-rotulo">${ldIcone('cadeado')}Conteúdo exclusivo</span>
+          <h2>${trava.titulo}</h2>
+          <p class="ld-trava-msg">${comLogoLd(trava.mensagem)}</p>
+          <ul class="ld-motivos">${trava.motivos.map(m => `<li>${ldIcone('ok')}<span>${m}</span></li>`).join('')}</ul>
+        </div>
+        <div class="ld-trava-compra">
+          <span class="ld-trava-para">Para continuar lendo</span>
+          <p class="ld-trava-valor"><b>${c.credits}</b> ${c.credits === 1 ? 'crédito' : 'créditos'}</p>
+          ${botao}
+          <p class="ld-trava-saldo${falta ? ' falta' : ''}">${!logado ? 'Entre na sua conta para usar seus créditos.'
+            : falta ? `Seu saldo: <b>${saldo} ${saldo === 1 ? 'crédito' : 'créditos'}</b>. ${faltam === 1 ? 'Falta 1' : `Faltam ${faltam}`}.`
+            : `Seu saldo: <b>${saldo} créditos</b>`}</p>
+          ${falta ? '<p class="ld-trava-nota">Na primeira recarga, você ganha o dobro de créditos.</p>' : ''}
+          <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
+        </div>
+      </div>
+    </div>`;
+}
+// Continue lendo (regra geral): o fim de todo artigo mostra 3 cartões de conteúdos relacionados, primeiro os do mesmo
+// assunto (ou do mesmo colunista) e, se faltar, outros quaisquer. Sorteados uma vez por visita: curtir, salvar ou mudar
+// a letra refaz a página, mas não troca as sugestões.
+const relacionados = embaralhar(LD_TODOS.filter(x => x !== c && (c.cat ? x.cat === c.cat : x.a === c.a))).concat(embaralhar(LD_TODOS.filter(x => x !== c))).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
 function render(){
   const curtido = ldLer('v2Curtidas', []).includes(c.t), salvo = lerSalvos().includes(c.t);
-  const relacionados = embaralhar(LD_TODOS.filter(x => x !== c && (c.cat ? x.cat === c.cat : x.a === c.a))).concat(embaralhar(LD_TODOS.filter(x => x !== c))).filter((x, i, a) => a.indexOf(x) === i).slice(0, 3);
   document.getElementById('ldPagina').innerHTML = `
     <a href="${voltarPara.href}" class="es-voltar ld-voltar">${icone('voltar')}${voltarPara.rotulo}</a>
     <header class="ld-topo">
@@ -103,14 +164,7 @@ function render(){
       <div class="ld-texto" style="--ld-escala:${[1, 1.1, 1.22][nivelLetra()]}">
         <p class="ld-demo">Texto de demonstração do protótipo.</p>
         ${corpoTexto()}
-        ${liberado() ? '' : `
-          <div class="ld-trava">
-            <span class="ld-trava-ic">${ldIcone('cadeado')}</span>
-            <h2>Continue lendo com ${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</h2>
-            <p>Este conteúdo é de um especialista escolhido pela nossa curadoria. Seus créditos valorizam quem escreve, sem anúncios interrompendo a leitura.</p>
-            <button type="button" class="btn lg" data-destravar>Destravar por ${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</button>
-            <a href="${urlPagina('carteira')}" class="ld-trava-link">Ver minha carteira</a>
-          </div>`}
+        ${liberado() ? '' : htmlTrava()}
       </div>
     </div>
     ${liberado() ? `
@@ -161,7 +215,7 @@ function render(){
           <div class="vc-info">
             <span class="vc-cat">${r.cat ? (ASSUNTO_CURTO[r.cat] || r.cat) : (COLUNISTAS.find(k => r.a.startsWith(k.nome)) || {}).aba || ''}</span>
             <h3>${comLogoLd(r.t)}</h3>
-            <div class="vc-row">${r.badge === 'premium' ? `<span class="vc-chip premium">${r.credits} ${r.credits === 1 ? 'crédito' : 'créditos'}</span>` : '<span class="vc-chip">Grátis</span>'}<span class="vc-btn">Ler ${icone('seta')}</span></div>
+            <div class="vc-row">${seloAcesso(r)}</div>
           </div>
         </a>`).join('')}
       </div>
@@ -201,9 +255,14 @@ pagina.addEventListener('click', ev => {
     ldGravar('v2LeituraLetra', Math.min(2, Math.max(0, nivelLetra() + +d.letra)));
     pagina.querySelector('.ld-texto').style.setProperty('--ld-escala', [1, 1.1, 1.22][nivelLetra()]);
     return;
+  } else if(d.entrarDestravar !== undefined){
+    ev.stopPropagation();                                              // senão o mesmo clique conta como "fora" e fecha a janela
+    scrollTo(0, 0); janelaEntrar.abrir(true);                          // depois de entrar, o box troca para Destravar
+    return;
   } else if(d.destravar !== undefined){
-    destravados = [...destravados, c.t]; ldGravar('v2Destravados', destravados);
-    mostrarAviso('Conteúdo destravado. No protótipo, nenhum crédito é descontado');
+    if(!comprarConteudo(c)){ mostrarAviso('Saldo insuficiente. Recarregue a carteira para destravar'); return; }
+    destravados = lerDestravados();
+    mostrarAviso(`Conteúdo destravado. ${travaPreco} ${c.credits === 1 ? 'debitado' : 'debitados'} da carteira; saldo de ${saldoCreditos()} créditos`);
   } else if(d.curtirCom){
     const m = comentarios[+d.curtirCom]; m.curti = !m.curti;
   } else if(d.acompanhar !== undefined){
@@ -234,3 +293,7 @@ pagina.addEventListener('submit', ev => {
   const y = scrollY; render(); scrollTo(0, y);
 });
 addEventListener('pagehide', pararLeitura);
+
+// Entrou ou saiu da conta com o convite na tela: o box se refaz (Entrar para destravar ↔ Destravar, saldo)
+new MutationObserver(() => { if(!liberado() && pagina.querySelector('.ld-trava')){ const y = scrollY; render(); scrollTo(0, y); } })
+  .observe(document.body, { attributes:true, attributeFilter:['class'] });

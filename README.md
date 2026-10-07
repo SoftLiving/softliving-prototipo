@@ -22,7 +22,8 @@ institucional/              conhecer, quem-somos, como-funciona, beneficios, emp
 assets/css/estilos.css      Todos os estilos: Base · Moldura · Componentes · uma seção por tela
 assets/js/layout.js         Moldura comum: faixa de protótipo, aviso, menu lateral,
                             topo, rodapé, barra do celular; saldo de créditos, logo em texto, fotoUrl(), mostrarAviso()
-conteudos.html              Tela Conteúdos: busca, destaque, assuntos (fichário), Todos/Grátis/Premium, grade
+conteudos.html              Tela Conteúdos (estrutura da Vitrine): assuntos em círculos, destaque, coleções, um bloco por assunto, lista completa
+assunto.html                Página de cada assunto (?a=bem-estar|saude|estilo-e-casa|viagem|tecnologia|softliving): destaque, mosaico, lista, Leia também
 busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupos (?q=termo); sugestões com o campo vazio
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
@@ -31,6 +32,7 @@ indicacoes.html             Tela Indicações: link de convite, convite por e-ma
 perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
 ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
 simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável
+entrar.html                 Tela de login (box de entrada no centro); depois de entrar, volta para a página de origem (?volta=)
 curtidas/comentarios/acompanhar/salvos.html  Atividades (atividades.js); Salvos lê a bandeirinha dos cartões (lerSalvos no layout.js)
 vitrine.html                Vitrines (menu, acima de Minhas Comunidades): esboço com os estabelecimentos
 estabelecimento.html        Página de um estabelecimento (?e=<id>): capa, sobre, benefício, informações, produtos e serviços
@@ -76,7 +78,8 @@ assets/img/                 Logos da FSB e da RB2
 | Página | Versão 2 |
 |---|---|
 | Início | pronta para revisão |
-| Conteúdos (`conteudos.html`) | pronta para revisão |
+| Conteúdos (`conteudos.html`) | pronta para revisão (estrutura de revista, como a Vitrine) |
+| Assuntos (`assunto.html?a=...`) | pronta para revisão (uma página por assunto, aberta pelos círculos da Conteúdos) |
 | Colunas (`colunas.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Busca (`busca.html`) | pronta para revisão (a versão 1 não tinha esta página) |
 | Leitura do artigo (`conteudo.html`) | pronta para revisão |
@@ -105,6 +108,52 @@ menos de 1000px (container query).
 
 ## Regras de visual
 
+- **Só com login:** perfil, carteira, Atividades (Curtidas, Comentários, Acompanhar, Salvos), Notificações, Indicações,
+  Amigos e Minhas Comunidades mostram, para quem não entrou, só o box de entrada no centro, sobre o fundo de sempre do
+  site (a coluna da direita dessas páginas também some). O box tem o mesmo conteúdo e visual da janela Entrar do topo:
+  os dois saem de `htmlEntrar()` e `cliqueEntrar()` no `layout.js`, então mudar ali muda os dois. O box acompanha a
+  orientação da tela: deitada (computador, tablet ou celular deitado) = horizontal, em duas colunas (título, redes
+  sociais e cadastro à esquerda; e-mail e senha à direita); em pé = vertical. Sem largura para as duas colunas
+  (menos de 660px), fica vertical. O box fica centralizado na tela inteira (não só na área do conteúdo), sem passar
+  por cima do menu lateral. Na tela de login o
+  menu lateral fica recolhido e, no computador, 30% visível (100% ao passar o mouse). O "Entrar" do topo do menu lateral
+  leva à página `entrar.html` (mesma tela), que depois de entrar volta para a página de onde a pessoa veio. Sem login
+  também somem o saldo de créditos do topo, a carteira do menu lateral, o sino e os números de não lidas do menu, e o
+  topo do menu mostra "Entrar" no lugar do nome. Lista em `PAGINAS_COM_LOGIN` no `layout.js`. Para entrar: clicar em
+  Entrar com os campos vazios, ou e-mail `123` e senha `123`.
+
+- **Selo de acesso nos cartões de conteúdo:** todo cartão de conteúdo mostra um selo (`seloAcesso(c)` no `layout.js`):
+  "Grátis" (verde) ou o preço com cadeado, ex. "2 créditos" (dourado); conteúdo pago que a pessoa já destravou fica
+  sem selo. O destravar é feito na tela do conteúdo, depois de clicar no cartão: debita os
+  créditos da carteira (`comprarConteudo` no `layout.js`, compras em `v2Compras`, que entram no extrato da Carteira) e
+  fica guardado em `v2Destravados`. O saldo de todo o site vem de `saldoCreditos()`. Cartões não têm botão Ler: o cartão inteiro abre o conteúdo.
+
+- **Continue lendo no fim de todo artigo:** a tela de leitura (`conteudo.html`) sempre termina com 3 cartões de
+  conteúdos relacionados (mesmo assunto ou colunista primeiro), com o selo de acesso; aparecem também nos conteúdos
+  bloqueados e ficam fixos durante a visita.
+
+- **Teste de pagamentos (ligado):** `TESTE_PAGAMENTOS = true` no `conteudos-dados.js` deixa cerca de 90% dos conteúdos
+  pagos (1, 2 ou 3 créditos); ficam grátis só a carta "Aos patrocinadores do SoftLiving" e a última coluna da coluna do
+  dia. Para voltar ao normal, mudar para `false`.
+
+- **Minhas Comunidades sem conteúdo pago:** tudo é gratuito (inclusive o acervo SoftLiving), então os cartões não
+  mostram etiqueta de Grátis nem de créditos e não há filtro Grátis/Premium (`normalizeCard` no `comunidades.js`).
+
+- **Logo em fundo escuro:** o logo em texto (`.sig`, "Soft" em itálico e "Living", na fonte original) usa as cores da
+  marca (azul `#013565` e verde `#1F5519`); sobre fundo escuro passa para as versões claras delas (azul-claro `#d6e6f5`
+  e verde-claro `#cfe9c4`). É automático em todo o site (`ajustarLogosEmTexto` no `layout.js` põe a classe `.sig-light`
+  quando o fundo atrás do logo é escuro, inclusive degradês e fotos, e em conteúdo que aparece depois, como o chat da
+  Ajuda). Para um logo que nunca deve mudar, usar a classe `.sig-fixo`.
+
+- **Menu institucional igual em todas as telas:** o menu do topo (computador), o rodapé e a janela "Saiba mais"
+  (celular) saem da mesma lista, `INSTITUCIONAL` no `layout.js`. Para pôr, tirar ou reordenar uma página, mudar só ali.
+
+- **Largura única do conteúdo:** todas as páginas têm a mesma largura de conteúdo, com ou sem a coluna lateral da direita.
+  Nas páginas sem a coluna, o espaço dela fica vazio (`.app:not(.com-lateral) .corpo::after` no `estilos.css`), com as
+  mesmas medidas: 340px, ou 300px entre 1200 e 1439px; abaixo de 1200px o espaço some, como a coluna. Página nova não
+  precisa fazer nada para seguir a regra; não usar `max-width` próprio para alargar ou estreitar o conteúdo da página.
+  Exceções: Ajuda (conteúdo e chat do assistente com o mesmo tamanho) e Simples (versão simplificada, coluna própria).
+
 - **Efeito vidro (padrão):** botões e boxes translúcidos, com desfoque, brilho na borda e sombra suave; o fundo da página
   tem manchas suaves de cor para o vidro ter o que desfocar. Seção "EFEITO VIDRO" no fim do `estilos.css`: todo botão ou
   box novo entra numa das listas de lá (vidro claro, verde ou colorido).
@@ -115,15 +164,30 @@ menos de 1000px (container query).
   o mouse. A regra fica no fim do `estilos.css` ("REGRA DE HOVER"): ao criar um botão ou caixa clicável novo,
   acrescentar o seletor nas listas de lá. Exceções: abas do fichário e itens do menu lateral e da barra do celular.
   Conteúdos com foto (cartões, matéria em destaque, itens de lista) ganham também uma caixa branca em volta no hover.
+  Entrar no hover é rápido (0,15s) e sair é lento (0,6s, desacelerando): as transições de hover usam `var(--hover-t)`
+  e `var(--hover-curva)` (seção "SAÍDA LENTA DO HOVER" do `estilos.css`); transição nova de hover deve usar as duas.
+  O botão salvar dos cartões só aparece ao passar o mouse no cartão (ou se já foi salvo); no celular, sempre à vista.
 
 - **Patrocinador apoiador:** uma faixa `<div class="apoio"></div>` por página recebe uma marca sorteada a cada visita
   (Rede D'Or, Claro, Bradesco Saúde), com logo em tom sobre tom. Lista em `PATROCINADORES` no layout.js; os logos ficam em
   `assets/img/logo-*.png` com fundo transparente. `?apoio=1|2|3` no endereço mostra uma marca específica.
 
+- **Carrosséis em Conteúdos e Vitrine:** as listas dentro dos blocos (coleções, Estilo e casa, Saúde, Tecnologia)
+  usam o carrossel vertical, 3 por vez; as setas só aparecem quando há mais itens do que cabem.
+- **Setas dos carrosséis:** em aparelhos com mouse, sobre o carrossel só acende a seta do lado de onde o mouse está, aos
+  poucos, conforme ele se aproxima dela (a outra fica apagada); ao sair, apaga devagar. Pelo teclado, as duas aparecem.
+  No celular e no tablet ficam sempre à vista. Vale para todos os carrosséis do site (`ativarCarrossel` no `layout.js`).
+
 - **Carrosséis:** blocos de conteúdos menores relacionados só se movem pelas setas: cada clique desliza um item, suave,
   em loop (`ativarCarrossel(elemento, 'h' | 'v')` no layout.js). Sem rolagem automática, sem efeito ao passar o mouse e sem
   rolagem pela roda do mouse. Horizontais: cartões de assunto, grupos da Início e sugestões da Coluna do dia (quantos por
   vez: `--vis` no CSS). Verticais: listas de Últimas matérias e de Colunas (4 por vez).
+
+## Publicação e cache
+
+O GitHub Pages deixa o navegador guardar os arquivos por até 10 minutos. Para a versão nova aparecer logo, os arquivos
+de estilo e script das páginas levam a versão no endereço (`?v=AAAAMMDDHHMM`). Antes de cada publicação, rodar
+`python3 ferramentas/versao.py`, que atualiza a versão em todas as páginas.
 
 ## Observações
 

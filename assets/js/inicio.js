@@ -14,9 +14,6 @@ const ASSUNTOS = [
   ['Tecnologia', 'Tecnologia e serviços digitais'],
 ];
 const assuntoCurto = cat => (ASSUNTOS.find(a => a[1] === cat) || [cat])[0];
-const seloPreco = c => c.badge === 'premium'
-  ? `<span class="vc-chip premium">${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`
-  : `<span class="vc-chip">Grátis</span>`;
 
 const botaoSalvar = `<button type="button" class="fav" title="Salvar para ler depois" aria-label="Salvar para ler depois">${icone('salvar')}</button>`;
 
@@ -34,7 +31,7 @@ function mostrarAssunto(i){
       <div class="vc-info">
         <span class="vc-cat">${assuntoCurto(c.cat)}</span>
         <h3>${c.t}</h3>
-        <div class="vc-row">${seloPreco(c)}<span class="vc-btn">Ler ${icone('seta')}</span></div>
+        <div class="vc-row">${seloAcesso(c)}</div>
       </div>
     </a>`).join('');
   tabs.querySelectorAll('button').forEach(b => {
@@ -64,11 +61,11 @@ document.getElementById('lead').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(destaque.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">${assuntoCurto(destaque.cat)}</span>
   <h3>${destaque.t}</h3><p>${destaque.e}</p>
-  <div class="meta"><span>${destaque.a}</span></div>`;
+  <div class="meta"><span>${destaque.a}</span>${seloAcesso(destaque)}</div>`;
 document.getElementById('list').innerHTML = ULTIMAS.slice(1).map(c => `
   <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${assuntoCurto(c.cat)}</span><h3>${c.t}</h3>
-    <div class="meta"><span>${c.a}</span></div></div></a>`).join('');
+    <div class="meta"><span>${c.a}</span>${seloAcesso(c)}</div></div></a>`).join('');
 ativarCarrossel(document.getElementById('list'), 'v');
 document.getElementById('verTodas').href = urlPagina('conteudos');
 
@@ -101,7 +98,7 @@ document.getElementById('colPrincipal').innerHTML = `
   <div class="imgw foto"><img src="${fotoUrl(ultimaDoDia.foto, 1100)}" alt=""></div>${botaoSalvar}
   <span class="cat">Coluna do dia · ${rotuloColuna(colDoDia)}</span>
   <h3>${ultimaDoDia.t}</h3><p>${colDoDia.bio.split('. ')[0]}.</p>
-  <div class="meta"><span>${colDoDia.nome}</span><i></i><span>${colDoDia.categoria}</span></div>`;
+  <div class="meta"><span>${colDoDia.nome}</span><i></i><span>${colDoDia.categoria}</span>${seloAcesso(ultimaDoDia)}</div>`;
 // as outras colunas em ordem sorteada a cada carregamento (a coluna do dia continua fixa)
 document.getElementById('colLista').innerHTML = embaralhar(TODAS_COLUNAS().filter(c => c !== ultimaDoDia))
   .map(c => {
@@ -109,7 +106,7 @@ document.getElementById('colLista').innerHTML = embaralhar(TODAS_COLUNAS().filte
     return `
   <a href="${urlConteudo(c.t)}" class="item"><img class="foto" src="${fotoUrl(c.foto, 300)}" alt="" loading="lazy">${botaoSalvar}
     <div><span class="cat">${rotuloColuna(col)}</span><h3>${comLogo(c.t)}</h3>
-    <div class="meta"><span>${col.nome}</span></div></div></a>`;
+    <div class="meta"><span>${col.nome}</span>${seloAcesso(c)}</div></div></a>`;
   }).join('');
 ativarCarrossel(document.getElementById('colLista'), 'v');
 

@@ -24,7 +24,7 @@
 .vt-categorias{ display:flex; gap:22px; overflow-x:auto; scrollbar-width:none; padding:10px 4px 16px; margin:0 -4px 20px; }
 .vt-categorias::-webkit-scrollbar{ display:none; }
 .vt-cat{ flex:none; display:flex; flex-direction:column; align-items:center; gap:9px; width:88px; font-size:13.5px; font-weight:600; color:var(--navy); text-align:center; }
-.vt-cat img{ width:84px; height:84px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 0 0 2px var(--mint-line), 0 8px 20px rgba(1,53,101,.12); transition:transform .15s ease, box-shadow .15s ease; }
+.vt-cat img{ width:84px; height:84px; border-radius:50%; object-fit:cover; border:3px solid #fff; box-shadow:0 0 0 2px var(--mint-line), 0 8px 20px rgba(1,53,101,.12); transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .vt-cat:hover img{ transform:translateY(-2px); box-shadow:0 0 0 2px var(--green), 0 12px 24px rgba(1,53,101,.16); }
 .vt-cat:hover{ color:var(--green); }
 
@@ -58,6 +58,10 @@
 .vt-mini img{ width:120px; height:100%; min-height:110px; object-fit:cover; border-radius:16px; }
 .vt-mini h3{ font-size:19px; margin:4px 0 4px; }
 .vt-mini p{ font-size:13.5px; line-height:1.5; color:var(--text-2); margin:0 0 10px; }
+/* Itens das listas em carrossel (coleções): todos da mesma altura; título e resumo com no máximo 2 linhas */
+.trilho-v > .vt-mini{ flex:none; height:156px; overflow:hidden; }   /* flex:none: sem isso os itens encolhiam para caber e o carrossel não rolava */
+.trilho-v > .vt-mini img{ height:132px; min-height:0; }
+.trilho-v > .vt-mini h3, .trilho-v > .vt-mini p{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
 .vt-mini-cat{ font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--green); }
 
 /* Recomendado pela comunidade */
@@ -87,7 +91,7 @@
 .vt-marca p{ font-size:16px; line-height:1.6; opacity:.9; margin:0 0 22px; }
 
 /* Regra de hover da v2 */
-.vt-mini, .vt-reco, .vt-bairro{ transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.vt-mini, .vt-reco, .vt-bairro{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .vt-mini:hover, .vt-reco:hover, .vt-bairro:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 .vt-mini:hover, .vt-reco:hover{ background:#fff; }
 
@@ -98,6 +102,7 @@
   .vt-destaques.trilho-h{ --vis:3; }
   .vt-colecao{ grid-template-columns:1fr; }
   .vt-colecao.invertida .vt-col-capa{ order:0; }
+  .vt-colecao .carrossel-v:not(.sem-rolagem){ margin-top:30px; }   /* foto em cima: a seta de cima não cobre a foto */
   .vt-col-capa{ min-height:300px; }
   .vt-recomendas{ grid-template-columns:1fr; }
   .vt-reco{ flex-direction:row; }
@@ -111,6 +116,8 @@
   .vt-mosaico{ grid-template-rows:120px 120px 90px; gap:8px; }
   .vt-destaques.trilho-h{ --vis:1.3; --gap:14px; }
   .vt-mini{ grid-template-columns:96px 1fr; }
+  .trilho-v > .vt-mini{ height:178px; }   /* texto mais estreito no celular: um pouco mais de altura para não cortar o autor */
+  .trilho-v > .vt-mini img{ height:154px; }
   .vt-mini img{ width:96px; }
   .vt-reco{ flex-direction:column; }
   .vt-reco-foto{ width:auto; height:150px; }
@@ -153,7 +160,7 @@
 .es-infos .ic{ width:18px; height:18px; color:var(--green); margin-top:2px; }
 
 .es-galeria{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:12px; }
-.es-galeria img{ width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; transition:transform .15s ease, box-shadow .15s ease; }
+.es-galeria img{ width:100%; aspect-ratio:1; object-fit:cover; border-radius:20px; transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .es-galeria img:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 
 @container (max-width:760px){
@@ -236,7 +243,7 @@
 .es-pagina .es-clube .btn:not(.ghost){ background:#fff !important; color:var(--navy) !important; border-color:#fff !important; } /* vence o vidro verde padrão */
 .es-pagina .es-clube .btn.ghost{ background:rgba(255,255,255,.14) !important; color:#fff !important; border-color:rgba(255,255,255,.4) !important; }
 .es-clube.dentro{ background:#1F5519; }
-.es-rel{ display:flex; align-items:center; gap:12px; padding:12px 14px; margin-bottom:8px; border-radius:16px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease; }
+.es-rel{ display:flex; align-items:center; gap:12px; padding:12px 14px; margin-bottom:8px; border-radius:16px; background:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .es-rel:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 .es-rel .ic{ width:22px; height:22px; color:var(--green); flex:none; }
 .es-rel small{ display:block; font-size:12px; color:var(--muted); }

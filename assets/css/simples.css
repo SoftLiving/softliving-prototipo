@@ -118,11 +118,11 @@
 .sm-infos{ margin:0 0 1em; }
 .sm-infos p{ display:flex; align-items:center; gap:.5em; margin:.3em 0; }
 .sm-infos svg.ic{ width:1.2em; height:1.2em; color:var(--green); flex-shrink:0; }
-.sm-novidade{ transition:transform .15s ease, box-shadow .15s ease; }
+.sm-novidade{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva); }
 .sm-novidade:hover{ transform:translateY(-2px); box-shadow:var(--sombra-hover); }
 
 /* Regra de hover da v2: botões e caixas clicáveis sobem 2px com sombra */
-.sm-big, .sm-row, .sm-btn, .sm-back, .sm-top-btn, .sm-fontsize button{ transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, border-color .15s ease; }
+.sm-big, .sm-row, .sm-btn, .sm-back, .sm-top-btn, .sm-fontsize button{ transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva), border-color var(--hover-t) var(--hover-curva); }
 .sm-big:hover, a.sm-row:hover, .sm-btn:hover, .sm-back:hover, .sm-top-btn:hover, .sm-fontsize button:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); }
 .sm-big:hover, a.sm-row:hover{ background:#fff; }
 .sm-big:focus-visible, .sm-row:focus-visible, .sm-btn:focus-visible{ outline:3px solid var(--green); outline-offset:2px; }

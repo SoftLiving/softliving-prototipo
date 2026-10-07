@@ -36,7 +36,7 @@
 /* Anterior / próximo */
 .cl-navega{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px; }
 .cl-nav{ display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:12px; align-items:center; padding:16px 20px; border-radius:22px;
-  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+  background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); box-shadow:var(--vidro-brilho); transition:transform var(--hover-t) var(--hover-curva), box-shadow var(--hover-t) var(--hover-curva), background-color var(--hover-t) var(--hover-curva); }
 .cl-nav:hover{ transform:translateY(-2px); box-shadow:var(--vidro-brilho), var(--sombra-hover); background:#fff; }
 .cl-nav small{ grid-column:1 / -1; display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
 .cl-nav small .ic{ width:14px; height:14px; }

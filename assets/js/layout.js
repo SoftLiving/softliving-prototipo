@@ -34,6 +34,7 @@ const PAGINAS = {
   comunidades:  { url:'comunidades/inicio.html' },
   amigos:       { url:'amigos.html' },               // antiga Conexões
   simples:      { url:'simples.html' },
+  entrar:       { url:'entrar.html' },              // tela de login (Entrar do menu lateral)
 };
 function urlPagina(nome){
   const p = PAGINAS[nome];
@@ -41,6 +42,16 @@ function urlPagina(nome){
 }
 // Páginas institucionais (institucional/). Segurança ainda não foi feita: por enquanto abre o Suporte (Conta e privacidade).
 const SITES = ['conhecer', 'quem-somos', 'como-funciona', 'beneficios', 'empresas-e-grupos', 'patrocinadores'];
+// Lista única das páginas institucionais: monta o menu do topo (computador), o rodapé e a janela "Saiba mais" (tablet e
+// celular), para os três terem sempre os mesmos itens, na mesma ordem. [página, nome, nome curto no menu do topo, descrição]
+const INSTITUCIONAL = [
+  ['conhecer', 'Conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
+  ['quem-somos', 'Quem somos', 'Quem somos', 'Propósito, missão, visão e valores'],
+  ['como-funciona', 'Como funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
+  ['beneficios', 'Benefícios', 'Benefícios', 'O que você ganha como membro'],
+  ['empresas-e-grupos', 'Empresas e grupos', 'Empresas', 'Para empresas e todo tipo de grupo, e a NR-1'],
+  ['patrocinadores', 'Patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
+];
 const urlSite = site => SITES.includes(site) ? `${LAYOUT_ROOT}institucional/${site}.html` : urlPagina('ajuda');
 
 // Fotos de exemplo (Unsplash) usadas nos dados: foto:"<id>"
@@ -63,6 +74,8 @@ const ICONES = {
   voltar:'<path d="M15 18l-6-6 6-6"/>',
   mais:'<path d="M12 5v14M5 12h14"/>',
   seta:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  cadeado:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  cadeadoAberto:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/>',
   salvar:'<path d="M6 3h12v18l-6-4-6 4V3z"/>',
   colunas:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>',
   curtidas:'<path d="M12 21c-4.5-2.6-8-6-8-10a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 11c0 4-3.5 7.4-8 10z"/>',
@@ -150,6 +163,10 @@ const LAYOUT_MENU = `
     <span class="avatar">RB</span>
     <div><small>${saudacao()}</small><strong>Rafael</strong></div>
   </a>
+  <a href="${urlPagina('entrar')}?volta=${encodeURIComponent(location.href)}" class="me me-visitante" title="Entrar na sua conta">
+    <span class="avatar">${icone('perfil')}</span>
+    <div><small>${saudacao().replace(',', '!')}</small><strong>Entrar</strong></div>
+  </a>
 
   ${MENU_SECOES.map(sec => `
   <div>
@@ -171,12 +188,7 @@ const LAYOUT_CABECALHO = `
   <button class="round menu-btn" id="menuBtn" aria-label="Abrir menu">${icone('menu')}</button>
   <a href="${urlPagina('inicio')}" class="sig brand" aria-label="SoftLiving, voltar ao início"><span class="soft">Soft</span><span class="living">Living</span></a>
   <nav class="site-nav" aria-label="Sobre a SoftLiving">
-    <a href="${urlSite('conhecer')}" data-site="conhecer">Conhecer</a>
-    <a href="${urlSite('quem-somos')}" data-site="quem-somos">Quem somos</a>
-    <a href="${urlSite('como-funciona')}" data-site="como-funciona">Como funciona</a>
-    <a href="${urlSite('beneficios')}" data-site="beneficios">Benefícios</a>
-    <a href="${urlSite('empresas-e-grupos')}" data-site="empresas-e-grupos" title="Empresas e grupos">Empresas</a>
-    <a href="${urlSite('patrocinadores')}" data-site="patrocinadores">Patrocinadores</a>
+    ${INSTITUCIONAL.map(([k, n, curto]) => `<a href="${urlSite(k)}" data-site="${k}"${curto !== n ? ` title="${n}"` : ''}>${curto}</a>`).join('')}
   </nav>
   <div class="tools">
     <button type="button" class="saiba-mais" aria-label="Saiba mais sobre a SoftLiving">Saiba mais${icone('abrir', 'chev')}</button>
@@ -197,7 +209,7 @@ const LAYOUT_RODAPE = `
         <p>Portal de conteúdo e comunidades, sem anúncios, com patrocinadores apoiadores.</p>
       </div>
       <div><h4>A ${LOGO}</h4>
-        <a href="${urlSite('conhecer')}">Conhecer</a><a href="${urlSite('quem-somos')}">Quem somos</a><a href="${urlSite('como-funciona')}">Como funciona</a><a href="${urlSite('beneficios')}">Benefícios</a><a href="${urlSite('empresas-e-grupos')}">Empresas e grupos</a><a href="${urlSite('seguranca')}">Segurança</a><a href="${urlSite('patrocinadores')}">Patrocinadores</a></div>
+        ${INSTITUCIONAL.map(([k, n]) => `<a href="${urlSite(k)}">${n}</a>`).join('')}</div>
       <div><h4>Conteúdos</h4>
         <a href="${urlPagina('conteudos')}">Saúde e bem-estar</a><a href="${urlPagina('conteudos')}">Estilo e casa</a><a href="${urlPagina('conteudos')}">Turismo e viagem</a><a href="${urlPagina('conteudos')}">Tecnologia</a><a href="${urlPagina('colunas')}">Colunistas</a></div>
       <div><h4>Comunidade</h4>
@@ -318,6 +330,14 @@ const fecharMenu = () => app.classList.remove('open');
 document.getElementById('menuBtn').addEventListener('click', abrirMenu);
 document.getElementById('tabVoce').addEventListener('click', e => { e.preventDefault(); abrirMenu(); });
 document.getElementById('scrim').addEventListener('click', fecharMenu);
+// Topo do menu sem login: "Entrar" no lugar do nome leva à tela de login (entrar.html); nas páginas que já mostram o
+// box de entrada, só leva ao campo de e-mail
+document.querySelector('.me-visitante').addEventListener('click', e => {
+  const box = document.querySelector('.pla-box');
+  if(!box) return;
+  e.preventDefault(); fecharMenu(); scrollTo(0, 0);
+  box.querySelector('input[name="email"]').focus();
+});
 
 // Submenu (Atividades): abre e fecha pelo botão; já vem aberto se a página atual for um dos itens dele.
 // Com o menu recolhido (só ícones), clicar em Atividades abre o menu para mostrar o submenu.
@@ -456,6 +476,23 @@ function ativarCarrossel(trilho, dir, visiveis = 4){
     car.prox = seta('prox', dir === 'h' ? 'Avançar' : 'Descer');
     car.append(car.ant, car.prox);
     Object.assign(car, { trilho, sentido:dir, visiveis, pos:0, deslize:null, ciclo:0 });
+    // Com mouse: só a seta do lado de onde o mouse está acende, e acende aos poucos conforme ele se aproxima dela
+    // (--perto vai de 0 a 1; o CSS usa como opacidade). A outra fica apagada. Ao sair do carrossel, apaga devagar.
+    if(matchMedia('(hover:hover)').matches){
+      car.addEventListener('mousemove', e => {
+        const r = car.getBoundingClientRect();
+        const alcance = (dir === 'h' ? r.width : r.height) * .6;   // a partir de 60% do carrossel de distância, apagada
+        const dist = b => { const c = b.getBoundingClientRect(); return Math.hypot(e.clientX - (c.left + c.width / 2), e.clientY - (c.top + c.height / 2)); };
+        const da = dist(car.ant), dp = dist(car.prox), perto = Math.min(da, dp);
+        const nivel = Math.max(0, Math.min(1, 1.15 - perto / alcance));   // 1 já um pouco antes de chegar na seta
+        [[car.ant, da <= dp], [car.prox, dp < da]].forEach(([b, estePerto]) => {
+          const v = estePerto ? nivel : 0;
+          b.style.setProperty('--perto', v.toFixed(3));
+          b.style.pointerEvents = v > .15 ? '' : 'none';             // apagada não recebe clique por engano
+        });
+      });
+      car.addEventListener('mouseleave', () => [car.ant, car.prox].forEach(b => { b.style.setProperty('--perto', 0); b.style.pointerEvents = ''; }));
+    }
     // Setas: deslizam um item (animação suave); clicar de novo durante o deslize soma mais um item
     const passoItem = () => { const a = trilho.children[0], b = trilho.children[1]; if(!a || !b) return 0; return dir === 'h' ? b.offsetLeft - a.offsetLeft : b.offsetTop - a.offsetTop; };
     // Destino: o começo do item seguinte (ou anterior). Os itens podem ter alturas diferentes (no celular, títulos de
@@ -577,11 +614,17 @@ function criarJanelaTopo(botao, classe, id, rotulo, render, aoClicar){
   const janela = { j, botao, render };
   janela.abrir = abrir => {
     if(abrir){ JANELAS_TOPO.forEach(o => o !== janela && !o.j.hidden && o.abrir(false)); render(j); }
-    // alinhada à direita do botão; no celular ocupa a largura da tela, logo abaixo do topo
+    // alinhada à direita do botão; no celular ocupa a largura da tela (16px de cada lado), logo abaixo do topo. Fica presa
+    // ao topo (não à tela): ao rolar a página, sobe e some junto com ele.
     const celular = matchMedia('(max-width:640px)').matches;
-    j.style.top = abrir && celular ? (botao.getBoundingClientRect().bottom + 10) + 'px' : '';
-    j.style.right = abrir && !celular ? (botao.parentElement.getBoundingClientRect().right - botao.getBoundingClientRect().right) + 'px' : '';
+    j.style.top = j.style.left = j.style.right = '';
     j.hidden = !abrir;
+    if(abrir && celular){
+      const ref = j.offsetParent.getBoundingClientRect();
+      j.style.top = (botao.getBoundingClientRect().bottom - ref.top + 10) + 'px';
+      j.style.left = (16 - ref.left) + 'px';
+      j.style.right = (ref.right - (document.documentElement.clientWidth - 16)) + 'px';
+    } else if(abrir) j.style.right = (botao.parentElement.getBoundingClientRect().right - botao.getBoundingClientRect().right) + 'px';
     botao.setAttribute('aria-expanded', abrir);
   };
   botao.addEventListener('click', e => { e.preventDefault(); janela.abrir(j.hidden); });
@@ -613,7 +656,7 @@ const janelaNotif = criarJanelaTopo(sino, 'nt-janela', 'ntJanela', 'Notificaçõ
 // Janela dos créditos: saldo (comprados e bônus), oferta da primeira recarga e atalhos da carteira
 const botaoCreditos = document.querySelector('.top .creditos');
 criarJanelaTopo(botaoCreditos, 'cr-janela', 'crJanela', 'Seus créditos', j => {
-  const bonus = SALDO_BASE + lerBonusCreditos();           // no protótipo, todo o saldo é bônus (ainda sem recarga)
+  const bonus = saldoCreditos();                           // no protótipo, todo o saldo é bônus (ainda sem recarga)
   j.innerHTML = `
     <div class="crj-saldo">
       <small>Saldo disponível</small>
@@ -638,30 +681,32 @@ const ENTRAR_SOCIAL = [
   ['Apple', '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#111" d="M16.4 12.6c0-2.4 2-3.5 2-3.6a4.4 4.4 0 0 0-3.4-1.9c-1.5-.1-2.8.9-3.5.9s-1.8-.8-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3a10 10 0 0 0 1.3-2.6 3.9 3.9 0 0 1-2.5-3.6zM14.1 5.5A4 4 0 0 0 15 2.6a4.1 4.1 0 0 0-2.7 1.4 3.8 3.8 0 0 0-1 2.8 3.4 3.4 0 0 0 2.8-1.3z"/></svg>'],
   ['Facebook', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1877F2"/><path fill="#fff" d="M13.4 19v-6h2l.3-2.4h-2.3V9.1c0-.7.2-1.2 1.2-1.2h1.2V5.8a16 16 0 0 0-1.8-.1c-1.8 0-3 1.1-3 3.1v1.8H9v2.4h2v6h2.4z"/></svg>'],
 ];
-const botaoEntrar = document.querySelector('.top .entrar');
-const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving', j => {
-  j.innerHTML = `
-    <div class="enj-topo"><b>Entrar na ${LOGO}</b><p>Bem-vindo de volta. Escolha como quer entrar.</p></div>
+// O conteúdo (htmlEntrar) e os cliques (cliqueEntrar) são os mesmos na janela do topo e no box das páginas que pedem login.
+const htmlEntrar = (titulo, texto) => `
+    <div class="enj-topo"><b>${titulo}</b><p>${texto}</p></div>
     <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
     <p class="enj-ou"><span>ou com seu e-mail</span></p>
-    <form class="enj-form" id="enForm" novalidate>
-      <p class="enj-dica">Protótipo: entre com login <b>123</b> e senha <b>123</b>.</p>
+    <form class="enj-form" novalidate>
+      <p class="enj-dica">No protótipo, é só clicar em <b>Entrar</b>, sem digitar nada, ou usar login <b>123</b> e senha <b>123</b>.</p>
       <label>E-mail ou login<input type="text" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
       <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>
-      <p class="enj-erro" id="enErro" role="alert" hidden>Login ou senha incorretos. No protótipo, use 123 e 123.</p>
+      <p class="enj-erro" role="alert" hidden>Login ou senha incorretos. No protótipo, deixe os campos vazios ou use 123 e 123.</p>
       <button type="submit" class="btn enj-entrar">Entrar</button>
     </form>
     <p class="enj-cadastro">Ainda não tem conta? <a href="#" class="enj-criar">Cadastre-se</a> e ganhe 20 créditos de bônus.</p>`;
-}, (e, j) => {
+function cliqueEntrar(e, j){
   const ver = e.target.closest('.enj-ver');
   if(ver){ const c = j.querySelector('input[name="senha"]'); const mostrar = c.type === 'password'; c.type = mostrar ? 'text' : 'password'; ver.textContent = mostrar ? 'Ocultar' : 'Mostrar'; ver.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha'); return; }
   const social = e.target.closest('[data-social]');
   if(social){ mostrarAviso(`Entrar com ${social.dataset.social}: fora deste protótipo`); return; }
   if(e.target.closest('.enj-esqueci')){ e.preventDefault(); mostrarAviso('Recuperar senha: fora deste protótipo'); return; }
   if(e.target.closest('.enj-criar')){ e.preventDefault(); mostrarAviso('Cadastro: fora deste protótipo'); }
-});
-// Simulação de entrada (protótipo): login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
+}
+const botaoEntrar = document.querySelector('.top .entrar');
+const janelaEntrar = criarJanelaTopo(botaoEntrar, 'en-janela', 'enJanela', 'Entrar na SoftLiving',
+  j => { j.innerHTML = htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Escolha como quer entrar.'); }, cliqueEntrar);
+// Simulação de entrada (protótipo): Entrar com os campos vazios, ou login 123 e senha 123. Fica guardado no navegador (v2Logado); nada é enviado.
 // Com a pessoa logada, o botão Entrar dá lugar ao avatar, que abre a janela da conta com a opção Sair.
 const lerLogado = () => { try { return localStorage.getItem('v2Logado') === '1'; } catch(e){ return false; } };
 function marcarLogado(logado){
@@ -669,12 +714,25 @@ function marcarLogado(logado){
   botaoEntrar.hidden = logado;
   botaoAvatar.hidden = !logado;
   document.body.classList.toggle('logado', logado);          // o CSS usa para decidir o que cabe no topo do celular
+  // Na tela de login o menu lateral fica sempre recolhido; depois de entrar, volta como a pessoa deixou
+  if(document.body.classList.contains('pede-login')) marcarRecolhido(!logado || lerPreferencia('v2MenuRecolhido') === '1');
+  // Na página Entrar, depois de entrar (ou se já estava logado), volta para a página de onde veio (?volta=), ou a Início
+  if(logado && LAYOUT_PAGE === 'entrar') location.replace(paginaDeVolta());
+}
+function paginaDeVolta(){
+  try {
+    const u = new URL(new URLSearchParams(location.search).get('volta') || '', location.href);
+    if(u.protocol === location.protocol && u.host === location.host && !/\/entrar\.html$/.test(u.pathname)) return u.href;
+  } catch(e){}
+  return urlPagina('inicio');
 }
 document.addEventListener('submit', e => {
-  if(e.target.id !== 'enForm') return;
+  if(!e.target.classList.contains('enj-form')) return;
   e.preventDefault();
-  const f = e.target, ok = f.email.value.trim() === '123' && f.senha.value === '123';
-  document.getElementById('enErro').hidden = ok;
+  // Entra com os dois campos vazios (atalho do protótipo) ou com login 123 e senha 123
+  const f = e.target, email = f.email.value.trim(), senha = f.senha.value;
+  const ok = (!email && !senha) || (email === '123' && senha === '123');
+  f.querySelector('.enj-erro').hidden = ok;
   if(!ok){ f.senha.value = ''; f.senha.focus(); return; }
   janelaEntrar.abrir(false);
   marcarLogado(true);
@@ -688,7 +746,7 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
     <div class="cnj-topo"><span class="cnj-av">RB</span><div><b>Rafael Barros</b><small>ra•••••@exemplo.com</small></div></div>
     <nav class="crj-links">
       <a href="${urlPagina('perfil')}">${icone('perfil')}Meu perfil</a>
-      <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${SALDO_BASE + lerBonusCreditos()} créditos</span></a>
+      <a href="${urlPagina('carteira')}">${icone('carteira')}Carteira · <span class="saldo-creditos">${saldoCreditos()} créditos</span></a>
       <a href="${urlPagina('ajuda')}">${icone('ajuda')}Suporte</a>
     </nav>
     <button type="button" class="cnj-sair">Sair da conta</button>`;
@@ -698,22 +756,40 @@ criarJanelaTopo(botaoAvatar, 'cn-janela', 'cnJanela', 'Sua conta', j => {
   marcarLogado(false);
   mostrarAviso('Você saiu da conta');
 });
+// Páginas com informações pessoais (perfil, carteira, Atividades, notificações, indicações, amigos e Minhas Comunidades): sem login, o conteúdo fica escondido pelo CSS e
+// aparece o aviso para entrar; ao entrar, o conteúdo aparece na hora. Os créditos (topo e menu) também só aparecem logado.
+const PAGINAS_COM_LOGIN = ['entrar', 'perfil', 'carteira', 'curtidas', 'comentarios', 'acompanhar', 'salvos', 'notificacoes', 'indicacoes', 'amigos', 'comunidades'];
+if(PAGINAS_COM_LOGIN.includes(LAYOUT_PAGE)){
+  document.body.classList.add('pede-login');
+  // Box de entrada no centro, com o mesmo conteúdo da janela Entrar
+  document.querySelector('main').insertAdjacentHTML('afterbegin', `
+    <section class="pede-login-aviso">
+      <div class="pla-box" role="region" aria-label="Entrar na SoftLiving">${htmlEntrar(`Entrar na ${LOGO}`, 'Bem-vindo de volta. Entre para ver seu perfil, seus créditos, suas atividades e suas comunidades.')}</div>
+    </section>`);
+  const boxEntrar = document.querySelector('.pla-box');
+  boxEntrar.addEventListener('click', e => cliqueEntrar(e, boxEntrar));
+  // Box centralizado na tela inteira, não só na área do conteúdo (que começa depois do espaço do menu lateral);
+  // se a tela for estreita, para logo ao lado do menu, sem passar por cima dele.
+  function centralizarBox(){
+    boxEntrar.style.translate = '';
+    if(document.body.classList.contains('logado')) return;
+    const r = boxEntrar.getBoundingClientRect(), menu = document.querySelector('.side').getBoundingClientRect();
+    const minimo = menu.right > 0 ? menu.right + 16 : 0;              // no celular o menu é a gaveta escondida
+    const dx = Math.max(innerWidth / 2 - (r.left + r.width / 2), minimo - r.left);
+    boxEntrar.style.translate = `${Math.round(dx)}px 0`;
+  }
+  centralizarBox();
+  addEventListener('resize', centralizarBox);
+  addEventListener('load', centralizarBox);
+  document.getElementById('collapseBtn').addEventListener('click', () => requestAnimationFrame(centralizarBox));
+}
 marcarLogado(lerLogado());
 
-// Janela "Saiba mais" (só no celular): as páginas institucionais, que no computador ficam no menu do topo (a partir de 1360px) e no rodapé
-// (celular e telas menores). No computador largo o botão fica escondido e o menu aparece inteiro.
-const SAIBA_MAIS = [
-  ['conhecer', 'Conhecer', 'O que é a SoftLiving e por que existe'],
-  ['quem-somos', 'Quem somos', 'Propósito, missão, visão e valores'],
-  ['como-funciona', 'Como funciona', 'Cadastro, conteúdos, grupos e créditos'],
-  ['beneficios', 'Benefícios', 'O que você ganha como membro'],
-  ['empresas-e-grupos', 'Empresas e grupos', 'Para empresas e todo tipo de grupo, e a NR-1'],
-  ['seguranca', 'Segurança', 'Privacidade e cuidado com seus dados'],
-  ['patrocinadores', 'Patrocinadores', 'Marcas que apoiam, sem anúncios'],
-];
+// Janela "Saiba mais" (celular e telas menores): as páginas de INSTITUCIONAL, as mesmas do menu do topo do computador
+// (a partir de 1360px). No computador largo o botão fica escondido e o menu aparece inteiro.
 criarJanelaTopo(document.querySelector('.top .saiba-mais'), 'sm-janela', 'smJanela', 'Saiba mais sobre a SoftLiving', j => {
   j.innerHTML = `<div class="smj-topo"><b>Conheça a ${LOGO}</b></div>
-    <nav class="smj-links">${SAIBA_MAIS.map(([k, n, d]) => `<a href="${urlSite(k)}"${k === LAYOUT_SITE ? ' aria-current="page" class="on"' : ''}><b>${n}</b><small>${d.replace('SoftLiving', LOGO)}</small></a>`).join('')}</nav>`;
+    <nav class="smj-links">${INSTITUCIONAL.map(([k, n, , d]) => `<a href="${urlSite(k)}"${k === LAYOUT_SITE ? ' aria-current="page" class="on"' : ''}><b>${n}</b><small>${d.replace('SoftLiving', LOGO)}</small></a>`).join('')}</nav>`;
 });
 
 // Número de não lidas no menu, bolinha do sino e (na página Notificações) a lista
@@ -731,13 +807,22 @@ const SALVOS_INICIAIS = ['Na Suíça, um vinho para chamar de seu', 'A casa não
 function lerSalvos(){ try { const v = JSON.parse(localStorage.getItem('v2Salvos')); return Array.isArray(v) ? v : [...SALVOS_INICIAIS]; } catch(e){ return [...SALVOS_INICIAIS]; } }
 function gravarSalvos(lista){ try { localStorage.setItem('v2Salvos', JSON.stringify(lista)); } catch(e){} }
 function tituloDoFav(fav){
-  const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, article') || fav.parentElement;
+  const cartao = fav.closest('.vcard, .item, .destaque, .cd-sug, .dl-texto, .ct-tile, .ct-faixa, article') || fav.parentElement;
   const h = cartao && cartao.querySelector('h1, h2, h3');
   return h ? h.textContent.replace(/‑/g, '-').trim() : '';   // o texto.js troca o hífen por um que não quebra; aqui volta ao normal
 }
 function marcarSalvos(){ const l = lerSalvos(); document.querySelectorAll('main .fav').forEach(f => f.classList.toggle('on', l.includes(tituloDoFav(f)))); }
 // Ordem aleatória (Fisher-Yates) numa cópia da lista: Conteúdos, Colunas, Vitrines e Grupos sorteiam a ordem a cada
 // carregamento da página (a ordem se mantém enquanto a pessoa troca abas e filtros)
+// Selo de acesso dos conteúdos (todos os cartões do site): Grátis ou o preço em créditos com cadeado (pago, ainda
+// fechado). Conteúdo pago já destravado pela pessoa fica sem selo. O destravar acontece na tela do conteúdo
+// (conteudo.js), que guarda o título em v2Destravados; conteúdos com badge 'destravado' nos dados já vêm destravados.
+function lerDestravados(){ try { const v = JSON.parse(localStorage.getItem('v2Destravados')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
+function seloAcesso(c){
+  if(c.badge === 'destravado' || (c.badge === 'premium' && lerDestravados().includes(c.t))) return '';
+  if(c.badge === 'premium') return `<span class="selo-acesso pago">${icone('cadeado')}${c.credits} ${c.credits === 1 ? 'crédito' : 'créditos'}</span>`;
+  return '<span class="selo-acesso gratis">Grátis</span>';
+}
 function embaralhar(lista){
   const a = [...lista];
   for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
@@ -824,12 +909,22 @@ function mostrarAviso(texto){
   toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
-// Regra do logo em texto (.sig): se o fundo atrás dele confunde as cores da marca (azul #013565 e verde #1F5519),
-// o logo passa a ser branco (classe .sig-light). Vale para todas as páginas, inclusive conteúdo gerado depois.
+// Regra do logo em texto (.sig): se o fundo atrás dele é escuro e confunde as cores da marca (azul #013565 e verde
+// #1F5519), o logo passa para as versões claras das mesmas cores (classe .sig-light), com a mesma fonte. Vale para a
+// página inteira (conteúdo, coluna da direita, janelas do topo, chat), inclusive o que aparece depois.
+// O fundo considerado é a primeira cor sólida atrás do logo; um degradê conta pela média das cores dele, e uma foto de
+// fundo conta como escura (no site, texto sobre foto fica sempre sobre uma camada escura).
 function corDeFundo(el){
   for(; el; el = el.parentElement){
-    const m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+    const cs = getComputedStyle(el);
+    const m = cs.backgroundColor.match(/[\d.]+/g);
     if(m && (m[3] === undefined || +m[3] > 0.5)) return m.slice(0, 3).map(Number);
+    const img = cs.backgroundImage;
+    if(img && img !== 'none'){
+      if(/url\(/.test(img)) return [30, 40, 50];
+      const cores = [...img.matchAll(/rgba?\(([^)]+)\)/g)].map(x => x[1].split(',').map(Number)).filter(c => c[3] === undefined || c[3] > 0.5);
+      if(cores.length) return [0, 1, 2].map(i => Math.round(cores.reduce((t, c) => t + c[i], 0) / cores.length));
+    }
   }
   return [255, 255, 255];
 }
@@ -888,15 +983,31 @@ function agendarAjusteLogos(){
   requestAnimationFrame(() => { ajusteLogosPendente = false; ajustarLogosEmTexto(); marcarRolagemAbas(); marcarSalvos(); });
 }
 agendarAjusteLogos();
-new MutationObserver(agendarAjusteLogos).observe(document.querySelector('main'), { childList:true, subtree:true });
+new MutationObserver(agendarAjusteLogos).observe(document.body, { childList:true, subtree:true });   // a página inteira (o chat da Ajuda fica fora do main)
 
-// Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta), guardados na sessão
+// Saldo de créditos: saldo fictício + bônus ganhos no protótipo (pesquisas de escuta, guardados na sessão) − créditos
+// gastos destravando conteúdos (compras guardadas no navegador em v2Compras, o mesmo lugar para todas as páginas).
 const SALDO_BASE = 41;
 function lerBonusCreditos(){
   try { return +sessionStorage.getItem('bonusCreditos') || 0; } catch(e){ return 0; }
 }
+function lerCompras(){ try { const v = JSON.parse(localStorage.getItem('v2Compras')); return Array.isArray(v) ? v : []; } catch(e){ return []; } }
+const creditosGastos = () => lerCompras().reduce((s, x) => s + x.v, 0);
+const saldoCreditos = () => SALDO_BASE + lerBonusCreditos() - creditosGastos();
+// Destravar um conteúdo pago: debita os créditos da carteira, registra a compra (aparece no extrato da Carteira) e
+// marca o conteúdo como destravado (v2Destravados). Sem saldo suficiente, não destrava e devolve false.
+function comprarConteudo(c){
+  if(lerDestravados().includes(c.t)) return true;
+  if(saldoCreditos() < c.credits) return false;
+  try {
+    localStorage.setItem('v2Compras', JSON.stringify([{ t:c.t, v:c.credits }, ...lerCompras()]));
+    localStorage.setItem('v2Destravados', JSON.stringify([...lerDestravados(), c.t]));
+  } catch(e){ return false; }
+  atualizarSaldo();
+  return true;
+}
 function atualizarSaldo(){
-  const saldo = SALDO_BASE + lerBonusCreditos();
+  const saldo = saldoCreditos();
   document.querySelectorAll('.saldo-creditos').forEach(el => { el.textContent = `${saldo} créditos`; el.dataset.n = saldo; });
 }
 atualizarSaldo();

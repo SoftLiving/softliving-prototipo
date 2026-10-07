@@ -13,8 +13,30 @@ const CONTEUDOS = [
   {foto:"1515886657613-9f3515b0c78f", cat:"Estilo de vida e consumo", t:"A Moda Finalmente Descobriu que Você Existe", e:"O público 50+ virou protagonista nas passarelas. E já era hora.", a:"Sofia Martellini", icon:"star", badge:"gratis"},
   {foto:"1445019980597-93fa8acb246c", cat:"Estilo de vida e consumo", t:"O luxo de hoje é outra coisa", e:"Menos ostentação, mais espaço, tempo, matéria, silêncio e liberdade.", a:"Erick Figueira de Mello", icon:"gift", badge:"gratis"},
   {foto:"1481627834876-b7833e8f5570", cat:"Estilo de vida e consumo", t:"Uma casa precisa de coisas velhas", e:"Sobre pátina, memória e a importância de não começar todos os interiores do zero.", a:"Erick Figueira de Mello", icon:"building", badge:"gratis"},
+  {foto:"1493663284031-b7e3aefcae8e", cat:"Estilo de vida e consumo", t:"Menos coisas, mais espaço", e:"Como desapegar sem culpa e deixar a casa mais leve, bonita e fácil de cuidar.", a:"Erick Figueira de Mello", icon:"building", badge:"gratis"},
   {foto:"1551836022-d5d88e9218df", cat:"SoftLiving", t:"Aos patrocinadores do SoftLiving", e:"Quem assina o começo?", a:"Rafael Barros · CEO SoftLiving", icon:"handshake", badge:"gratis"},
   {foto:"1563986768609-322da13575f3", cat:"Tecnologia e serviços digitais", t:"Agente de IA anti-golpe", e:"Como se proteger melhor no WhatsApp, Pix e links suspeitos.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1677442136019-21780ecad995", cat:"Tecnologia e serviços digitais", t:"Meu primeiro agente de IA", e:"Como começar a usar inteligência artificial sem medo.", a:"Bernardo Leitão", icon:"robot", badge:"gratis"},
+  {foto:"1447752875215-b2761acb3c5d", cat:"Saúde e bem-estar físico", t:"Caminhar: o exercício mais subestimado", e:"Trinta minutos por dia, no seu ritmo, fazem bem ao coração, ao sono e ao humor.", a:"Redação SoftLiving", icon:"activity", badge:"gratis"},
+  {foto:"1519494026892-80bbd2d6fd0d", cat:"Saúde e bem-estar físico", t:"Check-up sem medo", e:"O que vale a pena pedir ao médico depois dos 50, e o que pode esperar.", a:"Redação SoftLiving", icon:"activity", badge:"premium", credits:1},
+  {foto:"1544367567-0f2fcb009e0b", cat:"Saúde e bem-estar físico", t:"Respirar melhor muda o dia", e:"Exercícios simples de respiração para fazer em casa, em poucos minutos.", a:"Redação SoftLiving", icon:"activity", badge:"gratis"},
+  {foto:"1512941937669-90a1b58e7e9c", cat:"Tecnologia e serviços digitais", t:"WhatsApp sem segredos", e:"Grupos, áudios, chamadas de vídeo e privacidade: o essencial, passo a passo.", a:"Bernardo Leitão", icon:"phone", badge:"gratis"},
+  {foto:"1498050108023-c5249f4df085", cat:"Tecnologia e serviços digitais", t:"Senhas fortes sem dor de cabeça", e:"Como criar e guardar senhas seguras sem precisar decorar todas.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
+  {foto:"1460925895917-afdab827c52f", cat:"Tecnologia e serviços digitais", t:"Banco pelo celular, com segurança", e:"Pix, boletos e extratos no aplicativo do banco, sem cair em golpes.", a:"Bernardo Leitão", icon:"shield", badge:"gratis"},
   {foto:"1543269865-cbf427effbad", cat:"Saúde mental e qualidade de vida", t:"Mais conexão, menos solidão", e:"O papel da tecnologia na vida madura: usada com propósito, ela aproxima pessoas.", a:"Redação SoftLiving", icon:"chat", badge:"destravado"},
 ];
+
+// PROTÓTIPO · TESTE DE PAGAMENTOS: com TESTE_PAGAMENTOS ligado, cerca de 90% dos conteúdos ficam pagos (1, 2 ou 3
+// créditos), para testar o destravar e o débito na carteira. Ficam grátis só os títulos de CONTEUDOS_SEMPRE_GRATIS (e,
+// nas colunas, a última da coluna do dia, em colunas-dados.js). Os já destravados nos dados continuam destravados.
+// Para voltar ao normal, mude TESTE_PAGAMENTOS para false: valem de novo os badges escritos acima.
+const TESTE_PAGAMENTOS = true;
+const CONTEUDOS_SEMPRE_GRATIS = ['Aos patrocinadores do SoftLiving'];
+function bloquearParaTeste(lista, gratis){
+  if(!TESTE_PAGAMENTOS) return;
+  lista.forEach((c, i) => {
+    if(c.badge !== 'gratis' || gratis.includes(c.t)) return;
+    c.badge = 'premium'; c.credits = [1, 2, 3][i % 3];
+  });
+}
+bloquearParaTeste(CONTEUDOS, CONTEUDOS_SEMPRE_GRATIS);
