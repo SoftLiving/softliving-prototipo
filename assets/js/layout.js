@@ -695,7 +695,6 @@ const htmlEntrar = (titulo, texto) => `
     <div class="enj-social">${ENTRAR_SOCIAL.map(([n, svg]) => `<button type="button" class="enj-social-bt" data-social="${n}">${svg}Continuar com ${n}</button>`).join('')}</div>
     <p class="enj-ou"><span>ou com seu e-mail</span></p>
     <form class="enj-form" novalidate>
-      <p class="enj-dica">No protótipo, é só clicar em <b>Entrar</b>, sem digitar nada, ou usar login <b>123</b> e senha <b>123</b>.</p>
       <label>E-mail ou login<input type="text" name="email" autocomplete="username" placeholder="nome@exemplo.com"></label>
       <label>Senha<span class="enj-senha"><input type="password" name="senha" autocomplete="current-password" placeholder="Sua senha"><button type="button" class="enj-ver" aria-label="Mostrar senha">Mostrar</button></span></label>
       <div class="enj-linha"><label class="enj-lembrar"><input type="checkbox" checked> Manter conectado</label><a href="#" class="enj-esqueci">Esqueci minha senha</a></div>

@@ -119,7 +119,6 @@
           <input id="smSenha" name="senha" type="password" autocomplete="current-password" placeholder="Digite aqui">
           <p class="sm-erro" id="smErro" role="alert" hidden>Login ou senha incorretos. Confira e tente de novo.</p>
           <div class="sm-actions"><button type="submit" class="sm-btn sm-primary">Entrar</button></div>
-          <p class="sm-dica">Protótipo: use login <b>123</b> e senha <b>123</b>.</p>
         </form>`;
     },
     sair(){

@@ -3,7 +3,8 @@
 // (boxes BDDLE, BDVC, BSD e BDS; o formato de mosaico foi retirado em 2026-10-07) e, no fim, a lista completa com o fichário de
 // assuntos e Todos/Grátis/Premium. Usa CONTEUDOS (conteudos-dados.js) e fotoUrl/icone/mostrarAviso (layout.js).
 
-const ctEstado = { assunto:0, tipo:'todos', busca:'' };
+const CT_PASSO = 15;   // "Todos os conteúdos" mostra uma prévia de 15 e abre mais 15 a cada "Mais conteúdos"
+const ctEstado = { assunto:0, tipo:'todos', busca:'', mostrar:CT_PASSO };
 
 // 1) Assuntos em círculos, com a foto de um conteúdo de cada assunto: cada um leva à página própria do assunto
 // ("Todos" leva à lista completa, no fim desta página)
@@ -117,13 +118,16 @@ function renderConteudos(){
   document.getElementById('ctTipos').innerHTML = tipos.map(([k, l, n]) => `<button type="button" role="tab" class="${k === ctEstado.tipo ? 'on' : ''}" aria-selected="${k === ctEstado.tipo}" data-tipo="${k}">${l} <small>${n}</small></button>`).join('');
 
   const lista = porAssuntoEBusca.filter(c => ctEstado.tipo === 'todos' || (ctEstado.tipo === 'gratis' ? c.badge === 'gratis' : c.badge !== 'gratis'));
-  document.getElementById('ctGrade').innerHTML = lista.map(ctItem).join('');
+  document.getElementById('ctGrade').innerHTML = lista.slice(0, ctEstado.mostrar).map(ctItem).join('');
+  document.getElementById('ctMaisBox').hidden = lista.length <= ctEstado.mostrar;
+  document.getElementById('ctMais').innerHTML = `Mais conteúdos ${icone('mais')}`;
   document.getElementById('ctVazio').hidden = lista.length > 0;
   marcarSalvos();
 }
 
-document.getElementById('ctAssuntos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.assunto = +b.dataset.i; renderConteudos(); } });
-document.getElementById('ctTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.tipo = b.dataset.tipo; renderConteudos(); } });
+document.getElementById('ctAssuntos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.assunto = +b.dataset.i; ctEstado.mostrar = CT_PASSO; renderConteudos(); } });
+document.getElementById('ctTipos').addEventListener('click', e => { const b = e.target.closest('button'); if(b){ ctEstado.tipo = b.dataset.tipo; ctEstado.mostrar = CT_PASSO; renderConteudos(); } });
+document.getElementById('ctMais').addEventListener('click', () => { ctEstado.mostrar += CT_PASSO; renderConteudos(); });
 document.querySelector('main').addEventListener('click', e => {
   const fav = e.target.closest('.fav');
   if(fav){

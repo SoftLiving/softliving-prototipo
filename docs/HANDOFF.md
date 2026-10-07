@@ -278,6 +278,7 @@ Fonte: `assets/js/layout.js`.
   com o título e a quantidade. Coluna é o conteúdo escrito por um colunista;
   vitrine salva é o estabelecimento favoritado. **Em Minhas Comunidades entram os conteúdos e os serviços salvos
   dentro das comunidades fechadas** (decisão de 07/10/2026).
+- **Listas completas abrem em prévia, com botão para ver mais** (07/10/2026): "Todos os conteúdos" (página Conteúdos) mostra **15 itens** e o botão "Mais conteúdos" abre **mais 15** a cada clique; "Todos os grupos" (página Grupos) mostra **8** e o "Ver mais" abre **mais 8**. O botão some quando a lista acaba, e trocar de aba ou de filtro volta à prévia.
 - Cartões de conteúdo não têm botão "Ler": o cartão inteiro é o link.
 - O botão salvar do cartão só aparece no hover (ou se já foi salvo); no celular, sempre à vista.
 
@@ -548,6 +549,7 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 - **Quem se cadastra ganha 20 créditos de bônus.** É o bônus de cadastro, igual para todos: o convite não dá nada a
   mais ao convidado.
 - **Texto do convite:** "Cadastre-se pelo meu convite. Todo novo membro ganha 20 créditos de bônus."
+- **Corpo do e-mail de convite:** o texto padrão ainda será escrito pelo produto (em aberto, 8.2).
 
 ### 5.9 Outras telas
 
@@ -682,6 +684,7 @@ só como ponto de partida.
 - **Títulos dos boxes nas páginas de segmento:** os do protótipo são provisórios (4.9).
 - **Blocos ainda sem nome:** a lista "Todos os conteúdos" (fichário, filtro e lista em 3 colunas), a lista "Todos os grupos" da página Grupos, o topo de página, a faixa de apoio, a newsletter e as faixas de chamada. Implementar como estão no protótipo; o nome vem depois.
 - **Coluna da direita por página:** a coluna será contextual, mas as opções de cada página ainda não foram definidas (4.5). Até lá, vale o conjunto único de quatro blocos.
+- **Indicações › convite por e-mail:** o texto padrão do corpo do e-mail ainda será escrito pelo produto (5.8). Até lá, não definir esse texto na implementação.
 - **Pesquisa externa:** se dá créditos e para quem é enviada (5.7).
 - **Atividades (Curtidas, Comentários, Acompanhar, Salvos):** as rotas da V1 existem, mas o conteúdo delas não foi comparado com o protótipo.
 
