@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 7 de outubro de 2026 (quarta-feira)
-- **Total:** 284 commits
+- **Total:** 286 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 4 |
+| [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 6 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
 | [29 de setembro de 2026 (terça-feira)](#2026-09-29) | 12 |
@@ -30,10 +30,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-07"></a>
-## 7 de outubro de 2026 (quarta-feira) · 4 commits
+## 7 de outubro de 2026 (quarta-feira) · 6 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:53 | [`566a401`](https://github.com/SoftLiving/softliving-prototipo/commit/566a4015e185a6298b05edb2d3690a849c4f4179) | Conteúdos: Todos os conteúdos em prévia de 15 com o botão Mais conteúdos; login sem o aviso do protótipo |
+| 02:47 | [`862afa9`](https://github.com/SoftLiving/softliving-prototipo/commit/862afa9d6e1d6e150f7577d606cf172eec948438) | COMMITS.md: histórico atualizado com a nova página Grupos |
 | 02:47 | [`4227bec`](https://github.com/SoftLiving/softliving-prototipo/commit/4227bec63982d29bbedc7c4dbbd3d45cd3496516) | Grupos na estrutura de revista de Conteúdos e Vitrines, com cartões de grupo |
 | 02:37 | [`2867bfa`](https://github.com/SoftLiving/softliving-prototipo/commit/2867bfa24d2e0ea1a2eed77135308510ae9c7bc4) | COMMITS.md: histórico atualizado até 07/10/2026 (commits de 01/10 e o handoff da V1 para a V2) |
 | 02:37 | [`6a746ab`](https://github.com/SoftLiving/softliving-prototipo/commit/6a746ab47d286567a6bda22280baa46da84cbb08) | Handoff da V1 para a V2 e catálogo de boxes: documento do desenvolvedor, telas novas e decisões aplicadas |
