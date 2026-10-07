@@ -666,6 +666,7 @@ Tomadas na montagem das páginas. Já estão aplicadas nas seções acima e no p
 | Carrosséis e fichários | Todo carrossel tem setas e recebe mais itens do que cabem; as abas de fichário ficam em uma linha e rolam em volta contínua, com a mesma animação |
 | Atividades | Sem menu entre as páginas; Curtidas e Salvos em lista; Salvos separado em Conteúdos, Colunas, Grupos, Vitrines e Minhas Comunidades |
 | Coluna da direita | Meus grupos e Meus amigos só aparecem para quem está logado |
+| Boxes de grupo | Nomes e códigos confirmados: BEDHG, BDELDG, BDDLEG, BDVG e o menu MSG (final G, como o V dos de vitrine) |
 | Pesquisa de escuta | Perguntas contextuais à página; banco de perguntas ilimitado por página; pesquisa externa em camadas (5.7) |
 | Amigos online | Online = usou o portal nos últimos 5 minutos; a pessoa pode esconder o próprio estado no Meu perfil |
 | Encaminhar | "Mais interage" = mensagens trocadas e conteúdos encaminhados nos últimos 90 dias |
@@ -681,7 +682,7 @@ Tomadas na montagem das páginas. Já estão aplicadas nas seções acima e no p
 Pontos que ainda dependem de resposta do produto. **Não implementar antes da resposta**; onde há sugestão, ela vale
 só como ponto de partida.
 
-- **Códigos dos boxes de grupo:** BEDHG, BDELDG, BDDLEG, BDVG e MSG seguem a regra dos de vitrine (final G); falta a confirmação dos nomes pelo produto. Os títulos e as coleções da página Grupos são provisórios.
+- **Títulos e coleções da página Grupos:** os do protótipo são provisórios (4.9).
 - **Títulos dos boxes nas páginas de segmento:** os do protótipo são provisórios (4.9).
 - **Blocos ainda sem nome:** a lista "Todos os conteúdos" (fichário, filtro e lista em 3 colunas), a lista "Todos os grupos" da página Grupos, o topo de página, a faixa de apoio, a newsletter e as faixas de chamada. Implementar como estão no protótipo; o nome vem depois.
 - **Coluna da direita por página:** a coluna será contextual, mas as opções de cada página ainda não foram definidas (4.5). Até lá, vale o conjunto único de quatro blocos.
