@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
-- **Total:** 301 commits
+- **Total:** 303 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 11 |
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 13 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -31,10 +31,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-21"></a>
-## 21 de outubro de 2026 (quarta-feira) · 11 commits
+## 21 de outubro de 2026 (quarta-feira) · 13 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:25 | [`fb57d35`](https://github.com/SoftLiving/softliving-prototipo/commit/fb57d3568526951294df89a8a91095e24d6b77d6) | Indicações: lixeira à esquerda e Enviar convite à direita; resumo com os três números alinhados lado a lado no celular |
+| 02:23 | [`397ad9a`](https://github.com/SoftLiving/softliving-prototipo/commit/397ad9abd7cd89606aca6a8a21d259f9ce823eb8) | COMMITS.md: histórico atualizado |
 | 02:23 | [`25924f8`](https://github.com/SoftLiving/softliving-prototipo/commit/25924f82c229edb76bdc8c60a9d0b901cfbd10f8) | Indicações: sai do cartão do convite o aviso das regras dos créditos |
 | 02:16 | [`da2c679`](https://github.com/SoftLiving/softliving-prototipo/commit/da2c67944b62080bab935feb13004dc9f1729748) | COMMITS.md: histórico atualizado |
 | 02:16 | [`388f602`](https://github.com/SoftLiving/softliving-prototipo/commit/388f60206ccca2bfc42af8ab728c4d5c2a03a09b) | Indicações: no botão Convidar por e-mail, o selo vira o texto simples "Ganhe 5 créditos por indicação aprovada" |
