@@ -29,7 +29,7 @@ busca.html                  Tela Busca: conteúdos e colunas, colunistas e grupo
 notificacoes.html           Tela Notificações: filtros, não lidas/anteriores, preferências (a janela do sino fica no layout.js)
 amigos.html                 Tela Amigos (antiga Conexões): pedidos de amizade, seus amigos e sugestões
 carteira.html               Tela Carteira: saldo (comprados + bônus), recarga (Pix/cartão), bônus e extrato
-indicacoes.html             Tela Indicações: link de convite, convite por e-mail, como funciona e lista
+indicacoes.html             Tela Indicações: link de convite, convite por e-mail (janela de nova mensagem), como funciona e lista
 perfil.html                 Tela Meu perfil: números, sobre mim e interesses editáveis, grupos, amigos, conta
 ajuda.html                  Tela Ajuda: busca, temas, perguntas frequentes e contato por e-mail
 simples.html                Modo simples (sem layout.js): Novidades + 8 opções grandes, uma tarefa por tela, letra ajustável

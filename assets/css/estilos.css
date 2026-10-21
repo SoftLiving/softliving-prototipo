@@ -1033,9 +1033,37 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-bt.in-whats:hover{ background:#20bd5a; }
 .in-bt.in-branco{ background:#fff; color:var(--navy); }
 .in-bt.in-branco:hover{ background:#f3f7f4; }
-.in-email{ display:flex; gap:10px; margin-bottom:14px; }
-.in-email input{ flex:1; min-width:0; height:44px; padding:0 16px; border-radius:999px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font:inherit; font-size:14.5px; }
-.in-email input::placeholder{ color:rgba(255,255,255,.7); }
+/* Convite por e-mail: janela de "Nova mensagem" (barra navy, linhas De/Para/Assunto, corpo livre e convite travado) */
+.in-mail-intro{ margin:6px 0 14px; font-size:15px; color:var(--text-2); }
+.in-mail{ border-radius:22px; overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:var(--vidro-sombra); }
+.in-mail-barra{ background:var(--navy); color:#fff; padding:12px 20px; font-size:14.5px; font-weight:600; }
+.in-mail-linha{ display:flex; align-items:center; gap:12px; min-height:48px; padding:0 20px; border-bottom:1px solid var(--line); font-size:14.5px; }
+.in-mail-rot{ width:64px; flex:none; color:var(--muted); }
+.in-mail-fixo{ color:var(--text-2); min-width:0; }
+.in-mail-assunto{ color:var(--text); flex:1; }
+.in-mail-cadeado{ width:16px; height:16px; color:var(--line-2); flex:none; }
+.in-mail-linha input{ flex:1; min-width:0; border:none; outline:none; background:transparent; font:inherit; font-size:15px; color:var(--text); padding:13px 0; }
+.in-mail-corpo{ padding:16px 20px 4px; }
+.in-mail-corpo textarea{ display:block; width:100%; box-sizing:border-box; min-height:96px; border:none; outline:none; resize:vertical; background:transparent; font:inherit; font-size:15.5px; line-height:1.6; color:var(--text); padding:0; }
+.in-mail-cont{ display:block; text-align:right; font-size:12.5px; color:var(--muted); }
+.in-mail-padrao{ margin:6px 20px 20px; border:1px dashed var(--line-2); border-radius:16px; background:var(--paper); overflow:hidden; }
+.in-mail-trava{ display:flex; align-items:center; gap:6px; margin:0; padding:9px 16px; font-size:12.5px; color:var(--muted); border-bottom:1px dashed var(--line-2); }
+.in-mail-trava .ic{ width:14px; height:14px; }
+.in-mail-topo{ background:var(--green); color:#fff; padding:12px 22px; font-family:Georgia,serif; font-size:18px; font-weight:700; }
+.in-mail-texto{ padding:18px 22px; font-family:Georgia,serif; font-size:15px; line-height:1.6; color:#4a4a4a; }
+.in-mail-texto p{ margin:0 0 12px; }
+.in-mail-titulo{ font-family:'Inter',sans-serif; font-size:20px; color:var(--text); }
+.in-mail-url{ font-size:13px; overflow-wrap:anywhere; }
+.in-mail-botao{ display:inline-block; background:var(--green); color:#fff; border-radius:10px; padding:10px 22px; font-size:14.5px; font-weight:700; margin:2px 0 14px; }
+.in-mail-texto .in-mail-rodape{ margin:0; font-size:12px; color:#8a8a8a; }
+.in-mail-acoes{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 20px; border-top:1px solid var(--line); }
+.in-mail-enviar{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:11px 22px; font:inherit; font-size:14.5px; font-weight:600; color:#fff; background:var(--navy); cursor:pointer; transition:transform .15s, box-shadow .15s; }
+.in-mail-enviar:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(1,53,101,.22); }
+.in-mail-enviar .ic{ width:17px; height:17px; }
+.in-mail-erro{ font-size:13.5px; color:#b3261e; }
+.in-mail-descartar{ margin-left:auto; display:grid; place-items:center; width:38px; height:38px; border:none; border-radius:10px; background:transparent; color:var(--muted); cursor:pointer; }
+.in-mail-descartar:hover{ background:var(--paper-dark); color:var(--text); }
+.in-mail-descartar .ic{ width:19px; height:19px; }
 .in-regras{ margin:0; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.12); font-size:13.5px; line-height:1.6; color:rgba(255,255,255,.92); }
 .in-regras a{ color:#fff; text-decoration:underline; font-weight:600; }
 .in-regras .sig .soft{ color:#d6e6f5; } .in-regras .sig .living{ color:#cfe9c4; }   /* fundo escuro: cores claras da marca */
@@ -1180,7 +1208,9 @@ a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-
   .pf-numeros a:nth-child(n+3){ border-top:1px solid var(--line); }
 }
 @media (max-width:640px){
-  .in-email{ flex-direction:column; }
+  .in-mail-linha, .in-mail-corpo, .in-mail-acoes{ padding-left:16px; padding-right:16px; }
+  .in-mail-padrao{ margin:6px 12px 16px; }
+  .in-mail-texto{ padding:16px; }
   .in-cartao{ padding:22px 18px; }
   .in-codigo{ font-size:32px; }
   .pf-id{ padding:0 18px; }
@@ -1735,9 +1765,6 @@ body{ background:
 @media (max-width:640px){
   /* texto justificado abre buracos em coluna estreita */
   .hero p, .inst-hero .lead{ text-align:left; }
-  /* Indicações: campo de e-mail com altura própria quando empilha */
-  .in-email input{ flex:none; width:100%; }
-  .in-email .in-bt{ justify-content:center; }
   /* Acompanhar: botão embaixo do nome do colunista */
   .at-autor{ flex-wrap:wrap; }
   .at-autor .autor-txt{ flex:1 1 calc(100% - 70px); min-width:0; }

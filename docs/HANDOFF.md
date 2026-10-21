@@ -150,7 +150,7 @@ Mantêm a rota, as funções e o conteúdo de hoje, e recebem só os padrões gl
 | Grupo | "Quem participa" (Conectar, Conversar), abas Tópicos e Mural, "Rodadas" | Abas Conversas, Mural, Encontros e Membros; grupos de desapego com Anúncios |
 | Amigos | "Conexões": Recebidos, Enviados, Conectados e Seguindo | Pedidos de amizade e três abas: Seus amigos, Sugestões e Seguindo. "Mensagem" abre a Conversa; nas sugestões dá para Adicionar ou Seguir. É a única tela de pessoas da V2 |
 | Carteira | Saldo em Créditos e Bônus; "Ativação da conta" só por Pix (R$ 50,00 → 50 + 50); histórico com data e saldo após | Recarga de R$20 a R$200 por Pix ou cartão, com bônus progressivo; aviso de que o bônus vale 12 meses; extrato **com data e hora**, com filtros |
-| Indicações | Código, link, compartilhar (inclui WhatsApp); benefício descrito como "regras da campanha", sem valor fixo | Mostra o valor fixo (5 créditos para quem indicou) e convite por e-mail |
+| Indicações | Código, link, compartilhar (inclui WhatsApp); benefício descrito como "regras da campanha", sem valor fixo | Mostra o valor fixo (5 créditos para quem indicou) e convite por e-mail em janela de nova mensagem, com mensagem pessoal |
 | Meu perfil | Visibilidade do perfil, e-mail de nova mensagem, endereço público, foto, interesses, meus grupos, alterar senha, acessibilidade | Números, sobre mim, habilidades e ofertas, interesses, comunidades, vitrines favoritas, amigos e conta. Em "Conta e privacidade": "Aparecer na comunidade", **"Receber mensagens de quem não é amigo"** (nova), **"Mostrar quando estou online"** (nova), "Endereço público" (opcional), além das outras configurações da V1 |
 | Suporte | "Central de Ajuda": WhatsApp "em breve", tutoriais com tempo de leitura, perguntas frequentes | Sem WhatsApp e sem tempo de leitura; busca, temas, perguntas, e-mail e assistente com inteligência artificial, que responde só com o que está na base de conhecimento |
 | Minhas Comunidades | "Minha Empresa": troca entre 3 organizações; abas Início, Módulos, Conteúdos, Usuários, Publicar, Dashboard, Escuta | Abas Início, Conteúdos, Serviços (no lugar de Módulos), Grupos internos, Membros, Publicar, Dashboard, Escuta; públicos; estabelecimentos incluídos |
@@ -550,7 +550,22 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 - **Quem se cadastra ganha 20 créditos de bônus.** É o bônus de cadastro, igual para todos: o convite não dá nada a
   mais ao convidado.
 - **Texto do convite:** "Cadastre-se pelo meu convite. Todo novo membro ganha 20 créditos de bônus."
-- **Corpo do e-mail de convite:** o texto padrão ainda será escrito pelo produto (em aberto, 8.2).
+- **Convite por e-mail (aprovado em 21/10/2026):** bloco próprio "Convidar por e-mail", abaixo do cartão do convite,
+  em formato de janela de "Nova mensagem" de webmail. Substitui o campo de e-mail que ficava dentro do cartão.
+  - **De:** fixo, com o nome de quem indica: "Rafael Barros via SoftLiving". O envio sai de um endereço da SoftLiving;
+    só o nome de exibição leva o nome do indicador (confirmar se o provedor de e-mail permite).
+  - **Para:** obrigatório, um e-mail válido. Ao enviar, o convite entra na lista com a situação "Convite enviado".
+  - **Assunto:** fixo, sem edição: "[Nome] convidou você para a SoftLiving".
+  - **Mensagem pessoal:** opcional, até 400 caracteres, com contador. Vai no início do e-mail, antes do convite padrão.
+    Se ficar vazia, o e-mail sai só com o convite padrão.
+  - **Convite padrão:** aparece logo abaixo da mensagem, travado (borda tracejada e cadeado), para quem indica ver o
+    e-mail inteiro antes de enviar. Conteúdo: cabeçalho SoftLiving, "Um convite para você", "[Nome] convidou você
+    para conhecer a SoftLiving. Use o código [código] na tela de cadastro e venha fazer parte da comunidade.", o link
+    de convite e o botão "Conhecer a SoftLiving".
+  - **Rodapé do e-mail:** "Você recebeu este e-mail porque [Nome], membro da comunidade SoftLiving, indicou seu
+    endereço." e o link "Não quero receber convites" (no lugar de "Gerenciar preferências", que não serve para quem
+    ainda não tem conta). Sai o texto antigo "Você recebeu este e-mail por ser membro da comunidade SoftLiving".
+  - Botões: "Enviar convite" e a lixeira (descartar), que limpa Para e mensagem.
 
 ### 5.9 Outras telas
 
@@ -686,7 +701,6 @@ só como ponto de partida.
 - **Títulos dos boxes nas páginas de segmento:** os do protótipo são provisórios (4.9).
 - **Blocos ainda sem nome:** a lista "Todos os conteúdos" (fichário, filtro e lista em 3 colunas), a lista "Todos os grupos" da página Grupos, o topo de página, a faixa de apoio, a newsletter e as faixas de chamada. Implementar como estão no protótipo; o nome vem depois.
 - **Coluna da direita por página:** a coluna será contextual, mas as opções de cada página ainda não foram definidas (4.5). Até lá, vale o conjunto único de quatro blocos.
-- **Indicações › convite por e-mail:** o texto padrão do corpo do e-mail ainda será escrito pelo produto (5.8). Até lá, não definir esse texto na implementação.
 - **Pesquisa externa:** se dá créditos e para quem é enviada (5.7).
 - **Atividades (Curtidas, Comentários, Acompanhar, Salvos):** as rotas da V1 existem, mas o conteúdo delas não foi comparado com o protótipo.
 

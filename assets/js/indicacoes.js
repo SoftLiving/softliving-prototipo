@@ -45,15 +45,28 @@ document.getElementById('inCompartilhar').addEventListener('click', () => {
   if(navigator.share) navigator.share({ title:'Convite SoftLiving', text:IN_MENSAGEM, url:IN_LINK }).catch(() => {});
   else copiar(IN_MENSAGEM, 'Mensagem de convite copiada. Cole onde quiser compartilhar');
 });
+// Convite por e-mail ("Nova mensagem"): Para obrigatório, mensagem pessoal opcional (até 400 caracteres).
+// Código e link do convite padrão vêm do cartão do convite.
+const inMsg = document.getElementById('inEmailMsg');
+const inErro = document.getElementById('inEmailErro');
+const inCampo = document.getElementById('inEmailCampo');
+document.getElementById('inEmailCodigo').textContent = IN_CODIGO;
+document.getElementById('inEmailLink').textContent = IN_LINK;
+const inContar = () => { document.getElementById('inEmailCont').textContent = `${inMsg.value.length}/400`; };
+inMsg.addEventListener('input', inContar);
+inCampo.addEventListener('input', () => { inErro.textContent = ''; });
+document.getElementById('inEmailDescartar').addEventListener('click', () => {
+  inCampo.value = ''; inMsg.value = ''; inErro.textContent = ''; inContar();
+});
 document.getElementById('inEmail').addEventListener('submit', ev => {
   ev.preventDefault();
-  const campo = document.getElementById('inEmailCampo');
-  const email = campo.value.trim().toLowerCase();
-  if(!email) return;
+  const email = inCampo.value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ inErro.textContent = 'Informe um e-mail válido.'; inCampo.focus(); return; }
   if(!novos.includes(email)) novos.unshift(email);
   try { localStorage.setItem('v2Convites', JSON.stringify(novos)); } catch(e){}
-  campo.value = '';
+  const comMensagem = inMsg.value.trim() !== '';
+  inCampo.value = ''; inMsg.value = ''; inContar();
   renderIndicacoes();
-  mostrarAviso(`Convite registrado para ${email} (no protótipo, nenhum e-mail é enviado)`);
+  mostrarAviso(`Convite ${comMensagem ? 'com sua mensagem ' : ''}registrado para ${email} (no protótipo, nenhum e-mail é enviado)`);
 });
 renderIndicacoes();
