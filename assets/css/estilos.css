@@ -1034,7 +1034,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-bt.in-branco{ background:#fff; color:var(--navy); }
 .in-bt.in-branco:hover{ background:#f3f7f4; }
 /* Convite por e-mail: janela de "Nova mensagem" (barra navy, linhas De/Para/Assunto, corpo livre e convite travado) */
-.in-bt-email{ display:flex; align-items:center; gap:16px; width:100%; box-sizing:border-box; margin-top:14px; padding:16px 20px; border:1px solid rgba(255,255,255,.28); border-radius:22px; cursor:pointer; text-align:left; font:inherit; color:#fff; background:linear-gradient(135deg, #013565 0%, #2c5b58 55%, #3f7a45 100%); box-shadow:0 12px 28px rgba(0,0,0,.22); transition:transform .15s, box-shadow .15s; } /* faixa de ponta a ponta no fim do cartão */
+.in-bt-email{ display:flex; align-items:center; gap:16px; width:100%; box-sizing:border-box; margin-top:14px; padding:16px 20px; border:none; outline:none; border-radius:22px; cursor:pointer; text-align:left; font:inherit; color:#fff; background:linear-gradient(135deg, #013565 0%, #2c5b58 55%, #3f7a45 100%); box-shadow:0 12px 28px rgba(0,0,0,.22); transition:transform .15s, box-shadow .15s; } /* faixa de ponta a ponta no fim do cartão */
 .in-bt-email:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(0,0,0,.28); }
 .in-bt-email-ic{ display:grid; place-items:center; width:46px; height:46px; flex:none; border-radius:14px; background:rgba(255,255,255,.18); }
 .in-bt-email-ic .ic{ width:22px; height:22px; }
