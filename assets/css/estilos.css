@@ -1050,7 +1050,6 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-mail-painel[hidden]{ display:none; }
 .in-mail{ border-radius:20px; overflow:hidden; background:#fff; color:var(--text); box-shadow:0 14px 32px rgba(0,0,0,.18); } /* janela branca dentro do cartão do convite */
 .in-mail-barra{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--navy); padding:13px 20px; font-size:15px; font-weight:700; background:var(--paper-dark); border-bottom:1px solid var(--line); }
-.in-mail-selo{ font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:999px; background:var(--mint); color:var(--green); }
 .in-mail-linha:focus-within{ background:var(--mint-2); }
 .in-mail-linha{ display:flex; align-items:center; gap:12px; min-height:48px; padding:0 20px; border-bottom:1px solid var(--line); font-size:14.5px; }
 .in-mail-rot{ width:64px; flex:none; color:var(--muted); }
@@ -1061,16 +1060,16 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-mail-corpo{ padding:16px 20px 4px; }
 .in-mail-corpo textarea{ display:block; width:100%; box-sizing:border-box; min-height:96px; border:none; outline:none; resize:vertical; background:transparent; font:inherit; font-size:15.5px; line-height:1.6; color:var(--text); padding:0; }
 .in-mail-cont{ display:block; text-align:right; font-size:12.5px; color:var(--muted); }
-.in-mail-padrao{ margin:6px 20px 20px; border:1px dashed var(--line-2); border-radius:16px; background:var(--paper); overflow:hidden; }
-.in-mail-trava{ display:flex; align-items:center; gap:6px; margin:0; padding:9px 16px; font-size:12.5px; color:var(--muted); border-bottom:1px dashed var(--line-2); }
+.in-mail-padrao{ margin:6px 20px 20px; border:1px dashed var(--mint-line); border-radius:16px; background:var(--mint); overflow:hidden; } /* convite padrão todo no tom verde */
+.in-mail-trava{ display:flex; align-items:center; gap:6px; margin:0; padding:9px 16px; font-size:12.5px; color:var(--green); border-bottom:1px dashed var(--mint-line); }
 .in-mail-trava .ic{ width:14px; height:14px; }
 .in-mail-topo{ background:var(--green); color:#fff; padding:12px 22px; font-family:Georgia,serif; font-size:18px; font-weight:700; }
-.in-mail-texto{ padding:18px 22px; font-family:Georgia,serif; font-size:15px; line-height:1.6; color:#4a4a4a; }
+.in-mail-texto{ padding:18px 22px; font-family:Georgia,serif; font-size:15px; line-height:1.6; color:var(--green-dark); }
 .in-mail-texto p{ margin:0 0 12px; }
-.in-mail-titulo{ font-family:'Inter',sans-serif; font-size:20px; color:var(--text); }
+.in-mail-titulo{ font-family:'Inter',sans-serif; font-size:20px; color:var(--green); }
 .in-mail-url{ font-size:13px; overflow-wrap:anywhere; }
 .in-mail-botao{ display:inline-block; background:var(--green); color:#fff; border-radius:10px; padding:10px 22px; font-size:14.5px; font-weight:700; margin:2px 0 14px; }
-.in-mail-texto .in-mail-rodape{ margin:0; font-size:12px; color:#8a8a8a; }
+.in-mail-texto .in-mail-rodape{ margin:0; font-size:12px; color:var(--green-2); }
 .in-mail-incentivo{ margin:0 20px 16px; padding:10px 14px; border-radius:12px; background:var(--mint); color:var(--green-dark); font-size:13.5px; line-height:1.5; }
 .in-mail-acoes{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 20px; border-top:1px solid var(--line); }
 .in-mail-enviar{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:11px 22px; font:inherit; font-size:14.5px; font-weight:600; color:#fff; background:var(--navy); cursor:pointer; transition:transform .15s, box-shadow .15s; }
