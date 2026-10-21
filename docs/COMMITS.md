@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
-- **Total:** 297 commits
+- **Total:** 299 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 7 |
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 9 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -31,10 +31,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-21"></a>
-## 21 de outubro de 2026 (quarta-feira) · 7 commits
+## 21 de outubro de 2026 (quarta-feira) · 9 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:16 | [`388f602`](https://github.com/SoftLiving/softliving-prototipo/commit/388f60206ccca2bfc42af8ab728c4d5c2a03a09b) | Indicações: no botão Convidar por e-mail, o selo vira o texto simples "Ganhe 5 créditos por indicação aprovada" |
+| 02:13 | [`c284fbd`](https://github.com/SoftLiving/softliving-prototipo/commit/c284fbd0ec317ac8d15d384f92cf81e4ed01affb) | COMMITS.md: histórico atualizado |
 | 02:13 | [`e9fd3de`](https://github.com/SoftLiving/softliving-prototipo/commit/e9fd3de868f075e3262a69e2858fbb85e910f93d) | Indicações: prévia do convite toda no tom verde e sem o selo na barra Nova mensagem |
 | 02:04 | [`c462945`](https://github.com/SoftLiving/softliving-prototipo/commit/c462945a8b75718a7fd8a6106edf5887b9ccba62) | COMMITS.md: histórico atualizado |
 | 02:04 | [`469e07c`](https://github.com/SoftLiving/softliving-prototipo/commit/469e07cfa31234c16879d8aecba04a1baac4bdc5) | Indicações: botão Convidar por e-mail sem o contorno branco |
