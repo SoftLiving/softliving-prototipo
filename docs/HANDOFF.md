@@ -554,9 +554,10 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
   Substitui o campo de e-mail antigo.
   - **Como abre:** pelo botão "Convidar por e-mail", uma faixa de ponta a ponta no fim do cartão do convite, logo depois
     do aviso das regras, no mesmo degradê do cartão: ícone de envelope, título "Convidar por e-mail", a frase "Mande seu
-    convite com uma mensagem pessoal.", o selo "+5 créditos por indicação" e a seta. A janela começa fechada e, ao clicar, se estende para baixo do botão,
+    convite com uma mensagem pessoal.", o texto "Ganhe 5 créditos por indicação aprovada" (texto simples, sem
+    fundo) e a seta. A janela começa fechada e, ao clicar, se estende para baixo do botão,
     dentro do próprio cartão, tudo num box só. O mesmo botão fecha. Ao abrir, a página rola até a janela e o cursor vai para o campo Para.
-  - **Incentivo:** o selo "+5 créditos por indicação" fica no botão que abre a janela; dentro dela, acima do Enviar, a
+  - **Incentivo:** o texto "Ganhe 5 créditos por indicação aprovada" fica no botão que abre a janela; dentro dela, acima do Enviar, a
     faixa "+5 créditos para você a cada indicação aprovada. Quem você convida ganha 20 créditos ao se cadastrar."
   - **Convite padrão na prévia:** todo no tom verde da marca (fundo verde claro, borda tracejada verde, textos em verde).
   - **De:** fixo, com o nome de quem indica: "Rafael Barros via SoftLiving". O envio sai de um endereço da SoftLiving;

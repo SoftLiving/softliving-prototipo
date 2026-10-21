@@ -1041,7 +1041,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-bt-email-txt{ flex:1; min-width:0; }
 .in-bt-email-txt b{ display:block; font-family:'Fraunces',serif; font-size:21px; font-weight:600; line-height:1.2; }
 .in-bt-email-txt small{ display:block; margin-top:3px; font-size:14px; color:rgba(255,255,255,.85); }
-.in-bt-email-selo{ display:inline-block; margin-top:8px; font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:999px; background:rgba(255,255,255,.18);  }
+.in-bt-email-selo{ display:block; margin-top:4px; font-size:14px; font-weight:600; color:#cfe9c4; } /* texto simples, sem fundo de botão */
 .in-bt-seta{ width:24px; height:24px; flex:none; transition:transform .2s; }
 .in-bt-email[aria-expanded="true"] .in-bt-seta{ transform:rotate(180deg); }
 .in-bt-email[aria-expanded="true"]{ transform:none; }
