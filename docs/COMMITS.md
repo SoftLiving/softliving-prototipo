@@ -3,8 +3,8 @@
 Registro de todas as mudanças do protótipo, desde o primeiro commit, para acompanhamento do desenvolvimento.
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
-- **Período:** 23 de setembro de 2026 (quarta-feira) a 7 de outubro de 2026 (quarta-feira)
-- **Total:** 290 commits
+- **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
+- **Total:** 291 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,6 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 1 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -28,6 +29,13 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [25 de setembro de 2026 (sexta-feira)](#2026-09-25) | 42 |
 | [24 de setembro de 2026 (quinta-feira)](#2026-09-24) | 9 |
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
+
+<a id="2026-10-21"></a>
+## 21 de outubro de 2026 (quarta-feira) · 1 commit
+
+| Hora | Commit | Descrição |
+|---|---|---|
+| 01:41 | [`502d4e5`](https://github.com/SoftLiving/softliving-prototipo/commit/502d4e5b3aacd1a6a92bb24a077bfeea5e89a7ee) | Indicações: convite por e-mail em janela de nova mensagem, com mensagem pessoal e o convite padrão travado |
 
 <a id="2026-10-07"></a>
 ## 7 de outubro de 2026 (quarta-feira) · 10 commits
