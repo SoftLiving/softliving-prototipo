@@ -574,7 +574,7 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
   - **Rodapé do e-mail:** "Você recebeu este e-mail porque [Nome], membro da comunidade SoftLiving, indicou seu
     endereço." e o link "Não quero receber convites" (no lugar de "Gerenciar preferências", que não serve para quem
     ainda não tem conta). Sai o texto antigo "Você recebeu este e-mail por ser membro da comunidade SoftLiving".
-  - Botões: "Enviar convite" e a lixeira (descartar), que limpa Para e mensagem.
+  - Botões: a lixeira (descartar, à esquerda), que limpa Para e mensagem, e "Enviar convite" (à direita).
 
 ### 5.9 Outras telas
 

@@ -1072,11 +1072,11 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-mail-texto .in-mail-rodape{ margin:0; font-size:12px; color:var(--green-2); }
 .in-mail-incentivo{ margin:0 20px 16px; padding:10px 14px; border-radius:12px; background:var(--mint); color:var(--green-dark); font-size:13.5px; line-height:1.5; }
 .in-mail-acoes{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 20px; border-top:1px solid var(--line); }
-.in-mail-enviar{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:11px 22px; font:inherit; font-size:14.5px; font-weight:600; color:#fff; background:var(--navy); cursor:pointer; transition:transform .15s, box-shadow .15s; }
+.in-mail-enviar{ margin-left:auto; display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:11px 22px; font:inherit; font-size:14.5px; font-weight:600; color:#fff; background:var(--navy); cursor:pointer; transition:transform .15s, box-shadow .15s; }
 .in-mail-enviar:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(1,53,101,.22); }
 .in-mail-enviar .ic{ width:17px; height:17px; }
 .in-mail-erro{ font-size:13.5px; color:#b3261e; }
-.in-mail-descartar{ margin-left:auto; display:grid; place-items:center; width:38px; height:38px; border:none; border-radius:10px; background:transparent; color:var(--muted); cursor:pointer; }
+.in-mail-descartar{ display:grid; place-items:center; width:38px; height:38px; border:none; border-radius:10px; background:transparent; color:var(--muted); cursor:pointer; }
 .in-mail-descartar:hover{ background:var(--paper-dark); color:var(--text); }
 .in-mail-descartar .ic{ width:19px; height:19px; }
 .in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:22px; padding:24px 22px; border-radius:28px; background:#fdf1dc; border:1px solid #f0ddac; }
@@ -1211,8 +1211,8 @@ a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-
 @container (max-width:760px){
   .aj-contato{ grid-template-columns:1fr; }
   .in-convite{ grid-template-columns:1fr; }
-  .in-resumo{ flex-direction:row; flex-wrap:wrap; gap:16px 28px; }
-  .in-resumo div + div{ padding-top:0; border-top:none; }
+  .in-resumo{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; align-items:start; } /* três números lado a lado, alinhados */
+  .in-resumo div + div{ padding-top:0; border-top:none; padding-left:14px; border-left:1px solid #f0ddac; }
   .in-passos{ grid-template-columns:1fr; }
   .aj-temas{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
   .pf-numeros{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
