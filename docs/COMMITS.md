@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
-- **Total:** 295 commits
+- **Total:** 297 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 5 |
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 7 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -31,10 +31,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-21"></a>
-## 21 de outubro de 2026 (quarta-feira) · 5 commits
+## 21 de outubro de 2026 (quarta-feira) · 7 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:13 | [`e9fd3de`](https://github.com/SoftLiving/softliving-prototipo/commit/e9fd3de868f075e3262a69e2858fbb85e910f93d) | Indicações: prévia do convite toda no tom verde e sem o selo na barra Nova mensagem |
+| 02:04 | [`c462945`](https://github.com/SoftLiving/softliving-prototipo/commit/c462945a8b75718a7fd8a6106edf5887b9ccba62) | COMMITS.md: histórico atualizado |
 | 02:04 | [`469e07c`](https://github.com/SoftLiving/softliving-prototipo/commit/469e07cfa31234c16879d8aecba04a1baac4bdc5) | Indicações: botão Convidar por e-mail sem o contorno branco |
 | 02:01 | [`e1ced8f`](https://github.com/SoftLiving/softliving-prototipo/commit/e1ced8f4e9e6eba245366408d38e7d242544c7ea) | COMMITS.md: histórico atualizado |
 | 02:01 | [`e174c8d`](https://github.com/SoftLiving/softliving-prototipo/commit/e174c8d45abb6c84a2bc5acec7ecba6b4711b7fd) | Indicações: botão Convidar por e-mail de ponta a ponta no fim do cartão, abrindo a janela de nova mensagem dentro do mesmo box |
