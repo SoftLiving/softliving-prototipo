@@ -1079,9 +1079,6 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-mail-descartar{ margin-left:auto; display:grid; place-items:center; width:38px; height:38px; border:none; border-radius:10px; background:transparent; color:var(--muted); cursor:pointer; }
 .in-mail-descartar:hover{ background:var(--paper-dark); color:var(--text); }
 .in-mail-descartar .ic{ width:19px; height:19px; }
-.in-regras{ margin:0; padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.12); font-size:13.5px; line-height:1.6; color:rgba(255,255,255,.92); }
-.in-regras a{ color:#fff; text-decoration:underline; font-weight:600; }
-.in-regras .sig .soft{ color:#d6e6f5; } .in-regras .sig .living{ color:#cfe9c4; }   /* fundo escuro: cores claras da marca */
 .in-resumo{ display:flex; flex-direction:column; justify-content:center; gap:22px; padding:24px 22px; border-radius:28px; background:#fdf1dc; border:1px solid #f0ddac; }
 .in-resumo div{ display:flex; flex-direction:column; gap:4px; }
 .in-resumo div + div{ padding-top:18px; border-top:1px solid #f0ddac; }

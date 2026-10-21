@@ -545,6 +545,7 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 ### 5.8 Indicações
 
 - Link e código de convite, convite por e-mail e lista dos convidados.
+- O cartão do convite não mostra mais o aviso "Os créditos de indicação são pessoais, promocionais e não sacáveis..." (retirado em 21/10/2026).
 - Situações do convite: Convite enviado, Terminando o cadastro, Aprovada.
 - **Quem indica ganha 5 créditos de bônus** quando a indicação é aprovada. Só quem indicou recebe.
 - **Quem se cadastra ganha 20 créditos de bônus.** É o bônus de cadastro, igual para todos: o convite não dá nada a
@@ -553,7 +554,7 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 - **Convite por e-mail (aprovado em 21/10/2026):** janela de "Nova mensagem" de webmail, dentro do cartão do convite.
   Substitui o campo de e-mail antigo.
   - **Como abre:** pelo botão "Convidar por e-mail", uma faixa de ponta a ponta no fim do cartão do convite, logo depois
-    do aviso das regras, no mesmo degradê do cartão: ícone de envelope, título "Convidar por e-mail", a frase "Mande seu
+    dos botões de compartilhar, no mesmo degradê do cartão: ícone de envelope, título "Convidar por e-mail", a frase "Mande seu
     convite com uma mensagem pessoal.", o texto "Ganhe 5 créditos por indicação aprovada" (texto simples, sem
     fundo) e a seta. A janela começa fechada e, ao clicar, se estende para baixo do botão,
     dentro do próprio cartão, tudo num box só. O mesmo botão fecha. Ao abrir, a página rola até a janela e o cursor vai para o campo Para.
