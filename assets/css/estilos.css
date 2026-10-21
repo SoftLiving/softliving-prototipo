@@ -1034,9 +1034,24 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-bt.in-branco{ background:#fff; color:var(--navy); }
 .in-bt.in-branco:hover{ background:#f3f7f4; }
 /* Convite por e-mail: janela de "Nova mensagem" (barra navy, linhas De/Para/Assunto, corpo livre e convite travado) */
-.in-mail-intro{ margin:6px 0 14px; font-size:15px; color:var(--text-2); }
-.in-mail{ border-radius:22px; overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:var(--vidro-sombra); }
-.in-mail-barra{ background:var(--navy); color:#fff; padding:12px 20px; font-size:14.5px; font-weight:600; }
+.in-bt-email{ display:flex; align-items:center; gap:16px; width:100%; box-sizing:border-box; margin-top:14px; padding:16px 20px; border:1px solid rgba(255,255,255,.28); border-radius:22px; cursor:pointer; text-align:left; font:inherit; color:#fff; background:linear-gradient(135deg, #013565 0%, #2c5b58 55%, #3f7a45 100%); box-shadow:0 12px 28px rgba(0,0,0,.22); transition:transform .15s, box-shadow .15s; } /* faixa de ponta a ponta no fim do cartão */
+.in-bt-email:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(0,0,0,.28); }
+.in-bt-email-ic{ display:grid; place-items:center; width:46px; height:46px; flex:none; border-radius:14px; background:rgba(255,255,255,.18); }
+.in-bt-email-ic .ic{ width:22px; height:22px; }
+.in-bt-email-txt{ flex:1; min-width:0; }
+.in-bt-email-txt b{ display:block; font-family:'Fraunces',serif; font-size:21px; font-weight:600; line-height:1.2; }
+.in-bt-email-txt small{ display:block; margin-top:3px; font-size:14px; color:rgba(255,255,255,.85); }
+.in-bt-email-selo{ display:inline-block; margin-top:8px; font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:999px; background:rgba(255,255,255,.18);  }
+.in-bt-seta{ width:24px; height:24px; flex:none; transition:transform .2s; }
+.in-bt-email[aria-expanded="true"] .in-bt-seta{ transform:rotate(180deg); }
+.in-bt-email[aria-expanded="true"]{ transform:none; }
+.in-mail-painel{ margin-top:14px; }
+.in-convite.email-aberto .in-resumo{ align-self:start; } /* com a janela aberta, o resumo não estica até o fim do cartão */
+.in-mail-painel[hidden]{ display:none; }
+.in-mail{ border-radius:20px; overflow:hidden; background:#fff; color:var(--text); box-shadow:0 14px 32px rgba(0,0,0,.18); } /* janela branca dentro do cartão do convite */
+.in-mail-barra{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; color:var(--navy); padding:13px 20px; font-size:15px; font-weight:700; background:var(--paper-dark); border-bottom:1px solid var(--line); }
+.in-mail-selo{ font-size:12.5px; font-weight:600; padding:5px 12px; border-radius:999px; background:var(--mint); color:var(--green); }
+.in-mail-linha:focus-within{ background:var(--mint-2); }
 .in-mail-linha{ display:flex; align-items:center; gap:12px; min-height:48px; padding:0 20px; border-bottom:1px solid var(--line); font-size:14.5px; }
 .in-mail-rot{ width:64px; flex:none; color:var(--muted); }
 .in-mail-fixo{ color:var(--text-2); min-width:0; }
@@ -1056,6 +1071,7 @@ mark{ background:rgba(159,208,176,.55); color:inherit; border-radius:4px; paddin
 .in-mail-url{ font-size:13px; overflow-wrap:anywhere; }
 .in-mail-botao{ display:inline-block; background:var(--green); color:#fff; border-radius:10px; padding:10px 22px; font-size:14.5px; font-weight:700; margin:2px 0 14px; }
 .in-mail-texto .in-mail-rodape{ margin:0; font-size:12px; color:#8a8a8a; }
+.in-mail-incentivo{ margin:0 20px 16px; padding:10px 14px; border-radius:12px; background:var(--mint); color:var(--green-dark); font-size:13.5px; line-height:1.5; }
 .in-mail-acoes{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:14px 20px; border-top:1px solid var(--line); }
 .in-mail-enviar{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:11px 22px; font:inherit; font-size:14.5px; font-weight:600; color:#fff; background:var(--navy); cursor:pointer; transition:transform .15s, box-shadow .15s; }
 .in-mail-enviar:hover{ transform:translateY(-2px); box-shadow:0 8px 18px rgba(1,53,101,.22); }
@@ -1210,6 +1226,9 @@ a.me:hover::before, a.me:focus-visible::before{ -webkit-mask-position:0 0; mask-
 @media (max-width:640px){
   .in-mail-linha, .in-mail-corpo, .in-mail-acoes{ padding-left:16px; padding-right:16px; }
   .in-mail-padrao{ margin:6px 12px 16px; }
+  .in-mail-incentivo{ margin:0 12px 14px; }
+  .in-bt-email{ padding:14px; gap:12px; }
+  .in-bt-email-txt b{ font-size:18px; }
   .in-mail-texto{ padding:16px; }
   .in-cartao{ padding:22px 18px; }
   .in-codigo{ font-size:32px; }

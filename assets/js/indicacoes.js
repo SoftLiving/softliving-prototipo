@@ -52,6 +52,16 @@ const inErro = document.getElementById('inEmailErro');
 const inCampo = document.getElementById('inEmailCampo');
 document.getElementById('inEmailCodigo').textContent = IN_CODIGO;
 document.getElementById('inEmailLink').textContent = IN_LINK;
+// Botão Convidar por e-mail (no cartão): abre e fecha a janela dentro do cartão; ao abrir, rola até ela e põe o cursor no Para
+const inPainel = document.getElementById('inMailPainel');
+const inAbrir = document.getElementById('inAbrirEmail');
+inAbrir.addEventListener('click', () => {
+  const abrir = inPainel.hidden;
+  inPainel.hidden = !abrir;
+  inAbrir.setAttribute('aria-expanded', abrir);
+  document.querySelector('.in-convite').classList.toggle('email-aberto', abrir);
+  if(abrir){ inPainel.scrollIntoView({ behavior:'smooth', block:'nearest' }); inCampo.focus({ preventScroll:true }); }
+});
 const inContar = () => { document.getElementById('inEmailCont').textContent = `${inMsg.value.length}/400`; };
 inMsg.addEventListener('input', inContar);
 inCampo.addEventListener('input', () => { inErro.textContent = ''; });

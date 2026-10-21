@@ -550,8 +550,14 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
 - **Quem se cadastra ganha 20 créditos de bônus.** É o bônus de cadastro, igual para todos: o convite não dá nada a
   mais ao convidado.
 - **Texto do convite:** "Cadastre-se pelo meu convite. Todo novo membro ganha 20 créditos de bônus."
-- **Convite por e-mail (aprovado em 21/10/2026):** bloco próprio "Convidar por e-mail", abaixo do cartão do convite,
-  em formato de janela de "Nova mensagem" de webmail. Substitui o campo de e-mail que ficava dentro do cartão.
+- **Convite por e-mail (aprovado em 21/10/2026):** janela de "Nova mensagem" de webmail, dentro do cartão do convite.
+  Substitui o campo de e-mail antigo.
+  - **Como abre:** pelo botão "Convidar por e-mail", uma faixa de ponta a ponta no fim do cartão do convite, logo depois
+    do aviso das regras, no mesmo degradê do cartão: ícone de envelope, título "Convidar por e-mail", a frase "Mande seu
+    convite com uma mensagem pessoal.", o selo "+5 créditos por indicação" e a seta. A janela começa fechada e, ao clicar, se estende para baixo do botão,
+    dentro do próprio cartão, tudo num box só. O mesmo botão fecha. Ao abrir, a página rola até a janela e o cursor vai para o campo Para.
+  - **Incentivo:** selo "+5 créditos por indicação aprovada" na barra da janela e, acima do Enviar, a faixa "+5 créditos
+    para você a cada indicação aprovada. Quem você convida ganha 20 créditos ao se cadastrar."
   - **De:** fixo, com o nome de quem indica: "Rafael Barros via SoftLiving". O envio sai de um endereço da SoftLiving;
     só o nome de exibição leva o nome do indicador (confirmar se o provedor de e-mail permite).
   - **Para:** obrigatório, um e-mail válido. Ao enviar, o convite entra na lista com a situação "Convite enviado".
