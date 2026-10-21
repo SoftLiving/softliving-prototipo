@@ -560,7 +560,9 @@ O box "Sua opinião vale créditos" fica no topo da coluna da direita.
     dentro do próprio cartão, tudo num box só. O mesmo botão fecha. Ao abrir, a página rola até a janela e o cursor vai para o campo Para.
   - **Incentivo:** o texto "Ganhe 5 créditos por indicação aprovada" fica no botão que abre a janela; dentro dela, acima do Enviar, a
     faixa "+5 créditos para você a cada indicação aprovada. Quem você convida ganha 20 créditos ao se cadastrar."
-  - **Convite padrão na prévia:** todo no tom verde da marca (fundo verde claro, borda tracejada verde, textos em verde).
+  - **Convite padrão na prévia:** em cinza, com aparência de parte desativada (fundo cinza claro, borda tracejada, textos
+    e botão em cinza, nome SoftLiving em texto simples, sem barra), para não competir com os campos editáveis. No
+    e-mail de verdade, o convite sai com as cores da marca.
   - **De:** fixo, com o nome de quem indica: "Rafael Barros via SoftLiving". O envio sai de um endereço da SoftLiving;
     só o nome de exibição leva o nome do indicador (confirmar se o provedor de e-mail permite).
   - **Para:** obrigatório, um e-mail válido. Ao enviar, o convite entra na lista com a situação "Convite enviado".
