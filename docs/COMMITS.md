@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
-- **Total:** 291 commits
+- **Total:** 293 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 1 |
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 3 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -31,10 +31,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-10-21"></a>
-## 21 de outubro de 2026 (quarta-feira) · 1 commit
+## 21 de outubro de 2026 (quarta-feira) · 3 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 02:01 | [`e174c8d`](https://github.com/SoftLiving/softliving-prototipo/commit/e174c8d45abb6c84a2bc5acec7ecba6b4711b7fd) | Indicações: botão Convidar por e-mail de ponta a ponta no fim do cartão, abrindo a janela de nova mensagem dentro do mesmo box |
+| 01:41 | [`bb397f6`](https://github.com/SoftLiving/softliving-prototipo/commit/bb397f64c47d9bc742653a4deabf5ede6bbcac50) | COMMITS.md: histórico atualizado |
 | 01:41 | [`502d4e5`](https://github.com/SoftLiving/softliving-prototipo/commit/502d4e5b3aacd1a6a92bb24a077bfeea5e89a7ee) | Indicações: convite por e-mail em janela de nova mensagem, com mensagem pessoal e o convite padrão travado |
 
 <a id="2026-10-07"></a>
