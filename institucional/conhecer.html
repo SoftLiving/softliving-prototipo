@@ -6,7 +6,7 @@
 <title>Conhecer · SoftLiving (Protótipo · versão 2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/estilos.css?v=202610210228">
+<link rel="stylesheet" href="../assets/css/estilos.css?v=202611242252">
 </head>
 <body data-site="conhecer" data-root="../">
 
@@ -22,10 +22,16 @@
     </div>
     <p class="small-note">Já tem conta? <a href="https://softliving.com.br/entrar">Entrar aqui</a></p>
   </div>
-  <!-- Vídeo: para publicar, trocar o botão e o aviso por <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Vídeo SoftLiving" allowfullscreen></iframe> -->
-  <div class="video">
-    <button type="button" class="play" aria-label="Assistir ao vídeo" onclick="mostrarAviso('O vídeo entra aqui assim que ficar pronto')"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg></button>
-    <span class="note">Vídeo em breve</span>
+  <!-- Vídeo institucional: Conhecer a SoftLiving (YouTube, modo de privacidade ampliada) -->
+  <div class="video com-video">
+    <iframe src="https://www.youtube-nocookie.com/embed/nx9WJQqMtGw?rel=0" title="Conhecer a SoftLiving: a alegria de ficar de fora" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <script>
+      /* Aberta como arquivo (file://), o YouTube recusa o player (erro 153). Nesse caso, mostra a capa com link para o vídeo. */
+      if (location.protocol === "file:") {
+        var v = document.querySelector(".video.com-video");
+        v.innerHTML = '<a class="yt-link" href="https://www.youtube.com/watch?v=nx9WJQqMtGw" target="_blank" rel="noopener" aria-label="Assistir ao vídeo Conhecer a SoftLiving no YouTube"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg></span><span class="note">Assistir no YouTube</span></a>';
+      }
+    </script>
   </div>
 </div>
 
@@ -157,7 +163,7 @@
   </div>
 </div>
 
-<script src="../assets/js/texto.js?v=202610210228"></script>
-<script src="../assets/js/layout.js?v=202610210228"></script>
+<script src="../assets/js/texto.js?v=202611242252"></script>
+<script src="../assets/js/layout.js?v=202611242252"></script>
 </body>
 </html>
