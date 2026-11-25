@@ -4,7 +4,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
 - **Período:** 23 de setembro de 2026 (quarta-feira) a 24 de novembro de 2026 (terça-feira)
-- **Total:** 307 commits
+- **Total:** 309 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,7 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [24 de novembro de 2026 (terça-feira)](#2026-11-24) | 1 |
+| [24 de novembro de 2026 (terça-feira)](#2026-11-24) | 3 |
 | [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 16 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
@@ -32,10 +32,12 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
 <a id="2026-11-24"></a>
-## 24 de novembro de 2026 (terça-feira) · 1 commit
+## 24 de novembro de 2026 (terça-feira) · 3 commits
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 23:17 | [`dd1041f`](https://github.com/SoftLiving/softliving-prototipo/commit/dd1041fc9894cd98c77dd5d4dfb2fffcb102c0e7) | Conhecer: tira a borda e o brilho do quadro do vídeo do YouTube |
+| 22:53 | [`7a5884c`](https://github.com/SoftLiving/softliving-prototipo/commit/7a5884cbd6d5ff1df5bb0b646d586f4b097e3c90) | COMMITS.md: histórico atualizado |
 | 22:53 | [`f4a43cf`](https://github.com/SoftLiving/softliving-prototipo/commit/f4a43cfc7578ab095ba7a6bffec03a845b66532a) | Conhecer: vídeo do YouTube no lugar do player |
 
 <a id="2026-10-21"></a>
