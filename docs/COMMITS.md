@@ -3,8 +3,8 @@
 Registro de todas as mudanças do protótipo, desde o primeiro commit, para acompanhamento do desenvolvimento.
 
 - **Repositório:** https://github.com/SoftLiving/softliving-prototipo (branch `main`)
-- **Período:** 23 de setembro de 2026 (quarta-feira) a 21 de outubro de 2026 (quarta-feira)
-- **Total:** 305 commits
+- **Período:** 23 de setembro de 2026 (quarta-feira) a 24 de novembro de 2026 (terça-feira)
+- **Total:** 307 commits
 - **Ordem:** do mais recente para o mais antigo. Cada código abre o commit no GitHub, com os arquivos alterados.
 - **Horários:** de Brasília.
 
@@ -18,7 +18,8 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 
 | Dia | Commits |
 |---|---|
-| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 15 |
+| [24 de novembro de 2026 (terça-feira)](#2026-11-24) | 1 |
+| [21 de outubro de 2026 (quarta-feira)](#2026-10-21) | 16 |
 | [7 de outubro de 2026 (quarta-feira)](#2026-10-07) | 10 |
 | [1 de outubro de 2026 (quinta-feira)](#2026-10-01) | 36 |
 | [30 de setembro de 2026 (quarta-feira)](#2026-09-30) | 56 |
@@ -30,11 +31,19 @@ Registro de todas as mudanças do protótipo, desde o primeiro commit, para acom
 | [24 de setembro de 2026 (quinta-feira)](#2026-09-24) | 9 |
 | [23 de setembro de 2026 (quarta-feira)](#2026-09-23) | 11 |
 
-<a id="2026-10-21"></a>
-## 21 de outubro de 2026 (quarta-feira) · 15 commits
+<a id="2026-11-24"></a>
+## 24 de novembro de 2026 (terça-feira) · 1 commit
 
 | Hora | Commit | Descrição |
 |---|---|---|
+| 22:53 | [`f4a43cf`](https://github.com/SoftLiving/softliving-prototipo/commit/f4a43cfc7578ab095ba7a6bffec03a845b66532a) | Conhecer: vídeo do YouTube no lugar do player |
+
+<a id="2026-10-21"></a>
+## 21 de outubro de 2026 (quarta-feira) · 16 commits
+
+| Hora | Commit | Descrição |
+|---|---|---|
+| 02:28 | [`f76fe98`](https://github.com/SoftLiving/softliving-prototipo/commit/f76fe985394530380e1e4140de3d7d91946bcdfb) | COMMITS.md: histórico atualizado |
 | 02:28 | [`fbe5d1a`](https://github.com/SoftLiving/softliving-prototipo/commit/fbe5d1a4fb5e9b3ab3e652362d8ddd920a6325da) | Indicações: prévia do convite em cinza, com cara de parte travada, e o nome SoftLiving sem a barra sólida |
 | 02:25 | [`916c1c2`](https://github.com/SoftLiving/softliving-prototipo/commit/916c1c2258e1395b80a43d26af70bef81537b2b1) | COMMITS.md: histórico atualizado |
 | 02:25 | [`fb57d35`](https://github.com/SoftLiving/softliving-prototipo/commit/fb57d3568526951294df89a8a91095e24d6b77d6) | Indicações: lixeira à esquerda e Enviar convite à direita; resumo com os três números alinhados lado a lado no celular |
