@@ -1546,6 +1546,7 @@ body{ background:
   box-shadow:inset 0 1px 1px rgba(255,255,255,.9), 0 4px 12px rgba(0,0,0,.08);
 }
 :root .video{ background:rgba(230,242,234,.5); border-color:rgba(255,255,255,.85); -webkit-backdrop-filter:var(--vidro-desfoque); backdrop-filter:var(--vidro-desfoque); box-shadow:var(--vidro-brilho), var(--vidro-sombra); }
+:root .video.com-video{ border:0; background:#000; -webkit-backdrop-filter:none; backdrop-filter:none; box-shadow:var(--vidro-sombra); }
 
 /* Botão branco sobre o cartão verde: mais opaco para o texto verde continuar legível */
 :root .plan.featured .btn.white{ background:rgba(255,255,255,.88); }
